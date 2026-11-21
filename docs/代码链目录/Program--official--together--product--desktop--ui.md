@@ -287,6 +287,16 @@
 
 消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
 
+### project-governance.mjs
+
+[Program/official/together/product/desktop/ui/project-governance.mjs](../../Program/official/together/product/desktop/ui/project-governance.mjs) · program.official · 环3 · signed-package
+
+区域：commands。
+
+导入：未解析到本项目静态导入。
+
+消费者：`Program/official/together/product/desktop/ui/workspace.mjs`。
+
 ### source-browser.mjs
 
 [Program/official/together/product/desktop/ui/source-browser.mjs](../../Program/official/together/product/desktop/ui/source-browser.mjs) · program.official · 环3 · signed-package
@@ -401,9 +411,9 @@
 
 [Program/official/together/product/desktop/ui/workspace.mjs](../../Program/official/together/product/desktop/ui/workspace.mjs) · program.official · 环3 · signed-package
 
-区域：api; hostOS; detailView; appearance; motionPreference; mainTabs; state; board; timer; direction; surfaces; repositoryStatus; homeData; homeRevision; pulseFlight; broadcastRevision; memberMenu; accessSignature; agentCopyBusy; admittedAgent; developmentCloudRevision; releaseTransfer; activitySource; activityPages; situationCarousel; pairing; names。
+区域：api; hostOS; detailView; appearance; motionPreference; mainTabs; state; board; timer; direction; surfaces; repositoryStatus; updateChannels; governancePage; homeData; homeRevision; pulseFlight; broadcastRevision; memberMenu; accessSignature; agentCopyBusy; admittedAgent; developmentCloudRevision; releaseTransfer; activitySource; activityPages; situationCarousel; pairing; names。
 
-导入：`Program/official/together/product/desktop/ui/activity-history.mjs`, `Program/official/together/product/desktop/ui/appearance.mjs`, `Program/official/together/product/desktop/ui/audit.mjs`, `Program/official/together/product/desktop/ui/carousel.mjs`, `Program/official/together/product/desktop/ui/collaboration.mjs`, `Program/official/together/product/desktop/ui/connection.mjs`, `Program/official/together/product/desktop/ui/controls.mjs`, `Program/official/together/product/desktop/ui/detail-view.mjs`, `Program/official/together/product/desktop/ui/development.mjs`, `Program/official/together/product/desktop/ui/elections.mjs`, `Program/official/together/product/desktop/ui/engineering.mjs`, `Program/official/together/product/desktop/ui/icons.mjs`, `Program/official/together/product/desktop/ui/live.mjs`, `Program/official/together/product/desktop/ui/markdown.mjs`, `Program/official/together/product/desktop/ui/member-menu.mjs`, `Program/official/together/product/desktop/ui/native-overlays.mjs`, `Program/official/together/product/desktop/ui/source-browser.mjs`, `Program/official/together/product/desktop/ui/surfaces.mjs`, `Program/official/together/product/desktop/ui/unified.mjs`, `Program/official/together/product/desktop/ui/welcome.mjs`, `Program/official/together/product/desktop/ui/work-status.mjs`, `Program/official/together/product/desktop/ui/workflow.mjs`, `Program/official/together/product/office/web/motion.mjs`。
+导入：`Program/official/together/product/desktop/ui/activity-history.mjs`, `Program/official/together/product/desktop/ui/appearance.mjs`, `Program/official/together/product/desktop/ui/audit.mjs`, `Program/official/together/product/desktop/ui/carousel.mjs`, `Program/official/together/product/desktop/ui/collaboration.mjs`, `Program/official/together/product/desktop/ui/connection.mjs`, `Program/official/together/product/desktop/ui/controls.mjs`, `Program/official/together/product/desktop/ui/detail-view.mjs`, `Program/official/together/product/desktop/ui/development.mjs`, `Program/official/together/product/desktop/ui/elections.mjs`, `Program/official/together/product/desktop/ui/engineering.mjs`, `Program/official/together/product/desktop/ui/icons.mjs`, `Program/official/together/product/desktop/ui/live.mjs`, `Program/official/together/product/desktop/ui/markdown.mjs`, `Program/official/together/product/desktop/ui/member-menu.mjs`, `Program/official/together/product/desktop/ui/native-overlays.mjs`, `Program/official/together/product/desktop/ui/project-governance.mjs`, `Program/official/together/product/desktop/ui/source-browser.mjs`, `Program/official/together/product/desktop/ui/surfaces.mjs`, `Program/official/together/product/desktop/ui/unified.mjs`, `Program/official/together/product/desktop/ui/welcome.mjs`, `Program/official/together/product/desktop/ui/work-status.mjs`, `Program/official/together/product/desktop/ui/workflow.mjs`, `Program/official/together/product/office/web/motion.mjs`。
 
 消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
 

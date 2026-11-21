@@ -28,7 +28,7 @@ import re
 
 HEX = re.compile(r'[a-f0-9]{64}\Z')
 MAX_FILE = 16 * 1024 * 1024
-MAX_TREE = 128 * 1024 * 1024
+MAX_TREE = 256 * 1024 * 1024
 MAX_FILES = 5000
 MAX_BUNDLE = 2 * MAX_TREE + 4 * 1024 * 1024
 MAX_ARTIFACT = 512 * 1024 * 1024
@@ -36,7 +36,24 @@ MAX_ARTIFACTS = 1024 * 1024 * 1024
 ARTIFACT_LEGACY_CHUNK = 256 * 1024
 ARTIFACT_CHUNK = 2 * 1024 * 1024
 ARTIFACT_JSON_LIMIT = 3 * 1024 * 1024
-PUBLIC_KEYS = frozenset(('Config/release.pub.pem', 'Control/app/config/release-public.pem'))
+PUBLIC_KEYS = frozenset(('Config/release.pub.pem', 'Control/app/config/release-public.pem',
+                         'Program/official/together/product/office/config/release-public.pem'))
+# These redistributables are part of the reviewed OS source export and must survive checkout.
+_RUNTIME = 'Program/official/together/product/runtime/'
+PINNED_RUNTIME = {
+    _RUNTIME + 'native/aieyra-link-lan.exe': 'f208a46f1928550af47fc9a7be551743988d2eb079b26c9bcf9de5c2cfea7f1a',
+    _RUNTIME + 'native/aieyra-link.exe': 'f7a9643ec01acc82f0bdc56a4471b0108323280cf6886fcf85c95226df034921',
+    _RUNTIME + 'python/libcrypto-3.dll': 'e03dd02fdcfb791981c9962827cfcf495f2a47a514c1526efb57f847a9df514a',
+    _RUNTIME + 'python/libffi-8.dll': 'eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a',
+    _RUNTIME + 'python/libssl-3.dll': '1e4bc0638682bfcbb36f4465d6a2e9944d917a60f05ecc8ddf9e96847e05e13f',
+    _RUNTIME + 'python/python.exe': '29d6486dc5fa86c9d19db9d390fdbb62c4830e2b305761723c0b42e6f3596954',
+    _RUNTIME + 'python/python3.dll': 'f950ce3bf381d5ffae90cf63ec9c9761f1666d9a570e2f203a7f22da6f8e14f3',
+    _RUNTIME + 'python/python313.dll': 'e7119fc5892eab890d44f6df05f44d50cf8c390c35d152e589e0c35781ca8d05',
+    _RUNTIME + 'python/pythonw.exe': 'f74fe1bd59813ad8f8c913b45e7666094cea1e6ae0f3663f6e8ac743fb73e198',
+    _RUNTIME + 'python/sqlite3.dll': '3f0cb5fb18f1c7eb77fb58eb8497fea1b8974f2c824ac1c7377b363fd9be3485',
+    _RUNTIME + 'python/vcruntime140.dll': '052ad6a20d375957e82aa6a3c441ea548d89be0981516ca7eb306e063d5027f4',
+    _RUNTIME + 'python/vcruntime140_1.dll': '6a99bc0128e0c7d6cbbf615fcc26909565e17d4ca3451b97f8987f9c6acbc6c8',
+}
 
 
 # @chain-region canonical | calls: json.dumps
@@ -59,16 +76,18 @@ def source_path(value, *, allow_executable=False):
         any(p in ('.', '..') or p.endswith((' ', '.')) or p.casefold() in
             ('.git', '.ssh', '.env', 'node_modules', '__pycache__', 'secrets', 'credentials') or
             p.casefold().startswith('.env.') or re.fullmatch(r'(?i)(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\..*)?', p)
-            for p in parts) or value not in PUBLIC_KEYS and PurePosixPath(value).suffix.lower() in
+            for p in parts) or value not in PUBLIC_KEYS and value not in PINNED_RUNTIME and PurePosixPath(value).suffix.lower() in
         (('.pfx', '.pem', '.key', '.sqlite', '.db') if allow_executable else ('.exe', '.dll', '.pfx', '.pem', '.key', '.sqlite', '.db'))):
         raise ValueError('invalid_source_path')
     return value
 
 
-# @chain-region validate_blob | calls: ValueError, base64.b64decode, len, match[1].replace, match[1].replace(b'\r', b'').replace, re.fullmatch, source_path
+# @chain-region validate_blob | calls: ValueError, base64.b64decode, digest, len, match[1].replace, match[1].replace(b'\r', b'').replace, re.fullmatch, source_path
 def validate_blob(path, raw):
-    """The two shipped verification keys are public source, never private PEMs."""
+    """Check special source entries against their exact approved format or digest."""
     source_path(path)
+    if path in PINNED_RUNTIME and digest(raw) != PINNED_RUNTIME[path]:
+        raise ValueError('runtime_digest_mismatch')
     if path in PUBLIC_KEYS:
         match = re.fullmatch(rb'-----BEGIN PUBLIC KEY-----\r?\n([A-Za-z0-9+/=\r\n]+)-----END PUBLIC KEY-----\r?\n?', raw)
         if len(raw) > 8192 or not match:
@@ -96,6 +115,8 @@ def validate_manifest(files):
         source_path(path)
         if not isinstance(sha, str) or not HEX.fullmatch(sha):
             raise ValueError('invalid_source_digest')
+        if path in PINNED_RUNTIME and sha != PINNED_RUNTIME[path]:
+            raise ValueError('runtime_digest_mismatch')
         if path.casefold() in folded:
             raise ValueError('source_path_collision')
         folded.add(path.casefold())

@@ -408,7 +408,7 @@ if (!embedded && !app.requestSingleInstanceLock({ product: 'Aieyra Together Link
           data=await cloud.logout();setTab('home');
         }
         else if (value.method === 'refresh') {
-          if(osAccount&&mode==='cloud')await osAccount.sync({refresh:true});
+          if(osAccount)await osAccount.sync({refresh:true});
           data={...await cloud.refresh(tab==='home'?homeReads.signal:undefined),hostAuth:osAccount?.status()};
         }
         else if (value.method === 'work-status') data=await (await officeReady.promise).workStatus(first===true);
@@ -660,7 +660,7 @@ return {
   /* @chain-region startDesktop.origin */ get origin(){return host?.origin||'';},
   /* @chain-region startDesktop.accountChanged | calls: osAccount.invalidate, catch, osAccount.sync */ accountChanged(){
     osAccount?.invalidate();
-    if(mode==='cloud')void osAccount?.sync().catch(()=>{});
+    void osAccount?.sync().catch(()=>{});
   },
   /* @chain-region startDesktop.close | calls: ipcMain.removeHandler, homeReads.abort, releaseDownload.abort, closePreviews, development.close, osAccount.close, cloud.close, loginWindow.host.isDestroyed … */ close() {
     if(closing)return closing;

@@ -38,7 +38,8 @@ func main() {
 		return
 	}
 	host.EnsureConsoleUTF8()
-	if !agent.CurrentReleaseStage().CLI {
+	profileMaintenance := len(os.Args) > 1 && os.Args[1] == "profile"
+	if !agent.CurrentReleaseStage().CLI && !profileMaintenance {
 		fmt.Fprintln(os.Stdout, "CLI 在基础能力打磨阶段暂未开放，请使用 Aieyra OS。恢复方式见 docs/阶段性隐藏功能清单.md。")
 		return
 	}

@@ -198,13 +198,13 @@ const /* @chain-region fields | calls: Array.isArray, some, Object.keys, allowed
     const issued=await this.issue(options);
     return {...issued,management:await authority};
   }
-  /* @chain-region Onboarding.issueTicket | calls: binding, access, read, cloud.call, agents.find, Date.now, fail, agents.some … */ async issueTicket({replace = '', additional=false} = {}) {
+  /* @chain-region Onboarding.issueTicket | calls: binding, access, read, cloud.call, agents.find, Date.now, Number.isInteger, fail … */ async issueTicket({replace = '', additional=false} = {}) {
     const binding = this.binding(), access = await this.access();
     let record = this.read(access.user.id);
     const connections=access.member?await this.cloud.call('/agents'):{agents:[],single_agent:true};
     const agents=connections.agents||[];
     const active=agents.find(a=>a.id===record?.agent_id&&!a.revoked&&a.expires>Date.now()/1000);
-    if(additional&&connections.single_agent!==false)throw fail('manager_required_for_additional_agents',403);
+    if(additional && (connections.single_agent === true || Number.isInteger(connections.workstation_limit) && connections.workstations_used >= connections.workstation_limit)) throw fail('当前账号的工位已满',409);
     if(record?.agent_id&&access.member&&!agents.some(a=>a.id===record.agent_id&&!a.revoked&&a.expires>Date.now()/1000))record=null;
     const expired=record&&!record.revoked&&record.binding===binding&&this.admission(record,agents).state==='expired'||active?.enrollment?.state==='expired'&&record?.replacing_agent_id!==active.id;
     if(binding!==this.binding())throw fail('account_changed',401);
@@ -358,7 +358,7 @@ const /* @chain-region fields | calls: Array.isArray, some, Object.keys, allowed
         const [data,context]=await Promise.all([access.member?this.cloud.call('/agents'):{agents:[]},this.context(access)]);
         const connection=await this.connection(data.agents);
         if(binding!==this.binding())throw fail('account_changed',401);
-        const value={agents:data.agents,parallel_agents:data.single_agent===false,context,connection,restart:this.restartStatus(data.agents),enrollment:this.enrollment(access,binding,data.agents),stale:false,observed_at:context.observed_at};
+        const value={agents:data.agents,parallel_agents:data.single_agent===false,workstation_limit:data.workstation_limit,workstations_used:data.workstations_used,context,connection,restart:this.restartStatus(data.agents),enrollment:this.enrollment(access,binding,data.agents),stale:false,observed_at:context.observed_at};
         this.workSnapshot={scope:scope(),next_at:Date.now()+(data.agents.some(a=>!a.revoked&&!a.ready)?1500:10000),value};return value;
       } catch(error) {
         if(binding!==this.binding()||[401,403].includes(error.status)){this.workSnapshot=null;throw error;}

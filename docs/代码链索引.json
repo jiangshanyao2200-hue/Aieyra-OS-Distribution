@@ -421,7 +421,7 @@
       "ring": "3",
       "agreement": "AIDEBUG/AGENTS.md",
       "map": "AIDEBUG/together/CODEMAP.md",
-      "bodySHA256": "f1680a652c2c94441927f6aabdf1371f6d03bb79fffe4ccda6c7a2d1fcc71246",
+      "bodySHA256": "42e904119f8040b3ddaadbf6b519ebe11daa41e25658afc9abdadc093b2802d0",
       "regions": [
         {
           "name": "assert",
@@ -76302,7 +76302,7 @@
       "ring": "0",
       "agreement": "Core/cmd/AGENTS.md",
       "map": "Core/cmd/aieyra-cli/CODEMAP.md",
-      "bodySHA256": "4060d14aa0d467dbb8c6b428450061e758f2d8b3ae5ce84ac080f3c5492c94d3",
+      "bodySHA256": "a0ae51ffda1c39297e394ff54aa3266983fd9aaa89a42352457d3bd2e16a9e4e",
       "regions": [
         {
           "name": "main",
@@ -123589,7 +123589,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--agent.md",
-      "bodySHA256": "40c5f9fddb8259edb1b3eb32143fcb97228b97cd013a7d615141e633c8107102",
+      "bodySHA256": "8868cf4d760e5e61081037de797288977aa47a12fa383bf8cb4c14e31c43c7a4",
       "regions": [
         {
           "name": "Checkout",
@@ -124188,47 +124188,47 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--agent.md",
-      "bodySHA256": "bef9d0895e05717f86708d92432b086caaf06b7fa4bacde84d0b3a653542edea",
+      "bodySHA256": "a7cef9a89ac2e0d4f59dbde9f980210e02f18a1c4a08d2bbc1d9b2dfb2fdd161",
       "regions": [
         {
           "name": "canonical",
           "kind": "FunctionDef",
-          "bodyLine": 43
+          "bodyLine": 60
         },
         {
           "name": "digest",
           "kind": "FunctionDef",
-          "bodyLine": 48
+          "bodyLine": 65
         },
         {
           "name": "source_path",
           "kind": "FunctionDef",
-          "bodyLine": 53
+          "bodyLine": 70
         },
         {
           "name": "validate_blob",
           "kind": "FunctionDef",
-          "bodyLine": 69
+          "bodyLine": 86
         },
         {
           "name": "artifact_path",
           "kind": "FunctionDef",
-          "bodyLine": 86
+          "bodyLine": 105
         },
         {
           "name": "validate_manifest",
           "kind": "FunctionDef",
-          "bodyLine": 91
+          "bodyLine": 110
         },
         {
           "name": "revision_id",
           "kind": "FunctionDef",
-          "bodyLine": 108
+          "bodyLine": 129
         },
         {
           "name": "execution_plan",
           "kind": "FunctionDef",
-          "bodyLine": 113
+          "bodyLine": 134
         }
       ],
       "imports": [],
@@ -124742,7 +124742,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "6b356df71100bf5a04e79f174d9c8c8cc6284e611a587ea3dd1df57db2f5d9f6",
+      "bodySHA256": "a9aa8c50fa771d48ed28cd2862708645d85d116594ae146f609a9c8f0133c7ff",
       "regions": [
         {
           "name": "crypto",
@@ -124934,7 +124934,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "d83847981bc0d0db92b6b1e0ad0091d61c07392c6c9703e50efff7469878acee",
+      "bodySHA256": "cb98cad0e5d0985ff210a07c7f1fb65b31c33ce6cfc55ea85e32053075ac4d38",
       "regions": [
         {
           "name": "electron",
@@ -125219,7 +125219,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "a60d1ed0be11f2c7a35bc3af5d449b4110465060878295ebcc0d71438f74a8c7",
+      "bodySHA256": "a0de5c4f49ea08b77c5c119a5a1296b7cc2159c680ace8da356fa5d6981f4352",
       "regions": [
         {
           "name": "http",
@@ -126241,7 +126241,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "09a6b9c1a2f55dddc2b6afc039b1473ffa1d8db9e9a210236840efe791a2877c",
+      "bodySHA256": "a58c39182360e9816377372179cc9fd4b155c81958f83d7a73d5382093e7010e",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -126385,32 +126385,32 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "8e845985e5dbd9f5263ac35e53c58e1d3e4750a14e770f470895320c8d946da1",
+      "bodySHA256": "ffc2d49188bcf12bca68d8a02333925eaa776fdaad4f155732600df9df4d6178",
       "regions": [
         {
           "name": ".together-desktop[data-os-host] #workspace",
           "kind": "lexical",
-          "bodyLine": 27
+          "bodyLine": 31
         },
         {
           "name": "[data-os-host][data-mode=local] :is(#release-transfer,#broadcast-button,#broadcast-preview)",
           "kind": "lexical",
-          "bodyLine": 30
+          "bodyLine": 34
         },
         {
           "name": "[data-os-host] #local-office-tools button span, [data-os-host] #broadcast-preview",
           "kind": "lexical",
-          "bodyLine": 59
+          "bodyLine": 63
         },
         {
           "name": "[data-os-host] .titlebar",
           "kind": "lexical",
-          "bodyLine": 62
+          "bodyLine": 66
         },
         {
           "name": "[data-os-host] .titlebar-space",
           "kind": "lexical",
-          "bodyLine": 63
+          "bodyLine": 67
         }
       ],
       "imports": [],
@@ -126510,6 +126510,26 @@
       "chains": [],
       "protected": "signed-package",
       "consumers": []
+    },
+    "Program/official/together/product/desktop/ui/project-governance.mjs": {
+      "module": "program.official",
+      "ring": "3",
+      "agreement": "Program/official/AGENTS.md",
+      "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
+      "bodySHA256": "3b1db32878ed1cb57682e3b2fce3934256d3f02e6519ae9e166149151785046b",
+      "regions": [
+        {
+          "name": "commands",
+          "kind": "lexical",
+          "bodyLine": 15
+        }
+      ],
+      "imports": [],
+      "chains": [],
+      "protected": "signed-package",
+      "consumers": [
+        "Program/official/together/product/desktop/ui/workspace.mjs"
+      ]
     },
     "Program/official/together/product/desktop/ui/source-browser.mjs": {
       "module": "program.official",
@@ -126907,7 +126927,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "f41ba1ce4c86a5a51f0a2008bf7d825951ac90776d86e33c9ae133fb4c7f6a3c",
+      "bodySHA256": "8be67de5bb6a42c96b1a21f3af8cac953fd0850b825065d53c04315c3a150653",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -126919,7 +126939,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "45db2fd8d185cf2d01e470f74e6b3ec51c4098c193dcbbfcd181f03fff8d91ca",
+      "bodySHA256": "d04b78a1d657ed342ee71f9d0ea8369c48c57b967ddd38ef30da8274eec92dd7",
       "regions": [
         {
           "name": "api",
@@ -126934,127 +126954,137 @@
         {
           "name": "detailView",
           "kind": "lexical",
-          "bodyLine": 158
+          "bodyLine": 157
         },
         {
           "name": "appearance",
           "kind": "lexical",
-          "bodyLine": 159
+          "bodyLine": 158
         },
         {
           "name": "motionPreference",
           "kind": "lexical",
-          "bodyLine": 160
+          "bodyLine": 159
         },
         {
           "name": "mainTabs",
           "kind": "lexical",
-          "bodyLine": 166
+          "bodyLine": 165
         },
         {
           "name": "state",
           "kind": "lexical",
-          "bodyLine": 167
+          "bodyLine": 166
         },
         {
           "name": "board",
           "kind": "lexical",
-          "bodyLine": 168
+          "bodyLine": 167
         },
         {
           "name": "timer",
           "kind": "lexical",
-          "bodyLine": 169
+          "bodyLine": 168
         },
         {
           "name": "direction",
           "kind": "lexical",
-          "bodyLine": 170
+          "bodyLine": 169
         },
         {
           "name": "surfaces",
           "kind": "lexical",
-          "bodyLine": 171
+          "bodyLine": 170
         },
         {
           "name": "repositoryStatus",
           "kind": "lexical",
+          "bodyLine": 171
+        },
+        {
+          "name": "updateChannels",
+          "kind": "lexical",
           "bodyLine": 172
         },
         {
-          "name": "homeData",
+          "name": "governancePage",
           "kind": "lexical",
           "bodyLine": 173
         },
         {
-          "name": "homeRevision",
+          "name": "homeData",
           "kind": "lexical",
           "bodyLine": 174
         },
         {
-          "name": "pulseFlight",
+          "name": "homeRevision",
           "kind": "lexical",
           "bodyLine": 175
         },
         {
-          "name": "broadcastRevision",
+          "name": "pulseFlight",
           "kind": "lexical",
           "bodyLine": 176
         },
         {
-          "name": "memberMenu",
+          "name": "broadcastRevision",
           "kind": "lexical",
           "bodyLine": 177
         },
         {
-          "name": "accessSignature",
+          "name": "memberMenu",
           "kind": "lexical",
           "bodyLine": 178
         },
         {
-          "name": "agentCopyBusy",
+          "name": "accessSignature",
           "kind": "lexical",
           "bodyLine": 179
         },
         {
-          "name": "admittedAgent",
+          "name": "agentCopyBusy",
           "kind": "lexical",
           "bodyLine": 180
         },
         {
-          "name": "developmentCloudRevision",
+          "name": "admittedAgent",
           "kind": "lexical",
           "bodyLine": 181
         },
         {
+          "name": "developmentCloudRevision",
+          "kind": "lexical",
+          "bodyLine": 182
+        },
+        {
           "name": "releaseTransfer",
           "kind": "lexical",
-          "bodyLine": 189
+          "bodyLine": 190
         },
         {
           "name": "activitySource",
           "kind": "lexical",
-          "bodyLine": 240
+          "bodyLine": 241
         },
         {
           "name": "activityPages",
           "kind": "lexical",
-          "bodyLine": 241
+          "bodyLine": 242
         },
         {
           "name": "situationCarousel",
           "kind": "lexical",
-          "bodyLine": 242
+          "bodyLine": 243
         },
         {
           "name": "pairing",
           "kind": "lexical",
-          "bodyLine": 243
+          "bodyLine": 244
         },
         {
           "name": "names",
           "kind": "lexical",
-          "bodyLine": 245
+          "bodyLine": 246
         }
       ],
       "imports": [
@@ -127074,6 +127104,7 @@
         "Program/official/together/product/desktop/ui/markdown.mjs",
         "Program/official/together/product/desktop/ui/member-menu.mjs",
         "Program/official/together/product/desktop/ui/native-overlays.mjs",
+        "Program/official/together/product/desktop/ui/project-governance.mjs",
         "Program/official/together/product/desktop/ui/source-browser.mjs",
         "Program/official/together/product/desktop/ui/surfaces.mjs",
         "Program/official/together/product/desktop/ui/unified.mjs",
@@ -172546,7 +172577,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "78d470f485b0036a85b08f97b2fa0646994b2afdb0fdddb673a98cf31ad14f54",
+      "bodySHA256": "b1dc694d101dcd2084fdd25c145f61f7056c16a81a1b7a09ed4451429dea4bd9",
       "regions": [
         {
           "name": "load",
@@ -176059,6 +176090,7 @@
       "Program/official/together/product/desktop/ui/os-foundation.css",
       "Program/official/together/product/desktop/ui/os-host.css",
       "Program/official/together/product/desktop/ui/participation.css",
+      "Program/official/together/product/desktop/ui/project-governance.mjs",
       "Program/official/together/product/desktop/ui/source-browser.mjs",
       "Program/official/together/product/desktop/ui/station-overview.css",
       "Program/official/together/product/desktop/ui/surfaces.mjs",

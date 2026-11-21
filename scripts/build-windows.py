@@ -306,11 +306,13 @@ def build_installer(target, archive, generated, public_key, version, sequence, t
 
 
 def build(staging, out, key, notes, program_archives=False, previous_baseline=None, source_commit=None,
-          *, installer=True, test_public_key=None):
+          *, installer=True, test_public_key=None, source_revision=None):
     meta = json.loads((ROOT / 'scripts/release-metadata.json').read_text(encoding='utf-8'))
     version, sequence = meta['version'], meta['sequence']
     if source_commit is not None and not re.fullmatch(r'[a-f0-9]{40}(?:[a-f0-9]{24})?', source_commit):
         raise ValueError('Source commit must be a full Git object ID')
+    if source_revision is not None and (not source_commit or not re.fullmatch(r'[a-f0-9]{64}', source_revision)):
+        raise ValueError('Together builds require a source snapshot and its full Git commit')
     tag = f'{version}-r{sequence}'
     test_build = test_public_key is not None
     public_key = test_public_key if test_build else ROOT / 'Config/release.pub.pem'
@@ -365,6 +367,8 @@ def build(staging, out, key, notes, program_archives=False, previous_baseline=No
                      'artifacts': [{'file': str(out / a['name']), **{k: a[k] for k in ('kind', 'platform', 'arch', 'purpose', 'component', 'fromSequence') if k in a}} for a in artifacts]}
     if source_commit:
         release_input['sourceCommit'] = source_commit
+    if source_revision:
+        release_input['sourceRevision'] = source_revision
     (out / 'release-input.json').write_text(json.dumps(release_input, ensure_ascii=False, indent=2), encoding='utf-8')
     receipt = {'version': version, 'sequence': sequence, 'local_test': test_build,
                'baseline': {**signed, 'texts': len(json.loads(payload)['texts']), 'sha256': hashlib.sha256(envelope).hexdigest()},
@@ -382,9 +386,10 @@ if __name__ == '__main__':
     parser.add_argument('--program-archives', action='store_true', help='额外输出独立Link/Browser包；默认只输出内置全部程序的OS ZIP')
     parser.add_argument('--previous-baseline', type=Path, help='Signed Config/official-baseline.json from the preceding Windows release')
     parser.add_argument('--source-commit', help='Full Git object ID of the release source')
+    parser.add_argument('--source-revision', help='Together source snapshot used for this build')
     parser.add_argument('--skip-installer', action='store_true', help='仅生成 ZIP 制品')
     parser.add_argument('--test-public-key', type=Path, help='使用本机验收公钥，输出明确标记为 local-test')
     args = parser.parse_args()
     print(json.dumps(build(args.staging.resolve(), args.out.resolve(), args.key, args.notes, args.program_archives,
                            args.previous_baseline, args.source_commit, installer=not args.skip_installer,
-                           test_public_key=args.test_public_key), ensure_ascii=False))
+                           test_public_key=args.test_public_key, source_revision=args.source_revision), ensure_ascii=False))

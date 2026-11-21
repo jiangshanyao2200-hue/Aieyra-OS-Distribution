@@ -52,7 +52,7 @@ const ORIGIN = 'https://osupdate.aieyra.cn';
 const ACCOUNT = 'https://api.aieyra.cn';
 const /* @chain-region hash | calls: digest, update, crypto.createHash */ hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const /* @chain-region fail | calls: Object.assign, Error */ fail = (message, status = 400) => Object.assign(Error(message), { status });
-const ROUTES = /^\/(?:elections(?:\/(?:vote|authorize|authorization|candidate))?|engineering\/(?:overview|tasks|task|brief|events|repository|development|archive|manifest|file|reviews|workflow|verifications|compositions|releases(?:\/(?:proposals|propose|vote))?|release|handoffs|live\/(?:context|plan|conflicts|pheromones|rooms|room|drafts|draft|queue|sync))|access|apply|agents(?:\/revoke)?|discussions(?:\/(?:comment|like))?|board|members|votes|code(?:\/(?:file|archive))?|public\/events|goals(?:\/(?:nominate|vote))?|agendas(?:\/[a-f0-9]{32}(?:\/(?:publish|vote|comment|cancel|complete))?)?|keys(?:\/revoke)?|chat\/(?:messages|assets\/[a-f0-9]{32}|uploads(?:\/[a-f0-9]{32}\/(?:chunk|complete))?)|admin\/(?:elections\/resolve|engineering\/promote|overview|applications(?:\/review)?|goals\/(?:establish|complete)|agendas\/(?:assign|remove)|comments\/remove|discussions\/remove|users\/(?:disable|moderate)|chat\/remove|settings))$/;
+const ROUTES = /^\/(?:elections(?:\/(?:vote|authorize|authorization|candidate|manage|management))?|engineering\/(?:updates(?:\/commit)?|overview|tasks|task|brief|events|repository|development|archive|manifest|file|reviews|workflow|verifications|compositions|releases(?:\/(?:proposals|propose|vote))?|release|handoffs|live\/(?:context|plan|conflicts|pheromones|rooms|room|drafts|draft|queue|sync))|access|apply|agents(?:\/revoke)?|discussions(?:\/(?:comment|like))?|board|members|votes|code(?:\/(?:file|archive))?|public\/events|goals(?:\/(?:nominate|vote))?|agendas(?:\/[a-f0-9]{32}(?:\/(?:publish|vote|comment|cancel|complete))?)?|keys(?:\/revoke)?|chat\/(?:messages|assets\/[a-f0-9]{32}|uploads(?:\/[a-f0-9]{32}\/(?:chunk|complete))?)|admin\/(?:elections\/resolve|engineering\/(?:promote|updates\/sync)|overview|applications(?:\/review)?|goals\/(?:establish|complete)|agendas\/(?:assign|remove)|comments\/remove|discussions\/remove|users\/(?:disable|moderate)|chat\/remove|settings))$/;
 
 const { RequestGate } = require('./request-gate.cjs');
 /* @chain-region CloudClient */ class CloudClient {
@@ -82,7 +82,7 @@ const { RequestGate } = require('./request-gate.cjs');
   /* @chain-region CloudClient.state | calls: Date.now */ state() {
     if (this.grant && this.grant.expiresAt <= Date.now()) this.grant = null;
     return { signedIn: !!this.session && this.session.expiresAt > Date.now(), user: this.session?.user || null,
-      adminUntil: this.grant?.expiresAt || 0, generation: this.generation };
+      adminUntil: this.session?.user?.role===100 ? this.session.expiresAt : 0, generation: this.generation };
   }
   /* @chain-region CloudClient.clear | calls: gate.reset, c.abort, fs.unlinkSync, changed, state */ clear() {
     this.gate?.reset();
@@ -116,10 +116,7 @@ const { RequestGate } = require('./request-gate.cjs');
       Object.assign(headers, { 'x-os-proof': '2', 'x-os-time': time, 'x-os-nonce': nonce,
         'x-os-signature': crypto.sign(null, Buffer.from(['aieyra-os-proof-v2', hash(credential.accessToken), method, url.pathname, time, nonce, hash(JSON.stringify(value))].join('\n')), credential.privateKey).toString('base64url') });
     }
-    if (admin) {
-      if (!this.grant || this.grant.expiresAt <= Date.now()) { this.grant = null; throw fail('请先输入密码验证管理权限。', 403); }
-      headers['x-os-admin'] = this.grant.token;
-    }
+    if (admin && credential?.user?.role !== 100) throw fail('需要超级管理员账号。', 403);
     const controller = new AbortController(), generation = this.generation;
     this.controllers.add(controller); this.active++; this.activity(1);
     const sourceTransfer=/\/engineering\/(?:archive|file)$/.test(url.pathname),started=Date.now(),requestId=crypto.randomUUID();let httpStatus=0,failureRecord,receivedBytes=0,expectedBytes;

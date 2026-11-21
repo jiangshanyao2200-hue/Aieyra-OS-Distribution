@@ -361,6 +361,11 @@
   rule-352 | style | .code-pheromones
   rule-353 | style | .code-pheromones p
   rule-354 | style | .code-pheromones small
+  rule-355 | style | .project-governance
+  rule-356 | style | .project-governance h3
+  rule-357 | style | .project-governance-row
+  rule-358 | style | .project-governance-row > span
+  rule-359 | style | .project-governance-row .actions
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
 @file-map:end */
 @import url('../../office/web/station-visual.css');
@@ -441,3 +446,8 @@
 /* @chain-region rule-352 */ .code-pheromones{margin:16px 0;padding-inline-start:14px;border-inline-start:2px solid var(--accent,#b9a5ed);overflow-wrap:anywhere}
 /* @chain-region rule-353 */ .code-pheromones p{white-space:pre-wrap}
 /* @chain-region rule-354 */ .code-pheromones small{opacity:.7}
+/* @chain-region rule-355 */ .project-governance { display:grid; gap:1rem; margin-block-end:1rem; }
+/* @chain-region rule-356 */ .project-governance h3 { margin:0 0 .35rem; font-size:1rem; }
+/* @chain-region rule-357 */ .project-governance-row { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.4rem 1rem; border-block-end:1px solid var(--line, #8d9b9c55); padding-block:.5rem; }
+/* @chain-region rule-358 */ .project-governance-row > span { min-width:0; overflow-wrap:anywhere; }
+/* @chain-region rule-359 */ .project-governance-row .actions { flex-wrap:wrap; }

@@ -20,6 +20,10 @@
   rule-11 | style | [data-os-host] .os-cloud-status
   rule-12 | style | @media(max-width:700px)
   rule-13 | style | @media(max-width:460px)
+  rule-14 | style | .update-streams
+  rule-15 | style | .update-streams > div
+  rule-16 | style | .update-streams h3
+  rule-17 | style | .update-streams code
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
 @file-map:end */
 /* @chain-region rule-1 */ .together-desktop[data-os-host],
@@ -62,3 +66,7 @@
   [data-os-host] .titlebar { overflow:auto hidden; scrollbar-width:none; }
   [data-os-host] .titlebar-space { display:none; }
 }
+/* @chain-region rule-14 */ .update-streams { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:16px; margin-block:12px; }
+/* @chain-region rule-15 */ .update-streams > div { display:grid; align-content:start; justify-items:start; gap:6px; border-top:1px solid var(--ui-border); padding-block:10px; }
+/* @chain-region rule-16 */ .update-streams h3 { margin:0; font-size:14px; }
+/* @chain-region rule-17 */ .update-streams code { overflow-wrap:anywhere; font-size:12px; }

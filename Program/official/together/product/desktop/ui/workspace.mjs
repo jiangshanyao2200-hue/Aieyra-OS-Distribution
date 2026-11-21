@@ -2,7 +2,7 @@
 文件: link/desktop/ui/workspace.mjs
 位置: 三环·页面编排 | 首页、仓库、工位、群聊、管理、接入的状态与事件编排。
 约束: 可复用结构进入共享模块，编排层保留业务状态和授权动作；继续使用generation/epoch取消旧响应；不得重建整页破坏焦点和草稿
-下游: link/desktop/ui/activity-history.mjs, link/desktop/ui/appearance.mjs, link/desktop/ui/audit.mjs, link/desktop/ui/carousel.mjs, link/desktop/ui/collaboration.mjs, link/desktop/ui/connection.mjs, link/desktop/ui/controls.mjs, link/desktop/ui/detail-view.mjs, link/desktop/ui/development.mjs, link/desktop/ui/elections.mjs, link/desktop/ui/engineering.mjs, link/desktop/ui/icons.mjs, link/desktop/ui/live.mjs, link/desktop/ui/markdown.mjs, link/desktop/ui/member-menu.mjs, link/desktop/ui/native-overlays.mjs, link/desktop/ui/source-browser.mjs, link/desktop/ui/surfaces.mjs, link/desktop/ui/unified.mjs, link/desktop/ui/welcome.mjs, link/desktop/ui/work-status.mjs, link/desktop/ui/workflow.mjs, link/office/web/motion.mjs
+下游: link/desktop/ui/activity-history.mjs, link/desktop/ui/appearance.mjs, link/desktop/ui/audit.mjs, link/desktop/ui/carousel.mjs, link/desktop/ui/collaboration.mjs, link/desktop/ui/connection.mjs, link/desktop/ui/controls.mjs, link/desktop/ui/detail-view.mjs, link/desktop/ui/development.mjs, link/desktop/ui/elections.mjs, link/desktop/ui/engineering.mjs, link/desktop/ui/icons.mjs, link/desktop/ui/live.mjs, link/desktop/ui/markdown.mjs, link/desktop/ui/member-menu.mjs, link/desktop/ui/native-overlays.mjs, link/desktop/ui/project-governance.mjs, link/desktop/ui/source-browser.mjs, link/desktop/ui/surfaces.mjs, link/desktop/ui/unified.mjs, link/desktop/ui/welcome.mjs, link/desktop/ui/work-status.mjs, link/desktop/ui/workflow.mjs, link/office/web/motion.mjs
 上游: link/desktop/ui/index.html, link/desktop/ui/login.html
 链路: shared-ui, modal, governance
 验证: AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/desktop/modal-aidebug.cjs, tests/test_u81_runtime.py
@@ -84,6 +84,7 @@
   selectElectionGoals | function
   selectElectionGoals.node.onsubmit | handler
   repositoryView | function
+  submitChannel | function
   chatView | function
   chatView.oninput | handler
   chatView.onkeydown | handler
@@ -101,13 +102,11 @@
   loadChatImages | function
   loadChatImages.worker | function
   loadChatImages.worker.img.onclick | handler
-  unlock | function
   managed | function
   moderateMember | function
   managementView | function
   onclick | handler
   syncVisibleWorkspace | function
-  pinned | method
   onInset | method
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
 @file-map:end */
@@ -121,6 +120,7 @@ import {Appearance,defaults as appearanceDefaults} from './appearance.mjs';
 import {bindNativeOverlays} from './native-overlays.mjs';
 import {ActivityPages} from './activity-history.mjs';
 import {developmentHTML,developmentLogsHTML,updateDevelopment} from './development.mjs';
+import {projectGovernanceHTML,governanceForm} from './project-governance.mjs';
 import {connectionMessage,homeRetryDelay} from './connection.mjs';
 import {bindMemberMenu} from './member-menu.mjs';
 import {welcomePhase,welcomeHTML} from './welcome.mjs';
@@ -140,7 +140,6 @@ const hostOS=window.linkInOS;
 if(hostOS){
   document.documentElement.dataset.osHost='';
   document.documentElement.dataset.mode='local';
-  $('together-modes').hidden=false;
 }
 // Electron preserves the fields on plain results crossing the isolated world.
 for(const [name,invoke] of Object.entries(api)){
@@ -170,6 +169,8 @@ let timer,noticeTimer,liveTimer,adminTab='applications',adminPage=0, navigation=
 let direction=0,pendingTab='',broadcastPreviewTimer;
 const surfaces=new Surfaces(workspace),formDrafts=new Map(),sourceBrowser=new SourceBrowser(api);
 let repositoryStatus=null;
+let updateChannels=null, pendingChannelRequest=null;
+let governancePage=null, governanceOffset=0;
 let homeData=null,managementOffsets={applications:0,members:0,agendas:0,audit:0};
 let homeRevision=null,homeMilestones=[],homeReadAt=0,homeMilestoneView='all',homeBundled=false;
 let pulseFlight=null,visibilityRevision=0,lastHidden=document.hidden;
@@ -304,7 +305,10 @@ document.addEventListener('click',event=>{
   $('broadcast-button').hidden=!member;
   scheduleBroadcast();
   document.querySelectorAll('[data-tab]').forEach(button=>{
-    button.hidden=state.mode==='local'?button.dataset.tab!=='office':button.dataset.tab==='agents'?!state.signedIn:button.dataset.tab!=='home'&&(!member||button.dataset.tab==='management'&&!state.access?.admin);
+    const section=button.dataset.tab;
+    if(section==='office'&&hostOS)button.hidden=false;
+    else if(section==='agents')button.hidden=!state.signedIn;
+    else button.hidden=section!=='home'&&(!member||section==='management'&&!state.access?.admin&&!state.access?.project_manager);
     button.classList.toggle('active',button.dataset.tab===tab);button.setAttribute('aria-current',button.dataset.tab===tab?'page':'false');
   });
   const signature=JSON.stringify([state.signedIn,state.user]);
@@ -312,7 +316,7 @@ document.addEventListener('click',event=>{
   $('account').ariaLabel=state.signedIn?'账号信息':'登录';
   if(hostOS){
     const tools=$('local-office-tools');
-    $('tabs').hidden=state.mode==='local';
+    $('tabs').hidden=false;
     tools.hidden=state.mode!=='local';
     $('local-office-tabs').hidden=tools.hidden;
     for(const button of $('local-office-tabs').querySelectorAll('button'))button.disabled=!state.localReady;
@@ -332,6 +336,8 @@ document.addEventListener('click',event=>{
   memberMenu.close();
   direction=0;pendingTab='';cancelMotion($('navigation-sweep'));hideBroadcastPreview();
   repositoryStatus=null;
+  updateChannels=null;pendingChannelRequest=null;
+  governancePage=null;governanceOffset=0;
   activityPages.reset(null);
   clearTimeout(developmentTimer);developmentCloudRevision=null;developmentState={};developmentLogCursors=[0];developmentLogIndex=0;
   releaseTransfer=null;
@@ -350,12 +356,12 @@ document.addEventListener('click',event=>{
   if(previous!==undefined&&previous!==state.generation){clearScope();state.access=null;}
   if(next.access)state.access=next.access;
   if(!state.signedIn){state.access=null;state.user=null;if(state.mode==='cloud')tab='home';}
-  if(state.mode==='local')tab='office';
+  if(state.mode==='local'&&!pendingTab)tab='office';
   else if(!hostOS&&!wasSignedIn&&state.signedIn){tab='agents';await api.tab('agents');}
   if(oldAccess?.member&&state.access&&!state.access.member){clearScope();}
   if(next.releaseTransfer?.generation===state.generation&&!releaseTransfer)releaseTransfer=next.releaseTransfer;
   if(oldAccess?.admin&&!state.access?.admin){surfaces.clear();$('dialog').close();}
-  if(tab==='management'&&!state.access?.admin)tab='home';
+  if(tab==='management'&&!state.access?.admin&&!state.access?.project_manager)tab='home';
   if(next.onboarding)paintAgentActivity(next.onboarding);
   header();if(next.error)reportError(typeof next.error==='string'?{message:next.error}:next.error);
   const signature=JSON.stringify([state.mode,state.localReady,state.localError,state.hostAuth,state.signedIn,state.access]);
@@ -373,11 +379,20 @@ api.onState(next=>void receive(next));
     if(state.signedIn&&!state.access)surfaces.open('checking-error',`<section class="login-stage"><h1>暂时无法验证云端权限</h1><button class="secondary" data-action="refresh">重试连接</button></section>`);
   }
 }
-/* @chain-region navigate | calls: api.tab, mainTabs.find, previous.getBoundingClientRect, target.getBoundingClientRect, Math.sign, header, $, getBoundingClientRect … */ async function navigate(next){
+/* @chain-region navigate | calls: hostOS.mode, Error, api.tab, mainTabs.find, previous.getBoundingClientRect, target.getBoundingClientRect, Math.sign, header … */ async function navigate(next){
   if(next===tab&&!pendingTab)return;
   const serial=++navigation;
   pendingTab=next;
   try{
+    if(hostOS){
+      const surface=next==='office'?'local':'cloud';
+      if(surface!==state.mode){
+        const switched=await hostOS.mode(surface);
+        if(!switched.ok)throw Error(switched.error);
+        if(serial!==navigation)return;
+        state.mode=surface;document.documentElement.dataset.mode=surface;
+      }
+    }
     await api.tab(next);if(serial!==navigation)return;
     const previous=mainTabs.find(button=>button.dataset.tab===tab);
     const target=mainTabs.find(button=>button.dataset.tab===next);
@@ -769,7 +784,10 @@ api.onState(next=>void receive(next));
       content.dataset.stationMode=stationMode;
     }
     const reconnect=$('station-reconnect'),needsReconnect=phase==='reconnect'||data.connection?.state==='idle'||data.connection?.state==='unlinked';
-    workspace.querySelector('[data-action=agent-add]').hidden=!data.parallel_agents;
+    const add=workspace.querySelector('[data-action=agent-add]');
+    add.hidden=!data.parallel_agents;
+    add.disabled=Number.isInteger(data.workstation_limit)&&data.workstations_used>=data.workstation_limit;
+    add.textContent=Number.isInteger(data.workstation_limit)?'新增工位 · '+data.workstations_used+'/'+data.workstation_limit:'新增工位';
     reconnect.hidden=!needsReconnect;
     reconnect.querySelector('p').textContent='重新连接 Agent';
     const sync=$('station-sync');sync.textContent=`${data.stale?'同步暂缓 · 上次态势':'已同步'} · ${date(Date.parse(data.observed_at)/1000)}`;sync.classList.toggle('is-stale',data.stale);
@@ -936,26 +954,38 @@ api.onState(next=>void receive(next));
 }
 /* @chain-region repositoryView | calls: shell, $, project, Promise.allSettled, api.development, api.call, workspace.querySelector, paintDevelopment … */ async function repositoryView(epoch){
   shell('','','','repository');
-  if(!$('repository-host'))project($('content'),'<section id="repository-versions" aria-label="版本通道"></section><div id="development-host"></div><div id="release-votes-host"></div><div id="stable-proposal-host" class="actions"></div><div id="repository-host"></div>');
-  const [local,remote]=await Promise.allSettled([api.development('status'),api.call('/engineering/repository?offset=0')]);
+  if(!$('repository-host'))project($('content'),'<section id="repository-versions" aria-label="版本通道"></section><div id="update-channels"></div><div id="development-host"></div><div id="repository-host"></div>');
+  const [local,remote,channels]=await Promise.allSettled([api.development('status'),api.call('/engineering/repository?offset=0'),api.call('/engineering/updates')]);
   if(epoch!==viewEpoch)return;
   const surface=workspace.querySelector('.surface');let failure;
   if(local.status==='fulfilled'){paintDevelopment(local.value);surface.dataset.loaded='true';}else failure=local.reason;
   if(remote.status==='rejected')throw remote.reason;
-  const data=remote.value;developmentCloudRevision=data.repository.cloud;paintDevelopment(developmentState);
+  const data=remote.value;developmentCloudRevision=data.repository.development??data.repository.cloud;paintDevelopment(developmentState);
+  if(channels.status==='fulfilled'){
+    updateChannels=channels.value;
+    const dev=updateChannels.development,stable=updateChannels.stable;
+    const build=updateChannels.builds?.find(item=>item.revision===dev?.revision&&item.commit_id===dev?.commit_id&&item.sequence>(stable?.sequence||0));
+    const commit=updateChannels.can_commit&&updateChannels.cloud!==dev?.revision;
+    project($('update-channels'),`<section class="update-streams"><div><h3>开发版</h3><code>${e(dev?.commit_id.slice(0,12)||'尚未提交')}</code>${commit?'<button class="primary" data-action="channel-commit">提交开发版</button>':''}</div><div><h3>稳定版</h3><code>${e(stable?.build_id||'沿用线上稳定版')}</code>${updateChannels.can_sync&&build?`<button class="primary" data-action="channel-sync" data-build="${e(build.id)}">同步 ${e(build.id)}</button>`:''}</div></section>`);
+  }else{updateChannels=null;failure||=channels.reason;}
   project($('repository-versions'),versionTrackHTML(data.repository,repositoryStatus));
   await sourceBrowser.mount($('repository-host'),data.repository.cloud);if(epoch!==viewEpoch)return;
   if(data.repository.workflow_protocol>=2){
-    const [flow,ballots]=await Promise.allSettled([api.call('/engineering/workflow?repository_status=1'),api.call('/engineering/releases/proposals')]);
+    const [flow]=await Promise.allSettled([api.call('/engineering/workflow?repository_status=1')]);
     if(epoch!==viewEpoch)return;
     if(flow.status==='fulfilled'){
       repositoryStatus=flow.value;
       project($('repository-versions'),versionTrackHTML(data.repository,repositoryStatus));
-      project($('stable-proposal-host'),flow.value.can_authorize&&flow.value.development_release?'<button data-action="propose-stable">提交稳定版投票</button>':'');
     }else failure||=flow.reason;
-    if(ballots.status==='fulfilled')project($('release-votes-host'),releaseVotesHTML(ballots.value));else failure||=ballots.reason;
   }
   surface.dataset.loaded='true';if(failure)throw failure;
+}
+
+/* @chain-region submitChannel | calls: JSON.stringify, crypto.randomUUID, api.call, render */ async function submitChannel(route,payload){
+  const intent=JSON.stringify([state.generation,route,payload]);
+  if(pendingChannelRequest?.intent!==intent)pendingChannelRequest={intent,id:crypto.randomUUID()};
+  await api.call(route,{...payload,request_id:pendingChannelRequest.id});
+  pendingChannelRequest=null;await render();
 }
 /* @chain-region chatView | calls: shell, $, updateChat, classList.add, workspace.querySelector, icon, updateChatLength, addEventListener … */ async function chatView(epoch){
   const created=shell('','','','chat');
@@ -1091,29 +1121,28 @@ const /* @chain-region chatLength | calls: Array.from, text.replace */ chatLengt
   };
   await Promise.all(Array.from({length:Math.min(4,nodes.length)},worker));
 }
-/* @chain-region unlock | calls: form, api.verify, $, refresh, after */ async function unlock(after=()=>{}){
-  form('验证管理权限',[{name:'password',label:'账号密码',short:true,type:'password',max:256}],async values=>{
-    const epoch=dialogEpoch,result=await api.verify(values);if(epoch!==dialogEpoch||!$('dialog').open)return;
-    if(result.twoFactorRequired){form('账号二次验证',[{name:'code',label:'验证码',short:true,max:32}],async v=>{const next=dialogEpoch;await api.verify({challenge:result.challenge,code:v.code});await refresh();if(next===dialogEpoch&&$('dialog').open)await after();},'验证');}
-    else{await refresh();if(epoch===dialogEpoch&&$('dialog').open)await after();}
-  },'验证');
-}
-/* @chain-region managed | calls: Date.now, unlock, action */ async function managed(action){if(state.adminUntil<=Date.now()){await unlock(action);return;}await action();}
-/* @chain-region moderateMember | calls: managed, crypto.randomUUID, form, api.call, Number, refresh */ async function moderateMember(member,action){
-  if(!state.access?.admin)return;
+/* @chain-region managed | calls: action */ async function managed(action){if(state.access?.admin)await action();}
+/* @chain-region moderateMember | calls: api.call, projectGovernanceHTML, project, $, managed, crypto.randomUUID, form, Number … */ async function moderateMember(member,action){
+  if(!state.access?.admin&&!state.access?.project_manager)return;
+  const offset=governanceOffset;
+  const page=await api.call('/elections/management?offset='+offset);
+  if(epoch!==viewEpoch||offset!==governanceOffset)return;
+  governancePage=page;
+  const projectPanel=projectGovernanceHTML(page,offset,e);
+  if(!state.access.admin){project($('content'),projectPanel);return;}
   const label={ban:'封禁',unban:'解除封禁',mute:'禁言',unmute:'解除禁言'}[action];if(!label)return;
   await managed(()=>{
     const request_id=crypto.randomUUID(),fields=[...(action==='mute'?[{name:'duration',label:'时长',value:'3600',options:[['600','10 分钟'],['3600','1 小时'],['86400','1 天'],['604800','7 天']]}]:[]),{name:'reason',label:'原因',min:2,max:1000}];
     form(label+' · '+member.name,fields,async values=>{await api.call('/admin/users/moderate',{id:member.id,action,reason:values.reason,request_id,...(action==='mute'?{duration:Number(values.duration)}:{})});await refresh();},label,'moderate:'+member.id+':'+action);
   });
 }
-/* @chain-region managementView | calls: shell, Date.now, $, project, halo, URLSearchParams, map, Object.entries … */ async function managementView(epoch){
-  shell('','',''+(state.adminUntil>Date.now()?'<small id="admin-clock"></small><button class="secondary" data-action="lock">锁定</button>':''),'management:'+(state.adminUntil>Date.now()));
-  if(state.adminUntil<=Date.now()){$('content').className='admin-unlock';project($('content'),`${halo()}<button class="primary" data-action="unlock">验证管理权限</button>`);return;}
+/* @chain-region managementView | calls: shell, URLSearchParams, map, Object.entries, Promise.all, api.call, project, $ … */ async function managementView(epoch){
+  shell('','','','management');
+  if(!state.access?.admin)return;
   const query=new URLSearchParams(Object.entries(managementOffsets).map(([key,value])=>[key+'_offset',value]));
   const [data,applications]=await Promise.all([api.call('/admin/overview?dashboard=1&'+query),api.call('/admin/applications?offset='+managementOffsets.applications)]);
-  if(epoch!==viewEpoch)return;data.offsets={...managementOffsets};
-  project($('content'),managementHTML(data,applications,{attributes:userAttributes,avatar,date,auditHTML}));
+  if(epoch!==viewEpoch||offset!==governanceOffset)return;data.offsets={...managementOffsets};
+  project($('content'),projectPanel+managementHTML(data,applications,{attributes:userAttributes,avatar,date,auditHTML}));
 }
 document.addEventListener('click',async event=>{
   const carousel=event.target.closest('[data-carousel]');if(carousel){const [name,action]=carousel.dataset.carousel.split(':');(name==='situation'?situationCarousel:conversationCarousel).action(action);return;}
@@ -1137,6 +1166,27 @@ document.addEventListener('click',async event=>{
   }
   const button=event.target.closest('button');if(!button||button.disabled)return;const d=button.dataset,action=d.action;
   try{
+    if(d.governPage!==undefined){governanceOffset=Number(d.governPage);await render();return;}
+    if(d.govern){
+      const editor=governanceForm(governancePage,d);if(!editor)return;
+      const request_id=crypto.randomUUID();
+      form(editor.title,editor.fields,async values=>{
+        await api.call('/elections/manage',{...editor.payload(values),request_id});await render();
+      },'确定',d.govern+':'+d.row);return;
+    }
+    if(action==='channel-commit'&&updateChannels?.can_commit){
+      const snapshot=updateChannels,build=snapshot.builds.find(item=>item.revision===snapshot.cloud);
+      form('提交开发版',[{name:'commit',label:'Git 提交',short:true,min:40,max:64,value:build?.commit_id||''}],async values=>{
+        await submitChannel('/engineering/updates/commit',{revision:snapshot.cloud,commit_id:values.commit.trim(),expected_sequence:snapshot.development?.sequence||0});
+        notice('开发版已更新');
+      },'提交');return;
+    }
+    if(action==='channel-sync'&&updateChannels?.can_sync){
+      const snapshot=updateChannels,dev=snapshot.development;
+      button.disabled=true;
+      try{await submitChannel('/admin/engineering/updates/sync',{revision:dev.revision,commit_id:dev.commit_id,build_id:d.build,expected_sequence:snapshot.stable?.sequence||0});notice('稳定版已同步');}
+      finally{if(button.isConnected)button.disabled=false;}return;
+    }
     if(d.member){const member=homeData?.members?.members.find(m=>m.id===d.member);if(member)dialog(member.name,`<div class="profile">${avatar(member)}<p>${e(member.bio||'')}</p></div>`);return;}
     if(d.managementPage){const [kind,offset]=d.managementPage.split(':');if(Object.hasOwn(managementOffsets,kind))managementOffsets[kind]=Number(offset);await render();return;}
     if(d.releaseVote){const [id,choice]=d.releaseVote.split(':');button.disabled=true;try{await api.call('/engineering/releases/vote',{id,choice,request_id:crypto.randomUUID()});await render();}finally{if(button.isConnected)button.disabled=false;}return;}
@@ -1287,7 +1337,7 @@ document.addEventListener('click',async event=>{
     }
     if(action==='retry-office')await api.retry();
     if(action==='login')await api.login();if(action==='logout'){await api.logout();$('dialog').close();}
-    if(action==='refresh'){button.disabled=true;button.setAttribute('aria-busy','true');try{await refresh();}finally{if(button.isConnected){button.disabled=false;button.removeAttribute('aria-busy');}}}if(action==='unlock')await unlock();if(action==='lock'){await api.lock();await refresh();}
+    if(action==='refresh'){button.disabled=true;button.setAttribute('aria-busy','true');try{await refresh();}finally{if(button.isConnected){button.disabled=false;button.removeAttribute('aria-busy');}}}
     if(action==='apply')form('申请加入开发',[{name:'about',label:'个人说明',min:20,max:4000},{name:'participation',label:'参与计划',min:20,max:4000}],async values=>{await api.call('/apply',values);await refresh();});
     if(action==='goal-complete')await managed(()=>form('完成主目标',[{name:'note',label:'验收记录',min:10}],async values=>{await api.call('/admin/goals/complete',{id:board.cycle.id,...values});await render();}));
     if(action==='milestones')dialog('里程碑',`<div class="admin-list">${board?.history.map(h=>`<article><small>${date(h.completed)}</small><h3>${e(h.adoptions?.length>1?`${h.adoptions.length} 项已采纳目标`:h.title||'已完成阶段')}</h3>${h.adoptions?.length?`<ol>${h.adoptions.map(item=>`<li>${e(item.title)}</li>`).join('')}</ol>`:''}<p>${e(h.decision||'')}</p></article>`).join('')||'<p class="empty">暂无已完成目标</p>'}</div>`);
@@ -1335,17 +1385,14 @@ window.addEventListener('online',syncVisibleWorkspace);
 window.addEventListener('offline',()=>{
   if(tab==='home')surfaceStatus(Error('网络已断开'));
 });
-setInterval(()=>{if($('admin-clock')){const remaining=Math.max(0,Math.ceil((state.adminUntil-Date.now())/1000));$('admin-clock').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');}if(state.adminUntil&&state.adminUntil<=Date.now()){state.adminUntil=0;if(tab==='management')void render();}},1000);
 document.addEventListener('keydown',event=>{if(tab==='repository'&&repo==='code'&&$('file-find')&&!document.querySelector('dialog[open]')&&(event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='f'){event.preventDefault();workspace.querySelector('.source-find').hidden=false;$('file-find').focus();}});
 if(hostOS){
-  let switching=false;
-  const modes=$('together-modes');
   const toolbar=document.querySelector('.titlebar');
   toolbar.querySelector('.together-brand').textContent='Together';
   mountProgramToolbar(toolbar,{
     title:'.together-brand',
-    actions:'[data-tab],[data-office-action],[data-mode],#broadcast-button,#release-transfer',
-    groups:'#tabs,#local-office-tabs,#together-modes,#local-office-tools',
+    actions:'[data-tab],[data-office-action],#broadcast-button,#release-transfer',
+    groups:'#tabs,#local-office-tabs,#local-office-tools',
     /* @chain-region onInset | calls: document.documentElement.style.setProperty, catch, hostOS.toolbar, notice */ onInset:height=>{
       document.documentElement.style.setProperty('--office-toolbar-inset',height+'px');
       void hostOS.toolbar(height).catch(error=>notice(error.message));
@@ -1360,26 +1407,6 @@ if(hostOS){
       if(!result.ok)throw Error(result.error);
     }catch(error){notice(error.message);}
   });
-  modes.addEventListener('click',async event=>{
-    const button=event.target.closest('[data-mode]');
-    if(!button||switching||button.dataset.mode===state.mode)return;
-    switching=true;
-    let result;
-    try{
-      result=await hostOS.mode(button.dataset.mode);
-      if(!result.ok)throw Error(result.error);
-    }catch(error){notice(error.message);return;}
-    finally{switching=false;}
-    const next=result.data.mode;
-    document.documentElement.dataset.mode=next;
-    for(const item of modes.querySelectorAll('button'))item.setAttribute('aria-pressed',String(item.dataset.mode===next));
-    tab=result.data.tab;
-    const serial=++navigation;
-    try{
-      await receive({mode:next,hostAuth:state.hostAuth||result.data.hostAuth});
-      if(serial===navigation&&next==='cloud'&&state.signedIn)await refresh();
-    }catch(error){if(serial===navigation)notice(error.message);}
-  });
   hostOS.onVisibility(visible=>{
     if(visible){syncVisibleWorkspace();return;}
     clearTimeout(timer);clearTimeout(stationTimer);clearTimeout(broadcastTimer);
@@ -1387,6 +1414,6 @@ if(hostOS){
   });
 }
 
-await receive(await api.state());if(state.mode==='cloud'&&state.signedIn)await refresh(false);
+await receive(await api.state());if(state.signedIn)await refresh(false);
 
 if(state.mode==='cloud'&&state.access?.member){try{const status=await api.workStatus();if(status.agents.some(a=>(a.ready||a.enrollment?.state==='completed')&&!a.revoked&&a.expires>Date.now()/1000))await navigate('agents');}catch{/* Normal refresh keeps login and retries transient failures. */}}

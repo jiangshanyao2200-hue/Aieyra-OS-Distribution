@@ -55,9 +55,12 @@ class Checkout:
             (self.root / name).mkdir(exist_ok=True)
         self.file = self.root / 'checkout.json'
 
-    # @chain-region Checkout.sync | calls: ValueError, atomic, document, secrets.token_hex, self._load, self._materialize, self._path, self.call …
+    # @chain-region Checkout.sync | calls: ValueError, atomic, document, repository.get, secrets.token_hex, self._load, self._materialize, self._path …
     def sync(self):
-        revision = self.call('/engineering/overview')['repository']['cloud']
+        repository = self.call('/engineering/overview')['repository']
+        revision = repository.get('development', repository.get('cloud'))
+        if 'development' in repository and not revision:
+            raise ValueError('开发版尚未提交')
         if not source.HEX.fullmatch(revision or ''): raise ValueError('source_pending')
         if self.file.exists():
             ident = document(self.file)['id']

@@ -13,7 +13,6 @@
   tabs | element
   navigation-sweep | element
   local-office-tabs | element
-  together-modes | element
   local-office-tools | element
   broadcast-preview | element
   broadcast-button | element
@@ -29,8 +28,8 @@
   dialog-body | element
   detail-dialog | element
   detail-title | element
+  script-22 | element
   script-23 | element
-  script-24 | element
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
 @file-map:end -->
 <!doctype html>
@@ -58,12 +57,8 @@
       <button data-tab="chat" aria-label="开发者群聊" title="开发者群聊" hidden><i data-icon="chat"></i><span>群聊</span></button>
       <button data-tab="management" aria-label="管理" title="管理" hidden><i data-icon="management"></i><span>管理</span></button>
     </nav>
-    <nav id="local-office-tabs" aria-label="本地办公室" hidden><button data-office-action="stations" aria-pressed="true">工位</button><button data-office-action="chat" aria-pressed="false">群聊</button><button data-office-action="tasks" aria-pressed="false">工单</button></nav>
+    <nav id="local-office-tabs" aria-label="办公室操作" hidden><button data-office-action="stations" aria-pressed="true">名单</button><button data-office-action="chat" aria-pressed="false">工位消息</button><button data-office-action="tasks" aria-pressed="false">工单</button></nav>
     <span class="titlebar-space" aria-hidden="true"></span>
-    <div id="together-modes" role="group" aria-label="协作模式" hidden>
-      <button type="button" data-mode="local" aria-pressed="true">本地</button>
-      <button type="button" data-mode="cloud" aria-pressed="false">云端</button>
-    </div>
     <div id="local-office-tools" role="group" aria-label="本地工位操作" hidden>
       <button type="button" class="system-settings" data-office-action="connections" aria-label="云服务器" title="云服务器" disabled><i data-icon="office"></i><span>云服务器</span></button>
       <button type="button" class="system-settings" data-office-action="guide" aria-label="Agent 接入说明" title="Agent 接入说明" aria-haspopup="dialog" disabled><i data-icon="agent"></i><span>接入说明</span></button>
