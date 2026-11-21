@@ -4,7 +4,7 @@
   "kind": "agent",
   "name": "Eyra",
   "summary": "公开标准执行者定义；显式选择模型并创建独立实例。",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "publisher": "aieyra",
   "license": "SEE LICENSE IN PRODUCT",
   "contracts": {
@@ -823,8 +823,8 @@
       "size": 499
     },
     "prompts/tools/软件接口.txt": {
-      "sha256": "2bceb61dd9e8a8a34e2b7e9ddc5da7421ae957efbc3fb8f1b28f9d9db57f2a93",
-      "size": 4949
+      "sha256": "05bd24b833a6fce23036ec38f7f3858c1eeaa2ad4234d904661586fb6ce9203e",
+      "size": 5491
     },
     "prompts/tools/运行脚本.txt": {
       "sha256": "db431ec62fed48cf18549f122b999bd90281255c3beb2b326eb7cd46849180d1",

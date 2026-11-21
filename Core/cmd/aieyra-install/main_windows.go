@@ -34,6 +34,7 @@ func main() {
 	desktop := flag.String("desktop", "", "")
 	shortcuts := flag.Bool("shortcuts", true, "")
 	interactive := flag.Bool("interactive", false, "")
+	privacy := flag.String("privacy-policy", "", "")
 	flag.Parse()
 	report := json.NewEncoder(os.Stdout)
 	send := func(event host.InstallProgress) { _ = report.Encode(event) }
@@ -79,7 +80,7 @@ func main() {
 			return ctx.Err()
 		}
 	}
-	if err := host.InstallWindows(ctx, *archive, key, *version, *sequence, *root, *data, *shortcuts, *desktop, send, beforeCommit); err != nil {
+	if err := host.InstallWindows(ctx, *archive, key, *version, *sequence, *root, *data, *shortcuts, *desktop, send, beforeCommit, *privacy); err != nil {
 		send(host.InstallProgress{Step: "error", Message: err.Error()})
 		os.Exit(1)
 	}

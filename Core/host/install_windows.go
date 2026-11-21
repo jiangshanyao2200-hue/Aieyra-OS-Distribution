@@ -222,7 +222,10 @@ func extractInstallFile(entry *zip.File, target string, want updateFile, buffer 
 
 // InstallWindows stages a verified full archive beside the destination. The
 // atomic directory rename is the single point where the application appears.
-func InstallWindows(ctx context.Context, archivePath string, public []byte, version string, sequence int, root, data string, shortcuts bool, desktop string, progress func(InstallProgress), beforeCommit func(context.Context) error) error {
+func InstallWindows(ctx context.Context, archivePath string, public []byte, version string, sequence int, root, data string, shortcuts bool, desktop string, progress func(InstallProgress), beforeCommit func(context.Context) error, policy ...string) error {
+	if len(policy) > 1 || len(policy) == 1 && policy[0] != "" && policy[0] != "2026-11-22" {
+		return errors.New("隐私协议版本无效")
+	}
 	root, err := installDirectory(root)
 	if err != nil {
 		return err
@@ -308,6 +311,11 @@ func InstallWindows(ctx context.Context, archivePath string, public []byte, vers
 	baseline := filepath.Join(stage, filepath.FromSlash(installerBaseline))
 	if err := os.WriteFile(baseline, signed, 0644); err != nil {
 		return err
+	}
+	if len(policy) == 1 && policy[0] == "2026-11-22" {
+		if err := os.WriteFile(filepath.Join(stage, ".aieyra-privacy-consent"), []byte(policy[0]), 0600); err != nil {
+			return err
+		}
 	}
 	if err := ctx.Err(); err != nil {
 		return err

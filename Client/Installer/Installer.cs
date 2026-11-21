@@ -108,7 +108,7 @@ internal sealed class Setup
         halo = new HaloProgress(Find<TextBlock>("ProgressValue"));
         Find<Grid>("HaloHost").Children.Insert(0, halo);
         foreach (var id in new[] { "BrandTitle", "DestinationTitle", "ProgressLabel", "ProgressDetails",
-                                  "CompleteTitle", "CompleteDetails", "Edition" })
+                                  "CompleteTitle", "CompleteDetails", "Edition", "PrivacyTitle" })
             Outline(id, .75);
         Outline("ProgressValue", 1.45);
         using (var reader = new StreamReader(Resource("release.json"), Encoding.UTF8))
@@ -130,6 +130,11 @@ internal sealed class Setup
         Find<Button>("ChooseProgram").Click += delegate { Browse(program, "选择程序位置"); };
         Find<Button>("ChooseData").Click += delegate { Browse(data, "选择个人资料位置"); };
         Find<Button>("ExitSetup").Click += delegate { window.Close(); };
+        Find<Button>("PrivacyTerms").Click += delegate {
+            Show("PrivacyPage");
+            action.Content = "返回安装";
+            action.Focus();
+        };
         action.Click += RunAction;
         Fit();
     }
@@ -180,7 +185,7 @@ internal sealed class Setup
     private void FitContent(bool animate)
     {
         double spare = window.ActualHeight - Find<Grid>("HaloHost").Height - (page == "CompletePage" ? 282 : 224);
-        double offset = page == "DestinationPage" ? 0 : Math.Max(0, Math.Floor(spare * .46));
+        double offset = page == "DestinationPage" || page == "PrivacyPage" ? 0 : Math.Max(0, Math.Floor(spare * .46));
         var transform = (TranslateTransform)Find<StackPanel>("InstallerContent").RenderTransform;
         double previous = transform.Y;
         transform.Y = offset;
@@ -217,7 +222,7 @@ internal sealed class Setup
     {
         this.page = page;
         Find<Button>("ExitSetup").Visibility = page == "DestinationPage" ? Visibility.Visible : Visibility.Collapsed;
-        foreach (var name in new[] { "DestinationPage", "ProgressPage", "CompletePage" })
+        foreach (var name in new[] { "DestinationPage", "PrivacyPage", "ProgressPage", "CompletePage" })
         {
             var view = Find<StackPanel>(name);
             bool visible = page == name;
@@ -256,6 +261,13 @@ internal sealed class Setup
 
     private async void RunAction(object sender, RoutedEventArgs args)
     {
+        if (page == "PrivacyPage")
+        {
+            Show("DestinationPage");
+            action.Content = "开始安装";
+            Find<CheckBox>("PrivacyConsent").Focus();
+            return;
+        }
         if (complete)
         {
             confirmed = true;
@@ -268,6 +280,12 @@ internal sealed class Setup
             return;
         }
         string programPath, dataPath, desktopPath;
+        if (Find<CheckBox>("PrivacyConsent").IsChecked != true)
+        {
+            Find<TextBlock>("InputError").Text = "请先阅读并勾选隐私协议。";
+            Find<CheckBox>("PrivacyConsent").Focus();
+            return;
+        }
         try
         {
             programPath = AbsoluteDirectory(program.Text);
@@ -345,7 +363,7 @@ internal sealed class Setup
             {
                 Arguments = "-archive " + Quote(archive) + " -program " + Quote(root) + " -data " + Quote(personal) +
                     " -version " + version.version + " -sequence " + version.sequence.ToString(System.Globalization.CultureInfo.InvariantCulture) +
-                    " -interactive -shortcuts=" + (shortcuts ? "true" : "false") +
+                    " -privacy-policy 2026-11-22 -interactive -shortcuts=" + (shortcuts ? "true" : "false") +
                     (desktop.Length != 0 ? " -desktop " + Quote(desktop) : ""),
                 UseShellExecute = false, CreateNoWindow = true, RedirectStandardInput = true,
                 RedirectStandardOutput = true, StandardOutputEncoding = Encoding.UTF8, WorkingDirectory = temporary

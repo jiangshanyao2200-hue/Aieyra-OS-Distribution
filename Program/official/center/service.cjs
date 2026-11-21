@@ -105,7 +105,7 @@ function projectSituation({system,coreReady,board,link,integrity},report,telemet
  return {tone,message,focus,score,observedChecks:checked.length,checks,dimensions:rows.map(({warning,...row})=>row)};
 }
 
-function createCenterProgram({updates,community,conversation,openPage,releasePage,download,readCore,readPrograms,readBrowser,readLink,readLinkBoard,readDiagnostics,openManagement,sampleHost,model,learningSettings,statusLog,buildId,appVersion}){
+function createCenterProgram({updates,community,conversation,openPage,releasePage,download,readCore,readPrograms,readBrowser,readLink,readLinkBoard,readDiagnostics,openManagement,sampleHost,model,learningSettings,statusLog,issueReports,buildId,appVersion}){
  const check=r=>{if(r?.ok===false)throw Error(r.error||'更新操作未完成');return r;};
  let healthRequest;
  async function readHealthSnapshot(){
@@ -144,7 +144,7 @@ function createCenterProgram({updates,community,conversation,openPage,releasePag
   if(Array.isArray(programs))for(const p of programs.slice(0,80))add(p.name,p.program,p.program_session);
   const learningHeld=!core||browserFaults>0||integrity?.phase==='error'||count(integrity?.different)>0||
    ['waiting_idle','handoff'].includes(update?.phase);
-  return {coreReady:core?.ready,board,link,integrity,learningHeld,system:{
+  return {coreReady:core?.ready,board,link,integrity,learningHeld,update,system:{
    ok:true,observedAt:new Date().toISOString(),version:update?.currentVersion||'',items,agents,agentsObserved:internal||!!core||Array.isArray(programs)
   }};
  }
@@ -196,6 +196,10 @@ function createCenterProgram({updates,community,conversation,openPage,releasePag
   const observations=await Promise.allSettled([healthSnapshot(),sampleHost(),readDiagnostics()]);
   if(stopping)return;
   const [snapshot,host,runtime]=observations.map(result=>result.status==='fulfilled'&&result.value?.ok!==false?result.value:null);
+  const update=snapshot?.update;
+  if(update?.phase==='rolled_back'||update?.quick?.step==='failed'&&!['update_conflicts','update_needs_build'].includes(update.quick.code)){
+   issueReports?.system('update_error', update.release?.id);
+  }
   const system=snapshot?.system||null;
   const {cpu,memory,disk}=host?.hardware||{};
   const known=system?.items.filter(item=>item.state!=='unknown')||[];
@@ -252,6 +256,7 @@ function createCenterProgram({updates,community,conversation,openPage,releasePag
   return {
    ok:true,
    allowed:learningSettings.read(),
+   automatic_reports:issueReports?.preference()??false,
    sync:'pending_endpoint',
    local:telemetry?.learningHeld?'observing':report?.state||'unobserved',
    coverage:{ready,fresh,expected},
@@ -293,6 +298,11 @@ function createCenterProgram({updates,community,conversation,openPage,releasePag
    content:`[Aieyra OS 更新反馈] ${source==='agent'?'Agent':'用户'} · ${version}\n\n${details}`});
  }
  async function call(p={},source='user'){
+  if(issueReports){
+   if(p.action==='automatic_reports'&&source==='user')return {allowed:issueReports.preference(p.allowed)};
+   if(p.action==='report_issue'&&!p.release_topic)return issueReports.report(p,source==='agent');
+   if(p.action==='feedback_receipt'&&!p.release_topic)return issueReports.receipt(p.request_id);
+  }
   if(p.action==='download')return download();
   if(p.action==='health')return health();
   if(p.action==='telemetry'&&source==='agent')return agentTelemetry();

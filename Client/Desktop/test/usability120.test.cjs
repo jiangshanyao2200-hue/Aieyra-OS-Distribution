@@ -47,14 +47,17 @@ test('copy feedback repeats without losing the original icon or dynamic tooltip'
  assert.equal(button.innerHTML,'<copy/>');assert.equal(button.getAttribute('data-tip'),'复制说明');assert.equal(button.dataset.copied,undefined);assert.equal(button.getAttribute('aria-label'),'复制');
 });
 test('Link directly copies the current office guide once, gives common feedback and creates no popup',async t=>{
- const {setupLinkAccessGuide}=await import('../../../Control/app/web/link-access-guide.js'),f=documentFixture(),parent=f.doc.createElement('header');let resolve,fetches=0;const copies=[];
+ const {setupLinkAccessGuide}=await import('../../../Control/app/web/link-access-guide.js'),f=documentFixture();let resolve,fetches=0;const copies=[];
  const old=Object.getOwnPropertyDescriptor(globalThis,'navigator');Object.defineProperty(globalThis,'navigator',{configurable:true,value:{clipboard:{writeText:async v=>copies.push(v)}}});t.after(()=>old?Object.defineProperty(globalThis,'navigator',old):delete globalThis.navigator);
  const guide={protocol:'aieyra-office/1',origin:'http://127.0.0.1:18237',port:18237,api_base:'http://127.0.0.1:18237/api/agent/v1',guide_url:'http://127.0.0.1:18237/api/office/guide',station_script:path.join(os.tmpdir(),'station.py'),client_script:path.join(os.tmpdir(),'client.py'),current_project_id:'two',projects:[{id:'one',root:path.join(os.tmpdir(),'one')},{id:'two',root:path.join(os.tmpdir(),'two')}]};
- const ui=setupLinkAccessGuide({parent,fetchGuide:async()=>{fetches++;if(fetches>1)return {ok:false};await new Promise(r=>resolve=r);return {ok:true,json:async()=>guide};}});t.after(()=>ui.dispose());
- const button=parent.children[0],one=button.onclick();await button.onclick();assert.equal(fetches,1);resolve();await one;
- assert.equal(copies.length,1);assert.match(copies[0],/project = "two"/);assert.equal(button.dataset.copied,'true');assert.equal(button.disabled,false);assert(!f.doc.created.some(n=>['dialog','select','pre'].includes(n.tagName)));
- const status=f.doc.body.children[0];assert.equal(status.className,'sr-only');assert.equal(status.getAttribute('role'),'status');assert.match(status.textContent,/已复制/);
- await button.onclick();assert.equal(button.dataset.copied,undefined);assert.equal(status.className,'link-copy-notice');assert.match(status.textContent,/复制失败/);
+ const button=f.doc.createElement('button'),status=f.doc.createElement('span'),field={focus(){},select(){}};
+ const closeButton=f.doc.createElement('button'),fallback={hidden:true,querySelector:name=>name==='textarea'?field:closeButton};
+ const ui=setupLinkAccessGuide({button,status,fallback,project:()=>guide.current_project_id,fetchGuide:async()=>{fetches++;await new Promise(r=>resolve=r);return {ok:true,json:async()=>guide};}});t.after(()=>ui.dispose());
+ const one=button.onclick();await button.onclick();assert.equal(fetches,1);resolve();await one;
+ assert.equal(copies.length,1);assert.match(copies[0],/project = "two"/);assert.match(status.textContent,/已复制/);
+ navigator.clipboard.writeText=async()=>{throw Error('denied');};await button.onclick();assert.equal(fallback.hidden,false);
+ assert.equal(field.value,copies[0]);assert.match(status.textContent,/已选中/);
+ ui.dispose();await button.onclick();assert.equal(copies.length,1);
 });
 test('active tool Brief rows remain readable, while ordinary archived process bodies stay filtered',async()=>{
  const {visibleChat}=await import('../ui/agent-dock.mjs');const rows=[{id:'body',process:true},{id:'brief',from:'eyra',process:true,brief:true,state:'failed'},{id:'user',from:'user'}];assert.deepEqual(visibleChat(rows).map(r=>r.id),['brief','user']);

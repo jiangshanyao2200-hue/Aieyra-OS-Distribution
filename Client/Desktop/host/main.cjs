@@ -152,7 +152,7 @@ let descriptor = initial,
   modPackages, plugins, win, officialAccount, remoteLink, cloudUpdates, communityBridge, managedUpdates, forumSync, apps, browser, browserBridge, control, link, starting, surface, moduleDock, extensions,foldedOverlay,surfaceMenu,fileDrops,moduleDragPreview;
 let themeLibrary=null;
 let canvasProgram=null,canvasAccount=()=>({signedIn:false});
-let centerMonitor=null;
+let centerMonitor=null, issueReports=null;
 function workspaceProgram(){
  if(!canvasProgram)canvasProgram=require('../../../Program/official/workspace/service.cjs').createWorkspaceProgram({
   dataRoot:path.join(require('../src/paths.cjs').privatePath(config,'runtime'),'programs','workspace'),runtimeRoot:path.join(root,'runtime','media'),electron:require('electron'),conversation:conversationCall,stageFiles:async(id,paths)=>albumAttachments(await conversationStore(id).chooseBatch(paths)),imageCall:args=>core('workspace.program_images',args),videoCall:args=>core('workspace.program_videos',args),
@@ -179,7 +179,13 @@ const hostTrace = (phase, detail = '') => {
 };
 app.on('before-quit',()=>hostTrace('before-quit'));
 app.on('will-quit',()=>hostTrace('will-quit'));
-app.on('child-process-gone',(_event,details)=>hostTrace('child-process-gone',details.reason));
+app.on('child-process-gone',(_event,details)=>{
+  hostTrace('child-process-gone',details.reason);
+  if(['crashed','oom','abnormal-exit','launch-failed','integrity-failure'].includes(details.reason))issueReports?.system('child_crash');
+});
+app.on('render-process-gone',(_event,_contents,details)=>{
+  if(['crashed','oom','abnormal-exit','integrity-failure'].includes(details.reason))issueReports?.system('renderer_crash');
+});
 // Chromium stores runtime window state apart from account preferences.
 const profile = initial.mode === 'os'
   ? path.join(require('../src/paths.cjs').privatePath(config,'runtime'),'os', initial.session_id, 'desktop')
@@ -218,10 +224,15 @@ if (initial.parent_owned) {
 }
 let linkWorking=false;
 const core = async (action, args) => {
-  const result = await requestCore(descriptor, action, args);
+  let result;
+  try { result=await requestCore(descriptor,action,args); }
+  catch(error){if(!shutdown.started && ['ECONNREFUSED','ECONNRESET','EPIPE','ETIMEDOUT'].includes(error.code))issueReports?.system('core_unavailable');throw error;}
   if(['workspace.snapshot','workspace.task_snapshot'].includes(action)&&Array.isArray(result.roles))
   {
     linkWorking=(result.tasks||result.roles).some(role=>['queued','running','cancelling'].includes(role.state));
+    for(const task of result.tasks||result.roles){
+      if(task.state==='failed' && typeof task.id==='string' && Number.isSafeInteger(task.generation))issueReports?.system('execution_error',task.id+':'+task.generation);
+    }
     forumSync?.setWorking(linkWorking);
   }
   return result;
@@ -229,6 +240,7 @@ const core = async (action, args) => {
 const nativeAdapters={};
 const nativeVerification=require('./native-program-verification.cjs').createNativeProgramVerification();
 const nativePrograms=require('../../../Program/runtime/native.cjs').createNativePrograms({
+  onProgramError:()=>issueReports?.system('program_error'),
   resolve:async id=>{const out=await core('workspace.packages',{action:'resolve',id});if(out?.ok===false||!out?.item)throw Error(out?.error||'程序不可用');return out.item;},
   verify:item=>nativeVerification.verify(item),adapters:nativeAdapters,
   changed:()=>{link?.activateIfAdmitted();plugins?.changed();},onError:error=>{if(win&&!win.isDestroyed())win.webContents.send('workspace:notice','程序已停用，但草稿尚未保存，窗口已保留：'+error.message);},
@@ -781,7 +793,7 @@ app
     void plugins.changed();
     forumSync=require('./forum-sync.cjs').createForumSync({client:community,directory:require('../src/paths.cjs').privatePath(config,'forum')});
     managedUpdates=updatesEnabled?require('../src/managed-updates.cjs').createManagedUpdates({root,fetchImpl:community.authorizedFetch,signedIn:()=>community.status().signedIn,subscribe:community.subscribe,storePath:process.platform==='darwin'?require('../src/paths.cjs').privatePath(config,'updates'):undefined}):null;
-    officialAccount = require('./official-account.cjs').createOfficialAccount({BrowserWindow,session,owner:()=>win,core,community,config,offscreen,openInBrowser:args=>nativePrograms.run('browser',async()=>{const opened=await browser.user('program/browser',{action:'open',...args});if(opened.ok!==false)surface.navigate('browser');return opened;}),onWindow:portal=>require('../src/interface-zoom.cjs').forConfig(config).attach(portal,{minimum:[360,360]}),onChange:state=>{surfaceMenu?.accountChanged?.(state);remoteLink?.accountChanged(state);together.accountChanged();if(win&&!win.isDestroyed())win.webContents.send('workspace:accountChanged',state);extensions?.broadcast('accountChanged',state);}});
+    officialAccount = require('./official-account.cjs').createOfficialAccount({BrowserWindow,session,owner:()=>win,core,community,config,offscreen,openInBrowser:args=>nativePrograms.run('browser',async()=>{const opened=await browser.user('program/browser',{action:'open',...args});if(opened.ok!==false)surface.navigate('browser');return opened;}),onWindow:portal=>require('../src/interface-zoom.cjs').forConfig(config).attach(portal,{minimum:[360,360]}),onChange:state=>{issueReports?.accountChanged();surfaceMenu?.accountChanged?.(state);remoteLink?.accountChanged(state);together.accountChanged();if(win&&!win.isDestroyed())win.webContents.send('workspace:accountChanged',state);extensions?.broadcast('accountChanged',state);}});
     remoteLink=require('./remote-link.cjs').createRemoteLink({win,electron:require('electron'),account:officialAccount,onChange:state=>{if(win&&!win.isDestroyed())win.webContents.send('workspace:remoteLinkChanged',state);}});
     expose('remoteLink',p=>remoteLink.call(p));
     communityBridge=await require('./community.cjs').startCommunityBridge({close:()=>{ipcMain.removeHandler('plugin:invoke');ipcMain.removeHandler('plugin:project-drop');stopPluginTheme();tipWindow?.close();plugins.close();servers.close();resources.close();apps.close();forumSync.close();community.close();},call:async (p,signal)=>{
@@ -835,7 +847,7 @@ app
       throw Error('未知账号操作');
     });
     expose('feedback',async()=>({ok:false,error:'私密反馈已停用；旧本地记录不会上传，请由 Eyra 发布公开问题帖子'}));
-    cloudUpdates=require('./cloud-updates.cjs').createCloudUpdates({app,window:()=>win,root,config,initial,descriptor:()=>descriptor,core,canHandoff:()=>community.status().signedIn&&officialAccount.canHandoff()});
+    cloudUpdates=require('./cloud-updates.cjs').createCloudUpdates({app,window:()=>win,root,config,initial,descriptor:()=>descriptor,core,canHandoff:()=>community.status().signedIn&&officialAccount.canHandoff(),onUpdateError:()=>issueReports?.system('update_error')});
     // 本地编译默认关闭官方更新和安装补全，避免历史签名基线覆盖当前安装。
     expose('updateReady',()=>updatesEnabled?cloudUpdates.ready():{ok:true});
     expose('updateAcknowledge',p=>cloudUpdates.acknowledge(p));
@@ -897,9 +909,11 @@ app
     const statusLog=require('../../../Program/official/center/status-log.cjs').createStatusLog({
       file:path.join(centerData,'center','status-log.json'),readJson:inspectJson,writeJson:writeCenterJson,
     });
+    issueReports=require('../../../Program/official/center/issue-reports.cjs').createIssueReports({directory:path.join(centerData,'center'),root,version:initial.version,client:community,accountStatus:()=>officialAccount.status(),
+      confirm:async details=>(await dialog.showMessageBox(win,{type:'question',title:'提交到众创讨论',message:'以 Eyra 名义公开以下说明？',detail:details,buttons:['取消','确认公开'],defaultId:0,cancelId:0})).response===1});
     const centerService=require('../../../Program/official/center/service.cjs').createCenterProgram({
       updates:settingsUpdates,community,conversation:conversationCall,sampleHost:sampleCenterHost,model,
-      learningSettings,statusLog,buildId:initial.build?.build_id,appVersion:initial.version,
+      learningSettings,statusLog,issueReports,buildId:initial.build?.build_id,appVersion:initial.version,
       readCore:()=>core('workspace.snapshot',{include_activity:false}),readPrograms:()=>core('workspace.conversation',{action:'programs'}),
       readLinkBoard:()=>core('workspace.snapshot',{view:'internal_link'}),
       readBrowser:()=>browser.status(),readLink:()=>control.peek(),
@@ -939,7 +953,7 @@ app
       openManagement:id=>adapters[id].open(),openPage:()=>adapters.center.open(),releasePage:()=>extensions.releasePage('center'),
       download:()=>exposedHandlers.get('openLink')({url:require('../../../Contracts/official-services.json').download}),
     });
-    centerMonitor={close:()=>centerService.shutdown()};
+    centerMonitor={close:async()=>{const reports=issueReports;issueReports=null;await Promise.all([reports?.close(),centerService.shutdown()]);}};
     const extensionPackages=require('./extension-settings.cjs').createExtensionSettings({core,packages:modPackages,resources,dialog,changed:()=>plugins.changed(),exportAgent:p=>require('./agent-template-export.cjs').exportAgentTemplate({core,dialog,...p}),selectTask:id=>{surface.navigate('home');win.webContents.send('workspace:selectTask',{id});},appearance:()=>appearanceStore.read()});
     expose('extensionPackages',(p,owner)=>extensionPackages.call(p,{parent:owner||win,sender:extensions.contents('settings')}));
     expose('settingsBootstrap',async()=>({ok:true,features:require('../src/resources.cjs').releaseStage(),identityPalette:require('./profile.cjs').identityPalette(),onboarding:await core('settings',{action:'onboarding_status'}),profile:profileStore.read(),appearance:await core('settings',{action:'os_appearance_read'}),account:officialAccount.status()}));

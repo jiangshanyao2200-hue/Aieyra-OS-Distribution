@@ -258,6 +258,15 @@ async function refreshHealth(){
  finally{healthPending=false;if(epoch!==healthEpoch&&visible&&!document.hidden)void refreshHealth();}
 }
 const learningSync=$('center-learning-sync');
+const issueReporting=$('center-issue-reporting');
+let changingReports=false;
+issueReporting.onchange=async()=>{
+ const selected=issueReporting.checked;
+ changingReports=issueReporting.disabled=true;
+ try{await call({action:'automatic_reports',allowed:selected});$('center-issue-status').textContent='已保存';}
+ catch(error){issueReporting.checked=!selected;$('center-issue-status').textContent=error.message;}
+ finally{changingReports=issueReporting.disabled=false;}
+};
 const learningStatus=$('center-learning-status'),learningState=$('center-learning-state'),learningSummary=$('center-learning-summary');
 const learningChart=$('center-learning-chart');
 const localLearningLabels={learning:'持续学习',warming_up:'基线形成中',attention:'发现偏离',observing:'观测中 · 基线暂缓更新',unobserved:'等待采样'};
@@ -308,6 +317,7 @@ async function readLearning(allowed){
   const result=await call(saving?{action:'learning_sync',allowed}:{action:'learning_data'});
   if(closed||epoch!==learningEpoch)return;
   savedSync=result.allowed;
+  if(!changingReports){issueReporting.checked=result.automatic_reports===true;issueReporting.disabled=false;}
   learningSync.checked=savedSync;
   learningState.textContent=localLearningLabels[result.local]||localLearningLabels.unobserved;
   learningStatus.textContent=(saving?'选择已保存 · ':'')+(result.sync==='pending_endpoint'?'官网接收待接入，数据保存在本机':'');

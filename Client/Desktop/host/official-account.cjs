@@ -101,6 +101,8 @@ function createOfficialAccount({BrowserWindow,session,owner,core,community,confi
     // 账号菜单只显示用户自己的公开资料：名字、登录名、邮箱、分组、余额、已用与请求次数。
     const clean=v=>String(v||'').replace(/[\x00-\x1f]/g,' ').slice(0,80),num=v=>Number.isFinite(Number(v))&&v!==null&&v!==''?Number(v):null;
     user={id,name:clean(self.data.display_name||self.data.username||'Aieyra'),username:clean(self.data.username),email:clean(self.data.email),group:clean(self.data.group),quota:num(self.data.quota),usedQuota:num(self.data.used_quota),requestCount:num(self.data.request_count)};
+    let cloudError='';if(community)try{await community.connect(user,accountSession);}catch(e){cloudError=String(e.message);}
+    if(closed||captured!==epoch)return publicState();
     const list=[];for(let page=1;page<=50;page++){
      const result=await request('/api/token/?p='+page+'&size=100'),rows=result.data?.items||result.data?.tokens||result.data||result.items||[];
      if(!Array.isArray(rows))throw Error('账号 Key 列表格式不正确');list.push(...rows);if(rows.length<100||Number(result.data?.total)<=list.length)break;
@@ -112,7 +114,6 @@ function createOfficialAccount({BrowserWindow,session,owner,core,community,confi
      const c=human.draft(require('../src/model-pool.cjs').migrate(cfg.load(config).settings),'aieyra');
      if(c?.api_key&&c.base_url===GATEWAY&&saved.selected_key_digest===digest(c.api_key))selected={id:saved.selected_token_id,key:c.api_key,epoch,models:store.get('catalog:'+providers.catalogID(c))?.models||[]};
     }
-    let cloudError='';if(community)try{await community.connect(user,accountSession);}catch(e){cloudError=String(e.message);}
     if(closed||captured!==epoch)return publicState();
     if(portal&&!portal.isDestroyed()){portal.close();portal=null;}
     if(verifiedCookies!==cookieRevision)throw Error('账号会话已变化，请重新验证。');

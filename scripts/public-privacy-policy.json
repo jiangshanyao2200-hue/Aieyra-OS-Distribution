@@ -2,7 +2,7 @@
   "schema": 1,
   "notes": "Only exact reviewed product artwork and synthetic fixture values are exempt. Hashes do not contain original private values. New files fail closed.",
   "reviewed_text_assets": {
-    "Client/Installer/Installer.xaml": "e41e5669cc1e06b91a9201dbd71d1e46afb0df1b9e85d4db57539e52a22035a1",
+    "Client/Installer/Installer.xaml": "eb275a931e6622789802974cc9e2405b7615efdd707ef89022ff5a7e05a8760f",
     "Client/Installer/Installer.manifest": "3225b9ec09d46dbde40e4979e690ce8c1b5717c94a386e16cfc65f671e1b7026",
     "Program/official/together/product/runtime/python/python313._pth": "a6196d1e6759494d2cf2e16689f44986b1234a2ff37624b966231da94c706004",
     "Core/model_catalog_models_dev.LICENSE": "dc2dc41c9fea2fd3c41c21c6f484844cab367800b88ff24781f980ad3a9d160a",
@@ -20,7 +20,7 @@
     "Agent/program/prompts/workspace.txt": "3485088a5e5ace4de35c9069f51ef4d6c32e66eb66129441c015d583c19ecccf",
     "Agent/program/prompts/generic.txt": "20a45e29ef93b7585cd20cae4e6c05f8b5162469e9d73bbb79f90817275ecdbc",
     "Agent/program/prompts/computer.txt": "67359d7111d6de74c06306e0a5e273b4e8bd6a5f1cd14b91738b6ab58fe94f0d",
-    "Agent/program/prompts/center.txt": "7f35ec2afeaf937501fb1653117cd0ca2ba0818e37ab483c7fa3da7a6871cb3b"
+    "Agent/program/prompts/center.txt": "202b38a259a86b84994add6c829688b9d3d1872f25c4634eb35084577ad5b7fb"
   },
   "binary_assets": {
     "Program/official/together/product/desktop/icon.ico": "25da5e2a8f7835b31a7f67f7ab9109a10bf73bdd24d053473dcf551eac38c68b",
@@ -290,7 +290,9 @@
   ],
   "service_host_note": "Client-facing hosts only. Internal relays, admin panels and origin names never ship; DDoS defence is CDN/WAF, origin allow-lists and rate limits, not hidden names.",
   "reviewed_ip_literals": {
-    "Client/Installer/Installer.manifest": ["52ab14a48cb941963a498faefd02b1090ebfccfe47f07d5452628d8280b60154"],
+    "Client/Installer/Installer.manifest": [
+      "52ab14a48cb941963a498faefd02b1090ebfccfe47f07d5452628d8280b60154"
+    ],
     "Program/official/together/product/agent/prepare_vm.py": [
       "f9292b96ff7d66abe0820bbe9bd022cb0abd37bd673d7b462e1bba84245a9f66"
     ],
@@ -485,7 +487,7 @@
     "Agent/official/Eyra/prompts/tools/继续脚本.txt": "8560217352a1f909d3a40d71ca679ab2ff4be1331585590bd22f4b9d99061214",
     "Agent/official/Eyra/prompts/tools/设置.txt": "4e79bb0de325ac553904fe07959eec19c5361c566151c61851604ab95a7c80a3",
     "Agent/official/Eyra/prompts/tools/询问用户.txt": "29bef50efb642365c30f67ce7bf6a30e8793384515b839bbe900ab2a4438e38b",
-    "Agent/official/Eyra/prompts/tools/软件接口.txt": "2bceb61dd9e8a8a34e2b7e9ddc5da7421ae957efbc3fb8f1b28f9d9db57f2a93",
+    "Agent/official/Eyra/prompts/tools/软件接口.txt": "05bd24b833a6fce23036ec38f7f3858c1eeaa2ad4234d904661586fb6ce9203e",
     "Agent/official/Eyra/prompts/tools/运行脚本.txt": "db431ec62fed48cf18549f122b999bd90281255c3beb2b326eb7cd46849180d1",
     "Agent/official/Eyra/prompts/instructions/任务中补充.txt": "341f120d13008b86044218689333596d1f036d0b3067730a028ad33df196a996",
     "Agent/official/Eyra/prompts/instructions/保留的后台会话.txt": "b87a74f310a792782434da9f6f165076a4b8dab85f7636dd38d7821b7ba5e4f8",
@@ -585,7 +587,7 @@
     "Agent/program/prompts/settings.txt": "e2e344ebd736fe6698c597e4b5addca7ce40f5d4998ed80cc28ef939bc23ea60",
     "Agent/program/prompts/workspace.txt": "3485088a5e5ace4de35c9069f51ef4d6c32e66eb66129441c015d583c19ecccf",
     "Agent/program/prompts/computer.txt": "67359d7111d6de74c06306e0a5e273b4e8bd6a5f1cd14b91738b6ab58fe94f0d",
-    "Agent/program/prompts/center.txt": "7f35ec2afeaf937501fb1653117cd0ca2ba0818e37ab483c7fa3da7a6871cb3b"
+    "Agent/program/prompts/center.txt": "202b38a259a86b84994add6c829688b9d3d1872f25c4634eb35084577ad5b7fb"
   },
   "desktop_compatibility": {
     "Desktop/renderer/tips.mjs": "573faa76d57133c6dfb2ccb276da958fb3c3face27b37bfb80b908a4733c6bbe",

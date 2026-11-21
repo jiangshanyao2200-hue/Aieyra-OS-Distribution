@@ -467,6 +467,16 @@
 
 消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
 
+### center-issue-reports.test.cjs
+
+[Client/Desktop/test/center-issue-reports.test.cjs](center-issue-reports.test.cjs) · desktop · 环2 · 自有源码，顶部注释链由本工具维护
+
+区域：assert; fs; setup。
+
+导入：`Program/official/center/issue-reports.cjs`。
+
+消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
+
 ### center-situation.test.cjs
 
 [Client/Desktop/test/center-situation.test.cjs](center-situation.test.cjs) · desktop · 环2 · 自有源码，顶部注释链由本工具维护
@@ -1133,7 +1143,7 @@
 
 区域：fs; fixture; until; deferred; settle。
 
-导入：`Client/Desktop/host/chat-layer-preferences.cjs`, `Client/Desktop/host/desktop-tools.cjs`, `Client/Desktop/host/extension-settings.cjs`, `Client/Desktop/host/first-run.cjs`, `Client/Desktop/host/json-storage.cjs`, `Client/Desktop/host/module-catalog.cjs`, `Client/Desktop/host/module-drag-preview.cjs`, `Client/Desktop/host/module-order.cjs`, `Client/Desktop/host/module-runtime.cjs`, `Client/Desktop/host/native-modal.cjs`, `Client/Desktop/host/program-agent-overlay.cjs`, `Client/Desktop/host/program-drafts.cjs`, `Client/Desktop/host/program-service-authority.cjs`, `Client/Desktop/host/settings-updates.cjs`, `Client/Desktop/host/shutdown.cjs`, `Client/Desktop/host/software-api.cjs`, `Client/Desktop/host/theme-image-decoder.cjs`, `Client/Desktop/src/paths.cjs`, `Contracts/storage/profile.cjs`, `Halo/runtime/settings.cjs`, `Program/official/center/health-model.cjs`, `Program/official/center/learning.cjs`, `Program/official/center/status-log.cjs`, `Theme/runtime/official-library.cjs`, `Theme/runtime/recovery.cjs`。
+导入：`Client/Desktop/host/chat-layer-preferences.cjs`, `Client/Desktop/host/desktop-tools.cjs`, `Client/Desktop/host/extension-settings.cjs`, `Client/Desktop/host/first-run.cjs`, `Client/Desktop/host/json-storage.cjs`, `Client/Desktop/host/module-catalog.cjs`, `Client/Desktop/host/module-drag-preview.cjs`, `Client/Desktop/host/module-order.cjs`, `Client/Desktop/host/module-runtime.cjs`, `Client/Desktop/host/native-modal.cjs`, `Client/Desktop/host/program-agent-overlay.cjs`, `Client/Desktop/host/program-drafts.cjs`, `Client/Desktop/host/program-service-authority.cjs`, `Client/Desktop/host/settings-updates.cjs`, `Client/Desktop/host/shutdown.cjs`, `Client/Desktop/host/software-api.cjs`, `Client/Desktop/host/theme-image-decoder.cjs`, `Client/Desktop/src/paths.cjs`, `Contracts/storage/profile.cjs`, `Halo/runtime/settings.cjs`, `Program/official/center/health-model.cjs`, `Program/official/center/issue-reports.cjs`, `Program/official/center/learning.cjs`, `Program/official/center/status-log.cjs`, `Theme/runtime/official-library.cjs`, `Theme/runtime/recovery.cjs`。
 
 消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
 

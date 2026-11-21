@@ -46,11 +46,11 @@
     },
     {
       "id": "report_issue",
-      "description": "以 Agent 标记提交公开问题。使用 release_topic、request_id、content 和已获用户授权的 confirmed。"
+      "description": "Eyra 执行中提报问题，提供 request_id 和 category（execution_error 或 program_error）。可选 content 由使用者预览后公开。用同一编号查询回执。带 release_topic 时沿用版本反馈。"
     },
     {
       "id": "feedback_receipt",
-      "description": "按 release_topic 和原 request_id 核对提交回执。"
+      "description": "用原 request_id 查询本账号的反馈状态与众创帖子编号。版本帖回复同时提供 release_topic。"
     },
     {
       "id": "integrity",

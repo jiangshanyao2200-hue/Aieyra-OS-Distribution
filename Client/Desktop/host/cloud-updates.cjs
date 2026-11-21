@@ -9,7 +9,7 @@
 
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{spawn}=require('node:child_process');
-function createCloudUpdates({app,window,root,config,initial,descriptor,core,canHandoff=()=>true}){
+function createCloudUpdates({app,window,root,config,initial,descriptor,core,canHandoff=()=>true,onUpdateError=()=>{}}){
  let timer,bootstrapTimer,closed=false,busy=false,handoff=false,uiReady=false,reply,bootstrapDone=false,bootstrapBusy=false,bootstrapFailures=0;
  async function bootstrap(){
   if(closed||handoff||!uiReady||bootstrapDone||bootstrapBusy)return;
@@ -48,7 +48,7 @@ function createCloudUpdates({app,window,root,config,initial,descriptor,core,canH
    const deadline=Date.now()+10000;while(!fs.existsSync(readyFile)&&!failure&&Date.now()<deadline)await new Promise(r=>setTimeout(r,100));
    if(failure||!fs.existsSync(readyFile))throw failure||Error('更新助手没有确认交接');const receipt=JSON.parse(fs.readFileSync(readyFile,'utf8'));if(receipt.pid!==helper.pid||receipt.parent!==initial.parent_pid)throw Error('交接身份不匹配');
    helper.unref();handoff=true;app.quit();
-  }catch(error){await call({action:'handoff_failed'}).catch(()=>{});if(window()&&!window().isDestroyed())window().webContents.send('workspace:notice','更新已暂缓：'+error.message);}
+  }catch(error){if(frozen)onUpdateError();await call({action:'handoff_failed'}).catch(()=>{});if(window()&&!window().isDestroyed())window().webContents.send('workspace:notice','更新已暂缓：'+error.message);}
   finally{if(frozen&&!handoff){await core('workspace.update_unfreeze',{}).catch(()=>{});window()?.webContents.send('workspace:updateResume',{});}busy=false;}
  }
  function start(){if(timer||closed||(!fs.existsSync(path.join(root,'Config/official-baseline.json'))&&!fs.existsSync(path.join(root,'Config/release.json'))))return;void call({action:'start'}).catch(()=>{});timer=setInterval(()=>void tick(),15000);timer.unref();}

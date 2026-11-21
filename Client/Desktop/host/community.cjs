@@ -226,7 +226,16 @@ function createCommunityClient({fetchImpl=fetch,origin=CLOUD,now=Date.now}={}){
    return {response,assertCurrent,signal:abort};
   },signal);
  }
- return {get themeOrigin(){return origin;},status,connect,logout,call,authorizedFetch,centerDownload,themeRequest,themeMedia,subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn);},close(){if(closed)return;closed=true;generation++;credential=null;accountBinding=null;changed();listeners.clear();}};
+ async function reportIssue(owner,payload,signal){
+  const binding=accountBinding;
+  if(!binding||hash(String(binding.user.id))!==owner)throw cancelled();
+  if(!credential||credential.expiresAt<=now()+60000)await connect(binding.user,binding.accountSession);
+  const current=credential;
+  if(signal.aborted||!current||current.expiresAt<=now()||hash(String(current.user.id))!==owner)throw cancelled();
+  try{return await request('/api/v1/matrix/together/feedback',payload,{token:current.accessToken,binding:current,signed:true,signal});}
+  catch(error){if(error.status===401&&credential===current){credential=null;changed();}throw error;}
+ }
+ return {get themeOrigin(){return origin;},status,connect,logout,call,reportIssue,authorizedFetch,centerDownload,themeRequest,themeMedia,subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn);},close(){if(closed)return;closed=true;generation++;credential=null;accountBinding=null;changed();listeners.clear();}};
 }
 async function startCommunityBridge(client){
  const secret=crypto.randomBytes(32).toString('hex');let authority='';

@@ -31,7 +31,7 @@
 
 [Program/official/center/ui/center.mjs](../../Program/official/center/ui/center.mjs) · program.official · 环3 · signed-package
 
-区域：panel; feedbackStatus; drafts; topic; loadFeedback; selectTopic; updateDock; view; stopAccount; observed; reportFrame; openManagement; labels; nodePanel; situationMessage; healthToggle; incidencePanel; selectedName; actionButton; stateNames; categories; topology; selectNode; neuralSignals; showUpdates; dismissUpdates; showPanel; paintHub; paintBands; paintSituation; visible; refreshHealth; learningSync; learningStatus; learningChart; localLearningLabels; summaryHealthLabels; platformLabels; paintLearningSummary; learningEpoch; readLearning; paint; stop。
+区域：panel; feedbackStatus; drafts; topic; loadFeedback; selectTopic; updateDock; view; stopAccount; observed; reportFrame; openManagement; labels; nodePanel; situationMessage; healthToggle; incidencePanel; selectedName; actionButton; stateNames; categories; topology; selectNode; neuralSignals; showUpdates; dismissUpdates; showPanel; paintHub; paintBands; paintSituation; visible; refreshHealth; learningSync; issueReporting; changingReports; learningStatus; learningChart; localLearningLabels; summaryHealthLabels; platformLabels; paintLearningSummary; learningEpoch; readLearning; paint; stop。
 
 导入：`Client/Desktop/ui/app-shell.mjs`, `Client/Desktop/ui/tooltip.mjs`, `Client/Desktop/ui/update-settings.mjs`, `Program/official/center/ui/topology.mjs`。
 

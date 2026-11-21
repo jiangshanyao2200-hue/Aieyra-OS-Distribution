@@ -89,7 +89,7 @@ export function setupLinkAccessGuide({
 }) {
   const text = (zh, en) => language === 'en' ? en : zh;
   const field = fallback.querySelector('textarea');
-  let guide, controller, disposed = false, copying = false;
+  let guide, controller, loading, disposed = false, copying = false;
 
   async function load() {
     if (controller || disposed) return;
@@ -114,14 +114,14 @@ export function setupLinkAccessGuide({
 
   button.onclick = async () => {
     if (disposed || copying) return;
+    copying = true;
     if (!guide) {
       status.textContent = text('正在读取接入说明…', 'Loading access instructions…');
-      await load();
-      if (guide && !disposed) status.textContent = text('接入说明已就绪', 'Access instructions ready');
-      return;
+      if (!controller) loading = load();
+      await loading;
+      if (!guide || disposed) { copying = false; return; }
     }
     const instructions = linkAgentInstructions(guide, project());
-    copying = true;
     let copied = false;
     try {
       await navigator.clipboard.writeText(instructions);
@@ -144,7 +144,7 @@ export function setupLinkAccessGuide({
     status.textContent = copied ? text('已复制', 'Copied') : text('自动复制受限，接入信息已选中', 'Access instructions selected');
   };
   fallback.querySelector('button').onclick = () => { fallback.hidden = true; button.focus(); };
-  void load();
+  loading = load();
   return {
     dispose() {
       disposed = true;

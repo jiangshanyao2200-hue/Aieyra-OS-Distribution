@@ -10,7 +10,7 @@
 'use strict';
 // Trusted adapters are injected by the host; package code is never required.
 const catalog=require('../official/catalog.cjs');
-function createNativePrograms({resolve,readPackage,verify=item=>catalog.verify(item,readPackage(item)),adapters,changed=()=>{},onError=()=>{}}){
+function createNativePrograms({resolve,readPackage,verify=item=>catalog.verify(item,readPackage(item)),adapters,changed=()=>{},onError=()=>{},onProgramError=()=>{}}){
  const admitted=new Map(),retiring=new Map(),pending=new Set(),admitting=new Map();let closed=false,generation=0,selection=null,draining=null;
  async function revoke(key){
   const active=admitted.delete(key);if(retiring.has(key))return retiring.get(key);if(!active&&!pending.has(key))return;pending.add(key);
@@ -79,7 +79,11 @@ function createNativePrograms({resolve,readPackage,verify=item=>catalog.verify(i
    if(action==='invoke'){
     if(!own.definition.operations.some(op=>op.id===p.operation))throw Error('程序没有声明这项操作');
     if(!p.arguments||typeof p.arguments!=='object'||Array.isArray(p.arguments))throw Error('程序参数必须是对象');
-    return adapter.invoke(p.operation,p.arguments,{request_id:p.request_id});
+    try{return await adapter.invoke(p.operation,p.arguments,{request_id:p.request_id});}
+    catch(error){
+     if(own.id!=='center'&&!signal?.aborted&&error?.code!=='CANCELLED')onProgramError();
+     throw error;
+    }
    }
    throw Error('未知原生程序操作');
   });

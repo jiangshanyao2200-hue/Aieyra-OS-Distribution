@@ -14899,7 +14899,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "b6a7c99e90afe86c5489f41b586a7b4012810c31d3dd7f7eb24b9c469ab974a6",
+      "bodySHA256": "1ee6a2cd3f1557d4c31b347e8a0b1e80dfad65cb88b0f42ededd74ce453f1e99",
       "regions": [
         {
           "name": "fs",
@@ -14926,7 +14926,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "aa1c3fe80db6685f4e30ad54e215bca296e28bdf486e5089a726f5e51e3ceb04",
+      "bodySHA256": "be27f03bd8adb30ade6718759c149fc3b6eb3916e81ef4d3b117df069c670f87",
       "regions": [
         {
           "name": "crypto",
@@ -14966,7 +14966,7 @@
         {
           "name": "startCommunityBridge",
           "kind": "lexical",
-          "bodyLine": 222
+          "bodyLine": 231
         }
       ],
       "imports": [
@@ -16142,7 +16142,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "442111ff189e9c9d2b971ef61e3e0a3d193a9f0b404daa9ea1fa913032b27905",
+      "bodySHA256": "0f8be2d773a93decedd3f347b7aa859c947f4d3764d75bba3dda95fe72d73921",
       "regions": [
         {
           "name": "path",
@@ -16317,147 +16317,147 @@
         {
           "name": "profile",
           "kind": "lexical",
-          "bodyLine": 175
+          "bodyLine": 181
         },
         {
           "name": "page",
           "kind": "lexical",
-          "bodyLine": 185
+          "bodyLine": 191
         },
         {
           "name": "showWorkspaceWindow",
           "kind": "lexical",
-          "bodyLine": 188
+          "bodyLine": 194
         },
         {
           "name": "linkWorking",
           "kind": "lexical",
-          "bodyLine": 210
+          "bodyLine": 216
         },
         {
           "name": "core",
           "kind": "lexical",
-          "bodyLine": 211
+          "bodyLine": 217
         },
         {
           "name": "nativeAdapters",
           "kind": "lexical",
-          "bodyLine": 220
+          "bodyLine": 231
         },
         {
           "name": "nativeVerification",
           "kind": "lexical",
-          "bodyLine": 221
+          "bodyLine": 232
         },
         {
           "name": "nativePrograms",
           "kind": "lexical",
-          "bodyLine": 222
+          "bodyLine": 233
         },
         {
           "name": "closeServices",
           "kind": "lexical",
-          "bodyLine": 227
+          "bodyLine": 239
         },
         {
           "name": "shutdown",
           "kind": "lexical",
-          "bodyLine": 247
+          "bodyLine": 259
         },
         {
           "name": "quitPreparing",
           "kind": "lexical",
-          "bodyLine": 253
+          "bodyLine": 265
         },
         {
           "name": "startShutdown",
           "kind": "lexical",
-          "bodyLine": 255
+          "bodyLine": 267
         },
         {
           "name": "requestQuit",
           "kind": "lexical",
-          "bodyLine": 267
+          "bodyLine": 279
         },
         {
           "name": "profileStore",
           "kind": "lexical",
-          "bodyLine": 273
+          "bodyLine": 285
         },
         {
           "name": "haloStore",
           "kind": "lexical",
-          "bodyLine": 274
+          "bodyLine": 286
         },
         {
           "name": "appearanceStore",
           "kind": "lexical",
-          "bodyLine": 275
+          "bodyLine": 287
         },
         {
           "name": "promptEditor",
           "kind": "lexical",
-          "bodyLine": 277
+          "bodyLine": 289
         },
         {
           "name": "trusted",
           "kind": "lexical",
-          "bodyLine": 278
+          "bodyLine": 290
         },
         {
           "name": "exposedHandlers",
           "kind": "lexical",
-          "bodyLine": 288
+          "bodyLine": 300
         },
         {
           "name": "previews",
           "kind": "lexical",
-          "bodyLine": 291
+          "bodyLine": 303
         },
         {
           "name": "previewStore",
           "kind": "lexical",
-          "bodyLine": 293
+          "bodyLine": 305
         },
         {
           "name": "previewSession",
           "kind": "lexical",
-          "bodyLine": 294
+          "bodyLine": 306
         },
         {
           "name": "openPreview",
           "kind": "lexical",
-          "bodyLine": 295
+          "bodyLine": 307
         },
         {
           "name": "dialogPages",
           "kind": "lexical",
-          "bodyLine": 312
+          "bodyLine": 324
         },
         {
           "name": "pageDialogReady",
           "kind": "lexical",
-          "bodyLine": 313
+          "bodyLine": 325
         },
         {
           "name": "allowPageDialog",
           "kind": "lexical",
-          "bodyLine": 314
+          "bodyLine": 326
         },
         {
           "name": "askPageDialog",
           "kind": "lexical",
-          "bodyLine": 323
+          "bodyLine": 335
         },
         {
           "name": "expose",
           "kind": "lexical",
-          "bodyLine": 338
+          "bodyLine": 350
         },
         {
           "name": "startupFailed",
           "kind": "lexical",
-          "bodyLine": 352
+          "bodyLine": 364
         }
       ],
       "imports": [
@@ -16536,6 +16536,7 @@
         "Halo/runtime/settings.cjs",
         "Program/official/catalog.cjs",
         "Program/official/center/health-model.cjs",
+        "Program/official/center/issue-reports.cjs",
         "Program/official/center/learning.cjs",
         "Program/official/center/service.cjs",
         "Program/official/center/status-log.cjs",
@@ -17164,7 +17165,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "a112c00c0bcbd4ec8a5ba67a3f3e2eace06617f3819cd864740af3b78ac5048a",
+      "bodySHA256": "a3dc941408371005f6619e29cef75e136516c8cfe6f068562cd032c3b24ed1a7",
       "regions": [
         {
           "name": "OFFICIAL",
@@ -24852,6 +24853,36 @@
       "protected": null,
       "consumers": []
     },
+    "Client/Desktop/test/center-issue-reports.test.cjs": {
+      "module": "desktop",
+      "ring": "2",
+      "agreement": "Client/Desktop/AGENTS.md",
+      "map": "Client/Desktop/test/CODEMAP.md",
+      "bodySHA256": "3bcfc4c01220bfd95424ca0f8df8412f05e325e403aced4e0bf99451123cbab1",
+      "regions": [
+        {
+          "name": "assert",
+          "kind": "lexical",
+          "bodyLine": 4
+        },
+        {
+          "name": "fs",
+          "kind": "lexical",
+          "bodyLine": 5
+        },
+        {
+          "name": "setup",
+          "kind": "lexical",
+          "bodyLine": 9
+        }
+      ],
+      "imports": [
+        "Program/official/center/issue-reports.cjs"
+      ],
+      "chains": [],
+      "protected": null,
+      "consumers": []
+    },
     "Client/Desktop/test/center-situation.test.cjs": {
       "module": "desktop",
       "ring": "2",
@@ -26739,7 +26770,7 @@
       "ring": "2",
       "agreement": "Client/Desktop/AGENTS.md",
       "map": "Client/Desktop/test/CODEMAP.md",
-      "bodySHA256": "bdeb472a20d77e5a17586d827f263db3432eec4d27d3ea552d94799803804b24",
+      "bodySHA256": "a9e4093309acebb89b9ddfa9eb851966fb1ed869f8f9720fa56dc09dd5a5d90b",
       "regions": [
         {
           "name": "fs",
@@ -26754,17 +26785,17 @@
         {
           "name": "until",
           "kind": "lexical",
-          "bodyLine": 114
+          "bodyLine": 115
         },
         {
           "name": "deferred",
           "kind": "lexical",
-          "bodyLine": 121
+          "bodyLine": 122
         },
         {
           "name": "settle",
           "kind": "lexical",
-          "bodyLine": 122
+          "bodyLine": 123
         }
       ],
       "imports": [
@@ -26789,6 +26820,7 @@
         "Contracts/storage/profile.cjs",
         "Halo/runtime/settings.cjs",
         "Program/official/center/health-model.cjs",
+        "Program/official/center/issue-reports.cjs",
         "Program/official/center/learning.cjs",
         "Program/official/center/status-log.cjs",
         "Theme/runtime/official-library.cjs",
@@ -30950,7 +30982,7 @@
       "ring": "2",
       "agreement": "Client/Desktop/AGENTS.md",
       "map": "Client/Desktop/test/CODEMAP.md",
-      "bodySHA256": "a6f1bd5a3ff0ef0becdb711e74228e2790303c682e5d281e11e3f84edb17eef1",
+      "bodySHA256": "a051a1796f63853da9024cb1ae22eb83eb48adc6344d9fdb742ff8893e47a12f",
       "regions": [
         {
           "name": "documentFixture",
@@ -64173,7 +64205,7 @@
       "ring": "2",
       "agreement": "Client/AGENTS.md",
       "map": "Client/Installer/CODEMAP.md",
-      "bodySHA256": "3deec292aceb3fa67cfd34b3d84ef1b6f29710b1ba8ed47cdb9fee3f701a83fe",
+      "bodySHA256": "1ed0d7c11ad7ea442dd0d1b30bbb1c12d02924f4bac39ad8c6c3c6554cece322",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -70493,7 +70525,7 @@
       "ring": "2",
       "agreement": "Control/app/web/AGENTS.md",
       "map": "Control/app/web/CODEMAP.md",
-      "bodySHA256": "5a421a1bde7c56f04c08ea14df8c97abedf0044b11690ea7ff4b4b814045778d",
+      "bodySHA256": "49b195b6da54d14401152ed72106e48e510dc2b36e310f5ef805ea6b830417d4",
       "regions": [
         {
           "name": "linkAgentInstructions",
@@ -76957,7 +76989,7 @@
       "ring": "0",
       "agreement": "Core/cmd/AGENTS.md",
       "map": "Core/cmd/aieyra-install/CODEMAP.md",
-      "bodySHA256": "5f58fa7c498cc8c137141e5a1ca6f13356ea1629387d9c4e368d0f5d09e18641",
+      "bodySHA256": "f96291e89a13085a4e10da89ff54b7a9bacfb9b419baa90b14c7aeb9a19fc22d",
       "regions": [
         {
           "name": "trustedKey",
@@ -83722,7 +83754,7 @@
       "ring": "0",
       "agreement": "Core/host/AGENTS.md",
       "map": "Core/host/CODEMAP.md",
-      "bodySHA256": "4bce64c9bc5eafad520debdf642c2d5519760d658bb6e83a81cd9ba1714f8a43",
+      "bodySHA256": "ed7a7dfa4eaebd56d106ec758ce692401e2705e3e54e83a54612a1fe125b2928",
       "regions": [
         {
           "name": "installerBaseline",
@@ -83792,7 +83824,7 @@
         {
           "name": "installShortcuts",
           "kind": "lexical",
-          "bodyLine": 339
+          "bodyLine": 347
         }
       ],
       "imports": [
@@ -119841,6 +119873,68 @@
         "Client/Desktop/test/main-shutdown.test.cjs"
       ]
     },
+    "Program/official/center/issue-reports.cjs": {
+      "module": "program.official",
+      "ring": "3",
+      "agreement": "Program/official/AGENTS.md",
+      "map": "docs/代码链目录/Program--official--center.md",
+      "bodySHA256": "ad9e7a6fc857dfa199f3553e9c682b0f3166f3ed3107509c8973f9b58abcf68d",
+      "regions": [
+        {
+          "name": "fs",
+          "kind": "lexical",
+          "bodyLine": 3
+        },
+        {
+          "name": "path",
+          "kind": "lexical",
+          "bodyLine": 4
+        },
+        {
+          "name": "categories",
+          "kind": "lexical",
+          "bodyLine": 8
+        },
+        {
+          "name": "execution",
+          "kind": "lexical",
+          "bodyLine": 9
+        },
+        {
+          "name": "versionPattern",
+          "kind": "lexical",
+          "bodyLine": 10
+        },
+        {
+          "name": "privateText",
+          "kind": "lexical",
+          "bodyLine": 11
+        },
+        {
+          "name": "hash",
+          "kind": "lexical",
+          "bodyLine": 12
+        },
+        {
+          "name": "hour",
+          "kind": "lexical",
+          "bodyLine": 13
+        },
+        {
+          "name": "createIssueReports",
+          "kind": "lexical",
+          "bodyLine": 15
+        }
+      ],
+      "imports": [],
+      "chains": [],
+      "protected": "signed-package",
+      "consumers": [
+        "Client/Desktop/host/main.cjs",
+        "Client/Desktop/test/center-issue-reports.test.cjs",
+        "Client/Desktop/test/main-shutdown.test.cjs"
+      ]
+    },
     "Program/official/center/learning.cjs": {
       "module": "program.official",
       "ring": "3",
@@ -119918,7 +120012,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--center.md",
-      "bodySHA256": "b674a7cb23f8da9b4e41b12c281da0b313e215bb83dd88341d45acf93453b03b",
+      "bodySHA256": "502203c5e49361c20b3b528e7d429f28370cc50de2a3d543e784a79bc1729abb",
       "regions": [
         {
           "name": "ID",
@@ -120671,7 +120765,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--center--ui.md",
-      "bodySHA256": "832ae7ffe6dbab7c88d3519bbc2fdc8001b607469daa8a55ed36b3dcddd733f0",
+      "bodySHA256": "e0c3989ffcd2dc1c3a546e04414bba8efa54c27a95e53855bb93802f4f593304",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -120683,7 +120777,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--center--ui.md",
-      "bodySHA256": "e451b5624f6d4d7de5f41585eeabbdf33cdcf84ad19f0a905d5f93c56da1076f",
+      "bodySHA256": "99d43615d15450e9f68821aeac70e8c877b88b4405b24a836a50a9e451329d31",
       "regions": [
         {
           "name": "panel",
@@ -120851,54 +120945,64 @@
           "bodyLine": 260
         },
         {
-          "name": "learningStatus",
+          "name": "issueReporting",
           "kind": "lexical",
           "bodyLine": 261
         },
         {
-          "name": "learningChart",
+          "name": "changingReports",
           "kind": "lexical",
           "bodyLine": 262
         },
         {
+          "name": "learningStatus",
+          "kind": "lexical",
+          "bodyLine": 270
+        },
+        {
+          "name": "learningChart",
+          "kind": "lexical",
+          "bodyLine": 271
+        },
+        {
           "name": "localLearningLabels",
           "kind": "lexical",
-          "bodyLine": 263
+          "bodyLine": 272
         },
         {
           "name": "summaryHealthLabels",
           "kind": "lexical",
-          "bodyLine": 264
+          "bodyLine": 273
         },
         {
           "name": "platformLabels",
           "kind": "lexical",
-          "bodyLine": 265
+          "bodyLine": 274
         },
         {
           "name": "paintLearningSummary",
           "kind": "lexical",
-          "bodyLine": 266
+          "bodyLine": 275
         },
         {
           "name": "learningEpoch",
           "kind": "lexical",
-          "bodyLine": 300
+          "bodyLine": 309
         },
         {
           "name": "readLearning",
           "kind": "lexical",
-          "bodyLine": 301
+          "bodyLine": 310
         },
         {
           "name": "paint",
           "kind": "lexical",
-          "bodyLine": 330
+          "bodyLine": 340
         },
         {
           "name": "stop",
           "kind": "lexical",
-          "bodyLine": 336
+          "bodyLine": 346
         }
       ],
       "imports": [
@@ -162998,7 +163102,7 @@
       "ring": "1",
       "agreement": "Program/runtime/AGENTS.md",
       "map": "Program/runtime/CODEMAP.md",
-      "bodySHA256": "3cef1fc300b6180e79d90b742585e6a67cd6604c66c6a1bd805c9f9ce1bba75d",
+      "bodySHA256": "3ad14eb3875b9af15625cd51b470a7855d298315dc5179ecb5cb2645568ea606",
       "regions": [
         {
           "name": "catalog",
@@ -174384,6 +174488,7 @@
       "Client/Desktop/test/canvas-studio.test.cjs",
       "Client/Desktop/test/canvas-tools.test.cjs",
       "Client/Desktop/test/center-health-model.test.cjs",
+      "Client/Desktop/test/center-issue-reports.test.cjs",
       "Client/Desktop/test/center-situation.test.cjs",
       "Client/Desktop/test/chat-layer-preferences.test.cjs",
       "Client/Desktop/test/chat-layout-motion.test.cjs",
@@ -176002,6 +176107,7 @@
     ],
     "docs/代码链目录/Program--official--center.md": [
       "Program/official/center/health-model.cjs",
+      "Program/official/center/issue-reports.cjs",
       "Program/official/center/learning.cjs",
       "Program/official/center/service.cjs",
       "Program/official/center/status-log.cjs"

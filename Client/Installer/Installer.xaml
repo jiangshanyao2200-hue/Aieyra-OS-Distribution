@@ -193,8 +193,19 @@
                         Content="浏览" ToolTip="选择个人资料目录" AutomationProperties.Name="选择个人资料目录"/>
               </Grid>
               <CheckBox x:Name="Shortcuts" Margin="0,15,0,0" IsChecked="True" Content="创建桌面快捷方式组"/>
+              <WrapPanel Margin="0,7,0,0" VerticalAlignment="Center">
+                <CheckBox x:Name="PrivacyConsent" IsChecked="False" VerticalAlignment="Center" Content="我已阅读并同意" AutomationProperties.Name="我已阅读并同意隐私协议"/>
+                <Button x:Name="PrivacyTerms" Content="隐私协议" AutomationProperties.Name="查看隐私协议" Margin="3,0,0,0" Padding="4,0" MinWidth="0" MinHeight="28" Foreground="{StaticResource Accent}" Background="Transparent" BorderBrush="Transparent" Style="{StaticResource SetupButton}"/>
+              </WrapPanel>
               <TextBlock x:Name="InputError" Margin="0,6,0,0" TextWrapping="Wrap" Foreground="#FAC0B5"
                          AutomationProperties.LiveSetting="Polite"/>
+            </StackPanel>
+            <StackPanel x:Name="PrivacyPage" Visibility="Collapsed" MaxWidth="420">
+              <Grid><TextBlock x:Name="PrivacyTitle" Text="隐私协议" TextAlignment="Center" FontSize="21" FontWeight="SemiBold"/></Grid>
+              <TextBlock Margin="0,16,0,8" TextWrapping="Wrap" LineHeight="22" Text="登录 NEW API 后，中枢会把程序版本和故障类别发到官网众创讨论。同类故障合入一帖，以中枢名义公开。"/>
+              <TextBlock Margin="0,0,0,8" TextWrapping="Wrap" LineHeight="22" Text="Eyra 可在执行中提报故障。附加说明会先展示给你，确认后以 Eyra 名义公开。"/>
+              <TextBlock TextWrapping="Wrap" LineHeight="22" Foreground="{StaticResource Muted}" Text="账号用于验证身份、去重和查回执。可在中枢关闭自动提报，排队的自动报告随即清除。本机反馈记录最多保留 30 天。"/>
+              <TextBlock Margin="0,12,0,0" Foreground="{StaticResource Muted}" FontSize="12" Text="生效日期　2026-11-22"/>
             </StackPanel>
             <StackPanel x:Name="ProgressPage" Visibility="Collapsed">
               <Grid>

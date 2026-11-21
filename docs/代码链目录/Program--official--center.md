@@ -17,6 +17,16 @@
 
 消费者：`Client/Desktop/host/main.cjs`, `Client/Desktop/test/center-health-model.test.cjs`, `Client/Desktop/test/center-situation.test.cjs`, `Client/Desktop/test/main-shutdown.test.cjs`。
 
+### issue-reports.cjs
+
+[Program/official/center/issue-reports.cjs](../../Program/official/center/issue-reports.cjs) · program.official · 环3 · signed-package
+
+区域：fs; path; categories; execution; versionPattern; privateText; hash; hour; createIssueReports。
+
+导入：未解析到本项目静态导入。
+
+消费者：`Client/Desktop/host/main.cjs`, `Client/Desktop/test/center-issue-reports.test.cjs`, `Client/Desktop/test/main-shutdown.test.cjs`。
+
 ### learning.cjs
 
 [Program/official/center/learning.cjs](../../Program/official/center/learning.cjs) · program.official · 环3 · signed-package

@@ -4,7 +4,7 @@
   "kind": "program",
   "name": "中枢",
   "summary": "Eyra 的系统健康、Agent 工位、AIDEBUG 和受管更新，由 Nova 负责维护。",
-  "version": "1.2.23",
+  "version": "1.2.24",
   "publisher": "aieyra",
   "license": "SEE LICENSE IN PRODUCT",
   "contracts": {
@@ -29,8 +29,8 @@
   },
   "files": {
     "AGENTS.md": {
-      "sha256": "d01290d3784d74374df76aeb4ba451dd0ab88460ea89c9e08554ac5aba028153",
-      "size": 925
+      "sha256": "9055339c27e75a58d7a206e2fecbf3be1e3b11d1c7a33c4a19a7e31ce1fe90b4",
+      "size": 1216
     },
     "health-model.cjs": {
       "sha256": "d63b7bbaffb77d84464dce0fa89a66426af3215fd50f1b52a54fd5294bc50069",
@@ -41,12 +41,12 @@
       "size": 4208
     },
     "program.json": {
-      "sha256": "de8e62a80d5ee5d056740f853d9c79f79533f2583d09de7e13148a9980569c1f",
-      "size": 1761
+      "sha256": "5800039c6086e0369798e265039ca21393bce837cd82caca0ed2a978896d894a",
+      "size": 1920
     },
     "service.cjs": {
-      "sha256": "b674a7cb23f8da9b4e41b12c281da0b313e215bb83dd88341d45acf93453b03b",
-      "size": 21259
+      "sha256": "502203c5e49361c20b3b528e7d429f28370cc50de2a3d543e784a79bc1729abb",
+      "size": 21900
     },
     "status-log.cjs": {
       "sha256": "41b8544aa1bc6cccb45bbcaaccbc5341b70b221b03e7cae3dade202b79c1cb9b",
@@ -57,12 +57,12 @@
       "size": 13143
     },
     "ui/center.html": {
-      "sha256": "832ae7ffe6dbab7c88d3519bbc2fdc8001b607469daa8a55ed36b3dcddd733f0",
-      "size": 8027
+      "sha256": "e0c3989ffcd2dc1c3a546e04414bba8efa54c27a95e53855bb93802f4f593304",
+      "size": 8264
     },
     "ui/center.mjs": {
-      "sha256": "e451b5624f6d4d7de5f41585eeabbdf33cdcf84ad19f0a905d5f93c56da1076f",
-      "size": 20150
+      "sha256": "99d43615d15450e9f68821aeac70e8c877b88b4405b24a836a50a9e451329d31",
+      "size": 20733
     },
     "ui/THREE-LICENSE.txt": {
       "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
@@ -79,6 +79,10 @@
     "ui/topology.mjs": {
       "sha256": "6e9c9ab5a2081451c5ba9f7c459135d4fe9976ea6331d5374905add8e5469833",
       "size": 12007
+    },
+    "issue-reports.cjs": {
+      "sha256": "ad9e7a6fc857dfa199f3553e9c682b0f3166f3ed3107509c8973f9b58abcf68d",
+      "size": 9760
     }
   }
 }
