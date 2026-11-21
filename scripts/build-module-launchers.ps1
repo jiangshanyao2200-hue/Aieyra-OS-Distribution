@@ -59,7 +59,7 @@ try {
     $title = $entry.Value
     if ($title -cnotmatch '^Aieyra [A-Za-z]+$') { throw '程序启动器文件名无效' }
     $icon = Join-Path $root $(switch ($entry.Name) {
-      'link' { 'Control/app/desktop/assets/icon.ico' }
+      'link' { 'Client/Desktop/assets/link.ico' }
       'settings' { 'Client/Desktop/assets/config.ico' }
       default { 'Client/Desktop/assets/os.ico' }
     })
