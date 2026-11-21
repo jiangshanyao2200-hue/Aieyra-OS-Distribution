@@ -17848,7 +17848,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "7ba7186d10e81a904887330cef8569eda6c1a8256352753142638b79c8ed1de1",
+      "bodySHA256": "0865e7efd3fa4620a1d0749c2c21895b0fdb6e9610acf37922d5f962d6b704c1",
       "regions": [
         {
           "name": "fs",
@@ -17856,31 +17856,42 @@
           "bodyLine": 3
         },
         {
-          "name": "linkEnvironment",
+          "name": "officeRecord",
           "kind": "lexical",
           "bodyLine": 5
         },
         {
+          "name": "officeScope",
+          "kind": "lexical",
+          "bodyLine": 10
+        },
+        {
+          "name": "linkEnvironment",
+          "kind": "lexical",
+          "bodyLine": 14
+        },
+        {
           "name": "availablePort",
           "kind": "lexical",
-          "bodyLine": 27
+          "bodyLine": 42
         },
         {
           "name": "prepareLinkEnvironment",
           "kind": "lexical",
-          "bodyLine": 34
+          "bodyLine": 49
         },
         {
           "name": "togetherLegacyOffice",
           "kind": "lexical",
-          "bodyLine": 62
+          "bodyLine": 76
         }
       ],
       "imports": [
         "Client/Desktop/host/control.cjs",
         "Client/Desktop/host/json-storage.cjs",
         "Client/Desktop/src/paths.cjs",
-        "Client/Desktop/src/resources.cjs"
+        "Client/Desktop/src/resources.cjs",
+        "Contracts/storage/profile.cjs"
       ],
       "chains": [],
       "protected": null,
@@ -29187,7 +29198,7 @@
       "ring": "2",
       "agreement": "Client/Desktop/AGENTS.md",
       "map": "Client/Desktop/test/CODEMAP.md",
-      "bodySHA256": "398d5a1ca37058bcaab9c5b6266238a7c7e69b8cdd5a08cd0d8638b562df449d",
+      "bodySHA256": "9b5b1a56e4fb0fa30af85fd8e34241f2d880e84af85978984122a367131dff70",
       "regions": [
         {
           "name": "fs",
@@ -66058,7 +66069,7 @@
       "ring": "0",
       "agreement": "Contracts/storage/AGENTS.md",
       "map": "Contracts/storage/CODEMAP.md",
-      "bodySHA256": "e5aa8ac67d557115ed10b6d79d5f2ce5039777e2920a372707bf4579630b4738",
+      "bodySHA256": "7aca2f9534dcf50cf71e8c13db7d9aab0af6e6acd04336718747a940e4849a00",
       "regions": [
         {
           "name": "fs",
@@ -66084,6 +66095,11 @@
           "name": "resolve",
           "kind": "lexical",
           "bodyLine": 14
+        },
+        {
+          "name": "receivedProfile",
+          "kind": "lexical",
+          "bodyLine": 28
         }
       ],
       "imports": [],
@@ -66829,7 +66845,7 @@
       "ring": "0",
       "agreement": "Contracts/storage/AGENTS.md",
       "map": "Contracts/storage/CODEMAP.md",
-      "bodySHA256": "112ae132498d77dff93b7b31c92b07ffed21b4fab94c768a55634496586ebd6c",
+      "bodySHA256": "f2de3c4c14931f0d342e230212e4220b259a533cf772542cbdd825b8264b03b1",
       "regions": [
         {
           "name": "fs",
@@ -66862,9 +66878,14 @@
           "bodyLine": 28
         },
         {
-          "name": "use",
+          "name": "previousRoots",
           "kind": "lexical",
           "bodyLine": 29
+        },
+        {
+          "name": "use",
+          "kind": "lexical",
+          "bodyLine": 34
         }
       ],
       "imports": [
@@ -66880,6 +66901,7 @@
         "Client/Desktop/host/composer-draft.cjs",
         "Client/Desktop/host/image-library.cjs",
         "Client/Desktop/host/main.cjs",
+        "Client/Desktop/host/runtime-env.cjs",
         "Client/Desktop/host/runtime-prompts.cjs",
         "Client/Desktop/src/config.cjs",
         "Client/Desktop/src/main.cjs",

@@ -2,7 +2,7 @@
 // Map: CODEMAP.md
 // Owner: Contracts/storage/AGENTS.md | ring 0
 // Chains: module-local; query impact before editing
-// Regions: fs; marker; key; readMarker; bind; scope; use
+// Regions: fs; marker; key; readMarker; bind; scope; previousRoots; use
 // Impact: python -B scripts/code-atlas.py show Contracts/storage/profile.cjs
 // Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 // </AI-CHAIN>
@@ -35,8 +35,13 @@ function bind(config){
  configs.set(id,p);if(m)roots.add(key(p.root));return p;
 }
 let scope=null,users=0;
+function previousRoots(config){
+ const p=bind(config);
+ if(!p.unified||!require('./migration.cjs').receivedProfile(p.root,p.id))return [];
+ return mappings.get(key(p.config)).mappings.filter(m=>m.directory&&m.to==='.').map(m=>m.from);
+}
 function use(config){
  const p=bind(config);if(users&&key(scope.config)!==key(p.config))throw Error('Another user-data profile owns this process');
  const releaseOwner=ownership.enter(p);scope=p;users++;let released=false;return ()=>{if(released)return;released=true;releaseOwner();if(--users===0)scope=null;};
 }
-module.exports={marker,schema,bind,identityConfig(config){const p=bind(config);return mappings.get(key(p.config))?.identityConfig||p.config;},resolve:config=>require('./migration.cjs').resolve(config,readMarker),relocate(config,value){const p=bind(config);return origins.relocate(p.root,mappings.get(key(p.config))?.mappings||[],value);},enter:config=>ownership.enter(bind(config)),readMarker,use,active:()=>scope,rootBound:root=>roots.has(key(root))};
+module.exports={marker,schema,bind,previousRoots,identityConfig(config){const p=bind(config);return mappings.get(key(p.config))?.identityConfig||p.config;},resolve:config=>require('./migration.cjs').resolve(config,readMarker),relocate(config,value){const p=bind(config);return origins.relocate(p.root,mappings.get(key(p.config))?.mappings||[],value);},enter:config=>ownership.enter(bind(config)),readMarker,use,active:()=>scope,rootBound:root=>roots.has(key(root))};

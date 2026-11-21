@@ -733,9 +733,9 @@
 
 [Client/Desktop/host/runtime-env.cjs](runtime-env.cjs) · desktop.host · 环1 · 自有源码，顶部注释链由本工具维护
 
-区域：fs; linkEnvironment; availablePort; prepareLinkEnvironment; togetherLegacyOffice。
+区域：fs; officeRecord; officeScope; linkEnvironment; availablePort; prepareLinkEnvironment; togetherLegacyOffice。
 
-导入：`Client/Desktop/host/control.cjs`, `Client/Desktop/host/json-storage.cjs`, `Client/Desktop/src/paths.cjs`, `Client/Desktop/src/resources.cjs`。
+导入：`Client/Desktop/host/control.cjs`, `Client/Desktop/host/json-storage.cjs`, `Client/Desktop/src/paths.cjs`, `Client/Desktop/src/resources.cjs`, `Contracts/storage/profile.cjs`。
 
 消费者：`Client/Desktop/host/main.cjs`, `Client/Desktop/test/runtime-env.test.cjs`。
 

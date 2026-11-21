@@ -52,3 +52,26 @@ test('explicit isolated test values are kept',t=>{
  assert.equal(env.AIEYRA_CONTROL_PORT,'45678');assert.equal(env.AIEYRA_CONTROL_DATA,given.AIEYRA_CONTROL_DATA);assert.equal(env.AIEYRA_LINK_DATA_DIR,given.AIEYRA_LINK_DATA_DIR);
  assert.equal(given.AIEYRA_CONTROL_STORAGE,undefined,'input object is not mutated');
 });
+
+test('a completed profile move preserves the original office identity only at the recorded destination',async t=>{
+ const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'migrated-office-'));
+ t.after(()=>fs.rmSync(tmp,{recursive:true,force:true}));
+ const id='c'.repeat(32), old=path.join(tmp,'old'), moved=path.join(tmp,'new'), copy=path.join(tmp,'copy');
+ const config=root=>path.join(root,'Config','config.json');
+ const write=(file,value)=>fs.writeFileSync(file,JSON.stringify(value));
+ fs.mkdirSync(path.dirname(config(old)),{recursive:true});
+ write(config(old),{});
+ write(path.join(old,'.aieyra-userdata.json'),{schema:'aieyra.user-data/1',id,state:'ready',config:'Config/config.json'});
+ const previous=await prepareLinkEnvironment({},path.dirname(config(old)));
+ const {scope,port}=JSON.parse(fs.readFileSync(path.join(old,'Config/link/instance.json')));
+ write(path.join(old,'Config/link/together-owner.json'),{schema:1,owner:'together',scope,port});
+ fs.cpSync(old,moved,{recursive:true});
+ write(path.join(moved,'.aieyra-origins.json'),{schema:1,profile_id:id,mappings:[{from:old,to:'.',directory:true,windows:process.platform==='win32'}]});
+ write(path.join(moved,'.aieyra-migration-receipt.json'),{schema:1,id:'d'.repeat(32),state:'complete',profile_id:id,source_config:config(old),source_root:old,destination:moved,inventory_sha:'a'.repeat(64)});
+ const next=await prepareLinkEnvironment({},path.dirname(config(moved)));
+ assert.equal(next.AIEYRA_CONTROL_SCOPE,previous.AIEYRA_CONTROL_SCOPE);
+ assert.equal(next.AIEYRA_CONTROL_PORT,previous.AIEYRA_CONTROL_PORT);
+ assert.ok(next.AIEYRA_CONTROL_DATA.startsWith(moved+path.sep));
+ fs.cpSync(moved,copy,{recursive:true});
+ await assert.rejects(prepareLinkEnvironment({},path.dirname(config(copy))),/交接身份/);
+});

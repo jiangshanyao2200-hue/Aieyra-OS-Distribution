@@ -2,7 +2,7 @@
 // Map: CODEMAP.md
 // Owner: Contracts/storage/AGENTS.md | ring 0
 // Chains: module-local; query impact before editing
-// Regions: fs; barrier; key; read; resolve
+// Regions: fs; barrier; key; read; resolve; receivedProfile
 // Impact: python -B scripts/code-atlas.py show Contracts/storage/migration.cjs
 // Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 // </AI-CHAIN>
@@ -34,4 +34,8 @@ function resolve(config,readMarker){
  }
  throw Error('Too many migration redirects');
 }
-module.exports={resolve};
+function receivedProfile(root,id){
+ const receipt=read(root,receiptFile);
+ return receipt?.state==='complete'&&receipt.profile_id===id&&key(receipt.destination)===key(root);
+}
+module.exports={resolve,receivedProfile};

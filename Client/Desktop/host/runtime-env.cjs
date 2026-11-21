@@ -2,7 +2,7 @@
 // Map: CODEMAP.md
 // Owner: Client/Desktop/host/AGENTS.md | ring 1
 // Chains: module-local; query impact before editing
-// Regions: fs; linkEnvironment; availablePort; prepareLinkEnvironment; togetherLegacyOffice
+// Regions: fs; officeRecord; officeScope; linkEnvironment; availablePort; prepareLinkEnvironment; togetherLegacyOffice
 // Impact: python -B scripts/code-atlas.py show Client/Desktop/host/runtime-env.cjs
 // Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 // </AI-CHAIN>
@@ -11,6 +11,15 @@
 // Link 与 OS 共用 Config / Data 分区；显式隔离环境始终优先。
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),net=require('node:net');
 
+function officeRecord(configDir,name){
+ const file=path.join(configDir,'link',name),st=fs.lstatSync(file);
+ if(!st.isFile()||st.isSymbolicLink()||st.size>4096)throw Error('本地办公室交接配置无效');
+ return JSON.parse(fs.readFileSync(file,'utf8'));
+}
+function officeScope(root,id){
+ const identity=process.platform==='win32'?path.resolve(root).toLowerCase():path.resolve(root);
+ return crypto.createHash('sha256').update(identity+'\n'+id).digest('hex');
+}
 function linkEnvironment(env,configDir){
  const config=path.join(path.resolve(configDir),'config.json');
  const data=require('../src/paths.cjs').dataDir(config),base=require('../src/paths.cjs').privatePath(config,'link');
@@ -19,8 +28,14 @@ function linkEnvironment(env,configDir){
  const next={...env};
  const profile=require('../src/paths.cjs').profile(config);
  if(profile.unified){
-  const identity=process.platform==='win32'?path.resolve(data).toLowerCase():path.resolve(data);
-  next.AIEYRA_CONTROL_SCOPE=crypto.createHash('sha256').update(identity+'\n'+profile.id).digest('hex');
+  let scope=officeScope(data,profile.id);
+  const formerRoots=require('../../../Contracts/storage/profile.cjs').previousRoots(config);
+  if(formerRoots.length){
+   let saved;
+   try{saved=officeRecord(configDir,'instance.json');}catch(error){if(error.code!=='ENOENT')throw error;}
+   if(saved?.schema===1&&formerRoots.some(root=>officeScope(root,profile.id)===saved.scope))scope=saved.scope;
+  }
+  next.AIEYRA_CONTROL_SCOPE=scope;
   next.AIEYRA_CONTROL_RUNTIME ||= path.join(base,'runtime');
  }
  next.AIEYRA_CONTROL_PORT ||= String(port);
@@ -51,8 +66,7 @@ async function prepareLinkEnvironment(env,configDir){
  const file=path.join(configDir,'link','instance.json'),scope=next.AIEYRA_CONTROL_SCOPE;
  let port=20000+parseInt(scope.slice(0,8),16)%40000;
  try{
-  const st=fs.lstatSync(file);if(!st.isFile()||st.isSymbolicLink()||st.size>4096)throw Error('Link 实例配置无效');
-  const saved=JSON.parse(fs.readFileSync(file,'utf8'));
+  const saved=officeRecord(configDir,'instance.json');
   if(saved.schema!==1||!Number.isInteger(saved.port)||saved.port<1024||saved.port>65535||!/^[a-f0-9]{64}$/.test(saved.scope||''))throw Error('Link 实例配置无效');
   if(saved.scope===scope)port=saved.port;
  }catch(error){if(error.code!=='ENOENT')throw error;}
@@ -69,16 +83,11 @@ async function prepareLinkEnvironment(env,configDir){
  return next;
 }
 function togetherLegacyOffice(config){
- const dir=path.join(path.dirname(config),'link');
- const read=name=>{
-  const file=path.join(dir,name),st=fs.lstatSync(file);
-  if(!st.isFile()||st.isSymbolicLink()||st.size>4096)throw Error('本地办公室交接配置无效');
-  return JSON.parse(fs.readFileSync(file,'utf8'));
- };
+ const configDir=path.dirname(config);
  let marker;
- try{marker=read('together-owner.json');}catch(error){if(error.code==='ENOENT')return undefined;throw error;}
- const saved=read('instance.json');
- const env=linkEnvironment({},path.dirname(config));
+ try{marker=officeRecord(configDir,'together-owner.json');}catch(error){if(error.code==='ENOENT')return undefined;throw error;}
+ const saved=officeRecord(configDir,'instance.json');
+ const env=linkEnvironment({},configDir);
  if(marker.schema!==1||marker.owner!=='together'||saved.schema!==1||
     !/^[a-f0-9]{64}$/.test(saved.scope||'')||saved.scope!==env.AIEYRA_CONTROL_SCOPE||
     marker.scope!==saved.scope||marker.port!==saved.port||

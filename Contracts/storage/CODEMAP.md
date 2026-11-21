@@ -11,7 +11,7 @@
 
 [Contracts/storage/migration.cjs](migration.cjs) · contracts.storage · 环0 · 自有源码，顶部注释链由本工具维护
 
-区域：fs; barrier; key; read; resolve。
+区域：fs; barrier; key; read; resolve; receivedProfile。
 
 导入：未解析到本项目静态导入。
 
@@ -141,11 +141,11 @@
 
 [Contracts/storage/profile.cjs](profile.cjs) · contracts.storage · 环0 · 自有源码，顶部注释链由本工具维护
 
-区域：fs; marker; key; readMarker; bind; scope; use。
+区域：fs; marker; key; readMarker; bind; scope; previousRoots; use。
 
 导入：`Contracts/storage/migration.cjs`, `Contracts/storage/origins.cjs`, `Contracts/storage/ownership.cjs`。
 
-消费者：`AIDEBUG/core/live-instance.cjs`, `Client/Desktop/host/attachments.cjs`, `Client/Desktop/host/composer-draft.cjs`, `Client/Desktop/host/image-library.cjs`, `Client/Desktop/host/main.cjs`, `Client/Desktop/host/runtime-prompts.cjs`, `Client/Desktop/src/config.cjs`, `Client/Desktop/src/main.cjs`, `Client/Desktop/src/paths.cjs`, `Client/Desktop/src/resources.cjs`, `Client/Desktop/src/terminal-server.cjs`, `Client/Desktop/test/main-shutdown.test.cjs`, `Client/Desktop/test/profile-paths.test.cjs`, `Client/Desktop/test/role-profile.test.cjs`, `Contracts/storage/paths.cjs`。
+消费者：`AIDEBUG/core/live-instance.cjs`, `Client/Desktop/host/attachments.cjs`, `Client/Desktop/host/composer-draft.cjs`, `Client/Desktop/host/image-library.cjs`, `Client/Desktop/host/main.cjs`, `Client/Desktop/host/runtime-env.cjs`, `Client/Desktop/host/runtime-prompts.cjs`, `Client/Desktop/src/config.cjs`, `Client/Desktop/src/main.cjs`, `Client/Desktop/src/paths.cjs`, `Client/Desktop/src/resources.cjs`, `Client/Desktop/src/terminal-server.cjs`, `Client/Desktop/test/main-shutdown.test.cjs`, `Client/Desktop/test/profile-paths.test.cjs`, `Client/Desktop/test/role-profile.test.cjs`, `Contracts/storage/paths.cjs`。
 
 ### profile.go
 
