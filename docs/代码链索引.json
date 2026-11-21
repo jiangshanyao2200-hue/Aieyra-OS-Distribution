@@ -14899,7 +14899,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "1ee6a2cd3f1557d4c31b347e8a0b1e80dfad65cb88b0f42ededd74ce453f1e99",
+      "bodySHA256": "203d41df3d253224dcb5d643354c262ba09b9f4dc9120a5fdd9bbd3995734b30",
       "regions": [
         {
           "name": "fs",
@@ -15622,7 +15622,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "60d6f27d3e28975c3e2823d2eda2e66fd69fe78e0db718f2d61ade0af882c45c",
+      "bodySHA256": "1b479b80e9a7ac22d39d39c5161a11421f19e25f035b8ff674296e5d69b8c728",
       "regions": [
         {
           "name": "fs",
@@ -15642,12 +15642,13 @@
         {
           "name": "ensureDesktopShortcut",
           "kind": "lexical",
-          "bodyLine": 14
+          "bodyLine": 23
         }
       ],
       "imports": [
         "Client/Desktop/host/json-storage.cjs",
-        "Client/Desktop/src/paths.cjs"
+        "Client/Desktop/src/paths.cjs",
+        "Contracts/storage/migration.cjs"
       ],
       "chains": [],
       "protected": null,
@@ -16142,7 +16143,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "0f8be2d773a93decedd3f347b7aa859c947f4d3764d75bba3dda95fe72d73921",
+      "bodySHA256": "7c2d6c8bac04f99437ca3f38b54313f7fd239693102efce05b7bbc0fbc0a0ed7",
       "regions": [
         {
           "name": "path",
@@ -26040,7 +26041,7 @@
       "ring": "2",
       "agreement": "Client/Desktop/AGENTS.md",
       "map": "Client/Desktop/test/CODEMAP.md",
-      "bodySHA256": "0728acc702869ea8389125cbeecef74c9da5ff53d75c71546de064b4e27d88e1",
+      "bodySHA256": "92aa813e4d11fb0e9834716e880a3ff22856c59b63b28cb799157ccf755748d3",
       "regions": [
         {
           "name": "fs",
@@ -66106,6 +66107,7 @@
       "chains": [],
       "protected": null,
       "consumers": [
+        "Client/Desktop/host/first-run.cjs",
         "Contracts/storage/profile.cjs"
       ]
     },

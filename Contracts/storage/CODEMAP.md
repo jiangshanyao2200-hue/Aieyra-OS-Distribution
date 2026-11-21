@@ -15,7 +15,7 @@
 
 导入：未解析到本项目静态导入。
 
-消费者：`Contracts/storage/profile.cjs`。
+消费者：`Client/Desktop/host/first-run.cjs`, `Contracts/storage/profile.cjs`。
 
 ### migration.go
 

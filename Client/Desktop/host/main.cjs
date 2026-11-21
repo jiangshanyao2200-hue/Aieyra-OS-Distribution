@@ -31,7 +31,7 @@ if(initial.parent_owned){moduleEnv.AIEYRA_OS_OWNER_PORT=String(initial.parent_po
 const root = path.resolve(initial.root),
   config = path.resolve(initial.config);
 require('../../../Contracts/storage/profile.cjs').use(config);
-const installation=require('./first-run.cjs').installationSettings(config);
+const installation=require('./first-run.cjs').installationSettings(config,root);
 // One release-stage authority; first-ring migration does not enable remote Link.
 const landCoreOnly=!require('../src/resources.cjs').releaseStage().link_situation;
 const updatesEnabled=installation.role!=='development'&&require('../src/resources.cjs').read('运行参数.json').official_updates_enabled===true;
@@ -849,7 +849,7 @@ app
     expose('feedback',async()=>({ok:false,error:'私密反馈已停用；旧本地记录不会上传，请由 Eyra 发布公开问题帖子'}));
     cloudUpdates=require('./cloud-updates.cjs').createCloudUpdates({app,window:()=>win,root,config,initial,descriptor:()=>descriptor,core,canHandoff:()=>community.status().signedIn&&officialAccount.canHandoff(),onUpdateError:()=>issueReports?.system('update_error')});
     // 本地编译默认关闭官方更新和安装补全，避免历史签名基线覆盖当前安装。
-    expose('updateReady',()=>updatesEnabled?cloudUpdates.ready():{ok:true});
+    expose('updateReady',()=>cloudUpdates.ready({bootstrapEnabled:updatesEnabled}));
     expose('updateAcknowledge',p=>cloudUpdates.acknowledge(p));
     if(updatesEnabled)cloudUpdates.start();
     void officialAccount.refresh();

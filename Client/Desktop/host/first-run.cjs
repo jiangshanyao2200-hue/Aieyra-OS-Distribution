@@ -14,14 +14,23 @@ function readOptional(file){
  try{const st=fs.lstatSync(file);if(!st.isFile()||st.isSymbolicLink()||st.size>8192)throw Error('安装记录无效');return JSON.parse(fs.readFileSync(file,'utf8'));}
  catch(error){if(error.code==='ENOENT')return null;throw error;}
 }
-function installationSettings(config){
+function installationSettings(config,root){
  const value=readOptional(path.join(path.dirname(config),'installation.json'));
  if(value===null)return {schema:1,role:'user'};
  if(value.schema!==1||!['user','development'].includes(value.role)||Object.keys(value).some(k=>!['schema','role'].includes(k)))throw Error('安装角色配置无效');
+ if(root&&value.role==='development'){
+  const binding=readOptional(path.join(root,'.aieyra-installation.json'));
+  if(binding?.schema===1&&typeof binding.dataRoot==='string'&&path.isAbsolute(binding.dataRoot)){
+   const profile=require('../src/paths.cjs').profile(config);
+   // An installed copy can receive a profile that was previously used to develop the OS.
+   if(profile.unified&&binding.profileId===profile.id&&path.relative(binding.dataRoot,profile.root)===''&&
+      require('../../../Contracts/storage/migration.cjs').receivedProfile(profile.root,profile.id))return {schema:1,role:'user'};
+  }
+ }
  return value;
 }
 function ensureDesktopShortcut({root,config,desktop,shell}){
- if(installationSettings(config).role==='development')return {status:'development'};
+ if(installationSettings(config,root).role==='development')return {status:'development'};
  const p=require('../src/paths.cjs').profile(config);
  if(!p.unified)return {status:'legacy'};
  const record=path.join(path.dirname(config),'windows-first-run.json'),target=path.join(path.resolve(root),'Aieyra OS.exe');

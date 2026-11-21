@@ -319,7 +319,7 @@
 
 区域：fs; readOptional; installationSettings; ensureDesktopShortcut。
 
-导入：`Client/Desktop/host/json-storage.cjs`, `Client/Desktop/src/paths.cjs`。
+导入：`Client/Desktop/host/json-storage.cjs`, `Client/Desktop/src/paths.cjs`, `Contracts/storage/migration.cjs`。
 
 消费者：`Client/Desktop/host/main.cjs`, `Client/Desktop/test/first-run.test.cjs`, `Client/Desktop/test/main-shutdown.test.cjs`。
 

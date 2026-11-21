@@ -28,9 +28,9 @@ function createCloudUpdates({app,window,root,config,initial,descriptor,core,canH
   const id=crypto.randomUUID();return new Promise(resolve=>{const timeout=setTimeout(()=>{reply=null;resolve(false);},5000);reply={id,resolve:value=>{clearTimeout(timeout);reply=null;resolve(value)}};window().webContents.send('workspace:updatePrepare',{id});});
  }
  function acknowledge(p){if(reply&&p.id===reply.id)reply.resolve(p.ready===true);return {ok:true};}
- function ready(){uiReady=true;const health=process.env.AIEYRA_UPDATE_HEALTH;delete process.env.AIEYRA_UPDATE_HEALTH;
+ function ready({bootstrapEnabled=true}={}){uiReady=true;const health=process.env.AIEYRA_UPDATE_HEALTH;delete process.env.AIEYRA_UPDATE_HEALTH;
   if(health){const url=new URL(health);if(url.protocol==='http:'&&url.hostname==='127.0.0.1'&&/^\/[a-f0-9]{64}$/.test(url.pathname))void fetch(url,{method:'POST',redirect:'error',signal:AbortSignal.timeout(5000)}).catch(()=>{});}
-  if(!bootstrapTimer){bootstrapTimer=setTimeout(()=>{bootstrapTimer=null;void bootstrap();},750);bootstrapTimer.unref();}
+  if(bootstrapEnabled&&!bootstrapTimer){bootstrapTimer=setTimeout(()=>{bootstrapTimer=null;void bootstrap();},750);bootstrapTimer.unref();}
   return {ok:true};
  }
  async function tick(){
