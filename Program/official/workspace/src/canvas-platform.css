@@ -1,0 +1,123 @@
+.ui-surface-layer[data-ui-layout="embedded"].canvas-platform-focus-layer {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 18px;
+  overflow: hidden;
+  color: var(--ink);
+  touch-action: none;
+  cursor: default;
+}
+
+.ui-surface-backdrop.canvas-platform-focus-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--ui-surface-backdrop);
+  backdrop-filter: blur(3px);
+}
+
+.ui-surface[data-ui-surface].canvas-platform-focus-dialog {
+  --ui-surface-width: 1120px;
+  --ui-surface-max-height: 100%;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1120px;
+  height: min(780px, 100%);
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+  justify-self: center;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--ui-surface-radius);
+  outline: 0;
+  background: var(--surface-solid);
+  box-shadow: var(--shadow);
+}
+
+.ui-surface[data-ui-surface].canvas-platform-focus-dialog:focus-visible {
+  box-shadow: var(--focus-ring), var(--shadow);
+}
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-header {
+  display: flex;
+  min-width: 0;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ui-surface-pad-y) var(--ui-surface-pad-x);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--surface-solid);
+}
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-header .ui-surface-heading { min-width: 0; }
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-header h2 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-close {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  flex: 0 0 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+}
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-close:hover:not(:disabled),
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-close:focus-visible {
+  color: var(--accent);
+  background: var(--hover-bg);
+}
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-body {
+  position: relative;
+  container: canvas-focus / inline-size;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y;
+}
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-body > * {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* The embedded focus surface is separated from the canvas by depth and tone. */
+.ui-surface[data-ui-surface].canvas-platform-focus-dialog,
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-header {
+  border: 0;
+}
+
+.ui-surface.canvas-platform-focus-dialog .canvas-platform-focus-header {
+  background: color-mix(in srgb, var(--surface-solid) 94%, var(--accent) 2%);
+}
+
+@container artifact-workflow (max-width: 1040px) {
+  .ui-surface-layer[data-ui-layout="embedded"].canvas-platform-focus-layer { padding: 12px; }
+}
+
+@container artifact-workflow (max-width: 760px) {
+  .ui-surface-layer[data-ui-layout="embedded"].canvas-platform-focus-layer { padding: 8px; }
+  .ui-surface[data-ui-surface].canvas-platform-focus-dialog { border-radius: var(--ui-surface-radius); }
+}

@@ -1,0 +1,25 @@
+/* Existing default patch view, kept with its tool. Theme overrides may restyle these elements. */
+body :is(#stage,.team-exec) .patch-files { flex:none; display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 8px; }
+body :is(#stage,.team-exec) .patch-sum { align-self:center; margin-right:4px; font-size:12px; color:var(--text-2); font-variant-numeric:tabular-nums; }
+body :is(#stage,.team-exec) .patch-gap { display:block; width:100%; padding:2px 0; border:0; background:#ffffff05; color:var(--text-3); font:inherit; font-size:11px; text-align:center; cursor:pointer; }
+body :is(#stage,.team-exec) .patch-gap:hover { background:#ffffff0c; color:var(--text-2); }
+body :is(#stage,.team-exec) .patch-file { max-width:220px; padding:3px 11px; border:0; border-radius:999px; font:inherit; cursor:pointer; background:transparent; font-size:11.5px; color:var(--text-2); box-shadow:inset 0 0 0 1px #ffffff17; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body :is(#stage,.team-exec) .patch-file[data-current=true] { color:#eef1f7; background:#ffffff0a; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 10px var(--eyra-glow,#b9c8ff2e); }
+body :is(#stage,.team-exec) .patch-diff { flex:1; min-height:0; overflow:auto; scrollbar-width:none; padding:2px 0 12px; font:12.5px/1.65 Consolas,"Cascadia Mono",monospace; mask-image:linear-gradient(to bottom,transparent 0,#000 min(14px,var(--fade-top,0px)),#000 calc(100% - min(14px,var(--fade-bottom,0px))),transparent 100%); }
+body :is(#stage,.team-exec) .patch-line { display:grid; grid-template-columns:44px 16px minmax(0,1fr); padding:0 16px 0 0; color:#aeb6c4; white-space:pre-wrap; overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .patch-no { text-align:right; padding-right:8px; color:#525a6a; }
+body :is(#stage,.team-exec) .patch-mark { color:#525a6a; }
+body :is(#stage,.team-exec) .patch-line.add { background:#a9c0ec12; color:#d6e3ff; }
+body :is(#stage,.team-exec) .patch-line.add .patch-mark { color:#a9c0ec; }
+body :is(#stage,.team-exec) .patch-line.del { background:#e3a29c10; color:#f0c8c3; }
+body :is(#stage,.team-exec) .patch-line.del .patch-mark { color:#e3a29c; }
+body[data-form=work] #stage .patch-files { padding:0 12px 6px; }
+body[data-form=work] #stage .patch-file { font-size:10.5px; padding:2px 9px; }
+body[data-form=work] #stage .patch-diff { font-size:11px; line-height:1.55; }
+body[data-form=work] #stage .patch-line { grid-template-columns:36px 14px minmax(0,1fr); }
+body :is(#stage,.team-exec) .patch-files { padding:0 14px 8px!important; }
+body :is(#stage,.team-exec) .patch-file { background:#ffffff06; }
+body :is(#stage,.team-exec) .patch-file[data-current=true] { background:#ffffff0e!important; box-shadow:inset 0 0 0 1.5px #e6e9f0cc!important; }
+body :is(#stage,.team-exec) .patch-diff { margin:0 8px; border-radius:10px; background:#00000024; box-shadow:inset 0 0 0 1px #ffffff08; font-family:'Cascadia Mono',Consolas,monospace!important; }
+body :is(#stage,.team-exec) .patch-line.add { box-shadow:inset 2px 0 0 #a9c0ec; }
+body :is(#stage,.team-exec) .patch-line.del { box-shadow:inset 2px 0 0 #e3a29c; }

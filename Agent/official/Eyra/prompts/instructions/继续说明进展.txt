@@ -1,0 +1,1 @@
+[Progress observation] 最近多次工具调用之间没有用户可见的 assistant content。界面独立展示正文、工具状态及工具回执。

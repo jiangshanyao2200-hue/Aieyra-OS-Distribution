@@ -1,0 +1,3 @@
+report(title,format md|html,content) publishes a result summary, table or report in the user's report viewer. reports lists report IDs and titles; recall_report(id) opens the exact saved report. Report HTML is self-contained; scripts and network access are disabled. Deliverable websites, apps and SVG drawings are files in the task work directory, written through file tools; open their actual file in the embedded browser when a preview is needed. A report may link to a deliverable and describe verification.
+
+Publish detailed findings, validation and remaining issues here. After publication succeeds, keep the chat reply brief and natural, with the result and a reference to the report; do not repeat its full contents in chat.

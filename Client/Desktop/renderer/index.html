@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';">
+<title>Aieyra Config</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="titlebar">
+ <div class="brand"><img class="brand-mark" src="../assets/config.svg" alt=""> AIEYRA <span>Desktop</span></div>
+ <div class="titlebar__win">
+  <button class="winbtn" data-win="minimize" aria-label="最小化">−</button>
+  <button class="winbtn" data-win="maximize" aria-label="最大化">□</button>
+  <button class="winbtn winbtn--close" data-win="close" aria-label="关闭">×</button>
+ </div>
+</header>
+<div class="workspace">
+ <aside class="sidebar">
+  <div class="sidebar__heading">配置中心<span>SETTINGS</span></div>
+  <nav class="tabs" role="tablist" aria-label="设置" aria-orientation="vertical">
+   <button id="matrix-tab" class="tab" role="tab" aria-selected="false" aria-controls="api-page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 3 6 6 1-4 5 1 6-6-3-6 3 1-6-4-5 6-1z"/></svg><span>Eyra 配置</span></button>
+   <button id="api-tab" class="tab" role="tab" aria-selected="true" aria-controls="api-page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v4m8-4v4M6 8h12v3a6 6 0 0 1-6 6v4m-6-10h12"/></svg><span>API 配置</span><span class="tab__dot" aria-hidden="true"></span></button>
+   <button id="pool-tab" class="tab" role="tab" aria-selected="false" aria-controls="api-page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v4H4zm0 10h16v4H4z"/></svg><span>模型池</span></button>
+   <button id="display-tab" class="tab" role="tab" aria-selected="false" aria-controls="api-page"><span>字体与显示</span></button>
+  </nav>
+  <div class="sidebar__signature" aria-hidden="true"><span class="signature-orbit"></span>AIEYRA OS</div>
+ </aside>
+ <main id="pane-scroll">
+ <div class="page">
+  <section id="api-page" role="tabpanel" aria-labelledby="api-tab">
+   <div class="intro"><div class="provider-mark" aria-hidden="true">D<span>✦</span></div><div><p class="eyebrow">OFFICIAL API</p><h1>DeepSeek</h1></div><span class="provider-badge">官方</span></div>
+   <form id="api-form">
+    <div class="fields" id="all-fields" aria-label="API 参数"></div>
+    <div class="actions"><button type="button" class="btn btn--ghost" id="act-reset">恢复默认</button><div class="actions__primary"><button type="button" class="btn" id="act-test" title="Ctrl+T">测试连接</button><button type="submit" class="btn btn--primary" id="act-save" title="Ctrl+S">保存<span aria-hidden="true">↗</span></button></div></div>
+    <div id="action-status" role="status" aria-live="polite" hidden></div>
+   </form>
+  </section>
+ </div>
+</main>
+</div>
+<div class="toast" id="toast" hidden><span id="toast-text"></span><button type="button" class="btn" id="toast-reload">重新载入</button><button type="button" class="mini" id="toast-close" aria-label="忽略">×</button></div>
+<script src="terminal-bridge.js"></script>
+<script src="renderer.js"></script><script type="module" src="tips.mjs"></script>
+</body>
+</html>

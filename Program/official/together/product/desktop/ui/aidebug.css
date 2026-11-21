@@ -1,0 +1,41 @@
+/* @file-map:start
+文件: link/desktop/ui/aidebug.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: 入口/动态加载；参阅链路与目录地图
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .aidebug-bar
+  rule-2 | style | .aidebug-label
+  rule-3 | style | .aidebug-label small
+  rule-4 | style | .aidebug-label strong
+  rule-5 | style | .aidebug-label>span
+  rule-6 | style | .aidebug-actions
+  rule-7 | style | .aidebug-actions button,.aidebug-actions select
+  rule-8 | style | .aidebug-actions select
+  rule-9 | style | .visible-aidebug #workspace
+  rule-10 | style | .visible-aidebug #notice
+  rule-11 | style | .aidebug-gallery
+  rule-12 | style | .aidebug-gallery>p
+  rule-13 | style | .aidebug-review
+  rule-14 | style | .aidebug-review nav
+  rule-15 | style | .aidebug-review nav button
+  rule-16 | style | .aidebug-review img
+  rule-17 | style | .aidebug-review p
+  rule-18 | style | .aidebug-enabled-dialog>.dialog-top
+  rule-19 | style | .aidebug-modal-controls
+  rule-20 | style | .aidebug-modal-controls span
+  rule-21 | style | .aidebug-modal-controls button
+  rule-22 | style | @media(max-width:850px)
+  rule-23 | style | @media(max-width:650px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ .aidebug-bar{height:80px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 20px;background:#111921;border-bottom:1px solid #a9c0ec30;position:relative;z-index:6}
+/* @chain-region rule-2 */ .aidebug-label{display:grid;min-width:0;line-height:1.55}/* @chain-region rule-3 */ .aidebug-label small{color:#8ce3c5;font-size:14px;letter-spacing:.1em}/* @chain-region rule-4 */ .aidebug-label strong{font-size:14px;font-weight:550}/* @chain-region rule-5 */ .aidebug-label>span{font-size:14px;color:#a6b2c4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}/* @chain-region rule-6 */ .aidebug-actions{display:flex;align-items:center;gap:8px;flex:none}/* @chain-region rule-7 */ .aidebug-actions button,.aidebug-actions select{font-size:14px}/* @chain-region rule-8 */ .aidebug-actions select{color:#dfe7f5;background:#182431;border:1px solid #ffffff20;border-radius:20px;padding:7px}
+/* @chain-region rule-9 */ .visible-aidebug #workspace{height:calc(100vh - var(--titlebar-height) - 80px)}/* @chain-region rule-10 */ .visible-aidebug #notice{top:145px}
+/* @chain-region rule-11 */ .aidebug-gallery{width:min(1150px,94vw);max-width:94vw;max-height:90vh}/* @chain-region rule-12 */ .aidebug-gallery>p{font-size:14px;color:var(--muted);margin:12px 0}/* @chain-region rule-13 */ .aidebug-review{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px}/* @chain-region rule-14 */ .aidebug-review nav{display:flex;flex-direction:column;max-height:58vh;overflow:auto;gap:6px}/* @chain-region rule-15 */ .aidebug-review nav button{text-align:left;justify-content:flex-start;font-size:14px}/* @chain-region rule-16 */ .aidebug-review img{width:100%;height:auto;display:block;margin-top:12px}/* @chain-region rule-17 */ .aidebug-review p{font-size:14px;color:var(--muted)}
+/* @chain-region rule-18 */ .aidebug-enabled-dialog>.dialog-top{flex-wrap:wrap}/* @chain-region rule-19 */ .aidebug-modal-controls{display:flex;align-items:center;gap:8px;width:100%;font-size:14px;color:#8ce3c5}/* @chain-region rule-20 */ .aidebug-modal-controls span{flex:1;min-width:0}/* @chain-region rule-21 */ .aidebug-modal-controls button{width:auto;padding:4px 9px;font-size:14px;background:#a9c0ec0d}
+/* @chain-region rule-22 */ @media(max-width:850px){.aidebug-bar{padding:8px 12px;gap:8px}.aidebug-label>span{max-width:280px}.aidebug-actions{gap:4px}.aidebug-actions button{padding-inline:8px}.aidebug-actions select{max-width:85px}.aidebug-review{grid-template-columns:160px minmax(0,1fr)}}
+/* @chain-region rule-23 */ @media(max-width:650px){.aidebug-bar{display:block;padding-block:5px}.aidebug-label{grid-template-columns:auto 1fr;column-gap:10px}.aidebug-label>span{display:none}.aidebug-label strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.aidebug-actions{margin-top:6px;justify-content:flex-end}.aidebug-review{grid-template-columns:1fr}.aidebug-review nav{max-height:100px}.aidebug-review img{max-height:45vh;object-fit:contain}}

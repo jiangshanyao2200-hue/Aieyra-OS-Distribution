@@ -1,0 +1,37 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.context-project",
+  "kind": "context",
+  "name": "项目连续性上下文",
+  "summary": "保留完整近轮次，并在共同结构化摘要中强调纠正、来源、决策和未完成事项。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "context": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "context": "context.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "context.json": {
+      "sha256": "fefa003177d1124247f147a5b8c70f275a6413d13260209bfedc184895d60b2c",
+      "size": 495
+    }
+  }
+}

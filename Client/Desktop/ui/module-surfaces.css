@@ -1,0 +1,37 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .module-content; body.contacts-module; html:has(> body.contacts-module),html:has(> body.settings-extension[data-placement=attached]); body.contacts-module > :is(#status-anchor,#screen,#bottom-bar,#os-home,#status-rail,#activity-orbits); body[data-view$=-module-view] :is(#screen,#bottom-bar,#status-rail); body.contacts-module #view-surface; body.contacts-module #view-content; body.contacts-module .contacts-page; body[data-home-detached=true] :is(.window-controls,#brand-title,#account-status); body.module-container > :is(#screen,#bottom-bar,#os-home,#status-rail,#activity-orbits,#task-tabs); body.module-container #view-surface; body.module-container #usage-anchor; body.module-container :is(#status-anchor,#desktop-dock); #module-placeholder; #module-placeholder[hidden]; body.contacts-module[data-placement=attached]::before,body.contacts-module[data-placement=attached]::after; #module-placeholder button; #module-placeholder button:hover
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/module-surfaces.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Shared native pages use the existing fonts, theme and motion variables. */
+.module-content { width:100%;height:100%;padding:0!important; }
+body.contacts-module { display:block; background:transparent; }
+/* Both document layers must be transparent for a native view to composite. */
+html:has(> body.contacts-module),html:has(> body.settings-extension[data-placement=attached]) { background:transparent; }
+body.contacts-module > :is(#status-anchor,#screen,#bottom-bar,#os-home,#status-rail,#activity-orbits) { display:none!important; }
+/* Contacts owns its native Eyra projection. The home renderer stays alive for
+   drafts and tasks, but none of its chat layers may shine through this page. */
+body[data-view$=-module-view] :is(#screen,#bottom-bar,#status-rail) { display:none!important;visibility:hidden!important;pointer-events:none!important; }
+body.contacts-module #view-surface { position:fixed;inset:0;height:100%;padding:0; }
+body.contacts-module #view-content { height:100%; }
+body.contacts-module .contacts-page { margin:0 auto;max-width:1100px; }
+body[data-home-detached=true] #desktop-dock > :not(#dock-session-new):not(#dock-sessions),
+body[data-home-detached=true] :is(.window-controls,#brand-title,#account-status) { display:none!important; }
+body.module-container > :is(#screen,#bottom-bar,#os-home,#status-rail,#activity-orbits,#task-tabs) { display:none!important; }
+body.module-container #view-surface { bottom:0; }
+body.module-container #usage-anchor { display:none!important; }
+/* The full home view owns the live titlebar. A hidden shell must never leave
+   native drag rectangles underneath that view's controls. */
+body.module-container :is(#status-anchor,#desktop-dock) { app-region:no-drag; }
+#module-placeholder { position:fixed;inset:80px 20px 20px;display:grid;place-content:center;gap:16px;text-align:center;color:var(--text-2); }
+#module-placeholder[hidden] { display:none; }
+
+body.contacts-module[data-placement=attached]::before,body.contacts-module[data-placement=attached]::after{display:none}
+
+#module-placeholder button{justify-self:center;font:inherit;min-height:36px;padding:8px 18px;border:1px solid #ffffff18;border-radius:999px;color:var(--text);background:#ffffff09;cursor:pointer;transition:background var(--ui-fast) var(--ui-ease)}
+#module-placeholder button:hover{background:#ffffff15}#module-placeholder button:focus-visible{outline:2px solid var(--ui-accent);outline-offset:3px}

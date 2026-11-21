@@ -1,0 +1,81 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.statistics-workflow",
+  "kind": "workbox",
+  "name": "统计与报告工作流",
+  "summary": "先统计输入，审阅后生成实际 JSON 报告。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "workbox": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [
+    {
+      "id": "example.statistics",
+      "version": "^1.0.0"
+    },
+    {
+      "id": "example.report",
+      "version": "^1.0.0"
+    }
+  ],
+  "entrypoints": {
+    "workflow": "workflow.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "package.invoke",
+      "scope": "example.statistics",
+      "reason": "执行工作流中声明的步骤"
+    },
+    {
+      "capability": "package.invoke",
+      "scope": "example.report",
+      "reason": "执行工作流中声明的步骤"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.workbox",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "bafbc514b53234ebab4635d878861ec054ea836b88a1259732752360101c6f34",
+      "size": 84
+    },
+    "desktop.json": {
+      "sha256": "79f64aad812fe56e526cf4f2837dd9af25aec596d547f56a149b4f7e8f63634a",
+      "size": 103
+    },
+    "manual.md": {
+      "sha256": "3dcb5962466741934d2687b3b1d253504007ba6e9f23a120b547a6bff4ff5c17",
+      "size": 844
+    },
+    "workflow.json": {
+      "sha256": "82aea47f18aad2e0d101cb53b97ef87c0f9c9741f5a9b6c217f57406bc9dd878",
+      "size": 1948
+    }
+  }
+}

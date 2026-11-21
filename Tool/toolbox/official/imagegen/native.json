@@ -1,0 +1,7 @@
+{
+  "schema": "aieyra.native-tool/1",
+  "name": "image_gen",
+  "aliases": [
+    "image_gen"
+  ]
+}

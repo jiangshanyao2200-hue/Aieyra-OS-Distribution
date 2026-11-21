@@ -1,0 +1,46 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: html,body,body #screen; body:not([data-frame-ready=true]); body; body #screen; body[data-form=folded][data-eyra-placement] #screen #conversation #emergence; body[data-form=folded][data-eyra-placement] #screen #conversation #answer-stage; body[data-form=folded][data-eyra-placement] #screen .presence-header; body[data-compact=true][data-input=true][data-form=folded][data-eyra-placement] #screen #conversation #answer-stage; body[data-form=folded][data-eyra-placement] #bottom-bar; body[data-compact=true][data-form=folded][data-eyra-placement] #bottom-bar; body[data-input=true][data-form=folded][data-eyra-placement] #screen #conversation #emergence; body[data-input=true][data-form=folded][data-eyra-placement] #bottom-bar; body[data-form=folded][data-eyra-placement] #screen #conversation #answer-stage; body.composer-open[data-short-window=false][data-form=folded] #screen #conversation #answer-stage; body.composer-open[data-form=folded][data-eyra-placement]:not([data-program-agent=true]) #bottom-bar #composer:not([hidden]); body[data-form=folded][data-eyra-placement] #screen #conversation #answer-stage:not([hidden]); body #overlay-error; body #sub-overlay; body #sub-overlay .sub-overlay-main; body #sub-overlay .chat-name; body #sub-overlay .chat-text; body #sub-overlay .role-face; body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after; body[data-caption=true][data-form=folded][data-eyra-placement] #screen #conversation #answer-stage; body[data-caption=true] #screen #voice; body[data-caption=true][data-short-window=true] #screen #voice; body .ui-feedback
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/folded-overlay.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Only placement belongs to the portal. The input and ring use OS components. */
+html,body,body #screen { background:transparent!important; }
+body:not([data-frame-ready=true]) { visibility:hidden; }
+body { --fold-left:8px;--fold-bottom:8px;--fold-ring:104px;--composer-lift:0px; }
+body #screen { position:absolute;inset:0; }
+body[data-form=folded][data-eyra-placement] #screen #conversation #emergence { left:16px!important;bottom:16px!important;max-width:calc(100vw - 32px)!important;height:var(--fold-ring)!important;gap:12px!important;transition:opacity var(--ui-enter) var(--ui-ease)!important; }
+body[data-form=folded][data-eyra-placement] #screen #conversation #answer-stage { width:calc(100vw - var(--fold-ring) - 44px)!important;max-width:none!important; }
+body[data-form=folded][data-eyra-placement] #screen .presence-header { translate:none; }
+body[data-compact=true][data-input=true][data-form=folded][data-eyra-placement] #screen #conversation #answer-stage { translate:0 calc(-1 * (var(--overlay-input-height,40px) + 12px)); }
+body[data-form=folded][data-eyra-placement] #bottom-bar { inset:auto 16px 16px;transform:none;width:auto;transition:none; }
+body[data-compact=true][data-form=folded][data-eyra-placement] #bottom-bar { left:calc(var(--fold-ring) + 28px); }
+/* Quick input sits below the ring; the whole floating surface rises to fit. */
+body[data-input=true][data-form=folded][data-eyra-placement] #screen #conversation #emergence { bottom:calc(var(--overlay-input-height) + 28px)!important; }
+body[data-input=true][data-form=folded][data-eyra-placement] #bottom-bar { left:16px; }
+/* B019: bottom-aligned when short, but an overflowing reply stays scrollable to its first line. */
+body[data-form=folded][data-eyra-placement] #screen #conversation #answer-stage { justify-content:safe flex-end; }
+/* B020: this view is always short; only a short main window hides the reply while typing. */
+body.composer-open[data-short-window=false][data-form=folded] #screen #conversation #answer-stage { opacity:1!important;pointer-events:auto!important; }
+/* B033: this native layer cannot blur the page beneath it; the open input gets its own dark backing so a draft never reads through page text. */
+body.composer-open[data-form=folded][data-eyra-placement]:not([data-program-agent=true]) #bottom-bar #composer:not([hidden]) { display:grid!important;background:rgba(13,15,21,.94)!important;border-radius:16px!important;padding-left:12px!important;padding-right:6px!important; }
+/* O011: a reply shown over another page gets the same backing; page text never reads through it. */
+body[data-form=folded][data-eyra-placement] #screen #conversation #answer-stage:not([hidden]) { background:rgba(13,15,21,.94);border-radius:16px;padding:8px 14px;box-sizing:border-box; }
+body #overlay-error { position:absolute;inset:0 12px auto;margin:0; }
+body #sub-overlay { position:absolute;left:16px;right:16px;display:flex;align-items:flex-start;gap:12px;height:var(--fold-ring);--eyra-avatar:var(--fold-ring);--thought-height:calc(var(--fold-ring) - 30px); }
+body #sub-overlay .sub-overlay-main { min-width:0;flex:1;max-height:100%;display:flex;flex-direction:column;padding-top:5px;box-sizing:border-box; }
+body #sub-overlay .chat-name { margin:0 0 3px;font-size:12px;line-height:1.4;color:#c4b5f0; }
+body #sub-overlay .chat-text { min-height:0;overflow:auto;scrollbar-width:none;font:13px/1.5 var(--os-assistant-font,sans-serif);color:var(--ui-text-2); }
+body #sub-overlay .role-face { font-size:20px; }
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after { animation:none!important;transition:none!important; }
+/* 其他页面的浮层：光圈旁放思考和正文，样式跟首页工作时一样；背板保证页面文字不透上来。 */
+body[data-caption=true][data-form=folded][data-eyra-placement] #screen #conversation #answer-stage { align-self:center!important;width:auto!important;max-width:min(400px,calc(100vw - var(--fold-ring) - 44px))!important;max-height:var(--fold-ring)!important;overflow:hidden!important;padding:8px 12px!important;background:var(--ui-glass)!important;border:1px solid var(--ui-edge)!important;border-radius:var(--ui-radius-menu)!important;box-shadow:var(--glass-shadow)!important;mask-image:none!important;translate:none!important;opacity:1!important; }
+body[data-caption=true] #screen #voice { font-size:12px;line-height:1.5;white-space:pre-wrap;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;max-height:max(18px,calc(var(--fold-ring) - 40px))!important;overflow:hidden!important; }
+body[data-caption=true][data-short-window=true] #screen #voice { -webkit-line-clamp:1; }
+
+/* Native transparency uses alpha; backdrop blur cannot cross WebContents. */
+body .ui-feedback { background:var(--ui-glass); backdrop-filter:none; }

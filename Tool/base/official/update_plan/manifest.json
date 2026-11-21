@@ -1,0 +1,106 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.update_plan",
+  "kind": "tool",
+  "name": "持久计划",
+  "summary": "计划版本、依赖、验收与完整回执",
+  "version": "1.0.2",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/view.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "adapter.go": {
+      "sha256": "1cf2115ad55849031332aff4f72dfd8bc0bd70f8cc4cfea16f58bba017e8ac4a",
+      "size": 5594
+    },
+    "contract/types.go": {
+      "sha256": "05a68a016a839c4e45ce1bc2d5828e178a8d3775b6dca5095ae23858392fb11d",
+      "size": 6668
+    },
+    "definition.go": {
+      "sha256": "949305f12bdeec50b4cf41c51b9ff22cbe87e18a8943c5d572ab66edbed9af0d",
+      "size": 3221
+    },
+    "dependencies.go": {
+      "sha256": "8fe73603f7b69369f05a40f2f91f230d4dce58dfd5ee1fb8ee0c83c48d680a0e",
+      "size": 1463
+    },
+    "manual.txt": {
+      "sha256": "ceac024b526450d75957f2bfaf518e1663acf882ddb59e326903e475025c7178",
+      "size": 3995
+    },
+    "native.json": {
+      "sha256": "f3010abf086648302c38b5db91cb86cba27d18708019a82c548b92afb5901153",
+      "size": 102
+    },
+    "plan.go": {
+      "sha256": "d695b1b84abbf6d5a31e0172ae54955f799d10156118271241a2047513347cbd",
+      "size": 16768
+    },
+    "presentation/card.css": {
+      "sha256": "d482e3ae5d1360e0085f0a8973fc5a660ff51a42f3770d0e35dffaaf8fd64fa7",
+      "size": 2477
+    },
+    "presentation/desktop.css": {
+      "sha256": "5512745a2d819958f46d073edbcecf3ab5ac01b5d7626045c5e681284ad6cd40",
+      "size": 2995
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "e06e1d560fb9f28efb2d8deeb9af5f8798ec9f8f2a1bf705856bbd99fd67c888",
+      "size": 11613
+    },
+    "presentation/model.mjs": {
+      "sha256": "29c8165452ffb7e731df128a7fbb3c4318519383dd9ee19226e7db838353b706",
+      "size": 483
+    },
+    "presentation/text/view.go": {
+      "sha256": "9ab856bd21df7f1037387e2b78532f5d7ca75108ef3385138d30c769dca8b7fd",
+      "size": 1062
+    },
+    "README.md": {
+      "sha256": "1786a85407ccb04480759be4fcf1d24ca49217d746401665f0394ab26713ca00",
+      "size": 1157
+    },
+    "snapshot.go": {
+      "sha256": "8e2efd26d98142b05cc07f54466b5a3b2fb895aa2994594fc86a626a629b37b1",
+      "size": 4448
+    },
+    "types.go": {
+      "sha256": "963316197bf6fff80eb26b47a0c823d3e85b308083df7bc01b764098285ba7b9",
+      "size": 1135
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "aieyra.tool/1",
+  "executor": "javascript/1",
+  "name": "statistics",
+  "description": "数字统计示例",
+  "entry": "run.js",
+  "input": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "values": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "required": [
+      "values"
+    ]
+  },
+  "capabilities": []
+}

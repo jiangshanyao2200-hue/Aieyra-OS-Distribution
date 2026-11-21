@@ -1,0 +1,14 @@
+<!-- @file-map:start
+文件: link/desktop/ui/login.html
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: link/desktop/ui/login.cjs, link/desktop/ui/os-foundation.css, link/desktop/ui/workspace.css, link/desktop/ui/workspace.mjs
+上游: link/desktop/login-window.cjs
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  header-1 | element
+  script-2 | element
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end -->
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"><meta name="viewport" content="width=device-width,initial-scale=1"><title>New API 登录</title><link rel="stylesheet" href="os-foundation.css"><link rel="stylesheet" href="workspace.css"></head><body class="login-window"><header class="titlebar"><img class="brand-icon" src="halo.svg" alt=""><strong>New API 登录</strong><div class="window-actions"><button data-window="minimize" aria-label="最小化"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5h10"/></svg></button><button data-window="close" aria-label="关闭"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></div></header><script src="login.cjs"></script></body></html>

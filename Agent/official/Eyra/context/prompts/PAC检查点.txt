@@ -1,0 +1,2 @@
+较早的完整消息已可靠封存为PAC。按pac_id用memory packet/original回查；exact_plan_state与last_user_exact仍保留当前约束。recent_user_exact 是用户最近发过的原话，从旧到新，理解用户时以原话为准。摘要不能将阻塞或待办变成完成。
+

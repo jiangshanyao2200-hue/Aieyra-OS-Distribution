@@ -1,0 +1,228 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "dist/index.html",
+    "native": "workspace",
+    "navigation": {
+      "tab": "dock-workspace",
+      "host": "surface",
+      "background": "sleep",
+      "order": 6
+    }
+  },
+  "operations": [
+    {
+      "id": "help",
+      "description": "省略name列出全部画布工具；name指定工具后返回参数schema。生图、批次、工作流、联系表及知识能力统一在此发现。"
+    },
+    {
+      "id": "projects",
+      "description": "读取当前画布。"
+    },
+    {
+      "id": "context",
+      "description": "读取明确对象ID及当前修订。"
+    },
+    {
+      "id": "projects.list",
+      "description": "读取当前画布（Workspace 只有一个画布）。"
+    },
+    {
+      "id": "projects.inspect",
+      "description": "读取对象详情和修订。"
+    },
+    {
+      "id": "observe",
+      "description": "观察当前画布显示、通知与错误。"
+    },
+    {
+      "id": "open_panel",
+      "description": "通过 OS 共同入口打开画布 Agent 对话；旧侧栏已退役。"
+    },
+    {
+      "id": "projects.create",
+      "description": "确保唯一画布存在：已有时返回它，没有时创建。"
+    },
+    {
+      "id": "projects.flush",
+      "description": "保存当前项目。"
+    },
+    {
+      "id": "nodes.create",
+      "description": "创建需求便签或容器。"
+    },
+    {
+      "id": "nodes.update",
+      "description": "按 expected 原值修改节点字段，拒绝覆盖用户新编辑。"
+    },
+    {
+      "id": "nodes.style",
+      "description": "按 expected 原值修改节点样式。"
+    },
+    {
+      "id": "images.context",
+      "description": "读取图像任务的节点选区与画布修订。"
+    },
+    {
+      "id": "images.actions",
+      "description": "使用images.context返回的canvasRevision提交原版画布RuntimeAction数组。"
+    },
+    {
+      "id": "images.import",
+      "description": "按画布修订导入素材。"
+    },
+    {
+      "id": "images.locate",
+      "description": "定位已有图片节点。"
+    },
+    {
+      "id": "annotations.read",
+      "description": "读取图像标记。"
+    },
+    {
+      "id": "annotations.preview",
+      "description": "生成标记预览。"
+    },
+    {
+      "id": "database.use",
+      "description": "将素材库引用加入画布。"
+    },
+    {
+      "id": "documents.mount",
+      "description": "将文档挂载到画布。"
+    },
+    {
+      "id": "images.generate",
+      "description": "后台生成或编辑并保存到原版画布。input为单图或多图参数；立即返回jobId，images.status核对结果；request_id重试必须保持原参数。"
+    },
+    {
+      "id": "images.cancel",
+      "description": "停止原图片任务，保留已返回的成果。"
+    },
+    {
+      "id": "images.receipts",
+      "description": "读取生成回执与原产物；不重发。"
+    },
+    {
+      "id": "images.recover",
+      "description": "从原批次恢复已生成素材，不重发未知付费请求。"
+    },
+    {
+      "id": "knowledge.list",
+      "description": "读取画布Agent四层提示词与知识目录。"
+    },
+    {
+      "id": "knowledge.read",
+      "description": "按id读取知识正文。"
+    },
+    {
+      "id": "knowledge.update",
+      "description": "以revision保存知识文档或四层提示词。"
+    },
+    {
+      "id": "workspace.observe",
+      "description": "观察当前画布、项目与选区。"
+    },
+    {
+      "id": "workspace.open_panel",
+      "description": "打开画布侧栏；panel为matrix、database或prompts。"
+    },
+    {
+      "id": "documents.manage",
+      "description": "画布文档list/read/create/import/edit/patch/annotate/restore/metadata/sheet/delete。参数action、projectId、id、title、text、format；修改带expectedRevision，patches带oldText/text及可选blockId/start/end。文档自动挂载画布。"
+    },
+    {
+      "id": "documents.export",
+      "description": "按projectId、id、expectedRevision、format导出真实txt/md/html/csv/tsv/json/docx/xlsx/pptx/pdf；结果返回路径和SHA。"
+    },
+    {
+      "id": "documents.analyze",
+      "description": "对表格文档执行summary/group/sort/filter/finance；参数projectId、id、expectedRevision、operation、column及groupBy/compare/value/discountRate/periodsPerYear；saveAs保存报表。"
+    },
+    {
+      "id": "database.manage",
+      "description": "素材数据库list/read/save/use/delete。参数action、projectId、id、name、category、descriptor、summary、tags、paths、files；更新带recordRevision，use回填画布。"
+    },
+    {
+      "id": "settings.read",
+      "description": "读取当前画布公开视觉和交互设置，模型由OS权威接口提供。"
+    },
+    {
+      "id": "settings.update",
+      "description": "以patch更新画布视觉和交互设置；不保存独立模型或密钥。"
+    },
+    {
+      "id": "storage.status",
+      "description": "读取当前画布项目存储位置与状态。"
+    },
+    {
+      "id": "images.batch",
+      "description": "复用原版持久调度器：1–1000张或continuous持续出图，variants轮换单图方案，并发1–6；暂停等待在途回执，恢复不重发未知请求，连续每100张保存一组。"
+    },
+    {
+      "id": "images.status",
+      "description": "查询已受理图片任务与画布保存回执。"
+    },
+    {
+      "id": "images.wait",
+      "description": "等待原图片任务，最多25秒，不重发。"
+    },
+    {
+      "id": "goals.manage",
+      "description": "管理所属项目的持续目标、固定原图、历轮成果和反馈。生成时携带goalId及刚读取的goalRevision。"
+    },
+    {
+      "id": "canvas.workflow",
+      "description": "原版画布工作流：节点查找、需求便签、关系、定位、更新、删除及继续绘图。"
+    },
+    {
+      "id": "canvas.experience",
+      "description": "读取、追加、替换或整理本项目绘图经验；替换与整理需要expectedRevision，原版本留档。"
+    },
+    {
+      "id": "images.view",
+      "description": "查看实际单图像素，经OS共同图片输入接口返回；支持high/original。"
+    },
+    {
+      "id": "images.view_many",
+      "description": "按原版顺序生成带编号联系表并返回实际像素，每页最多40图；nextOffset继续查看。"
+    },
+    {
+      "id": "videos.list",
+      "description": "读取当前画布的视频素材、剪辑和导出任务，并恢复尚未落画布的已完成成果。"
+    },
+    {
+      "id": "videos.import",
+      "description": "复制本地视频进入画布素材库，检查实际媒体并落画布，原文件保持不变。"
+    },
+    {
+      "id": "videos.attach",
+      "description": "将已有视频素材重新放入画布。"
+    },
+    {
+      "id": "videos.create",
+      "description": "创建剪辑：片段按数组顺序播放，可裁剪起止时间。空片段可保存草稿，导出前需添加。"
+    },
+    {
+      "id": "videos.update",
+      "description": "按原修订更新剪辑，冲突保留已保存版本。"
+    },
+    {
+      "id": "videos.export",
+      "description": "导出指定修订为 MP4，requestId 幂等，立即返回本地任务。不会重新启动已完成或取消的同号任务。"
+    },
+    {
+      "id": "videos.status",
+      "description": "读取本地导出进度与真实成果，完成时落画布。"
+    },
+    {
+      "id": "videos.cancel",
+      "description": "取消当前本地导出并保留原素材与剪辑。"
+    },
+    {
+      "id": "videos.task",
+      "description": "调用 Workspace 专员自己的 video_gen 任务。create 准备、submit 付费提交、status/list 本地读取、query 查询、recover 读原回执、download 取回成果并落画布。未知提交不得换号重试。"
+    }
+  ]
+}

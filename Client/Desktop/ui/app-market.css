@@ -1,0 +1,27 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .mk-search; .mk-tools; .mk-more; .mk-grid; .mk-card; .mk-card:hover; .mk-card:active; @keyframes mk-rise; .mk-card h3; .mk-card p; .mk-card footer; .mk-card footer span:last-child; .mk-state; .mk-more; .mk-skeleton; @keyframes mk-shimmer
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/app-market.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import url('./package-details.css');
+.mk-search { flex:0 1 240px; min-width:120px; } .mk-search .field { min-height:32px; border-radius:999px; }
+.mk-tools { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+.mk-more { margin-top:18px; }
+.mk-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; }
+.mk-card { position:relative; display:grid; grid-template-columns:48px minmax(0,1fr); gap:6px 14px; align-content:start; min-width:0; padding:16px; border:0; border-radius:18px; background:#ffffff08; box-shadow:var(--ui-edge); color:inherit; text-align:left; backdrop-filter:blur(18px); content-visibility:auto; contain-intrinsic-size:auto 128px; opacity:0; animation:mk-rise var(--ui-move) var(--ui-ease) forwards; animation-delay:calc(var(--i,0) * 22ms); transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease),transform var(--ui-fast) var(--ui-ease); }
+.mk-card:hover { background:#ffffff0f; box-shadow:var(--ui-edge-hi); transform:translateY(-2px); }
+.mk-card:active { transform:translateY(0) scale(.99); }
+@keyframes mk-rise { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+.mk-card h3 { margin:0; overflow:hidden; font-size:14px; font-weight:500; line-height:1.4; text-overflow:ellipsis; white-space:nowrap; }
+.mk-card p { display:-webkit-box; margin:0; overflow:hidden; color:var(--ui-text-2); font-size:12px; line-height:1.55; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
+.mk-card footer { grid-column:1 / -1; display:flex; align-items:center; gap:8px; margin-top:6px; color:var(--ui-text-3); font-size:11px; font-variant-numeric:tabular-nums; }
+.mk-card footer span:last-child { margin-left:auto; }
+.mk-state { margin:12vh 0 0; color:var(--ui-text-3); text-align:center; font-size:14px; animation:mk-rise var(--ui-enter) var(--ui-ease); }
+.mk-more { display:flex; justify-content:center; }
+.mk-skeleton { min-height:128px; border-radius:18px; background:linear-gradient(100deg,#ffffff06 30%,#ffffff10 50%,#ffffff06 70%) 0 0/300% 100%; animation:mk-shimmer 1.4s linear infinite; }
+@keyframes mk-shimmer { to { background-position:-300% 0; } }

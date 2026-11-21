@@ -1,0 +1,19 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Halo/official/AGENTS.md | ring 3
+ * Chains: module-local; query impact before editing
+ * Regions: .role-ring; .role-ring .role-face; .role-ring:not([data-state=idle]) .role-face; body #onboarding #avatar-eyra.halo-surface; body #onboarding #avatar-eyra.halo-surface img; body #onboarding #avatar-eyra.halo-surface:not([data-state=idle]) img
+ * Impact: python -B scripts/code-atlas.py show Halo/official/identity.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import url('./instrument.css');
+/* Identity geometry only. Every role consumes the complete Halo instrument. */
+.role-ring { position:relative;display:grid;grid-template:minmax(0,1fr) / minmax(0,1fr);place-items:center;justify-self:center;flex:none;aspect-ratio:1;min-width:0;min-height:0;width:var(--eyra-avatar,80px);height:var(--eyra-avatar,80px);padding:0!important;border:0!important;border-radius:50%;background:transparent!important;color:var(--eyra-light); }
+.role-ring .role-face { position:relative;z-index:1;width:round(70%,2px);height:round(70%,2px);border-radius:50%;object-fit:cover;display:grid;place-items:center;font-size:clamp(12px,1.6vw,23px);transition:opacity var(--ui-enter,240ms) var(--ui-ease,ease); }
+.role-ring:not([data-state=idle]) .role-face { opacity:0; }
+body #onboarding #avatar-eyra.halo-surface { box-shadow:none; }
+/* The host owns preview media geometry; Halo owns state transitions. */
+body #onboarding #avatar-eyra.halo-surface img { transition:opacity var(--ui-enter,240ms) var(--ui-ease,ease); }
+body #onboarding #avatar-eyra.halo-surface:not([data-state=idle]) img { opacity:0; }

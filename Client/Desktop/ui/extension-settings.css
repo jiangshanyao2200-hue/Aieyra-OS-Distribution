@@ -1,0 +1,16 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .extension-package-list; .extension-package; .extension-package:hover; .extension-package .link-name; .extension-package .link-control
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/extension-settings.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import url('./package-details.css');
+.extension-package-list { display:grid; gap:4px; margin-top:16px; }
+.extension-package { width:100%; text-align:left; background:transparent; border:0; border-radius:var(--ui-radius-control); }
+.extension-package:hover { background:var(--ui-control-hover); }
+.extension-package .link-name { overflow:hidden; text-overflow:ellipsis; }
+.extension-package .link-control { flex:0 0 auto; color:var(--ui-text-2); }

@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "artifactKinds": [
+    "outline",
+    "character",
+    "source-document",
+    "chapter",
+    "review",
+    "document"
+  ],
+  "templates": [
+    {
+      "id": "general",
+      "label": "通用写作",
+      "detail": "文章、散文、说明与自由体裁",
+      "placeholder": "例如：品牌年度内容计划",
+      "requestPlaceholder": "例如：为新产品发布写一份面向合作伙伴的说明稿，语气专业克制。",
+      "canvasRoles": ["writing-request", "outline", "character-list", "chapter", "review", "document"],
+      "emptyDescription": "先创建结构大纲、可选主体信息或导入文档。这里会显示可选择、可修订的真实正文。",
+      "agentWelcomeTerms": ["目标", "资料", "结构"],
+      "agentWelcome": "目标、资料和结构交给 Agent；选中正文可续写、审阅或导出。",
+      "workflowPath": ["目标与素材", "正文单元", "审阅校订", "交付文稿"],
+      "stages": ["1 · 目标与素材", "2 · 正文写作", "3 · 审阅校订", "4 · 交付文稿"],
+      "overlay": "模板：通用写作。用途：适配未细分的文章、长文与综合写作任务。结构：先明确受众与交付目标，再按大纲→正文单元→审稿→成稿推进。质量边界：保持逻辑、语气和术语一致；事实、引文与数据必须来自用户或可核验资料，不得补造。",
+      "kinds": {
+        "outline": {"label": "结构大纲", "short": "纲", "description": "目标、受众、结构与交付约束", "text": "# 结构大纲\n\n## 写作目标\n待完善\n\n## 受众与约束\n待完善\n\n## 内容结构\n1. 第一部分"},
+        "character": {"label": "主体信息", "short": "主", "description": "可选：人物、对象、立场与关键术语", "text": "# 主体信息\n\n对象 / 人物：\n\n立场与目标：\n\n关系、术语与约束："},
+        "source-document": {"label": "资料", "short": "资", "description": "受控 DOCX / TXT / Markdown 来源", "text": "# 资料摘录\n\n粘贴资料，或使用“导入文档”。"},
+        "chapter": {"label": "正文单元", "short": "文", "description": "按结构维护的段落、小节或内容模块", "text": "# 正文单元\n\n在这里开始写作。"},
+        "review": {"label": "审阅记录", "short": "审", "description": "事实、结构、一致性与风格检查", "text": "# 审阅记录\n\n## 事实与一致性\n待检查\n\n## 待修改项\n待整理"},
+        "document": {"label": "交付文稿", "short": "稿", "description": "可导出的完整汇总文档", "text": "# 交付文稿\n\n在这里汇总已审阅的正文单元。"}
+      }
+    },
+    {
+      "id": "article",
+      "label": "文章 / 散文",
+      "detail": "主题、结构、段落与修订",
+      "placeholder": "例如：城市与记忆随笔",
+      "requestPlaceholder": "例如：写一篇关于城市与记忆的散文，面向普通读者，语言克制而有画面感。",
+      "canvasRoles": ["writing-request", "outline", "character-list", "chapter", "review", "document"],
+      "emptyDescription": "先创建文章提纲、可选叙述主体或导入素材。正文区用于逐段选择、写作与修订。",
+      "agentWelcomeTerms": ["主题", "段落", "文章"],
+      "agentWelcome": "主题、段落写文章；选中正文可续写或审阅。",
+      "workflowPath": ["选题与素材", "段落 / 小节", "编辑审阅", "完整文章"],
+      "stages": ["1 · 选题与素材", "2 · 段落写作", "3 · 编辑审阅", "4 · 完整文章"],
+      "overlay": "模板：文章。用途：形成面向明确读者与渠道的观点、说明或叙事文章。结构：主题与立意→段落大纲→正文段落→连贯性审稿→成稿。质量边界：中心明确、段落各有职责、过渡自然；不得用空泛措辞或虚构事实填补证据。",
+      "kinds": {
+        "outline": {"label": "文章提纲", "short": "纲", "description": "主题、读者、立意与段落结构", "text": "# 文章提纲\n\n## 主题与读者\n待完善\n\n## 核心立意\n待完善\n\n## 段落结构\n1. 开篇"},
+        "character": {"label": "叙述主体", "short": "主", "description": "可选：人物、对象、视角与情绪线", "text": "# 叙述主体\n\n对象 / 人物：\n\n叙述视角：\n\n情绪与关系线："},
+        "source-document": {"label": "资料", "short": "资", "description": "受控 DOCX / TXT / Markdown 来源", "text": "# 资料摘录\n\n粘贴资料，或使用“导入文档”。"},
+        "chapter": {"label": "段落 / 小节", "short": "段", "description": "可选择、可修订的文章正文单元", "text": "# 新段落 / 小节\n\n在这里展开主题。"},
+        "review": {"label": "编辑审阅", "short": "审", "description": "立意、节奏、连贯性与语言检查", "text": "# 编辑审阅\n\n## 立意与连贯性\n待检查\n\n## 语言与节奏\n待检查"},
+        "document": {"label": "完整文章", "short": "文", "description": "可导出的文章或散文成稿", "text": "# 完整文章\n\n在这里汇总已审阅的段落与小节。"}
+      }
+    },
+    {
+      "id": "academic",
+      "label": "论文 / 研究",
+      "detail": "论点、材料、章节与审稿",
+      "placeholder": "例如：数字人文研究论文",
+      "requestPlaceholder": "例如：围绕数字人文中的文本分析方法形成论文，严格标记待核验的文献与论据。",
+      "canvasRoles": ["writing-request", "outline", "character-list", "chapter", "review", "document"],
+      "emptyDescription": "先创建研究提纲、可选研究对象或导入文献笔记。正文区用于逐小节论证与 revision。",
+      "agentWelcomeTerms": ["研究问题", "论点", "来源"],
+      "agentWelcome": "研究问题、论点、来源写论文；选中小节可审校。",
+      "workflowPath": ["研究设计与资料", "论证小节", "学术审校", "论文稿"],
+      "stages": ["1 · 研究设计与资料", "2 · 论证写作", "3 · 学术审校", "4 · 论文稿"],
+      "overlay": "模板：论文与学术写作。用途：围绕研究问题形成可审查的论证文本。结构：问题与范围→论点或方法→证据与论证单元→局限审查→结论。质量边界：严格区分资料事实、作者推论与待验证假设；不得虚构文献、引文、数据、实验或引用格式。",
+      "kinds": {
+        "outline": {"label": "研究提纲", "short": "纲", "description": "研究问题、核心论点、方法与论文结构", "text": "# 研究提纲\n\n## 研究问题\n待完善\n\n## 核心论点与方法\n待完善\n\n## 论文结构\n1. 引言"},
+        "character": {"label": "研究对象", "short": "研", "description": "可选：研究主体、样本、概念与变量", "text": "# 研究对象\n\n研究主体 / 样本：\n\n核心概念与变量：\n\n范围与限制："},
+        "source-document": {"label": "来源文献", "short": "献", "description": "项目内受控的文献与笔记", "text": "# 来源文献笔记\n\n来源：\n\n核心观点与可引用证据："},
+        "chapter": {"label": "论证小节", "short": "论", "description": "包含论点、证据与分析的正文单元", "text": "# 论证小节\n\n## 论点\n待完善\n\n## 证据与分析\n待完善"},
+        "review": {"label": "学术审校", "short": "审", "description": "证据、引文、逻辑与反论证检查", "text": "# 学术审校\n\n## 证据与引文\n待核查\n\n## 逻辑、反论证与限制\n待核查"},
+        "document": {"label": "论文稿", "short": "稿", "description": "可导出的完整论文或研究稿", "text": "# 论文稿\n\n## 摘要\n待完善\n\n## 正文\n汇总已审阅的论证小节。"}
+      }
+    },
+    {
+      "id": "fiction",
+      "label": "小说 / 叙事",
+      "detail": "大纲、人物、章节与成稿",
+      "placeholder": "例如：长篇小说第一卷",
+      "requestPlaceholder": "例如：写一部长篇悬疑小说，主角在失忆后追查自己的过去。",
+      "canvasRoles": ["writing-request", "world-building", "outline", "character-list", "character-state", "chapter", "review", "document"],
+      "emptyDescription": "先创建故事大纲、人物卡或导入参考资料。正文区用于逐章写作、审稿与修订。",
+      "agentWelcomeTerms": ["故事大纲", "人物", "章节"],
+      "agentWelcome": "故事大纲、人物、章节写作；选中正文可续写或审稿。",
+      "workflowPath": ["设定与资料", "章节", "叙事审稿", "小说成稿"],
+      "stages": ["1 · 设定与资料", "2 · 章节写作", "3 · 叙事审稿", "4 · 小说成稿"],
+      "overlay": "模板：小说与叙事写作。用途：在同一无限画布上发展需求、世界设定、人物、情节、章节状态与小说成稿。结构：写作需求→故事设定/角色列表/故事大纲→章节链；每章可派生角色章节状态并作为后续章节上下文→连续性与节奏审稿→成稿。创建时用 canvasRole 明确节点语义。质量边界：保持人物动机、时间线、视角和设定一致；不得无依据改写用户已确定的核心设定。",
+      "kinds": {
+        "outline": {"label": "故事大纲", "short": "纲", "description": "主题、情节结构、世界观与章节约束", "text": "# 故事大纲\n\n## 主题与核心冲突\n待完善\n\n## 章节结构\n1. 第一章"},
+        "character": {"label": "人物卡", "short": "人", "description": "人物关系、动机、弧光与时间线", "text": "# 人物卡\n\n姓名：\n\n动机与弧光：\n\n关系与时间线："},
+        "source-document": {"label": "资料", "short": "资", "description": "受控 DOCX / TXT / Markdown 来源", "text": "# 资料摘录\n\n粘贴资料，或使用“导入文档”。"},
+        "chapter": {"label": "章节", "short": "章", "description": "按段落维护的小说正文", "text": "# 新章节\n\n在这里开始叙事。"},
+        "review": {"label": "叙事审稿", "short": "审", "description": "情节、人物、时间线与文风检查", "text": "# 叙事审稿\n\n## 情节与人物一致性\n待检查\n\n## 时间线与文风\n待检查"},
+        "document": {"label": "小说成稿", "short": "稿", "description": "可导出的完整叙事文稿", "text": "# 小说成稿\n\n在这里汇总已审阅的章节。"}
+      }
+    },
+    {
+      "id": "plan",
+      "label": "计划 / 方案",
+      "detail": "目标、约束、模块与交付",
+      "placeholder": "例如：产品发布执行方案",
+      "requestPlaceholder": "例如：为产品发布制定执行方案，明确里程碑、负责人、风险与验收标准。",
+      "canvasRoles": ["writing-request", "outline", "character-list", "chapter", "review", "document"],
+      "emptyDescription": "先创建方案框架、可选干系人信息或导入现有资料。正文区用于逐模块计划、评审与 revision。",
+      "agentWelcomeTerms": ["目标", "里程碑", "风险"],
+      "agentWelcome": "目标、里程碑、风险写计划；选中模块可补写或评审。",
+      "workflowPath": ["目标与约束", "执行模块", "方案评审", "完整方案"],
+      "stages": ["1 · 目标与约束", "2 · 执行模块", "3 · 方案评审", "4 · 完整方案"],
+      "overlay": "模板：计划与方案。用途：把目标转为可执行、可评审的计划或方案。结构：背景、目标与约束→任务模块与里程碑→资源、责任与风险→验收标准。质量边界：行动、负责人、时间和指标应明确且相互一致；未提供的预算、承诺或组织事实必须标为待确认。",
+      "kinds": {
+        "outline": {"label": "方案框架", "short": "纲", "description": "目标、范围、里程碑与验收结构", "text": "# 方案框架\n\n## 目标与范围\n待完善\n\n## 约束与资源\n待完善\n\n## 里程碑\n1. 第一阶段"},
+        "character": {"label": "干系人 / 角色", "short": "角", "description": "可选：责任人、协作者、对象与决策关系", "text": "# 干系人 / 角色\n\n角色与责任：\n\n协作 / 决策关系：\n\n需求与约束："},
+        "source-document": {"label": "资料", "short": "资", "description": "受控 DOCX / TXT / Markdown 来源", "text": "# 资料摘录\n\n粘贴资料，或使用“导入文档”。"},
+        "chapter": {"label": "执行模块", "short": "项", "description": "行动、负责人、时点与验收标准", "text": "# 执行模块\n\n## 行动与负责人\n待完善\n\n## 时点与验收标准\n待完善"},
+        "review": {"label": "方案评审", "short": "审", "description": "可行性、风险、依赖与资源检查", "text": "# 方案评审\n\n## 可行性与依赖\n待检查\n\n## 风险与应对\n待检查"},
+        "document": {"label": "完整方案", "short": "案", "description": "可导出的计划或执行方案", "text": "# 完整方案\n\n在这里汇总已审阅的执行模块。"}
+      }
+    },
+    {
+      "id": "script",
+      "label": "脚本 / 文案",
+      "detail": "场次、节奏、对白与版本",
+      "placeholder": "例如：品牌短片脚本",
+      "requestPlaceholder": "例如：为 90 秒品牌短片写脚本，包含场景、画面、旁白与节奏。",
+      "canvasRoles": ["writing-request", "outline", "character-list", "chapter", "review", "document"],
+      "emptyDescription": "先创建脚本结构、可选角色 / 受众信息或导入素材。正文区用于逐场次、逐文案段修订。",
+      "agentWelcomeTerms": ["传播目标", "场次", "文案"],
+      "agentWelcome": "传播目标、场次、文案写脚本；选中内容可续写或审校。",
+      "workflowPath": ["创意与角色", "场次 / 文案段", "节奏审校", "定稿脚本"],
+      "stages": ["1 · 创意与角色", "2 · 场次与文案", "3 · 节奏审校", "4 · 定稿脚本"],
+      "overlay": "模板：脚本与文案。用途：为明确媒介、受众和时长形成可执行的脚本或传播文案。结构：目标与信息层级→场次、节拍或文案模块→对白、旁白或行动→节奏与口吻审稿。质量边界：格式、语气、时长和渠道约束一致；不得把创作稿声称为已拍摄、已发布或已获授权。",
+      "kinds": {
+        "outline": {"label": "脚本结构", "short": "纲", "description": "传播目标、受众、节奏与场次结构", "text": "# 脚本结构\n\n## 目标与受众\n待完善\n\n## 调性与核心信息\n待完善\n\n## 场次 / 文案结构\n1. 开场"},
+        "character": {"label": "角色 / 受众", "short": "角", "description": "可选：角色动机、受众画像、口吻与关系", "text": "# 角色 / 受众\n\n角色或受众：\n\n动机与口吻：\n\n关系与禁忌："},
+        "source-document": {"label": "资料", "short": "资", "description": "受控 DOCX / TXT / Markdown 来源", "text": "# 资料摘录\n\n粘贴资料，或使用“导入文档”。"},
+        "chapter": {"label": "场次 / 文案段", "short": "场", "description": "镜头、动作、对白或独立文案单元", "text": "# 场次 / 文案段\n\n画面 / 动作：\n\n对白 / 文案："},
+        "review": {"label": "节奏审校", "short": "审", "description": "节奏、对白、信息层级与品牌检查", "text": "# 节奏审校\n\n## 节奏与对白\n待检查\n\n## 信息层级与品牌约束\n待检查"},
+        "document": {"label": "定稿脚本", "short": "稿", "description": "可导出的完整脚本或文案", "text": "# 定稿脚本\n\n在这里汇总已审阅的场次或文案段。"}
+      }
+    },
+    {
+      "id": "report",
+      "label": "报告",
+      "detail": "事实、分析、结论与建议",
+      "placeholder": "例如：季度业务复盘报告",
+      "requestPlaceholder": "例如：根据项目内资料形成季度业务复盘报告，区分事实、分析、结论与建议。",
+      "canvasRoles": ["writing-request", "outline", "character-list", "chapter", "review", "document"],
+      "emptyDescription": "先创建报告框架、可选分析主体或导入证据资料。正文区用于逐章节分析、复核与 revision。",
+      "agentWelcomeTerms": ["口径", "证据", "结论"],
+      "agentWelcome": "口径、证据、结论写报告；选中章节可补写或复核。",
+      "workflowPath": ["范围与资料", "分析章节", "事实复核", "报告成稿"],
+      "stages": ["1 · 范围与资料", "2 · 分析章节", "3 · 事实复核", "4 · 报告成稿"],
+      "overlay": "模板：报告。用途：基于给定资料形成可追溯的分析、总结或决策报告。结构：范围与口径→事实或数据→分析与发现→结论、建议与局限。质量边界：标清来源、时间、单位以及事实与推断；不得虚构数据、调研、附件或已完成的验证。",
+      "kinds": {
+        "outline": {"label": "报告框架", "short": "纲", "description": "目标、对象、口径、范围与章节结构", "text": "# 报告框架\n\n## 目标与读者\n待完善\n\n## 范围与口径\n待完善\n\n## 章节结构\n1. 摘要"},
+        "character": {"label": "分析主体", "short": "主", "description": "可选：组织、业务、事件、对象与责任关系", "text": "# 分析主体\n\n组织 / 业务 / 事件：\n\n范围与责任关系：\n\n关键口径与术语："},
+        "source-document": {"label": "证据与资料", "short": "证", "description": "项目内受控的事实来源、口径说明与资料", "text": "# 证据与资料\n\n来源：\n\n事实、口径与时间范围："},
+        "chapter": {"label": "分析章节", "short": "析", "description": "事实、分析、结论与建议组成的报告单元", "text": "# 分析章节\n\n## 事实\n待完善\n\n## 分析、结论与建议\n待完善"},
+        "review": {"label": "事实复核", "short": "核", "description": "证据、口径、结论与表达边界检查", "text": "# 事实复核\n\n## 证据与口径\n待核查\n\n## 结论与表达边界\n待核查"},
+        "document": {"label": "报告成稿", "short": "报", "description": "可导出的完整报告", "text": "# 报告成稿\n\n## 执行摘要\n待完善\n\n## 正文\n汇总已复核的分析章节。"}
+      }
+    }
+  ]
+}

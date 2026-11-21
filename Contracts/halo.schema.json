@@ -1,0 +1,278 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "aieyra.halo/1"
+    },
+    "preset": {
+      "const": "classic"
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]{1,32}$"
+          },
+          "shape": {
+            "enum": [
+              "ellipse",
+              "polygon",
+              "polyline"
+            ]
+          },
+          "cx": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "cy": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "rx": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 50
+          },
+          "ry": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 50
+          },
+          "points": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 64,
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "stroke": {
+            "type": "string",
+            "pattern": "^(none|currentColor|#[a-fA-F0-9]{6})$"
+          },
+          "fill": {
+            "type": "string",
+            "pattern": "^(none|currentColor|#[a-fA-F0-9]{6})$"
+          },
+          "width": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 10
+          },
+          "opacity": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "states": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 15,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "boot",
+                "connecting",
+                "compacting",
+                "offline",
+                "thinking",
+                "body",
+                "tool",
+                "preparing",
+                "waiting",
+                "queued",
+                "confirming",
+                "idle",
+                "cancelling",
+                "waiting_user",
+                "error"
+              ]
+            }
+          },
+          "motion": {
+            "type": "object",
+            "properties": {
+              "duration": {
+                "type": "number",
+                "minimum": 600,
+                "maximum": 60000
+              },
+              "easing": {
+                "enum": [
+                  "linear",
+                  "ease-in-out"
+                ]
+              },
+              "frames": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 16,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "offset": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "rotate": {
+                      "type": "number",
+                      "minimum": -720,
+                      "maximum": 720
+                    },
+                    "scale": {
+                      "type": "number",
+                      "minimum": 0.1,
+                      "maximum": 2
+                    },
+                    "x": {
+                      "type": "number",
+                      "minimum": -50,
+                      "maximum": 50
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": -50,
+                      "maximum": 50
+                    },
+                    "opacity": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "offset"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "duration",
+              "easing",
+              "frames"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "shape"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "shape": {
+                  "const": "ellipse"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "cx",
+                "cy",
+                "rx",
+                "ry"
+              ],
+              "not": {
+                "required": [
+                  "points"
+                ]
+              }
+            },
+            "else": {
+              "required": [
+                "points"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "cx"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "cy"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "rx"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "ry"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "shape": {
+                  "const": "polygon"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "points": {
+                  "minItems": 3
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Aieyra Halo 1.0",
+  "oneOf": [
+    {
+      "required": [
+        "preset"
+      ],
+      "not": {
+        "required": [
+          "layers"
+        ]
+      }
+    },
+    {
+      "required": [
+        "layers"
+      ],
+      "not": {
+        "required": [
+          "preset"
+        ]
+      }
+    }
+  ]
+}

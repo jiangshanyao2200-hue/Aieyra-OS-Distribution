@@ -1,0 +1,1 @@
+Private input was submitted through the terminal view. Further output capture is disabled for this session to prevent echoed secrets. Use input_state and exit_code; missing output is not evidence of failure. Do not request the secret in chat or retry it.

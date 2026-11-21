@@ -1,0 +1,22 @@
+<!-- @file-map:start
+文件: link/desktop/offline.html
+位置: 二环·桌面能力 | Electron生命周期、权限边界、本机服务、云账号与可诊断桌面模块。
+约束: renderer通过preload白名单进入主进程，禁止开放任意IPC；启动失败先持久取证；关闭须收束服务租约和诊断
+下游: link/desktop/offline.cjs
+上游: link/desktop/main.cjs
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: npm --prefix link/desktop run check, AIDEBUG/startup-review.py
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  style-1 | element
+  script-2 | element
+  main-3 | element
+  retry | element
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end -->
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self'">
+<title>Aieyra 众创 Link</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#101319;color:#e3e6ec;font:16px/1.8 system-ui,sans-serif}main{text-align:center;max-width:440px;padding:32px}img{width:88px;height:88px}h1{font-size:24px;font-weight:500}p{color:#a5adbb}button{font:inherit;padding:9px 28px;border:1px solid #798db5;border-radius:24px;background:#1b263b;color:#fff;cursor:pointer}button:focus-visible{outline:2px solid #9ac5ff;outline-offset:4px}
+</style><script defer src="offline.cjs"></script></head><body><main><img src="icon.png" alt=""><h1>Link 暂时无法启动</h1><p>请保留完整程序目录。若已打开众创 Link，请使用已有窗口。</p><button id="retry">重新启动</button></main></body></html>

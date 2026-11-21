@@ -1,0 +1,35 @@
+/* Default plan receipt styles; host placement stays in the client. */
+.plan-steps { list-style: none; padding: 0px; margin: 0px; }
+.plan-steps li { display: flex; gap: 10px; padding: 7px 0px; color: rgb(160, 160, 160); font-size: 0.85rem; line-height: 1.5; }
+.plan-steps .completed { color: rgb(111, 111, 111); }
+.plan-steps .in_progress { color: rgb(240, 240, 240); }
+.task-progress { color: rgb(153, 153, 153); font-size: 0.85rem; margin: 14px 0px; }
+.task-progress summary { cursor: pointer; padding: 9px 0px; }
+.task-progress .message-card { padding: 10px 0px; }
+.plan-heading { display: flex; align-items: center; gap: 16px; font-size: 12px; letter-spacing: 0.04em; color: rgb(170, 170, 170); }
+.plan-count { color: rgb(119, 119, 119); font-variant-numeric: tabular-nums; }
+.plan-objective { margin: 10px 0px 12px; font-size: 14px; line-height: 1.6; color: rgb(221, 221, 221); }
+.task-progress .plan-steps { list-style: none; padding: 0px; margin: 10px 0px 0px; display: grid; gap: 10px; }
+.task-progress .plan-steps li { display: flex; align-items: baseline; gap: 12px; font-size: 13px; line-height: 1.55; color: rgb(133, 133, 133); padding: 0px; border: 0px; background: none; }
+.task-progress .plan-steps li.in_progress { color: rgb(238, 238, 238); }
+.task-progress .plan-steps li.blocked { color: rgb(221, 221, 221); }
+.plan-all { display: none; }
+.step-mark { flex: 0 0 auto; width: 12px; text-align: center; color: rgb(119, 119, 119); }
+.in_progress .step-mark { color: rgb(238, 238, 238); animation: 1.2s ease-in-out 0s infinite normal none running step-breathe; }
+@keyframes step-breathe { 
+  50% { opacity: 0.4; }
+}
+@media (max-width: 900px) {
+.task-progress .plan-steps { gap: 7px; }
+}
+@media (max-height: 620px) {
+.plan-objective { margin: 8px 0px; }
+}
+.plan-phase h4 { margin: 14px 0px 8px; font-size: 13px; font-weight: 600; }
+.step-content { min-width: 0px; overflow-wrap: anywhere; }
+.plan-prior, .step-reason, .step-evidence { display: block; font-size: 12px; color: rgb(136, 136, 136); }
+.plan-prior { margin-bottom: 3px; text-decoration-thickness: 1px; }
+.plan-feedback { font-size: 12px; color: rgb(187, 187, 187); line-height: 1.6; margin: 10px 0px; }
+.task-progress .plan-steps li.completed { color: rgb(119, 119, 119); }
+.plan-heading::-webkit-details-marker { display: none; }
+.plan-current { flex: 1 1 0%; min-width: 0px; overflow: hidden; white-space: nowrap; mask-image: linear-gradient(to right, rgb(0, 0, 0) calc(100% - 20px), transparent); }

@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' aieyra-theme:; img-src aieyra-theme:; base-uri 'none'; form-action 'none'">
+<title>输入</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="ui-foundation.css">
+<style>html,body{height:100%;margin:0;overflow:hidden}form{box-sizing:border-box;display:grid;grid-template-rows:minmax(0,1fr) auto auto;gap:12px;height:100%;padding:18px 20px;app-region:drag}p{margin:0;overflow:auto;white-space:pre-wrap;app-region:no-drag}input,nav{app-region:no-drag}nav{display:flex;justify-content:flex-end;gap:8px}</style></head>
+<body class="ui-native-dialog"><form id="form" role="dialog" aria-describedby="message"><p id="message"></p><input class="ui-dialog-input" id="value" aria-label="输入内容" hidden><nav class="ui-dialog-actions"><button type="button" id="cancel">取消</button><button type="submit" class="ui-primary" id="ok">确定</button></nav></form>
+<script type="module" src="page-dialog.mjs"></script></body></html>

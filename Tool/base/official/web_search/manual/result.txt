@@ -1,0 +1,1 @@
+Results are retrieved source observations, with URLs and a retrieval timestamp; retrieval time is distinct from publication time. A provider cited answer and local snippets are identified separately. Host concurrency and deadlines are bounded. description is the short displayed purpose of the search.

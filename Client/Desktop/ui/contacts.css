@@ -1,0 +1,342 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body; body; body #desktop-dock #dock-sessions; body #desktop-dock #dock-contacts; body #desktop-dock #dock-sessions; body #desktop-dock #dock-sessions::after; #dock-sessions svg path; body.session-drawer-open #dock-sessions .m1; body.session-drawer-open #dock-sessions .m3; .contact-ring; :is(.sd-row,.cp-row,.sd-pick,.gv-pick):focus-visible; .glide; .glide[data-show=true]; .glide[data-jump=true]; .glide:is(:has(~ :focus-visible),:has(~ * :focus-visible)); @layer aieyra-workspace; body:is(.sd-geom,.al-geom) :is(#screen,#os-home,#view-surface); body:is(.sd-geom,.al-geom):not([data-eyra-placement=compact],[data-form=folded]) #bottom-bar; body[data-eyra-placement=compact]:is(.sd-geom,.al-geom):not([data-form=folded]) #bottom-bar; body[data-form=folded][data-eyra-placement]:is(.sd-geom,.al-geom) #bottom-bar; body.session-drawer-open #usage-anchor; @media (max-width:1100px); .session-drawer; .session-drawer[hidden]; body.contacts-module .session-drawer; .sd-list; .sd-row; .sd-row[aria-current=true]::before; .sd-row .role-ring; .sd-row .group-face; .sd-row .role-ring .role-face; .sd-text; .sd-line; body .sd-name; .sd-time; .sd-last; .sd-eyra; .sd-toggle; .sd-toggle svg,.sd-pick-new svg; .sd-toggle[aria-expanded=true] svg; .sd-toggle:is(:hover,:focus-visible); .sd-toggle::before; .sd-sessions; @keyframes sd-expand; .sd-session; .sd-picker; .sd-picker[hidden]; .sd-pick; .sd-picker .glide; .sd-pick .role-ring; .sd-pick > span:last-child; .sd-pick .role-ring .role-face; .sd-pick-new; .sd-pick-new svg; :is(.sd-row,.cp-row,.sd-pick) .role-ring:not([data-state=idle]) .role-face; @keyframes face-work; .contact-bio; .contact-bio[data-show=true]; .contact-bio[hidden]; .contact-bio strong; .contact-bio-tag; .contact-bio p; #contacts-view; #contacts-view[hidden]; .cp-column; .cp-bar; .cp-title; .cp-columns; .cp-section; .cp-section[data-column=sessions]; .cp-section[data-column=people]; .cp-section[data-column=groups]; .cp-section[hidden]; .cp-section-title; .cp-empty; @media(max-width:760px); .cp-search; .cp-search::placeholder; .cp-search:focus; .cp-search::-webkit-search-cancel-button; :is(.cp-icon,.cp-tool); :is(.cp-icon,.cp-tool):is(:hover,:focus-visible); :is(.cp-icon,.cp-tool):active; :is(.cp-icon,.cp-tool) svg; .cp-list; .cp-list .glide; .cp-row; .cp-row .role-ring; .cp-row .group-face; .cp-row .role-ring .role-face; .cp-text; body .cp-name; .cp-desc; .cp-tools; .cp-row:is(:hover,:focus-within) .cp-tools; .cp-tool; .cp-gap; :is(.ce-primary,.ce-secondary); .ce-primary; .ce-primary:hover:not(:disabled); .ce-secondary; .ce-secondary:hover:not(:disabled); :is(.ce-primary,.ce-secondary):active:not(:disabled); :is(.ce-primary,.ce-secondary):disabled; .ce-delete; .ce-delete:is(:hover,:focus-visible); .ce-delete[hidden]; .contact-editor; .contact-editor svg; .ce-shell; .ce-id; .ce-id .ce-close; .ce-face-wrap; .ce-avatar; .ce-avatar .role-ring; .cp-self-face; .cp-self-face img; .ce-avatar .cp-self-face; .contact-editor[data-self=true]; .contact-editor[data-self=true] :is(.ce-bio,.ce-prompt-wrap,.ce-row:has(.ce-model),.ce-tools-row,.ce-row:has(.ce-ring)); .contact-editor .ce-user-color-row[hidden]; .ce-avatar .role-ring .role-face; .ce-avatar-cue; .ce-avatar-cue svg; .ce-avatar:is(:hover,:focus-visible,[data-drop=true]) .ce-avatar-cue; .ce-avatar:focus-visible; .ce-idtext; :is(.ce-name,.ce-bio); .ce-name; .ce-bio; .ce-bio::placeholder; :is(.ce-name,.ce-bio):hover; :is(.ce-name,.ce-bio):focus; .ce-prompt-wrap; .ce-label; .ce-prompt; @media (max-height:560px); .ce-prompt::placeholder; .ce-prompt:focus; .ce-rows; .ce-row; .ce-row[hidden]; .ce-pick; .ce-pick:hover; .ce-pick[data-empty=true]; .ce-pick-text; .ce-pick svg; .ce-pick[aria-expanded=true] svg; .ce-think; .ce-seg; .ce-seg:hover; .ce-seg[aria-checked=true]; .ce-chips; .ce-chip; .ce-add; .ce-add:hover; .ce-add[aria-expanded=true]; .ce-add svg; :is(.ce-pick,.ce-seg,.ce-add,.ce-close):focus-visible; .ce-menu; .ce-menu[hidden]; .ce-menu-viewport; .ce-menu .glide; .ce-option; .contact-editor .ce-option; .ce-option[aria-disabled=true]; .ce-option-text; .ce-option-text b; .ce-option-text small; .ce-option-mark; .ce-option-mark svg; .ce-option-act; .ce-option-act svg; .ce-tool-option:not([aria-disabled=true]) .ce-option-act; .ce-tool-option[aria-selected=false] .ce-option-act svg; .ce-menu[aria-multiselectable=true] .ce-menu-viewport; .ce-option[aria-disabled=true] .ce-option-act; .ce-option[aria-selected=true]:not([aria-disabled=true]) .ce-option-act; .ce-option:not([aria-disabled=true]):hover .ce-option-act; .ce-error; .ce-error[hidden]; .ce-foot; .ce-foot > .ce-error; .contact-editor .ce-shell > .ce-foot; .contact-editor :is(.ce-shell,.ce-name,.ce-bio,.ce-prompt,.ce-option,.ce-seg,.ce-pick,.ce-add,.ce-avatar,.ce-close,.ce-delete,.ce-primary,.ce-secondary):focus-visible; :is(.ce-primary,.ce-secondary):focus-visible; .contact-confirm; .cc-shell; .cc-shell h2; .cc-shell p; .cc-shell .ce-foot; .ce-primary.cc-danger; .ce-primary.cc-danger:hover:not(:disabled); .contact-confirm :is(button):focus-visible; @media (prefers-reduced-motion:reduce); .sd-sessions,:is(.sd-row,.cp-row,.sd-pick) .role-ring .role-face; .contact-bio,.cp-tools,.sd-toggle svg,.ce-pick svg,.ce-add,.ce-avatar-cue,#dock-sessions svg path,body #desktop-dock #dock-sessions; .glide; .cp-search:focus-visible; body.reduce-motion :is(.sd-row,.cp-row,.sd-pick) .role-ring .role-face; body .contact-editor; .contact-editor .ce-id; .contact-editor .ce-name; .contact-editor .ce-prompt-wrap; .contact-editor .ce-rows; .contact-editor .ce-label; .contact-editor .ce-prompt; .contact-editor .ce-shell > .ce-foot; .contact-editor :is(button,input,textarea):focus-visible; @media(max-width:560px),(max-height:560px); .contact-editor .ce-id; .contact-editor .ce-prompt-wrap; .contact-editor .ce-rows,.contact-editor .ce-shell > .ce-foot; .contacts-page .cp-bar .cp-title; .contacts-page .cp-bar .cp-icon; .cp-action-label; @media(max-width:460px); .cp-create:hover,.cp-create:focus-visible; .session-drawer; body #desktop-dock #sd-new; body.session-drawer-open #desktop-dock #sd-new; body #desktop-dock #sd-new[hidden]; @starting-style; @media(prefers-reduced-motion:reduce); .ce-prompt-layer; .ce-tabs; .contact-editor :is(.ce-prompt-wrap,.ce-rows)[hidden]; .ce-prompt-layer; .contact-editor .ce-prompt-wrap; .contact-editor .ce-prompt; body #desktop-dock; body #desktop-dock #sd-new; .contact-editor .ce-prompt; .contact-editor .ce-prompt:is(:hover,:focus); .contact-editor .ce-rows; .contact-editor .ce-row; body.reduce-motion .session-drawer; @media(prefers-reduced-motion:reduce); body:has(.contact-editor:modal) .contacts-page; body:not([data-form=folded]) #screen,body #view-surface,body :is(#bottom-bar,#status-rail,#activity-orbits),body[data-form=folded] #screen #conversation #emergence; body #desktop-dock > :not(#sd-new),body #dock-pinned-apps > button; body.workspace-sliding :is(#screen,#view-surface,#bottom-bar,#session-drawer); body:not([data-eyra-placement=compact],[data-eyra-placement=work],[data-form=folded]) #bottom-bar; body[data-eyra-placement=compact]:not([data-form=folded]) #bottom-bar; body:not([data-form=folded]) #screen,body #view-surface; @layer aieyra-workspace; body:not([data-form=folded]) #screen,body #view-surface; .cp-embedded .cp-name,.cp-embedded .cp-desc; .cp-embedded > .role-ring; .cp-embedded .cp-tools; .contact-editor .ce-shell; .contact-editor .ce-id,.contact-editor .ce-foot; .contact-editor .ce-idtext; .contact-editor .ce-prompt-wrap; .contact-editor .ce-prompt; .contact-editor .ce-rows; .contact-editor .ce-row; .contact-editor .ce-tools-row; .contact-editor .ce-chips; .contact-editor .ce-chip; .contact-editor .ce-add; @media(max-height:560px); .contact-editor .ce-id; .contact-editor .ce-shell > .ce-foot; .contact-editor .ce-prompt-wrap; .contact-editor .ce-rows
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/contacts.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Contacts, session sidebar and profile editor. Shares ui-foundation tokens. */
+/* The OS owns the space left by its drawers; theme layouts own its contents.
+   Important layers have reverse priority, before the theme's slot widths. */
+@layer aieyra-workspace,aieyra-user,aieyra-theme;
+/* Sidebar surfaces are clear by default; Appearance › 版面 › 侧栏透明度 adds a veil. */
+body { --panel-alpha:calc((100 - var(--panel-clear,100)) / 100 * .86); --panel-blur:calc((100 - var(--panel-clear,100)) * .26px); }
+/* Geometry changes once; shared motion interpolates painted surfaces. */
+body { --sd-push:0px; --al-push:0px; --ui-workspace-inset-left:var(--sd-push); --ui-workspace-inset-right:var(--al-push); }
+
+/* ---------- Dock: session menu, then contacts ---------- */
+body #desktop-dock #dock-sessions { order:-2; margin-right:8px; overflow:visible; }
+body #desktop-dock #dock-contacts { order:1; }
+body #desktop-dock #dock-sessions { justify-content:center; padding:0; width:calc(36px * var(--os-scale,1)); transition:color var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease),opacity var(--ui-enter) var(--ui-ease),scale var(--ui-move) var(--ui-ease); }
+body #desktop-dock #dock-sessions::after { content:''; position:absolute; right:-9px; top:10px; bottom:10px; width:1px; background:#ffffff12; }
+
+/* The menu folds into a back arrow: it is now the sidebar's collapse button. */
+#dock-sessions svg path { transform-box:fill-box; transform-origin:0 50%; transition:transform var(--ui-move) var(--ui-ease); }
+body.session-drawer-open #dock-sessions .m1 { transform:translate(0,4.5px) rotate(-45deg) scaleX(.5); }
+body.session-drawer-open #dock-sessions .m3 { transform:translate(0,-4.5px) rotate(45deg) scaleX(.5); }
+
+.contact-ring { --role-tone:214,220,232; }
+/* Rows show focus through the gliding plate, not a hard outline. */
+:is(.sd-row,.cp-row,.sd-pick,.gv-pick):focus-visible { outline:none; }
+
+/* ---------- Gliding hover plate (glide.mjs) ---------- */
+.glide { position:absolute; left:0; top:0; z-index:0; width:0; height:0; border-radius:var(--glide-radius,14px); background:#ffffff0c; box-shadow:inset 0 0 0 1px #ffffff10; opacity:0; pointer-events:none; transition:translate 320ms cubic-bezier(.3,1.14,.4,1),width 320ms cubic-bezier(.3,1.14,.4,1),height 320ms cubic-bezier(.3,1.14,.4,1),opacity var(--ui-fast) var(--ui-ease); }
+.glide[data-show=true] { opacity:1; }
+.glide[data-jump=true] { transition:opacity var(--ui-fast) var(--ui-ease); }
+.glide:is(:has(~ :focus-visible),:has(~ * :focus-visible)) { box-shadow:inset 0 0 0 1px #a9c0ec40; }
+
+/* ---------- Session sidebar: a column the whole interface makes room for ---------- */
+@layer aieyra-workspace {
+body:is(.sd-geom,.al-geom) :is(#screen,#os-home,#view-surface) { left:var(--sd-push)!important; right:auto!important; width:calc(100% - var(--sd-push) - var(--al-push))!important; justify-self:stretch; }
+}
+body:is(.sd-geom,.al-geom):not([data-eyra-placement=compact],[data-form=folded]) #bottom-bar { margin-left:calc((var(--sd-push) - var(--al-push)) / 2); width:min(720px,calc(100vw - 48px - var(--sd-push) - var(--al-push))); }
+body[data-eyra-placement=compact]:is(.sd-geom,.al-geom):not([data-form=folded]) #bottom-bar { left:calc(var(--edge) + var(--sd-push)); right:calc(var(--edge) + var(--al-push)); }
+body[data-form=folded][data-eyra-placement]:is(.sd-geom,.al-geom) #bottom-bar { left:calc(16px + var(--sd-push)); right:calc(16px + var(--al-push)); }
+/* 圆栏贴右：右侧面板的推移由 --al-push 在基础规则里统一处理。 */
+body.session-drawer-open #usage-anchor { flex-shrink:1; min-width:0; overflow:hidden; }
+@media (max-width:1100px) { body.session-drawer-open #usage-anchor :is(#cache-count,#compression-count,.model-separator) { display:none; } }
+.session-drawer { position:fixed; z-index:60; top:var(--titlebar-height,56px); left:0; bottom:0; width:var(--sd-width,280px); translate:calc(var(--workspace-x,0px) - var(--sd-width,280px)) 0; display:flex; flex-direction:column; padding:2px 0 14px; background:rgb(10 12 17 / var(--panel-alpha)); backdrop-filter:blur(var(--panel-blur)); app-region:no-drag; }
+.session-drawer[hidden] { display:none; }
+/* 扩展页嵌在主窗口里，会话抽屉只由主窗口显示。 */
+body.contacts-module .session-drawer { display:none; }
+.sd-list { position:relative; flex:1; min-height:0; overflow-y:auto; padding:2px 10px 8px; scrollbar-width:none; }
+.sd-row { position:relative; z-index:1; display:flex; align-items:center; gap:11px; min-height:52px; padding:7px 10px; border-radius:14px; color:var(--ui-text); cursor:pointer; outline:none; }
+.sd-row[aria-current=true]::before { content:''; position:absolute; left:1px; top:50%; width:3px; height:18px; translate:0 -50%; border-radius:2px; background:var(--ui-accent); }
+.sd-row .role-ring { width:var(--chat-small-avatar); height:var(--chat-small-avatar); flex:0 0 var(--chat-small-avatar); }
+.sd-row .group-face { --size:var(--chat-small-avatar)!important; }
+.sd-row .role-ring .role-face { font-size:calc(var(--chat-small-avatar) * .32); }
+.sd-text { flex:1; min-width:0; display:grid; gap:2px; }
+.sd-line { display:flex; align-items:baseline; gap:8px; min-width:0; }
+body .sd-name { flex:1; min-width:0; margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sd-time { flex:none; font-size:11px; color:var(--ui-text-2); font-variant-numeric:tabular-nums; text-shadow:0 1px 3px #000c; }
+.sd-last { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sd-eyra { margin-bottom:4px; }
+.sd-toggle { position:relative; display:inline-flex; align-items:center; gap:1px; flex:none; height:24px; padding:0 4px 0 8px; border:0; border-radius:12px; background:#ffffff10; color:var(--ui-text-2); cursor:pointer; transition:color var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease); }
+.sd-toggle svg,.sd-pick-new svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; transition:transform var(--ui-enter) var(--ui-ease); }
+.sd-toggle[aria-expanded=true] svg { transform:rotate(90deg); }
+.sd-toggle:is(:hover,:focus-visible) { color:var(--ui-text); background:#ffffff12; outline:none; }
+/* Several sessions fold behind one row: the count and the arrow sit together. */
+.sd-toggle::before { content:attr(data-count); font-size:11px; font-weight:600; font-variant-numeric:tabular-nums; }
+.sd-sessions { display:grid; gap:1px; margin:0 0 4px 24px; padding-left:8px; box-shadow:inset 1px 0 0 #ffffff12; animation:sd-expand var(--ui-enter) var(--ui-ease); }
+@keyframes sd-expand { from { opacity:0; translate:0 -4px; } to { opacity:1; translate:0 0; } }
+.sd-session { min-height:42px; padding:5px 8px; }
+.sd-picker { position:fixed; z-index:90; top:calc(var(--titlebar-height,56px) + 4px); left:10px; width:min(236px,calc(var(--sd-width,280px) - 20px)); max-height:min(360px,60vh); overflow-y:auto; display:grid; gap:2px; padding:6px; border-radius:var(--ui-radius-menu); background:#14171ff2; backdrop-filter:var(--ui-blur); box-shadow:var(--ui-edge-hi),var(--ui-shadow); scrollbar-width:none; }
+.sd-picker[hidden] { display:none; }
+.sd-pick { position:relative; z-index:1; display:flex; align-items:center; gap:10px; min-height:38px; padding:5px 10px; border:0; border-radius:10px; background:transparent; color:var(--ui-text); font:inherit; font-size:13px; text-align:left; cursor:pointer; outline:none; }
+.sd-picker .glide { --glide-radius:10px; }
+.sd-pick .role-ring { width:26px; height:26px; flex:0 0 26px; }
+.sd-pick > span:last-child { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.sd-pick .role-ring .role-face { font-size:11px; }
+.sd-pick-new { color:var(--ui-accent); }
+.sd-pick-new svg { margin:0 5px; }
+
+/* Working agents breathe: the face itself moves, not only its ring. */
+:is(.sd-row,.cp-row,.sd-pick) .role-ring:not([data-state=idle]) .role-face { animation:face-work 2.2s var(--ui-ease) infinite; }
+@keyframes face-work { 0%,100% { scale:1; } 45% { scale:.88; } }
+
+/* ---------- Floating introduction ---------- */
+.contact-bio { position:fixed; z-index:120; max-width:260px; padding:10px 13px 11px; border-radius:var(--ui-radius-menu); background:#151821f5; backdrop-filter:var(--ui-blur); box-shadow:var(--ui-edge-hi),0 12px 36px #0008; color:var(--ui-text); pointer-events:none; opacity:0; translate:-4px 0; transition:opacity var(--ui-fast) var(--ui-ease),translate var(--ui-fast) var(--ui-ease); }
+.contact-bio[data-show=true] { opacity:1; translate:0 0; }
+.contact-bio[hidden] { display:none; }
+.contact-bio strong { font-size:13px; }
+.contact-bio-tag { margin-left:8px; padding:1px 7px; border-radius:8px; background:#ffffff0f; color:var(--ui-text-2); font-size:10.5px; }
+.contact-bio p { margin:6px 0 0; font-size:12px; line-height:1.65; color:var(--ui-text-2); white-space:pre-wrap; overflow-wrap:anywhere; display:-webkit-box; -webkit-line-clamp:8; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* ---------- Contacts: sessions, people and groups ---------- */
+#contacts-view { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; height:100%; min-height:0; }
+#contacts-view[hidden] { display:none; }
+.cp-column { display:flex; flex-direction:column; width:min(100%,1280px); height:100%; min-height:0; padding:var(--page-top,16px) 16px 16px; }
+.cp-bar { display:flex; align-items:center; gap:8px; padding:0 8px 16px; }
+.cp-title { margin:0 auto 0 0; font-size:18px; font-weight:600; }
+.cp-columns { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,min(35%,440px)) minmax(0,1fr); gap:16px; flex:1; min-height:0; overflow:auto; }
+.cp-section { display:flex; flex-direction:column; min-width:0; min-height:0; }
+.cp-section[data-column=sessions] { grid-column:1; }
+.cp-section[data-column=people] { grid-column:2; }
+.cp-section[data-column=groups] { grid-column:3; }
+.cp-section[hidden] { display:none; }
+.cp-section-title { margin:0; padding:8px 16px 12px; font-size:13px; font-weight:500; color:var(--ui-text-2); }
+.cp-empty { margin:24px 16px; color:var(--ui-text-3); font-size:12px; }
+@media(max-width:760px) { .cp-columns { grid-template-columns:minmax(0,1fr) minmax(0,42%) minmax(0,1fr); gap:8px; } .cp-search { max-width:220px; } }
+.cp-search { flex:1; min-width:0; height:34px; padding:0; border:0; border-radius:0; background:transparent; box-shadow:inset 0 -1px 0 transparent; color:var(--ui-text); font:inherit; font-size:13.5px; outline:none; transition:box-shadow var(--ui-fast) var(--ui-ease); }
+.cp-search::placeholder { color:var(--ui-text-3); }
+.cp-search:focus { box-shadow:inset 0 -1.5px 0 var(--ui-accent); }
+.cp-search::-webkit-search-cancel-button { display:none; }
+:is(.cp-icon,.cp-tool) { display:grid; place-items:center; flex:none; width:34px; height:34px; padding:0; border:0; border-radius:50%; background:transparent; box-shadow:inset 0 0 0 1px #ffffff14; color:var(--ui-text-2); cursor:pointer; transition:color var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease),scale var(--ui-fast) var(--ui-ease); }
+:is(.cp-icon,.cp-tool):is(:hover,:focus-visible) { color:var(--ui-text); background:#ffffff10; box-shadow:inset 0 0 0 1px #ffffff2c; outline:none; }
+:is(.cp-icon,.cp-tool):active { scale:.94; }
+:is(.cp-icon,.cp-tool) svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.cp-list { position:relative; flex:1; min-height:0; overflow-y:auto; padding:0 8px; scrollbar-width:none; }
+.cp-list .glide { --glide-radius:16px; }
+.cp-row { position:relative; z-index:1; display:flex; align-items:center; gap:12px; min-height:58px; padding:8px 10px 8px 12px; border-radius:16px; color:var(--ui-text); cursor:default; outline:none; user-select:none; }
+.cp-row .role-ring { width:var(--chat-small-avatar); height:var(--chat-small-avatar); flex:0 0 var(--chat-small-avatar); }
+.cp-row .group-face { --size:var(--chat-small-avatar)!important; }
+.cp-row .role-ring .role-face { font-size:calc(var(--chat-small-avatar) * .32); }
+.cp-text { flex:1; min-width:0; display:grid; gap:2px; }
+body .cp-name { margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.cp-desc { overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow-wrap:anywhere; font-size:12px; color:var(--ui-text-2); }
+.cp-tools { display:flex; flex-direction:column; gap:4px; opacity:0; translate:6px 0; pointer-events:none; transition:opacity var(--ui-fast) var(--ui-ease),translate var(--ui-enter) var(--ui-ease); }
+.cp-row:is(:hover,:focus-within) .cp-tools { opacity:1; translate:0 0; pointer-events:auto; }
+.cp-tool { width:30px; height:30px; box-shadow:none; }
+.cp-gap { height:14px; }
+
+/* ---------- Profile editor: identity line, prompt, model and toolbox ---------- */
+:is(.ce-primary,.ce-secondary) { display:inline-flex; align-items:center; gap:6px; height:34px; padding:0 16px; border:0; border-radius:17px; font:inherit; font-size:13px; cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease),scale var(--ui-fast) var(--ui-ease); }
+.ce-primary { background:#e6e9f0; color:#0d0f14; font-weight:600; }
+.ce-primary:hover:not(:disabled) { background:#fff; }
+.ce-secondary { background:#ffffff0a; box-shadow:var(--ui-edge); color:var(--ui-text); }
+.ce-secondary:hover:not(:disabled) { background:#ffffff12; box-shadow:var(--ui-edge-hi); }
+:is(.ce-primary,.ce-secondary):active:not(:disabled) { scale:.97; }
+:is(.ce-primary,.ce-secondary):disabled { opacity:.45; cursor:default; }
+.ce-delete { margin-right:auto; height:34px; padding:0 12px; border:0; border-radius:17px; background:transparent; color:var(--ui-text-3); font:inherit; font-size:13px; cursor:pointer; transition:color var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease); }
+.ce-delete:is(:hover,:focus-visible) { color:#f2c6c1; background:#e3a29c1f; }
+.ce-delete[hidden] { display:none; }
+.contact-editor { width:min(580px,94vw); height:min(640px,88vh); max-width:none; max-height:none; padding:0; overflow:hidden; color:var(--ui-text); }
+.contact-editor svg { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+/* A short window scrolls the whole editor; the prompt never shrinks under the rows. */
+.ce-shell { display:flex; flex-direction:column; height:100%; outline:none; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#ffffff1f transparent; }
+
+/* Identity: a larger face on the left, name and introduction beside it. */
+.ce-id { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:22px 16px 4px 24px; }
+.ce-id .ce-close { align-self:start; }
+.ce-face-wrap { position:relative; width:88px; height:88px; }
+.ce-avatar { position:relative; display:block; width:88px; height:88px; padding:0; border:0; border-radius:50%; background:transparent; cursor:pointer; }
+.ce-avatar .role-ring { width:88px; height:88px; }
+.cp-self-face { box-sizing:border-box;display:grid;place-items:center;width:var(--chat-small-avatar,42px);height:var(--chat-small-avatar,42px);border:2px solid;border-radius:50%;overflow:hidden;color:var(--ui-text); }
+.cp-self-face img { width:100%;height:100%;object-fit:cover; }
+.ce-avatar .cp-self-face { width:100%;height:100%;font-size:24px; }
+.contact-editor[data-self=true] { height:auto;min-height:min(310px,80vh); }
+.contact-editor[data-self=true] :is(.ce-bio,.ce-prompt-wrap,.ce-row:has(.ce-model),.ce-tools-row,.ce-row:has(.ce-ring)) { display:none; }
+.contact-editor .ce-user-color-row[hidden] { display:none; }
+.ce-avatar .role-ring .role-face { font-size:24px; }
+.ce-avatar-cue { position:absolute; inset:5px; z-index:2; display:grid; place-items:center; border-radius:50%; background:rgb(8 10 14 / .5); color:#fff; opacity:0; transition:opacity var(--ui-fast) var(--ui-ease); pointer-events:none; }
+.ce-avatar-cue svg { width:20px; height:20px; }
+.ce-avatar:is(:hover,:focus-visible,[data-drop=true]) .ce-avatar-cue { opacity:1; }
+.ce-avatar:focus-visible { box-shadow:0 0 0 3px #a9c0ec55; }
+.ce-idtext { display:grid; gap:2px; min-width:0; }
+:is(.ce-name,.ce-bio) { display:block; width:100%; box-sizing:border-box; margin:0 0 0 -8px; padding:3px 8px; border:0; border-radius:8px; background:transparent; color:var(--ui-text); font:inherit; outline:none; resize:none; cursor:text; transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease); }
+.ce-name { font-size:18px; font-weight:600; line-height:1.35; text-overflow:ellipsis; }
+.ce-bio { min-height:27px; overflow-y:auto; font-size:13px; line-height:1.55; color:var(--ui-text-2); scrollbar-width:none; }
+.ce-bio::placeholder { color:var(--ui-text-3); }
+:is(.ce-name,.ce-bio):hover { background:#ffffff08; }
+:is(.ce-name,.ce-bio):focus { background:#ffffff0b; box-shadow:inset 0 0 0 1px #a9c0ec55; }
+
+/* The prompt takes the room that is left. */
+.ce-prompt-wrap { display:flex; flex-direction:column; gap:8px; flex:1 0 auto; padding:16px 24px 0; }
+.ce-label { flex:none; width:44px; font-size:12px; color:var(--ui-text-3); }
+.ce-prompt { flex:1; min-height:140px; width:100%; box-sizing:border-box; padding:12px 14px; border:0; border-radius:14px; background:rgba(8,10,14,.68); box-shadow:var(--ui-edge); color:#e6e9f0; caret-color:#e6edfb; -webkit-text-fill-color:currentColor; -webkit-text-stroke:0 transparent; text-shadow:none; font-family:Consolas,"Cascadia Mono","Microsoft YaHei",monospace; font-size:12.5px; line-height:1.7; outline:none; resize:none; scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease); }
+@media (max-height:560px) { .ce-prompt { min-height:88px; } }
+.ce-prompt::placeholder { color:var(--ui-text-3); font-family:inherit; }
+.ce-prompt:focus { box-shadow:inset 0 0 0 1px #a9c0ec55; }
+
+/* Model, its thinking, and tools: one label column, controls beside it. */
+.ce-rows { display:grid; gap:10px; padding:16px 24px 2px; }
+.ce-row { display:flex; align-items:center; gap:12px; min-height:32px; }
+.ce-row[hidden] { display:none; }
+.ce-pick { display:inline-flex; align-items:center; gap:6px; min-width:0; max-width:100%; height:32px; padding:0 9px 0 14px; border:0; border-radius:16px; background:#ffffff08; box-shadow:var(--ui-edge); color:var(--ui-text); font:inherit; font-size:13px; cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease); }
+.ce-pick:hover { background:#ffffff10; box-shadow:var(--ui-edge-hi); }
+.ce-pick[data-empty=true] { color:var(--ui-text-3); }
+.ce-pick-text { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ce-pick svg { flex:none; width:15px; height:15px; color:var(--ui-text-3); transition:transform var(--ui-enter) var(--ui-ease); }
+.ce-pick[aria-expanded=true] svg { transform:rotate(180deg); }
+.ce-think { display:inline-flex; flex-wrap:wrap; gap:2px; padding:3px; border-radius:16px; background:#ffffff06; box-shadow:var(--ui-edge); }
+.ce-seg { height:26px; padding:0 11px; border:0; border-radius:13px; background:transparent; color:var(--ui-text-2); font:inherit; font-size:12.5px; cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease); }
+.ce-seg:hover { color:var(--ui-text); }
+.ce-seg[aria-checked=true] { background:#ffffff18; color:var(--ui-text); }
+.ce-chips { display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-width:0; }
+.ce-chip { display:inline-flex; align-items:center; gap:2px; height:26px; padding:0 10px; border-radius:13px; background:#ffffff0a; color:var(--ui-text-2); font-size:12.5px; white-space:nowrap; }
+.ce-add { display:grid; place-items:center; flex:none; width:28px; height:28px; min-width:0; min-height:0; padding:0; border:0; border-radius:50%; background:transparent; box-shadow:inset 0 0 0 1px #ffffff22; color:var(--ui-text-2); cursor:pointer; transition:color var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease),rotate var(--ui-enter) var(--ui-ease); }
+.ce-add:hover { color:var(--ui-text); background:#ffffff10; box-shadow:inset 0 0 0 1px #ffffff36; }
+.ce-add[aria-expanded=true] { rotate:45deg; color:var(--ui-text); }
+.ce-add svg { width:14px; height:14px; }
+:is(.ce-pick,.ce-seg,.ce-add,.ce-close):focus-visible { box-shadow:0 0 0 2px #a9c0ec55; }
+
+/* These lists overlap editable text inside a glass dialog. Use the theme tint at full opacity. */
+.ce-menu { position:absolute; z-index:5; min-width:260px; max-width:min(340px,calc(100% - 24px)); max-height:min(300px,calc(100% - 24px)); display:flex; flex-direction:column; padding:8px 6px; border-radius:var(--ui-radius-menu,14px); background:var(--glass-sheen),rgb(from var(--glass-tint) r g b / 1); box-shadow:var(--glass-edge),var(--glass-shadow); }
+.ce-menu[hidden] { display:none; }
+.ce-menu-viewport { position:relative; display:grid; grid-template-columns:minmax(0,1fr); gap:2px; min-height:0; overflow-y:auto; scroll-padding-block:6px; scrollbar-width:none; mask-image:linear-gradient(transparent,#000 6px,#000 calc(100% - 6px),transparent); }
+.ce-menu .glide { --glide-radius:10px; }
+.ce-option { position:relative; z-index:1; display:flex; align-items:center; gap:10px; min-height:44px; padding:6px 8px 6px 12px; border:0; border-radius:10px; background:transparent; color:var(--ui-text); font:inherit; text-align:left; cursor:pointer; }
+.contact-editor .ce-option { background:transparent; color:var(--ui-text); }
+.ce-option[aria-disabled=true] { cursor:default; opacity:.62; }
+.ce-option-text { display:grid; gap:1px; flex:1; min-width:0; }
+.ce-option-text b { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; font-weight:600; }
+.ce-option-text small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11.5px; color:var(--ui-text-3); }
+.ce-option-mark { display:grid; place-items:center; flex:none; width:22px; color:var(--ui-accent); }
+.ce-option-mark svg { width:15px; height:15px; stroke-width:2; }
+.ce-option-act { display:grid; place-items:center; flex:none; width:26px; height:26px; border-radius:50%; box-shadow:inset 0 0 0 1px #ffffff22; color:var(--ui-text-2); font-size:11px; transition:color var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease); }
+.ce-option-act svg { width:13px; height:13px; stroke-width:1.9; }
+.ce-tool-option:not([aria-disabled=true]) .ce-option-act { border-radius:5px; }
+.ce-tool-option[aria-selected=false] .ce-option-act svg { visibility:hidden; }
+.ce-menu[aria-multiselectable=true] .ce-menu-viewport { scrollbar-width:thin; overscroll-behavior:contain; }
+.ce-option[aria-disabled=true] .ce-option-act { width:auto; box-shadow:none; color:var(--ui-text-3); }
+.ce-option[aria-selected=true]:not([aria-disabled=true]) .ce-option-act { background:#ffffff14; box-shadow:none; color:var(--ui-text); }
+.ce-option:not([aria-disabled=true]):hover .ce-option-act { color:var(--ui-text); }
+.ce-error { margin:8px 24px 0; font-size:12.5px; color:var(--ui-error); }
+.ce-error[hidden] { display:none; }
+.ce-foot { display:flex; flex-wrap:wrap; justify-content:flex-end; align-items:center; gap:8px; padding:16px 20px 18px 24px; }
+.ce-foot > .ce-error { flex:0 0 100%; min-width:0; margin:0; max-height:min(100px,20vh); overflow-y:auto; overflow-wrap:anywhere; line-height:1.6; }
+.contact-editor .ce-shell > .ce-foot { position:sticky; bottom:0; flex-shrink:0; margin-top:auto; z-index:2; background:var(--glass-surface); backdrop-filter:var(--glass-filter); border-top:1px solid #ffffff08; }
+.contact-editor :is(.ce-shell,.ce-name,.ce-bio,.ce-prompt,.ce-option,.ce-seg,.ce-pick,.ce-add,.ce-avatar,.ce-close,.ce-delete,.ce-primary,.ce-secondary):focus-visible { outline:none; }
+:is(.ce-primary,.ce-secondary):focus-visible { box-shadow:0 0 0 2px #a9c0ec40; }
+
+.contact-confirm { width:min(400px,92vw); height:fit-content; }
+.cc-shell { margin:0; padding:22px 22px 0; }
+.cc-shell h2 { margin:0 0 8px; font-size:15px; font-weight:600; }
+.cc-shell p { margin:0 0 18px; font-size:13px; line-height:1.7; color:var(--ui-text-2); }
+.cc-shell .ce-foot { margin:0 -22px; padding:0 20px 18px; }
+.ce-primary.cc-danger { background:var(--ui-error); color:#1a0d0c; }
+.ce-primary.cc-danger:hover:not(:disabled) { background:#efb8b2; }
+.contact-confirm :is(button):focus-visible { outline:none; }
+
+@media (prefers-reduced-motion:reduce) {
+ .sd-sessions,:is(.sd-row,.cp-row,.sd-pick) .role-ring .role-face { animation:none!important; }
+ .contact-bio,.cp-tools,.sd-toggle svg,.ce-pick svg,.ce-add,.ce-avatar-cue,#dock-sessions svg path,body #desktop-dock #dock-sessions { transition:none; }
+ .glide { transition:opacity var(--ui-fast) var(--ui-ease); }
+}
+.cp-search:focus-visible { outline:none; }
+body.reduce-motion :is(.sd-row,.cp-row,.sd-pick) .role-ring .role-face { animation:none!important; }
+
+/* The contact and group forms share the OS glass, rhythm and focus contract. */
+body .contact-editor { border-radius:24px; }
+.contact-editor .ce-id { padding:28px 28px 20px;gap:18px;border-bottom:1px solid #ffffff0c; }
+.contact-editor .ce-name { font-size:22px;font-weight:500;line-height:1.5; }
+.contact-editor .ce-prompt-wrap { padding:22px 28px 0;gap:10px; }
+.contact-editor .ce-rows { padding:20px 28px;gap:14px; }
+.contact-editor .ce-label { width:auto;min-width:44px;font-size:12px;letter-spacing:.04em; }
+.contact-editor .ce-prompt { min-height:160px;font:13px/1.8 var(--os-user-font,inherit);padding:14px 16px; }
+.contact-editor .ce-shell > .ce-foot { padding:16px 28px;gap:12px; }
+.contact-editor :is(button,input,textarea):focus-visible { outline:2px solid #a9c0ec80;outline-offset:2px; }
+@media(max-width:560px),(max-height:560px) {
+ .contact-editor .ce-id { padding:18px 20px 14px;gap:12px; }.contact-editor .ce-name { font-size:18px; }
+ .contact-editor .ce-prompt-wrap { padding:16px 20px 0; }.contact-editor .ce-prompt { min-height:110px; }
+ .contact-editor .ce-rows,.contact-editor .ce-shell > .ce-foot { padding:14px 20px; }
+}
+
+.contacts-page .cp-bar .cp-title {color:var(--ui-accent,#8daee5);margin-inline-end:auto;}
+.contacts-page .cp-bar .cp-icon {display:inline-flex;align-items:center;gap:4px;width:auto;min-width:30px;border-radius:4px;padding-inline:6px;}
+.cp-action-label {font-size:12px;white-space:nowrap;}
+@media(max-width:460px){.contacts-page .cp-bar:has(.cp-search:not([hidden])) .cp-action-label {display:none;}}
+
+.cp-create:hover,.cp-create:focus-visible { background:#ffffff12; }
+/* 联系人选择器在顶栏加号下方展开。 */
+.session-drawer { --sd-head-bottom:44px; }
+
+/* Creation enters the space revealed by the session menu in the title bar. */
+body #desktop-dock #sd-new{position:absolute;left:0;top:50%;translate:0 -50%;opacity:0;scale:.65;pointer-events:none;app-region:no-drag;transition:opacity var(--ui-enter) var(--ui-ease),scale var(--ui-enter) var(--ui-ease)}
+body.session-drawer-open #desktop-dock #sd-new{opacity:1;scale:1;pointer-events:auto}
+body #desktop-dock #sd-new[hidden]{display:none}
+@starting-style{body.session-drawer-open #desktop-dock #sd-new{opacity:0;scale:.65}}
+@media(prefers-reduced-motion:reduce){body #desktop-dock #sd-new{transition:none}}
+
+.ce-prompt-layer{display:flex;gap:8px;flex-wrap:wrap}
+.ce-tabs{padding:14px 28px 0}
+.contact-editor :is(.ce-prompt-wrap,.ce-rows)[hidden]{display:none}
+.ce-prompt-layer{flex:none}
+.contact-editor .ce-prompt-wrap{flex:1 0 auto;min-height:min-content}
+.contact-editor .ce-prompt{min-height:120px}
+
+body #desktop-dock{position:relative}
+body #desktop-dock #sd-new{justify-content:center;padding:0;width:calc(36px * var(--os-scale,1));height:calc(36px * var(--os-scale,1))}
+
+.contact-editor .ce-prompt{box-shadow:var(--ui-edge);flex:1 0 120px}
+.contact-editor .ce-prompt:is(:hover,:focus){box-shadow:var(--ui-edge-hi)}
+.contact-editor .ce-rows{display:flex;flex:none;flex-wrap:wrap;gap:12px 20px}
+.contact-editor .ce-row{flex:1 1 200px;min-width:0}
+
+body.reduce-motion .session-drawer{transition:none}
+@media(prefers-reduced-motion:reduce){.session-drawer{transition:none}}
+
+/* Blur the underlying list itself: native view zoom can drop backdrop filtering. */
+body:has(.contact-editor:modal) .contacts-page{filter:blur(6px)}
+
+/* A left drawer translates painted surfaces. Width adapts once at rest.
+   Keep fixed descendants (folded halo and work stage) in viewport coordinates. */
+body:not([data-form=folded]) #screen,body #view-surface,body :is(#bottom-bar,#status-rail,#activity-orbits),body[data-form=folded] #screen #conversation #emergence { translate:var(--workspace-x,0px) 0; }
+body #desktop-dock > :not(#sd-new),body #dock-pinned-apps > button { translate:calc(var(--workspace-x,0px) * var(--workspace-menu-ratio,1)) 0; }
+body.workspace-sliding :is(#screen,#view-surface,#bottom-bar,#session-drawer) { will-change:translate; }
+/* The input follows the narrowed screen: centred placements move half the settled inset and shrink by it; edge-anchored ones keep their right edge inside the window. */
+body:not([data-eyra-placement=compact],[data-eyra-placement=work],[data-form=folded]) #bottom-bar { translate:calc(var(--workspace-x,0px) - var(--workspace-inset,0px) / 2) 0; width:min(720px,calc(100vw - 48px - var(--workspace-inset,0px))); }
+body[data-eyra-placement=compact]:not([data-form=folded]) #bottom-bar { right:calc(var(--edge) + var(--workspace-inset,0px)); }
+
+body:not([data-form=folded]) #screen,body #view-surface { justify-self:start; }
+@layer aieyra-workspace {
+body:not([data-form=folded]) #screen,body #view-surface { width:calc(100% - var(--workspace-inset,0px))!important; }
+}
+
+/* Program contacts share the editor, while their conversation stays in the program. */
+.cp-embedded .cp-name,.cp-embedded .cp-desc { color:var(--ui-text-3); }
+.cp-embedded > .role-ring { opacity:.56; }
+.cp-embedded .cp-tools { opacity:1; }
+
+/* Embedded specialists stay discoverable without filling the contact list. */
+/* Bound each editor section; a large toolbox cannot shrink the prompt or footer. */
+.contact-editor .ce-shell { overflow:hidden;min-width:0; }
+.contact-editor .ce-id,.contact-editor .ce-foot { flex:none; }
+.contact-editor .ce-idtext { min-width:0; }
+.contact-editor .ce-prompt-wrap { flex:1 1 180px;min-height:110px;overflow:hidden;padding-top:12px; }
+.contact-editor .ce-prompt { flex:1 1 80px;min-height:60px; }
+.contact-editor .ce-rows { flex:0 1 auto;display:flex;flex-direction:column;flex-wrap:nowrap;max-height:38%;min-height:64px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-block:12px; }
+.contact-editor .ce-row { flex:none;min-height:32px; }
+.contact-editor .ce-tools-row { flex:1 1 auto;min-height:32px;align-items:flex-start; }
+.contact-editor .ce-chips { flex:1;min-width:0;min-height:0;align-self:stretch;max-height:108px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:2px; }
+.contact-editor .ce-chip { max-width:100%;white-space:normal;height:auto;min-height:26px;overflow-wrap:anywhere;box-sizing:border-box; }
+.contact-editor .ce-add { margin-top:2px; }
+@media(max-height:560px) {
+ .contact-editor .ce-id { padding-block:12px; }
+ .contact-editor .ce-shell > .ce-foot { padding-block:10px; }
+ .contact-editor .ce-prompt-wrap { min-height:96px; }
+ .contact-editor .ce-rows { max-height:34%; }
+}

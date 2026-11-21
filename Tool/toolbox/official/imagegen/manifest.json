@@ -1,0 +1,82 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.image_gen",
+  "kind": "toolbox",
+  "name": "图片生成",
+  "summary": "生成、编辑与持久图片批次",
+  "version": "1.0.1",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/preview.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "README.md": {
+      "sha256": "6910055b28044e86b830946f4a6ec7d49c7c3746f20ccca256cb24a0d635e0a8",
+      "size": 1464
+    },
+    "contract/result.go": {
+      "sha256": "6a0d753518a744268bb90b9fbfc7e2571a44b010ca4db09896af2e506bb17283",
+      "size": 3759
+    },
+    "definition.go": {
+      "sha256": "65f1c33b354f48ed1c0573405395633a44dcff2d16a08c720814d37156bc8fec",
+      "size": 1496
+    },
+    "execute.go": {
+      "sha256": "7f0c221e237a24e6dd44c8849b4f118b366078a1dc3df4f9b5536cbf0a10eaa8",
+      "size": 8618
+    },
+    "image.go": {
+      "sha256": "6f3564136fab06e82678692a03748fb4fd4fcf4101281e00101d198cf20d939c",
+      "size": 1861
+    },
+    "manual.txt": {
+      "sha256": "48b4750cd4d0b74e968f6f85cc991d08e75c96b951aa248b57a65633f25852af",
+      "size": 4561
+    },
+    "native.json": {
+      "sha256": "bcc0bb43a08d5b2c0b947dd18c0abcabee5a90222029e07d8740dd5204fd5ce7",
+      "size": 98
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "8c130f92856bb9295d51c204b19a90578afea2ed307fa195fc088d181c6da67d",
+      "size": 878
+    },
+    "presentation/text/preview.go": {
+      "sha256": "e43d53571a3d280f7cc434b6c6ccab784fa703d898931299d3fb0634ca4fb9be",
+      "size": 1418
+    }
+  }
+}

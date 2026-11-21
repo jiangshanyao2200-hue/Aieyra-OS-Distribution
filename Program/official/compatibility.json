@@ -1,0 +1,14 @@
+{
+  "aieyra.browser": [
+    {
+      "digest": "69ce33054c7f3adccf3aa51fd2221be56279213a5cc908356c753d66799c668a",
+      "documentation": {
+        "AGENTS.md": {
+          "sha256": "6ff50f4a0b917ecc704e2d851f03eb461be371f1bb4ddda693f855a34e9b6e11",
+          "size": 1894,
+          "text": "# 浏览器领域模块 · 工作协约\n\n遵循[根协约](../../../AGENTS.md)；当前职责与迁移边界见[工程地图](../../../docs/工程地图.md)。本文件覆盖本目录中没有更近协约的自有子目录，测试、样例资产和第三方依赖不因此成为独立执行模块。\n\n入口：[browser-runtime.cjs](service/browser-runtime.cjs)、[browser-control.cjs](service/browser-control.cjs)、[browser-shell.html](ui/browser-shell.html)。\n\n职责：service 拥有网页执行/语义目标、标签、快照/过期动作、人机控制、身份、书签和偏好；ui 拥有真实导航、侧栏与页面。\n\n依赖与接口：Desktop 注入 Electron/受限 preload/原子写入、缩放及公共窗口；服务不导入 Desktop，内嵌与独立入口复用同一实例。\n\n资料与状态：宿主注入 storage 解析的浏览器资料根，窗口关闭不清身份；截图缓存按页面/导航代次有界并拒绝迟到结果。\n\n开发与验收：修改后在 Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 视觉/工作流测试分别覆盖控制权、实际网页/滚位、拆放重开与低对比网页；合成模型不称真实模型。\n\n兼容与交接：Desktop 旧服务/页面只转接，禁止恢复副本；当前不是普通第三方沙箱包，官方共同登记已接入，实际验收事实见docs/CURRENT。 修改接口时一起核对调用者、交付清单和对应专题地图；未实际验证的范围保持未验，不以目录存在或安装成功代替运行验收。\n\nmanifest.json覆盖本目录实际载荷；业务、页面或协约改动后使用SDK/tools/package.cjs的pack刷新清单，再重建宿主摘要。导航来自program.json，执行适配仍由宿主显式注入。停用/卸载保留私人资料。\n"
+        }
+      }
+    }
+  ]
+}

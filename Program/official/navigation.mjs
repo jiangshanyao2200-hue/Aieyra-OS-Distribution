@@ -1,0 +1,2 @@
+// Generated from Program official manifests by catalog.cjs --write-navigation.
+export const programPages=Object.freeze([{"key":"coding","title":"Coding","tab":"dock-coding"},{"key":"servers","title":"服务器","tab":"dock-servers"},{"key":"workspace","title":"Workspace","tab":"dock-workspace"},{"key":"center","title":"中枢","tab":"dock-center"},{"key":"together","title":"Aieyra Together","tab":"dock-together"}].map(Object.freeze));

@@ -1,0 +1,91 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.specialist-workflow",
+  "kind": "workbox",
+  "name": "专员统计工作流",
+  "summary": "先统计输入，审阅后生成实际 JSON 报告。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "workbox": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [
+    {
+      "id": "example.statistics",
+      "version": "^1.0.0"
+    },
+    {
+      "id": "example.report",
+      "version": "^1.0.0"
+    },
+    {
+      "id": "example.workflow-manager",
+      "version": "^1.0.0",
+      "optional": false
+    }
+  ],
+  "entrypoints": {
+    "workflow": "workflow.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "package.invoke",
+      "scope": "example.statistics",
+      "reason": "执行工作流中声明的步骤"
+    },
+    {
+      "capability": "package.invoke",
+      "scope": "example.report",
+      "reason": "执行工作流中声明的步骤"
+    },
+    {
+      "capability": "package.invoke",
+      "scope": "example.workflow-manager",
+      "reason": "显式创建绑定此工作流的标准Agent"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.workbox",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "bafbc514b53234ebab4635d878861ec054ea836b88a1259732752360101c6f34",
+      "size": 84
+    },
+    "desktop.json": {
+      "sha256": "79f64aad812fe56e526cf4f2837dd9af25aec596d547f56a149b4f7e8f63634a",
+      "size": 103
+    },
+    "manual.md": {
+      "sha256": "5dc36f817f663489bfec0180ccdce4500e653501a60bfc7a46eef53a0c955668",
+      "size": 1153
+    },
+    "workflow.json": {
+      "sha256": "a5b7aee8b21012281fedc3854061b9487baffe8b7aed28c6bd90b5d37d382913",
+      "size": 1745
+    }
+  }
+}

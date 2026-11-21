@@ -1,0 +1,2316 @@
+{
+  "projects": {
+    "description": "读取当前画布。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "context": {
+    "description": "读取明确对象ID及当前修订。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "项目 ID"
+        },
+        "nodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "projectId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "projects.list": {
+    "description": "读取当前画布（Workspace 只有一个画布）。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "projects.inspect": {
+    "description": "读取对象详情和修订。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "项目 ID"
+        },
+        "nodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "projectId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "observe": {
+    "description": "观察当前画布显示、通知与错误。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "open_panel": {
+    "description": "通过 OS 共同入口打开画布 Agent 对话；旧侧栏已退役。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "panel": {
+          "type": "string",
+          "enum": [
+            "matrix"
+          ]
+        }
+      },
+      "required": [
+        "panel"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "projects.create": {
+    "description": "确保唯一画布存在：已有画布时直接返回它，没有时创建默认画布。Workspace 只有一个画布。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "项目名称"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "image"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "nodes.create": {
+    "description": "创建需求便签或容器。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "项目 ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "requirement",
+            "container"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "description": "标题"
+        },
+        "text": {
+          "type": "string",
+          "description": "需求正文"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "projectId",
+        "type",
+        "title"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "nodes.update": {
+    "description": "按 expected 原值修改节点字段，拒绝覆盖用户新编辑。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "项目 ID"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "节点 ID"
+        },
+        "expected": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "patch": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "projectId",
+        "nodeId",
+        "expected",
+        "patch"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "nodes.style": {
+    "description": "按 expected 原值修改节点样式。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "项目 ID"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "节点 ID"
+        },
+        "expected": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "appearance": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "projectId",
+        "nodeId",
+        "expected",
+        "appearance"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.import": {
+    "description": "按画布修订导入素材。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "string",
+            "description": "真实本地图片路径"
+          }
+        },
+        "title": {
+          "type": "string",
+          "description": "素材名称"
+        }
+      },
+      "required": [
+        "paths"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.locate": {
+    "description": "定位已有图片节点。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "成果画布ID"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "成果节点ID"
+        }
+      },
+      "required": [
+        "projectId",
+        "nodeId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "annotations.read": {
+    "description": "读取图像标记。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "目标画布项目ID；省略使用当前任务所属画布，仅目标不明时workspace.observe"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "图片节点ID"
+        },
+        "assetIndex": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "nodeId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "annotations.preview": {
+    "description": "生成标记预览。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "目标画布项目ID；省略使用当前任务所属画布，仅目标不明时workspace.observe"
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "图片节点ID"
+        },
+        "assetIndex": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "nodeId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "workspace.observe": {
+    "description": "观察当前画布、项目与选区。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "workspace.open_panel": {
+    "description": "打开画布侧栏；panel为matrix、database或prompts。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "panel": {
+          "type": "string",
+          "enum": [
+            "matrix",
+            "database",
+            "prompts"
+          ]
+        }
+      },
+      "required": [
+        "panel"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "documents.manage": {
+    "description": "画布文档list/read/create/import/edit/patch/annotate/restore/metadata/sheet/delete。参数action、projectId、id、title、text、format；修改带expectedRevision，patches带oldText/text及可选blockId/start/end。文档自动挂载画布。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "目标画布项目ID；省略使用当前任务所属画布，仅目标不明时workspace.observe"
+        },
+        "id": {
+          "type": "string",
+          "description": "documents.list/create返回的文档ID"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "description": "标题"
+        },
+        "text": {
+          "type": "string",
+          "description": "完整正文"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "txt",
+            "md",
+            "html",
+            "csv",
+            "tsv",
+            "json",
+            "docx",
+            "xlsx",
+            "pptx",
+            "pdf"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "本地文件路径"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "summary": {
+          "type": "string",
+          "description": "修改原因"
+        },
+        "citations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "list",
+            "read",
+            "create",
+            "import",
+            "edit",
+            "patch",
+            "annotate",
+            "restore",
+            "metadata",
+            "sheet",
+            "delete"
+          ]
+        },
+        "patches": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "properties": {
+              "blockId": {
+                "type": "string",
+                "description": "段落ID"
+              },
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "oldText": {
+                "type": "string",
+                "description": "精确原文"
+              },
+              "text": {
+                "type": "string",
+                "description": "替换正文"
+              }
+            },
+            "required": [
+              "oldText",
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "instruction": {
+          "type": "string",
+          "description": "此位置应补写/修改的说明"
+        },
+        "removeId": {
+          "type": "string",
+          "description": "删除批注ID"
+        },
+        "resolveId": {
+          "type": "string",
+          "description": "已处理批注ID"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "resolved",
+            "dismissed"
+          ]
+        },
+        "sheet": {
+          "type": "string",
+          "description": "工作表名称"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "documents.export": {
+    "description": "按projectId、id、expectedRevision、format导出真实txt/md/html/csv/tsv/json/docx/xlsx/pptx/pdf；结果返回路径和SHA。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "目标画布项目ID；省略使用当前任务所属画布，仅目标不明时workspace.observe"
+        },
+        "id": {
+          "type": "string",
+          "description": "documents.list/create返回的文档ID"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "txt",
+            "md",
+            "html",
+            "csv",
+            "tsv",
+            "json",
+            "docx",
+            "xlsx",
+            "pptx",
+            "pdf"
+          ]
+        },
+        "allSheets": {
+          "type": "boolean"
+        },
+        "slides": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "id",
+        "format"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "documents.analyze": {
+    "description": "对表格文档执行summary/group/sort/filter/finance；参数projectId、id、expectedRevision、operation、column及groupBy/compare/value/discountRate/periodsPerYear；saveAs保存报表。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "目标画布项目ID；省略使用当前任务所属画布，仅目标不明时workspace.observe"
+        },
+        "id": {
+          "type": "string",
+          "description": "文档ID"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "summary",
+            "group",
+            "sort",
+            "filter",
+            "finance"
+          ]
+        },
+        "column": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "groupBy": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "compare": {
+          "type": "string",
+          "enum": [
+            "eq",
+            "contains",
+            "gt",
+            "lt"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "descending": {
+          "type": "boolean"
+        },
+        "discountRate": {
+          "type": "number"
+        },
+        "periodsPerYear": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "saveAs": {
+          "type": "string",
+          "description": "保存报表标题"
+        }
+      },
+      "required": [
+        "id",
+        "operation",
+        "column"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "database.manage": {
+    "description": "素材数据库list/read/save/use/delete。参数action、projectId、id、name、category、descriptor、summary、tags、paths、files；更新带recordRevision，use回填画布。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "list",
+            "read",
+            "save",
+            "use",
+            "delete"
+          ]
+        },
+        "projectId": {
+          "type": "string",
+          "description": "目标画布项目ID；省略使用当前任务所属画布，仅目标不明时workspace.observe"
+        },
+        "id": {
+          "type": "string",
+          "description": "数据库条目ID"
+        },
+        "query": {
+          "type": "string",
+          "description": "搜索词"
+        },
+        "name": {
+          "type": "string",
+          "description": "名称"
+        },
+        "entityKey": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "person",
+            "anime",
+            "product",
+            "style",
+            "scene",
+            "preference",
+            "other"
+          ]
+        },
+        "descriptor": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "summary": {
+          "type": "string",
+          "description": "摘要及使用约束"
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        "paths": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "string"
+          }
+        },
+        "mergeRecords": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "合并来源ID"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "id",
+              "revision"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "recordRevision": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "settings.read": {
+    "description": "读取当前画布公开视觉和交互设置，模型由OS权威接口提供。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "settings.update": {
+    "description": "以patch更新画布视觉和交互设置；不保存独立模型或密钥。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "patch": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "patch"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "storage.status": {
+    "description": "读取当前画布项目存储位置与状态。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "images.generate": {
+    "description": "后台生成或编辑并保存到原版画布。input为单图或多图参数；立即返回jobId，images.status核对结果；request_id重试必须保持原参数。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "nodeIds": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "string"
+          }
+        },
+        "goalId": {
+          "type": "string"
+        },
+        "goalRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "prompt": {
+              "type": "string"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "model": {
+              "type": "string"
+            },
+            "size": {
+              "type": "string"
+            },
+            "quality": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "auto"
+              ]
+            },
+            "outputFormat": {
+              "enum": [
+                "png",
+                "jpeg",
+                "webp"
+              ]
+            },
+            "outputCompression": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "background": {
+              "enum": [
+                "transparent",
+                "opaque",
+                "auto"
+              ]
+            },
+            "inputFidelity": {
+              "type": "string"
+            },
+            "moderation": {
+              "type": "string"
+            },
+            "editImage": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "dataUrl": {
+                  "type": "string"
+                },
+                "nodeId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "assetIndex": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "role": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "displayCode": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "maskImage": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "dataUrl": {
+                  "type": "string"
+                },
+                "nodeId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "assetIndex": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "role": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "displayCode": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "referenceImages": {
+              "type": "array",
+              "maxItems": 40,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "dataUrl": {
+                    "type": "string"
+                  },
+                  "nodeId": {
+                    "type": "string"
+                  },
+                  "assetId": {
+                    "type": "string"
+                  },
+                  "assetIndex": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "purpose": {
+                    "type": "string"
+                  },
+                  "displayCode": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "operation": {
+              "type": "string",
+              "enum": [
+                "generate",
+                "edit",
+                "replace",
+                "variants"
+              ]
+            },
+            "parentId": {
+              "type": "string"
+            },
+            "ratio": {
+              "type": "string",
+              "enum": [
+                "1:1",
+                "16:9",
+                "9:16",
+                "4:3",
+                "3:4",
+                "3:2",
+                "2:3",
+                "21:9",
+                "9:21",
+                "4:5"
+              ]
+            },
+            "resolution": {
+              "type": "string",
+              "enum": [
+                "720P",
+                "1080P",
+                "2K",
+                "4K"
+              ]
+            },
+            "assetIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "来源容器内序号，从0开始。"
+            },
+            "sourceImage": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "dataUrl": {
+                  "type": "string"
+                },
+                "nodeId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "assetIndex": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "role": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "displayCode": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "sourcePath": {
+              "type": "string"
+            },
+            "sourceAssetId": {
+              "type": "string"
+            },
+            "generationMode": {
+              "enum": [
+                "parallel",
+                "sequential"
+              ]
+            },
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 10,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "prompt": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "ratio": {
+                    "type": "string",
+                    "enum": [
+                      "1:1",
+                      "16:9",
+                      "9:16",
+                      "4:3",
+                      "3:4",
+                      "3:2",
+                      "2:3",
+                      "21:9",
+                      "9:21",
+                      "4:5"
+                    ]
+                  },
+                  "resolution": {
+                    "type": "string",
+                    "enum": [
+                      "720P",
+                      "1080P",
+                      "2K",
+                      "4K"
+                    ]
+                  },
+                  "quality": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high",
+                      "xhigh",
+                      "max",
+                      "auto"
+                    ]
+                  },
+                  "size": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "prompt"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "prompt"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.cancel": {
+    "description": "停止原图片任务，保留已返回的成果。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "images.recover": {
+    "description": "从原批次恢复已生成素材，不重发未知付费请求。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "projectId",
+        "runId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.context": {
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "nodeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "images.actions": {
+    "description": "使用images.context返回的canvasRevision提交原版画布RuntimeAction数组。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "canvasRevision": {
+          "type": "integer"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "required": [
+        "projectId",
+        "canvasRevision",
+        "actions"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.batch": {
+    "description": "复用原版持久调度器：1–1000张或continuous持续出图，variants轮换单图方案，并发1–6；暂停等待在途回执，恢复不重发未知请求，连续每100张保存一组。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "nodeIds": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "string"
+          }
+        },
+        "goalId": {
+          "type": "string"
+        },
+        "goalRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "operation": {
+          "enum": [
+            "start",
+            "status",
+            "list",
+            "pause",
+            "resume",
+            "cancel",
+            "recover",
+            "skip"
+          ]
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "continuous": {
+          "type": "boolean"
+        },
+        "concurrency": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "prompt": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "size": {
+              "type": "string"
+            },
+            "quality": {
+              "type": "string",
+              "enum": [
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max",
+                "auto"
+              ]
+            },
+            "outputFormat": {
+              "enum": [
+                "png",
+                "jpeg",
+                "webp"
+              ]
+            },
+            "outputCompression": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "background": {
+              "enum": [
+                "transparent",
+                "opaque",
+                "auto"
+              ]
+            },
+            "inputFidelity": {
+              "type": "string"
+            },
+            "moderation": {
+              "type": "string"
+            },
+            "editImage": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "dataUrl": {
+                  "type": "string"
+                },
+                "nodeId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "assetIndex": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "role": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "displayCode": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "maskImage": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "dataUrl": {
+                  "type": "string"
+                },
+                "nodeId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "assetIndex": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "role": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "displayCode": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "referenceImages": {
+              "type": "array",
+              "maxItems": 40,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "dataUrl": {
+                    "type": "string"
+                  },
+                  "nodeId": {
+                    "type": "string"
+                  },
+                  "assetId": {
+                    "type": "string"
+                  },
+                  "assetIndex": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "purpose": {
+                    "type": "string"
+                  },
+                  "displayCode": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "operation": {
+              "type": "string",
+              "enum": [
+                "generate",
+                "edit",
+                "replace"
+              ]
+            },
+            "parentId": {
+              "type": "string"
+            },
+            "ratio": {
+              "type": "string",
+              "enum": [
+                "1:1",
+                "16:9",
+                "9:16",
+                "4:3",
+                "3:4",
+                "3:2",
+                "2:3",
+                "21:9",
+                "9:21",
+                "4:5"
+              ]
+            },
+            "resolution": {
+              "type": "string",
+              "enum": [
+                "720P",
+                "1080P",
+                "2K",
+                "4K"
+              ]
+            },
+            "assetIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "来源容器内序号，从0开始。"
+            },
+            "sourceImage": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "dataUrl": {
+                  "type": "string"
+                },
+                "nodeId": {
+                  "type": "string"
+                },
+                "assetId": {
+                  "type": "string"
+                },
+                "assetIndex": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "role": {
+                  "type": "string"
+                },
+                "purpose": {
+                  "type": "string"
+                },
+                "displayCode": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "sourcePath": {
+              "type": "string"
+            },
+            "sourceAssetId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "prompt"
+          ],
+          "additionalProperties": false
+        },
+        "variants": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "type": "object",
+            "properties": {
+              "prompt": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "ratio": {
+                "type": "string",
+                "enum": [
+                  "1:1",
+                  "16:9",
+                  "9:16",
+                  "4:3",
+                  "3:4",
+                  "3:2",
+                  "2:3",
+                  "21:9",
+                  "9:21",
+                  "4:5"
+                ]
+              },
+              "resolution": {
+                "type": "string",
+                "enum": [
+                  "720P",
+                  "1080P",
+                  "2K",
+                  "4K"
+                ]
+              },
+              "quality": {
+                "type": "string",
+                "enum": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh",
+                  "max",
+                  "auto"
+                ]
+              },
+              "size": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "prompt"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "required": [
+        "operation"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.status": {
+    "description": "查询已受理图片任务与画布保存回执。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "waitMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 25000
+        }
+      },
+      "required": [
+        "jobId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.wait": {
+    "description": "等待原图片任务，最多25秒，不重发。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "waitMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 25000
+        }
+      },
+      "required": [
+        "jobId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "goals.manage": {
+    "description": "管理所属项目的持续目标、固定原图、历轮成果和反馈。生成时携带goalId及刚读取的goalRevision。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "operation"
+          ],
+          "properties": {
+            "operation": {
+              "type": "string",
+              "enum": [
+                "list",
+                "start",
+                "read",
+                "resume",
+                "update"
+              ]
+            },
+            "goalId": {
+              "type": "string"
+            },
+            "objective": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "keep": {
+              "type": "string",
+              "maxLength": 4000
+            },
+            "expectedRevision": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "feedbackMode": {
+              "type": "string",
+              "enum": [
+                "notes",
+                "chat"
+              ]
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "active",
+                "paused",
+                "satisfied"
+              ]
+            },
+            "references": {
+              "type": "array",
+              "maxItems": 24,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "nodeId"
+                ],
+                "properties": {
+                  "nodeId": {
+                    "type": "string"
+                  },
+                  "assetIndex": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "sourceArtifactIds": {
+              "type": "array",
+              "maxItems": 40,
+              "items": {
+                "type": "string"
+              }
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            }
+          }
+        }
+      },
+      "required": [
+        "projectId",
+        "input"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "canvas.workflow": {
+    "description": "原版画布工作流：节点查找、需求便签、关系、定位、更新、删除及继续绘图。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "operation": {
+              "type": "string",
+              "description": "成果操作：prepare_requirement 准备通用需求便签并连接图片，不生成；list_nodes 查看成果；describe_node 读取成果详情；focus_node 定位成果；connect_nodes 建立成果来源关系；disconnect_node 移除关系；delete_node 删除成果；clear_canvas 清空成果画布；update_node 修改成果元数据；continue_node/redraw_node/cutout_node 基于已有图片继续工作。",
+              "enum": [
+                "list_nodes",
+                "prepare_requirement",
+                "describe_node",
+                "focus_node",
+                "connect_nodes",
+                "disconnect_node",
+                "delete_node",
+                "clear_canvas",
+                "update_node",
+                "continue_node",
+                "redraw_node",
+                "cutout_node"
+              ]
+            },
+            "scenario": {
+              "type": "string",
+              "enum": [
+                "text-to-image",
+                "image-to-image",
+                "replace-element",
+                "place-element",
+                "virtual-try-on",
+                "layered-drawing",
+                "cutout",
+                "region-redraw",
+                "photo-enhance"
+              ],
+              "description": "仅兼容旧调用的可选字段；不决定图片角色或执行门禁。"
+            },
+            "inputNodeIds": {
+              "type": "array",
+              "maxItems": 40,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              },
+              "description": "prepare_requirement 要连接到通用需求便签的已有图片或容器 ID；图片分工由正文自由描述，缺图时省略，不创建容器。"
+            },
+            "sourceNodeIds": {
+              "type": "array",
+              "maxItems": 40,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              },
+              "description": "兼容旧调用的连接图片列表，与 inputNodeIds 合并，不强制处理角色。"
+            },
+            "referenceNodeIds": {
+              "type": "array",
+              "maxItems": 40,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              },
+              "description": "兼容旧调用的连接图片列表，与 inputNodeIds 合并。nodeId 可指定已有图片锚点。"
+            },
+            "text": {
+              "type": "string",
+              "maxLength": 24000,
+              "description": "prepare_requirement 的用户需求正文；尚未提供时省略，不能编造需求。"
+            },
+            "nodeId": {
+              "type": "string",
+              "description": "目标成果 ID；如果用户只说标题且你不确定 ID，可改用 nodeTitle。"
+            },
+            "nodeTitle": {
+              "type": "string",
+              "description": "目标成果标题选择器。用于 focus_node/describe_node/update_node/disconnect_node/delete_node/continue_node/redraw_node/cutout_node。"
+            },
+            "sourceId": {
+              "type": "string",
+              "description": "connect_nodes 的来源成果 ID；如果用户只说标题且你不确定 ID，可改用 sourceTitle。"
+            },
+            "sourceTitle": {
+              "type": "string",
+              "description": "connect_nodes 的来源成果标题选择器。"
+            },
+            "targetId": {
+              "type": "string",
+              "description": "connect_nodes 的目标成果 ID；如果用户只说标题且你不确定 ID，可改用 targetTitle。"
+            },
+            "targetTitle": {
+              "type": "string",
+              "description": "connect_nodes 的目标成果标题选择器。"
+            },
+            "relationType": {
+              "type": "string",
+              "enum": [
+                "derived-from",
+                "referenced",
+                "variant",
+                "grouped"
+              ],
+              "description": "connect_nodes 的成果关系。derived-from=直接衍生；referenced=作为参考；variant=同源变体；grouped=仅组织归组。默认 derived-from。"
+            },
+            "direction": {
+              "type": "string",
+              "enum": [
+                "input",
+                "output",
+                "both"
+              ],
+              "description": "disconnect_node 的断开方向。input=移除当前成果的来源；output=移除以当前成果为来源的关系；both=两者都移除。不确定时用 input。"
+            },
+            "deleteMode": {
+              "type": "string",
+              "enum": [
+                "only",
+                "branch"
+              ],
+              "description": "delete_node 的删除范围。only=默认，只删当前成果并保留衍生成果；branch=删除当前成果和所有衍生成果，只有用户明确要求时使用。"
+            },
+            "title": {
+              "type": "string",
+              "description": "update_node 更新成果时使用的新标题。"
+            },
+            "prompt": {
+              "type": "string",
+              "description": "更新成果说明，或 continue_node 的后续生成要求。真正生成或修改图片请用 image_gen(prompt=...)。"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "queued",
+                "working",
+                "review",
+                "done"
+              ]
+            },
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "parentId": {
+              "type": "string",
+              "description": "成果来源 ID。生成或修改图片时优先使用 image_gen.parentId，由运行时自动建立来源关系。"
+            },
+            "assetIndex": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "图片资产序号；0 表示第一张。"
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "list_nodes 分页起点，默认 0。"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "description": "list_nodes 每页数量，默认 25，最大 100。"
+            },
+            "query": {
+              "type": "string",
+              "description": "list_nodes 按节点 ID、标题或提示词模糊筛选。"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "intent",
+                "image",
+                "review",
+                "export",
+                "branch",
+                "post"
+              ],
+              "description": "list_nodes 按成果类型筛选。"
+            },
+            "relation": {
+              "type": "string",
+              "enum": [
+                "root",
+                "derived-from",
+                "referenced",
+                "variant",
+                "grouped"
+              ],
+              "description": "list_nodes 按来源关系筛选；root 表示没有父节点。"
+            }
+          },
+          "required": [
+            "operation"
+          ]
+        },
+        "canvasRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "canvas.experience": {
+    "description": "读取、追加、替换或整理本项目绘图经验；替换与整理需要expectedRevision，原版本留档。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "add",
+                "read",
+                "replace",
+                "compact"
+              ]
+            },
+            "scope": {
+              "type": "string",
+              "enum": [
+                "project"
+              ],
+              "description": "经验仅属于当前项目，不建立跨项目基础偏好。"
+            },
+            "title": {
+              "type": "string",
+              "description": "经验标题。"
+            },
+            "text": {
+              "type": "string",
+              "description": "本轮已验证的工作经验或明确反馈，注明依据和适用条件；不写成跨项目偏好，不把推测当事实。"
+            },
+            "summary": {
+              "type": "string",
+              "description": "整理经验时的摘要。"
+            },
+            "instruction": {
+              "type": "string",
+              "description": "整理经验时的保留规则。"
+            },
+            "rating": {
+              "type": "string",
+              "enum": [
+                "good",
+                "bad",
+                "mixed",
+                "note"
+              ]
+            },
+            "expectedRevision": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "action"
+          ]
+        },
+        "canvasRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.view": {
+    "description": "查看实际单图像素，经OS共同图片输入接口返回；支持high/original。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Local filesystem path to an image file."
+            },
+            "detail": {
+              "type": "string",
+              "enum": [
+                "high",
+                "original"
+              ],
+              "description": "Image detail level. Defaults to high. Use high for ordinary review and all multi-image review; use original only for a single image when exact native pixels or resolution are essential."
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        },
+        "canvasRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "images.view_many": {
+    "description": "按原版顺序生成带编号联系表并返回实际像素，每页最多40图；nextOffset继续查看。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object",
+          "properties": {
+            "nodeId": {
+              "type": "string",
+              "description": "Canvas image node/container ID; includes all its images, in order."
+            },
+            "paths": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 40,
+              "items": {
+                "type": "string"
+              },
+              "description": "Current-project image paths, ordered to match the task."
+            },
+            "offset": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Start at this zero-based container image index; default 0."
+            }
+          },
+          "additionalProperties": false
+        },
+        "canvasRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "input"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.list": {
+    "description": "读取当前画布的视频素材、剪辑和导出任务，并恢复尚未落画布的已完成成果。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "videos.import": {
+    "description": "复制本地视频进入画布素材库，检查实际媒体并落画布，原文件保持不变。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.attach": {
+    "description": "将已有视频素材重新放入画布。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "assetId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "assetId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.create": {
+    "description": "创建剪辑：片段按数组顺序播放，可裁剪起止时间。空片段可保存草稿，导出前需添加。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "clips": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "properties": {
+              "assetId": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "assetId",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "fps": {
+          "type": "integer",
+          "enum": [
+            24,
+            30
+          ]
+        }
+      },
+      "required": [
+        "clips"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.update": {
+    "description": "按原修订更新剪辑，冲突保留已保存版本。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "clips": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "properties": {
+              "assetId": {
+                "type": "string"
+              },
+              "start": {
+                "type": "number"
+              },
+              "end": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "assetId",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "fps": {
+          "type": "integer",
+          "enum": [
+            24,
+            30
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "revision",
+        "clips"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.export": {
+    "description": "导出指定修订为 MP4，requestId 幂等，立即返回本地任务。不会重新启动已完成或取消的同号任务。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "revision",
+        "requestId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.status": {
+    "description": "读取本地导出进度与真实成果，完成时落画布。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "requestId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.cancel": {
+    "description": "取消当前本地导出并保留原素材与剪辑。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "requestId"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "videos.task": {
+    "description": "调用 Workspace 专员自己的 video_gen 任务。create 准备、submit 付费提交、status/list 本地读取、query 查询、recover 读原回执、download 取回成果并落画布。未知提交不得换号重试。",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "create",
+            "submit",
+            "status",
+            "list",
+            "query",
+            "recover",
+            "download"
+          ]
+        },
+        "request_id": {
+          "type": "string"
+        },
+        "profile_id": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer"
+        },
+        "size": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

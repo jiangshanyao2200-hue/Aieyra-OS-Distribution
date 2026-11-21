@@ -1,0 +1,132 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.browser",
+  "kind": "program",
+  "name": "浏览器",
+  "summary": "打开、观察和操作网页；用户与 Agent 共用标签、身份和控制权。",
+  "version": "1.1.34",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "program": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "program": "program.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "AGENTS.md": {
+      "sha256": "582210301c1afeedbd5fcc23991c3330bb4bbcf9f3733036024cf6786a42eaa7",
+      "size": 3610
+    },
+    "program.json": {
+      "sha256": "04231a8a9c3006d77d5b243e94954078e5869f3144121d58e45700890e25cac6",
+      "size": 2102
+    },
+    "README.md": {
+      "sha256": "13f35f245c578c76d81ec54fb566df36f9c4d5fa9617a8001729ee67d604fe7a",
+      "size": 3578
+    },
+    "service/browser-artifacts.cjs": {
+      "sha256": "010e14ce1c0d656a7dd83bb065762a3e361e11abe83cf4324284d66843f5ba0e",
+      "size": 4824
+    },
+    "service/browser-bookmarks.cjs": {
+      "sha256": "b6b6aaf9fb6efe180404a842e595920282963e5d31ed3078e71e362c53316ef4",
+      "size": 2425
+    },
+    "service/browser-control.cjs": {
+      "sha256": "d22c06d2e9304ce3be4bc5e15560c3c8d5b1f5cbcef49dd43fc71bddbd410e8c",
+      "size": 1551
+    },
+    "service/browser-external-access.cjs": {
+      "sha256": "355b3e4ee8eb59b60ea1a8bc4fa63d11143368c8cc05d5b3cad846bec896841c",
+      "size": 8695
+    },
+    "service/browser-passwords.cjs": {
+      "sha256": "731001f03b78e386590c4ab220ccab9eef84c08b1e956535d4b6290fd4e521d9",
+      "size": 4294
+    },
+    "service/browser-permissions.cjs": {
+      "sha256": "709f0d09143226b0a82749fe56129040dcef4d4f4053b115b7b890280e6911ad",
+      "size": 719
+    },
+    "service/browser-preferences.cjs": {
+      "sha256": "a1b78e3f7ae377f1377c07e37c368f3e0df4018718c2114f8ebf893504d95268",
+      "size": 3939
+    },
+    "service/browser-profiles.cjs": {
+      "sha256": "836b293b26c94aade4bd5c19222402f996cec4fd88f9a0a153a3ccf6bdec0c38",
+      "size": 6593
+    },
+    "service/browser-proxy-reputation.cjs": {
+      "sha256": "ca450f151c92ce8c1779cafaa6ee2cc05fea14f1b5432c4d29a10894d8b54472",
+      "size": 1313
+    },
+    "service/browser-runtime.cjs": {
+      "sha256": "1c139b46414be73a8e81dba3a94ea28139c455a39363f65c380a77a84629d3c3",
+      "size": 92587
+    },
+    "service/browser-semantics.cjs": {
+      "sha256": "45eb859f482a6913df94feaaf58dadc1ea03f7d303881aac2764d78dfb1c88e4",
+      "size": 8182
+    },
+    "service/browser-socks-proxy.cjs": {
+      "sha256": "a7d7cd330c703571e6e13b16f2c25528a680036027df798674a96efacfd93e9f",
+      "size": 4885
+    },
+    "service/browser-storage-lease.cjs": {
+      "sha256": "9490075250f46dd8d20ca964a3e55f6781cfadedc55a105be8ce6d3621a308dd",
+      "size": 1445
+    },
+    "ui/browser-guard.css": {
+      "sha256": "46dc270d630736f0ff3cdd4b1694ea1e6fea3ee13cf21dceaa9989da511e703d",
+      "size": 56
+    },
+    "ui/browser-guard.html": {
+      "sha256": "68584b31dffc8d8c4d7ac98c7283c5c9e59fef99648f7cd323913b141cf9c0c8",
+      "size": 275
+    },
+    "ui/browser-guard.js": {
+      "sha256": "65c95fbc1a270fbdca7114a1d12e585c31e29cfba9c1fc909ab28e4f003dc221",
+      "size": 168
+    },
+    "ui/browser-navigation.js": {
+      "sha256": "58416dfdc00a0cee919621c47f57fdb02127080fb973e541bae8122443e020cc",
+      "size": 2987
+    },
+    "ui/browser-panels.js": {
+      "sha256": "01a923d0c71950cac241392f1d0b19be714ada9c2fec5da9d323fc13310d84e1",
+      "size": 22569
+    },
+    "ui/browser-proxy-input.js": {
+      "sha256": "f06f3fec95fbf710a0f314ebe2ed90d0d82eb9fc884d573d7469f6cf6dcc936c",
+      "size": 2980
+    },
+    "ui/browser-shell.css": {
+      "sha256": "0a37f4a9273f5f645d61c4ef92366659b7e85b6639f3b47fc211056cf80f039e",
+      "size": 20321
+    },
+    "ui/browser-shell.html": {
+      "sha256": "c16f174759ea6415bad942bf742bd94621f7f3987d32dce21a3288b5b3949ed0",
+      "size": 5424
+    },
+    "ui/browser-shell.js": {
+      "sha256": "2ea02951958d81084df0d0dd7e08e60072264047f5fbb5b8e41d6f9f0a813859",
+      "size": 18420
+    }
+  }
+}

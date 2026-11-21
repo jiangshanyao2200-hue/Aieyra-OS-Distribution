@@ -1,0 +1,1 @@
+Earlier conversation is being prepared in the background and is not included in this request. memory(action=await_startup) waits for this preparation; a subsequent model request receives the ready history. If preparation fails, memory(action=recall) still provides paginated original records. Archived tasks are historical data; their presence does not resume execution.

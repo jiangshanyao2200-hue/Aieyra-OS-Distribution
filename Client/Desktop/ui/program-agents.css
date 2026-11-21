@@ -1,0 +1,83 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: [data-agent-working=true] > svg; [data-agent-state=failed],[data-agent-state=interrupted]; [data-agent-state=waiting_user]; @keyframes program-agent-breathe; .reduce-motion [data-agent-working=true] > svg; @media(prefers-reduced-motion:reduce); .module-mark[data-program-icon]; .module-mark[data-program-icon] > svg; :is(#desktop-dock button,.module-mark[data-program-icon]) > svg; :is(#desktop-dock button,.module-mark[data-program-icon]) > .dock-agent; :is(#desktop-dock button,.module-mark[data-program-icon])[data-agent-face=true] > .dock-agent; :is(#desktop-dock button,.module-mark[data-program-icon])[data-agent-face] > svg; :is(#desktop-dock button,.module-mark[data-program-icon])[data-agent-face=true] > svg; :is(#desktop-dock,.module-mark[data-program-icon]) .dock-agent .role-face; .reduce-motion :is(#desktop-dock button,.module-mark[data-program-icon]) > :is(svg,.dock-agent); @media(prefers-reduced-motion:reduce); [data-unconfigured=true] .model-readout,[data-unconfigured=true] .usage-readout; #session-indicators[data-unconfigured=true] #usage-anchor; #session-indicators[data-unconfigured=true] #model-display; #session-indicators[data-unconfigured=true] #model-name; .model-empty-orbit; [data-unconfigured=true] .model-orbit; [data-unconfigured=true] .model-empty-orbit; body[data-program-agent=true] #screen; body[data-program-sidebar=true]; body[data-program-sidebar=true][data-program-expanded=true]; .program-panel-edge; .program-panel-edge::before; .program-panel-edge:not(:hover,:focus-visible); .program-panel-edge:is(:hover,:focus-visible); .program-panel-edge:is(:hover,:focus-visible)::before; .program-recent; .program-recent; body[data-program-agent=true][data-input=true] .program-recent; .program-messages; .program-panel-welcome; .program-reference-chips; .program-reference-chips button; .program-reference-picker; .program-reference-picker label; body[data-program-agent=true][data-form=folded][data-eyra-placement] #bottom-bar; body[data-program-agent=true] #overlay-error; body[data-program-agent=true]:not([data-program-expanded=true]):not([data-chat-closing=true]) :is(#bottom-bar,#overlay-error,.program-recent); .program-panel-edge[hidden],.program-recent[hidden]; body.session-drawer-open; body[data-program-agent=true] #bottom-bar #composer; .program-status; .program-status[hidden]; .program-status button; .program-panel-header; .program-panel-title; body .panel-collapse; body .panel-collapse:hover; .panel-collapse svg; body[data-program-sidebar=true] .program-recent.chat-viewport; body[data-program-agent=true] #composer .program-composer-context; .program-composer-context[hidden],.program-composer-error[hidden]; .program-composer-error; .program-image-jobs; .program-image-job; .program-image-job>span; .program-status,.program-panel-title,body .panel-collapse
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/program-agents.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Navigation activity belongs to the real program agent, including off-page work. */
+[data-agent-working=true] > svg { animation:program-agent-breathe 1.8s ease-in-out infinite; }
+[data-agent-state=failed],[data-agent-state=interrupted] { color:var(--ui-error); }
+[data-agent-state=waiting_user] { color:var(--ui-warn); }
+@keyframes program-agent-breathe { 0%,100% { opacity:.45;transform:scale(.94); } 50% { opacity:1;transform:scale(1.04); } }
+.reduce-motion [data-agent-working=true] > svg { animation:none;opacity:1; }
+@media(prefers-reduced-motion:reduce) { [data-agent-working=true] > svg { animation:none; } }
+/* 顶栏工作指示（第109轮 R11）：工作时图标换成角色头像加缩小光圈；光圈叠在按钮内，按钮尺寸不变，停止后淡回原图标。 */
+.module-mark[data-program-icon] { position:relative;display:grid;place-items:center; }
+.module-mark[data-program-icon] > svg { grid-area:1/1;margin:0; }
+:is(#desktop-dock button,.module-mark[data-program-icon]) > svg { transition:opacity var(--ui-enter) var(--ui-ease); }
+:is(#desktop-dock button,.module-mark[data-program-icon]) > .dock-agent { position:absolute;left:50%;top:50%;width:calc(28px * var(--os-scale,1));height:calc(28px * var(--os-scale,1));translate:-50% -50%;opacity:0;scale:.8;pointer-events:none;transition:opacity var(--ui-enter) var(--ui-ease),scale var(--ui-enter) var(--ui-ease); }
+:is(#desktop-dock button,.module-mark[data-program-icon])[data-agent-face=true] > .dock-agent { opacity:1;scale:1; }
+:is(#desktop-dock button,.module-mark[data-program-icon])[data-agent-face] > svg { animation:none; }
+:is(#desktop-dock button,.module-mark[data-program-icon])[data-agent-face=true] > svg { opacity:0; }
+:is(#desktop-dock,.module-mark[data-program-icon]) .dock-agent .role-face { opacity:1; }
+.reduce-motion :is(#desktop-dock button,.module-mark[data-program-icon]) > :is(svg,.dock-agent) { transition:none; }
+@media(prefers-reduced-motion:reduce) { :is(#desktop-dock button,.module-mark[data-program-icon]) > :is(svg,.dock-agent) { transition:none; } }
+[data-unconfigured=true] .model-readout,[data-unconfigured=true] .usage-readout { pointer-events:none; }
+#session-indicators[data-unconfigured=true] #usage-anchor { display:none; }
+#session-indicators[data-unconfigured=true] #model-display { opacity:.65;width:calc(3em + 56px);min-width:calc(3em + 56px);transition:none; }
+#session-indicators[data-unconfigured=true] #model-name { display:inline;max-width:none;opacity:1;transform:none; }
+.model-empty-orbit { display:none; }
+[data-unconfigured=true] .model-orbit { display:none; }
+[data-unconfigured=true] .model-empty-orbit { display:block; }
+
+body[data-program-agent=true] #screen { display:none!important; }
+body[data-program-sidebar=true] { background:transparent!important; }
+/* 侧栏是盖在程序页（含原生网页）之上的独立窗口，模糊不到下面的内容：叠两层 --ui-glass，下面的文字不再透上来。 */
+body[data-program-sidebar=true][data-program-expanded=true] { background:linear-gradient(var(--ui-glass),var(--ui-glass)),var(--ui-glass)!important;box-shadow:var(--ui-edge-hi),-18px 0 48px -24px #000000ad; }
+.program-panel-edge { position:fixed;inset:0;display:grid;place-items:center;width:100%;padding:0;border:0;background:transparent;color:var(--ui-text-2);cursor:pointer;font-size:24px;opacity:.55; }
+.program-panel-edge::before { content:'';position:absolute;right:3px;top:45%;width:3px;height:34px;border-radius:var(--ui-radius-pill);background:currentColor; }
+.program-panel-edge:not(:hover,:focus-visible) { font-size:0; }
+.program-panel-edge:is(:hover,:focus-visible) { background:var(--ui-glass);opacity:1; }
+.program-panel-edge:is(:hover,:focus-visible)::before { opacity:0; }
+.program-recent { position:absolute;box-sizing:border-box;color:var(--ui-text); }
+.program-recent { inset:48px 0 16px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:16px; }
+body[data-program-agent=true][data-input=true] .program-recent { bottom:calc(var(--overlay-input-height) + 28px); }
+.program-messages { display:flex;flex-direction:column;gap:var(--chat-safe-gap); }
+.program-panel-welcome { margin-bottom:var(--chat-safe-gap); }
+.program-reference-chips { display:flex;flex-wrap:wrap;gap:4px; }
+.program-reference-chips button { max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.program-reference-picker { max-height:160px;overflow:auto;border:0;box-shadow:var(--ui-edge);border-radius:var(--ui-radius-menu);padding:8px;background:var(--glass-surface); }
+.program-reference-picker label { display:flex;align-items:center;gap:8px;padding:4px; }
+body[data-program-agent=true][data-form=folded][data-eyra-placement] #bottom-bar { left:16px;right:16px;bottom:16px; }
+body[data-program-agent=true] #overlay-error { top:56px;bottom:auto;left:16px;right:16px;max-height:100px;overflow:auto; }
+body[data-program-agent=true]:not([data-program-expanded=true]):not([data-chat-closing=true]) :is(#bottom-bar,#overlay-error,.program-recent) { display:none!important; }
+.program-panel-edge[hidden],.program-recent[hidden] { display:none; }
+
+body.session-drawer-open { --program-edge-width:0px; }
+
+
+
+body[data-program-agent=true] #bottom-bar #composer { min-height:48px; }
+.program-status { display:flex;align-items:center;gap:8px;padding:0 8px 8px;color:var(--ui-text-3);font-size:12px; }
+.program-status[hidden] { display:none; }
+.program-status button { min-height:24px;padding:2px 8px; }
+
+.program-panel-header { position:absolute;inset:0 0 auto;height:48px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 16px; }
+.program-panel-title { overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ui-text-2);font-size:var(--os-interface-size,13px); }
+body .panel-collapse { display:grid;place-items:center;flex:none;width:32px;height:32px;min-height:32px;padding:6px;border:0;border-radius:50%;background:transparent;color:var(--ui-text-2); }
+body .panel-collapse:hover { background:var(--ui-glass-soft);color:var(--ui-text); }
+.panel-collapse svg { width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:var(--ui-icon-stroke,1.5);stroke-linecap:round;stroke-linejoin:round; }
+body[data-program-sidebar=true] .program-recent.chat-viewport { padding-top:16px; }
+body[data-program-agent=true] #composer .program-composer-context { grid-area:1 / 1 / auto / -1;min-width:0; }
+.program-composer-context[hidden],.program-composer-error[hidden] { display:none; }
+.program-composer-error { margin:0 0 8px;max-height:24vh;overflow:auto;white-space:normal;overflow-wrap:anywhere; }
+
+.program-image-jobs { display:grid;gap:12px;margin-top:16px; }
+.program-image-job { display:flex;flex-wrap:wrap;gap:8px;font-size:var(--os-interface-size,13px);color:var(--ui-text-2); }
+.program-image-job>span { flex-basis:100%;overflow-wrap:anywhere; }
+
+.program-status,.program-panel-title,body .panel-collapse{color:var(--ui-text)}

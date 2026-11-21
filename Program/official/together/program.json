@@ -1,0 +1,19 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "product/desktop/ui/index.html",
+    "native": "together",
+    "navigation": {
+      "tab": "dock-together",
+      "host": "surface",
+      "background": "sleep",
+      "order": 8
+    }
+  },
+  "operations": [
+    {"id": "status", "description": "读取当前本地办公室连接及工位数量。"},
+    {"id": "stations", "description": "读取本地工位名单和状态。"},
+    {"id": "task", "description": "按 id 读取本地工单详情。"}
+  ]
+}

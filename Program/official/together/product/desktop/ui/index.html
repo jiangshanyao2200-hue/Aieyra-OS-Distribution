@@ -1,0 +1,96 @@
+<!-- @file-map:start
+文件: link/desktop/ui/index.html
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: link/desktop/ui/aidebug.mjs, link/desktop/ui/appearance.css, link/desktop/ui/appearance.mjs, link/desktop/ui/engineering.css, link/desktop/ui/engineering.mjs, link/desktop/ui/feedback.css, link/desktop/ui/focus.css, link/desktop/ui/os-foundation.css, link/desktop/ui/os-host.css, link/desktop/ui/participation.css, link/desktop/ui/station-overview.css, link/desktop/ui/unified.css, link/desktop/ui/unified.mjs, link/desktop/ui/workflow.css, link/desktop/ui/workflow.mjs, link/desktop/ui/workspace.css, link/desktop/ui/workspace.mjs, link/office/web/dialogs.css, link/office/web/together-design.css
+上游: link/desktop/main.cjs
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  desktop-background | element
+  native-office-frame | element
+  header-3 | element
+  tabs | element
+  navigation-sweep | element
+  local-office-tabs | element
+  together-modes | element
+  local-office-tools | element
+  broadcast-preview | element
+  broadcast-button | element
+  broadcast-unread | element
+  release-transfer | element
+  system-settings | element
+  account | element
+  notice | element
+  milestone-announcement | element
+  workspace | element
+  dialog | element
+  dialog-title | element
+  dialog-body | element
+  detail-dialog | element
+  detail-title | element
+  script-23 | element
+  script-24 | element
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end -->
+<!doctype html>
+<html lang="zh-CN" class="together-desktop">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://os.aieyra.cn; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Aieyra 众创 Link</title><link rel="stylesheet" href="os-foundation.css"><link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="engineering.css"><link rel="stylesheet" href="workflow.css"><link rel="stylesheet" href="participation.css"><link rel="stylesheet" href="station-overview.css"><link rel="stylesheet" href="focus.css"><link rel="stylesheet" href="appearance.css"><link rel="stylesheet" href="unified.css">
+  <link rel="stylesheet" href="../../office/web/dialogs.css">
+  <link rel="stylesheet" href="feedback.css">
+  <link rel="stylesheet" href="../../office/web/together-design.css">
+  <link rel="stylesheet" href="os-host.css">
+</head>
+<body>
+  <div id="desktop-background" aria-hidden="true"><img class="background-layer" alt=""><img class="background-layer" alt=""><div class="background-shade"></div></div>
+  <img id="native-office-frame" alt="" aria-hidden="true" hidden>
+  <header class="titlebar topbar">
+    <div class="together-brand"><img src="../../office/web/mark.svg" alt="" width="26" height="26"><span>Aieyra <strong>Together</strong></span></div>
+    <nav id="tabs" aria-label="主导航">
+      <span id="navigation-sweep" aria-hidden="true"></span>
+      <button data-tab="agents" aria-label="Agent 接入" title="Agent 接入" hidden><i data-icon="agent"></i><span>接入</span></button>
+      <button data-tab="home" class="active" aria-label="首页" title="首页" aria-current="page"><i data-icon="home"></i><span>首页</span></button>
+      <button data-tab="repository" aria-label="仓库" title="仓库" hidden><i data-icon="repository"></i><span>仓库</span></button>
+      <button data-tab="office" aria-label="Agent 工位" title="Agent 工位" hidden><i data-icon="office"></i><span>工位</span></button>
+      <button data-tab="chat" aria-label="开发者群聊" title="开发者群聊" hidden><i data-icon="chat"></i><span>群聊</span></button>
+      <button data-tab="management" aria-label="管理" title="管理" hidden><i data-icon="management"></i><span>管理</span></button>
+    </nav>
+    <nav id="local-office-tabs" aria-label="本地办公室" hidden><button data-office-action="stations" aria-pressed="true">工位</button><button data-office-action="chat" aria-pressed="false">群聊</button><button data-office-action="tasks" aria-pressed="false">工单</button></nav>
+    <span class="titlebar-space" aria-hidden="true"></span>
+    <div id="together-modes" role="group" aria-label="协作模式" hidden>
+      <button type="button" data-mode="local" aria-pressed="true">本地</button>
+      <button type="button" data-mode="cloud" aria-pressed="false">云端</button>
+    </div>
+    <div id="local-office-tools" role="group" aria-label="本地工位操作" hidden>
+      <button type="button" class="system-settings" data-office-action="connections" aria-label="云服务器" title="云服务器" disabled><i data-icon="office"></i><span>云服务器</span></button>
+      <button type="button" class="system-settings" data-office-action="guide" aria-label="Agent 接入说明" title="Agent 接入说明" aria-haspopup="dialog" disabled><i data-icon="agent"></i><span>接入说明</span></button>
+    </div>
+    <button id="broadcast-preview" data-action="broadcast" hidden><span class="broadcast-preview-icon"></span><span class="broadcast-preview-copy"><strong></strong><small></small></span><i data-icon="arrow"></i></button>
+    <button id="broadcast-button" class="system-settings broadcast-button" data-action="broadcast" aria-label="共创动态" title="共创动态" hidden><i data-icon="broadcast"></i><span id="broadcast-unread" hidden></span></button>
+    <button id="release-transfer" class="system-settings release-transfer" data-action="release-transfer" aria-label="版本下载" title="版本下载" hidden><i data-icon="download"></i></button>
+    <button id="system-settings" class="system-settings" data-action="system-settings" aria-label="系统设置" title="系统设置"><i data-icon="settings"></i></button>
+    <button id="account" class="account" aria-label="登录" aria-haspopup="dialog">登录</button>
+    <nav class="window-actions" aria-label="窗口">
+      <button data-window="minimize" aria-label="最小化"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5h10"/></svg></button>
+      <button data-window="maximize" aria-label="最大化"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx=".5"/></svg></button>
+      <button data-window="close" aria-label="关闭"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
+    </nav>
+  </header>
+  <div id="notice" role="status" hidden></div>
+  <div id="milestone-announcement" class="sr-only" role="status"></div>
+  <main id="workspace" tabindex="-1"></main>
+  <dialog id="dialog" aria-labelledby="dialog-title">
+    <div class="dialog-top"><h2 id="dialog-title"></h2><button type="button" data-dialog-close aria-label="关闭窗口"><i data-icon="close"></i></button></div>
+    <div id="dialog-body"></div>
+  </dialog>
+  <dialog id="detail-dialog" class="reading-dialog" aria-labelledby="detail-title">
+    <div class="dialog-top"><h2 id="detail-title"></h2><button type="button" data-dialog-close aria-label="关闭详情" autofocus><i data-icon="close"></i></button></div>
+    <div class="detail-content" tabindex="0" role="document" aria-labelledby="detail-title"></div>
+  </dialog>
+  <script type="module" src="workspace.mjs"></script>
+  <script type="module" src="aidebug.mjs"></script>
+</body>
+</html>

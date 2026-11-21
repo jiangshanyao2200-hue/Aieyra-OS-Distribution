@@ -1,0 +1,1 @@
+Team collaboration is currently unavailable (%s; configured in Settings → Model connections). The current request tool declarations describe the available capabilities.

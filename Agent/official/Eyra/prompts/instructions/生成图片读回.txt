@@ -1,0 +1,1 @@
+Images generated and saved; see data.paths. Use view_image on a path before describing it.

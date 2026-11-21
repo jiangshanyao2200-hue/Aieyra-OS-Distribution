@@ -1,0 +1,61 @@
+[
+  {
+    "folder": "base/official/terminal",
+    "id": "aieyra.tool.terminal",
+    "name": "terminal",
+    "aliases": [
+      "terminal",
+      "exec_command",
+      "write_stdin",
+      "read_shell_output"
+    ]
+  },
+  {
+    "folder": "base/official/apply_patch",
+    "id": "aieyra.tool.apply_patch",
+    "name": "apply_patch",
+    "aliases": [
+      "apply_patch"
+    ]
+  },
+  {
+    "folder": "base/official/update_plan",
+    "id": "aieyra.tool.update_plan",
+    "name": "update_plan",
+    "aliases": [
+      "update_plan"
+    ]
+  },
+  {
+    "folder": "base/official/view_image",
+    "id": "aieyra.tool.view_image",
+    "name": "view_image",
+    "aliases": [
+      "view_image"
+    ]
+  },
+  {
+    "folder": "base/official/web_search",
+    "id": "aieyra.tool.web_search",
+    "name": "web_search",
+    "aliases": [
+      "web_search"
+    ]
+  },
+  {
+    "folder": "toolbox/official/imagegen",
+    "id": "aieyra.tool.image_gen",
+    "name": "image_gen",
+    "aliases": [
+      "image_gen"
+    ]
+  },
+  {
+    "folder": "toolbox/official/videogen",
+    "id": "aieyra.tool.video_gen",
+    "name": "video_gen",
+    "aliases": [
+      "video_gen"
+    ]
+  }
+]

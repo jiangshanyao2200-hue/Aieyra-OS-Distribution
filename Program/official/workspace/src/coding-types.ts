@@ -1,0 +1,40 @@
+export type CodingItem = {
+  id: string; type: string; text?: string; phase?: string; status?: string;
+  command?: string; aggregatedOutput?: string; exitCode?: number; truncated?: boolean;
+  changes?: Array<{ path: string; diff?: string; kind?: { type: string; move_path?: string } }>;
+  query?: string; action?: unknown; path?: string; tool?: string; name?: string;
+  turnId?: string; durationMs?: number; cwd?: string;
+  startedAt?: number;
+  image?: { id: string; canvasProjectId: string; status: string; startedAt: number; input: Record<string, unknown>; summary?: string; error?: string;
+    batch?: { status: string; count: number | null; continuous: boolean; completed: number; failed: number; unknown: number; skipped?: number; running: number; concurrency: number; summary: string };
+    outputs: Array<{nodeId: string; displayCode: string; title: string; assets: Array<{path?: string; assetUrl?: string; displayCode?: string}>}> };
+  plan?: Array<{ step: string; status: string }>;
+  server?: string; arguments?: unknown; result?: unknown; error?: unknown;
+  receiverThreadIds?: string[]; agentsStates?: Record<string, { status?: string; message?: string }>;
+  delegation?: { taskId: string; name: string; model: string; profileId: string; status: string; baseTools: string[]; toolNames: string[]; result?: string; progress?: string; error?: string; review?: { verdict: string; evidence: string } | null };
+};
+export type CodingRequest = {
+  id: string | number; method: string;
+  params: { command?: string; reason?: string; questions?: Array<{ id: string; header: string; question: string; isSecret?: boolean; options?: Array<{ label: string; description: string }> | null }> };
+};
+export type CodingState = {
+  avatar?: string;
+  retrying?: { turnId: string; message: string } | null;
+  submissions?: Array<{ id: string; turnId?: string; status: "pending" | "unknown" | "accepted" | "rejected" }>;
+  runtimeId?: string;
+  lastTurnId?: string | null;
+  nativeReplies?: Array<{ requestId: string | number; runtimeId: string; turnId: string; submittedAt: number; observedAt: number }>;
+  cacheReported?: boolean;
+  storedHistory?: boolean; hasMessages?: boolean;
+  waitingFor?: "user" | "approval" | null;
+  transportMetrics?: Array<{ protocol: string; completed: boolean; durationMs: number; firstEventMs: number | null; inputTokens?: number; outputTokens?: number; cachedInputTokens?: number | null; cacheReported?: boolean }>;
+  revision?: number; conversations?: Array<{ id: string; label: string; createdAt: number }>;
+  itemsDelta?: boolean;
+  ok: boolean; error?: string; version?: string; model?: string; threadId?: string | null; turnId?: string | null;
+  status?: "connecting" | "running" | "idle" | "stopped" | "compacting" | "error";
+  items?: CodingItem[]; cursor?: string | null; contextSource?: string;
+  models?: string[]; transport?: string;
+  tokenUsage?: { total: { inputTokens: number; cachedInputTokens: number; outputTokens: number }; last: { totalTokens: number; inputTokens: number; cachedInputTokens: number; outputTokens: number }; modelContextWindow: number | null } | null;
+  plan?: Array<{ step: string; status: string }>; requests?: CodingRequest[];
+  agents?: Array<{ id: string; name: string; status: string }>;
+};

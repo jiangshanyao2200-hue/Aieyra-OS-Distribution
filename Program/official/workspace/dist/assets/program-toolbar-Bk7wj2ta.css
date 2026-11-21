@@ -1,0 +1,93 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Theme/runtime/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: :root; .os-program-toolbar; .os-program-toolbar[data-folded=true]; .os-program-toolbar::after; .os-program-toolbar[data-folded=true]::after; @media(prefers-reduced-motion:reduce); .module-command-bar.os-program-toolbar; .module-command-bar strong; .module-command-bar .program-context; .module-command-bar button; #center-toolbar .center-update-dock; #rail.module-command-bar .ui-rail-button; body:has(#rail.module-command-bar) .app-main; body:has(#rail.module-command-bar[data-folded=true]) .app-main; @layer program-chrome; [data-program-row]; [data-program-row][data-program-tracks]; [data-program-title]; [data-program-actions]:not([hidden]); [data-program-action]:not([hidden]); [data-program-action]:hover:not(:disabled); [data-program-action]:is([aria-selected=true],[aria-current=page],[aria-pressed=true],[aria-expanded=true]); [data-program-action]:focus-visible; [data-program-action]:disabled; [data-program-action] svg; [data-program-action] span:not([hidden]); [data-program-action] :is(i,.ui-rail-icon); [data-program-action] .ui-rail-label; [data-program-row] [hidden]; .os-program-toolbar; @media (max-width:560px); [data-program-row]; [data-program-title]
+ * Impact: python -B scripts/code-atlas.py show Theme/runtime/program-toolbar.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+:root {
+ --program-toolbar-height:44px;
+ --program-toolbar-ink:var(--ui-text,#eef0f2);
+ --program-toolbar-muted:var(--ui-text-2,#bdc5cc);
+ --program-toolbar-selection:var(--ui-control-hover,#ffffff1a);
+}
+.os-program-toolbar {
+ position:relative;
+ z-index:8;
+ -webkit-app-region:no-drag;
+}
+.module-command-bar.os-program-toolbar { display:flex; align-items:center; gap:10px; min-height:44px; padding:4px 16px; background:transparent; color:var(--ui-text,inherit); }
+.module-command-bar strong { font-size:14px; font-weight:600; }
+.module-command-bar .program-context { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.module-command-bar button { display:inline-flex; align-items:center; gap:6px; }
+#rail.module-command-bar .ui-rail-button { display:inline-flex; width:auto; min-height:32px; padding-inline:7px; border-radius:4px; }
+
+/* The program hosts own placement. The shared chrome owns the row and its controls,
+   including in applications with an existing third-party control stylesheet. */
+@layer program-chrome {
+ [data-program-row] {
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:6px!important;
+  width:100%!important;
+  min-width:0!important;
+  height:var(--program-toolbar-height)!important;
+  min-height:var(--program-toolbar-height)!important;
+  padding:0 12px!important;
+  margin-inline:0!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  color:var(--program-toolbar-ink)!important;
+  font-family:var(--os-interface-font,var(--browser-font,"Segoe UI",system-ui,sans-serif))!important;
+  letter-spacing:0!important;
+ }
+ [data-program-title] {
+  display:inline-flex!important; align-items:center!important; flex:0 0 auto!important;
+  height:32px!important; padding:0!important; margin:0 8px 0 0!important;
+  color:inherit!important; font:600 14px/20px var(--os-interface-font,var(--browser-font,"Segoe UI",system-ui,sans-serif))!important;
+  letter-spacing:0!important; white-space:nowrap!important;
+ }
+ [data-program-actions]:not([hidden]) {
+  display:flex!important; align-items:center!important; flex-wrap:nowrap!important;
+  flex-direction:row!important; gap:4px!important; margin-block:0!important; padding:0!important;
+  background:transparent!important; border:0!important; border-radius:0!important; box-shadow:none!important;
+ }
+ [data-program-action]:not([hidden]) {
+  box-sizing:border-box!important; display:inline-flex!important; flex:0 0 auto!important;
+  align-items:center!important; justify-content:center!important; gap:6px!important;
+  width:auto!important; min-width:32px!important; height:32px!important; min-height:32px!important;
+  padding:0 7px!important; margin:0!important; border:0!important; border-radius:4px!important;
+  background:var(--program-action-fill,transparent)!important;
+  color:var(--program-action-ink,var(--program-toolbar-muted))!important; box-shadow:none!important;
+  font:500 13px/18px var(--os-interface-font,var(--browser-font,"Segoe UI",system-ui,sans-serif))!important;
+  letter-spacing:0!important; white-space:nowrap!important; cursor:pointer;
+  -webkit-app-region:no-drag; transition:background-color 120ms ease,color 120ms ease;
+ }
+ [data-program-action]:hover:not(:disabled) {--program-action-fill:var(--program-toolbar-selection);--program-action-ink:var(--program-toolbar-ink);}
+ [data-program-action]:is([aria-selected=true],[aria-current=page],[aria-pressed=true],[aria-expanded=true]) {
+  --program-action-fill:var(--program-toolbar-selection);
+  --program-action-ink:var(--program-toolbar-ink);
+ }
+ [data-program-action]:focus-visible {outline:2px solid var(--ui-accent,#9ab7eb)!important;outline-offset:-2px!important;}
+ [data-program-action]:disabled {opacity:.42!important;cursor:default;}
+ [data-program-action] svg {display:block!important;flex:none!important;width:16px!important;height:16px!important;}
+ [data-program-action] span:not([hidden]) {font:inherit;}
+ [data-program-action] :is(i,.ui-rail-icon) {display:grid!important;place-items:center!important;width:16px!important;height:16px!important;background:none!important;box-shadow:none!important;border:0!important;padding:0!important;}
+ [data-program-action] .ui-rail-label {position:static!important;font:inherit!important;opacity:1!important;transform:none!important;}
+ [data-program-row] [hidden] {display:none!important;}
+ @media (max-width:560px) {
+  [data-program-row] {padding-inline:8px!important;gap:4px!important;}
+  [data-program-title] {margin-inline-end:4px!important;}
+ }
+}
+

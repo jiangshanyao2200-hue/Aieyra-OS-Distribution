@@ -1,0 +1,595 @@
+/* @file-map:start
+文件: link/office/web/together-design.css
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html, link/office/web/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test link/office/tests/unit/*.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | :root:is(.together-desktop,.together-office)
+  rule-2 | style | :root:is(.together-desktop,.together-office):not([data-os-host])
+  rule-3 | style | :is(.together-desktop,.together-office) :where(a,button,summary,[role=tab],input,textarea,[tabindex]):focus-visible
+  rule-4 | style | :is(.together-desktop,.together-office) [data-tone=work]
+  rule-5 | style | :is(.together-desktop,.together-office) [data-tone=election]
+  rule-6 | style | :is(.together-desktop,.together-office) [data-tone=success]
+  rule-7 | style | :is(.together-desktop,.together-office) [data-tone=release]
+  rule-8 | style | :is(.together-desktop,.together-office) [data-tone=attention]
+  rule-9 | style | .together-desktop body
+  rule-10 | style | .together-desktop body > .titlebar
+  rule-11 | style | .together-brand
+  rule-12 | style | .together-brand strong
+  rule-13 | style | .together-brand img
+  rule-14 | style | .titlebar-space
+  rule-15 | style | .together-desktop .titlebar nav#tabs
+  rule-16 | style | .together-desktop .titlebar #tabs > button
+  rule-17 | style | .together-desktop .titlebar #tabs > button .icon
+  rule-18 | style | .together-desktop .titlebar #tabs > button.active
+  rule-19 | style | .together-desktop .titlebar #tabs > button:hover:not(:disabled)
+  rule-20 | style | .together-desktop .titlebar #navigation-sweep
+  rule-21 | style | .together-desktop .titlebar .system-settings
+  rule-22 | style | .together-desktop .titlebar :is(.system-settings,.account,.window-actions button)
+  rule-23 | style | .together-desktop #broadcast-button
+  rule-24 | style | .together-desktop #broadcast-button:has(#broadcast-unread:not([hidden]))
+  rule-25 | style | .together-desktop #broadcast-unread:not([hidden])
+  rule-26 | style | #broadcast-preview:not([hidden])
+  rule-27 | style | .broadcast-preview-icon
+  rule-28 | style | .broadcast-preview-icon .icon
+  rule-29 | style | .broadcast-preview-copy
+  rule-30 | style | .broadcast-preview-copy > *
+  rule-31 | style | .broadcast-preview-copy strong
+  rule-32 | style | .broadcast-preview-copy small
+  rule-33 | style | #broadcast-preview > .icon
+  rule-34 | style | .together-desktop #workspace > .surface
+  rule-35 | style | .together-desktop .surface > .surface-toolbar:has(.together-page-title)
+  rule-36 | style | .together-page-title
+  rule-37 | style | .together-desktop .surface > header .together-page-title
+  rule-38 | style | .together-desktop #workspace .unified-home
+  rule-39 | style | .together-desktop .home-situation
+  rule-40 | style | .together-desktop .home-stage-heading
+  rule-41 | style | .together-desktop .home-stage-heading p
+  rule-42 | style | .together-desktop .home-stage-heading h1
+  rule-43 | style | .together-desktop .home-stage-heading:has(+.home-stage-steps [data-step-state=current]) h1
+  rule-44 | style | .together-desktop .home-stage-members
+  rule-45 | style | .together-desktop .home-stage-steps
+  rule-46 | style | .together-desktop .home-stage-steps li
+  rule-47 | style | .together-desktop .home-stage-steps li::before
+  rule-48 | style | .together-desktop .home-stage-steps [data-step-state=done]
+  rule-49 | style | .together-desktop .home-stage-steps [data-step-state=current]
+  rule-50 | style | .together-desktop .home-stage-step, .together-desktop button.home-stage-step:hover:not(:disabled)
+  rule-51 | style | .together-desktop [data-step-state=current] .home-stage-step, .together-desktop button.home-stage-step:hover:not(:disabled)
+  rule-52 | style | .together-desktop [data-step-state=current] .home-stage-step
+  rule-53 | style | .together-desktop [data-step-state=current] .home-stage-icon
+  rule-54 | style | .together-desktop .home-stage-icon
+  rule-55 | style | .together-desktop .home-stage-icon i
+  rule-56 | style | .together-desktop .home-stage-text strong
+  rule-57 | style | .together-desktop .home-stage-text > span
+  rule-58 | style | .together-desktop [data-step-state=current] .home-stage-text > span
+  rule-59 | style | .together-desktop .home-milestones
+  rule-60 | style | .together-desktop .home-milestones li
+  rule-61 | style | .together-desktop .home-milestones li::before
+  rule-62 | style | .together-desktop .home-milestones [data-featured]
+  rule-63 | style | .together-desktop .milestone-icon
+  rule-64 | style | .together-desktop .milestone-filters
+  rule-65 | style | .together-desktop .milestone-filters [aria-pressed=true]
+  rule-66 | style | .together-desktop .milestone-description strong
+  rule-67 | style | .together-desktop .milestone-description > div, .together-desktop .home-milestones time
+  rule-68 | style | .together-desktop .milestone-link
+  rule-69 | style | .together-desktop .repository-channels
+  rule-70 | style | .together-desktop .repository-channels li + li
+  rule-71 | style | .together-desktop .repository-channels li > :is(button,div)
+  rule-72 | style | .together-desktop .repository-channels .channel-icon
+  rule-73 | style | .together-desktop .source-repository
+  rule-74 | style | .together-desktop #workspace .development-card
+  rule-75 | style | .together-desktop .surface:has(.work-status) > header
+  rule-76 | style | .together-desktop .surface:has(.work-status) > header::before
+  rule-77 | style | .together-desktop .surface:has(.work-status) .situation-headline
+  rule-78 | style | .together-desktop .personal-desk
+  rule-79 | style | .together-desktop .station-work-marker
+  rule-80 | style | .together-desktop .station-work-marker[data-task-state=blocked]
+  rule-81 | style | .together-desktop .station-work-marker[data-task-state=review]
+  rule-82 | style | .together-desktop :is(.composer,.admin-list > article,.home-goal,.construction-task,.quest)
+  rule-83 | style | .together-desktop .surface.chat-surface .composer
+  rule-84 | style | .together-desktop .management-grid > .management-section
+  rule-85 | style | .together-desktop .management-section .admin-list > article + article
+  rule-86 | style | .together-desktop .management-section h2
+  rule-87 | style | .together-desktop .management-section:has([data-review]) h2
+  rule-88 | style | .together-desktop :is(#workspace,#dialog,#detail-dialog) button.primary:not(:disabled)
+  rule-89 | style | .together-desktop :is(#workspace,#dialog,#detail-dialog) button.primary:hover:not(:disabled)
+  rule-90 | style | .together-desktop :is(#workspace,#dialog,#detail-dialog) button.secondary
+  rule-91 | style | .together-desktop body :is(#dialog,#detail-dialog)
+  rule-92 | style | .together-office #main
+  rule-93 | style | .together-office #main .link-tabs
+  rule-94 | style | .together-office #main .link-tabs > button.ui-rail-button
+  rule-95 | style | .together-office #main .link-tabs > button.ui-rail-button[aria-selected=true]
+  rule-96 | style | .together-office #main .link-tabs > button.ui-rail-button .ui-rail-icon
+  rule-97 | style | .together-office #main .link-top:has(#link-station-overview:not([hidden]))
+  rule-98 | style | #link-station-overview:not([hidden])
+  rule-99 | style | #link-station-overview h1
+  rule-100 | style | #link-station-overview span
+  rule-101 | style | .together-office #main .station-controls:not([hidden]), .together-office #main #station-pages:not([hidden])
+  rule-102 | style | .together-office #main .station-controls
+  rule-103 | style | .together-office #main .station-controls :is(input,select)
+  rule-104 | style | .together-office #main #station-search
+  rule-105 | style | .together-office #main .station-controls output
+  rule-106 | style | .together-office #main #station-pages button
+  rule-107 | style | .together-office #main #station-pages button:disabled
+  rule-108 | style | .together-office #main #station-pages svg
+  rule-109 | style | .together-office #main #station-pages [data-station-page="1"] svg
+  rule-110 | style | .together-office #main .home-seat
+  rule-111 | style | .together-office #main .home-seat:is(:hover,:focus-visible)
+  rule-112 | style | .together-office #main .home-seat:is([data-state=offline],[data-state=lost],[data-state=sync]) > svg
+  rule-113 | style | .together-office #main .home-seat .seat-name
+  rule-114 | style | .together-office #main .home-seat .seat-status
+  rule-115 | style | .together-office #main .home-seat[data-state=working] .seat-status
+  rule-116 | style | .together-office #main :is(.ticket,.group-message,.detail,#link-connections)
+  rule-117 | style | .together-office #main .ticket
+  rule-118 | style | .together-office #main .panel-head
+  rule-119 | style | .together-office #main .panel-head h2
+  rule-120 | style | .together-office #main .group-page, .together-office #main .workorders-page
+  rule-121 | style | @media (max-width: 920px)
+  rule-122 | style | @media (max-width: 760px)
+  rule-123 | style | @media (max-width: 620px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ :root:is(.together-desktop,.together-office) {
+  color-scheme: dark;
+  --together-canvas: #111411;
+  --together-rail: #141714;
+  --together-panel: #1a1e1a;
+  --together-raised: #222722;
+  --together-edge: #394139;
+  --together-ink: #edf1eb;
+  --together-muted: #aab7ad;
+  --together-accent: #d1ed9b;
+  --together-accent-ink: #182015;
+  --together-info: #a3ceef;
+  --together-election: #efd4a4;
+  --together-release: #dccef3;
+  --together-attention: #ffbaad;
+  --together-radius: 8px;
+  --together-gutter: 28px;
+  --line: var(--together-edge);
+}
+
+/* @chain-region rule-2 */ :root:is(.together-desktop,.together-office):not([data-os-host]) {
+  --ui-text: var(--together-ink);
+  --ui-text-2: var(--together-muted);
+  --ui-text-3: #9aa79d;
+  --ui-panel: var(--together-panel);
+  --ui-glass: var(--together-panel);
+  --ui-accent: var(--together-accent);
+}
+
+/* @chain-region rule-3 */ :is(.together-desktop,.together-office) :where(a,button,summary,[role=tab],input,textarea,[tabindex]):focus-visible {
+  outline: 2px solid var(--together-accent);
+  outline-offset: 2px;
+}
+
+/* @chain-region rule-4 */ :is(.together-desktop,.together-office) [data-tone=work] { --event-accent: var(--together-info); }
+/* @chain-region rule-5 */ :is(.together-desktop,.together-office) [data-tone=election] { --event-accent: var(--together-election); }
+/* @chain-region rule-6 */ :is(.together-desktop,.together-office) [data-tone=success] { --event-accent: var(--together-accent); }
+/* @chain-region rule-7 */ :is(.together-desktop,.together-office) [data-tone=release] { --event-accent: var(--together-release); }
+/* @chain-region rule-8 */ :is(.together-desktop,.together-office) [data-tone=attention] { --event-accent: var(--together-attention); }
+
+/* @chain-region rule-9 */ .together-desktop body { background: var(--together-canvas); }
+/* @chain-region rule-10 */ .together-desktop body > .titlebar {
+  gap: 9px;
+  padding-inline: 14px 8px;
+  background: var(--together-rail);
+  border-bottom: 1px solid var(--together-edge);
+  backdrop-filter: none;
+}
+/* @chain-region rule-11 */ .together-brand {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--together-muted);
+}
+/* @chain-region rule-12 */ .together-brand strong { color: var(--together-ink); font-weight: 650; }
+/* @chain-region rule-13 */ .together-brand img { flex: none; border-radius: 6px; }
+/* @chain-region rule-14 */ .titlebar-space { flex: 1 1 12px; min-width: 0; }
+/* @chain-region rule-15 */ .together-desktop .titlebar nav#tabs {
+  flex: 0 1 auto;
+  gap: 2px !important;
+  padding: 3px;
+  margin-inline-start: 6px;
+  border: 1px solid var(--together-edge);
+  border-radius: var(--together-radius);
+  background: var(--together-canvas);
+}
+/* @chain-region rule-16 */ .together-desktop .titlebar #tabs > button {
+  flex: 0 0 35px;
+  width: 35px;
+  height: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  color: var(--together-muted);
+  box-shadow: none;
+}
+/* @chain-region rule-17 */ .together-desktop .titlebar #tabs > button .icon { color: inherit; }
+/* @chain-region rule-18 */ .together-desktop .titlebar #tabs > button.active {
+  background: var(--together-raised);
+  color: var(--together-accent);
+  box-shadow: inset 0 0 0 1px #535f49;
+}
+/* @chain-region rule-19 */ .together-desktop .titlebar #tabs > button:hover:not(:disabled) { background: var(--together-raised); }
+/* @chain-region rule-20 */ .together-desktop .titlebar #navigation-sweep {
+  bottom: 1px;
+  height: 2px;
+  background: var(--together-accent);
+  box-shadow: none;
+}
+/* @chain-region rule-21 */ .together-desktop .titlebar .system-settings { margin-left: 0; border-radius: 6px; }
+/* @chain-region rule-22 */ .together-desktop .titlebar :is(.system-settings,.account,.window-actions button) {
+  box-shadow: none;
+}
+/* @chain-region rule-23 */ .together-desktop #broadcast-button { color: var(--together-muted); }
+/* @chain-region rule-24 */ .together-desktop #broadcast-button:has(#broadcast-unread:not([hidden])) { color: var(--together-accent); }
+/* @chain-region rule-25 */ .together-desktop #broadcast-unread:not([hidden]) {
+  border-radius: 4px;
+  color: var(--together-accent-ink);
+  background: var(--together-accent);
+}
+/* @chain-region rule-26 */ #broadcast-preview:not([hidden]) {
+  display: grid;
+  grid-template-columns: 22px minmax(0,1fr) 15px;
+  align-items: center;
+  gap: 8px;
+  width: 223px;
+  max-width: 23vw;
+  min-width: 0;
+  min-height: 38px;
+  padding: 4px 8px;
+  border: 1px solid var(--together-edge);
+  border-inline-start: 2px solid var(--event-accent,var(--together-accent));
+  border-radius: 6px;
+  background: var(--together-raised);
+  color: var(--together-ink);
+  text-align: start;
+  -webkit-app-region: no-drag;
+}
+/* @chain-region rule-27 */ .broadcast-preview-icon { color: var(--event-accent,var(--together-accent)); }
+/* @chain-region rule-28 */ .broadcast-preview-icon .icon { width: 18px; height: 18px; }
+/* @chain-region rule-29 */ .broadcast-preview-copy { min-width: 0; }
+/* @chain-region rule-30 */ .broadcast-preview-copy > * {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 1.25;
+}
+/* @chain-region rule-31 */ .broadcast-preview-copy strong { font-weight: 650; }
+/* @chain-region rule-32 */ .broadcast-preview-copy small { color: var(--together-muted); }
+/* @chain-region rule-33 */ #broadcast-preview > .icon { width: 13px; height: 13px; color: var(--together-muted); }
+/* @chain-region rule-34 */ .together-desktop #workspace > .surface {
+  padding: 22px var(--together-gutter) 18px;
+}
+/* @chain-region rule-35 */ .together-desktop .surface > .surface-toolbar:has(.together-page-title) {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--together-edge);
+}
+/* @chain-region rule-36 */ .together-page-title { margin: 0; color: var(--together-ink); font-size: 22px; font-weight: 650; }
+/* @chain-region rule-37 */ .together-desktop .surface > header .together-page-title { font-size: 22px; }
+/* @chain-region rule-38 */ .together-desktop #workspace .unified-home { gap: 24px; }
+/* @chain-region rule-39 */ .together-desktop .home-situation {
+  padding: 18px 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--together-edge);
+  background: none;
+  box-shadow: none;
+}
+/* @chain-region rule-40 */ .together-desktop .home-stage-heading { margin-bottom: 24px; }
+/* @chain-region rule-41 */ .together-desktop .home-stage-heading p {
+  margin: 0 0 9px;
+  font-size: 13px;
+  font-weight: 560;
+  color: var(--together-muted);
+}
+/* @chain-region rule-42 */ .together-desktop .home-stage-heading h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 660;
+  line-height: 1.22;
+  color: var(--together-ink);
+}
+/* @chain-region rule-43 */ .together-desktop .home-stage-heading:has(+.home-stage-steps [data-step-state=current]) h1 {
+  text-wrap: balance;
+}
+/* @chain-region rule-44 */ .together-desktop .home-stage-members {
+  color: var(--together-muted);
+  border: 1px solid var(--together-edge);
+  border-radius: 6px;
+  background: var(--together-panel);
+}
+/* @chain-region rule-45 */ .together-desktop .home-stage-steps {
+  gap: 7px;
+  padding: 0;
+}
+/* @chain-region rule-46 */ .together-desktop .home-stage-steps li {
+  min-width: 0;
+  --stage-line: var(--together-edge);
+}
+/* @chain-region rule-47 */ .together-desktop .home-stage-steps li::before { display: none; }
+/* @chain-region rule-48 */ .together-desktop .home-stage-steps [data-step-state=done] { --stage-line: var(--together-accent); }
+/* @chain-region rule-49 */ .together-desktop .home-stage-steps [data-step-state=current] { --stage-line: var(--event-accent); }
+/* @chain-region rule-50 */ .together-desktop .home-stage-step,
+.together-desktop button.home-stage-step:hover:not(:disabled) {
+  display: grid;
+  grid-template: 34px minmax(42px,auto) / minmax(0,1fr);
+  gap: 9px;
+  align-content: start;
+  justify-items: start;
+  min-height: 100%;
+  padding: 12px 10px 10px;
+  border-top: 2px solid var(--stage-line);
+  border-radius: 0 0 6px 6px;
+  color: var(--together-ink);
+  background: color-mix(in srgb,var(--together-panel) 89%,transparent);
+}
+/* @chain-region rule-51 */ .together-desktop [data-step-state=current] .home-stage-step,
+.together-desktop button.home-stage-step:hover:not(:disabled) {
+  background: var(--together-raised);
+}
+/* @chain-region rule-52 */ .together-desktop [data-step-state=current] .home-stage-step {
+  background: color-mix(in srgb,var(--event-accent) 10%,var(--together-rail));
+}
+/* @chain-region rule-53 */ .together-desktop [data-step-state=current] .home-stage-icon {
+  color: var(--event-accent);
+}
+/* @chain-region rule-54 */ .together-desktop .home-stage-icon {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 5px;
+  color: var(--together-muted);
+  background: var(--together-canvas);
+  box-shadow: none;
+}
+/* @chain-region rule-55 */ .together-desktop .home-stage-icon i {
+  right: -4px;
+  bottom: -3px;
+  border-color: var(--together-rail);
+  background: var(--together-accent);
+}
+/* @chain-region rule-56 */ .together-desktop .home-stage-text strong { font-size: 15px; }
+/* @chain-region rule-57 */ .together-desktop .home-stage-text > span { color: var(--together-muted); }
+/* @chain-region rule-58 */ .together-desktop [data-step-state=current] .home-stage-text > span { color: var(--event-accent); }
+/* @chain-region rule-59 */ .together-desktop .home-milestones {
+  background: var(--together-canvas);
+  border: 0;
+}
+/* @chain-region rule-60 */ .together-desktop .home-milestones li {
+  border-top-color: var(--together-edge);
+}
+/* @chain-region rule-61 */ .together-desktop .home-milestones li::before { display: none; }
+/* @chain-region rule-62 */ .together-desktop .home-milestones [data-featured] {
+  border-inline-start: 2px solid var(--event-accent);
+  padding-inline-start: 12px;
+  background: color-mix(in srgb,var(--event-accent) 6%,var(--together-canvas));
+}
+/* @chain-region rule-63 */ .together-desktop .milestone-icon {
+  border: 0;
+  border-radius: 5px;
+  background: var(--together-raised);
+}
+/* @chain-region rule-64 */ .together-desktop .milestone-filters { border-color: var(--together-edge); background: var(--together-panel); }
+/* @chain-region rule-65 */ .together-desktop .milestone-filters [aria-pressed=true] { background: var(--together-raised); }
+/* @chain-region rule-66 */ .together-desktop .milestone-description strong { color: var(--together-ink); }
+/* @chain-region rule-67 */ .together-desktop .milestone-description > div,
+.together-desktop .home-milestones time { color: var(--together-muted); }
+/* @chain-region rule-68 */ .together-desktop .milestone-link { text-decoration-thickness: 1px; }
+
+/* @chain-region rule-69 */ .together-desktop .repository-channels {
+  border: 1px solid var(--together-edge);
+  border-radius: var(--together-radius);
+  background: var(--together-panel);
+}
+/* @chain-region rule-70 */ .together-desktop .repository-channels li + li { border-color: var(--together-edge); }
+/* @chain-region rule-71 */ .together-desktop .repository-channels li > :is(button,div) { padding: 12px; }
+/* @chain-region rule-72 */ .together-desktop .repository-channels .channel-icon {
+  background: var(--together-rail);
+  border-radius: 6px;
+}
+/* @chain-region rule-73 */ .together-desktop .source-repository {
+  background: var(--together-rail);
+  border-color: var(--together-edge);
+  border-radius: var(--together-radius);
+}
+/* @chain-region rule-74 */ .together-desktop #workspace .development-card {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--together-edge);
+  border-radius: 0;
+  box-shadow: none;
+}
+/* @chain-region rule-75 */ .together-desktop .surface:has(.work-status) > header {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--together-edge);
+  background: none;
+  box-shadow: none;
+}
+/* @chain-region rule-76 */ .together-desktop .surface:has(.work-status) > header::before { content: none; }
+/* @chain-region rule-77 */ .together-desktop .surface:has(.work-status) .situation-headline {
+  font-size: 26px;
+  color: var(--together-ink);
+}
+/* @chain-region rule-78 */ .together-desktop .personal-desk {
+  align-items: center;
+  border-block-end: 1px solid var(--together-edge);
+}
+/* @chain-region rule-79 */ .together-desktop .station-work-marker { color: var(--together-info); }
+/* @chain-region rule-80 */ .together-desktop .station-work-marker[data-task-state=blocked] { color: var(--together-attention); }
+/* @chain-region rule-81 */ .together-desktop .station-work-marker[data-task-state=review] { color: var(--together-accent); }
+/* @chain-region rule-82 */ .together-desktop :is(.composer,.admin-list > article,.home-goal,.construction-task,.quest) {
+  border-color: var(--together-edge);
+  border-radius: var(--together-radius);
+  background: var(--together-panel);
+}
+/* @chain-region rule-83 */ .together-desktop .surface.chat-surface .composer {
+  border-radius: var(--together-radius);
+  background: var(--together-panel);
+}
+/* @chain-region rule-84 */ .together-desktop .management-grid > .management-section {
+  background: transparent;
+  border: 0;
+  border-block-start: 1px solid var(--together-edge);
+  border-radius: 0;
+  box-shadow: none;
+}
+/* @chain-region rule-85 */ .together-desktop .management-section .admin-list > article + article { margin-top: 4px; }
+/* @chain-region rule-86 */ .together-desktop .management-section h2 { color: var(--together-ink); }
+/* @chain-region rule-87 */ .together-desktop .management-section:has([data-review]) h2 { color: var(--together-election); }
+/* @chain-region rule-88 */ .together-desktop :is(#workspace,#dialog,#detail-dialog) button.primary:not(:disabled) {
+  color: var(--together-accent-ink);
+  background: var(--together-accent);
+  border-color: transparent;
+  border-radius: 6px;
+  box-shadow: none;
+  font-weight: 650;
+}
+/* @chain-region rule-89 */ .together-desktop :is(#workspace,#dialog,#detail-dialog) button.primary:hover:not(:disabled) {
+  background: #e0f7bb;
+}
+/* @chain-region rule-90 */ .together-desktop :is(#workspace,#dialog,#detail-dialog) button.secondary {
+  border-radius: 6px;
+  box-shadow: none;
+}
+/* @chain-region rule-91 */ .together-desktop body :is(#dialog,#detail-dialog) {
+  color: var(--together-ink);
+  background: var(--together-panel) !important;
+  border: 1px solid var(--together-edge);
+  border-radius: var(--together-radius);
+  box-shadow: 0 15px 38px #0005;
+}
+
+/* @chain-region rule-92 */ .together-office #main {
+  color: var(--together-ink);
+  background: color-mix(in srgb,var(--together-canvas) 83%,transparent);
+}
+/* @chain-region rule-93 */ .together-office #main .link-tabs {
+  border-radius: var(--together-radius);
+  border: 1px solid var(--together-edge);
+  background: var(--together-rail);
+  box-shadow: none;
+}
+/* @chain-region rule-94 */ .together-office #main .link-tabs > button.ui-rail-button {
+  color: var(--together-muted);
+  border-radius: 5px;
+  min-height: 36px;
+}
+/* @chain-region rule-95 */ .together-office #main .link-tabs > button.ui-rail-button[aria-selected=true] {
+  background: var(--together-raised);
+  color: var(--together-accent);
+}
+/* @chain-region rule-96 */ .together-office #main .link-tabs > button.ui-rail-button .ui-rail-icon {
+  width: 24px;
+  height: 24px;
+  color: inherit;
+  box-shadow: none;
+}
+/* @chain-region rule-97 */ .together-office #main .link-top:has(#link-station-overview:not([hidden])) {
+  padding-block: 14px 12px;
+  border-bottom: 1px solid var(--together-edge);
+}
+/* @chain-region rule-98 */ #link-station-overview:not([hidden]) {
+  display: flex;
+  flex: 1 1 260px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+  min-width: 0;
+}
+/* @chain-region rule-99 */ #link-station-overview h1 {
+  font-size: 22px;
+  line-height: 1.35;
+  margin: 0;
+  font-weight: 650;
+}
+/* @chain-region rule-100 */ #link-station-overview span { color: var(--together-muted); font-size: 14px; }
+/* @chain-region rule-101 */ .together-office #main .station-controls:not([hidden]),
+.together-office #main #station-pages:not([hidden]) {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+}
+/* @chain-region rule-102 */ .together-office #main .station-controls { min-width:0; justify-content:flex-end; }
+/* @chain-region rule-103 */ .together-office #main .station-controls :is(input,select) {
+  max-width:100%;
+  min-height:32px;
+  padding:4px 8px;
+  border:1px solid var(--together-edge);
+  border-radius:6px;
+  background:var(--together-panel);
+  color:var(--together-ink);
+  font-size:13px;
+}
+/* @chain-region rule-104 */ .together-office #main #station-search { width:145px; }
+/* @chain-region rule-105 */ .together-office #main .station-controls output {
+  color:var(--together-muted);
+  font-size:13px;
+  font-variant-numeric:tabular-nums;
+}
+/* @chain-region rule-106 */ .together-office #main #station-pages button {
+  display:grid;
+  place-items:center;
+  width:32px;
+  min-height:32px;
+  padding:4px;
+  border:1px solid var(--together-edge);
+  border-radius:6px;
+  color:var(--together-ink);
+}
+/* @chain-region rule-107 */ .together-office #main #station-pages button:disabled { opacity:.36; }
+/* @chain-region rule-108 */ .together-office #main #station-pages svg { width:16px; height:16px; }
+/* @chain-region rule-109 */ .together-office #main #station-pages [data-station-page="1"] svg { transform:rotate(180deg); }
+/* @chain-region rule-110 */ .together-office #main .home-seat {
+  border-radius: var(--together-radius);
+}
+/* @chain-region rule-111 */ .together-office #main .home-seat:is(:hover,:focus-visible) {
+  background: var(--together-panel);
+}
+/* @chain-region rule-112 */ .together-office #main .home-seat:is([data-state=offline],[data-state=lost],[data-state=sync]) > svg {
+  opacity: .78;
+  filter: saturate(.52);
+}
+/* @chain-region rule-113 */ .together-office #main .home-seat .seat-name { color: var(--together-ink); }
+/* @chain-region rule-114 */ .together-office #main .home-seat .seat-status { color: var(--together-muted); }
+/* @chain-region rule-115 */ .together-office #main .home-seat[data-state=working] .seat-status { color: var(--together-accent); }
+/* @chain-region rule-116 */ .together-office #main :is(.ticket,.group-message,.detail,#link-connections) {
+  border-color: var(--together-edge);
+  border-radius: var(--together-radius);
+}
+/* @chain-region rule-117 */ .together-office #main .ticket { background: var(--together-panel); }
+/* @chain-region rule-118 */ .together-office #main .panel-head { padding-bottom: 12px; border-bottom: 1px solid var(--together-edge); }
+/* @chain-region rule-119 */ .together-office #main .panel-head h2 { font-weight: 650; }
+/* @chain-region rule-120 */ .together-office #main .group-page,
+.together-office #main .workorders-page { padding-inline: 10px; }
+
+/* @chain-region rule-121 */ @media (max-width: 920px) {
+  .together-brand > span { display: none; }
+}
+/* @chain-region rule-122 */ @media (max-width: 760px) {
+  :root:is(.together-desktop,.together-office) { --together-gutter: 16px; }
+  #broadcast-preview:not([hidden]) { display: none; }
+}
+/* @chain-region rule-123 */ @media (max-width: 620px) {
+  .together-desktop body > .titlebar { padding-inline: 6px; gap: 5px; }
+  .together-desktop .titlebar nav#tabs { margin-inline-start: 0; min-width: 0; }
+  .together-desktop .titlebar #tabs > button { width: 30px; flex-basis: 30px; }
+  .together-brand { display: none; }
+  .together-desktop .home-stage-heading h1 { font-size: 25px; }
+  .together-desktop .home-stage-heading { flex-wrap: wrap; }
+  .together-office #main .station-controls { width:100%; justify-content:flex-start; }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.coding",
+  "kind": "program",
+  "name": "Coding",
+  "summary": "Cota 与 Vaya 共用项目、文件变化与操作日志；透明聊天层可展开和折叠。",
+  "version": "1.0.29",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "program": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "program": "program.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "AGENTS.md": {
+      "sha256": "bc9f3fc4d4d6c95a5f06f26c4864bccacf82c2a2face27dd2f6da86c10e309c5",
+      "size": 3467
+    },
+    "program.json": {
+      "sha256": "f8398934416f88d1f8cdf667a5e00f818ba51a548d4aca48766e4dede0146efe",
+      "size": 627
+    },
+    "service.cjs": {
+      "sha256": "822cceed0d4725b91fe4719aa4d4359515e285976fd9bb629f8641c853fb1009",
+      "size": 14962
+    },
+    "ui/coding.css": {
+      "sha256": "081f715a3d2f62497b07cbd8722bc8298e11aa790ae0ad60c682bd9c029bce11",
+      "size": 12418
+    },
+    "ui/coding.html": {
+      "sha256": "8a53ecd2d27a2eae42e50da3bb9736f99a28d4f5aa1a6b66658a32a3274e8cff",
+      "size": 5187
+    },
+    "ui/coding.mjs": {
+      "sha256": "820b79483d2ad5c29059530d5ad9d52cad9c8d31172f87b3a6ab6cb01542b661",
+      "size": 18339
+    },
+    "ui/project-evidence.mjs": {
+      "sha256": "6ff4dde19b815fa09dc07ea9cc4bf3dc5d5400e774ae1bd17841375c680afe25",
+      "size": 1296
+    },
+    "ui/project-layout.mjs": {
+      "sha256": "57e760818ef4ea32bedc7001c64f6cb3ffaf44a4d79d85ea7b17e47c9790266b",
+      "size": 4226
+    },
+    "ui/project-view.mjs": {
+      "sha256": "b0608c1ea21088745348d9440023d611be9b3411587efc1140d7530f5476f49c",
+      "size": 20634
+    }
+  }
+}

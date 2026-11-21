@@ -1,0 +1,23 @@
+{
+  "schema": "aieyra.theme/1",
+  "elements": "1.0.0",
+  "assets": {
+    "complete": {
+      "path": "assets/complete.wav",
+      "mime": "audio/wav"
+    },
+    "failure": {
+      "path": "assets/failure.wav",
+      "mime": "audio/wav"
+    },
+    "attention": {
+      "path": "assets/attention.wav",
+      "mime": "audio/wav"
+    }
+  },
+  "sounds": {
+    "task.completed": "complete",
+    "task.failed": "failure",
+    "attention.pending": "attention"
+  }
+}

@@ -1,0 +1,1 @@
+简短中文操作用途。仅显示元数据，不改变已有进程、命令、输入字节或权限。No rationale, exit code, duration or progress counters.

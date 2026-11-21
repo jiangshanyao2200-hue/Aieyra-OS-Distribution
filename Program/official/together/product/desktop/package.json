@@ -1,0 +1,15 @@
+{
+  "name": "aieyra-together-link",
+  "productName": "Aieyra Together Link",
+  "version": "0.19.2",
+  "private": true,
+  "main": "bootstrap.cjs",
+  "description": "Standalone OS Link office, maintained by Aieyra OS Together",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check bootstrap.cjs && node --check startup-diagnostics.cjs && node --check portable.cjs && node --check main.cjs && node --check service-host.cjs && node --check preload.cjs"
+  },
+  "devDependencies": {
+    "electron": "44.4.5"
+  }
+}

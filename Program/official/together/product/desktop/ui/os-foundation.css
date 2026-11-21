@@ -1,0 +1,400 @@
+/* @file-map:start
+文件: link/desktop/ui/os-foundation.css
+位置: 市中心·设计变量 | 全局字号、色彩、圆角、动效与交互原语。
+约束: 设计变量不包含页面专用布局；修改须检查宽窄窗、四档缩放、焦点与减少动效
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html, link/desktop/ui/login.html
+链路: shared-ui
+验证: AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | :root
+  rule-2 | style | body
+  rule-3 | style | :where(button,input,textarea,select)
+  rule-4 | style | :where(button,[role=button],summary,a[href],input,textarea,select,[tabindex]):focus-visible
+  rule-5 | style | :where(button):disabled
+  rule-6 | style | :where(button,input,textarea,select)[aria-busy=true]
+  rule-7 | style | [hidden]
+  rule-8 | style | body button.ui-rail-button
+  rule-9 | style | body button.ui-rail-button .ui-rail-icon
+  rule-10 | style | body button.ui-rail-button .ui-rail-icon svg
+  rule-11 | style | body button.ui-rail-button .ui-rail-label
+  rule-12 | style | body button.ui-rail-button:is([aria-current=page],[aria-selected=true])
+  rule-13 | style | body button.ui-rail-button:is([aria-current=page],[aria-selected=true]) .ui-rail-icon
+  rule-14 | style | body button.ui-rail-button:hover:not(:disabled) .ui-rail-icon
+  rule-15 | style | body button.ui-rail-button:focus-visible
+  rule-16 | style | body button.ui-rail-button:focus-visible .ui-rail-icon
+  rule-17 | style | body button.ui-rail-button:disabled
+  rule-18 | style | :root
+  rule-19 | style | body :is(button.ui-outline,input.ui-outline,button.pill:not(.primary),button.sv-add,button.panel-more,.panel-notice button,.link-back,.channel-mode button,.link-guide-actions button)
+  rule-20 | style | body :is(button.ui-outline,button.pill:not(.primary),button.sv-add,button.panel-more,.panel-notice button,.link-back,.channel-mode button,.link-guide-actions button):hover:not(:disabled)
+  rule-21 | style | body :is(button.ui-outline,.channel-mode button):is([aria-selected=true],[aria-current=page],[aria-checked=true])
+  rule-22 | style | body :is(button.ui-outline,button.pill:not(.primary),button.sv-add,button.panel-more):active:not(:disabled)
+  rule-23 | style | body .ui-outline:disabled
+  rule-24 | style | body .ui-pages
+  rule-25 | style | body .ui-page-numbers
+  rule-26 | style | body .ui-page-numbers[data-pending=true]
+  rule-27 | style | body .ui-pages button.ui-page-number
+  rule-28 | style | body .ui-pages button.ui-page-number[aria-current=page]
+  rule-29 | style | body .ui-pages input.ui-outline[type=number]
+  rule-30 | style | body .ui-pages button.ui-page-number:is([aria-current=page],:hover:not(:disabled))
+  rule-31 | style | body .channel-mode
+  rule-32 | style | body:is([data-visible=false],[data-ui-hidden=true]) *, body:is([data-visible=false],[data-ui-hidden=true]) *::before, body:is([data-visible=false],[data-ui-hidden=true]) *::after
+  rule-33 | style | body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after,body.reduce-motion *::backdrop
+  rule-34 | style | @media(prefers-reduced-motion:reduce)
+  rule-35 | style | ::selection
+  rule-36 | style | :where(input,textarea,[contenteditable])
+  rule-37 | style | ::-webkit-scrollbar
+  rule-38 | style | ::-webkit-scrollbar-thumb
+  rule-39 | style | ::-webkit-scrollbar-thumb:hover
+  rule-40 | style | ::-webkit-scrollbar-track,::-webkit-scrollbar-corner
+  rule-41 | style | :where(input[type=checkbox],input[type=radio])
+  rule-42 | style | :where(input[type=checkbox])
+  rule-43 | style | :where(input[type=radio])
+  rule-44 | style | :where(input[type=checkbox]:checked)
+  rule-45 | style | :where(input[type=radio]:checked)
+  rule-46 | style | input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration
+  rule-47 | style | input::-webkit-outer-spin-button,input::-webkit-inner-spin-button
+  rule-48 | style | input:-webkit-autofill,input:-webkit-autofill:focus
+  rule-49 | style | .glass-color
+  rule-50 | style | .glass-color-panel
+  rule-51 | style | @keyframes glass-color-in
+  rule-52 | style | .glass-color-hue
+  rule-53 | style | .glass-color-hue::-webkit-slider-thumb
+  rule-54 | style | .glass-color-presets
+  rule-55 | style | .glass-color-channel
+  rule-56 | style | .glass-color-channel input
+  rule-57 | style | .glass-color-presets button[aria-pressed=true]
+  rule-58 | style | .glass-color-presets button
+  rule-59 | style | .glass-color-panel input[type=text]
+  rule-60 | style | .glass-color-panel input[type=text]:focus
+  rule-61 | style | summary
+  rule-62 | style | summary::-webkit-details-marker
+  rule-63 | style | :is(.conversation-tool,.raw-receipt,.collaboration-row,.settings-area) > summary::before,.send-recovery summary::before,.group-original summary::before,.transcript-command::before
+  rule-64 | style | :is(.conversation-tool,.raw-receipt,.collaboration-row,.settings-area)[open] > summary::before,.send-recovery details[open] > summary::before,.group-original[open] summary::before,details[open] > .transcript-command::before
+  rule-65 | style | .ui-tip
+  rule-66 | style | .ui-tip-native
+  rule-67 | style | .ui-tip-rows
+  rule-68 | style | .ui-tip-rows dt
+  rule-69 | style | .ui-tip-rows dd
+  rule-70 | style | .ui-tip-accessible
+  rule-71 | style | .ui-tip.model-hover
+  rule-72 | style | .ui-tip-native.model-hover
+  rule-73 | style | .mh-head
+  rule-74 | style | .mh-head strong
+  rule-75 | style | .mh-head small
+  rule-76 | style | .mh-text
+  rule-77 | style | .mh-price
+  rule-78 | style | .mh-price>div
+  rule-79 | style | .mh-price span,.mh-unit
+  rule-80 | style | .mh-price b
+  rule-81 | style | .mh-unit
+  rule-82 | style | .mh-note
+  rule-83 | style | .mh-price-none
+  rule-84 | style | .mh-facts
+  rule-85 | style | .mh-facts b
+  rule-86 | style | .mh-caps
+  rule-87 | style | .mh-cap
+  rule-88 | style | .mh-cap[data-on=true]
+  rule-89 | style | .mh-cap[data-on=false]
+  rule-90 | style | @keyframes ui-float-in
+  rule-91 | style | body :is(.ui-menu,.glass-select-list,.module-dock-menu)
+  rule-92 | style | body :is(.ui-menu,.module-dock-menu)
+  rule-93 | style | body .ui-menu-native
+  rule-94 | style | :is(.ui-menu,.module-dock-menu) button
+  rule-95 | style | :is(.ui-menu,.module-dock-menu) button:is(:hover,[aria-pressed=true]),.glass-select-option.active
+  rule-96 | style | :is(.ui-menu,.module-dock-menu) button:focus-visible,.glass-select-option:focus-visible
+  rule-97 | style | body dialog:not(#onboarding)
+  rule-98 | style | body dialog:not(#onboarding)[open]
+  rule-99 | style | body dialog:not(#onboarding):not([open])
+  rule-100 | style | body dialog:not(#onboarding)::backdrop
+  rule-101 | style | body dialog:not(#onboarding)[open]::backdrop
+  rule-102 | style | body dialog.ui-menu:not(#onboarding)
+  rule-103 | style | body dialog.ui-menu:not(#onboarding)::backdrop
+  rule-104 | style | @starting-style
+  rule-105 | style | @keyframes ui-topbar-in
+  rule-106 | style | body .ui-topbar-menu
+  rule-107 | style | body .ui-topbar-menu.ui-menu-native
+  rule-108 | style | body dialog.ui-topbar-menu:not(#onboarding)
+  rule-109 | style | body dialog.ui-topbar-menu:not(#onboarding)[open]
+  rule-110 | style | @starting-style
+  rule-111 | style | body .ui-topbar-menu .system-heading
+  rule-112 | style | body .ui-topbar-menu :is(button,.system-title)
+  rule-113 | style | .ui-native-dialog
+  rule-114 | style | .ui-dialog-input
+  rule-115 | style | :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button
+  rule-116 | style | :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button:hover:not(:disabled)
+  rule-117 | style | :is(.ui-dialog-actions .ui-primary,dialog .exit-actions button:last-child,dialog .crop-actions button:last-child),:is(.ui-dialog-actions .ui-primary,dialog .exit-actions button:last-child,dialog .crop-actions button:last-child):hover:not(:disabled)
+  rule-118 | style | :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button:active:not(:disabled)
+  rule-119 | style | :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button:disabled
+  rule-120 | style | .ui-tip.program-preview
+  rule-121 | style | .program-preview header
+  rule-122 | style | .program-preview strong
+  rule-123 | style | .program-preview small
+  rule-124 | style | .program-preview img
+  rule-125 | style | .program-preview img[hidden]
+  rule-126 | style | .ui-tip-native.program-preview
+  rule-127 | style | body :where(#onboarding) input[type=range]
+  rule-128 | style | body :where(#onboarding) input[type=range]::-webkit-slider-runnable-track
+  rule-129 | style | body :where(#onboarding) input[type=range]::-webkit-slider-thumb
+  rule-130 | style | body :where(#onboarding) input[type=range]:hover::-webkit-slider-thumb,body :where(#onboarding) input[type=range]:focus-visible::-webkit-slider-thumb
+  rule-131 | style | body :where(#onboarding) input[type=range]:focus
+  rule-132 | style | body :where(#onboarding) button
+  rule-133 | style | body .ui-tabs
+  rule-134 | style | body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)
+  rule-135 | style | body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline):is(:hover,[aria-selected=true])
+  rule-136 | style | body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)::before,body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)::after
+  rule-137 | style | body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)[data-dirty=true]
+  rule-138 | style | body :is(.settings-actions,.settings-head-actions) > button:not(.ui-outline,.ui-page-number)
+  rule-139 | style | body .settings-actions > button:not(.quiet,.secondary,.glass-pill,.text-button,.ui-outline,.ui-page-number)
+  rule-140 | style | body :is(.settings-actions,.settings-head-actions) > button:is(:hover,:focus-visible):not(:disabled)
+  rule-141 | style | body :is(.settings-actions,.settings-head-actions) > button:active:not(:disabled)
+  rule-142 | style | body .settings-head-actions
+  rule-143 | style | body .settings-head-actions svg
+  rule-144 | style | body .media-choice
+  rule-145 | style | body .media-choice button[aria-selected=true]
+  rule-146 | style | body button.role-ring
+  rule-147 | style | body button.role-ring:is(:hover,:focus-visible)
+  rule-148 | style | body button.role-ring:active
+  rule-149 | style | .program-preview-default
+  rule-150 | style | .program-preview-bar
+  rule-151 | style | .program-preview-content
+  rule-152 | style | @keyframes ui-control-spin
+  rule-153 | style | body .topbar
+  rule-154 | style | body .topbar :is(#desktop-dock button,.topbar-icon)>svg
+  rule-155 | style | body .topbar :is(#desktop-dock button,.topbar-icon):focus-visible
+  rule-156 | style | body .topbar :is(#desktop-dock button,.topbar-icon):active:not(:disabled)
+  rule-157 | style | body .topbar .ui-topbar-trigger[aria-expanded=true]
+  rule-158 | style | body #onboarding :is(.glass-select,.media-source)
+  rule-159 | style | body #onboarding :is(.glass-select,.media-source)::after
+  rule-160 | style | body #onboarding :is(.glass-select,.media-source)[aria-expanded=true]::after
+  rule-161 | style | body #onboarding :is(.glass-select,.media-source):is(:hover,[aria-expanded=true]):not(:disabled)
+  rule-162 | style | body #onboarding :is(.glass-select,.media-source):focus-visible
+  rule-163 | style | body #onboarding .media-source[aria-busy=true]::after
+  rule-164 | style | body #onboarding .settings-head
+  rule-165 | style | body #onboarding .settings-head h2
+  rule-166 | style | .role-tabs
+  rule-167 | style | body #onboarding .role-tab
+  rule-168 | style | body #onboarding .role-tab[aria-selected=true]
+  rule-169 | style | body .ui-topbar-menu[popover]:not(#system-popover)
+  rule-170 | style | body .ui-topbar-menu[popover]:not(#system-popover):popover-open
+  rule-171 | style | @starting-style
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Shared by OS, native surfaces and the HTTP Link page. No page geometry here. */
+/* @chain-region rule-1 */ :root {
+ --ui-ease:cubic-bezier(.2,.8,.2,1);
+ --ui-fast:160ms; --ui-enter:240ms; --ui-move:360ms;
+ --ui-radius-control:10px; --ui-radius-menu:14px; --ui-radius:18px;
+ --ui-text:#e6e9f0; --ui-text-2:#9aa3b2; --ui-text-3:#6b7385;
+ --ui-accent:#a9c0ec; --ui-error:#e3a29c; --ui-ok:#9fd8b4; --ui-warn:#e3c19c;
+ --ui-radius-pill:999px; --ui-pop-gap:16px;
+ --ui-icon-size:16px; --ui-icon-stroke:1.5;
+ --ui-glass:rgba(12,14,19,.93); --ui-glass-soft:rgba(12,14,19,.66);
+ --ui-blur:var(--glass-filter);
+ --ui-edge:inset 0 0 0 1px #ffffff14; --ui-edge-hi:inset 0 0 0 1px #ffffff29;
+ --ui-shadow:0 18px 54px #0007;
+ --glass-tint:rgba(14,16,22,.64);
+ --glass-surface:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0) 32%),var(--glass-tint);
+ --glass-filter:blur(20px) saturate(1.2); --glass-edge:var(--ui-edge-hi); --glass-shadow:var(--ui-shadow); --glass-veil:rgba(5,6,10,.3);
+ --ui-topbar-surface:var(--glass-tint); --ui-topbar-filter:var(--glass-filter);
+ --ui-topbar-shadow:inset 0 -1px 0 #ffffff0a,0 3px 12px #0003;
+ --ui-topbar-menu-shadow:inset 1px 0 0 #ffffff14,inset -1px 0 0 #ffffff14,inset 0 -1px 0 #ffffff14,0 12px 28px #0004;
+}
+/* @chain-region rule-2 */ body { --ease:var(--ui-ease); --t1:var(--ui-fast); --t2:var(--ui-enter); --t3:var(--ui-move); }
+/* @chain-region rule-3 */ :where(button,input,textarea,select) { font:inherit; color:inherit; }
+/* @chain-region rule-4 */ :where(button,[role=button],summary,a[href],input,textarea,select,[tabindex]):focus-visible { outline:1px solid var(--ui-accent); outline-offset:3px; }
+/* @chain-region rule-5 */ :where(button):disabled { cursor:default; }
+/* @chain-region rule-6 */ :where(button,input,textarea,select)[aria-busy=true] { cursor:progress; }
+/* @chain-region rule-7 */ [hidden] { display:none!important; }
+/* Theme, Program and Link navigation share one circular icon treatment. */
+/* @chain-region rule-8 */ body button.ui-rail-button { display:grid;justify-items:center;align-content:start;gap:4px;width:64px;max-width:100%;min-height:0;padding:4px;border:0;border-radius:0;background:transparent;color:var(--ui-text-2);font:inherit;font-size:var(--os-interface-size,13px);line-height:1.4;cursor:pointer; }
+/* @chain-region rule-9 */ body button.ui-rail-button .ui-rail-icon { display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--glass-surface,var(--ui-glass-soft));box-shadow:inset 0 0 0 1.5px #ffffffc9;font-style:normal;transition:opacity var(--ui-fast) var(--ui-ease); }
+/* @chain-region rule-10 */ body button.ui-rail-button .ui-rail-icon svg { display:block;width:20px;height:20px;padding:0;fill:none;stroke:currentColor;stroke-width:var(--ui-icon-stroke);stroke-linecap:round;stroke-linejoin:round; }
+/* @chain-region rule-11 */ body button.ui-rail-button .ui-rail-label { font:inherit;line-height:1.4;white-space:nowrap; }
+/* @chain-region rule-12 */ body button.ui-rail-button:is([aria-current=page],[aria-selected=true]) { color:var(--ui-text); }
+/* @chain-region rule-13 */ body button.ui-rail-button:is([aria-current=page],[aria-selected=true]) .ui-rail-icon { box-shadow:inset 0 0 0 2px #fff,0 2px 8px #0003; }
+/* @chain-region rule-14 */ body button.ui-rail-button:hover:not(:disabled) .ui-rail-icon { opacity:.8; }
+/* @chain-region rule-15 */ body button.ui-rail-button:focus-visible { outline:none; }
+/* @chain-region rule-16 */ body button.ui-rail-button:focus-visible .ui-rail-icon { outline:1px solid var(--ui-accent);outline-offset:3px; }
+/* @chain-region rule-17 */ body button.ui-rail-button:disabled { opacity:.45;cursor:default; }
+/* Outlined actions share the same edge, geometry and interaction across pages. */
+/* @chain-region rule-18 */ :root { --ui-control-edge:#ffffff8f; --ui-control-edge-active:#ffffffe0; --ui-control-fill:#ffffff08; --ui-control-hover:#ffffff12; }
+/* @chain-region rule-19 */ body :is(button.ui-outline,input.ui-outline,button.pill:not(.primary),button.sv-add,button.panel-more,.panel-notice button,.link-back,.channel-mode button,.link-guide-actions button) { box-sizing:border-box;min-height:32px;padding:5px 14px;border:1px solid var(--ui-control-edge);border-radius:var(--ui-radius-pill);background:var(--ui-control-fill);box-shadow:none;color:var(--ui-text);font-size:14px;line-height:1.4;text-shadow:none;-webkit-text-stroke:0;transition:background-color var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease); }
+/* @chain-region rule-20 */ body :is(button.ui-outline,button.pill:not(.primary),button.sv-add,button.panel-more,.panel-notice button,.link-back,.channel-mode button,.link-guide-actions button):hover:not(:disabled) { background:var(--ui-control-hover);box-shadow:none;transform:none; }
+/* @chain-region rule-21 */ body :is(button.ui-outline,.channel-mode button):is([aria-selected=true],[aria-current=page],[aria-checked=true]) { border-color:var(--ui-control-edge-active);background:#ffffff1c;color:var(--ui-text);box-shadow:none; }
+/* @chain-region rule-22 */ body :is(button.ui-outline,button.pill:not(.primary),button.sv-add,button.panel-more):active:not(:disabled) { opacity:.72;transform:none; }
+/* @chain-region rule-23 */ body .ui-outline:disabled { opacity:.4;cursor:default; }
+/* @chain-region rule-24 */ body .ui-pages { display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px; }
+/* @chain-region rule-25 */ body .ui-page-numbers { display:inline-flex;align-items:center;gap:8px; }
+/* @chain-region rule-26 */ body .ui-page-numbers[data-pending=true] { visibility:hidden; }
+/* Page numbers are true circles; digits are centred on their cap height, not the CJK line box.
+   .ui-pages raises specificity above the shared outline :is() rule, whose pill padding pushed digits right. */
+/* @chain-region rule-27 */ body .ui-pages button.ui-page-number { display:inline-grid;place-items:center;box-sizing:border-box;flex:0 0 32px;width:32px;min-width:32px;height:32px;min-height:32px;padding:0;border:1px solid var(--ui-control-edge);border-radius:50%;background:var(--ui-control-fill);box-shadow:none;color:var(--ui-text);font-family:var(--os-interface-font,inherit);font-size:14px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums lining-nums;letter-spacing:0;text-align:center;text-box:trim-both cap alphabetic;text-shadow:none;-webkit-text-stroke:0; }
+/* @chain-region rule-28 */ body .ui-pages button.ui-page-number[aria-current=page] { color:#fff; }
+/* @chain-region rule-29 */ body .ui-pages input.ui-outline[type=number] { width:64px;min-width:0;height:32px;padding:0 8px;text-align:center;font-variant-numeric:tabular-nums; }
+/* @chain-region rule-30 */ body .ui-pages button.ui-page-number:is([aria-current=page],:hover:not(:disabled)) { background:#ffffff1c;border-color:var(--ui-control-edge-active);box-shadow:none; }
+/* @chain-region rule-31 */ body .channel-mode { padding:0;gap:8px;background:none;box-shadow:none; }
+
+/* Hidden renderers preserve phase without spending frames on decorative loops. */
+/* @chain-region rule-32 */ body:is([data-visible=false],[data-ui-hidden=true]) *,
+body:is([data-visible=false],[data-ui-hidden=true]) *::before,
+body:is([data-visible=false],[data-ui-hidden=true]) *::after { animation-play-state:paused!important; }
+/* @chain-region rule-33 */ body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after,body.reduce-motion *::backdrop { animation:none!important;transition:none!important;scroll-behavior:auto!important; }
+/* @chain-region rule-34 */ @media(prefers-reduced-motion:reduce) { *,*::before,*::after,*::backdrop { animation:none!important;transition:none!important;scroll-behavior:auto!important; } }
+/* 不留系统默认样式：选区、光标、滚动条、复选框、单选框、搜索框、自动填充。 */
+/* @chain-region rule-35 */ ::selection { background:#a9c0ec40; }
+/* @chain-region rule-36 */ :where(input,textarea,[contenteditable]) { caret-color:#c9d6ff; }
+/* @chain-region rule-37 */ ::-webkit-scrollbar { width:6px; height:6px; }
+/* @chain-region rule-38 */ ::-webkit-scrollbar-thumb { border-radius:6px; background:#ffffff24; }
+/* @chain-region rule-39 */ ::-webkit-scrollbar-thumb:hover { background:#ffffff3d; }
+/* @chain-region rule-40 */ ::-webkit-scrollbar-track,::-webkit-scrollbar-corner { background:transparent; }
+/* @chain-region rule-41 */ :where(input[type=checkbox],input[type=radio]) { appearance:none; flex:none; width:16px; height:16px; min-height:0; margin:0; padding:0; border:0; background:#ffffff0d center/12px no-repeat; box-shadow:var(--ui-edge-hi); cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease); }
+/* @chain-region rule-42 */ :where(input[type=checkbox]) { border-radius:4px; }
+/* @chain-region rule-43 */ :where(input[type=radio]) { border-radius:50%; }
+/* @chain-region rule-44 */ :where(input[type=checkbox]:checked) { background-color:#a9c0ec; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='m2.5 6.2 2.4 2.4 4.6-5' fill='none' stroke='%230b0d12' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); box-shadow:none; }
+/* @chain-region rule-45 */ :where(input[type=radio]:checked) { background-color:#a9c0ec; background-image:radial-gradient(circle,#0b0d12 0 3px,transparent 3.5px); background-size:auto; box-shadow:none; }
+/* @chain-region rule-46 */ input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration { appearance:none; display:none; }
+/* @chain-region rule-47 */ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button { appearance:none; margin:0; }
+/* @chain-region rule-48 */ input:-webkit-autofill,input:-webkit-autofill:focus { -webkit-text-fill-color:var(--ui-text); caret-color:#c9d6ff; transition:background-color 99999s; box-shadow:inset 0 0 0 1px #ffffff14; }
+/* @chain-region rule-49 */ .glass-color { flex:none; width:22px; height:22px; min-height:0; padding:0; border:0; border-radius:50%; background:var(--swatch,#fff); box-shadow:inset 0 0 0 1px #ffffff40,0 0 0 2px #ffffff0a; cursor:pointer; }
+/* @chain-region rule-50 */ .glass-color-panel { position:fixed; z-index:2147482000; display:grid; gap:10px; width:216px; padding:12px; border-radius:14px; background:var(--ui-glass); box-shadow:var(--ui-edge),0 18px 50px #0009; animation:glass-color-in var(--ui-fast) var(--ui-ease); }
+/* @chain-region rule-51 */ @keyframes glass-color-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+/* @chain-region rule-52 */ .glass-color-hue { appearance:none; width:100%; height:10px; min-height:0; margin:0; padding:0; border-radius:10px; background:linear-gradient(90deg,#f66,#fc6,#6f6,#6ff,#66f,#f6f,#f66); cursor:pointer; }
+/* @chain-region rule-53 */ .glass-color-hue::-webkit-slider-thumb { appearance:none; width:14px; height:14px; border-radius:50%; background:#eef1f7; box-shadow:0 0 0 2px #0b0d12; }
+/* @chain-region rule-54 */ .glass-color-presets { display:grid; grid-template-columns:repeat(8,1fr); gap:6px; }
+/* @chain-region rule-55 */ .glass-color-channel { display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;gap:8px;font-size:14px;color:var(--ui-text-2); }
+/* @chain-region rule-56 */ .glass-color-channel input { width:100%;min-width:0; }
+/* @chain-region rule-57 */ .glass-color-presets button[aria-pressed=true] { outline:1px solid var(--ui-text);outline-offset:2px; }
+/* @chain-region rule-58 */ .glass-color-presets button { aspect-ratio:1; min-height:0; padding:0; border:0; border-radius:50%; background:var(--swatch); box-shadow:inset 0 0 0 1px #ffffff33; cursor:pointer; }
+/* @chain-region rule-59 */ .glass-color-panel input[type=text] { width:100%; min-height:30px; padding:4px 10px; border:0; border-radius:8px; background:#ffffff0a; box-shadow:var(--ui-edge); color:var(--ui-text); font:14px/1.4 Consolas,"Cascadia Mono",monospace; outline:none; }
+/* @chain-region rule-60 */ .glass-color-panel input[type=text]:focus { box-shadow:inset 0 0 0 1px #a9c0ec80; }
+/* 系统的折叠三角全部去掉；没有另外设计展开样式的 details 统一用这个自绘的。 */
+/* @chain-region rule-61 */ summary { list-style:none; }
+/* @chain-region rule-62 */ summary::-webkit-details-marker { display:none; }
+/* @chain-region rule-63 */ :is(.conversation-tool,.raw-receipt,.collaboration-row,.settings-area) > summary::before,.send-recovery summary::before,.group-original summary::before,.transcript-command::before { content:""; display:inline-block; width:6px; height:6px; margin-right:8px; vertical-align:.12em; border-right:1.2px solid currentColor; border-bottom:1.2px solid currentColor; transform:rotate(-45deg); transition:transform var(--ui-fast) var(--ui-ease); }
+/* @chain-region rule-64 */ :is(.conversation-tool,.raw-receipt,.collaboration-row,.settings-area)[open] > summary::before,.send-recovery details[open] > summary::before,.group-original[open] summary::before,details[open] > .transcript-command::before { transform:rotate(45deg); }
+
+/* Shared interaction elements. Native surfaces use alpha without backdrop blur. */
+/* @chain-region rule-65 */ .ui-tip{position:fixed;inset:auto;margin:0;width:max-content;height:auto;box-sizing:border-box;padding:6px 11px;border:0;border-radius:var(--ui-radius-control);max-width:min(340px,calc(100vw - 16px));overflow:hidden;background:var(--ui-glass);box-shadow:var(--ui-edge-hi),var(--ui-shadow);color:var(--ui-text);font:400 14px/1.55 var(--os-interface-font,"Aieyra Inter","Aieyra Noto Sans SC",sans-serif);letter-spacing:.01em;white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none;z-index:2147483600;animation:ui-float-in var(--ui-fast) var(--ui-ease)}
+/* @chain-region rule-66 */ .ui-tip-native{position:absolute;left:0;top:0;max-width:340px;box-shadow:var(--ui-edge-hi);animation:none}
+/* @chain-region rule-67 */ .ui-tip-rows{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 12px;margin:4px 0;white-space:normal}
+/* @chain-region rule-68 */ .ui-tip-rows dt{margin:0;color:var(--ui-text-2)}
+/* @chain-region rule-69 */ .ui-tip-rows dd{margin:0;min-width:0;text-align:right;font-variant-numeric:tabular-nums;color:var(--ui-text)}
+/* @chain-region rule-70 */ .ui-tip-accessible{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;pointer-events:none}
+/* @chain-region rule-71 */ .ui-tip.model-hover{width:312px;padding:14px 16px 12px;border-radius:var(--ui-radius);white-space:normal;background:var(--glass-surface);backdrop-filter:var(--glass-filter);box-shadow:var(--glass-edge),var(--glass-shadow)}
+/* @chain-region rule-72 */ .ui-tip-native.model-hover{max-width:312px;background:var(--ui-glass);backdrop-filter:none;box-shadow:var(--ui-edge-hi)}
+/* @chain-region rule-73 */ .mh-head{display:flex;flex-direction:column;gap:2px;margin:0 0 8px}
+/* @chain-region rule-74 */ .mh-head strong{font-size:14px;font-weight:600;color:var(--ui-text)}
+/* @chain-region rule-75 */ .mh-head small{font:14px/1.4 Consolas,"Cascadia Mono",monospace;color:var(--ui-text-3)}
+/* @chain-region rule-76 */ .mh-text{margin:0 0 10px;font-size:14px;line-height:1.6;color:var(--ui-text-2)}
+/* @chain-region rule-77 */ .mh-price{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:4px 16px;margin:0 0 8px;padding:8px 12px;border-radius:var(--ui-radius-control);background:var(--ui-glass-soft);box-shadow:var(--ui-edge)}
+/* @chain-region rule-78 */ .mh-price>div{display:flex;flex-direction:column;gap:2px}
+/* @chain-region rule-79 */ .mh-price span,.mh-unit{font-size:14px;color:var(--ui-text-3)}
+/* @chain-region rule-80 */ .mh-price b{font-size:14px;font-weight:600;color:var(--ui-text);font-variant-numeric:tabular-nums}
+/* @chain-region rule-81 */ .mh-unit{grid-column:1/-1}
+/* @chain-region rule-82 */ .mh-note{display:block;margin-top:8px;line-height:1.5}
+/* @chain-region rule-83 */ .mh-price-none{display:block;font-size:14px;color:var(--ui-text-3)}
+/* @chain-region rule-84 */ .mh-facts{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0 0 8px;font-size:14px;color:var(--ui-text-3)}
+/* @chain-region rule-85 */ .mh-facts b{color:var(--ui-text);font-weight:500;font-variant-numeric:tabular-nums}
+/* @chain-region rule-86 */ .mh-caps{display:flex;flex-wrap:wrap;gap:8px}
+/* @chain-region rule-87 */ .mh-cap{padding:2px 8px;border-radius:var(--ui-radius-pill);font-size:14px;box-shadow:var(--ui-edge);color:var(--ui-text-2)}
+/* @chain-region rule-88 */ .mh-cap[data-on=true]{color:var(--ui-text);background:var(--ui-glass-soft);box-shadow:var(--ui-edge-hi)}
+/* @chain-region rule-89 */ .mh-cap[data-on=false]{color:var(--ui-text-3);text-decoration:line-through}
+/* @chain-region rule-90 */ @keyframes ui-float-in{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+/* @chain-region rule-91 */ body :is(.ui-menu,.glass-select-list,.module-dock-menu){box-sizing:border-box;border:0;border-radius:var(--ui-radius-menu);background:var(--glass-surface);color:var(--ui-text);box-shadow:var(--glass-edge),var(--glass-shadow);backdrop-filter:var(--glass-filter)}
+/* @chain-region rule-92 */ body :is(.ui-menu,.module-dock-menu){padding:8px;animation:ui-float-in var(--ui-enter) var(--ui-ease)}
+/* @chain-region rule-93 */ body .ui-menu-native{background:var(--ui-glass);backdrop-filter:none;box-shadow:var(--ui-edge-hi)}
+/* @chain-region rule-94 */ :is(.ui-menu,.module-dock-menu) button{display:block;width:100%;padding:8px 12px;border:0;border-radius:var(--ui-radius-control);color:inherit;background:transparent;font:14px/1.4 var(--os-interface-font,"Aieyra Inter","Aieyra Noto Sans SC",sans-serif);text-align:left;cursor:pointer}
+/* @chain-region rule-95 */ :is(.ui-menu,.module-dock-menu) button:is(:hover,[aria-pressed=true]),.glass-select-option.active{background:color-mix(in srgb,var(--ui-text) 8%,transparent)}
+/* @chain-region rule-96 */ :is(.ui-menu,.module-dock-menu) button:focus-visible,.glass-select-option:focus-visible{outline:1px solid var(--ui-accent);outline-offset:-2px}
+/* @chain-region rule-97 */ body dialog:not(#onboarding){border:0;border-radius:var(--ui-radius);background:var(--glass-surface);backdrop-filter:var(--glass-filter);box-shadow:var(--glass-edge),var(--glass-shadow);color:var(--ui-text);opacity:0;transform:translateY(8px) scale(.985);transition:opacity var(--ui-enter) var(--ui-ease),transform var(--ui-enter) var(--ui-ease)}
+/* @chain-region rule-98 */ body dialog:not(#onboarding)[open]{opacity:1;transform:none;animation:none}
+/* @chain-region rule-99 */ body dialog:not(#onboarding):not([open]){display:none;visibility:hidden;pointer-events:none;transition:none}
+/* @chain-region rule-100 */ body dialog:not(#onboarding)::backdrop{background:var(--glass-veil);backdrop-filter:blur(6px);opacity:0;transition:opacity var(--ui-enter) var(--ui-ease)}
+/* @chain-region rule-101 */ body dialog:not(#onboarding)[open]::backdrop{opacity:1;animation:none}
+/* @chain-region rule-102 */ body dialog.ui-menu:not(#onboarding){border-radius:var(--ui-radius-menu)}
+/* @chain-region rule-103 */ body dialog.ui-menu:not(#onboarding)::backdrop{background:transparent;backdrop-filter:none}
+/* @chain-region rule-104 */ @starting-style{body dialog:not(#onboarding)[open]{opacity:0;transform:translateY(8px) scale(.985)}body dialog:not(#onboarding)[open]::backdrop{opacity:0}}
+/* Attached titlebar menus share their header material and a fixed top seam. */
+/* @chain-region rule-105 */ @keyframes ui-topbar-in{from{opacity:0;transform:scaleY(.975)}to{opacity:1;transform:none}}
+/* @chain-region rule-106 */ body .ui-topbar-menu{box-sizing:border-box;border:0;border-radius:0 0 var(--ui-radius-menu) var(--ui-radius-menu);background:var(--ui-topbar-surface);backdrop-filter:var(--ui-topbar-filter);box-shadow:var(--ui-topbar-menu-shadow);color:var(--ui-text);transform-origin:top center;animation:ui-topbar-in var(--ui-enter) var(--ui-ease);overflow:auto;overscroll-behavior:contain}
+/* @chain-region rule-107 */ body .ui-topbar-menu.ui-menu-native{backdrop-filter:none}
+/* @chain-region rule-108 */ body dialog.ui-topbar-menu:not(#onboarding){border-radius:0 0 var(--ui-radius-menu) var(--ui-radius-menu);background:var(--ui-topbar-surface);backdrop-filter:var(--ui-topbar-filter);box-shadow:var(--ui-topbar-menu-shadow);transform:scaleY(.975);transform-origin:top center}
+/* @chain-region rule-109 */ body dialog.ui-topbar-menu:not(#onboarding)[open]{transform:none}
+/* @chain-region rule-110 */ @starting-style{body dialog.ui-topbar-menu:not(#onboarding)[open]{opacity:0;transform:scaleY(.975)}}
+/* @chain-region rule-111 */ body .ui-topbar-menu .system-heading{flex-wrap:wrap;gap:8px}
+/* @chain-region rule-112 */ body .ui-topbar-menu :is(button,.system-title){overflow-wrap:anywhere;white-space:normal}
+/* @chain-region rule-113 */ .ui-native-dialog{background:var(--ui-glass);color:var(--ui-text);font:14px/1.6 var(--os-interface-font,"Aieyra Inter","Aieyra Noto Sans SC",sans-serif)}
+/* @chain-region rule-114 */ .ui-dialog-input{box-sizing:border-box;width:100%;min-height:36px;padding:6px 12px;border:0;border-radius:var(--ui-radius-control);background:var(--ui-glass-soft);box-shadow:var(--ui-edge-hi);font:inherit;color:inherit}
+/* @chain-region rule-115 */ :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button{min-width:0;min-height:32px;padding:5px 16px;border:0;border-radius:var(--ui-radius-pill);background:color-mix(in srgb,var(--ui-text) 8%,transparent);box-shadow:var(--ui-edge-hi);color:var(--ui-text);font:inherit;font-size:14px;cursor:pointer;transition:transform var(--ui-fast) var(--ui-ease)}
+/* @chain-region rule-116 */ :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button:hover:not(:disabled){background:color-mix(in srgb,var(--ui-text) 12%,transparent)}
+/* @chain-region rule-117 */ :is(.ui-dialog-actions .ui-primary,dialog .exit-actions button:last-child,dialog .crop-actions button:last-child),:is(.ui-dialog-actions .ui-primary,dialog .exit-actions button:last-child,dialog .crop-actions button:last-child):hover:not(:disabled){background:var(--ui-text);box-shadow:none;color:var(--ui-glass);font-weight:600}
+/* @chain-region rule-118 */ :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button:active:not(:disabled){transform:scale(.97)}
+/* @chain-region rule-119 */ :is(.ui-dialog-actions,dialog .exit-actions,dialog .crop-actions) button:disabled{opacity:.45;cursor:default}
+
+/* Program thumbnails use the same DOM/native tooltip and theme surface. */
+/* @chain-region rule-120 */ .ui-tip.program-preview { display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px;box-sizing:border-box;width:var(--preview-width,320px);height:auto;max-width:calc(100vw - 16px);padding:12px;border-radius:var(--ui-radius);white-space:normal; }
+/* @chain-region rule-121 */ .program-preview header { display:grid;gap:4px;min-width:0; }
+/* @chain-region rule-122 */ .program-preview strong { overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;color:var(--ui-text); }
+/* @chain-region rule-123 */ .program-preview small { font-size:14px;color:var(--ui-text-3); }
+/* @chain-region rule-124 */ .program-preview img { display:block;width:100%;height:auto;aspect-ratio:var(--preview-ratio,16 / 10);min-height:0;object-fit:contain;border-radius:var(--ui-radius-control); }
+/* @chain-region rule-125 */ .program-preview img[hidden] { display:none; }
+
+/* @chain-region rule-126 */ .ui-tip-native.program-preview { max-width:none; }
+
+/* Settings control bases have one owner; component classes override these defaults. */
+/* @chain-region rule-127 */ body :where(#onboarding) input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:18px; min-height:0; margin:0; padding:0; border:0; background:transparent; cursor:pointer; }
+/* @chain-region rule-128 */ body :where(#onboarding) input[type=range]::-webkit-slider-runnable-track { height:2px; border-radius:2px; background:linear-gradient(90deg,var(--s-accent,var(--ui-accent)) 0 var(--fill,0%),#ffffff1f var(--fill,0%) 100%); }
+/* @chain-region rule-129 */ body :where(#onboarding) input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; margin-top:-6px; border-radius:50%; background:var(--ui-text); box-shadow:0 0 0 4px #a9c0ec22,0 2px 6px #0008; transition:transform var(--t1) var(--ease); }
+/* @chain-region rule-130 */ body :where(#onboarding) input[type=range]:hover::-webkit-slider-thumb,body :where(#onboarding) input[type=range]:focus-visible::-webkit-slider-thumb { transform:scale(1.15); }
+/* @chain-region rule-131 */ body :where(#onboarding) input[type=range]:focus { outline:none; }
+/* @chain-region rule-132 */ body :where(#onboarding) button { min-height:32px; padding:0 16px; border-radius:var(--ui-radius-pill); font-size:14px; transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease); }
+
+/* Shared semantic controls: the settings, picker and dialog consumers share these states. */
+/* @chain-region rule-133 */ body .ui-tabs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0;padding:0;min-width:0}
+/* @chain-region rule-134 */ body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline){position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:32px;padding:4px 16px;border:0;border-radius:var(--ui-radius-pill);background:transparent;box-shadow:var(--ui-edge);color:var(--ui-text-2);font-family:var(--os-interface-font,inherit);font-size:var(--os-interface-size,13px);font-weight:var(--os-interface-weight,400);line-height:1.4;cursor:pointer;transform:none;transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease)}
+/* @chain-region rule-135 */ body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline):is(:hover,[aria-selected=true]){background:color-mix(in srgb,var(--ui-text) 8%,transparent);box-shadow:var(--ui-edge-hi);color:var(--ui-text)}
+/* @chain-region rule-136 */ body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)::before,body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)::after{content:none}
+/* @chain-region rule-137 */ body :is(.ui-tabs,.theme-sorts) button:not(.ui-outline)[data-dirty=true]{box-shadow:inset 0 -2px var(--ui-warn),var(--ui-edge-hi)}
+/* @chain-region rule-138 */ body :is(.settings-actions,.settings-head-actions) > button:not(.ui-outline,.ui-page-number){box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:32px;height:auto;padding:6px 16px;border:0;border-radius:var(--ui-radius-pill);background:color-mix(in srgb,var(--ui-text) 8%,transparent);box-shadow:var(--ui-edge-hi);color:var(--ui-text);font-size:14px;line-height:1.4;cursor:pointer;transition:background-color var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease)}
+/* @chain-region rule-139 */ body .settings-actions > button:not(.quiet,.secondary,.glass-pill,.text-button,.ui-outline,.ui-page-number){background:var(--ui-text);box-shadow:none;color:var(--ui-glass);font-weight:500}
+/* @chain-region rule-140 */ body :is(.settings-actions,.settings-head-actions) > button:is(:hover,:focus-visible):not(:disabled){filter:brightness(1.12)}
+/* @chain-region rule-141 */ body :is(.settings-actions,.settings-head-actions) > button:active:not(:disabled){opacity:.75}
+/* @chain-region rule-142 */ body .settings-head-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+/* @chain-region rule-143 */ body .settings-head-actions svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* @chain-region rule-144 */ body .media-choice{position:fixed;inset:auto;margin:0;width:196px;max-height:calc(100vh - 32px);overflow:auto}
+/* @chain-region rule-145 */ body .media-choice button[aria-selected=true]{background:color-mix(in srgb,var(--ui-text) 8%,transparent);color:var(--ui-text)}
+/* @chain-region rule-146 */ body button.role-ring{cursor:pointer;transition:filter var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease)}
+/* @chain-region rule-147 */ body button.role-ring:is(:hover,:focus-visible){filter:brightness(1.2)}
+/* @chain-region rule-148 */ body button.role-ring:active{opacity:.7}
+
+/* @chain-region rule-149 */ .program-preview-default{aspect-ratio:var(--preview-ratio,16 / 10);display:grid;grid-template-rows:auto 1fr;overflow:hidden;border-radius:var(--ui-radius-control);background:var(--ui-glass-soft);box-shadow:var(--ui-edge)}
+/* @chain-region rule-150 */ .program-preview-bar{margin:12px;padding:8px 12px;border-radius:var(--ui-radius-pill);background:color-mix(in srgb,var(--ui-text) 8%,transparent);font-size:14px;color:var(--ui-text-2)}
+/* @chain-region rule-151 */ .program-preview-content{display:grid;align-content:center;justify-items:center;gap:12px;padding:16px;color:var(--ui-text-2)}
+
+/* @chain-region rule-152 */ @keyframes ui-control-spin{to{transform:rotate(360deg)}}
+
+/* Navigation and compact titlebar glyphs share one recipe. Desktop mode only selects a size. */
+/* @chain-region rule-153 */ body .topbar { --ui-control-icon-size:calc(var(--ui-icon-size) * var(--os-scale,1)); }
+/* @chain-region rule-154 */ body .topbar :is(#desktop-dock button,.topbar-icon)>svg { display:block;flex:0 0 var(--ui-control-icon-size);width:var(--ui-control-icon-size);height:var(--ui-control-icon-size);fill:none;stroke:currentColor;stroke-width:var(--ui-icon-stroke);stroke-linecap:round;stroke-linejoin:round; }
+/* @chain-region rule-155 */ body .topbar :is(#desktop-dock button,.topbar-icon):focus-visible { outline:1px solid var(--ui-accent);outline-offset:2px; }
+/* @chain-region rule-156 */ body .topbar :is(#desktop-dock button,.topbar-icon):active:not(:disabled) { opacity:.75; }
+/* @chain-region rule-157 */ body .topbar .ui-topbar-trigger[aria-expanded=true]{background:color-mix(in srgb,var(--ui-text) 8%,transparent);color:var(--ui-text)}
+
+/* One trigger recipe for pulse, avatar sources and every settings select. */
+/* @chain-region rule-158 */ body #onboarding :is(.glass-select,.media-source){box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:100%;min-height:36px;padding:6px 0;border:0;border-bottom:1px solid transparent;border-radius:0;background:none;box-shadow:none;color:var(--ui-text);font:inherit;font-size:14px;font-weight:400;line-height:1.4;text-align:left;cursor:pointer;transition:opacity var(--ui-fast) var(--ui-ease)}
+/* @chain-region rule-159 */ body #onboarding :is(.glass-select,.media-source)::after{content:'';flex:0 0 14px;width:14px;height:14px;margin-left:auto;background:var(--ui-text-3);mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform var(--ui-enter) var(--ui-ease)}
+/* @chain-region rule-160 */ body #onboarding :is(.glass-select,.media-source)[aria-expanded=true]::after{transform:rotate(180deg)}
+/* @chain-region rule-161 */ body #onboarding :is(.glass-select,.media-source):is(:hover,[aria-expanded=true]):not(:disabled){border-bottom-color:var(--ui-text-3)}
+/* @chain-region rule-162 */ body #onboarding :is(.glass-select,.media-source):focus-visible{outline:1px solid var(--ui-accent);outline-offset:2px}
+/* @chain-region rule-163 */ body #onboarding .media-source[aria-busy=true]::after{mask:none;background:none;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:ui-control-spin 1s linear infinite}
+/* @chain-region rule-164 */ body #onboarding .settings-head{display:flex;flex-wrap:wrap;align-items:center;gap:16px;min-height:36px;margin:0 0 20px}
+/* @chain-region rule-165 */ body #onboarding .settings-head h2{margin:0;color:var(--ui-text);font-size:22px;font-weight:500;line-height:1.4;letter-spacing:.02em}
+/* @chain-region rule-166 */ .role-tabs{display:flex;align-items:center;gap:8px}
+/* @chain-region rule-167 */ body #onboarding .role-tab{--eyra-avatar:36px;display:grid;place-items:center;box-sizing:border-box;width:36px;height:36px;min-height:36px;padding:2px;border:0;border-radius:50%;background:transparent;box-shadow:var(--ui-edge);color:var(--ui-text-2);cursor:pointer}
+/* @chain-region rule-168 */ body #onboarding .role-tab[aria-selected=true]{box-shadow:inset 0 0 0 1px var(--ui-accent);color:var(--ui-text)}
+
+/* Native and DOM topbar menus finish exit before leaving the top layer. */
+/* @chain-region rule-169 */ body .ui-topbar-menu[popover]:not(#system-popover) { opacity:0;transform:scaleY(.985);transform-origin:top center;animation:none;transition:opacity var(--ui-fast) var(--ui-ease),transform var(--ui-fast) var(--ui-ease),display var(--ui-fast) allow-discrete,overlay var(--ui-fast) allow-discrete; }
+/* @chain-region rule-170 */ body .ui-topbar-menu[popover]:not(#system-popover):popover-open { opacity:1;transform:none; }
+/* @chain-region rule-171 */ @starting-style { body .ui-topbar-menu[popover]:not(#system-popover):popover-open { opacity:0;transform:scaleY(.985); } }

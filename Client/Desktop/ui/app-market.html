@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: aieyra-theme:; font-src 'self' aieyra-theme:; frame-src 'self'">
+<title>主题</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="app-shell.css"><link rel="stylesheet" href="app-market.css"><link rel="stylesheet" href="theme-showcase.css"><link rel="stylesheet" href="theme-library.css"></head>
+<body>
+<section id="theme-root" class="theme-root"></section>
+<dialog id="package-manager" class="package-manager"><header class="package-manager-head"><strong>扩展管理</strong><button id="package-manager-close" class="pill" type="button">关闭</button></header>
+<nav class="package-manager-rail" id="rail" aria-label="分类"></nav>
+<main class="package-manager-main">
+ <div class="mk-tools">
+  <nav class="segments" id="sorts" role="tablist" aria-label="排序"></nav>
+  <label class="mk-search"><span class="sr-only">搜索</span><input class="field" id="q" type="text" placeholder="搜索" autocomplete="off" spellcheck="false"></label>
+ </div>
+ <div class="mk-tools"><button id="agent-instances" class="pill" type="button">Agent 实例</button><button id="theme-showcase" class="pill" type="button">组件与状态</button><button id="import-folder" class="pill" type="button">导入文件夹</button><button id="import-archive" class="pill" type="button">导入压缩包</button></div>
+ <section id="grid" class="mk-grid" aria-live="polite"></section>
+ <p id="state" class="mk-state" role="status" hidden></p>
+ <div class="mk-more"><button id="more" class="pill" type="button" hidden>加载更多</button></div>
+</main>
+</dialog>
+<dialog id="detail" class="mk-detail"><article id="detail-body"></article></dialog>
+<div id="app-notice" class="app-notice" role="status" hidden></div>
+<script type="module" src="app-market.mjs"></script>
+</body></html>

@@ -1,0 +1,1 @@
+This core restarted after generation %d. Earlier tasks, plans, summaries and last_user_exact are historical records. The host has not resubmitted those tasks; this run’s new user messages are recorded separately.

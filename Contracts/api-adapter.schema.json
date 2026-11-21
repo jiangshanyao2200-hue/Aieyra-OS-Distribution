@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aieyra.invalid/contracts/api-adapter.schema.json",
+  "title": "Aieyra declarative model API adapter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "protocol"
+  ],
+  "properties": {
+    "schema": {
+      "const": "aieyra.api/1"
+    },
+    "protocol": {
+      "enum": [
+        "responses",
+        "chat_completions",
+        "anthropic_messages",
+        "google_generate"
+      ]
+    },
+    "path": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "stream_path": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "headers": {
+      "type": "object",
+      "maxProperties": 16,
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 512
+      }
+    },
+    "model_aliases": {
+      "type": "object",
+      "maxProperties": 128,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+    "defaults": {
+      "type": "array",
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "spec",
+          "value"
+        ],
+        "properties": {
+          "spec": {
+            "type": "object",
+            "description": "A bounded API/parameters.Spec; protected protocol fields are rejected by the runtime."
+          },
+          "value": {}
+        }
+      }
+    }
+  },
+  "description": "The runtime validates routes, headers, parameter paths and values; schema validation alone does not authorize a package."
+}

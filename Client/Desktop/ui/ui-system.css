@@ -1,0 +1,261 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body :is(.module-bar,#status-anchor); body #system-popover; body #system-bubble; body :is(.module-bar,#status-anchor) .window-controls; body :is(.module-bar,#status-anchor) .window-controls *; .window-controls button; body #dock-situation,body #module-situation; body #desktop-dock; body #usage-anchor; body #status-anchor; body #status-rail; body.native-eyra-overlay :is(#emergence,#bottom-bar); body[data-view=conversation-view] #screen *,body[data-view=conversation-view] #screen *::before,body[data-view=conversation-view] #screen *::after; body[data-form=folded] #view-content > :is(#document-viewer,#control-view,#settings-view); body .hx .role-ring; body .hx .role-ring .role-face; .chat-phase; body #onboarding .profile-pair; body #onboarding #role-settings; body #onboarding .profile-card; body #onboarding .profile-card > :is(.avatar-slot,.role-ring); body #onboarding .profile-card .avatar-slot; body #onboarding .identity-controls; body #onboarding .identity-controls input; body #onboarding .identity-controls input:focus; body #onboarding :is(#avatar-eyra,.role-setting .role-ring); body #onboarding :is(#avatar-eyra,.role-setting .role-ring):has(img:not([hidden])); body #onboarding .user-profile .avatar-slot; body #onboarding .user-profile .avatar-slot::after; body #onboarding #avatar-eyra; body #onboarding .avatar-slot img; body #onboarding #avatar-eyra img; body #onboarding #user-ring-colors; body #onboarding #user-ring-colors button; body #onboarding #user-ring-colors button::before; body #onboarding #user-ring-colors button:hover::before; body #onboarding #user-ring-colors button[aria-pressed=true]::before; body .chat-entry.user .chat-avatar; .notice-reason; body #presence-caption:has(.notice-reason:not([hidden])); body #onboarding .role-box .link-name,body #onboarding .role-box .link-control; body #onboarding .role-box .link-control > :first-child; body #onboarding .role-box .link-control > .glass-select; body.settings-extension[data-visible=false] .role-ring::before,body.settings-extension[data-visible=false] .role-ring::after; .chat-entry[data-thought=true] .chat-text; .chat-entry[data-thought=true][data-streaming=false] .chat-text; .chat-entry[data-streaming=true] .chat-text; @media(max-width:900px); body[data-form=work] #screen #conversation; body.composer-open[data-form=work] #screen #conversation; body #usage-anchor .model-display; body #status-anchor; body #desktop-dock; @media(max-width:680px); body #cache-count,body #compression-count,body #output-count,body #model-separator; body #usage-anchor; body #composer #message; body #conversation; body :where(button,[role=button],summary,a[href],input,textarea):focus-visible; body :where(button):disabled; body :is(#plan-pop,#report-pop,#diary-pop,#terminal-pop,#exit-ask); body :is(.glass-select-list,#plan-pop,#report-pop,#diary-pop,#system-popover,#terminal-pop,#exit-ask); .account-status; .account-status[hidden]; .account-status-avatar; body .stage-head .stage-state; body .stage-pane[data-state=running] .stage-head::after; body .stage-pane[data-state=failed] .stage-state; body .tool-evidence; body .tool-evidence h4; body .tool-evidence pre; body .stage-pane[data-kind=transcript] .stage-body; body .stage-pane[data-kind=transcript] .tool-receipts; body .stage-pane[data-kind=transcript] .tool-receipt-body; body .stage-pane[data-kind=transcript] :is(.transcript-command,.transcript-output); body .stage-pane[data-kind=transcript] .transcript-command; body :is(.plan-ball,.diary-ball,.term-orb,.conversation-orb); body :is(.plan-ball,.diary-ball,.term-orb,.conversation-orb) > svg; body .chat-entry[data-subprocess=true] .chat-main; body .chat-entry[data-subprocess=true] .chat-text; body .chat-entry[data-subprocess=true] .chat-name; body .chat-entry[data-subprocess=true] .chat-phase; body .sub-tool-line; body .sub-tool-dot; body .notice-copy; body .esc-stop-hint; body .esc-stop-hint[hidden]; body .esc-stop-hint[data-place=below]; body .esc-stop-hint .esc-stop-text; body .esc-stop-hint .esc-stop-spark; body .esc-stop-hint .esc-stop-spark::after; body .esc-stop-hint[data-state=stopping] .esc-stop-spark; body .esc-stop-hint.esc-stop-ping; body .esc-stop-hint.esc-stop-ping .esc-stop-text; body .esc-stop-hint.esc-stop-ping .esc-stop-spark; body .esc-stop-hint.esc-stop-ping .esc-stop-spark::after; body .esc-stop-hint[data-state=leaving]; @keyframes esc-hint-in; @keyframes esc-hint-sheen; @keyframes esc-hint-spark; @keyframes esc-hint-ripple; body.reduce-motion .esc-stop-hint, body.reduce-motion .esc-stop-hint * , body.reduce-motion .esc-stop-hint .esc-stop-spark::after; @media(prefers-reduced-motion:reduce); @media (prefers-reduced-motion: reduce); body[data-form=folded].composer-open #control-view #control-surface; body[data-form=folded].composer-open #control-remote; body.native-eyra-overlay.composer-open #control-view #control-surface; body :is(#plan-pop,#report-pop,#terminal-pop,#extension-overflow-list,.model-hover,#onboarding .account-pop,.contact-bio,.gv-mention,.gv-station); body dialog#image-viewer; body dialog:not(#onboarding) .ce-option:focus-visible; .web-reference-preview; .web-reference-preview h2; .chat-entry.user .chat-actions; .chat-entry.user:hover .chat-actions,.chat-entry.user:focus-within .chat-actions; .chat-action; .chat-action[hidden]; .chat-action svg; .chat-entry.user[data-clamped=true]:not([data-expanded=true]) .chat-text; body .chat-entry.user .chat-text.user-md; body .chat-entry.user .chat-text.user-md > :first-child; :is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry); :is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry):hover:not(:disabled); :is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry):active:not(:disabled); :is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry):focus-visible; body #startup; #startup-actions; body .chat-entry.user.link-notice .chat-avatar,body .chat-entry.user.link-notice .chat-name; body .chat-entry.user.link-notice .chat-text; @keyframes ui-status-breathe; body #status-anchor .session-indicators; body #status-anchor .topbar-icon; body #status-anchor .topbar-icon:is(:hover,:focus-visible); body #status-anchor .topbar-icon [hidden]; .topbar-icon[data-active=true] .usage-meter; .model-readout[data-expanded=true] .model-orbit; @keyframes status-meter; @keyframes status-orbit; body.reduce-motion .topbar-icon svg path,body[data-visible=false] .topbar-icon svg path; @media(prefers-reduced-motion:reduce); body #status-anchor .session-indicators[hidden]; .status-readout-measure; body #status-anchor .usage-readout; body #status-anchor .usage-readout>svg; .usage-total; .usage-current; body #status-anchor .model-readout; body #status-anchor .model-readout>svg; .model-slot; body #status-anchor .model-readout[data-expanded=true]; .model-readout>span; .model-readout[data-expanded=true]>span; .session-indicators[data-compact=true] .usage-current; body[data-visible=false] .model-readout>span; .session-model-menu; .session-model-menu p; .session-model-menu button; .session-model-menu button::after; .session-model-menu button[aria-pressed=true]::after; body .session-model-menu button[aria-pressed=true]:not(:hover); body .session-model-menu[data-menu-input=pointer] button:focus-visible; body .session-model-menu[data-menu-input=keyboard] button:hover:not(:focus-visible); body .sd-picker; body .sd-picker .sd-pick; @media(max-width:680px); body #onboarding .ui-tabs; body #onboarding .settings-head .ui-tabs; body #onboarding .settings-head-actions button,body #onboarding .settings-actions > button; body #onboarding .profile-card .avatar-slot; body[data-land="core"]; body[data-land="ring"] :is(#dock-situation,#dock-servers,#dock-workspace,#dock-apps,#dock-pinned-apps); body:is([data-view=document-viewer],[data-scoped-report-open=true]) :is(#emergence,.chat-layer-mini,.chat-layer-fold); body #document-viewer[data-kind=usage]; body #document-viewer[data-kind=usage] :is(#document-content,.usage-page,.usage-section,.usage-scroll); body #document-viewer[data-kind=usage] .usage-tiles
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/ui-system.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import url("../../../Halo/official/identity.css");
+@import url("../../../Tool/presentation/desktop.css");
+@import url('./ui-foundation.css');
+@import url('./thinking.css');
+/* Current shared surface contract. Loaded after historical shape rules. */
+body :is(.module-bar,#status-anchor) { overflow:hidden; }
+body #system-popover { margin:0;inset:auto;app-region:no-drag; }
+body #system-bubble { app-region:no-drag; }
+body :is(.module-bar,#status-anchor) .window-controls { flex:none; }
+body :is(.module-bar,#status-anchor) .window-controls,
+body :is(.module-bar,#status-anchor) .window-controls * { app-region:no-drag; }
+.window-controls button { transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease); }
+body #dock-situation,body #module-situation { display:none!important; }
+/* Navigation hit areas remain stable; the common tooltip owns labels and previews. */
+/* The dock also fills the empty titlebar space. Keep that space draggable;
+   individual buttons and slots opt out in desktop-shell.css. */
+body #desktop-dock { min-width:124px;flex:0 1 auto; }
+body #usage-anchor { min-width:0;flex:0 1 auto;overflow:hidden; }
+body #status-anchor { gap:12px; }
+body #status-rail { left:auto;right:calc(var(--rail-right,16px) + var(--al-push,0px));max-width:calc(100vw - 32px); }
+body.native-eyra-overlay :is(#emergence,#bottom-bar) { visibility:hidden!important; }
+body.native-eyra-overlay #emergence *,body.native-eyra-overlay #emergence *::before,body.native-eyra-overlay #emergence *::after,
+body[data-view=conversation-view] #screen *,body[data-view=conversation-view] #screen *::before,body[data-view=conversation-view] #screen *::after { animation-play-state:paused!important; }
+/* Native pages and documents keep their full height. Only the floating content
+   covers its own small rectangle; no blank band is reserved across the page. */
+body[data-form=folded] #view-content > :is(#document-viewer,#control-view,#settings-view) { height:100%!important;max-height:100%!important; }
+body .hx .role-ring { width:var(--hx-eyra);height:var(--hx-eyra); }
+body .hx .role-ring .role-face { font-size:calc(var(--hx-eyra) * .38); }
+.chat-phase { margin-left:10px;font-weight:400;font-size:11px;color:var(--text-3); }
+/* Status typography and its orbit are shared in Theme/default/appearance.css. */
+/* The three identities share the same editable nameplate and avatar geometry. */
+body #onboarding .profile-pair { --profile-avatar-size:88px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,278px),1fr));gap:18px 24px;padding:10px 0 14px; }
+body #onboarding #role-settings { display:contents; }
+body #onboarding .profile-card { display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;gap:14px;margin:0;min-width:0;border:0!important; }
+body #onboarding .profile-card > :is(.avatar-slot,.role-ring) { justify-self:center; }
+body #onboarding .profile-card .avatar-slot { width:var(--profile-avatar-size);height:var(--profile-avatar-size);box-shadow:inset 0 0 0 1px #e6e9f033; }
+body #onboarding .identity-controls { min-width:0;display:grid;grid-auto-rows:minmax(32px,auto);gap:8px; }
+body #onboarding .identity-controls input { width:100%;min-width:0;min-height:32px;padding:2px 0;background:transparent;border:0;border-bottom:1px solid transparent;box-shadow:none;font-size:16px;font-weight:500;letter-spacing:.02em; }
+body #onboarding .identity-controls input:focus { border-bottom-color:var(--s-accent);outline:0; }
+/* Match Ryo's visible face (or the main Halo circle), not its padded SVG box. */
+body #onboarding :is(#avatar-eyra,.role-setting .role-ring) { --profile-halo-size:calc(var(--profile-avatar-size) / .77);width:var(--profile-halo-size);height:var(--profile-halo-size);margin:calc((var(--profile-avatar-size) - var(--profile-halo-size)) / 2); }
+body #onboarding :is(#avatar-eyra,.role-setting .role-ring):has(img:not([hidden])) { --profile-halo-size:calc(var(--profile-avatar-size) / .7); }
+body #onboarding .user-profile .avatar-slot { border:0;box-shadow:none;overflow:visible; }
+body #onboarding .user-profile .avatar-slot::after { content:"";position:absolute;inset:-1px;box-sizing:border-box;border:3px solid var(--identity-color,#fff);border-radius:50%;box-shadow:0 0 0 1px #0008,0 0 16px color-mix(in srgb,var(--identity-color,#fff) 38%,transparent);pointer-events:none; }
+body #onboarding #avatar-eyra { overflow:visible;background:transparent;box-shadow:none; }
+body #onboarding .avatar-slot img { width:100%;height:100%;margin:0;border-radius:50%;object-fit:cover; }
+body #onboarding #avatar-eyra img { width:round(70%,2px);height:round(70%,2px); }
+body #onboarding #user-ring-colors { display:flex;align-items:center;flex-wrap:wrap;align-content:center;gap:2px;min-height:32px;min-width:0; }
+body #onboarding #user-ring-colors button { display:grid;place-items:center;flex:0 0 22px;width:22px;height:24px;min-height:0;padding:0;border:0;background:transparent;box-shadow:none;cursor:pointer; }
+body #onboarding #user-ring-colors button::before { content:"";width:14px;height:14px;border-radius:50%;background:var(--swatch);box-shadow:inset 0 0 0 1px #ffffff40;transition:transform var(--ui-fast) var(--ui-ease); }
+body #onboarding #user-ring-colors button:hover::before { transform:scale(1.12); }
+body #onboarding #user-ring-colors button[aria-pressed=true]::before { outline:1px solid var(--ui-text);outline-offset:2px; }
+body .chat-entry.user .chat-avatar { box-shadow:0 0 12px color-mix(in srgb,var(--user-ring-color,#e6e9f0) 30%,transparent);outline:3px solid var(--user-ring-color,#e6e9f0);outline-offset:0; }
+.notice-reason { display:block;max-width:680px;white-space:normal;font-size:13px;line-height:1.6;color:var(--ui-text-2); }
+body #presence-caption:has(.notice-reason:not([hidden])) { --caption-direction:column;max-width:680px;white-space:normal;overflow:visible; }
+body #onboarding .role-box .link-name,body #onboarding .role-box .link-control { align-self:center;line-height:1.6; }
+body #onboarding .role-box .link-control > :first-child { align-self:center; }
+body #onboarding .role-box .link-control > .glass-select { flex:1 1 auto;min-width:0;min-height:32px;padding-block:0;font-size:13px;line-height:1.6; }
+body.settings-extension[data-visible=false] .role-ring::before,body.settings-extension[data-visible=false] .role-ring::after { animation-play-state:paused; }
+.chat-entry[data-thought=true] .chat-text { max-height:156px;overflow:auto;color:var(--text-2);font-size:.94em;scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; }
+.chat-entry[data-thought=true][data-streaming=false] .chat-text { max-height:80px; }
+.chat-entry[data-streaming=true] .chat-text { transition:color var(--ui-enter) var(--ui-ease); }
+@media(max-width:900px) {
+ body[data-form=work] #screen #conversation { inset:0 var(--work-left) 52vh var(--work-left)!important; }
+ body.composer-open[data-form=work] #screen #conversation { clip-path:none;--input-reserve:0px; }
+ body #usage-anchor .model-display { max-width:90px; }
+ body #status-anchor { gap:6px;padding-left:10px; }
+ body #desktop-dock { gap:5px;min-width:126px; }
+}
+@media(max-width:680px) {
+ body #cache-count,body #compression-count,body #output-count,body #model-separator { display:none!important; }
+ body #usage-anchor { font-size:calc(10px * var(--os-scale));gap:5px; }
+}
+
+/* Composer height belongs to the common input layout, not the portal viewport. */
+body #composer #message { max-height:none; }
+
+/* The conversation owns follow/reader state; browser anchoring must not compete. */
+body #conversation { overflow-anchor:none; }
+
+/* Focus, hidden surfaces and motion preferences apply to every shared surface. */
+body :where(button,[role=button],summary,a[href],input,textarea):focus-visible { outline:1px solid var(--ui-accent,#a9c0ec);outline-offset:3px; }
+body :where(button):disabled { cursor:default; }
+
+/* Same material and timing for menus, reports and native-dialog surfaces. */
+body :is(#plan-pop,#report-pop,#diary-pop,#terminal-pop,#exit-ask) {
+ background:var(--ui-glass)!important;border-radius:var(--ui-radius)!important;box-shadow:var(--ui-edge),var(--ui-shadow)!important;backdrop-filter:var(--ui-blur)!important;
+}
+body :is(.glass-select-list,#plan-pop,#report-pop,#diary-pop,#system-popover,#terminal-pop,#exit-ask) {
+ transition-duration:var(--ui-enter);transition-timing-function:var(--ui-ease);
+}
+.account-status{display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;padding:2px;border:0;border-radius:50%;background:transparent;color:var(--ui-text);-webkit-app-region:no-drag;cursor:pointer;transition:background-color var(--ui-fast) var(--ui-ease)}
+.account-status[hidden]{display:none}.account-status:hover{background:#ffffff10}.account-status:focus-visible{outline:1px solid var(--ui-accent);outline-offset:2px}
+.account-status-avatar{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;overflow:hidden;background:#ffffff0b;color:var(--ui-accent);font-size:12px;font-weight:500}.account-status-avatar img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* Brief remains readable while the state is carried by the shared accent. */
+body .stage-head .stage-state { min-width:0;flex:1;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ui-text-2); }
+body .stage-pane[data-state=running] .stage-head::after { content:'';width:5px;height:5px;flex:none;border-radius:50%;background:var(--ui-accent);animation:ui-status-breathe 2s var(--ui-ease) infinite; }
+body .stage-pane[data-state=failed] .stage-state { color:var(--ui-error); }
+/* 工具详情：关键的最亮，事实扫一眼，正文留头尾，备注最安静。 */
+body .tool-evidence { margin-top:9px; }
+body .tool-evidence h4 { margin:0 0 4px;font-size:10.5px;font-weight:500;color:var(--ui-text-3); }
+body .tool-evidence pre { margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.55 var(--os-tools-font,monospace);color:var(--ui-text-2);max-height:240px;overflow:auto;scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; }
+/* Small operations occupy their content height; terminals retain their canvas. */
+/* Tool results share the terminal reading surface and one scrolling region. */
+body .stage-pane[data-kind=transcript] .stage-body { overflow:auto;scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; }
+body .stage-pane[data-kind=transcript] .tool-receipts { display:block;margin:4px 12px 12px; }
+body .stage-pane[data-kind=transcript] .tool-receipt-body { max-height:none;overflow:visible; }
+body .stage-pane[data-kind=transcript] :is(.transcript-command,.transcript-output) { display:block;font:12px/1.7 var(--os-tools-font,monospace); }
+body .stage-pane[data-kind=transcript] .transcript-command { display:list-item;color:var(--ui-text);margin:6px 0; }
+body :is(.plan-ball,.diary-ball,.term-orb,.conversation-orb) { display:grid;place-items:center;padding:0;line-height:1; }
+body :is(.plan-ball,.diary-ball,.term-orb,.conversation-orb) > svg { display:block;flex:none;margin:0;align-self:center;justify-self:center; }
+/* The subconscious uses one identity row, with a bounded live reading area. */
+body .chat-entry[data-subprocess=true] .chat-main { height:var(--eyra-avatar,110px);max-height:var(--eyra-avatar,110px);box-sizing:border-box;display:flex;flex-direction:column;min-height:0;padding-top:0; }
+body .chat-entry[data-subprocess=true] .chat-text { flex:1;min-height:0;max-height:none;overflow:auto;scrollbar-width:thin;scrollbar-color:#ffffff24 transparent;--thought-height:calc(var(--eyra-avatar,110px) - var(--chat-name,14px) * 1.45 - 4px); }
+body .chat-entry[data-subprocess=true] .chat-name { flex:none; }
+body .chat-entry[data-subprocess=true] .chat-phase { display:none; }
+body .sub-tool-line { display:flex;align-items:flex-start;gap:8px;font:12px/1.6 var(--os-tools-font,monospace);color:var(--ui-text-2);overflow-wrap:anywhere; }
+body .sub-tool-dot { flex:none;width:6px;height:6px;border:1px solid var(--sub,#b9a2ff);border-radius:50%;margin-top:.5em;animation:ui-status-breathe 1.6s var(--ui-ease) infinite; }
+/* 折叠态只留光圈：思考、回复、短语和潜意识都不在左下角出现（点光圈回首页看）。 */
+body[data-form=folded] #screen #conversation :is(#presence-caption,#muse,.thought-view), body[data-form=folded]:not([data-caption=true]) #screen #conversation :is(#answer-stage,.team-voice), body[data-form=folded] #sub-overlay { display:none!important; }
+/* 复制改为双击文字（copy-gesture.mjs），不显示复制按钮。 */
+body .notice-copy { display:none!important; }
+/* 执行中第一次 Esc 的顶部提示（esc-stop.mjs）：标题栏中间空白处“叮”地亮一下——光点一闪、字上扫过一道光，
+   2.5 秒内再按 Esc 才停止；到时自己淡出。不接收指针，不挡标题栏拖动。 */
+body .esc-stop-hint { position:fixed; z-index:95; top:calc(var(--titlebar-height,56px) / 2); left:50%; translate:-50% -50%; display:flex; align-items:center; gap:9px; padding:6px 16px; border-radius:999px; pointer-events:none; white-space:nowrap; font-size:12.5px; letter-spacing:.06em; color:#dfe5f2; background:radial-gradient(ellipse 70% 90% at 50% 50%,rgba(185,200,255,.13),rgba(185,200,255,0) 72%); opacity:1; transition:opacity 220ms var(--ui-ease,ease),translate 220ms var(--ui-ease,ease); }
+body .esc-stop-hint[hidden] { display:none; }
+body .esc-stop-hint[data-place=below] { top:calc(var(--titlebar-height,56px) + 20px)!important; left:50%!important; }
+body .esc-stop-hint .esc-stop-text { background:linear-gradient(100deg,#c3cbdd 0 38%,#ffffff 50%,#c3cbdd 62% 100%) 100% 0/260% 100% no-repeat; -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 14px rgba(185,200,255,.28); }
+body .esc-stop-hint .esc-stop-spark { position:relative; flex:0 0 6px; width:6px; height:6px; border-radius:50%; background:#f4f6ff; box-shadow:0 0 8px 1px var(--eyra-glow,#b9c8ffaa); }
+body .esc-stop-hint .esc-stop-spark::after { content:''; position:absolute; inset:-5px; border-radius:50%; border:1px solid #dfe6ffaa; opacity:0; }
+body .esc-stop-hint[data-state=stopping] .esc-stop-spark { border-radius:1.5px; }
+body .esc-stop-hint.esc-stop-ping { animation:esc-hint-in 280ms cubic-bezier(.2,.8,.2,1); }
+body .esc-stop-hint.esc-stop-ping .esc-stop-text { animation:esc-hint-sheen 1100ms 80ms cubic-bezier(.3,.6,.2,1) both; }
+body .esc-stop-hint.esc-stop-ping .esc-stop-spark { animation:esc-hint-spark 700ms cubic-bezier(.2,.8,.2,1); }
+body .esc-stop-hint.esc-stop-ping .esc-stop-spark::after { animation:esc-hint-ripple 760ms 60ms ease-out; }
+body .esc-stop-hint[data-state=leaving] { opacity:0; translate:-50% calc(-50% - 4px); }
+@keyframes esc-hint-in { from { opacity:0; translate:-50% calc(-50% + 5px); scale:.96; } }
+@keyframes esc-hint-sheen { from { background-position:100% 0; } to { background-position:0 0; } }
+@keyframes esc-hint-spark { 0% { scale:0; opacity:0; } 45% { scale:1.7; opacity:1; } 100% { scale:1; } }
+@keyframes esc-hint-ripple { 0% { scale:.4; opacity:.9; } 100% { scale:1.8; opacity:0; } }
+body.reduce-motion .esc-stop-hint, body.reduce-motion .esc-stop-hint * , body.reduce-motion .esc-stop-hint .esc-stop-spark::after { animation:none!important; transition:none!important; }
+/* State-specific ring shorthand must not restart hidden or reduced-motion effects. */
+body:is([data-visible=false],[data-ui-hidden=true],.native-eyra-overlay,[data-view=browser-view],[data-view$=-module-view]) #screen #conversation :is(#eyra-trigger,.role-trigger),
+body:is([data-visible=false],[data-ui-hidden=true],.native-eyra-overlay,[data-view=browser-view],[data-view$=-module-view]) #screen #conversation :is(#eyra-trigger,.role-trigger) *,
+body:is([data-visible=false],[data-ui-hidden=true],.native-eyra-overlay,[data-view=browser-view],[data-view$=-module-view]) #screen #conversation :is(#eyra-trigger,.role-trigger)::before,
+body:is([data-visible=false],[data-ui-hidden=true],.native-eyra-overlay,[data-view=browser-view],[data-view$=-module-view]) #screen #conversation :is(#eyra-trigger,.role-trigger)::after { animation-play-state:paused!important; }
+body.reduce-motion #screen #conversation :is(#eyra-trigger,.role-trigger),body.reduce-motion #screen #conversation :is(#eyra-trigger,.role-trigger) *,body.reduce-motion #screen #conversation :is(#eyra-trigger,.role-trigger)::before,body.reduce-motion #screen #conversation :is(#eyra-trigger,.role-trigger)::after { animation:none!important;transition:none!important; }
+@media(prefers-reduced-motion:reduce) { body #screen #conversation :is(#eyra-trigger,.role-trigger),body #screen #conversation :is(#eyra-trigger,.role-trigger) *,body #screen #conversation :is(#eyra-trigger,.role-trigger)::before,body #screen #conversation :is(#eyra-trigger,.role-trigger)::after { animation:none!important;transition:none!important; } }
+@media (prefers-reduced-motion: reduce) { body .esc-stop-hint, body .esc-stop-hint *, body .esc-stop-hint .esc-stop-spark::after { animation:none!important; transition:none!important; } }
+/* 折叠页不再显示输入框（只留光圈），首页留着未发草稿（composer-open）时 Link 也不能再为输入框让出高度（R46：486→320）。 */
+body[data-form=folded].composer-open #control-view #control-surface { margin-bottom:calc(var(--eyra-ring-size,104px) + 44px)!important; }
+body[data-form=folded].composer-open #control-remote { margin-bottom:calc(var(--eyra-ring-size,104px) + 44px); }
+body.native-eyra-overlay.composer-open #control-view #control-surface { margin-bottom:0!important; }
+
+/* ---------- One glass for every dialog and popover (2026-10-26) ----------
+   Every window that floats over the interface is the same translucent glass:
+   background shows through one shared blur, a thin light edge, a soft shadow, and
+   the same enter/leave motion. Later sheets cannot make one opaque again. */
+body :is(#plan-pop,#report-pop,#terminal-pop,#extension-overflow-list,.model-hover,#onboarding .account-pop,.contact-bio,.gv-mention,.gv-station) { background:var(--glass-surface)!important; backdrop-filter:var(--glass-filter)!important; border:0!important; box-shadow:var(--glass-edge),var(--glass-shadow)!important; color:var(--ui-text); }
+body dialog#image-viewer { background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 24%),rgba(10,12,17,.7)!important; }
+body dialog:not(#onboarding) .ce-option:focus-visible { outline:none; }
+
+.web-reference-preview { width:min(600px,94vw);max-height:85vh;overflow:auto;padding:24px; }
+.web-reference-preview h2 { font-size:18px;margin:0 0 12px; }.web-reference-preview p { font-size:12px;overflow-wrap:anywhere;color:var(--ui-text-2); }.web-reference-preview pre { white-space:pre-wrap;max-height:45vh;overflow:auto; }.web-reference-preview footer { display:flex;justify-content:flex-end;gap:12px; }
+/* R64 用户消息：悬停时名字旁的小图标、长消息折叠与结构化粘贴排版。 */
+.chat-entry.user .chat-actions{display:inline-flex;align-items:center;gap:2px;margin-left:8px;vertical-align:-4px;opacity:0;transition:opacity var(--ui-enter,160ms) var(--ui-ease,ease)}
+.chat-entry.user:hover .chat-actions,.chat-entry.user:focus-within .chat-actions{opacity:1}
+.chat-action{display:inline-grid;place-items:center;width:22px;height:22px;min-height:0;min-width:0;padding:0;border:0;border-radius:6px;background:transparent;color:var(--ui-text-3,#8a91a0);cursor:pointer;app-region:no-drag;transition:color var(--ui-enter,160ms) var(--ui-ease,ease),background var(--ui-enter,160ms) var(--ui-ease,ease)}
+.chat-action[hidden]{display:none}.chat-action:hover{background:#ffffff12;color:var(--ui-text,#e6e9f0)}.chat-action:focus-visible{outline:1px solid var(--ui-accent,#a9c0ec);outline-offset:1px}
+.chat-action svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.chat-entry.user[data-clamped=true]:not([data-expanded=true]) .chat-text{max-height:var(--clamp-height,230px);overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 2.4em),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 2.4em),transparent)}
+body .chat-entry.user .chat-text.user-md{white-space:normal}
+body .chat-entry.user .chat-text.user-md > :first-child{margin-top:0}body .chat-entry.user .chat-text.user-md > :last-child{margin-bottom:0}
+
+:is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry){min-height:32px;padding:6px 16px;border:0;border-radius:var(--ui-radius-pill);background:#ffffff14;box-shadow:var(--ui-edge-hi);color:var(--ui-text);font-size:13px;backdrop-filter:blur(14px);transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease),transform var(--ui-fast) var(--ui-ease)}
+:is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry):hover:not(:disabled){background:#ffffff24;color:var(--ui-text)}
+:is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry):active:not(:disabled){transform:scale(.97)}
+:is(#reconnect,#startup-retry,#startup-settings,#startup-skip,#control-retry):focus-visible{outline:1px solid var(--ui-accent);outline-offset:2px}
+
+/* 启动页叠在场景上，不整页涂黑；同排按钮同尺寸。 */
+body #startup { top:var(--titlebar-height,56px); background:var(--glass-veil,#08090bcc); backdrop-filter:blur(14px); }
+#startup-actions { gap:12px; }
+
+/* 办公室叫醒 Eyra 的来源行：不是用户说的话，不要头像和气泡。 */
+body .chat-entry.user.link-notice .chat-avatar,body .chat-entry.user.link-notice .chat-name { display:none; }
+body .chat-entry.user.link-notice .chat-text { color:var(--ui-text-3); font-size:12px; }
+
+@keyframes ui-status-breathe { 0%,100% { scale:.98;opacity:.4; } 45% { scale:1.025;opacity:1; } }
+
+/* One compact titlebar control family; account avatar stays beside window controls. */
+body #status-anchor .session-indicators{display:flex;align-items:center;gap:8px;flex:none;margin-left:auto;app-region:drag}
+body #status-anchor .topbar-icon{display:grid;place-items:center;flex:none;box-sizing:border-box;width:32px;height:32px;min-width:32px;max-width:none;padding:0;margin:0;border:0;border-radius:50%;background:transparent;color:var(--ui-text-2);overflow:visible;mask-image:none;cursor:pointer;app-region:no-drag;transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease)}
+body #status-anchor .topbar-icon:is(:hover,:focus-visible){background:color-mix(in srgb,var(--ui-text) 8%,transparent);color:var(--ui-text)}
+body #status-anchor .topbar-icon [hidden]{display:none}
+.topbar-icon[data-active=true] .usage-meter{transform-origin:center;animation:status-meter 1.4s var(--ui-ease) infinite}
+.model-readout[data-expanded=true] .model-orbit{transform-origin:center;animation:status-orbit var(--ui-move) var(--ui-ease)}
+@keyframes status-meter{50%{transform:scaleY(.65);opacity:.55}}
+@keyframes status-orbit{to{transform:rotate(360deg)}}
+body.reduce-motion .topbar-icon svg path,body[data-visible=false] .topbar-icon svg path{animation:none}
+@media(prefers-reduced-motion:reduce){.topbar-icon svg path{animation:none!important}}
+
+body #status-anchor .session-indicators[hidden]{display:none}
+
+.status-readout-measure{position:absolute;visibility:hidden;pointer-events:none;white-space:pre;width:max-content;max-width:none;padding:0;border:0;contain:layout style}
+
+/* Readout slots keep navigation and window controls still during each cycle. */
+body #status-anchor .usage-readout{display:flex;gap:6px;width:var(--usage-width,110px);min-width:var(--usage-width,110px);border-radius:var(--ui-radius-pill);padding:0 6px;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+body #status-anchor .usage-readout>svg{display:block;flex:none}
+.usage-total{min-width:48px;text-align:right;color:var(--ui-text)}
+.usage-current{display:block;flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;color:var(--ui-text-2)}
+body #status-anchor .model-readout{transition:width var(--ui-move) var(--ui-ease);position:relative;display:flex;justify-content:flex-end;width:32px;min-width:32px;gap:0;border-radius:var(--ui-radius-pill);overflow:hidden}
+body #status-anchor .model-readout>svg{flex:none;margin:0 calc((32px - var(--ui-control-icon-size)) / 2)}
+.model-slot{display:flex;justify-content:flex-end;flex:none;app-region:drag}
+body #status-anchor .model-readout[data-expanded=true]{width:var(--model-width,176px);min-width:32px}
+.model-readout>span{position:absolute;left:12px;right:40px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;opacity:0;transform:translateX(-8px);transition:opacity var(--ui-enter) var(--ui-ease),transform var(--ui-enter) var(--ui-ease)}
+.model-readout[data-expanded=true]>span{opacity:1;transform:translateX(0)}
+.session-indicators[data-compact=true] .usage-current{display:block;font-size:11px}
+body[data-visible=false] .model-readout>span{transition:none}
+
+.session-model-menu{position:fixed;inset:auto;margin:0;min-width:220px;max-width:min(360px,calc(100vw - 32px));max-height:min(440px,75vh);overflow:auto}
+.session-model-menu p{margin:8px 10px 12px;color:var(--ui-text-2);font-size:12px}
+.session-model-menu button{display:flex;align-items:center;gap:8px;min-width:0}
+.session-model-menu button::after{content:'';margin-left:auto;flex:none;width:16px;height:16px}
+.session-model-menu button[aria-pressed=true]::after{content:'✓';color:var(--ui-accent)}
+body .session-model-menu button[aria-pressed=true]:not(:hover){background:transparent}
+body .session-model-menu[data-menu-input=pointer] button:focus-visible{outline:none}
+body .session-model-menu[data-menu-input=keyboard] button:hover:not(:focus-visible){background:transparent}
+
+/* Stable hit areas: labels live in the shared immediate preview surface. */
+body .sd-picker{inset:auto;margin:0;width:236px;max-width:calc(100vw - 32px);max-height:min(360px,60vh)}
+body .sd-picker .sd-pick{display:flex;align-items:center;gap:10px;min-height:38px}
+
+@media(max-width:680px){body #onboarding .profile-pair{grid-template-columns:minmax(0,1fr)}}
+
+body #onboarding .ui-tabs{gap:8px;margin:0;padding:0}
+body #onboarding .settings-head .ui-tabs{margin-left:auto}
+body #onboarding .settings-head-actions button,body #onboarding .settings-actions > button{min-height:32px;padding:6px 16px;font-size:13px;line-height:1.4}
+body #onboarding .profile-card .avatar-slot{cursor:default}
+
+/* LAND first migration: retain original home/settings visuals and components. */
+body[data-land="core"] :is(#dock-coding,#browser-slot,#dock-link,#dock-situation,#dock-servers,#dock-workspace,#dock-contacts,#dock-sessions,#session-drawer,#sd-new,#dock-apps,#dock-pinned-apps){display:none!important}
+body[data-land="core"]{--session-width:0px;--sidebar-width:0px}
+
+/* First ring: original browser, contacts and OS sessions; later city modules stay closed. */
+body[data-land="ring"] :is(#dock-situation,#dock-servers,#dock-workspace,#dock-apps,#dock-pinned-apps){display:none!important}
+body:is([data-view=document-viewer],[data-scoped-report-open=true]) :is(#emergence,.chat-layer-mini,.chat-layer-fold){visibility:hidden!important;pointer-events:none}
+body #document-viewer[data-kind=usage]{--doc-left-room:0px!important;min-width:0;max-width:100%;box-sizing:border-box}
+body #document-viewer[data-kind=usage] :is(#document-content,.usage-page,.usage-section,.usage-scroll){min-width:0;box-sizing:border-box;max-width:100%}
+body #document-viewer[data-kind=usage] .usage-tiles{grid-template-columns:repeat(auto-fit,minmax(min(128px,100%),1fr))}
+

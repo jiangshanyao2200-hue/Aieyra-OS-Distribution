@@ -1,0 +1,129 @@
+{
+  "schema": "aieyra.theme/1",
+  "elements": "1.0.0",
+  "renderers": {
+    "aieyra.content.code/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "caption"
+        },
+        {
+          "slot": "content"
+        }
+      ]
+    },
+    "aieyra.content.quote/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "content"
+        }
+      ]
+    },
+    "aieyra.content.table/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "content"
+        }
+      ]
+    },
+    "aieyra.content.thinking/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "heading"
+        },
+        {
+          "slot": "content"
+        }
+      ]
+    },
+    "aieyra.content.tool-result/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "summary"
+        },
+        {
+          "slot": "content"
+        },
+        {
+          "slot": "details"
+        }
+      ]
+    },
+    "aieyra.content.image/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "heading"
+        },
+        {
+          "slot": "content"
+        },
+        {
+          "slot": "controls"
+        }
+      ]
+    },
+    "aieyra.content.attachment/1": {
+      "tag": "span",
+      "style": {
+        "display": "inline-flex",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "name"
+        },
+        {
+          "slot": "metadata"
+        }
+      ]
+    },
+    "aieyra.content.media/1": {
+      "tag": "section",
+      "style": {
+        "display": "grid",
+        "gap": "8px"
+      },
+      "children": [
+        {
+          "slot": "heading"
+        },
+        {
+          "slot": "content"
+        },
+        {
+          "slot": "controls"
+        }
+      ]
+    }
+  }
+}

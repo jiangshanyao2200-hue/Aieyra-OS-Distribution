@@ -1,0 +1,634 @@
+/* @file-map:start
+文件: link/office/web/styles.css
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: 无已解析的项目内静态导入
+上游: link/office/web/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test link/office/tests/unit/*.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | @layer reset
+  rule-2 | style | @layer base
+  rule-3 | style | @layer layout
+  rule-4 | style | @layer components
+  rule-5 | style | @layer responsive
+  rule-6 | style | :root
+  rule-7 | style | html, body
+  rule-8 | style | body
+  rule-9 | style | #app
+  rule-10 | style | #main
+  rule-11 | style | .floor-seat
+  rule-12 | style | .desk-side
+  rule-13 | style | .desk-top
+  rule-14 | style | .desk-leg
+  rule-15 | style | .monitor-back
+  rule-16 | style | .monitor-screen
+  rule-17 | style | .monitor-lines
+  rule-18 | style | .keyboard
+  rule-19 | style | .seat-chair
+  rule-20 | style | .seat-signal
+  rule-21 | style | .seat-name
+  rule-22 | style | .seat-idle
+  rule-23 | style | .seat-running, .seat-busy
+  rule-24 | style | .seat-waiting_user
+  rule-25 | style | .seat-running .monitor-lines, .seat-busy .monitor-lines
+  rule-26 | style | .seat-running .seat-signal, .seat-busy .seat-signal
+  rule-27 | style | @keyframes terminal-scan
+  rule-28 | style | @keyframes signal-breathe
+  rule-29 | style | button:focus-visible, select:focus-visible
+  rule-30 | style | @media (prefers-reduced-motion: reduce)
+  rule-31 | style | #main
+  rule-32 | style | .work-orbit
+  rule-33 | style | .seat-running .work-orbit, .seat-busy .work-orbit
+  rule-34 | style | .floor-seat
+  rule-35 | style | .floor-seat .monitor-screen
+  rule-36 | style | .floor-seat:hover .monitor-screen
+  rule-37 | style | .seat-running .monitor-screen, .seat-busy .monitor-screen
+  rule-38 | style | .seat-running .monitor-lines, .seat-busy .monitor-lines
+  rule-39 | style | @keyframes work-orbit
+  rule-40 | style | @media (prefers-reduced-motion: reduce)
+  rule-41 | style | .seat-paused
+  rule-42 | style | .floor-seat .desk-top
+  rule-43 | style | .floor-seat .desk-side
+  rule-44 | style | .floor-seat .seat-chair
+  rule-45 | style | .floor-seat .seat-name
+  rule-46 | style | summary
+  rule-47 | style | .seat-name
+  rule-48 | style | :root
+  rule-49 | style | .floor-seat:focus-visible
+  rule-50 | style | :is(button, a, summary, input, textarea, select):focus-visible
+  rule-51 | style | @media (prefers-reduced-motion: reduce)
+  rule-52 | style | button:disabled
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Current home foundations and original desk artwork; superseded selectors removed. */
+@layer reset, base, layout, components, responsive;
+
+/* @chain-region rule-1 */ @layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0px;
+    min-height: 100%;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    color: inherit;
+  }
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0px;
+  }
+  button,
+  select {
+    touch-action: manipulation;
+  }
+  svg {
+    flex-shrink: 0;
+  }
+  [hidden] {
+    display: none !important;
+  }
+}
+/* @chain-region rule-2 */ @layer base {
+  :root {
+    color-scheme: dark;
+    --bg: #101319;
+    --sidebar: #12171e;
+    --panel: #181e26;
+    --raised: #1c242d;
+    --line: #2b343e;
+    --line-soft: #242c35;
+    --text: #e0e6ec;
+    --secondary: #a5b1bd;
+    --muted: #7f8c9b;
+    --mint: #acb9d7;
+    --lavender: #b9b0d7;
+    --blue: #9fbfdc;
+    --amber: #dcc297;
+    --red: #e0a2a7;
+    --radius: 14px;
+    --font:
+      'Segoe UI Variable Text', 'Segoe UI', 'Microsoft YaHei UI', 'PingFang SC', system-ui,
+      sans-serif;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.6 var(--font);
+    letter-spacing: 0.01em;
+  }
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+  ::selection {
+    background: rgb(56, 66, 89);
+    color: rgb(246, 247, 251);
+  }
+  :focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 4px;
+    border-radius: 5px;
+  }
+  button {
+    border: 0px;
+    background: none;
+  }
+  input,
+  textarea,
+  select {
+    color: var(--text);
+    background: none;
+    border: 0px;
+    min-width: 0px;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted);
+  }
+  textarea {
+    resize: vertical;
+  }
+  select {
+    cursor: pointer;
+  }
+  select option {
+    background: var(--raised);
+    color: var(--text);
+  }
+  input[type='search']::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
+  pre,
+  code {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    letter-spacing: 0px;
+  }
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  small {
+    font-size: 14px;
+  }
+  time {
+    white-space: nowrap;
+  }
+  button:disabled {
+    opacity: 0.42;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0px, 0px, 0px, 0px);
+    white-space: nowrap;
+    border: 0px;
+  }
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    transform: translateY(-200%);
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: var(--mint);
+    color: rgb(20, 27, 42);
+  }
+  .skip-link:focus {
+    transform: none;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: padding-box rgb(59, 71, 83);
+    border: 2px solid transparent;
+    border-radius: 10px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(59, 71, 83) transparent;
+  }
+}
+/* @chain-region rule-3 */ @layer layout {
+  kbd {
+    font: 14px var(--font);
+    color: rgb(140, 152, 166);
+    padding: 1px 4px;
+    border: 1px solid rgb(52, 64, 75);
+    border-radius: 4px;
+  }
+  main {
+    max-width: 1560px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 34px 38px 30px;
+    flex: 1 1 0%;
+    min-width: 0px;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    font-weight: 550;
+  }
+}
+/* @chain-region rule-4 */ @layer components {
+  .toast {
+    position: fixed;
+    bottom: 26px;
+    left: calc(50% + 80px);
+    transform: translateX(-50%);
+    z-index: 90;
+    background: rgb(41, 47, 62);
+    border: 1px solid rgb(93, 102, 124);
+    color: rgb(211, 217, 232);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 9px 36px;
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 14px;
+    max-width: min(90vw, 520px);
+  }
+  dialog {
+    color: var(--text);
+    background: rgb(25, 31, 39);
+    border: 1px solid rgb(58, 71, 81);
+    border-radius: 18px;
+    width: min(640px, -36px + 100vw);
+    max-height: min(85vh, 900px);
+    padding: 25px 30px 28px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 32px 120px;
+    overscroll-behavior: contain;
+  }
+  dialog::backdrop {
+    background: rgba(8, 12, 18, 0.72);
+    backdrop-filter: blur(5px);
+  }
+  dialog h2 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    margin-bottom: 22px;
+  }
+  .boot {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--secondary);
+  }
+  .boot small {
+    color: var(--muted);
+  }
+  .boot-mark {
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+    background: rgb(36, 43, 58);
+    color: var(--mint);
+    border-radius: 16px;
+    width: 60px;
+    height: 60px;
+  }
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes skeleton {
+    100% {
+      background-position: -220% 0px;
+    }
+  }
+}
+/* @chain-region rule-5 */ @layer responsive {
+  @media (min-width: 1600px) {
+    main {
+      padding-top: 42px;
+    }
+  }
+  @media (max-width: 1250px) {
+    main {
+      padding: 28px 25px;
+    }
+  }
+  @media (max-width: 800px) {
+    main {
+      padding: 26px 24px;
+    }
+    .toast {
+      left: 50%;
+    }
+  }
+  @media (max-width: 560px) {
+    main {
+      padding: 25px 17px;
+    }
+    dialog {
+      width: calc(-24px + 100vw);
+      padding: 20px;
+      border-radius: 14px;
+      max-height: 88dvh;
+    }
+    dialog h2 {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 360px) {
+    main {
+      padding-left: 13px;
+      padding-right: 13px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation: auto ease 0s 1 normal none running none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+/* @chain-region rule-6 */ :root {
+  --scene-bg: #11171e;
+  --scene-line: #ffffff12;
+  --scene-ink: #e6e8ee;
+  --scene-muted: #878d9c;
+  --scene-accent: #9facca;
+}
+/* @chain-region rule-7 */ html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--scene-bg);
+}
+/* @chain-region rule-8 */ body {
+  font-family: Inter, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  color: var(--scene-ink);
+}
+/* @chain-region rule-9 */ #app {
+  display: block;
+  height: 100%;
+  min-height: 0px;
+}
+/* @chain-region rule-10 */ #main {
+  position: relative;
+  max-width: none;
+  padding: 0px;
+  margin: 0px;
+  min-height: 0px;
+  overflow: hidden;
+  outline: none;
+}
+/* @chain-region rule-11 */ .floor-seat {
+  cursor: pointer;
+  outline: none;
+  --seat-color: #657781;
+}
+/* @chain-region rule-12 */ .desk-side {
+  fill: rgb(25, 36, 45);
+  stroke: rgb(74, 91, 101);
+  stroke-width: 0.6;
+}
+/* @chain-region rule-13 */ .desk-top {
+  fill: rgb(78, 87, 107);
+  stroke: rgb(142, 150, 167);
+  stroke-width: 0.7;
+}
+/* @chain-region rule-14 */ .desk-leg {
+  fill: none;
+  stroke: rgb(51, 68, 79);
+  stroke-width: 5;
+}
+/* @chain-region rule-15 */ .monitor-back {
+  fill: rgb(26, 39, 49);
+  stroke: rgb(100, 110, 135);
+  stroke-width: 1.2;
+}
+/* @chain-region rule-16 */ .monitor-screen {
+  fill: rgb(38, 61, 73);
+  stroke: var(--seat-color);
+  stroke-opacity: 0.5;
+  stroke-width: 0.6;
+}
+/* @chain-region rule-17 */ .monitor-lines {
+  stroke: var(--seat-color);
+  stroke-width: 1.2;
+  opacity: 0.3;
+}
+/* @chain-region rule-18 */ .keyboard {
+  fill: rgb(39, 57, 67);
+  stroke: rgb(105, 114, 136);
+  stroke-width: 0.6;
+}
+/* @chain-region rule-19 */ .seat-chair {
+  fill: rgb(35, 52, 63);
+  stroke: rgb(91, 101, 125);
+  stroke-width: 1;
+}
+/* @chain-region rule-20 */ .seat-signal {
+  fill: var(--seat-color);
+  opacity: 0.55;
+}
+/* @chain-region rule-21 */ .seat-name {
+  font-size: 14px;
+  fill: rgb(192, 196, 206);
+  font-weight: 500;
+}
+/* @chain-region rule-22 */ .seat-idle {
+  --seat-color: #8a9dc9;
+}
+/* @chain-region rule-23 */ .seat-running,
+.seat-busy {
+  --seat-color: #adb9d5;
+}
+/* @chain-region rule-24 */ .seat-waiting_user {
+  --seat-color: #d4be84;
+}
+/* @chain-region rule-25 */ .seat-running .monitor-lines,
+.seat-busy .monitor-lines {
+  opacity: 1;
+  animation: 2.7s ease-in-out 0s infinite normal none running terminal-scan;
+}
+/* @chain-region rule-26 */ .seat-running .seat-signal,
+.seat-busy .seat-signal {
+  opacity: 1;
+  animation: 2.7s ease-in-out 0s infinite normal none running signal-breathe;
+}
+/* @chain-region rule-27 */ @keyframes terminal-scan {
+  0%,
+  100% {
+    stroke-opacity: 0.5;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+/* @chain-region rule-28 */ @keyframes signal-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* @chain-region rule-29 */ button:focus-visible,
+select:focus-visible {
+  outline: rgb(179, 187, 205) solid 2px;
+  outline-offset: 3px;
+}
+/* @chain-region rule-30 */ @media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: auto ease 0s 1 normal none running none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* @chain-region rule-31 */ #main {
+  height: 100%;
+  width: 100%;
+}
+/* @chain-region rule-32 */ .work-orbit {
+  fill: none;
+  stroke: rgb(173, 183, 205);
+  stroke-opacity: 0;
+  stroke-width: 1.6;
+  stroke-dasharray: 30, 190;
+  pointer-events: none;
+}
+/* @chain-region rule-33 */ .seat-running .work-orbit,
+.seat-busy .work-orbit {
+  stroke-opacity: 0.5;
+  animation: 5s linear 0s infinite normal none running work-orbit;
+}
+/* @chain-region rule-34 */ .floor-seat {
+  transition: opacity 0.35s;
+}
+/* @chain-region rule-35 */ .floor-seat .monitor-screen {
+  transition: fill 0.3s;
+}
+/* @chain-region rule-36 */ .floor-seat:hover .monitor-screen {
+  fill: rgb(73, 81, 100);
+}
+/* @chain-region rule-37 */ .seat-running .monitor-screen,
+.seat-busy .monitor-screen {
+  fill: rgb(52, 60, 80);
+}
+/* @chain-region rule-38 */ .seat-running .monitor-lines,
+.seat-busy .monitor-lines {
+  animation: 1.8s steps(4) 0s infinite normal none running terminal-scan;
+}
+/* @chain-region rule-39 */ @keyframes work-orbit {
+  100% {
+    stroke-dashoffset: -440;
+  }
+}
+
+/* @chain-region rule-40 */ @media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: auto ease 0s 1 normal none running none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* @chain-region rule-41 */ .seat-paused {
+  --seat-color: #b8ad88;
+}
+/* @chain-region rule-42 */ .floor-seat .desk-top {
+  fill: color-mix(in srgb, var(--station-accent) 65%, #24323b);
+  stroke: var(--station-accent);
+  stroke-width: 1.1;
+}
+/* @chain-region rule-43 */ .floor-seat .desk-side {
+  fill: color-mix(in srgb, var(--station-accent) 24%, #19242d);
+}
+/* @chain-region rule-44 */ .floor-seat .seat-chair {
+  fill: color-mix(in srgb, var(--station-accent) 28%, #23343f);
+}
+/* @chain-region rule-45 */ .floor-seat .seat-name {
+  font-size: 14px;
+  fill: rgb(216, 219, 225);
+}
+/* @chain-region rule-46 */ summary {
+  min-height: 28px;
+  padding: 4px 0px;
+  line-height: 1.6;
+}
+/* @chain-region rule-47 */ .seat-name {
+  font-size: 14px;
+}
+/* @chain-region rule-48 */ :root {
+  --panel: #171b26;
+  --raised: #1d222e;
+  --line: #343842;
+  --line-soft: #282c35;
+  --text: #dadde5;
+  --secondary: #b0b5c0;
+  --muted: #9197a5;
+  --mint: #b7becf;
+  --control-ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+/* @chain-region rule-49 */ .floor-seat:focus-visible {
+  outline: none;
+}
+/* @chain-region rule-50 */ :is(button, a, summary, input, textarea, select):focus-visible {
+  outline: rgb(183, 194, 221) solid 2px;
+  outline-offset: 3px;
+}
+
+/* @chain-region rule-51 */ @media (prefers-reduced-motion: reduce) {
+  #toast {
+    animation: auto ease 0s 1 normal none running none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* @chain-region rule-52 */ button:disabled {
+  cursor: default;
+}

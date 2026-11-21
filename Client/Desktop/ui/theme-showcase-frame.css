@@ -1,0 +1,44 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: html,body; body; .showcase-content; .sample-card; .sample-card h2; .sample-row; .sample-grid; .sample-grid label; .sample-card .danger; .sample-slot; .sample-terminal; .chat-entry; .chat-text; .chat-text p; .chat-text table; .role-ring; .chat-name; .thought-stream; .sample-dialog; .sample-dialog::backdrop; .sample-attachments,.attachment-cards; .attachment-card,.composer-attachment; .attachment-labels,.attachment-card; .attachment-preview,.attachment-remove; .tool-digest; .digest-section; .showcase-content :focus-visible; .quiet; .quiet:hover:not(:disabled); .showcase-content a; .showcase-content [data-state=failed]; .showcase-content .app-main; .reduce-motion *; @media(max-width:480px)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/theme-showcase-frame.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+html,body{height:100%;overflow:auto}
+body{margin:0;padding:16px;color:var(--ui-text);background:transparent}
+.showcase-content{display:grid;gap:16px;min-width:0}
+.sample-card{padding:16px;border-radius:var(--ui-radius);background:var(--ui-glass);box-shadow:var(--ui-edge);min-width:0}
+.sample-card h2{font-size:16px;margin:0 0 12px}.sample-card h3{font-size:14px}
+.sample-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:12px 0}
+.sample-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:16px;margin:16px 0}
+.sample-grid label{display:grid;gap:8px}.sample-grid :is(input,textarea,select){min-width:0;max-width:100%}
+.sample-card .danger{color:var(--ui-error)}
+.sample-slot{padding:16px;margin:8px;min-width:0;border-radius:var(--ui-radius-control);box-shadow:var(--ui-edge);overflow-wrap:anywhere}
+.sample-terminal{height:200px;width:100%;overflow:hidden}
+.chat-entry{display:flex;gap:16px;margin-bottom:24px}.chat-main{min-width:0;flex:1}
+.chat-text{font:var(--os-assistant-weight,400) var(--os-assistant-size,16px)/var(--os-assistant-line,1.85) var(--os-assistant-font,sans-serif);overflow-wrap:anywhere}
+.chat-text p{margin:12px 0}.chat-text pre{overflow:auto;padding:12px;background:var(--ui-glass);border-radius:var(--ui-radius-control)}
+.chat-text table{border-collapse:collapse}.chat-text :is(th,td){border-bottom:1px solid var(--ui-text-3);padding:8px 16px;text-align:left}
+.role-ring{width:72px;height:72px;border:2px solid var(--ui-text-3);border-radius:50%;flex:none}
+.chat-name{font-size:13px;color:var(--ui-text-2)}.sample-history{font-size:12px;color:var(--ui-text-3)}
+.thought-stream{min-height:96px;margin:16px 0}.showcase-content textarea{width:100%;max-width:100%}
+.sample-dialog{color:var(--ui-text);background:var(--ui-glass);border:0;border-radius:var(--ui-radius);padding:24px;max-width:calc(100% - 32px)}
+.sample-dialog::backdrop{background:var(--glass-veil)}
+.sample-attachments,.attachment-cards{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0}
+.attachment-card,.composer-attachment{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;background:var(--ui-glass);color:var(--ui-text);border:0;border-radius:var(--ui-radius-control)}
+.attachment-labels,.attachment-card{display:flex;flex-direction:column}.attachment-meta,.attachment-card-meta{font-size:11px;color:var(--ui-text-2)}
+.attachment-preview,.attachment-remove{background:transparent;border:0;color:inherit}.attachment-remove::after{content:'×'}
+.tool-digest{overflow-wrap:anywhere}.digest-lead{font-size:16px}.digest-note{color:var(--ui-text-2)}.digest-error{color:var(--ui-error)}
+.digest-section{padding:8px 0}.digest-text,.patch-diff{white-space:pre-wrap;overflow-wrap:anywhere}.digest-facts{display:flex;gap:16px;flex-wrap:wrap}.digest-facts dd{margin:0}
+.showcase-content :focus-visible{outline:2px solid var(--ui-accent);outline-offset:2px}
+.quiet{min-height:32px;padding:4px 12px;border:0;border-radius:var(--ui-radius-pill);background:transparent;color:var(--ui-text-2);font:inherit}
+.quiet:hover:not(:disabled){background:#ffffff14;color:var(--ui-text)}.quiet:disabled{opacity:.45;cursor:default}
+.showcase-content a{color:var(--ui-accent)}
+.showcase-content [data-state=failed]{color:var(--ui-error)}.showcase-content [data-state=completed]{color:var(--ui-ok)}
+.showcase-content .app-main{position:static;padding:16px;overflow:auto}.showcase-content .app-rail{position:static;transform:none}
+.reduce-motion *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(max-width:480px){.role-ring{width:48px;height:48px}.chat-entry{gap:12px}.sample-card{padding:12px}}

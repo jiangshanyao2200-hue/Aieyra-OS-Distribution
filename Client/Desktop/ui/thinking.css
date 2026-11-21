@@ -1,0 +1,21 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body :is(.thought-view,.agent-thought,.thinking-content,.chat-entry[data-thought=true] .chat-text,#answer-stage[data-kind=thinking] #voice,[data-text-kind=thinking]); body .thought-view :is(.tv-title,.tv-flow,.tv-text),body [data-text-kind=thinking] *; body .thought-view .tv-title; body .thought-view .tv-flow; body :is(.tv-flow,.tv-text,.tv-title),body .work-transcript-block[data-kind=thinking] .work-transcript-text
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/thinking.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Thinking owns its typography. A parent conversation's stroke/shadow never leaks in. */
+body :is(.thought-view,.agent-thought,.thinking-content,.chat-entry[data-thought=true] .chat-text,#answer-stage[data-kind=thinking] #voice,[data-text-kind=thinking]) {
+ --region-font:var(--os-thinking-font,"Segoe UI","Microsoft YaHei",sans-serif);--region-size:var(--os-thinking-size,14px);--region-weight:var(--os-thinking-weight,400);--region-line:var(--os-thinking-line,1.6);--region-letter:var(--os-thinking-letter,0px);--region-paragraph:var(--os-thinking-paragraph,12px);
+ font-family:var(--region-font)!important;font-size:var(--region-size)!important;font-weight:var(--region-weight)!important;line-height:var(--region-line)!important;letter-spacing:var(--region-letter)!important;
+ -webkit-text-stroke:0 transparent!important;text-shadow:0 1px 4px #0009!important;filter:none;color:var(--os-thinking-color,#e8edf5)!important;opacity:1;
+}
+body .thought-view :is(.tv-title,.tv-flow,.tv-text),body [data-text-kind=thinking] * { font:inherit;letter-spacing:inherit;-webkit-text-stroke:0 transparent;text-shadow:none; }
+body .thought-view .tv-title { font-weight:min(700,calc(var(--os-thinking-weight,400) + 100)); }
+body .thought-view .tv-flow { gap:var(--os-thinking-paragraph,12px); }
+body :is(.tv-flow,.tv-text,.tv-title),body .work-transcript-block[data-kind=thinking] .work-transcript-text { color:var(--os-thinking-color,#e8edf5)!important; }
+/* Motion modes come from Theme's shared appearance tokens. */

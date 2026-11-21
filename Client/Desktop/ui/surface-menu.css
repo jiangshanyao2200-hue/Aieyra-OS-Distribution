@@ -1,0 +1,68 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: html,body; body; .module-dock-menu; body .module-dock-menu.ui-menu-native; .module-dock-menu.notice-panel; body[data-topbar=true]; body .module-dock-menu.ui-topbar-menu; .ui-topbar-menu.notice-panel header; .notice-panel header; .module-dock-menu.notice-panel button:not(.ui-icon-button); .notice-panel details; .notice-panel article; .notice-panel pre; .notice-list; .notice-panel :is(.notice-list,article); .notice-panel :is(.notice-list,article)::-webkit-scrollbar; .notice-panel :is(.notice-list,article)::-webkit-scrollbar-thumb; .notice-panel header; .notice-panel header strong; .notice-panel summary; .notice-panel summary:hover; .notice-title; .notice-panel article; .module-dock-menu.account-panel; .account-panel header; .account-avatar; .account-meta,.account-updated; .account-panel dt; .account-panel footer; .module-dock-menu.apps-panel; .apps-row; .apps-row:hover,.apps-row:focus-within; .module-dock-menu .apps-open; .module-dock-menu .apps-open:hover; .module-dock-menu .apps-open:focus-visible; .apps-icon; .apps-row:hover .apps-icon; .apps-icon svg; .apps-text; .apps-text strong; .apps-text small; .module-dock-menu .apps-pin; .module-dock-menu .apps-pin::after; .module-dock-menu .apps-pin[aria-checked=true]; .module-dock-menu .apps-pin[aria-checked=true]::after; @media (prefers-reduced-motion:reduce); .surface-model-title; button[role=menuitemradio]; button[role=menuitemradio]::after; button[role=menuitemradio][aria-checked=true]::after; .module-dock-menu[data-menu-input=pointer] button:focus-visible; .module-dock-menu[data-menu-input=keyboard] button:hover:not(:focus-visible)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/surface-menu.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import url('./ui-foundation.css');
+html,body{margin:0;background:transparent;overflow:hidden;app-region:no-drag}
+body{width:max-content;padding:2px}
+.module-dock-menu{min-width:190px}
+/* The renderer starts presence only after the host has a painted native frame. */
+body .module-dock-menu.ui-menu-native{animation:none!important}
+
+.module-dock-menu.notice-panel { display:flex;flex-direction:column;width:440px;max-height:480px;overflow:hidden;padding:18px;background:linear-gradient(180deg,#ffffff08,transparent 120px),var(--ui-glass);color:var(--ui-text);border-radius:var(--ui-radius); }
+body[data-topbar=true]{padding:0}
+body .module-dock-menu.ui-topbar-menu{padding:12px;min-width:0;border-radius:0 0 var(--ui-radius-menu) var(--ui-radius-menu);background:var(--ui-topbar-surface);backdrop-filter:none;box-shadow:var(--ui-topbar-menu-shadow)}
+.ui-topbar-menu.notice-panel header{flex-wrap:wrap;gap:8px}
+.notice-panel header { display:flex;align-items:center;gap:10px;padding-bottom:12px; }.notice-panel header strong { flex:1; }
+.module-dock-menu.notice-panel button:not(.ui-icon-button) { width:auto;display:inline-flex;padding:6px 12px;margin:4px 0;font-size:12px; }
+.notice-panel details { padding:12px 0;border-top:1px solid #ffffff12; }.notice-panel summary { cursor:pointer;font-size:13px; }
+.notice-panel article { font:13px/1.7 var(--os-interface-font,sans-serif);overflow-wrap:anywhere;user-select:text;max-height:260px;overflow:auto;margin:12px 0; }
+.notice-panel pre { white-space:pre-wrap; }.notice-panel :focus-visible { outline:1px solid var(--ui-accent);outline-offset:2px; }
+.notice-list{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding-right:4px}
+.notice-panel :is(.notice-list,article){scrollbar-width:thin;scrollbar-color:#ffffff28 transparent}
+.notice-panel :is(.notice-list,article)::-webkit-scrollbar{width:6px;height:6px}
+.notice-panel :is(.notice-list,article)::-webkit-scrollbar-thumb{border-radius:6px;background:#ffffff28}
+.notice-panel header{flex:none;padding-bottom:10px}
+.notice-panel header strong{font-size:14px;font-weight:550;letter-spacing:.03em}
+.notice-panel summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:baseline;list-style:none;padding:4px 2px;border-radius:6px}
+.notice-panel summary:hover{background:#ffffff06}.notice-panel summary time{font-size:10px;color:var(--ui-text-3)}
+.notice-title{line-height:1.6;overflow-wrap:anywhere}.unread .notice-title::before{content:'';display:inline-block;width:5px;height:5px;background:var(--ui-accent);border-radius:50%;margin-right:8px;vertical-align:middle}
+.notice-panel article{max-height:240px;padding-right:6px}.notice-panel article.loading{color:var(--ui-text-3);font-size:12px}
+.module-dock-menu.account-panel{width:330px;padding:20px;background:linear-gradient(160deg,#ffffff08,transparent 140px),var(--ui-glass);border-radius:var(--ui-radius)}
+.account-panel header{display:flex;gap:12px;align-items:center}.account-panel header strong{font-size:15px;font-weight:550;overflow-wrap:anywhere}
+.account-avatar{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;overflow:hidden;background:#ffffff0c;color:var(--ui-accent)}.account-avatar img{width:100%;height:100%;object-fit:cover}
+.account-meta,.account-updated{font-size:11px;color:var(--ui-text-3);line-height:1.6;overflow-wrap:anywhere}.account-panel dl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0}
+.account-panel dt{font-size:11px;color:var(--ui-text-2)}.account-panel dd{font-size:17px;font-variant-numeric:tabular-nums;margin:8px 0 0;overflow-wrap:anywhere}
+.account-panel footer{display:flex;gap:6px;justify-content:flex-end;padding-top:8px;border-top:1px solid #ffffff10}.module-dock-menu.account-panel button{width:auto;padding:8px 10px;font-size:12px}
+
+/* 顶栏“应用”面板 */
+.module-dock-menu.apps-panel { display:grid; gap:2px; width:360px; padding:8px; overflow:auto; scrollbar-width:thin; scrollbar-color:#ffffff28 transparent; }
+.apps-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:4px; border-radius:10px; transition:background-color var(--ui-fast) var(--ui-ease); }
+.apps-row:hover,.apps-row:focus-within { background:#ffffff0c; }
+.module-dock-menu .apps-open { display:grid; grid-template-columns:36px minmax(0,1fr); align-items:center; gap:12px; min-width:0; width:auto; min-height:0; padding:8px 4px 8px 8px; border:0; border-radius:10px; background:none; color:inherit; text-align:left; cursor:pointer; }
+.module-dock-menu .apps-open:hover { background:none; }
+.module-dock-menu .apps-open:focus-visible { outline:none; box-shadow:none; background:none; }
+.apps-icon { display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:#ffffff0d; box-shadow:var(--ui-edge); transition:transform var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease); }
+.apps-row:hover .apps-icon { background:#a9c0ec1f; transform:scale(1.04); }
+.apps-icon svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.apps-text { display:grid; gap:1px; min-width:0; }
+.apps-text strong { font-size:13px; font-weight:500; }
+.apps-text small { overflow:hidden; font-size:12px; color:var(--ui-text-3); text-overflow:ellipsis; white-space:nowrap; }
+.module-dock-menu .apps-pin { position:relative; flex:none; width:32px; height:18px; min-height:0; margin-right:8px; padding:0; border:0; border-radius:999px; background:#ffffff14; cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease); }
+.module-dock-menu .apps-pin::after { content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:#c9cfda; transition:transform var(--ui-fast) var(--ui-ease),background-color var(--ui-fast) var(--ui-ease); }
+.module-dock-menu .apps-pin[aria-checked=true] { background:#a9c0ec66; }
+.module-dock-menu .apps-pin[aria-checked=true]::after { background:#eef1f7; transform:translateX(14px); }
+@media (prefers-reduced-motion:reduce) { .apps-row,.apps-icon,.module-dock-menu .apps-pin,.module-dock-menu .apps-pin::after { transition:none; } }
+/* Model choices share the titlebar material and keep native pages visible. */
+.surface-model-title{margin:0;padding:8px 12px;color:var(--ui-text-2);font-size:12px;line-height:1.5}
+button[role=menuitemradio]{display:flex;align-items:center;gap:8px;min-width:0}
+button[role=menuitemradio]::after{content:'';margin-left:auto;flex:none;width:16px;height:16px}
+button[role=menuitemradio][aria-checked=true]::after{content:'✓';color:var(--ui-accent)}
+.module-dock-menu[data-menu-input=pointer] button:focus-visible{outline:none}
+.module-dock-menu[data-menu-input=keyboard] button:hover:not(:focus-visible){background:transparent}

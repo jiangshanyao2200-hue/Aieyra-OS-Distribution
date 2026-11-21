@@ -1,0 +1,1843 @@
+/* @file-map:start
+文件: link/office/web/link-page.css
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: link/office/web/station-visual.css, link/office/web/station-visual.mjs, link/office/web/ui-foundation.css
+上游: link/office/web/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test link/office/tests/unit/*.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | @font-face
+  rule-2 | style | @font-face
+  rule-3 | style | :root
+  rule-4 | style | :root:not([data-os-host])
+  rule-5 | style | html, body
+  rule-6 | style | body
+  rule-7 | style | button
+  rule-8 | style | ::selection
+  rule-9 | style | .boot
+  rule-10 | style | .boot-mark
+  rule-11 | style | .boot p
+  rule-12 | style | #main.link-page
+  rule-13 | style | .link-top
+  rule-14 | style | .link-back
+  rule-15 | style | .link-back:hover
+  rule-16 | style | .link-back:focus-visible
+  rule-17 | style | .link-back[hidden]
+  rule-18 | style | .link-back svg
+  rule-19 | style | .link-ticker
+  rule-20 | style | .link-ticker[hidden]
+  rule-21 | style | .link-top:has(> .link-ticker[hidden])
+  rule-22 | style | .link-top:has(> .link-ticker[hidden]) > .link-ticker
+  rule-23 | style | .tk-frame
+  rule-24 | style | .tk-line
+  rule-25 | style | .tk-line.long
+  rule-26 | style | .tk-line[data-tone='calm']
+  rule-27 | style | .tk-line[data-tone='live']
+  rule-28 | style | .tk-line[data-tone='warn']
+  rule-29 | style | .tk-line[data-tone='alert']
+  rule-30 | style | .tk-dot
+  rule-31 | style | .tk-dot::after
+  rule-32 | style | .tk-line[data-tone='calm'] .tk-dot, .tk-line[data-tone='calm'] .tk-dot::after
+  rule-33 | style | .tk-line.in
+  rule-34 | style | .tk-line.out
+  rule-35 | style | @keyframes tk-in
+  rule-36 | style | @keyframes tk-out
+  rule-37 | style | .link-view
+  rule-38 | style | .link-view:focus
+  rule-39 | style | .link-view[data-page='stations']
+  rule-40 | style | .page-empty
+  rule-41 | style | .meta
+  rule-42 | style | .home-grid
+  rule-43 | style | .home-seat
+  rule-44 | style | .home-seat svg
+  rule-45 | style | .home-seat:is(:hover,:focus-visible)
+  rule-46 | style | .home-seat:hover .monitor-screen
+  rule-47 | style | .home-seat:focus-visible
+  rule-48 | style | .home-seat .floor-seat
+  rule-49 | style | .home-seat .seat-name
+  rule-50 | style | .home-seat .seat-code
+  rule-51 | style | .home-seat .seat-status
+  rule-52 | style | .seat-status[data-state='working']
+  rule-53 | style | .seat-status[data-state='waiting']
+  rule-54 | style | .seat-status[data-state='error']
+  rule-55 | style | .home-seat[data-lead='true'] .seat-name::before
+  rule-56 | style | .seat-error
+  rule-57 | style | .seat-waiting_user .seat-signal
+  rule-58 | style | .seat-error .seat-signal
+  rule-59 | style | .home-seat:is([data-state='offline'], [data-state='lost'], [data-state='sync']) svg
+  rule-60 | style | .home-seat:is([data-state='offline'], [data-state='lost'], [data-state='sync']) :is(.seat-name, .seat-status)
+  rule-61 | style | .seat-say
+  rule-62 | style | .seat-say > span
+  rule-63 | style | .seat-say::before
+  rule-64 | style | .seat-say::after
+  rule-65 | style | .seat-say[data-age='old']
+  rule-66 | style | .home-seat:hover .seat-say
+  rule-67 | style | .home-seat:is([data-state='offline'], [data-state='lost']) .seat-say
+  rule-68 | style | @keyframes say-pop
+  rule-69 | style | @keyframes say-ring
+  rule-70 | style | .device-side
+  rule-71 | style | .device-stand
+  rule-72 | style | .device-vent, .device-speaker
+  rule-73 | style | .device-led
+  rule-74 | style | .device-app
+  rule-75 | style | .device-screen-pattern
+  rule-76 | style | .device-identity-mark
+  rule-77 | style | .seat-running .device-led
+  rule-78 | style | .seat-running .device-screen-pattern, .seat-running .device-app
+  rule-79 | style | .home-seat:is([data-state='offline'], [data-state='lost'], [data-state='sync']) :is(.device-led, .device-screen-pattern, .device-app)
+  rule-80 | style | .detail
+  rule-81 | style | .detail h2
+  rule-82 | style | .detail h3
+  rule-83 | style | .detail p
+  rule-84 | style | .detail p.meta
+  rule-85 | style | .detail .evidence
+  rule-86 | style | .facts
+  rule-87 | style | .facts dt
+  rule-88 | style | .facts dd
+  rule-89 | style | .detail-head
+  rule-90 | style | .detail-head > div
+  rule-91 | style | .detail-head p.meta
+  rule-92 | style | .detail-desk
+  rule-93 | style | .detail-desk .work-orbit
+  rule-94 | style | .detail-diag
+  rule-95 | style | .ticket-group + .ticket-group
+  rule-96 | style | .ticket-group-name
+  rule-97 | style | .ticket-group-name b
+  rule-98 | style | .ticket-group[data-group='doing'] .ticket-group-name
+  rule-99 | style | .ticket-group[data-group='doing'] .ticket-group-name::before
+  rule-100 | style | .ticket-group[data-group='done'] .ticket
+  rule-101 | style | .ticket-list
+  rule-102 | style | .ticket
+  rule-103 | style | .ticket::before
+  rule-104 | style | .ticket:hover, .ticket:focus-visible
+  rule-105 | style | .ticket[data-tone='live']
+  rule-106 | style | .ticket[data-tone='review']
+  rule-107 | style | .ticket[data-tone='warn']
+  rule-108 | style | .ticket[data-tone='done']
+  rule-109 | style | .ticket[data-tone='muted']
+  rule-110 | style | .ticket[data-tone='open']
+  rule-111 | style | .ticket strong
+  rule-112 | style | .ticket-foot
+  rule-113 | style | .ticket-who
+  rule-114 | style | .ticket-who > span
+  rule-115 | style | .ticket-who i
+  rule-116 | style | .ticket-foot time
+  rule-117 | style | .ticket-chip
+  rule-118 | style | .ticket[data-tone='open'] .ticket-chip, .ticket[data-tone='muted'] .ticket-chip
+  rule-119 | style | .channel
+  rule-120 | style | .channel summary
+  rule-121 | style | .channel summary::-webkit-details-marker
+  rule-122 | style | .channel summary svg
+  rule-123 | style | .channel[open] summary svg
+  rule-124 | style | .channel summary:hover
+  rule-125 | style | .channel summary b
+  rule-126 | style | .channel-mode
+  rule-127 | style | .channel-mode button
+  rule-128 | style | .channel-mode button:hover
+  rule-129 | style | .channel-mode button[aria-checked='true']
+  rule-130 | style | .channel-body
+  rule-131 | style | .channel-say
+  rule-132 | style | .channel-say .chat-avatar
+  rule-133 | style | .channel-say p
+  rule-134 | style | .chat-who
+  rule-135 | style | .chat-who strong
+  rule-136 | style | .chat-who time
+  rule-137 | style | .chat-say
+  rule-138 | style | .channel-raw
+  rule-139 | style | .channel-raw time
+  rule-140 | style | .channel-raw p
+  rule-141 | style | .toast
+  rule-142 | style | @keyframes heartbeat
+  rule-143 | style | @keyframes pulse-ring
+  rule-144 | style | @keyframes link-blink
+  rule-145 | style | @keyframes page-in
+  rule-146 | style | @media (max-width: 860px)
+  rule-147 | style | @media (max-width: 599px)
+  rule-148 | style | @media (prefers-reduced-motion: reduce)
+  rule-149 | style | [data-os-host] :is(#link-station-overview, #station-search, #station-filter)
+  rule-150 | style | [data-os-host] .link-top
+  rule-151 | style | [data-os-host] .link-top:not(:has(#link-back:not([hidden]), #link-ticker:not([hidden]), #station-pages:not([hidden])))
+  rule-152 | style | [data-os-host] #link-tabs
+  rule-153 | style | [data-os-host] #main.link-page
+  rule-154 | style | [data-os-host] #main .link-back
+  rule-155 | style | [data-os-host] .pixel-table:only-child > h3
+  rule-156 | style | [data-os-host] body
+  rule-157 | style | #main.link-page
+  rule-158 | style | .link-tabs
+  rule-159 | style | .link-top
+  rule-160 | style | .link-view
+  rule-161 | style | .group-page, .workorders-page
+  rule-162 | style | .group-page
+  rule-163 | style | .panel-head
+  rule-164 | style | .panel-head h2
+  rule-165 | style | .panel-head > button, .history-controls button, .panel-more, .panel-notice button
+  rule-166 | style | .panel-head > button:hover, .history-controls button:hover, .panel-more:hover, .panel-notice button:hover
+  rule-167 | style | .panel-head > button:focus-visible, .history-controls button:focus-visible, .panel-more:focus-visible, .panel-notice button:focus-visible, .group-avatar:focus-visible, .group-quote:focus-visible, .dependency-link:focus-visible
+  rule-168 | style | .history-controls
+  rule-169 | style | .history-controls .meta
+  rule-170 | style | .history-controls button:disabled
+  rule-171 | style | .panel-notice
+  rule-172 | style | .panel-more
+  rule-173 | style | .group-messages
+  rule-174 | style | .group-message
+  rule-175 | style | .group-avatar
+  rule-176 | style | button.group-avatar
+  rule-177 | style | .group-avatar svg
+  rule-178 | style | .group-avatar > svg:not(:has(.floor-seat))
+  rule-179 | style | .group-message-body
+  rule-180 | style | .group-message .chat-who
+  rule-181 | style | .group-message .chat-who strong
+  rule-182 | style | .group-say
+  rule-183 | style | .group-quote
+  rule-184 | style | button.group-quote
+  rule-185 | style | button.group-quote:hover
+  rule-186 | style | .group-mentions
+  rule-187 | style | .group-mention
+  rule-188 | style | .group-original
+  rule-189 | style | .group-original summary
+  rule-190 | style | .group-original p
+  rule-191 | style | .ticket-board
+  rule-192 | style | .ticket-board .ticket
+  rule-193 | style | .ticket-board .ticket-foot
+  rule-194 | style | .ticket-board .ticket-who
+  rule-195 | style | .dependency-link
+  rule-196 | style | .dependency-link + .dependency-link
+  rule-197 | style | @media (max-width: 599px)
+  rule-198 | style | body :is(button, summary, a[href], [tabindex]):focus-visible
+  rule-199 | style | body button:disabled
+  rule-200 | style | .link-view:focus-visible
+  rule-201 | style | .link-connection-summary
+  rule-202 | style | #link-connection
+  rule-203 | style | #link-connection svg
+  rule-204 | style | #link-connection[data-online='true']
+  rule-205 | style | #link-connections
+  rule-206 | style | #link-connections h2
+  rule-207 | style | #link-connections h3
+  rule-208 | style | #link-connections p
+  rule-209 | style | #link-join
+  rule-210 | style | #link-adapters
+  rule-211 | style | #link-adapters li
+  rule-212 | style | #link-adapters small
+  rule-213 | style | .link-top
+  rule-214 | style | input:-webkit-autofill, input:-webkit-autofill:focus
+  rule-215 | style | .home-grid
+  rule-216 | style | .pixel-office
+  rule-217 | style | .pixel-table
+  rule-218 | style | .pixel-table h3
+  rule-219 | style | .pixel-seats
+  rule-220 | style | .pixel-office .home-seat
+  rule-221 | style | .pixel-office .home-seat:hover
+  rule-222 | style | .pixel-office .home-seat:focus-visible
+  rule-223 | style | .pixel-office .home-seat > *, .home-seat .pixel-station-avatar
+  rule-224 | style | .pixel-office .home-seat .pixel-station-avatar
+  rule-225 | style | .seat-copy
+  rule-226 | style | .pixel-office .home-seat .seat-name
+  rule-227 | style | .pixel-office .home-seat .seat-status
+  rule-228 | style | .pixel-office .seat-status::before
+  rule-229 | style | .pixel-office .seat-status:is([data-state=live],[data-state=online],[data-state=working],[data-state=ready])::before
+  rule-230 | style | .pixel-office .seat-status:is([data-state=offline],[data-state=lost])::before
+  rule-231 | style | .seat-chevron
+  rule-232 | style | .pixel-speech
+  rule-233 | style | .pixel-office .seat-say
+  rule-234 | style | .pixel-office .seat-say::before,.pixel-office .seat-say::after
+  rule-235 | style | .pixel-office .seat-say :is(span,small)
+  rule-236 | style | .pixel-portrait-name,.pixel-completion
+  rule-237 | style | .station-detail .pixel-station-avatar
+  rule-238 | style | .station-detail .detail-head
+  rule-239 | style | .station-detail h2:focus
+  rule-240 | style | .group-avatar .pixel-station-avatar
+  rule-241 | style | .portrait-sprite
+  rule-242 | style | .portrait-tide
+  rule-243 | style | .portrait-ember
+  rule-244 | style | .portrait-iris
+  rule-245 | style | .portrait-jade
+  rule-246 | style | @keyframes portrait-blink
+  rule-247 | style | @keyframes portrait-talk
+  rule-248 | style | .home-seat[data-speaking=true] .portrait-sprite
+  rule-249 | style | .pixel-office .seat-say:not([data-age=old])
+  rule-250 | style | .pixel-office .seat-say[data-age=old]
+  rule-251 | style | @media(max-width:560px)
+  rule-252 | style | .pixel-office .home-seat[data-speaking=true] .seat-say
+  rule-253 | style | .pixel-office .home-seat[data-speaking=true] .seat-say::before
+  rule-254 | style | @media(prefers-reduced-motion:reduce)
+  rule-255 | style | [data-os-host] #link-tabs
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+@import url('./station-visual.css');
+@import url('./ui-foundation.css');
+/* 共享工位模块：页头 → 可滚动内容 → 左下导航。导航有独立网格行，
+   不覆盖工位/详情，也不占侧栏；工位、只读群聊和工单各自保留阅读状态。
+   导航方向同时维护 office-home.js 的 aria-orientation。 */
+/* @chain-region rule-1 */ @font-face {
+  font-family: 'Aieyra Inter';
+  src: url('./fonts/inter-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+/* @chain-region rule-2 */ @font-face {
+  font-family: 'Aieyra Noto Sans SC';
+  src: url('./fonts/notosanssc-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+/* @chain-region rule-3 */ :root {
+  --ui-glass-2: rgba(255, 255, 255, 0.035);
+  --ui-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0) 38%);
+  --ui-ring: rgba(230, 233, 240, 0.85);
+  --ui-alert: #e39a8f;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --spring: cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+/* @chain-region rule-4 */ :root:not([data-os-host]) {
+  --ui-glass: rgba(14, 16, 22, 0.3);
+  --ui-blur: blur(22px) saturate(1.3);
+  --ui-edge: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --ui-edge-hi: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  --ui-text: #e6e9f0;
+  --ui-text-2: #9aa3b2;
+  --ui-text-3: #6b7385;
+  --ui-accent: #a9c0ec;
+  --ui-ok: #9fd8b4;
+  --ui-warn: #e0c37f;
+}
+/* @chain-region rule-5 */ html,
+body {
+  background: transparent !important;
+  overflow: hidden;
+}
+/* @chain-region rule-6 */ body {
+  color: var(--ui-text);
+  font:
+    14px/1.6 'Aieyra Inter',
+    'Aieyra Noto Sans SC',
+    'Segoe UI',
+    'Microsoft YaHei UI',
+    system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+/* @chain-region rule-7 */ button {
+  font: inherit;
+  color: inherit;
+}
+/* @chain-region rule-8 */ ::selection {
+  background: #a9c0ec44;
+}
+
+/* @chain-region rule-9 */ .boot {
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  height: 100dvh;
+  color: var(--ui-text-2);
+  font-size: 14px;
+}
+/* @chain-region rule-10 */ .boot-mark {
+  display: block;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 0;
+  box-shadow: inset 0 0 0 1.5px var(--ui-ring);
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+/* @chain-region rule-11 */ .boot p {
+  margin: 0;
+}
+
+/* —— 骨架：顶部（返回 + 下方一行态势字幕）+ 工位区 —— */
+/* @chain-region rule-12 */ #main.link-page {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100dvh;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+}
+/* @chain-region rule-13 */ .link-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  min-height: 44px;
+  padding: 8px 24px;
+}
+/* @chain-region rule-14 */ .link-back {
+  flex: none;
+  white-space: nowrap;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px 0 9px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ui-glass);
+  backdrop-filter: var(--ui-blur);
+  box-shadow: var(--ui-edge);
+  color: var(--ui-text-2);
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    color var(--ui-fast) var(--ui-ease),
+    box-shadow var(--ui-fast) var(--ui-ease),
+    translate var(--ui-fast) var(--ui-ease);
+}
+/* @chain-region rule-15 */ .link-back:hover {
+  color: var(--ui-text);
+  box-shadow: var(--ui-edge-hi);
+  translate: -2px 0;
+}
+/* @chain-region rule-16 */ .link-back:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px #e6e9f0,
+    0 0 0 3px #a9c0ec26;
+}
+/* @chain-region rule-17 */ .link-back[hidden] {
+  display: none;
+}
+/* @chain-region rule-18 */ .link-back svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+}
+
+/* 态势字幕：一行实心细字，不描边、没有底。新的一行从下方“聚拢”（字距由宽变窄、由虚变实），旧的一行向上“散开”。 */
+/* @chain-region rule-19 */ .link-ticker {
+  grid-column: 1;
+  grid-row: 2;
+  width: min(760px, 100%);
+  min-width: 0;
+  height: 32px;
+  flex: 1 1 180px;
+  margin-top: 0;
+}
+/* @chain-region rule-20 */ .link-ticker[hidden] {
+  display: block;
+  visibility: hidden;
+}
+/* @chain-region rule-21 */ .link-top:has(> .link-ticker[hidden]) {
+  min-height: 0;
+}
+/* @chain-region rule-22 */ .link-top:has(> .link-ticker[hidden]) > .link-ticker {
+  display: none;
+}
+/* The connection entry remains available when the optional ticker is hidden. */
+/* @chain-region rule-23 */ .tk-frame {
+  position: relative;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 18px,
+    #000 calc(100% - 18px),
+    transparent
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 18px, #000 calc(100% - 18px), transparent);
+}
+/* @chain-region rule-24 */ .tk-line {
+  --tone: 226, 230, 238;
+  position: absolute;
+  inset: 0;
+  display: block;
+  padding: 0 18px;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 32px;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(var(--tone), 0.88);
+}
+/* @chain-region rule-25 */ .tk-line.long {
+  text-align: left;
+  inset: 0 auto 0 0;
+}
+/* @chain-region rule-26 */ .tk-line[data-tone='calm'] {
+  --tone: 196, 203, 216;
+}
+/* @chain-region rule-27 */ .tk-line[data-tone='live'] {
+  --tone: 240, 243, 248;
+}
+/* @chain-region rule-28 */ .tk-line[data-tone='warn'] {
+  --tone: 233, 207, 143;
+}
+/* @chain-region rule-29 */ .tk-line[data-tone='alert'] {
+  --tone: 236, 166, 156;
+}
+/* @chain-region rule-30 */ .tk-dot {
+  position: relative;
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 12px 0 0;
+  border-radius: 50%;
+  vertical-align: 0.2em;
+  background: rgba(var(--tone), 0.95);
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+/* @chain-region rule-31 */ .tk-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(var(--tone), 0.7);
+  animation: pulse-ring 1.6s ease-out infinite;
+}
+/* @chain-region rule-32 */ .tk-line[data-tone='calm'] .tk-dot,
+.tk-line[data-tone='calm'] .tk-dot::after {
+  animation-duration: 2.6s;
+}
+/* @chain-region rule-33 */ .tk-line.in {
+  animation: tk-in var(--ui-enter) var(--ui-ease) both;
+}
+/* @chain-region rule-34 */ .tk-line.out {
+  animation: tk-out var(--ui-enter) var(--ui-ease) both;
+}
+/* @chain-region rule-35 */ @keyframes tk-in {
+  from {
+    opacity: 0;
+    transform: translateY(60%);
+    filter: blur(6px);
+    letter-spacing: 0.3em;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    letter-spacing: 0.08em;
+  }
+}
+/* @chain-region rule-36 */ @keyframes tk-out {
+  to {
+    opacity: 0;
+    transform: translateY(-55%);
+    filter: blur(6px);
+    letter-spacing: 0.2em;
+  }
+}
+
+/* —— 工位区 —— */
+/* @chain-region rule-37 */ .link-view {
+  min-height: 0;
+  overflow: auto;
+  padding: 8px 32px 40px;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff24 transparent;
+  user-select: text;
+}
+/* @chain-region rule-38 */ .link-view:focus {
+  outline: none;
+}
+/* @chain-region rule-39 */ .link-view[data-page='stations'] {
+  display: flex;
+  align-items: safe center;
+  justify-content: center;
+  padding: 24px 32px;
+}
+/* @chain-region rule-40 */ .page-empty {
+  margin: auto;
+  text-align: center;
+  color: var(--ui-text-2);
+  font-size: 14px;
+}
+/* @chain-region rule-41 */ .meta {
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: var(--ui-text-3);
+}
+
+/* @chain-region rule-42 */ .home-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 28px var(--gap, 38px);
+  width: calc(var(--columns, 3) * var(--size, 200px) + (var(--columns, 3) - 1) * var(--gap, 38px));
+  max-width: 100%;
+  margin: auto;
+}
+/* @chain-region rule-43 */ .home-seat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 var(--size, 160px);
+  width: var(--size, 160px);
+  min-width: 0;
+  padding: 34px 0 6px;
+  border: 0;
+  border-radius: 22px;
+  background: none;
+  color: var(--ui-text);
+  text-align: center;
+  cursor: pointer;
+}
+/* @chain-region rule-44 */ .home-seat svg {
+  display: block;
+  width: 100%;
+  height: var(--size, 160px);
+  overflow: visible;
+  pointer-events: none;
+}
+/* @chain-region rule-45 */ .home-seat:is(:hover,:focus-visible) {
+  background: #ffffff04;
+}
+/* @chain-region rule-46 */ .home-seat:hover .monitor-screen {
+  fill: #3a4256;
+}
+/* @chain-region rule-47 */ .home-seat:focus-visible {
+  outline: none;
+  background: #ffffff06;
+  box-shadow: inset 0 0 0 1px #e6e9f055;
+}
+/* @chain-region rule-48 */ .home-seat .floor-seat {
+  cursor: inherit;
+}
+/* @chain-region rule-49 */ .home-seat .seat-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.65;
+  color: #e2e5ec;
+}
+/* @chain-region rule-50 */ .home-seat .seat-code {
+  max-width: 100%;
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  color: var(--station-accent);
+}
+/* @chain-region rule-51 */ .home-seat .seat-status {
+  max-width: 100%;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ui-text-2);
+}
+/* @chain-region rule-52 */ .seat-status[data-state='working'] {
+  color: #dfe4ec;
+}
+/* @chain-region rule-53 */ .seat-status[data-state='waiting'] {
+  color: var(--ui-warn);
+}
+/* @chain-region rule-54 */ .seat-status[data-state='error'] {
+  color: var(--ui-alert);
+}
+/* @chain-region rule-55 */ .home-seat[data-lead='true'] .seat-name::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 6px 1px 0;
+  border-radius: 50%;
+  background: var(--station-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--station-accent) 30%, transparent);
+}
+/* @chain-region rule-56 */ .seat-error {
+  --seat-color: #e39a8f;
+}
+/* @chain-region rule-57 */ .seat-waiting_user .seat-signal {
+  opacity: 1;
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+/* @chain-region rule-58 */ .seat-error .seat-signal {
+  opacity: 1;
+}
+/* @chain-region rule-59 */ .home-seat:is([data-state='offline'], [data-state='lost'], [data-state='sync']) svg {
+  opacity: 0.42;
+  filter: saturate(0.3);
+}
+/* @chain-region rule-60 */ .home-seat:is([data-state='offline'], [data-state='lost'], [data-state='sync'])
+  :is(.seat-name, .seat-status) {
+  color: var(--ui-text-3);
+}
+
+/* 头顶气泡：最近一句话。冒出来时像一次脉冲（先放大一点再落定，外面扩散一圈细环）。 */
+/* @chain-region rule-61 */ .seat-say {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 50%;
+  width: max-content;
+  max-width: min(calc(var(--size, 160px) - 6px), 240px);
+  padding: 6px 12px 7px;
+  border-radius: 14px;
+  background: var(--ui-sheen), rgba(14, 16, 22, 0.42);
+  backdrop-filter: var(--ui-blur);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--station-accent) 42%, #ffffff14);
+  color: #e6e9f0;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+  overflow-wrap: anywhere;
+  translate: -50% 0;
+  transform-origin: 50% 100%;
+  animation: say-pop 0.62s var(--spring) both;
+  pointer-events: none;
+}
+/* @chain-region rule-62 */ .seat-say > span {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+/* @chain-region rule-63 */ .seat-say::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 14px;
+  background: linear-gradient(
+    color-mix(in srgb, var(--station-accent) 70%, transparent),
+    transparent
+  );
+}
+/* @chain-region rule-64 */ .seat-say::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--station-accent) 60%, transparent);
+  animation: say-ring 0.9s ease-out 0.1s both;
+}
+/* @chain-region rule-65 */ .seat-say[data-age='old'] {
+  color: var(--ui-text-2);
+  box-shadow: inset 0 0 0 1px #ffffff12;
+  opacity: 0.62;
+}
+/* @chain-region rule-66 */ .home-seat:hover .seat-say {
+  translate: -50% -3px;
+}
+/* @chain-region rule-67 */ .home-seat:is([data-state='offline'], [data-state='lost']) .seat-say {
+  opacity: 0.45;
+}
+/* @chain-region rule-68 */ @keyframes say-pop {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+  }
+  55% {
+    opacity: 1;
+    scale: 1.06;
+  }
+  100% {
+    scale: 1;
+  }
+}
+/* @chain-region rule-69 */ @keyframes say-ring {
+  from {
+    opacity: 0.9;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 1.18 1.5;
+  }
+}
+
+/* 桌上的设备（沿用之前 Link 云办公室的画法与配色）：电脑带主机箱、服务器机柜、手机支架 */
+/* @chain-region rule-70 */ .device-side {
+  fill: #19242d;
+  stroke: #646e87;
+  stroke-width: 0.8;
+}
+/* @chain-region rule-71 */ .device-stand {
+  fill: none;
+  stroke: #697288;
+  stroke-width: 2;
+}
+/* @chain-region rule-72 */ .device-vent,
+.device-speaker {
+  fill: none;
+  stroke: #8390a6;
+  stroke-width: 1;
+}
+/* @chain-region rule-73 */ .device-led {
+  fill: var(--station-accent);
+  opacity: 0.8;
+}
+/* @chain-region rule-74 */ .device-app {
+  fill: var(--station-accent);
+  opacity: 0.45;
+}
+/* @chain-region rule-75 */ .device-screen-pattern {
+  fill: none;
+  stroke: var(--station-accent);
+  stroke-width: 1;
+  opacity: 0.6;
+}
+/* @chain-region rule-76 */ .device-identity-mark {
+  stroke: var(--station-accent);
+  stroke-width: 0.8;
+}
+/* @chain-region rule-77 */ .seat-running .device-led {
+  animation: heartbeat 1.4s ease-in-out infinite;
+}
+/* @chain-region rule-78 */ .seat-running .device-screen-pattern,
+.seat-running .device-app {
+  opacity: 0.95;
+  animation: terminal-scan 2.2s ease-in-out infinite;
+}
+/* @chain-region rule-79 */ .home-seat:is([data-state='offline'], [data-state='lost'], [data-state='sync'])
+  :is(.device-led, .device-screen-pattern, .device-app) {
+  opacity: 0.25;
+  animation: none;
+}
+
+/* —— 详情（工位、工单）：没有卡片底，也没有遮罩，内容直接铺在页面上 —— */
+/* @chain-region rule-80 */ .detail {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 4px 4px 40px;
+  animation: page-in var(--ui-enter) var(--ease);
+}
+/* @chain-region rule-81 */ .detail h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #eef1f7;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+/* @chain-region rule-82 */ .detail h3 {
+  margin: 26px 0 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ui-text-3);
+  letter-spacing: 0.08em;
+}
+/* @chain-region rule-83 */ .detail p {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-84 */ .detail p.meta {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-85 */ .detail .evidence {
+  white-space: pre-wrap;
+  color: var(--ui-text-2);
+  font-size: 14px;
+}
+/* @chain-region rule-86 */ .facts {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 8px 12px;
+  margin: 16px 0 0;
+  font-size: 14px;
+}
+/* @chain-region rule-87 */ .facts dt {
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-88 */ .facts dd {
+  margin: 0;
+  color: #dfe4ec;
+}
+/* @chain-region rule-89 */ .detail-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 4px;
+}
+/* @chain-region rule-90 */ .detail-head > div {
+  min-width: 0;
+}
+/* @chain-region rule-91 */ .detail-head p.meta {
+  font-size: 14px;
+}
+/* @chain-region rule-92 */ .detail-desk {
+  flex: 0 0 104px;
+  width: 104px;
+  height: 86px;
+  overflow: visible;
+}
+/* @chain-region rule-93 */ .detail-desk .work-orbit {
+  display: none;
+}
+/* @chain-region rule-94 */ .detail-diag {
+  margin-top: 18px !important;
+}
+
+/* @chain-region rule-95 */ .ticket-group + .ticket-group {
+  margin-top: 14px;
+}
+/* @chain-region rule-96 */ .ticket-group-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px !important;
+  font-size: 14px !important;
+  color: var(--ui-text-2);
+}
+/* @chain-region rule-97 */ .ticket-group-name b {
+  min-width: 20px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #ffffff0d;
+  color: var(--ui-text-2);
+  font:
+    500 14px/18px 'Aieyra Inter',
+    system-ui;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+/* @chain-region rule-98 */ .ticket-group[data-group='doing'] .ticket-group-name {
+  color: #eef1f7;
+}
+/* @chain-region rule-99 */ .ticket-group[data-group='doing'] .ticket-group-name::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #eef1f7;
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+/* @chain-region rule-100 */ .ticket-group[data-group='done'] .ticket {
+  opacity: 0.78;
+}
+/* @chain-region rule-101 */ .ticket-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 8px;
+}
+/* @chain-region rule-102 */ .ticket {
+  --tone: var(--ui-accent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 12px 14px 11px 16px;
+  border: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: var(--ui-edge);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--ui-fast) var(--ui-ease),
+    box-shadow var(--ui-fast) var(--ui-ease),
+    translate var(--ui-fast) var(--ui-ease);
+}
+/* @chain-region rule-103 */ .ticket::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 12px;
+  bottom: 12px;
+  width: 2.5px;
+  border-radius: 3px;
+  background: var(--tone);
+  opacity: 0.8;
+}
+/* @chain-region rule-104 */ .ticket:hover,
+.ticket:focus-visible {
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: var(--ui-edge-hi);
+  translate: 0 -1px;
+}
+/* @chain-region rule-105 */ .ticket[data-tone='live'] {
+  --tone: #eef1f7;
+}
+/* @chain-region rule-106 */ .ticket[data-tone='review'] {
+  --tone: var(--ui-accent);
+}
+/* @chain-region rule-107 */ .ticket[data-tone='warn'] {
+  --tone: var(--ui-warn);
+}
+/* @chain-region rule-108 */ .ticket[data-tone='done'] {
+  --tone: var(--ui-ok);
+}
+/* @chain-region rule-109 */ .ticket[data-tone='muted'] {
+  --tone: #ffffff33;
+}
+/* @chain-region rule-110 */ .ticket[data-tone='open'] {
+  --tone: #ffffff3a;
+}
+/* @chain-region rule-111 */ .ticket strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #e9ecf2;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-112 */ .ticket-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 14px;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-113 */ .ticket-who {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--ui-text-2);
+}
+/* @chain-region rule-114 */ .ticket-who > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* @chain-region rule-115 */ .ticket-who i {
+  display: grid;
+  place-items: center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--station-accent);
+  font-style: normal;
+  font-size: 14px;
+  color: #dfe4ec;
+}
+/* @chain-region rule-116 */ .ticket-foot time {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+/* @chain-region rule-117 */ .ticket-chip {
+  flex: none;
+  margin-left: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tone) 14%, transparent);
+  color: color-mix(in srgb, var(--tone) 80%, #ffffff);
+  font-size: 14px;
+  line-height: 18px;
+}
+/* @chain-region rule-118 */ .ticket[data-tone='open'] .ticket-chip,
+.ticket[data-tone='muted'] .ticket-chip {
+  background: #ffffff0a;
+  color: var(--ui-text-2);
+}
+
+/* 发言记录：一个频道两种看法。展开后右侧是切换（简约 / 详情）。 */
+/* @chain-region rule-119 */ .channel {
+  position: relative;
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid #ffffff0c;
+}
+/* @chain-region rule-120 */ .channel summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ui-text-3);
+  list-style: none;
+}
+/* @chain-region rule-121 */ .channel summary::-webkit-details-marker {
+  display: none;
+}
+/* @chain-region rule-122 */ .channel summary svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  rotate: 180deg;
+  transition: rotate var(--ui-enter) var(--ui-ease);
+}
+/* @chain-region rule-123 */ .channel[open] summary svg {
+  rotate: 270deg;
+}
+/* @chain-region rule-124 */ .channel summary:hover {
+  color: var(--ui-text-2);
+}
+/* @chain-region rule-125 */ .channel summary b {
+  min-width: 18px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ffffff0a;
+  font:
+    500 14px/16px 'Aieyra Inter',
+    system-ui;
+  text-align: center;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-126 */ .channel-mode {
+  position: absolute;
+  top: 14px;
+  right: 0;
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: var(--ui-edge);
+}
+/* @chain-region rule-127 */ .channel-mode button {
+  height: 24px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--ui-text-3);
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    color var(--ui-fast) var(--ui-ease),
+    background-color var(--ui-fast) var(--ui-ease);
+}
+/* @chain-region rule-128 */ .channel-mode button:hover {
+  color: var(--ui-text);
+}
+/* @chain-region rule-129 */ .channel-mode button[aria-checked='true'] {
+  background: rgba(255, 255, 255, 0.1);
+  color: #eef1f7;
+  box-shadow: inset 0 0 0 1px #ffffff1c;
+}
+/* @chain-region rule-130 */ .channel-body {
+  margin-top: 12px;
+  animation: page-in var(--ui-enter) var(--ease);
+}
+/* @chain-region rule-131 */ .channel-say {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 8px 0 0;
+}
+/* @chain-region rule-132 */ .channel-say .chat-avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--station-accent) 16%, rgba(13, 15, 21, 0.6));
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--station-accent) 70%, #ffffff22);
+  font-size: 14px;
+  font-weight: 500;
+  color: #eef1f7;
+}
+/* @chain-region rule-133 */ .channel-say p {
+  margin: 0 !important;
+}
+/* @chain-region rule-134 */ .chat-who {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px !important;
+}
+/* @chain-region rule-135 */ .chat-who strong {
+  font-size: 14px;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--station-accent) 45%, #e6e9f0);
+}
+/* @chain-region rule-136 */ .chat-who time {
+  font-size: 14px;
+  color: var(--ui-text-3);
+  font-variant-numeric: tabular-nums;
+}
+/* @chain-region rule-137 */ .chat-say {
+  display: inline-block;
+  max-width: min(100%, 620px);
+  padding: 8px 13px;
+  border-radius: 6px 16px 16px 16px;
+  background: var(--ui-sheen), var(--ui-glass);
+  backdrop-filter: var(--ui-blur);
+  box-shadow: var(--ui-edge);
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  color: #e3e7ee;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-138 */ .channel-raw {
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff08;
+}
+/* @chain-region rule-139 */ .channel-raw time {
+  font-size: 14px;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-140 */ .channel-raw p {
+  white-space: pre-wrap;
+  font-size: 14px !important;
+  color: var(--ui-text-2);
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Aieyra Noto Sans SC', monospace;
+}
+
+/* @chain-region rule-141 */ .toast {
+  border-radius: 999px;
+  background: rgba(12, 14, 19, 0.82);
+  backdrop-filter: var(--ui-blur);
+  box-shadow: var(--ui-edge);
+  color: var(--ui-text);
+  font-size: 14px;
+}
+
+/* 心跳：快—快—停（像脉冲星，也像数字生命的心跳）；细环向外扩散后消失。 */
+/* @chain-region rule-142 */ @keyframes heartbeat {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 0.9;
+  }
+  14% {
+    scale: 1.32;
+    opacity: 1;
+  }
+  28% {
+    scale: 1;
+  }
+  42% {
+    scale: 1.18;
+  }
+  56% {
+    scale: 1;
+    opacity: 0.9;
+  }
+}
+/* @chain-region rule-143 */ @keyframes pulse-ring {
+  0% {
+    opacity: 0.8;
+    scale: 1;
+  }
+  70%,
+  100% {
+    opacity: 0;
+    scale: 2.8;
+  }
+}
+/* @chain-region rule-144 */ @keyframes link-blink {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* @chain-region rule-145 */ @keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}
+
+/* @chain-region rule-146 */ @media (max-width: 860px) {
+  .link-top {
+    min-height: 78px;
+    padding: 10px 16px 0;
+  }
+  .link-ticker {
+    margin-top: 4px;
+  }
+  .link-view {
+    padding: 12px 16px 28px;
+  }
+  .link-view[data-page='stations'] {
+    padding: 16px;
+  }
+}
+/* @chain-region rule-147 */ @media (max-width: 599px) {
+  .home-grid {
+    row-gap: 22px;
+  }
+  .home-seat .seat-name {
+    font-size: 14px;
+  }
+  .home-seat .seat-code {
+    font-size: 14px;
+  }
+  .home-seat .seat-status {
+    font-size: 14px;
+  }
+  .seat-say {
+    font-size: 14px;
+  }
+}
+/* @chain-region rule-148 */ @media (prefers-reduced-motion: reduce) {
+  .boot-mark,
+  .tk-dot,
+  .tk-dot::after,
+  .tk-line,
+  .seat-say,
+  .seat-say::after,
+  .detail,
+  .channel-body,
+  .ticket-group-name::before {
+    animation: none !important;
+  }
+  .seat-say::after {
+    display: none;
+  }
+}
+
+/* 同背景三标签；只改变观察面板，不改变工位或任务的生命周期。 */
+/* @chain-region rule-149 */ [data-os-host] :is(#link-station-overview, #station-search, #station-filter) {
+  display: none !important;
+}
+/* @chain-region rule-150 */ [data-os-host] .link-top {
+  border-bottom: 0;
+}
+/* @chain-region rule-151 */ [data-os-host] .link-top:not(:has(#link-back:not([hidden]), #link-ticker:not([hidden]), #station-pages:not([hidden]))) {
+  display: none;
+}
+/* @chain-region rule-152 */ [data-os-host] #link-tabs {
+  justify-self: end;
+}
+/* @chain-region rule-153 */ [data-os-host] #main.link-page {
+  background: transparent;
+}
+/* @chain-region rule-154 */ [data-os-host] #main .link-back {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ui-text) 7%, transparent), transparent 32%),
+    var(--ui-glass, var(--glass-tint));
+  color: var(--ui-text);
+}
+/* @chain-region rule-155 */ [data-os-host] .pixel-table:only-child > h3 {
+  display: none;
+}
+/* @chain-region rule-156 */ [data-os-host] body {
+  --together-panel: var(--ui-glass);
+  --together-raised: color-mix(in srgb, var(--ui-glass) 82%, var(--ui-text));
+  --together-edge: color-mix(in srgb, var(--ui-text) 19%, transparent);
+  --together-ink: var(--ui-text);
+  --together-muted: var(--ui-text-2);
+  --together-accent: var(--ui-accent);
+}
+/* @chain-region rule-157 */ #main.link-page {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+/* @chain-region rule-158 */ .link-tabs {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  justify-self: start;
+  gap: 4px;
+  width: fit-content;
+  max-width: calc(100% - 48px);
+  margin: 0 24px 18px;
+  padding: 6px;
+  min-height: 0;
+}
+/* @chain-region rule-159 */ .link-top {
+  grid-column: 1;
+  grid-row: 1;
+}
+/* @chain-region rule-160 */ .link-view {
+  grid-column: 1;
+  grid-row: 2;
+  min-width: 0;
+}
+/* @chain-region rule-161 */ .group-page,
+.workorders-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4px 4px 32px;
+}
+/* @chain-region rule-162 */ .group-page {
+  max-width: 820px;
+}
+/* @chain-region rule-163 */ .panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+/* @chain-region rule-164 */ .panel-head h2 {
+  margin: 0;
+  color: #eef1f7;
+  font-size: 18px;
+  font-weight: 500;
+}
+/* @chain-region rule-165 */ .panel-head > button,
+.history-controls button,
+.panel-more,
+.panel-notice button {
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff06;
+  box-shadow: var(--ui-edge);
+  color: var(--ui-text-2);
+  font-size: 14px;
+  cursor: pointer;
+}
+/* @chain-region rule-166 */ .panel-head > button:hover,
+.history-controls button:hover,
+.panel-more:hover,
+.panel-notice button:hover {
+  color: var(--ui-text);
+  box-shadow: var(--ui-edge-hi);
+}
+/* @chain-region rule-167 */ .panel-head > button:focus-visible,
+.history-controls button:focus-visible,
+.panel-more:focus-visible,
+.panel-notice button:focus-visible,
+.group-avatar:focus-visible,
+.group-quote:focus-visible,
+.dependency-link:focus-visible {
+  outline: 1px solid var(--ui-ring);
+  outline-offset: 3px;
+}
+/* @chain-region rule-168 */ .history-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+/* @chain-region rule-169 */ .history-controls .meta {
+  margin: 0;
+}
+/* @chain-region rule-170 */ .history-controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+/* @chain-region rule-171 */ .panel-notice {
+  margin: 12px 0;
+  color: var(--ui-text-2);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-172 */ .panel-more {
+  display: block;
+  margin: 18px auto 0;
+}
+/* @chain-region rule-173 */ .group-messages {
+  display: grid;
+  gap: 22px;
+}
+/* @chain-region rule-174 */ .group-message {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+}
+/* @chain-region rule-175 */ .group-avatar {
+  display: block;
+  width: 56px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-176 */ button.group-avatar {
+  cursor: pointer;
+}
+/* @chain-region rule-177 */ .group-avatar svg {
+  display: block;
+  width: 56px;
+  height: 52px;
+  overflow: visible;
+}
+/* @chain-region rule-178 */ .group-avatar > svg:not(:has(.floor-seat)) {
+  padding: 12px;
+  box-sizing: border-box;
+}
+/* @chain-region rule-179 */ .group-message-body {
+  min-width: 0;
+  padding-top: 2px;
+}
+/* @chain-region rule-180 */ .group-message .chat-who {
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+/* @chain-region rule-181 */ .group-message .chat-who strong {
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-182 */ .group-say {
+  margin: 5px 0 0;
+  color: #e3e7ee;
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+/* @chain-region rule-183 */ .group-quote {
+  display: block;
+  max-width: 100%;
+  margin: 6px 0;
+  padding: 3px 10px;
+  border: 0;
+  border-left: 2px solid color-mix(in srgb, var(--station-accent) 60%, transparent);
+  background: none;
+  color: var(--ui-text-3);
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-184 */ button.group-quote {
+  cursor: pointer;
+}
+/* @chain-region rule-185 */ button.group-quote:hover {
+  color: var(--ui-text-2);
+}
+/* @chain-region rule-186 */ .group-mentions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 5px 0 0;
+}
+/* @chain-region rule-187 */ .group-mention {
+  color: var(--station-accent);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-188 */ .group-original {
+  margin-top: 5px;
+  font-size: 14px;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-189 */ .group-original summary {
+  width: fit-content;
+  cursor: pointer;
+}
+/* @chain-region rule-190 */ .group-original p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--ui-text-2);
+  font-size: 14px;
+  line-height: 1.75;
+}
+/* @chain-region rule-191 */ .ticket-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+/* @chain-region rule-192 */ .ticket-board .ticket {
+  min-height: 132px;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 16px 14px 20px;
+}
+/* @chain-region rule-193 */ .ticket-board .ticket-foot {
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+/* @chain-region rule-194 */ .ticket-board .ticket-who {
+  flex: 1 1 80px;
+}
+/* @chain-region rule-195 */ .dependency-link {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ui-accent);
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-196 */ .dependency-link + .dependency-link {
+  margin-top: 6px;
+}
+/* @chain-region rule-197 */ @media (max-width: 599px) {
+  .link-view,
+  .link-view[data-page='stations'] {
+    padding-left: 10px;
+    padding-right: 12px;
+  }
+  .link-top {
+    padding-left: 10px;
+    padding-right: 12px;
+  }
+  .group-message {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .group-avatar,
+  .group-avatar svg {
+    width: 42px;
+    height: 44px;
+  }
+  .panel-head {
+    gap: 8px;
+  }
+}
+
+/* Keyboard and disabled states share the native-surface contract. */
+/* @chain-region rule-198 */ body :is(button, summary, a[href], [tabindex]):focus-visible {
+  outline: 1px solid var(--ui-accent);
+  outline-offset: 3px;
+}
+/* @chain-region rule-199 */ body button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+/* @chain-region rule-200 */ .link-view:focus-visible {
+  outline-offset: -4px;
+}
+/* @chain-region rule-201 */ .link-connection-summary {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-left: auto;
+  color: var(--ui-text-3);
+  font-size: 14px;
+  white-space: nowrap;
+}
+/* @chain-region rule-202 */ #link-connection {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ui-text-3);
+  background: #ffffff08;
+  cursor: pointer;
+}
+/* @chain-region rule-203 */ #link-connection svg {
+  width: 20px;
+  height: 20px;
+}
+/* @chain-region rule-204 */ #link-connection[data-online='true'] {
+  color: #a7d4bc;
+}
+/* @chain-region rule-205 */ #link-connections {
+  position: fixed;
+  inset: 14px 18px auto auto;
+  margin: 0;
+  width: min(380px, calc(100vw - 36px));
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 22px;
+  border: 1px solid #ffffff24;
+  border-radius: 20px;
+  background: var(--ui-sheen), rgba(16, 19, 26, 0.94);
+  backdrop-filter: var(--ui-blur);
+  box-shadow: 0 20px 60px #0006;
+  color: var(--ui-text);
+}
+/* @chain-region rule-206 */ #link-connections h2 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 14px;
+}
+/* @chain-region rule-207 */ #link-connections h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin: 22px 0 8px;
+}
+/* @chain-region rule-208 */ #link-connections p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ui-text-2);
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-209 */ #link-join {
+  border: 1px solid #ffffff24;
+  background: #ffffff08;
+  color: var(--ui-text);
+  padding: 9px 15px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+/* @chain-region rule-210 */ #link-adapters {
+  padding: 0;
+  list-style: none;
+}
+/* @chain-region rule-211 */ #link-adapters li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ffffff10;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-212 */ #link-adapters small {
+  font-size: 14px;
+  color: var(--ui-text-3);
+}
+/* @chain-region rule-213 */ .link-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* @chain-region rule-214 */ input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text, #e6e9f0);
+  transition: background-color 99999s;
+}
+
+/* --lift 只修正图形自身上方留白；溢出行不平移，确保首末工位可滚动到。 */
+/* @chain-region rule-215 */ .home-grid {
+  translate: 0 calc(-1 * var(--lift, 0px));
+}
+/* @chain-region rule-216 */ .pixel-office {
+  width: min(100%, 1060px);
+  margin-inline: auto;
+  display: grid;
+  gap: 28px;
+  color: var(--ui-text, var(--text, #e6e9f0));
+}
+/* @chain-region rule-217 */ .pixel-table { min-width: 0; background: transparent; }
+/* @chain-region rule-218 */ .pixel-table h3 {
+  margin: 0 0 8px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 13%, transparent);
+  color: var(--ui-text-2, #b0bac9);
+  font-size: 14px;
+  font-weight: 550;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-219 */ .pixel-seats { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,282px),1fr)); gap:12px 16px; }
+/* @chain-region rule-220 */ .pixel-office .home-seat {
+  --seat-portrait-size:144px;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--seat-portrait-size) minmax(0,1fr) 8px;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  text-align: start;
+  letter-spacing: 0;
+  -webkit-app-region: no-drag;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+/* @chain-region rule-221 */ .pixel-office .home-seat:hover { background: color-mix(in srgb, currentColor 6%, transparent); }
+/* @chain-region rule-222 */ .pixel-office .home-seat:focus-visible { outline: 2px solid var(--ui-accent, #9cbcff); outline-offset: -2px; }
+/* @chain-region rule-223 */ .pixel-office .home-seat > *, .home-seat .pixel-station-avatar { pointer-events: none; }
+/* @chain-region rule-224 */ .pixel-office .home-seat .pixel-station-avatar { width:var(--seat-portrait-size); height:var(--seat-portrait-size); margin:0; }
+/* @chain-region rule-225 */ .seat-copy { display:grid; gap:5px; min-width:0; text-shadow:0 1px 3px #000b; }
+/* @chain-region rule-226 */ .pixel-office .home-seat .seat-name { margin: 0; width: auto; color: inherit; font-weight: 600; white-space: normal; overflow-wrap: anywhere; }
+/* @chain-region rule-227 */ .pixel-office .home-seat .seat-status {
+  margin: 0;
+  color: var(--ui-text-2, #b0bac9);
+  width: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-228 */ .pixel-office .seat-status::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-inline-end: 7px;
+  border-radius: 50%;
+  vertical-align: 1px;
+  background: currentColor;
+}
+/* @chain-region rule-229 */ .pixel-office .seat-status:is([data-state=live],[data-state=online],[data-state=working],[data-state=ready])::before { color: #53b99b; }
+/* @chain-region rule-230 */ .pixel-office .seat-status:is([data-state=offline],[data-state=lost])::before { opacity: .5; }
+/* @chain-region rule-231 */ .seat-chevron {
+  width: 6px;
+  height: 6px;
+  margin-inline-start: 1px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+  opacity: .54;
+}
+/* @chain-region rule-232 */ .pixel-speech { min-width:0; }
+/* @chain-region rule-233 */ .pixel-office .seat-say {
+  position: static;
+  inset:auto;
+  display: block;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  translate: none;
+  animation: none;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  color: var(--ui-text-2, #b0bac9);
+  font-size: 12px;
+}
+/* @chain-region rule-234 */ .pixel-office .seat-say::before,.pixel-office .seat-say::after { content: none; }
+/* @chain-region rule-235 */ .pixel-office .seat-say :is(span,small) { overflow-wrap: anywhere; }
+/* @chain-region rule-236 */ .pixel-portrait-name,.pixel-completion { font-size: 13px; color: var(--ui-text-2, #b0bac9); overflow-wrap: anywhere; }
+/* @chain-region rule-237 */ .station-detail .pixel-station-avatar { width:136px; height:136px; flex:none; }
+/* @chain-region rule-238 */ .station-detail .detail-head { column-gap: 16px; }
+/* @chain-region rule-239 */ .station-detail h2:focus { outline: none; }
+/* @chain-region rule-240 */ .group-avatar .pixel-station-avatar { width:42px; height:42px; pointer-events:none; }
+
+/* @chain-region rule-241 */ .portrait-sprite { display:block; aspect-ratio:1; background-size:300% 100%; background-repeat:no-repeat; image-rendering:pixelated; animation:portrait-blink 5.4s steps(1,end) infinite; }
+/* @chain-region rule-242 */ .portrait-tide { background-image:url('portraits/tide.png'); }
+/* @chain-region rule-243 */ .portrait-ember { background-image:url('portraits/ember.png'); animation-delay:-1.4s; }
+/* @chain-region rule-244 */ .portrait-iris { background-image:url('portraits/iris.png'); animation-delay:-2.1s; }
+/* @chain-region rule-245 */ .portrait-jade { background-image:url('portraits/jade.png'); animation-delay:-3.4s; }
+/* @chain-region rule-246 */ @keyframes portrait-blink { 0%,96%,100% { background-position:0 0; } 97%,99% { background-position:50% 0; } }
+/* @chain-region rule-247 */ @keyframes portrait-talk {
+  0%,100% { background-position:0 0; }
+  26%,78% { background-position:50% 0; }
+  52% { background-position:100% 0; }
+}
+/* @chain-region rule-248 */ .home-seat[data-speaking=true] .portrait-sprite { animation:portrait-talk .92s steps(1,end) infinite; }
+/* @chain-region rule-249 */ .pixel-office .seat-say:not([data-age=old]) { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+/* @chain-region rule-250 */ .pixel-office .seat-say[data-age=old] { opacity:.72; }
+/* @chain-region rule-251 */ @media(max-width:560px) {
+  .pixel-office .home-seat { --seat-portrait-size:108px; }
+  .station-detail .pixel-station-avatar { width:94px; height:94px; }
+}
+/* @chain-region rule-252 */ .pixel-office .home-seat[data-speaking=true] .seat-say {
+  position:relative;
+  padding:5px 9px;
+  border-inline-start:2px solid var(--station-accent);
+  border-radius:3px;
+  background:color-mix(in srgb,var(--station-accent) 8%,#19232d);
+  color:#f2f4f7;
+}
+/* @chain-region rule-253 */ .pixel-office .home-seat[data-speaking=true] .seat-say::before {
+  content:'';
+  position:absolute;
+  inset:9px auto auto -6px;
+  width:0;
+  height:0;
+  border-block:4px solid transparent;
+  border-inline-end:4px solid var(--station-accent);
+  background:none;
+  box-shadow:none;
+  transform:none;
+}
+/* @chain-region rule-254 */ @media(prefers-reduced-motion:reduce) { .portrait-sprite,.home-seat[data-speaking=true] .portrait-sprite { animation:none; } }
+
+/* @chain-region rule-255 */ [data-os-host] #link-tabs { display:none; }

@@ -1,0 +1,292 @@
+/* @file-map:start
+文件: link/desktop/ui/unified.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .surface>header.surface-toolbar
+  rule-2 | style | .surface>header.surface-toolbar:has(.surface-status:not([hidden])),.surface>header.surface-toolbar:has(>.actions:not(:empty))
+  rule-3 | style | .unified-home
+  rule-4 | style | .home-situation
+  rule-5 | style | .home-stage-heading
+  rule-6 | style | .home-stage-heading p
+  rule-7 | style | .home-stage-heading h1
+  rule-8 | style | .home-stage-heading .home-previous-release
+  rule-9 | style | .home-previous-release strong
+  rule-10 | style | .home-previous-release .icon
+  rule-11 | style | .home-stage-heading .home-stage-members
+  rule-12 | style | .home-stage-members .icon
+  rule-13 | style | .home-stage-steps
+  rule-14 | style | .home-stage-steps li
+  rule-15 | style | .home-stage-steps li:not(:last-child)::before
+  rule-16 | style | .home-stage-steps li[data-step-state=done]:not(:last-child)::before
+  rule-17 | style | .home-stage-step
+  rule-18 | style | button.home-stage-step,button.home-stage-step:hover:not(:disabled)
+  rule-19 | style | .home-stage-step:hover .home-stage-icon,.home-stage-step:focus-visible .home-stage-icon
+  rule-20 | style | .home-stage-icon
+  rule-21 | style | .home-stage-icon .icon
+  rule-22 | style | [data-step-state=done] .home-stage-icon,[data-step-state=current] .home-stage-icon
+  rule-23 | style | [data-step-state=current] .home-stage-icon
+  rule-24 | style | .home-stage-icon i
+  rule-25 | style | .home-stage-icon i .icon
+  rule-26 | style | .home-stage-text
+  rule-27 | style | .home-stage-text strong
+  rule-28 | style | .home-stage-text>span
+  rule-29 | style | [data-step-state=current] .home-stage-text>span
+  rule-30 | style | .unified-home :is(#home-goals,#home-leadership,#home-agendas,#home-construction,#home-members)
+  rule-31 | style | .home-goals
+  rule-32 | style | .home-goal
+  rule-33 | style | .home-goal h2
+  rule-34 | style | .home-goal p
+  rule-35 | style | .home-members
+  rule-36 | style | .home-members .members
+  rule-37 | style | .home-members .member
+  rule-38 | style | .home-members .member>span:last-child
+  rule-39 | style | .home-construction .engineering-intro:empty
+  rule-40 | style | .construction-board
+  rule-41 | style | .unified-home [data-tone=election]
+  rule-42 | style | .unified-home [data-tone=work]
+  rule-43 | style | .unified-home [data-tone=success]
+  rule-44 | style | .unified-home [data-tone=release]
+  rule-45 | style | .unified-home [data-tone=attention]
+  rule-46 | style | .home-milestones
+  rule-47 | style | .milestone-heading
+  rule-48 | style | .home-milestones h2
+  rule-49 | style | .home-milestones h2 .icon
+  rule-50 | style | .milestone-filters
+  rule-51 | style | .milestone-filters button
+  rule-52 | style | .milestone-filters [aria-pressed=true]
+  rule-53 | style | .milestone-filters .icon
+  rule-54 | style | .home-milestones[data-view=achievements] li[data-achievement=false]
+  rule-55 | style | .home-milestones ol
+  rule-56 | style | .home-milestones li
+  rule-57 | style | .home-milestones li:not(:last-child)::before
+  rule-58 | style | .milestone-icon
+  rule-59 | style | .milestone-icon .icon
+  rule-60 | style | [data-achievement=true]>.milestone-icon
+  rule-61 | style | .milestone-description
+  rule-62 | style | .milestone-description strong
+  rule-63 | style | .milestone-description>div
+  rule-64 | style | .home-milestones time
+  rule-65 | style | .home-milestones .milestone-link
+  rule-66 | style | .milestone-link .icon
+  rule-67 | style | .home-milestones [data-arrival=true]
+  rule-68 | style | @keyframes milestone-arrival
+  rule-69 | style | :root:is([data-motion=reduced],[data-hidden=true]) .home-milestones [data-arrival=true]
+  rule-70 | style | @media(prefers-reduced-motion:reduce)
+  rule-71 | style | @media(max-width:650px)
+  rule-72 | style | .source-repository
+  rule-73 | style | .source-directory
+  rule-74 | style | .source-directory .tree-search
+  rule-75 | style | .source-directory input
+  rule-76 | style | .source-directory [data-source-files]
+  rule-77 | style | .source-directory :is(.source-file,.source-folder)
+  rule-78 | style | :is(.source-file,.source-folder)>span
+  rule-79 | style | :is(.source-file,.source-folder) svg
+  rule-80 | style | .source-file[aria-pressed=true]
+  rule-81 | style | .source-folder
+  rule-82 | style | .source-folder::-webkit-details-marker
+  rule-83 | style | .source-directory :is(.source-file,.source-folder)::before
+  rule-84 | style | .source-directory .source-folder::before
+  rule-85 | style | .source-directory details[open]>.source-folder::before
+  rule-86 | style | .source-directory :is(.source-folder:hover,.source-folder:focus-visible)
+  rule-87 | style | .source-index-status
+  rule-88 | style | .source-index-status:empty
+  rule-89 | style | .source-repository .source
+  rule-90 | style | .source-repository .source>header
+  rule-91 | style | .source-repository [data-source-name]
+  rule-92 | style | .source-repository [data-source-size]
+  rule-93 | style | .source-repository pre
+  rule-94 | style | .construction-board::-webkit-scrollbar,.source-directory [data-source-files]::-webkit-scrollbar,.source-repository pre::-webkit-scrollbar
+  rule-95 | style | .source-repository .pager
+  rule-96 | style | .source-repository .pager:empty
+  rule-97 | style | .source-repository .pager button
+  rule-98 | style | .management-grid
+  rule-99 | style | .management-section
+  rule-100 | style | .management-section>h2
+  rule-101 | style | .management-section>h2 small
+  rule-102 | style | .management-section .admin-list
+  rule-103 | style | .management-section .admin-list>article
+  rule-104 | style | .management-section .row strong
+  rule-105 | style | .management-section .avatar
+  rule-106 | style | .management-section .audit
+  rule-107 | style | .management-section .audit p
+  rule-108 | style | .release-ballots
+  rule-109 | style | .release-ballot
+  rule-110 | style | .release-ballot h3
+  rule-111 | style | .release-ballot p
+  rule-112 | style | .release-support
+  rule-113 | style | .release-support strong
+  rule-114 | style | .release-support span
+  rule-115 | style | .release-vote-meter
+  rule-116 | style | .release-vote-meter i
+  rule-117 | style | .release-vote-meter b
+  rule-118 | style | .release-ballot>.actions
+  rule-119 | style | .chat-surface .message
+  rule-120 | style | .chat-surface .message>div
+  rule-121 | style | .chat-surface .message[data-own=true]
+  rule-122 | style | .message[data-own=true] header
+  rule-123 | style | .message[data-own=true] .message-images
+  rule-124 | style | .message .markdown
+  rule-125 | style | .message[data-own=true] .markdown
+  rule-126 | style | .chat-surface
+  rule-127 | style | .chat-surface .composer
+  rule-128 | style | .chat-surface .chat-log
+  rule-129 | style | @media(max-width:900px)
+  rule-130 | style | @media(max-width:620px)
+  rule-131 | style | @media(prefers-reduced-motion:reduce)
+  rule-132 | style | @media(max-height:360px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ .surface>header.surface-toolbar{display:none;min-height:0;margin:0;padding:0;border:0}
+/* @chain-region rule-2 */ .surface>header.surface-toolbar:has(.surface-status:not([hidden])),.surface>header.surface-toolbar:has(>.actions:not(:empty)){display:flex;justify-content:flex-end;gap:16px;margin:0 0 16px;flex-wrap:wrap}
+/* @chain-region rule-3 */ .unified-home{display:flex;flex-direction:column;gap:24px;max-width:1400px;margin-inline:auto;padding:4px 6px 24px}
+/* @chain-region rule-4 */ .home-situation{
+ position:relative;
+ padding:26px 22px 22px;
+ border-block:1px solid #c5dfed30;
+ background:linear-gradient(100deg,#131c23e8 0%,#111b22a6 60%,#11182052 100%);
+}
+/* @chain-region rule-5 */ .home-stage-heading{display:flex;align-items:center;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;margin-bottom:24px}
+/* @chain-region rule-6 */ .home-stage-heading p{color:#b6cad4;font-size:13px;font-weight:550;margin-bottom:5px}
+/* @chain-region rule-7 */ .home-stage-heading h1{font-family:inherit;font-size:27px;font-weight:580;letter-spacing:0;overflow-wrap:anywhere}
+/* @chain-region rule-8 */ .home-stage-heading .home-previous-release{margin-top:10px;max-width:100%;gap:7px;text-align:left}
+/* @chain-region rule-9 */ .home-previous-release strong{min-width:0;overflow-wrap:anywhere}
+/* @chain-region rule-10 */ .home-previous-release .icon{width:16px;height:16px;flex-shrink:0}
+/* @chain-region rule-11 */ .home-stage-heading .home-stage-members{min-height:38px;padding:7px 11px;border:1px solid #b0d0de45;border-radius:7px;background:#10252c85;color:#d4e7ec;font-size:13px;white-space:nowrap}
+/* @chain-region rule-12 */ .home-stage-members .icon{width:17px;height:17px;color:#98d6de}
+/* @chain-region rule-13 */ .home-stage-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:0;padding:0}
+/* @chain-region rule-14 */ .home-stage-steps li{position:relative;min-width:0;isolation:isolate}
+/* @chain-region rule-15 */ .home-stage-steps li:not(:last-child)::before{
+ content:'';position:absolute;z-index:-1;top:22px;left:44px;right:0;border-top:1px dashed #bed1e34a;
+}
+/* @chain-region rule-16 */ .home-stage-steps li[data-step-state=done]:not(:last-child)::before{
+ border:0;height:1px;background:linear-gradient(90deg,var(--event-accent),#bed1e34a);
+}
+/* @chain-region rule-17 */ .home-stage-step{display:grid;grid-template:44px auto / minmax(0,1fr);justify-items:start;gap:8px;width:100%;height:100%;padding:0 12px 3px 0;min-width:0;text-align:start;color:#dae4e9}
+/* @chain-region rule-18 */ button.home-stage-step,button.home-stage-step:hover:not(:disabled){border-radius:0;background:transparent;color:#f0f7fa}
+/* @chain-region rule-19 */ .home-stage-step:hover .home-stage-icon,.home-stage-step:focus-visible .home-stage-icon{border-color:var(--event-accent)}
+/* @chain-region rule-20 */ .home-stage-icon{
+ position:relative;display:grid;place-items:center;width:44px;height:44px;border:1px solid #a3b9c752;
+ border-radius:9px;background:#131e26;color:#b5c7d1;
+}
+/* @chain-region rule-21 */ .home-stage-icon .icon{width:21px;height:21px}
+/* @chain-region rule-22 */ [data-step-state=done] .home-stage-icon,[data-step-state=current] .home-stage-icon{
+ color:var(--event-accent);border-color:color-mix(in srgb,var(--event-accent) 53%,transparent);
+ background:color-mix(in srgb,var(--event-accent) 15%,#132029);
+}
+/* @chain-region rule-23 */ [data-step-state=current] .home-stage-icon{box-shadow:0 0 18px color-mix(in srgb,var(--event-accent) 18%,transparent)}
+/* @chain-region rule-24 */ .home-stage-icon i{position:absolute;right:-5px;bottom:-3px;display:grid;place-items:center;width:16px;height:16px;border:2px solid #16232b;border-radius:4px;background:var(--event-accent);color:#101c20}
+/* @chain-region rule-25 */ .home-stage-icon i .icon{width:11px;height:11px;stroke-width:2}
+/* @chain-region rule-26 */ .home-stage-text{display:grid;gap:3px;min-width:0;line-height:1.4;overflow-wrap:anywhere}
+/* @chain-region rule-27 */ .home-stage-text strong{font-weight:560;font-size:14px}
+/* @chain-region rule-28 */ .home-stage-text>span{color:#adbfc9;font-size:13px}
+/* @chain-region rule-29 */ [data-step-state=current] .home-stage-text>span{color:var(--event-accent)}
+/* @chain-region rule-30 */ .unified-home :is(#home-goals,#home-leadership,#home-agendas,#home-construction,#home-members){scroll-margin-top:14px}
+/* @chain-region rule-31 */ .home-goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px}
+/* @chain-region rule-32 */ .home-goal{padding:28px;border:1px solid var(--line);border-radius:24px;background:color-mix(in srgb,var(--ui-panel,#121720) 48%,transparent)}
+/* @chain-region rule-33 */ .home-goal h2{font-size:28px;line-height:1.45;font-weight:500;margin:0 0 14px}
+/* @chain-region rule-34 */ .home-goal p{line-height:1.9;color:var(--ui-text-2)}
+/* @chain-region rule-35 */ .home-members{padding-top:18px;border-top:1px solid var(--line)}
+/* @chain-region rule-36 */ .home-members .members{display:flex;flex-wrap:wrap;gap:12px}
+/* @chain-region rule-37 */ .home-members .member{flex:0 1 180px;padding:12px 16px;border-radius:16px;min-width:0}
+/* @chain-region rule-38 */ .home-members .member>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:16px;line-height:1.5}
+/* @chain-region rule-39 */ .home-construction .engineering-intro:empty{display:none}
+/* @chain-region rule-40 */ .construction-board{scrollbar-width:none}
+/* @chain-region rule-41 */ .unified-home [data-tone=election]{--event-accent:#ffd08a}
+/* @chain-region rule-42 */ .unified-home [data-tone=work]{--event-accent:#a1d7ee}
+/* @chain-region rule-43 */ .unified-home [data-tone=success]{--event-accent:#a0ebc5}
+/* @chain-region rule-44 */ .unified-home [data-tone=release]{--event-accent:#e1b7f2}
+/* @chain-region rule-45 */ .unified-home [data-tone=attention]{--event-accent:#ffb6a9}
+/* @chain-region rule-46 */ .home-milestones{border-bottom:1px solid var(--line);background:linear-gradient(90deg,#0d161edc,#141b2173 85%)}
+/* @chain-region rule-47 */ .milestone-heading{display:flex;align-items:center;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;padding:8px 14px}
+/* @chain-region rule-48 */ .home-milestones h2{display:flex;align-items:center;gap:9px;margin:0;font-size:16px;font-weight:580}
+/* @chain-region rule-49 */ .home-milestones h2 .icon{color:#9fc9d6}
+/* @chain-region rule-50 */ .milestone-filters{display:flex;align-items:center;gap:2px;border:1px solid #b0d0de36;border-radius:7px;padding:2px;background:#10191f}
+/* @chain-region rule-51 */ .milestone-filters button{min-height:30px;min-width:58px;padding:3px 9px;border-radius:5px;font-size:13px}
+/* @chain-region rule-52 */ .milestone-filters [aria-pressed=true]{background:#bdd8e325;color:#ebf7fd}
+/* @chain-region rule-53 */ .milestone-filters .icon{width:15px;height:15px;color:#edd0a1}
+/* @chain-region rule-54 */ .home-milestones[data-view=achievements] li[data-achievement=false]{display:none}
+/* @chain-region rule-55 */ .home-milestones ol{margin:0;padding:0 4px;list-style:none;max-height:16rem;overflow:auto;scrollbar-width:thin;scrollbar-color:#b6d1e450 transparent}
+/* @chain-region rule-56 */ .home-milestones li{
+ position:relative;isolation:isolate;display:grid;grid-template-columns:34px minmax(0,1fr) auto;
+ align-items:center;gap:4px 12px;padding:8px 14px;border-top:1px solid #b5d1e01c;font-size:13px;
+}
+/* @chain-region rule-57 */ .home-milestones li:not(:last-child)::before{content:'';position:absolute;z-index:-1;left:30px;top:28px;bottom:-19px;width:1px;background:#bdd9e936}
+/* @chain-region rule-58 */ .milestone-icon{position:relative;display:grid;place-items:center;width:34px;height:34px;border:1px solid #a8c2d24f;border-radius:8px;background:#121d24;color:var(--event-accent)}
+/* @chain-region rule-59 */ .milestone-icon .icon{width:17px;height:17px}
+/* @chain-region rule-60 */ [data-achievement=true]>.milestone-icon{border-color:color-mix(in srgb,var(--event-accent) 54%,transparent);background:color-mix(in srgb,var(--event-accent) 11%,#152026)}
+/* @chain-region rule-61 */ .milestone-description{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 12px;min-width:0;overflow-wrap:anywhere}
+/* @chain-region rule-62 */ .milestone-description strong{color:var(--event-accent);font-weight:580}
+/* @chain-region rule-63 */ .milestone-description>div{display:flex;align-items:baseline;gap:2px 10px;flex-wrap:wrap;min-width:0;color:#c1cdd3}
+/* @chain-region rule-64 */ .home-milestones time{align-self:center;color:#a3b8c5;font-variant-numeric:tabular-nums}
+/* @chain-region rule-65 */ .home-milestones .milestone-link{display:inline;min-height:0;max-width:100%;padding:0;color:#e0edf1;text-align:start;white-space:normal;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:3px}
+/* @chain-region rule-66 */ .milestone-link .icon{display:inline-block;vertical-align:middle;width:13px;height:13px}
+/* @chain-region rule-67 */ .home-milestones [data-arrival=true]{animation:milestone-arrival 850ms ease-out}
+/* @chain-region rule-68 */ @keyframes milestone-arrival{
+ from{opacity:.72;translate:0 6px;background:color-mix(in srgb,var(--event-accent) 14%,transparent)}
+ to{opacity:1;translate:0 0;background:transparent}
+}
+/* @chain-region rule-69 */ :root:is([data-motion=reduced],[data-hidden=true]) .home-milestones [data-arrival=true]{animation:none}
+/* @chain-region rule-70 */ @media(prefers-reduced-motion:reduce){
+ .home-milestones [data-arrival=true]{animation:none}
+}
+/* @chain-region rule-71 */ @media(max-width:650px){
+ .home-situation{padding:18px 14px}
+ .home-stage-heading{margin-bottom:18px}
+ .home-stage-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+ .home-stage-steps li:nth-child(2)::before{content:none}
+ .home-milestones li{grid-template-columns:34px minmax(0,1fr);align-items:start}
+ .home-milestones time{grid-column:2}
+}
+/* @chain-region rule-72 */ .source-repository{display:grid;grid-template-columns:minmax(210px,28%) minmax(0,1fr);height:clamp(360px,60vh,760px);min-width:0;margin:24px 0 10px;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:color-mix(in srgb,var(--ui-panel,#131722) 40%,transparent)}
+/* @chain-region rule-73 */ .source-directory{display:flex;flex-direction:column;min-height:0;min-width:0;border-right:1px solid var(--line);padding:14px 10px}
+/* @chain-region rule-74 */ .source-directory .tree-search{display:flex;gap:6px;flex:none;align-items:center;margin-bottom:10px}
+/* @chain-region rule-75 */ .source-directory input{width:100%;min-width:0;background:transparent;border:0;border-radius:10px;padding:10px;color:var(--ui-text)}
+/* @chain-region rule-76 */ .source-directory [data-source-files]{overflow:auto;min-height:0;flex:1;scrollbar-width:none}
+/* @chain-region rule-77 */ .source-directory :is(.source-file,.source-folder){display:flex;gap:8px;align-items:center;justify-content:flex-start;width:100%;text-align:left;min-width:0;min-height:34px;padding:6px 8px;padding-inline-start:min(calc(8px + var(--source-depth,0) * 12px),30%);border-radius:7px;font-size:14px;line-height:1.5}
+/* @chain-region rule-78 */ :is(.source-file,.source-folder)>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+/* @chain-region rule-79 */ :is(.source-file,.source-folder) svg{width:16px;height:16px;flex:none;opacity:.65}
+/* @chain-region rule-80 */ .source-file[aria-pressed=true]{color:var(--ui-accent);background:color-mix(in srgb,var(--ui-accent) 11%,transparent)}
+/* @chain-region rule-81 */ .source-folder{list-style:none;cursor:pointer}
+/* @chain-region rule-82 */ .source-folder::-webkit-details-marker{display:none}
+/* @chain-region rule-83 */ .source-directory :is(.source-file,.source-folder)::before{content:'';width:6px;height:6px;flex:none}
+/* @chain-region rule-84 */ .source-directory .source-folder::before{border:solid currentColor;border-width:0 1px 1px 0;transform:rotate(-45deg)}
+/* @chain-region rule-85 */ .source-directory details[open]>.source-folder::before{transform:rotate(45deg)}
+/* @chain-region rule-86 */ .source-directory :is(.source-folder:hover,.source-folder:focus-visible){background:color-mix(in srgb,var(--ui-accent) 11%,transparent)}
+/* @chain-region rule-87 */ .source-index-status{display:flex;align-items:center;gap:6px;flex:none;padding:6px;color:var(--ui-text-3);font-size:12px}
+/* @chain-region rule-88 */ .source-index-status:empty{display:none}
+/* @chain-region rule-89 */ .source-repository .source{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:hidden}
+/* @chain-region rule-90 */ .source-repository .source>header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line);flex:none;min-width:0}
+/* @chain-region rule-91 */ .source-repository [data-source-name]{font-size:14px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* @chain-region rule-92 */ .source-repository [data-source-size]{flex:none;font-size:14px;color:var(--ui-text-3)}
+/* @chain-region rule-93 */ .source-repository pre{flex:1;min-height:0;overflow:auto;margin:0;padding:20px;background:transparent;font-size:14px;line-height:1.8;tab-size:4;scrollbar-width:none}
+/* @chain-region rule-94 */ .construction-board::-webkit-scrollbar,.source-directory [data-source-files]::-webkit-scrollbar,.source-repository pre::-webkit-scrollbar{display:none}
+/* @chain-region rule-95 */ .source-repository .pager{padding:8px;gap:8px;margin:0;flex:none}
+/* @chain-region rule-96 */ .source-repository .pager:empty{display:none}
+/* @chain-region rule-97 */ .source-repository .pager button{font-size:14px;min-height:34px;padding:4px 8px}
+/* @chain-region rule-98 */ .management-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:28px;max-width:1500px;margin-inline:auto;padding:4px}
+/* @chain-region rule-99 */ .management-section{min-width:0;border:1px solid var(--line);border-radius:22px;padding:22px;background:color-mix(in srgb,var(--ui-panel,#131722) 30%,transparent)}
+/* @chain-region rule-100 */ .management-section>h2{font-size:19px;font-weight:500;display:flex;gap:10px;align-items:baseline;margin:0 0 14px}
+/* @chain-region rule-101 */ .management-section>h2 small{font-size:14px;color:var(--ui-text-3)}
+/* @chain-region rule-102 */ .management-section .admin-list{padding:0}/* @chain-region rule-103 */ .management-section .admin-list>article{padding:14px 0;background:transparent;border-radius:0;border-bottom:1px solid var(--line)}
+/* @chain-region rule-104 */ .management-section .row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* @chain-region rule-105 */ .management-section .avatar{width:30px;height:30px;flex:none}
+/* @chain-region rule-106 */ .management-section .audit{overflow:hidden}/* @chain-region rule-107 */ .management-section .audit p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* @chain-region rule-108 */ .release-ballots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px;margin:20px 0}
+/* @chain-region rule-109 */ .release-ballot{display:grid;grid-template-columns:1fr auto;gap:16px;padding:22px;border:1px solid var(--line);border-radius:22px}
+/* @chain-region rule-110 */ .release-ballot h3{margin:10px 0;font-size:21px;font-weight:500}/* @chain-region rule-111 */ .release-ballot p{color:var(--ui-text-2);line-height:1.75}
+/* @chain-region rule-112 */ .release-support{display:flex;flex-direction:column;align-items:flex-end;justify-content:center}/* @chain-region rule-113 */ .release-support strong{font-size:25px;font-weight:450}/* @chain-region rule-114 */ .release-support span{font-size:14px;color:var(--ui-text-3)}
+/* @chain-region rule-115 */ .release-vote-meter{grid-column:1/-1;position:relative;height:5px;border-radius:4px;background:var(--line);overflow:hidden}/* @chain-region rule-116 */ .release-vote-meter i{display:block;height:100%;background:var(--ui-accent);transition:width 300ms ease}/* @chain-region rule-117 */ .release-vote-meter b{position:absolute;top:0;bottom:0;width:2px;background:var(--ui-text)}
+/* @chain-region rule-118 */ .release-ballot>.actions{grid-column:1/-1}
+/* @chain-region rule-119 */ .chat-surface .message{max-width:84%;margin-right:auto}/* @chain-region rule-120 */ .chat-surface .message>div{flex:0 1 auto;max-width:100%}/* @chain-region rule-121 */ .chat-surface .message[data-own=true]{flex-direction:row-reverse;margin-left:auto;margin-right:0}/* @chain-region rule-122 */ .message[data-own=true] header{justify-content:flex-end}/* @chain-region rule-123 */ .message[data-own=true] .message-images{justify-content:flex-end}
+/* @chain-region rule-124 */ .message .markdown{padding:14px 18px;border-radius:0 18px 18px 18px;background:color-mix(in srgb,var(--ui-panel,#141a24) 70%,transparent);overflow-wrap:anywhere}
+/* @chain-region rule-125 */ .message[data-own=true] .markdown{border-radius:18px 0 18px 18px;background:color-mix(in srgb,var(--ui-accent) 12%,transparent)}
+/* @chain-region rule-126 */ .chat-surface{max-width:1240px}/* @chain-region rule-127 */ .chat-surface .composer{margin-top:18px}/* @chain-region rule-128 */ .chat-surface .chat-log{padding-top:6px}
+/* @chain-region rule-129 */ @media(max-width:900px){.management-grid{grid-template-columns:1fr}.source-repository{grid-template-columns:minmax(160px,32%) minmax(0,1fr)}.home-situation{min-height:170px;padding-inline:24px}.chat-surface .message{max-width:92%}}
+/* @chain-region rule-130 */ @media(max-width:620px){.unified-home{gap:18px}.home-goal{padding:20px}.source-repository{grid-template-columns:140px minmax(0,1fr)}.source-directory{padding:8px 4px}.source-directory .tree-search{gap:0}.source-directory .tree-search button{padding:5px}.source-repository .source>header{padding:12px}.source-repository [data-source-size]{display:none}.source-repository pre{padding:12px}.management-section{padding:16px}}
+/* @chain-region rule-131 */ @media(prefers-reduced-motion:reduce){.release-vote-meter i{transition:none}}
+/* @chain-region rule-132 */ @media(max-height:360px){.home-members .members{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}.home-members .member{width:100%;justify-content:flex-start}}

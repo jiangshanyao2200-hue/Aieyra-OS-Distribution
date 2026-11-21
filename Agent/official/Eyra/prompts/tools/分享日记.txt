@@ -1,0 +1,1 @@
+Compatibility notice: automatic diaries and share_diary are retired. Historical diaries remain available through unified memory. If the user asks to read one, retrieve its actual content and source; use report for a long document. Never invent a diary or an active subconscious speaker.

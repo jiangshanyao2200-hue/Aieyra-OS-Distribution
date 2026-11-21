@@ -1,0 +1,130 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.terminal",
+  "kind": "tool",
+  "name": "终端",
+  "summary": "命令、交互终端与原进程日志",
+  "version": "1.0.8",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual/terminal.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/view.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "call.go": {
+      "sha256": "d8e929b494393ff03d84e0ccc7cdecfe8af43f582288cee177989b5a8b8f6de2",
+      "size": 1753
+    },
+    "contract/types.go": {
+      "sha256": "6231be6a4a88ec8ce73a6deb1fe0d19b7e6ef710be9514376155e64c6007b8f1",
+      "size": 1634
+    },
+    "decode.go": {
+      "sha256": "ec16d02b186177232fd214c25fb0b8e88f0e1492468b247370ff73ebd9f8a826",
+      "size": 993
+    },
+    "definition.go": {
+      "sha256": "d3c50cde863148835fd1be978e7acfb9d01e8a9d020cd01bc0c91e81ca7f1758",
+      "size": 6089
+    },
+    "execute.go": {
+      "sha256": "ebf29c572b5484be637313662b117eacf800d0cf3829980c2329bc181dfb6b5c",
+      "size": 1559
+    },
+    "manual/background.txt": {
+      "sha256": "b0ea32fb5bd4d1ec73597ed692a952d7bc14e55e5df9485344ba9521a5c0db3c",
+      "size": 423
+    },
+    "manual/budget.txt": {
+      "sha256": "f14015b5f275bf5afd0e690925a3c602675a3b3f60efe88c738459e2a3343578",
+      "size": 183
+    },
+    "manual/bytes.txt": {
+      "sha256": "69c1f57e21732eb70dc08200e9e09d85fe6949f046df697e3c5139a6381a4b8c",
+      "size": 349
+    },
+    "manual/exec.txt": {
+      "sha256": "5fbb56edadb36e5c2dd09090f95c0f41a8f01d66cf60fb70ce17744b2b5287a5",
+      "size": 1207
+    },
+    "manual/input.txt": {
+      "sha256": "92a62b6daaf4d627d741ad82fa73bcaea6d5c055b0c404350f57e57593bd86c1",
+      "size": 1137
+    },
+    "manual/operation.txt": {
+      "sha256": "443203ca9d2492803e26955ebcbc7f6b91904f385afb5d0e12f86427f396869a",
+      "size": 160
+    },
+    "manual/purpose.txt": {
+      "sha256": "ff60a1dc80306309c4d766f115dabec48dde564ff1b858d2b252addf65c63421",
+      "size": 173
+    },
+    "manual/read.txt": {
+      "sha256": "d34d55f5890bb2f0f129c9a5ac60b7848e947d6bac09f13ae48f3ed5648250db",
+      "size": 287
+    },
+    "manual/terminal.txt": {
+      "sha256": "6ffb2615c006e71c7ec2528cbed816eb178a07cc2dd7d19cae6a025bfd9b75b2",
+      "size": 1079
+    },
+    "native.json": {
+      "sha256": "ef178c12ae1dc25fec014669596d71e76a19da37b1b79eb6e8f4ee121a7eaadc",
+      "size": 160
+    },
+    "presentation/desktop.css": {
+      "sha256": "2f51642506fec3bd5e9783815d189e0194f161422a70d1404cf11088d66b6f95",
+      "size": 3663
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "430b5c5e105d0156078e09d17f0c188327119830a8f30e169283158d1833e636",
+      "size": 31772
+    },
+    "presentation/readonly.mjs": {
+      "sha256": "7573fc0f2046fb5ecff216c0a8b5024aa9e39221881b1bfa7fc1fd6380334a2c",
+      "size": 4775
+    },
+    "presentation/text/view.go": {
+      "sha256": "64d2c6a63684a811111d86e26a1919b1f7377dd7fca407d60d0c0ef85b3a95aa",
+      "size": 849
+    },
+    "presentation/text.mjs": {
+      "sha256": "ca0c754d224738f3445aea466dd3ba380e249f092dd687f1ccd4735aa83557cf",
+      "size": 245
+    },
+    "README.md": {
+      "sha256": "82b9b69592101e703842209cdabb3fb03b6a08ef129d908f0fc756c52aa704d1",
+      "size": 1257
+    }
+  }
+}

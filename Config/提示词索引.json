@@ -1,0 +1,1424 @@
+{
+  "resources": [
+    {
+      "key": "basicCapabilitiesStage",
+      "file": "Matrix/运行协定/基础能力阶段.txt",
+      "source": "team_roles.go",
+      "path": "Agent/official/Eyra/prompts/contracts/基础能力阶段.txt",
+      "legacy_sha256": "1d875c2e36d02672e62a8ea2e60a7e7d81c14a5db7ac98615a8b68aaa21587fa"
+    },
+    {
+      "key": "MatrixAgentManual",
+      "file": "Matrix/工具说明/专项助手.txt",
+      "source": "Core/agent_tool.go; Core/matrix_agents.go; Core/workspace_situation.go; Core/workspace_mother_packages.go",
+      "path": "Agent/official/Eyra/prompts/tools/专项助手.txt",
+      "legacy_sha256": "51f086333df59836715790c190b0d84dcc0e6e5608380303d7c2b46115fb6c91"
+    },
+    {
+      "key": "manual_041",
+      "file": "Matrix/工具说明/主动压缩.txt",
+      "source": "toolbox.go",
+      "path": "Agent/official/Eyra/prompts/tools/主动压缩.txt",
+      "legacy_sha256": "34625217c7c649ebb8510adbaa558db3407c4391e9ecfe60ec64c8bf3b49f1c7"
+    },
+    {
+      "key": "cloudReportManual",
+      "file": "Matrix/工具说明/云端上报.txt",
+      "source": "cloudReportManual",
+      "path": "Agent/official/Eyra/prompts/tools/云端上报.txt",
+      "legacy_sha256": "92b8afa2966a5be4c2afda1dac127d1ca2ddd129aa731cad2b4be42f6ebe14a5"
+    },
+    {
+      "key": "HumanManual",
+      "file": "Matrix/工具说明/人工决策.txt",
+      "source": "HumanManual",
+      "path": "Agent/official/Eyra/prompts/tools/人工决策.txt",
+      "legacy_sha256": "3bf79a8ef5502b576e81da234aabec51714257202b15c10e1200938ed3737df9"
+    },
+    {
+      "key": "literal_016",
+      "file": "Matrix/工具说明/保留常驻进程.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/background.txt",
+      "legacy_sha256": "b0ea32fb5bd4d1ec73597ed692a952d7bc14e55e5df9485344ba9521a5c0db3c"
+    },
+    {
+      "key": "literal_035",
+      "file": "Matrix/工具说明/内部模块.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/tools/内部模块.txt",
+      "legacy_sha256": "e000d1eda106c6e4d24a33ad12e7f7a38cec4e72add0c43880448db1a9fc7e8d"
+    },
+    {
+      "key": "subconsciousToolDefinitions_1",
+      "file": "Matrix/工具说明/分享日记.txt",
+      "source": "workspace_subconscious.go:subconsciousToolDefinitions",
+      "path": "Agent/official/Eyra/prompts/tools/分享日记.txt",
+      "legacy_sha256": "d3d14d68d22f322afb57fd183fd07b4aef49da8ab6ff0ffa36240591b07ce533"
+    },
+    {
+      "key": "literal_018",
+      "file": "Matrix/工具说明/命令输入字节.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/bytes.txt",
+      "legacy_sha256": "69c1f57e21732eb70dc08200e9e09d85fe6949f046df697e3c5139a6381a4b8c"
+    },
+    {
+      "key": "literal_037",
+      "file": "Matrix/工具说明/固定协同.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/tools/固定协同.txt",
+      "legacy_sha256": "de29b13749b32cb050671df11fa81a78e038454b6f86380e95eee0bd2f6d586b"
+    },
+    {
+      "key": "literal_036",
+      "file": "Matrix/工具说明/官方更新.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/tools/官方更新.txt",
+      "legacy_sha256": "9d507d7f45f80fc94f9f39be8364f449222364a60ebdba50797df186e7ca10b5"
+    },
+    {
+      "key": "WorkspaceToolDefinitions_1",
+      "file": "Matrix/工具说明/工作区操作.txt",
+      "source": "workspace_tools.go:WorkspaceToolDefinitions",
+      "path": "Agent/official/Eyra/prompts/tools/工作区操作.txt",
+      "legacy_sha256": "d731792d570f7872c5b7e95628e7089fae2c70c2d820cb53a89628d6d0d85f37"
+    },
+    {
+      "key": "ToolFactoryManual",
+      "file": "Matrix/工具说明/工具工厂.txt",
+      "source": "Core/matrix_tool_factory.go; Core/toolbox.go; Core/tool_packages.go",
+      "path": "Agent/official/Eyra/prompts/tools/工具工厂.txt",
+      "legacy_sha256": "872137a9dc3cd3b421e4c04fecde6393d05669c33fec8d5afc9b2e5cf58e5eea"
+    },
+    {
+      "key": "ToolboxDefinition_1",
+      "file": "Matrix/工具说明/工具箱操作.txt",
+      "source": "toolbox.go:ToolboxDefinition",
+      "path": "Agent/official/Eyra/prompts/tools/工具箱操作.txt",
+      "legacy_sha256": "9d1184dac23e24a008205e4198e5781bef14f2b76a71dacfa72ea9aa220ea6cf"
+    },
+    {
+      "key": "literal_038",
+      "file": "Matrix/工具说明/工程索引.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/tools/工程索引.txt",
+      "legacy_sha256": "29b6eade681fc3bcc8c853306137621cd9eddfd781ebb573396cb354aebeaea9"
+    },
+    {
+      "key": "literal_006",
+      "file": "Matrix/工具说明/异步调用.txt",
+      "source": "orchestration_tools.go",
+      "path": "Agent/official/Eyra/prompts/tools/异步调用.txt",
+      "legacy_sha256": "69a37a99ad8f25498174b5786ec8947d4b6fae33048af8ad76235d0ce7eacaed"
+    },
+    {
+      "key": "literal_015",
+      "file": "Matrix/工具说明/执行命令.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/exec.txt",
+      "legacy_sha256": "f4c348d5c10a96a102877399a4a3dbc2fe3a898d96ef34f1316e92ef7679ea10"
+    },
+    {
+      "key": "ReportToolDefinition_1",
+      "file": "Matrix/工具说明/报告.txt",
+      "source": "workspace_tools.go:ReportToolDefinition",
+      "path": "Agent/official/Eyra/prompts/tools/报告.txt",
+      "legacy_sha256": "55101c2135bcaccadfb71ee0a337c7d9d167ce01b6bc60f26ea1212123869614",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "literal_021",
+      "file": "Matrix/工具说明/持久计划.txt",
+      "source": "tools.go",
+      "path": "Tool/base/official/update_plan/manual.txt",
+      "legacy_sha256": "7dd3678f7853982d917c043941ea99251c176110a49e00d18536e9d0aad389e3"
+    },
+    {
+      "key": "ImageToolDefinition_1",
+      "file": "Matrix/工具说明/查看图片.txt",
+      "source": "Core/image_tool.go; Tool/base/official/view_image/definition.go; Tool/base/official/view_image/ocr_windows.go",
+      "path": "Tool/base/official/view_image/manual.txt",
+      "legacy_sha256": "cf89ce24abb679b3516989efe7a4d628d961e9c1ed850984dcc548fb1bedc0c2"
+    },
+    {
+      "key": "literal_030",
+      "file": "Matrix/工具说明/永久记忆.txt",
+      "source": "Core/workspace_memory.go; Core/agent_package_memory.go; Core/conversation_contacts.go",
+      "path": "Agent/official/Eyra/prompts/tools/永久记忆.txt",
+      "legacy_sha256": "2634c7a649888b4662f308b96817d3063de1160a0828c0b129e84190ee814c06"
+    },
+    {
+      "key": "manual_042",
+      "file": "Matrix/工具说明/浏览器.txt",
+      "source": "toolbox.go",
+      "path": "Agent/official/Eyra/prompts/tools/浏览器.txt",
+      "legacy_sha256": "213cd0038bab31793f0dc491a17b292cd83bd24eb1615cb64f359ee7c67b6fe0"
+    },
+    {
+      "key": "literal_014",
+      "file": "Matrix/工具说明/源码搜索.txt",
+      "source": "shell_runtime.go",
+      "path": "Agent/official/Eyra/prompts/tools/源码搜索.txt",
+      "legacy_sha256": "b5832248258b7724bf0d5e9443097ceba6207f97134f51423af1a79d2a34f8f1"
+    },
+    {
+      "key": "literal_031",
+      "file": "Matrix/工具说明/潜意识回忆.txt",
+      "source": "workspace_subconscious.go",
+      "path": "Agent/official/Eyra/prompts/tools/潜意识回忆.txt",
+      "legacy_sha256": "65ac700fa43da346ad4a8fc4cfae1b52bfa6aad7a0f0b38db400afb07522c405"
+    },
+    {
+      "key": "ImageGenManual",
+      "file": "Matrix/工具说明/生图.txt",
+      "source": "ImageGenManual",
+      "path": "Tool/toolbox/official/imagegen/manual.txt",
+      "legacy_sha256": "b6c6ce5279edb50b6847f56f066036be672deb11e7a7e9672c99ce686cb06078"
+    },
+    {
+      "key": "ModelsToolDefinition",
+      "file": "Matrix/工具说明/模型池.txt",
+      "source": "model_discovery.go",
+      "path": "Agent/official/Eyra/prompts/tools/模型池.txt",
+      "legacy_sha256": "54d3e0f97c9e69a617b41eafd03bf36db9dd338e5d4a271af885b7cd8d0e9119"
+    },
+    {
+      "key": "manual_043",
+      "file": "Matrix/工具说明/电脑操作.txt",
+      "source": "toolbox.go",
+      "path": "Agent/official/Eyra/prompts/tools/电脑操作.txt",
+      "legacy_sha256": "f38467920d5ba96e9389a1b644bac2ee14ac2391ef752980c971fcbc5fab24fd"
+    },
+    {
+      "key": "ToolboxCatalog",
+      "file": "Matrix/工具说明/目录.txt",
+      "source": "ToolboxCatalog",
+      "path": "Agent/official/Eyra/prompts/tools/目录.txt",
+      "legacy_sha256": "f87518c968514503d241a6124868a9c1a9a15a67db8dff6672f0485194fb9a1e"
+    },
+    {
+      "key": "communityToolDescription",
+      "file": "Matrix/工具说明/社区.txt",
+      "source": "communityToolDescription",
+      "path": "Agent/official/Eyra/prompts/tools/社区.txt",
+      "legacy_sha256": "73e6ae4d387a702945c3db9045b3abe8cbd014868476c919563f786e634228cb"
+    },
+    {
+      "key": "linkToolManual",
+      "file": "Matrix/工具说明/Link办公室.txt",
+      "source": "toolbox.go",
+      "path": "Agent/official/Eyra/prompts/tools/Link办公室.txt",
+      "legacy_sha256": "e8971009f0fb66c30ef783b5e9d4b1658cb9130e10300660f6cbe0d4f1ead8f6"
+    },
+    {
+      "key": "serverToolManual",
+      "file": "Matrix/工具说明/服务器管理.txt",
+      "source": "toolbox.go",
+      "path": "Agent/official/Eyra/prompts/tools/服务器管理.txt",
+      "legacy_sha256": "a6e4cb2fa856806c226efe2e458e2eae6363ac677023c4e98153dfb7f7089dcb"
+    },
+    {
+      "key": "capabilityReference",
+      "file": "Matrix/辅助指令/本机能力.txt",
+      "source": "host_plugins.go",
+      "path": "Agent/official/Eyra/prompts/instructions/本机能力.txt",
+      "legacy_sha256": "a765cb44fb62b08e3670f76b10119a12a5b508b30384c37310d0d4f22479342d"
+    },
+    {
+      "key": "literal_029",
+      "file": "Matrix/工具说明/终端工作区.txt",
+      "source": "workspace_host.go",
+      "path": "Agent/official/Eyra/prompts/tools/终端工作区.txt",
+      "legacy_sha256": "30d0bb6987e6b265e6b5b772493d23a7c89cc3b87eade54bfc281f85ea73bf99"
+    },
+    {
+      "key": "literal_028",
+      "file": "Matrix/工具说明/终端工具箱.txt",
+      "source": "workspace_host.go",
+      "path": "Agent/official/Eyra/prompts/tools/终端工具箱.txt",
+      "legacy_sha256": "d4c348774bbc1fee11379dc96062f60b6f3ddc73798bba2984497cfa807252b3"
+    },
+    {
+      "key": "literal_013",
+      "file": "Matrix/工具说明/终端输入回车.txt",
+      "source": "shell.go",
+      "path": "Agent/official/Eyra/prompts/tools/终端输入回车.txt",
+      "legacy_sha256": "a62b1009a978a7374b8e5485a0d5fed9c6a9f750b683f070f21c2e6eed7fb27b"
+    },
+    {
+      "key": "literal_017",
+      "file": "Matrix/工具说明/继续命令.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/input.txt",
+      "legacy_sha256": "92a62b6daaf4d627d741ad82fa73bcaea6d5c055b0c404350f57e57593bd86c1"
+    },
+    {
+      "key": "OrchestrationToolDefinitions_2",
+      "file": "Matrix/工具说明/继续脚本.txt",
+      "source": "orchestration_tools.go:OrchestrationToolDefinitions",
+      "path": "Agent/official/Eyra/prompts/tools/继续脚本.txt",
+      "legacy_sha256": "8560217352a1f909d3a40d71ca679ab2ff4be1331585590bd22f4b9d99061214"
+    },
+    {
+      "key": "WebSearchToolDefinition_2",
+      "file": "Matrix/工具说明/联网查询方式.txt",
+      "source": "web_search.go:WebSearchToolDefinition",
+      "path": "Tool/base/official/web_search/manual/method.txt",
+      "legacy_sha256": "fe5410d8c564c1e35657fa3d8edb59fafb28ff574f1b7d40410bb6e8d4345b4f"
+    },
+    {
+      "key": "WebSearchToolDefinition_1",
+      "file": "Matrix/工具说明/联网查询用途.txt",
+      "source": "web_search.go:WebSearchToolDefinition",
+      "path": "Tool/base/official/web_search/manual/purpose.txt",
+      "legacy_sha256": "d6d61c7fdb2290aa555a24a72f3b534c7f071e374f422587e7bfc4ca54189f2a"
+    },
+    {
+      "key": "WebSearchToolDefinition_3",
+      "file": "Matrix/工具说明/联网查询结果.txt",
+      "source": "web_search.go:WebSearchToolDefinition",
+      "path": "Tool/base/official/web_search/manual/result.txt",
+      "legacy_sha256": "5a6aba00418a7cebc391c15fcecdd1c9053bfac4749c843d83cbb76b13792e84"
+    },
+    {
+      "key": "settingsManual",
+      "file": "Matrix/工具说明/设置.txt",
+      "source": "settingsManual",
+      "path": "Agent/official/Eyra/prompts/tools/设置.txt",
+      "legacy_sha256": "4e79bb0de325ac553904fe07959eec19c5361c566151c61851604ab95a7c80a3"
+    },
+    {
+      "key": "AskUserToolDefinition_1",
+      "file": "Matrix/工具说明/询问用户.txt",
+      "source": "Core/workspace_ask.go:AskUserToolDefinition/replyAsk; Client/Desktop/ui/ask-user.mjs",
+      "path": "Agent/official/Eyra/prompts/tools/询问用户.txt",
+      "legacy_sha256": "d1c38864bba96a845760bede583a72104526615678d72b0ed36057e94b899d3a"
+    },
+    {
+      "key": "literal_019",
+      "file": "Matrix/工具说明/读取命令日志.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/read.txt",
+      "legacy_sha256": "d34d55f5890bb2f0f129c9a5ac60b7848e947d6bac09f13ae48f3ed5648250db"
+    },
+    {
+      "key": "softwareAPIManual",
+      "file": "Matrix/工具说明/软件接口.txt",
+      "source": "softwareAPIManual",
+      "path": "Agent/official/Eyra/prompts/tools/软件接口.txt",
+      "legacy_sha256": "d7e96b66fc77fab52dfe81c964f51052841f61823ded4bb3286c3d94fb1b46e5"
+    },
+    {
+      "key": "OrchestrationToolDefinitions_1",
+      "file": "Matrix/工具说明/运行脚本.txt",
+      "source": "orchestration_tools.go:OrchestrationToolDefinitions",
+      "path": "Agent/official/Eyra/prompts/tools/运行脚本.txt",
+      "legacy_sha256": "db431ec62fed48cf18549f122b999bd90281255c3beb2b326eb7cd46849180d1"
+    },
+    {
+      "key": "fastDigestInstruction",
+      "file": "Matrix/记忆/会话尾整理.txt",
+      "source": "fastDigestInstruction",
+      "path": "Agent/official/Eyra/context/prompts/会话尾整理.txt",
+      "legacy_sha256": "661938fc506c8ad1954a1ac236bc680aa63dc4cd92c243a1ad2d819b55d5e54e"
+    },
+    {
+      "key": "memoryContract",
+      "file": "Matrix/记忆/使用约定.txt",
+      "source": "memoryContract",
+      "path": "Agent/official/Eyra/context/prompts/使用约定.txt",
+      "legacy_sha256": "ebe6bbf738954d5a2961ee5e76d9eda864708f19e0f971597732586ded7872fb"
+    },
+    {
+      "key": "Message_2",
+      "file": "Matrix/记忆/历史摘要前缀.txt",
+      "source": "context.go:Message",
+      "path": "Agent/official/Eyra/context/prompts/历史摘要前缀.txt",
+      "legacy_sha256": "ddd21161dd57f2d106d5242e45853950787220e4793ab3cde34c202d3c518e74"
+    },
+    {
+      "key": "Message_1",
+      "file": "Matrix/记忆/压缩检查点.txt",
+      "source": "context.go:Message",
+      "path": "Agent/official/Eyra/context/prompts/压缩检查点.txt",
+      "legacy_sha256": "7222b7c914139a21face419dd6b122c6cf026bc1212c5815a44916777b717155"
+    },
+    {
+      "key": "RecallPrefix",
+      "file": "Matrix/记忆/引用前缀.txt",
+      "source": "RecallPrefix",
+      "path": "Agent/official/Eyra/context/prompts/引用前缀.txt",
+      "legacy_sha256": "d624bfea73f0b4f2729b80002069f636181191d228e30332e7d334cfcd739fef"
+    },
+    {
+      "key": "eyraOrganizeInstruction",
+      "file": "Matrix/记忆/整理.txt",
+      "source": "eyraOrganizeInstruction",
+      "path": "Agent/official/Eyra/context/prompts/整理.txt",
+      "legacy_sha256": "07d88f3267bc1bf92bf9d524da4f1b57fb478da318915408bc849eab4928ba2b"
+    },
+    {
+      "key": "fastCompactInstruction",
+      "file": "Matrix/记忆/本轮压缩.txt",
+      "source": "fastCompactInstruction",
+      "path": "Agent/official/Eyra/context/prompts/本轮压缩.txt",
+      "legacy_sha256": "c6eecd92451dd0ce86d9c86ffd0c6ebb2de153bcf5d412345309aa2c1cfa1c6d"
+    },
+    {
+      "key": "run_5",
+      "file": "Matrix/记忆/检索结果前缀.txt",
+      "source": "matrix_agent_runtime.go:run",
+      "path": "Agent/official/Eyra/context/prompts/检索结果前缀.txt",
+      "legacy_sha256": "0c98dd488e07e35905c236831ac95ec08f960560f1302d0e2e0dc8ebdcbd876a"
+    },
+    {
+      "key": "memorySettingsContract",
+      "file": "Matrix/记忆/配置说明.txt",
+      "source": "memorySettingsContract",
+      "path": "Agent/official/Eyra/context/prompts/配置说明.txt",
+      "legacy_sha256": "c0cf451ea271825e2a2288134d8a37c60036648b5274fbc2a6d9157775d04957"
+    },
+    {
+      "key": "drain_2",
+      "file": "Matrix/辅助指令/任务中补充.txt",
+      "source": "workspace.go:drain",
+      "path": "Agent/official/Eyra/prompts/instructions/任务中补充.txt",
+      "legacy_sha256": "341f120d13008b86044218689333596d1f036d0b3067730a028ad33df196a996"
+    },
+    {
+      "key": "literal_011",
+      "file": "Matrix/辅助指令/保留的后台会话.txt",
+      "source": "shell.go",
+      "path": "Agent/official/Eyra/prompts/instructions/保留的后台会话.txt",
+      "legacy_sha256": "b87a74f310a792782434da9f6f165076a4b8dab85f7636dd38d7821b7ba5e4f8"
+    },
+    {
+      "key": "literal_025",
+      "file": "Matrix/辅助指令/协同模板.txt",
+      "source": "workspace_collaboration.go",
+      "path": "Agent/official/Eyra/prompts/instructions/协同模板.txt",
+      "legacy_sha256": "24bae959f8c2344802c14ecd09e73455c95abcb849d04e74c2f0ff2476494211"
+    },
+    {
+      "key": "literal_008",
+      "file": "Matrix/辅助指令/历史图片缺失.txt",
+      "source": "responses.go",
+      "path": "Agent/official/Eyra/prompts/instructions/历史图片缺失.txt",
+      "legacy_sha256": "809852c51eb4f9d40f94c8518f41dd823ebcdd9fae2045ba325d203e39809440"
+    },
+    {
+      "key": "literal_004",
+      "file": "Matrix/辅助指令/后台历史准备.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/后台历史准备.txt",
+      "legacy_sha256": "d83becb2251326a30a6fb90ae0595677e453ce00143a68d3f5a8490f3a00fa07"
+    },
+    {
+      "key": "literal_010",
+      "file": "Matrix/辅助指令/命令环境.txt",
+      "source": "shell.go",
+      "path": "Agent/official/Eyra/prompts/instructions/命令环境.txt",
+      "legacy_sha256": "33f11ba1e76b867cda366ea6c9f9e673371e4363bdfe6e4d1b5f6cb9bb9a73ae"
+    },
+    {
+      "key": "literal_033",
+      "file": "Matrix/辅助指令/团队消息边界.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/instructions/团队消息边界.txt",
+      "legacy_sha256": "ba3e1b69715b141a1b1731c5a0c349946564eab9864c1525b20c29ecd575a90e"
+    },
+    {
+      "key": "literal_001",
+      "file": "Matrix/辅助指令/子代执行.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/子代执行.txt",
+      "legacy_sha256": "6a2a27ccf4affcdc64c06ed2a8dc35d461f5520b9ab7442886c4a762b1ac2a66"
+    },
+    {
+      "key": "run_2",
+      "file": "Matrix/辅助指令/宿主持久记录.txt",
+      "source": "matrix_agent_runtime.go:run",
+      "path": "Agent/official/Eyra/prompts/instructions/宿主持久记录.txt",
+      "legacy_sha256": "1443f9fd19dd4b4a3cdb96c52ea635538db491fa80023a8908a1d6d181815d57"
+    },
+    {
+      "key": "literal_002",
+      "file": "Matrix/辅助指令/工位参考.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/工位参考.txt",
+      "legacy_sha256": "53c28524be1782ab69d71f69168913b2134d33fcd215d69191a9892595659dda"
+    },
+    {
+      "key": "literal_040",
+      "file": "Matrix/辅助指令/持久任务状态.txt",
+      "source": "workspace_workflow.go",
+      "path": "Agent/official/Eyra/prompts/instructions/持久任务状态.txt",
+      "legacy_sha256": "1105dedf8e1a25e4b8ba4befbb2a22b761b342ea2426a747510c055874e9a0d3"
+    },
+    {
+      "key": "literal_005",
+      "file": "Matrix/辅助指令/旧计划边界.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/旧计划边界.txt",
+      "legacy_sha256": "d3910342bb2717abd8afe066935664582d43efa84a385ba8188c83d597415d4c"
+    },
+    {
+      "key": "literal_020",
+      "file": "Matrix/辅助指令/生成图片读回.txt",
+      "source": "toolbox.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生成图片读回.txt",
+      "legacy_sha256": "70ad06c6f99d7ce0ce4a389c85b42a077e37b81c9e56e8db88a474d548cc0c42"
+    },
+    {
+      "key": "literal_009",
+      "file": "Matrix/辅助指令/用户图片缺失.txt",
+      "source": "responses.go",
+      "path": "Agent/official/Eyra/prompts/instructions/用户图片缺失.txt",
+      "legacy_sha256": "a278b212d6c99693f131813454193ce004102929d52637bac7fa72cdc10a77a7"
+    },
+    {
+      "key": "drain_1",
+      "file": "Matrix/辅助指令/用户补充消息.txt",
+      "source": "workspace.go:drain",
+      "path": "Agent/official/Eyra/prompts/instructions/用户补充消息.txt",
+      "legacy_sha256": "c79e58a32fa6e160fef62a197c2231b8b703ce22bb9e9ee8de17d915492b63bf"
+    },
+    {
+      "key": "run_1",
+      "file": "Matrix/辅助指令/社区导航.txt",
+      "source": "matrix_agent_runtime.go:run",
+      "path": "Agent/official/Eyra/prompts/instructions/社区导航.txt",
+      "legacy_sha256": "2a6f6bc8a6ad62260a6286cfd9710332302f51399c14a8c96db99e02100dd51b"
+    },
+    {
+      "key": "literal_032",
+      "file": "Matrix/辅助指令/私密输入结果.txt",
+      "source": "workspace_terminals.go",
+      "path": "Agent/official/Eyra/prompts/instructions/私密输入结果.txt",
+      "legacy_sha256": "f850fef8155ce1baa925dea9ec5d39f5ccfea519d08d1dd95118be5ea7f461cf"
+    },
+    {
+      "key": "run_6",
+      "file": "Matrix/辅助指令/累计任务预算.txt",
+      "source": "matrix_agent_runtime.go:run",
+      "path": "Agent/official/Eyra/prompts/instructions/累计任务预算.txt",
+      "legacy_sha256": "de743869b873aef4fd720a42d7b788408c5e02d215b32b2c931e38a71bb324d3"
+    },
+    {
+      "key": "webSearchSystem",
+      "file": "Matrix/辅助指令/网络搜索.txt",
+      "source": "runtime resources",
+      "path": "Tool/base/official/web_search/prompts/search.txt",
+      "legacy_sha256": "9653378a4e16c965474796d76681995038ce2dff261a8bac7dd90080bc6ee8d5"
+    },
+    {
+      "key": "literal_003",
+      "file": "Matrix/辅助指令/重启后的历史.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/重启后的历史.txt",
+      "legacy_sha256": "d0456e99fb043123067816c0379fbb84aece15d56c53e9fee4bf5d7c0cecaab1"
+    },
+    {
+      "key": "literal_034",
+      "file": "Matrix/运行协定/主控身份.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/contracts/主控身份.txt",
+      "legacy_sha256": "fe234c9d459e32b2bfebeae31e0cc7224a887bec2d8a70019a2d17cb4a99e385"
+    },
+    {
+      "key": "literal_039",
+      "file": "Matrix/运行协定/产物验收.txt",
+      "source": "workspace_workflow.go",
+      "path": "Agent/official/Eyra/prompts/contracts/产物验收.txt",
+      "legacy_sha256": "49257ff75643d58f89c3de4fe5821177a0c6e677f4fbd6f236296dfe6fcc6776"
+    },
+    {
+      "key": "run_3",
+      "file": "Matrix/运行协定/任务验收.txt",
+      "source": "matrix_agent_runtime.go:run",
+      "path": "Agent/official/Eyra/prompts/contracts/任务验收.txt",
+      "legacy_sha256": "a46413ab0a87917fa754bb446b058660f59555f194aed9070f352e6bcda88907"
+    },
+    {
+      "key": "literal_026",
+      "file": "Matrix/运行协定/共享身份.txt",
+      "source": "workspace_host.go",
+      "path": "Agent/official/Eyra/prompts/contracts/共享身份.txt",
+      "legacy_sha256": "8c9952a83f69e7b696b419032f2e25590a18a13cb39eede00d9453bcbf68b7af"
+    },
+    {
+      "key": "roleContract_2",
+      "file": "Matrix/运行协定/协同派发状态.txt",
+      "source": "workspace_host.go:roleContract",
+      "path": "Agent/official/Eyra/prompts/contracts/协同派发状态.txt",
+      "legacy_sha256": "cdfa8a4437b7a7976881e910f1454228830c18a9f111b5526325b43bae26dcc2"
+    },
+    {
+      "key": "baseMatrixContract",
+      "file": "Matrix/运行协定/单人桌面.txt",
+      "source": "baseMatrixContract",
+      "path": "Agent/official/Eyra/prompts/contracts/单人桌面.txt",
+      "legacy_sha256": "9a714ef57dc6e85b40972bb79e8ddf6adf16659e45424f5374872921b9984a35"
+    },
+    {
+      "key": "roleContract_1",
+      "file": "Matrix/运行协定/单人派发状态.txt",
+      "source": "workspace_host.go:roleContract",
+      "path": "Agent/official/Eyra/prompts/contracts/单人派发状态.txt",
+      "legacy_sha256": "bce00465c73a9baaa4eaca57c6465d555d8f5bffcfa802c57efca24370c9a5aa"
+    },
+    {
+      "key": "baseTerminalContract",
+      "file": "Matrix/运行协定/命令行.txt",
+      "source": "baseTerminalContract",
+      "path": "Agent/official/Eyra/prompts/contracts/命令行.txt",
+      "legacy_sha256": "7bd6808b8a302d33d672989bf9e21a682fb7493eda063d4357a1d87d0ab6095c"
+    },
+    {
+      "key": "teamMatrixContract",
+      "file": "Matrix/运行协定/团队主控.txt",
+      "source": "teamMatrixContract",
+      "path": "Agent/official/Eyra/prompts/contracts/团队主控.txt",
+      "legacy_sha256": "1ee78129c7836fe8f84416c2596b7af0be9d8f6dd89e0a24a7e9c5c4ac5e36d5"
+    },
+    {
+      "key": "teamMatrixTeam",
+      "file": "Matrix/运行协定/团队沟通.txt",
+      "source": "teamMatrixTeam",
+      "path": "Agent/official/Eyra/prompts/contracts/团队沟通.txt",
+      "legacy_sha256": "6d33bb84736fe95fffdf789fafb0df5e8c7cff09777993f89e24fd2ad78aae75"
+    },
+    {
+      "key": "baseToolsSentence",
+      "file": "Matrix/运行协定/基础工具.txt",
+      "source": "Core/agent_tool.go; Core/tool_permissions.go; Core/team_roles.go",
+      "path": "Agent/official/Eyra/prompts/contracts/基础工具.txt",
+      "legacy_sha256": "628d2897e633216f53524cbce5a8b2e75eb5e82091d673300d83ea85f7fd7d8f"
+    },
+    {
+      "key": "baseContractTail",
+      "file": "Matrix/运行协定/执行约定.txt",
+      "source": "baseContractTail",
+      "path": "Agent/official/Eyra/prompts/contracts/执行约定.txt",
+      "legacy_sha256": "8d20e9a68cbb5a1a23f10b77026b6a8e8f1cabb7801c9313f4c046e711abf252"
+    },
+    {
+      "key": "literal_027",
+      "file": "Matrix/运行协定/终端回复.txt",
+      "source": "workspace_host.go",
+      "path": "Agent/official/Eyra/prompts/contracts/终端回复.txt",
+      "legacy_sha256": "1552d862cadb1605e0fb47de1b389038054d0873c0529c709038f15e60082c14"
+    },
+    {
+      "key": "teamNarration",
+      "file": "Matrix/运行协定/过程展示.txt",
+      "source": "teamNarration",
+      "path": "Agent/official/Eyra/prompts/contracts/过程展示.txt",
+      "legacy_sha256": "f3af75636fae99049835022f8a28303fa96ce74c2a6842b3599c33df8b1fcc3f"
+    },
+    {
+      "key": "connectionJSON",
+      "file": "Matrix/连接检测/JSON响应.txt",
+      "source": "runtime resources",
+      "path": "Agent/official/Eyra/prompts/connection/JSON响应.txt",
+      "legacy_sha256": "9c1b8f73aace428532a245ad3ac213ebd4e1ed0943d6e1652de461b11f5b3935"
+    },
+    {
+      "key": "connectionGreeting",
+      "file": "Matrix/连接检测/简短问候.txt",
+      "source": "runtime resources",
+      "path": "Agent/official/Eyra/prompts/connection/简短问候.txt",
+      "legacy_sha256": "4ac771bab6500c2f3efe55e56b512729a729846f11bb701ba99395c711ca05bf"
+    },
+    {
+      "key": "greet_6",
+      "file": "Matrix/问候/启动招呼.txt",
+      "source": "workspace_companion.go:greet",
+      "path": "Agent/official/Eyra/prompts/greetings/启动招呼.txt",
+      "legacy_sha256": "a7f836ce5d363b885be62f6c94c9de375098ec2e26fd6326bf21794ca764949b"
+    },
+    {
+      "key": "greet_3",
+      "file": "Matrix/问候/启动检查点.txt",
+      "source": "workspace_companion.go:greet",
+      "path": "Agent/official/Eyra/prompts/greetings/启动检查点.txt",
+      "legacy_sha256": "67be695148ac302fb381c38fa9a7a173402041d3cbfa9a4b585d354e1dda9902"
+    },
+    {
+      "key": "greet_5",
+      "file": "Matrix/问候/启动计划.txt",
+      "source": "workspace_companion.go:greet",
+      "path": "Agent/official/Eyra/prompts/greetings/启动计划.txt",
+      "legacy_sha256": "f20350b23fa6eb6cd60e892d24918c492bba414855055922f63097bf3825bc48"
+    },
+    {
+      "key": "greet_4",
+      "file": "Matrix/问候/启动记忆.txt",
+      "source": "workspace_companion.go:greet",
+      "path": "Agent/official/Eyra/prompts/greetings/启动记忆.txt",
+      "legacy_sha256": "3e31af195fd232b0878b5d078a795f7cb190a858154e29cd73ed8cda262c2c54"
+    },
+    {
+      "key": "greet_1",
+      "file": "Matrix/问候/梦境问候.txt",
+      "source": "workspace_companion.go:greet",
+      "path": "Agent/official/Eyra/prompts/greetings/梦境问候.txt",
+      "legacy_sha256": "8383cb771e1f613bf11055b487220056e72c2eead925eb11333021e21a096ade"
+    },
+    {
+      "key": "greet_2",
+      "file": "Matrix/问候/独立梦境展示.txt",
+      "source": "workspace_companion.go:greet",
+      "path": "Agent/official/Eyra/prompts/greetings/独立梦境展示.txt",
+      "legacy_sha256": "27eb627dbe3521192ab7438a3ed17f4ae753d36678f77f259d5886cd235a7354"
+    },
+    {
+      "key": "teamExecutionContract",
+      "file": "Cota/提示词.txt#协定",
+      "source": "teamExecutionContract",
+      "path": "Agent/official/Cota/prompts/提示词.txt",
+      "legacy_sha256": "9ab7e3c67ef6ed2d529bab68dbd250f587b5540f7a221387e5f0ac6644db8ad6",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "teamExecutionPrompt",
+      "file": "Cota/提示词.txt#角色",
+      "source": "teamExecutionPrompt",
+      "path": "Agent/official/Cota/prompts/提示词.txt",
+      "legacy_sha256": "9ab7e3c67ef6ed2d529bab68dbd250f587b5540f7a221387e5f0ac6644db8ad6",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "childPromptTemplate",
+      "file": "子代/模板/提示词.txt",
+      "source": "runtime resources",
+      "path": "Agent/official/Eyra/prompts/delegation/提示词.txt",
+      "legacy_sha256": "83673c73d744c61f81a7ee3ef79da5d9558558f3a9f8e8173f4e2e2f2c81a319"
+    },
+    {
+      "key": "teamResultNotice",
+      "file": "Matrix/辅助指令/成员完成通知.txt",
+      "source": "team_talk.go",
+      "path": "Agent/official/Eyra/prompts/instructions/成员完成通知.txt",
+      "legacy_sha256": "559442208aaa84cd2edf003bd49217f87b7888c9fd94e3ef3fde79e01c645405"
+    },
+    {
+      "key": "silentRoundsReminder",
+      "file": "Matrix/辅助指令/继续说明进展.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/继续说明进展.txt",
+      "legacy_sha256": "efdf473079d954c75009e499743c1d9a79668dfa9eaba43f450b5fa1defb03af"
+    },
+    {
+      "key": "eyraSessionTemplate",
+      "file": "子代/模板/Eyra会话.txt",
+      "source": "conversation_contacts.go",
+      "path": "Agent/official/Eyra/prompts/delegation/Eyra会话.txt",
+      "legacy_sha256": "9918f834c1fec47006e076ca41628932c9d1b1381a5a1bc7fc0fc99fba7d885f"
+    },
+    {
+      "key": "conversationPromptTemplate",
+      "file": "子代/模板/对话.txt",
+      "source": "conversation_agents.go",
+      "path": "Agent/official/Eyra/prompts/delegation/对话.txt",
+      "legacy_sha256": "adf4a3e98c661666a835e1a32f81b693fa088f9630987c5c6697022210ee130b"
+    },
+    {
+      "key": "conversationImagePrompt",
+      "file": "子代/模板/看图.txt",
+      "source": "conversation_agents.go",
+      "path": "Agent/official/Eyra/prompts/delegation/看图.txt",
+      "legacy_sha256": "d0764e4d779e89e1105e875037870325a003cdeefab9024eaaa41f4a4cc5f21a"
+    },
+    {
+      "key": "conversationWorkPrompt",
+      "file": "子代/模板/工作.txt",
+      "source": "conversation_contacts.go",
+      "path": "Agent/official/Eyra/prompts/delegation/工作.txt",
+      "legacy_sha256": "560169a4b974c129e4984d8a005ca95c79f1af13b9de6bb31f171d0b9983ec30"
+    },
+    {
+      "key": "groupTurnPrompt",
+      "file": "子代/模板/群聊.txt",
+      "source": "conversation_groups.go",
+      "path": "Agent/official/Eyra/prompts/delegation/群聊.txt",
+      "legacy_sha256": "06f0c9ae39eca8ca57a7cbe220156d2ba0562f53708d0f397ae10eb7c6f9a814"
+    },
+    {
+      "key": "groupHostPrompt",
+      "file": "子代/模板/群主持.txt",
+      "source": "conversation_groups.go",
+      "path": "Agent/official/Eyra/prompts/delegation/群主持.txt",
+      "legacy_sha256": "620fb8ba36107ae458254f74677dbe5c94c9ee8153075014dd21749ef3a856f0"
+    },
+    {
+      "key": "groupToolManual",
+      "file": "子代/模板/群工具.txt",
+      "source": "conversation_groups.go",
+      "path": "Agent/official/Eyra/prompts/delegation/群工具.txt",
+      "legacy_sha256": "4fe8e7baf4c9f005bc38c5d96613440dfa30d8291e41273d053d0d3322d40034"
+    },
+    {
+      "key": "subconsciousPrompt",
+      "file": "潜意识/提示词.txt",
+      "source": "subconsciousPrompt",
+      "path": "Agent/official/Eyra/context/prompts/legacy/提示词.txt",
+      "legacy_sha256": "debd4e18f68b5e7c1aa1f60fc37ea68c68e0651e7713694f34d2ad011dca26f2"
+    },
+    {
+      "key": "organizeMessages_2",
+      "file": "潜意识/辅助指令/保留背景前缀.txt",
+      "source": "workspace_subconscious.go:organizeMessages",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/保留背景前缀.txt",
+      "legacy_sha256": "b13b6d80e2229046083fd4dbcd3dbf532f1938139f150acb5648706103e514eb"
+    },
+    {
+      "key": "subCompactInstruction",
+      "file": "潜意识/辅助指令/压缩.txt",
+      "source": "subCompactInstruction",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/压缩.txt",
+      "legacy_sha256": "03f48f515c49d284194ce64d1d7ea7822d778a70dd0754a3eaeab09eb40c1ab7"
+    },
+    {
+      "key": "subAskInstruction",
+      "file": "潜意识/辅助指令/回忆.txt",
+      "source": "subAskInstruction",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/回忆.txt",
+      "legacy_sha256": "4ecf704d5eb428799c4e9be26108765585afedc713df93802a8be78234617d07"
+    },
+    {
+      "key": "subOrganizeInstruction",
+      "file": "潜意识/辅助指令/整理.txt",
+      "source": "subOrganizeInstruction",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/整理.txt",
+      "legacy_sha256": "9a33c43c7802af7ed62a2e385e332cda30e5d9f5809cd09997a3e652c251312a"
+    },
+    {
+      "key": "eyraMaintenancePrompt",
+      "file": "潜意识/辅助指令/整理约定.txt",
+      "source": "eyraMaintenancePrompt",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/整理约定.txt",
+      "legacy_sha256": "754b7ae9525139dba891489f2a9ce99019805b0f56f2a34a25f2c2b476120c40"
+    },
+    {
+      "key": "organizeMessages_1",
+      "file": "潜意识/辅助指令/日记素材前缀.txt",
+      "source": "workspace_subconscious.go:organizeMessages",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/日记素材前缀.txt",
+      "legacy_sha256": "ba49ba51dbe748ccd4629c8839d20938b5d8c003701e8de286046ebc2416fba2"
+    },
+    {
+      "key": "compactInstruction",
+      "file": "潜意识/辅助指令/标准摘要.txt",
+      "source": "compactInstruction",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/标准摘要.txt",
+      "legacy_sha256": "7b01140ec83ce1b40df155c82991165e80aafa0e87da4b340672f9d34d150c94"
+    },
+    {
+      "key": "subDreamInstruction",
+      "file": "潜意识/辅助指令/梦境.txt",
+      "source": "subDreamInstruction",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/梦境.txt",
+      "legacy_sha256": "acc44353aded1eb34b5f0c264ab037f54f67ad9aedd0e1751f8063b3fb289df9"
+    },
+    {
+      "key": "rememberOSContinuity_1",
+      "file": "潜意识/辅助指令/连续记忆.txt",
+      "source": "workspace_continuity.go:rememberOSContinuity",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/连续记忆.txt",
+      "legacy_sha256": "6327a6237a059c06d75a31b4b1e039d4dbcfcfe60fc2b1cc301ee7b72e2cfe4f"
+    },
+    {
+      "key": "rememberOSContinuity_2",
+      "file": "潜意识/辅助指令/连续记忆输入.txt",
+      "source": "workspace_continuity.go:rememberOSContinuity",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/连续记忆输入.txt",
+      "legacy_sha256": "8d397bbff44ba00f83d645d28a2f10e366c63cdfebf7638fc375cc561c9035e5"
+    },
+    {
+      "key": "teamRoleSwitchedOff",
+      "file": "Matrix/运行协定/团队角色关闭.txt",
+      "source": "team_roles.go:teamContract",
+      "path": "Agent/official/Eyra/prompts/contracts/团队角色关闭.txt",
+      "legacy_sha256": "7bb3b82cc4f065edc9e83c898b6448a3e5b06fa5048f99874f949bce3391d8e5"
+    },
+    {
+      "key": "teamVisionContract",
+      "file": "Vaya/提示词.txt#协定",
+      "source": "teamVisionContract",
+      "path": "Agent/official/Vaya/prompts/提示词.txt",
+      "legacy_sha256": "724b4c09ae8e430978971080faf1a92d444c33888e455041e8cf5d385deb87fc",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "teamVisionPrompt",
+      "file": "Vaya/提示词.txt#角色",
+      "source": "teamVisionPrompt",
+      "path": "Agent/official/Vaya/prompts/提示词.txt",
+      "legacy_sha256": "724b4c09ae8e430978971080faf1a92d444c33888e455041e8cf5d385deb87fc",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "companion_桌面说明",
+      "file": "Matrix/运行协定/桌面说明.txt",
+      "source": "workspace_companion.go:companionContract",
+      "path": "Agent/official/Eyra/prompts/contracts/桌面说明.txt",
+      "legacy_sha256": "6936e22b54b0c1dd41cbfda00db737ef6688357512668b4b6ee70a7be164b82f"
+    },
+    {
+      "key": "companion_命令行说明",
+      "file": "Matrix/运行协定/命令行说明.txt",
+      "source": "workspace_companion.go:companionContract",
+      "path": "Agent/official/Eyra/prompts/contracts/命令行说明.txt",
+      "legacy_sha256": "9f0462020c842172ed6bf89231f0b31da02e1e4dffa2f676517ae849823157c5"
+    },
+    {
+      "key": "default_自我",
+      "file": "Matrix/默认/自我.txt",
+      "source": "Agent/official/Eyra/definition.json",
+      "path": "Agent/official/Eyra/prompts/default/自我.txt",
+      "legacy_sha256": "07c7a82eb9e0778b9d29e0027140df636f7fdebc2670dc3973b88242aba9b23b",
+      "read_only": true,
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "default_工作",
+      "file": "Matrix/默认/工作.txt",
+      "source": "Agent/official/Eyra/definition.json",
+      "path": "Agent/official/Eyra/prompts/default/工作.txt",
+      "legacy_sha256": "03fb9faa31fe6bac0906c0e58b3203551ff303c5c2034091a34fbb3c648bd729",
+      "read_only": true
+    },
+    {
+      "key": "default_边界",
+      "file": "Matrix/默认/边界.txt",
+      "source": "Agent/official/Eyra/definition.json",
+      "path": "Agent/official/Eyra/prompts/default/边界.txt",
+      "legacy_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "read_only": true
+    },
+    {
+      "key": "default_思考方式",
+      "file": "Matrix/默认/思考方式.txt",
+      "source": "Agent/official/Eyra/definition.json",
+      "path": "Agent/official/Eyra/prompts/default/思考方式.txt",
+      "legacy_sha256": "832ce15a49a772e4fb1874401778c5292f08a79222f356a7e79d81f65054ff3c",
+      "read_only": true
+    },
+    {
+      "key": "LinkWorkorderDelegation",
+      "file": "Matrix/运行协定/工单委派.txt",
+      "source": "Control/app/scripts/task_delegation.py",
+      "path": "Agent/official/Eyra/prompts/contracts/工单委派.txt",
+      "legacy_sha256": "cef1d8627a07c9756589c3d6c8b1b4b274f72d60c28091809f2b6f3fff6a0f8c"
+    },
+    {
+      "key": "pac_PAC目录",
+      "file": "Matrix/记忆/PAC目录.txt",
+      "source": "workspace_pac.go / context.go / matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/context/prompts/PAC目录.txt",
+      "legacy_sha256": "4032883d2a623b6025b7e7a6583022b02092c2b4e3f0ddad2cca370531b1ee37"
+    },
+    {
+      "key": "pac_当前偏好",
+      "file": "Matrix/记忆/当前偏好.txt",
+      "source": "workspace_pac.go / context.go / matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/context/prompts/当前偏好.txt",
+      "legacy_sha256": "d5e09065d388170877131cf5feda5cee05f324b65cc40ce0bb4c08c99fe16cf1"
+    },
+    {
+      "key": "pac_PAC检查点",
+      "file": "Matrix/记忆/PAC检查点.txt",
+      "source": "workspace_pac.go / context.go / matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/context/prompts/PAC检查点.txt",
+      "legacy_sha256": "8e5841f4bc1e693ebd358a12b62dbf96985f4639f6c9464d2bbf175194575243"
+    },
+    {
+      "key": "pac_PAC合并",
+      "file": "Matrix/记忆/PAC合并.txt",
+      "source": "workspace_pac.go / context.go / matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/context/prompts/PAC合并.txt",
+      "legacy_sha256": "6f2ab3cb7a7e92a8097dc2f1b4a323256662b6dc12a2d8b3eab0b532120f0e7f"
+    },
+    {
+      "key": "terminalTool",
+      "file": "Matrix/工具说明/终端.txt",
+      "source": "terminal_tool.go",
+      "path": "Tool/base/official/terminal/manual/terminal.txt",
+      "legacy_sha256": "aa813d4ebc21fae84704c8a49e31a93a565e525e46465bc0fd02d8e6049028fa"
+    },
+    {
+      "key": "pendingExecutionDelivery",
+      "file": "Matrix/辅助指令/未完成执行.txt",
+      "source": "agent_delivery_recovery.go",
+      "path": "Agent/official/Eyra/prompts/instructions/未完成执行.txt",
+      "legacy_sha256": "b614207c49a38ffc7da35d34742f673eb01d6d213237f1185c29bc7394b063c3"
+    },
+    {
+      "key": "askUserReceipt",
+      "file": "Matrix/辅助指令/提问回执.txt",
+      "source": "workspace_ask.go:askUserReceipt",
+      "path": "Agent/official/Eyra/prompts/instructions/提问回执.txt",
+      "legacy_sha256": "8bae894345f126c766a9787db9044bf1b373274d8f7c4596989d8bd75197a6fb"
+    },
+    {
+      "key": "contextCleaning",
+      "file": "Matrix/记忆/上下文清洗.txt",
+      "source": "workspace_context.go",
+      "path": "Agent/official/Eyra/context/prompts/上下文清洗.txt",
+      "legacy_sha256": "29f91f9e8228b2e34331fabb2e27ac31032c0e145f330d2a73e994e0d3d06604"
+    },
+    {
+      "key": "external56_workspace_host.go_0",
+      "file": "Matrix/运行协定/终端兼容身份.txt",
+      "source": "workspace_host.go",
+      "path": "Agent/official/Eyra/prompts/contracts/终端兼容身份.txt",
+      "legacy_sha256": "86f43b85621b01182317331d7c1beb4db2c75e63132b8864beec1887fbc4a7af"
+    },
+    {
+      "key": "external56_goal_completion.go_1",
+      "file": "Matrix/辅助指令/目标独立步骤.txt",
+      "source": "goal_completion.go",
+      "path": "Agent/official/Eyra/prompts/instructions/目标独立步骤.txt",
+      "legacy_sha256": "e5ffcd264c57117b95f9060c3784fa720bd17a973bed9cedad1a03b16b465037"
+    },
+    {
+      "key": "external56_goal_completion.go_2",
+      "file": "Matrix/辅助指令/目标验收状态.txt",
+      "source": "goal_completion.go",
+      "path": "Agent/official/Eyra/prompts/instructions/目标验收状态.txt",
+      "legacy_sha256": "c39a593421d74fa62dcb479cd10619d5883a7ccd314b322cb1a54eadb4611aae"
+    },
+    {
+      "key": "external56_team_roles.go_3",
+      "file": "Matrix/运行协定/团队结果交付.txt",
+      "source": "team_roles.go",
+      "path": "Agent/official/Eyra/prompts/contracts/团队结果交付.txt",
+      "legacy_sha256": "0d7f7c5e2ed7bfd27e2eac082901ad1565f87e85435943ef9196911364442e38"
+    },
+    {
+      "key": "external56_team_roles.go_4",
+      "file": "Matrix/工具说明/工具箱目录前缀.txt",
+      "source": "team_roles.go",
+      "path": "Agent/official/Eyra/prompts/tools/工具箱目录前缀.txt",
+      "legacy_sha256": "6d316eead51eefa708fdcc819d1f42ed2f67e4fc604604fb1328ae0b259c34ac"
+    },
+    {
+      "key": "external56_workspace_tools.go_5",
+      "file": "Matrix/运行协定/项目角色兼容.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/contracts/项目角色兼容.txt",
+      "legacy_sha256": "302be6fcfc4cb663188c3d958f19309182a63de3bbfb253d07b6fac6d2011ed5"
+    },
+    {
+      "key": "external56_workspace_tools.go_6",
+      "file": "Matrix/运行协定/执行角色兼容.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/contracts/执行角色兼容.txt",
+      "legacy_sha256": "eeaefef0255497c4df61666aa8f105b819b188f7a33ec67814a01184e72225b7"
+    },
+    {
+      "key": "external56_workspace_fastmemory.go_7",
+      "file": "Matrix/记忆/旧记忆前缀.txt",
+      "source": "workspace_fastmemory.go",
+      "path": "Agent/official/Eyra/context/prompts/旧记忆前缀.txt",
+      "legacy_sha256": "9294a7573484cdbe672f5326b0a813d82c73b82dfe46f852a7f833c7b489e8f1"
+    },
+    {
+      "key": "external56_workspace_memory.go_8",
+      "file": "Matrix/记忆/原文回查说明.txt",
+      "source": "workspace_memory.go",
+      "path": "Agent/official/Eyra/context/prompts/原文回查说明.txt",
+      "legacy_sha256": "19c4fd81308b188f3933c8735346de57f9bff0cdad13012586b2311c42418e62"
+    },
+    {
+      "key": "external56_workspace_attachments.go_9",
+      "file": "Matrix/辅助指令/用户附件清单.txt",
+      "source": "workspace_attachments.go",
+      "path": "Agent/official/Eyra/prompts/instructions/用户附件清单.txt",
+      "legacy_sha256": "219f18ce8fce41b54acb6ac047c42a81d3b6ec4713e77679ec09c4980e144631"
+    },
+    {
+      "key": "external56_matrix_agent_runtime.go_10",
+      "file": "子代/模板/附件未观察.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/delegation/附件未观察.txt",
+      "legacy_sha256": "4d6fa94a212afb8d5070a9d04096cc63539fd9e10bb7bf377a6ee16c9ef2d7b7"
+    },
+    {
+      "key": "external56_matrix_agent_runtime.go_11",
+      "file": "Matrix/辅助指令/空回复补充.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/空回复补充.txt",
+      "legacy_sha256": "ee2338401bd766d3a427e158f6a074365515f0098b31a17b14e6edc463e7e26b"
+    },
+    {
+      "key": "external56_image_tool.go_12",
+      "file": "Matrix/辅助指令/图片未读取.txt",
+      "source": "image_tool.go",
+      "path": "Agent/official/Eyra/prompts/instructions/图片未读取.txt",
+      "legacy_sha256": "c7a8b0a7af290254040f4be4935f0a97311be3fa23ec95ba08664581494629c4"
+    },
+    {
+      "key": "external56_workspace_startup.go_13",
+      "file": "Matrix/辅助指令/后台历史就绪.txt",
+      "source": "workspace_startup.go",
+      "path": "Agent/official/Eyra/prompts/instructions/后台历史就绪.txt",
+      "legacy_sha256": "e4fede526e8d0a31155ac930708c7f1b07a3acfdb39e3f92d831953ef7b8d78e"
+    },
+    {
+      "key": "external56_workspace_subconscious.go_14",
+      "file": "潜意识/辅助指令/日记分享通知.txt",
+      "source": "workspace_subconscious.go",
+      "path": "Agent/official/Eyra/context/prompts/legacy/辅助指令/日记分享通知.txt",
+      "legacy_sha256": "c69042b012d7dd43e8de3450a95de7b30cb617c431d117a5f11d816602fe6965"
+    },
+    {
+      "key": "external56_workspace_updates.go_15",
+      "file": "Matrix/辅助指令/更新通知.txt",
+      "source": "workspace_updates.go",
+      "path": "Agent/official/Eyra/prompts/instructions/更新通知.txt",
+      "legacy_sha256": "4b2f4d2c89def4f6c0123899b4102c510c58fa339dd31bfaad22636478bffe74"
+    },
+    {
+      "key": "external56_workspace_updates.go_16",
+      "file": "Matrix/辅助指令/Mac更新通知.txt",
+      "source": "workspace_updates.go",
+      "path": "Agent/official/Eyra/prompts/instructions/Mac更新通知.txt",
+      "legacy_sha256": "74e9d77b488eb695b7227a8dd580f90457111b5ba30a91e790beab1d8304bfaa"
+    },
+    {
+      "key": "external56_memory_lookup.go_17",
+      "file": "Matrix/记忆/检索结果说明.txt",
+      "source": "memory_lookup.go",
+      "path": "Agent/official/Eyra/context/prompts/检索结果说明.txt",
+      "legacy_sha256": "6463ccfaa6431a9f1cd9a3d4e9bfa01a70e7db72d3cf29a4ddba03fb27d398d5"
+    },
+    {
+      "key": "teamUnavailable56",
+      "file": "Matrix/运行协定/团队不可用.txt",
+      "source": "team_roles.go",
+      "path": "Agent/official/Eyra/prompts/contracts/团队不可用.txt",
+      "legacy_sha256": "a134a7fcadd4b168cace1cfc932b2d3030e5589a7031011c84a1b46287f14317"
+    },
+    {
+      "key": "external56_matrix_agent_runtime.go_0",
+      "file": "Matrix/辅助指令/记忆压缩暂不可用.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/记忆压缩暂不可用.txt",
+      "legacy_sha256": "f5a5dcd0505d9c69dda035dd42e8e2870cb274d95f557b780fb1a0a5975fad27"
+    },
+    {
+      "key": "external56_matrix_agent_runtime.go_1",
+      "file": "Matrix/辅助指令/上下文摘要暂不可用.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/上下文摘要暂不可用.txt",
+      "legacy_sha256": "fa51b1392202a1734063f428177c5ab514e387f7c046c9a2f1262c3d6fe0ed31"
+    },
+    {
+      "key": "external56_matrix_agent_runtime.go_2",
+      "file": "Matrix/辅助指令/摘要未减少上下文.txt",
+      "source": "matrix_agent_runtime.go",
+      "path": "Agent/official/Eyra/prompts/instructions/摘要未减少上下文.txt",
+      "legacy_sha256": "e692b96e957bf35c99e47e6f4e41e328ed05d5029201387306f69cf895aba462"
+    },
+    {
+      "key": "external56_workspace_pac.go_3",
+      "file": "Matrix/记忆/封存结果说明.txt",
+      "source": "workspace_pac.go",
+      "path": "Agent/official/Eyra/context/prompts/封存结果说明.txt",
+      "legacy_sha256": "2e3568076c2d71fb0e6fc2e762afa4e2b66b1035f1354ba3742fe20458810bc5"
+    },
+    {
+      "key": "external56_shell_tools.go_4",
+      "file": "Matrix/工具说明/命令操作描述.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/operation.txt",
+      "legacy_sha256": "443203ca9d2492803e26955ebcbc7f6b91904f385afb5d0e12f86427f396869a"
+    },
+    {
+      "key": "round56_b602cdc7a27a",
+      "file": "Matrix/辅助指令/历史图片不可用.txt",
+      "source": "api.go",
+      "path": "Agent/official/Eyra/prompts/instructions/历史图片不可用.txt",
+      "legacy_sha256": "3b56d230c9619639ddd49b3d1d4102bcc70b23bb674ff11ea1367eff9513e698"
+    },
+    {
+      "key": "round56_c91067b0bb4e",
+      "file": "Matrix/工具说明/命令用途描述.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/purpose.txt",
+      "legacy_sha256": "ff60a1dc80306309c4d766f115dabec48dde564ff1b858d2b252addf65c63421"
+    },
+    {
+      "key": "round56_8d0fd4cb6112",
+      "file": "Matrix/辅助指令/生图未知结果.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图未知结果.txt",
+      "legacy_sha256": "9623afd8331a90746693cc78f35e7ca8460e9ec28e624832cadf57cd9a5cca4e"
+    },
+    {
+      "key": "round56_7ab4cab8963f",
+      "file": "Matrix/辅助指令/生图保存失败.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图保存失败.txt",
+      "legacy_sha256": "73fbe3ea182b419a15f34f99016107259a59bccc3f1f41436f4b7890dc43e58f"
+    },
+    {
+      "key": "round56_cd74935133b5",
+      "file": "Matrix/辅助指令/生图停止结果.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图停止结果.txt",
+      "legacy_sha256": "9290388a031bf739ab071c0bcc8cef518d2e5e5f59af344497ff27b0b8eedc39"
+    },
+    {
+      "key": "round56_8b0c1f91f48d",
+      "file": "Matrix/辅助指令/生图用量失败.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图用量失败.txt",
+      "legacy_sha256": "a0824ea843bc5ab85d6f1dc63773ca93adb54a728a44e66dd60cf1d1cbd10245"
+    },
+    {
+      "key": "round56_2b6560b486e1",
+      "file": "Matrix/辅助指令/生图部分完成.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图部分完成.txt",
+      "legacy_sha256": "c9e720764cfd827bd601400aba4802d4454892781d07d4536ae91be0a7789e62"
+    },
+    {
+      "key": "round56_665e3e2d178d",
+      "file": "Matrix/辅助指令/生图请求失败.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图请求失败.txt",
+      "legacy_sha256": "de54e8951485e922e6e0b994ff6a076e16d09d5f742bf72975ac7f9a1a924616"
+    },
+    {
+      "key": "round56_b22116a8acb7",
+      "file": "Matrix/辅助指令/生图未提交.txt",
+      "source": "image_generation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图未提交.txt",
+      "legacy_sha256": "e0685bd314cec093d200fc9bf26be4a7e48a53f58eb5471effa71ede0e65d3ec"
+    },
+    {
+      "key": "round56_d4d7c6f06c3d",
+      "file": "Matrix/辅助指令/生图批次继续.txt",
+      "source": "image_batches.go",
+      "path": "Agent/official/Eyra/prompts/instructions/生图批次继续.txt",
+      "legacy_sha256": "94f80cb8b51b0babf1ff272f7e7b854604844192578322ca85dd1def36999aa6"
+    },
+    {
+      "key": "round56_148e08e5e86b",
+      "file": "Matrix/记忆/历史来源说明.txt",
+      "source": "memory_pac_history.go",
+      "path": "Agent/official/Eyra/context/prompts/历史来源说明.txt",
+      "legacy_sha256": "4ccd3acb07a893fb164a9abb4cc2d0e08e2d846ad6b1356357145c1fa6cb7fa4"
+    },
+    {
+      "key": "round56_d42befc98a1b",
+      "file": "Matrix/辅助指令/文件变更通知.txt",
+      "source": "workspace_changes.go",
+      "path": "Agent/official/Eyra/prompts/instructions/文件变更通知.txt",
+      "legacy_sha256": "48ca6fbb511cc5f705d01c5509dcf16f6b766c9083170d5237df2f03256b2866"
+    },
+    {
+      "key": "round56_b61b0dd7dd74",
+      "file": "Matrix/工具说明/桌面操作补充.txt",
+      "source": "workspace_desktop.go",
+      "path": "Agent/official/Eyra/prompts/tools/桌面操作补充.txt",
+      "legacy_sha256": "bf062e69fc01f9691f4b3bfea6d4bf69e8d37c8136bda91b3523cbad69638fe4"
+    },
+    {
+      "key": "round56_63c01d72cfb5",
+      "file": "Matrix/工具说明/协作操作补充.txt",
+      "source": "workspace_collaboration.go",
+      "path": "Agent/official/Eyra/prompts/tools/协作操作补充.txt",
+      "legacy_sha256": "5b0ffb575df3b7477df40fef2cd73474eb0d430a1f7a9ff21a950e275fe09606"
+    },
+    {
+      "key": "round56_adec28dd48b5",
+      "file": "Matrix/工具说明/命令输出预算.txt",
+      "source": "shell_tools.go",
+      "path": "Tool/base/official/terminal/manual/budget.txt",
+      "legacy_sha256": "f14015b5f275bf5afd0e690925a3c602675a3b3f60efe88c738459e2a3343578"
+    },
+    {
+      "key": "round56_a0f371402b27",
+      "file": "Matrix/工具说明/工程索引结果.txt",
+      "source": "workspace_index.go",
+      "path": "Agent/official/Eyra/prompts/tools/工程索引结果.txt",
+      "legacy_sha256": "fa5ceb6ac7f2e7a13519d11f317ba15330380e1a6a912c4d8492cba1353ff795"
+    },
+    {
+      "key": "round56_6bbc09271b07",
+      "file": "Matrix/辅助指令/等待主控说明.txt",
+      "source": "workspace_tools.go",
+      "path": "Agent/official/Eyra/prompts/instructions/等待主控说明.txt",
+      "legacy_sha256": "3e82655e171fcaf0256380599d23a9e572f7471cfbae19d6719299a6835a9930"
+    },
+    {
+      "key": "lateExternal56_0",
+      "file": "Matrix/辅助指令/连续记忆来源.txt",
+      "source": "memory_continuity.go",
+      "path": "Agent/official/Eyra/prompts/instructions/连续记忆来源.txt",
+      "legacy_sha256": "d1e8160a67d9dd1b0aedc85c1ead7b7edb203a9ad4553c07e965fc4ec5254472"
+    },
+    {
+      "key": "lateExternal56_1",
+      "file": "Matrix/辅助指令/历史整理失败.txt",
+      "source": "workspace_startup.go",
+      "path": "Agent/official/Eyra/prompts/instructions/历史整理失败.txt",
+      "legacy_sha256": "3585a383058cd75c15d3c409151119ff96cb20a9c8ec9e18af97acf342c35e1a"
+    },
+    {
+      "key": "lateExternal56_2",
+      "file": "Matrix/辅助指令/输入回执保存失败.txt",
+      "source": "workspace_terminals.go",
+      "path": "Agent/official/Eyra/prompts/instructions/输入回执保存失败.txt",
+      "legacy_sha256": "387fd618f1418983ada60f962f80c403dc4a1e270149279c2613e8f6ccb39270"
+    },
+    {
+      "key": "lateExternal56_3",
+      "file": "Matrix/辅助指令/工作记录不可用.txt",
+      "source": "workspace_workflow.go",
+      "path": "Agent/official/Eyra/prompts/instructions/工作记录不可用.txt",
+      "legacy_sha256": "c757152ec48a697aaa5f846214a1c2adcdc180037d9d11a6bd7908e429fcbc69"
+    },
+    {
+      "key": "lateExternal56_4",
+      "file": "Matrix/辅助指令/工作记录验证说明.txt",
+      "source": "workspace_workflow.go",
+      "path": "Agent/official/Eyra/prompts/instructions/工作记录验证说明.txt",
+      "legacy_sha256": "3fc02f728154e765aab469dcf913ada3fb821a3a319680028e5ac438806e32d8"
+    },
+    {
+      "key": "lateExternal56_5",
+      "file": "Matrix/辅助指令/工作记录中断调用.txt",
+      "source": "workspace_workflow.go",
+      "path": "Agent/official/Eyra/prompts/instructions/工作记录中断调用.txt",
+      "legacy_sha256": "19bbfad39192e49a1345b4e6b18b0df6d98ad96c2368c0159d50e65b21da7589"
+    },
+    {
+      "key": "outputContinuation",
+      "file": "Matrix/辅助指令/输出截断续作.txt",
+      "source": "output_continuation.go",
+      "path": "Agent/official/Eyra/prompts/instructions/输出截断续作.txt",
+      "legacy_sha256": "bbba15e77ad54fd81a41e204d58f78afb0c678ec81d68c64bc8063a22dad0c7e"
+    },
+    {
+      "key": "teamExecutionPrompt",
+      "file": "Cota/提示词.txt",
+      "source": "teamExecutionPrompt",
+      "path": "Agent/official/Cota/prompts/提示词.txt",
+      "legacy_sha256": "9ab7e3c67ef6ed2d529bab68dbd250f587b5540f7a221387e5f0ac6644db8ad6",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "teamVisionPrompt",
+      "file": "Vaya/提示词.txt",
+      "source": "teamVisionPrompt",
+      "path": "Agent/official/Vaya/prompts/提示词.txt",
+      "legacy_sha256": "724b4c09ae8e430978971080faf1a92d444c33888e455041e8cf5d385deb87fc",
+      "description": "公开可编辑的交付与沟通文案：自然Brief，报告承载详情，聊天简短说明结果。"
+    },
+    {
+      "key": "coreLinkManual",
+      "file": "子代/模板/核心协作.txt",
+      "source": "conversation_link.go",
+      "path": "Agent/official/Eyra/prompts/delegation/核心协作.txt",
+      "legacy_sha256": "089f504d17633c9b0da5f8a8d5dcbdd022c112386f5434de5c805f0eebd97b08"
+    },
+    {
+      "key": "motherIdentityContract",
+      "file": "Matrix/辅助指令/母体专业身份.txt",
+      "source": "workspace_identity.go",
+      "path": "Agent/official/Eyra/prompts/instructions/母体专业身份.txt",
+      "legacy_sha256": "ff5d7557567a751138f93db55ed17ce95bf55468e7ef56081f20cfc4a2d13cae"
+    },
+    {
+      "key": "motherRepairEvent",
+      "file": "Matrix/辅助指令/母体修理.txt",
+      "source": "workspace_repairs.go",
+      "path": "Agent/official/Eyra/prompts/instructions/母体修理.txt",
+      "legacy_sha256": "30356b5441b2991fc6ba2d50c53e2c6195e7b62f4f51e8861644567c5025104c"
+    },
+    {
+      "key": "VideoGenManual",
+      "file": "Matrix/工具说明/视频生成.txt",
+      "source": "VideoGenManual",
+      "path": "Tool/toolbox/official/videogen/manual.txt",
+      "legacy_sha256": "cabfc573fa251eca77770459eaad6de0d95cdcf74a5ad441daae28e2d27134c1"
+    },
+    {
+      "key": "programAgent_browser",
+      "file": "Program/browser.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/browser.txt",
+      "legacy_sha256": "0e2ed2428e02b3ac5c4a3e0f8986714011a23569f6112c246fd39ddd21e94712"
+    },
+    {
+      "key": "programAgent_settings",
+      "file": "Program/settings.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/settings.txt",
+      "legacy_sha256": "863ab039e17a73a183b9b8bc7472a04b3841d8f9976171766cd90f8624e88336"
+    },
+    {
+      "key": "programAgent_contacts",
+      "file": "Program/contacts.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/contacts.txt",
+      "legacy_sha256": "7fe6c5d6845a41e01e1372e029bf6c1575c14dc75537ce22e86ffb367f86016f"
+    },
+    {
+      "key": "programAgent_link",
+      "file": "Program/link.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/link.txt",
+      "legacy_sha256": "24c81a4ade3ba2065fce2ca1f9dce75e172c6e98d45acda5a70954811ea19009"
+    },
+    {
+      "key": "programAgent_servers",
+      "file": "Program/servers.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/servers.txt",
+      "legacy_sha256": "98d0d137208f5d15fd6532f5445892f0541d5231c6b32b61df5e3b6c602e70fd"
+    },
+    {
+      "key": "programAgent_market",
+      "file": "Program/market.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/market.txt",
+      "legacy_sha256": "2426cfe4277578243c657d65d6836b3da374a403847edd2224f40652cbcb0811"
+    },
+    {
+      "key": "programAgent_workspace",
+      "file": "Program/workspace.txt",
+      "source": "program_agents.go",
+      "path": "Agent/program/prompts/workspace.txt",
+      "legacy_sha256": "3485088a5e5ace4de35c9069f51ef4d6c32e66eb66129441c015d583c19ecccf"
+    },
+    {
+      "key": "programAgentGeneric",
+      "file": "Program/generic.txt",
+      "path": "Agent/program/prompts/generic.txt",
+      "source": "program_agents.go",
+      "legacy_sha256": "20a45e29ef93b7585cd20cae4e6c05f8b5162469e9d73bbb79f90817275ecdbc"
+    },
+    {
+      "key": "programAgent_computer",
+      "file": "Program/computer.txt",
+      "source": "Core/program_agents.go; Agent/program/catalog.json",
+      "path": "Agent/program/prompts/computer.txt",
+      "legacy_sha256": "67359d7111d6de74c06306e0a5e273b4e8bd6a5f1cd14b91738b6ab58fe94f0d"
+    },
+    {
+      "key": "programAgent_center",
+      "file": "Program/center.txt",
+      "source": "Core/program_agents.go; Agent/program/catalog.json",
+      "path": "Agent/program/prompts/center.txt",
+      "legacy_sha256": "de6bd6738e4a85a903cc74f83aec82e9aab5958855338c215c15ef8ecfcda951"
+    }
+  ],
+  "version": 1
+}

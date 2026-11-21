@@ -1,0 +1,7 @@
+{
+  "schema": "aieyra.native-tool/1",
+  "name": "web_search",
+  "aliases": [
+    "web_search"
+  ]
+}

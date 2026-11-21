@@ -1,0 +1,307 @@
+# @file-map:start
+# 文件: link/office/service/hub_client.py
+# 位置: 二环·工位服务 | 本机控制、接入、凭据、工位与租约的HTTP服务。
+# 约束: 服务绑定本机并核对所有者身份；凭据与工作正文不因短暂失联清空；关闭使用租约排空
+# 下游: link/office/service/human_requests.py, link/office/service/request_intake.py, link/office/service/requirement_delivery.py, link/office/service/service_common.py
+# 上游: link/office/service/main.py
+# 链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+# 验证: python -X utf8 -B -m unittest discover -s link/office/tests/service
+# 目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+#   Hub | class
+#   Hub.__init__ | function
+#   Hub.status | function
+#   Hub.chat_history | function
+#   Hub.agent_retire | function
+#   Hub.agent_call | function
+#   Hub.agent_provision | function
+#   Hub.intake_read | function
+#   Hub.intake_record | function
+#   Hub.intake_receipt | function
+#   Hub.human_snapshot | function
+#   Hub.human_get | function
+#   Hub.human_decide | function
+#   Hub.registry | function
+#   Hub.host_operations | function
+#   Hub.management | function
+#   Hub.reconnect | function
+#   Hub.message | function
+# 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+# @file-map:end
+"""Legacy center transport adapter; local mode supplies its own hub."""
+
+import hashlib
+import importlib
+import json
+import sys
+import time
+from human_requests import HumanError
+from request_intake import ROUTES as INTAKE_READS
+from service_common import REGISTRY_ACTIONS
+from requirement_delivery import canonical
+from service_common import ID, Problem
+
+
+# @chain-region Hub | calls: HumanError, ID.fullmatch, Problem, ValueError, bool, canonical, delivery.get, document['request_id'].encode …
+class Hub:
+    # @chain-region Hub.__init__ | calls: importlib.import_module, sys.path.insert
+    def __init__(self, config):
+        self.config = config
+        sys.path.insert(0, config["hub_client_dir"])
+        self.client = importlib.import_module("coord")
+
+    # @chain-region Hub.status | calls: self.client.call
+    def status(self):
+        return self.client.call(self.config["hub_read_identity"], "/v1/status")
+
+    # @chain-region Hub.chat_history | calls: ValueError, bool, getattr, isinstance, list, m.get, result.get, reversed …
+    def chat_history(self, before=None):
+        if getattr(self, "is_local", False):
+            return self.client.chat_history(before)
+        result = self.client.call(
+            self.config["hub_read_identity"],
+            "/v1/history" + ("?before=" + str(before) if before else ""),
+        )
+        end = time.time()
+        start = None
+        raw = result.get("messages")
+        if not isinstance(raw, list):
+            raise ValueError("invalid_chat_history")
+        rows = [
+            m
+            for m in raw
+            if isinstance(m, dict)
+            and isinstance(m.get("created"), (int, float))
+            and m["created"] <= end
+        ]
+        more = bool(raw and result.get("has_more"))
+        return {
+            "messages": list(reversed(rows)),
+            "has_more": more,
+            "next_before": raw[-1]["seq"] if more else None,
+            "window_start": start,
+            "window_end": end,
+            "retention_hours": None,
+        }
+
+    # @chain-region Hub.agent_retire | calls: ValueError, self.client.call, self.config.get
+    def agent_retire(self, actor_id, request_id):
+        owner = self.config.get("hub_user_identity")
+        if not owner:
+            raise ValueError("503:agent_owner_identity_not_configured")
+        return self.client.call(owner, "/v1/revoke", {"request_id": request_id, "id": actor_id})
+
+    # @chain-region Hub.agent_call | calls: self.client.call
+    def agent_call(self, identity, path, body=None):
+        return self.client.call(identity, path, body)
+
+    # @chain-region Hub.agent_provision | calls: ValueError, document['request_id'].encode, hashlib.sha256, hashlib.sha256(document['request_id'].encode()).hexdigest, range, result.get, self.client.call, self.client.load …
+    def agent_provision(self, document):
+        """Keep center credentials in the existing OS-user-bound vault."""
+        identity = document["local_identity"]
+        if identity:
+            actor = self.client.call(identity, "/v1/status")["actor"]
+            return {"identity": identity, "actor_id": actor["id"]}
+        seed = hashlib.sha256(document["request_id"].encode()).hexdigest()[:24]
+        identity = "control-agent-" + seed
+        owner = self.config.get("hub_user_identity")
+        if not owner:
+            raise ValueError("503:agent_owner_identity_not_configured")
+        # Registration replay intentionally omits the token. Reuse the vault first.
+        try:
+            result = self.client.load(identity)
+        except FileNotFoundError:
+            result = None
+        if result is None:
+            for generation in range(4):
+                result = self.client.call(
+                    owner,
+                    "/v1/register",
+                    {
+                        "request_id": "control-enroll-" + seed + "-" + str(generation),
+                        "name": document["name"],
+                        "project": document["project"],
+                    },
+                )
+                if result.get("token"):
+                    self.client.save(identity, result)
+                    break
+                # First registration response was lost before DPAPI persistence.
+                # Retire that undelivered identity before allocating its replacement.
+                self.client.call(
+                    owner,
+                    "/v1/revoke",
+                    {
+                        "request_id": "control-orphan-" + seed + "-" + str(generation),
+                        "id": result["id"],
+                    },
+                )
+            else:
+                raise ValueError("503:agent_registration_recovery_exhausted")
+        actor = self.client.call(identity, "/v1/status")["actor"]
+        if actor["id"] != result["id"] or actor["role"] != "agent":
+            raise ValueError("403:dedicated_agent_identity_required")
+        host, adapter, seat = "ext-host-" + seed, "ext-adapter-" + seed, "ext-seat-" + seed
+        operations = [
+            (
+                "host-register",
+                {
+                    "id": host,
+                    "version": 0,
+                    "name": document["name"],
+                    "actor_id": actor["id"],
+                    "projects": [document["project"]],
+                    "max_active": 1,
+                    "max_seats": 8,
+                },
+            ),
+            (
+                "adapter-register",
+                {
+                    "id": adapter,
+                    "version": 0,
+                    "host_id": host,
+                    "name": document["name"],
+                    "kind": "generic-agent",
+                    "version_label": "aieyra-agent/1",
+                    "actions": ["inspect", "dispatch"],
+                    "availability": "available",
+                },
+            ),
+            (
+                "seat-create",
+                {
+                    "id": seat,
+                    "version": 0,
+                    "name": document["name"],
+                    "project": document["project"],
+                    "scope": "external/" + seed,
+                    "actor_id": actor["id"],
+                    "host_id": host,
+                    "adapter_id": adapter,
+                    "ownership": "external",
+                },
+            ),
+        ]
+        for action, payload in operations:
+            self.client.call(
+                owner, "/v1/" + action, {**payload, "request_id": "control-" + seed + "-" + action}
+            )
+        return {"identity": identity, "actor_id": actor["id"], "seat_id": seat}
+
+    # @chain-region Hub.intake_read | calls: ValueError, self.client.call, urlencode
+    def intake_read(self, route, fields):
+        from urllib.parse import urlencode
+
+        if route not in INTAKE_READS:
+            raise ValueError("invalid_intake_route")
+        query = urlencode(fields)
+        return self.client.call(
+            self.config["hub_read_identity"], "/v1/" + route + ("?" + query if query else "")
+        )
+
+    # @chain-region Hub.intake_record | calls: self.client.call
+    def intake_record(self, payload):
+        return self.client.call(
+            self.config["hub_read_identity"], "/v1/requirement-receipt", payload
+        )
+
+    # @chain-region Hub.intake_receipt | calls: self.intake_read
+    def intake_receipt(self, request_id):
+        return self.intake_read("intake-receipt", {"request_id": request_id})
+
+    # @chain-region Hub.human_snapshot | calls: self.client.call, self.config.get
+    def human_snapshot(self, project, after=""):
+        identity = self.config.get("hub_user_identity", self.config["hub_read_identity"])
+        return self.client.call(
+            identity,
+            "/v1/collaboration/snapshot?project="
+            + project
+            + ("&after_human=" + after if after else ""),
+        )
+
+    # @chain-region Hub.human_get | calls: self.client.call, self.config.get
+    def human_get(self, ident):
+        identity = self.config.get("hub_user_identity", self.config["hub_read_identity"])
+        return self.client.call(identity, "/v1/human-request?id=" + ident)
+
+    # @chain-region Hub.human_decide | calls: HumanError, self.client.call, self.config.get
+    def human_decide(self, payload):
+        identity = self.config.get("hub_user_identity")
+        if not identity:
+            raise HumanError("human_owner_identity_not_configured", 503)
+        return self.client.call(identity, "/v1/human-request-decide", payload)
+
+    # @chain-region Hub.registry | calls: self.client.call, self.config.get
+    def registry(self):
+        # The registry includes capability flags and host-management visibility.
+        # Keep the identity explicit and backend-only; default to the management
+        # identity so the browser does not see a read-only projection while the
+        # same local console is authorized to manage seats.
+        identity = self.config.get(
+            "hub_registry_identity",
+            self.config.get("hub_management_identity", self.config["hub_read_identity"]),
+        )
+        return self.client.call(identity, "/v1/registry")
+
+    # @chain-region Hub.host_operations | calls: ID.fullmatch, Problem, isinstance, self.client.call, self.config.get
+    def host_operations(self, host_id):
+        if not isinstance(host_id, str) or not ID.fullmatch(host_id):
+            raise Problem("invalid_host_id", "工位主机编号无效。")
+        identity = self.config.get(
+            "hub_operations_identity",
+            self.config.get("hub_management_identity", self.config.get("hub_read_identity")),
+        )
+        return self.client.call(identity, "/v1/host-operations?host_id=" + host_id)
+
+    # @chain-region Hub.management | calls: Problem, isinstance, self.client.call, self.config.get
+    def management(self, action, payload):
+        # The browser never chooses an arbitrary cloud path. The center remains the
+        # authority for role, scope, capacity, epoch and receipt validation.
+        if action not in REGISTRY_ACTIONS:
+            raise Problem("unsupported_management_action", "管理动作不在白名单内。", 400)
+        if not isinstance(payload, dict):
+            raise Problem("invalid_management_payload", "管理动作需为对象。", 400)
+        identity = self.config.get("hub_management_identity", self.config.get("hub_user_identity"))
+        return self.client.call(identity, "/v1/" + action, payload)
+
+    # @chain-region Hub.reconnect | calls: self.client.start
+    def reconnect(self):
+        # Reuse the center's authenticated tunnel recovery, including its existing fallback.
+        return self.client.start()
+
+    # @chain-region Hub.message | calls: canonical, delivery.get, json.loads, self.client.call
+    def message(self, delivery):
+        # 此入口由本机用户主动发送，身份沿已有站长控制台；Agent后台汇报使用各自身份。
+        if delivery.get("intake_context"):
+            # Requirement delivery keeps its private body in the original local
+            # ledger/native thread. The maintenance actor reports metadata only.
+            return self.client.call(
+                self.config["hub_read_identity"],
+                "/v1/message",
+                {
+                    "project": "coordination",
+                    "kind": "progress",
+                    "request_id": "control:" + delivery["id"],
+                    "body": canonical(
+                        {
+                            "control_delivery": delivery["id"],
+                            "context": json.loads(delivery["intake_context"]),
+                            "body_sha256": delivery["body_sha256"],
+                            "state": "dispatch_intent",
+                        }
+                    ),
+                },
+            )
+        return self.client.call(
+            self.config["hub_user_identity"],
+            "/v1/message",
+            {
+                "project": "coordination",
+                "kind": "discussion",
+                "request_id": "control:" + delivery["id"],
+                "body": (
+                    "[发送给 " + delivery["target"] + "]\n" if delivery["target"] != "all" else ""
+                )
+                + delivery["body"],
+            },
+        )

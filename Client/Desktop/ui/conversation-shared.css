@@ -1,0 +1,114 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .work-participants; .work-participants[hidden]; .work-participant-list,.shared-chat-messages; .work-participant-list .chat-entry; body .work-participant-list .chat-entry:not([data-work=true]) .chat-text; body .work-participants[data-full-messages=true] .chat-entry:not([data-work=true]) .chat-text; .work-participants[data-crowded=true][data-expanded=false]; .work-participants[data-crowded=true][data-expanded=false] .work-participant-list; .work-participants[data-crowded=true][data-expanded=false] .chat-entry; body .work-participants[data-crowded=true][data-expanded=false] .chat-main; body .work-participants[data-crowded=true][data-expanded=false] .chat-entry .chat-text; .work-participants[data-crowded=true][data-expanded=false] .work-participant-inspect; .work-participant-toggle; .work-participant-inspect; .work-participant-toggle,.work-participant-inspect; .work-participant-toggle:hover,.work-participant-inspect:hover; .shared-chat-messages .chat-entry[data-system=true]; .shared-chat-messages .chat-entry[data-system=true]>.role-ring; .shared-chat-messages .chat-entry[data-system=true] .chat-name; .shared-chat-messages .chat-entry[data-system=true] .chat-main; .stage-pin; .group-page .gv-working; .group-page .gv-messages; body[data-delegated=true][data-form=work] #emergence>:is(.presence-header,#answer-stage); .conversation-work-layout; body.conversation-agent .conversation-work-layout; .conversation-work-layout[data-preview=true]; .shared-work-previews; .shared-work-previews[hidden]; .shared-work-previews[data-columns="2"]; .shared-work-previews .stage-head; .shared-work-previews .stage-body; .shared-work-previews .stage-state; @media(max-width:760px); body.conversation-agent .conversation-work-layout>#conversation-scroll; body :is(#stage,.team-exec).shared-work-previews .stage-head>.stage-role; body .chat-viewport; body .chat-viewport .shared-chat-messages; body[data-form=work]; body[data-form=work][data-preview-layout=side]; body[data-form=work][data-preview-layout=side] #screen #conversation; body[data-form=work][data-preview-layout=stack] #screen #conversation; body[data-form=work]:is([data-preview-layout=none],[data-preview-layout=hidden]) #screen #conversation; .chat-link-receipt; .chat-link-receipt>summary; .chat-link-receipt>pre; .chat-entry[data-history-preview=true]>.chat-main>.chat-text; @property --chat-row-height; body .chat-entry:is([data-work=true],[data-response=true]); body .chat-entry:is([data-work=true],[data-response=true]) .chat-main; body .chat-entry:is([data-work=true],[data-response=true]) .chat-name; .chat-work-status; body .chat-entry[data-response=true]:not([data-work=true]) .chat-text; body .chat-entry[data-work=true]; body .chat-entry[data-work=true] .chat-main; body .chat-entry[data-work=true] .chat-text; .work-transcript-block; .work-transcript-block:last-child; .work-transcript-label; .work-transcript-label[hidden]; .work-transcript-text; .work-transcript-text>:first-child; .work-transcript-text>:last-child; body :is(.chat-text,.work-transcript-text).markdown>:last-child; .work-transcript-block[data-kind=thinking]; .work-transcript-block[data-kind=brief]; body .chat-entry:is(.brief,.talk); body .chat-entry:is(.brief,.talk) > .role-ring; body .chat-entry:is(.brief,.talk) .chat-main; body .chat-entry:is(.brief,.talk) .chat-name; body .chat-entry:is(.brief,.talk) .chat-text; body .chat-entry:is(.brief,.talk) .chat-text > :first-child; body .chat-entry:is(.brief,.talk) .chat-text > :last-child; .chat-follow-space; body .chat-bottom-flow; .chat-bottom-flow::before; .chat-bottom-flow>*; body .chat-entry .chat-name + .chat-text
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/conversation-shared.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Shared semantic nodes inherit Theme message slots and independent Halo. */
+.work-participants{display:grid;gap:16px;margin-block:24px;min-width:0}
+.work-participants[hidden]{display:none}
+.work-participant-list,.shared-chat-messages{display:flex;flex-direction:column;gap:var(--chat-safe-gap);min-width:0}
+.work-participant-list .chat-entry{content-visibility:auto;contain-intrinsic-size:auto 140px}
+body .work-participant-list .chat-entry:not([data-work=true]) .chat-text{max-height:160px;overflow:clip;overscroll-behavior:auto}
+/* A group response is a full chat message; only the collapsed member overview is abbreviated. */
+body .work-participants[data-full-messages=true] .chat-entry:not([data-work=true]) .chat-text{max-height:none;overflow:visible}
+.work-participants[data-crowded=true][data-expanded=false]{gap:8px;margin-block:16px}
+.work-participants[data-crowded=true][data-expanded=false] .work-participant-list{gap:8px}
+.work-participants[data-crowded=true][data-expanded=false] .chat-entry{contain-intrinsic-size:auto 56px}
+body .work-participants[data-crowded=true][data-expanded=false] .chat-main{height:auto;max-height:none;padding-top:0}
+body .work-participants[data-crowded=true][data-expanded=false] .chat-entry .chat-text{max-height:1.5em;overflow:clip;white-space:nowrap;text-overflow:ellipsis}
+.work-participants[data-crowded=true][data-expanded=false] .work-participant-inspect{padding:0 8px;margin-left:8px}
+.work-participant-toggle{justify-self:start}
+.work-participant-inspect{margin-left:12px;font-size:12px}
+.work-participant-toggle,.work-participant-inspect{border:0;border-radius:var(--ui-radius-pill);padding:8px 12px;color:var(--ui-text-2);background:transparent;cursor:pointer}
+.work-participant-toggle:hover,.work-participant-inspect:hover{color:var(--ui-text);background:color-mix(in srgb,var(--ui-text) 8%,transparent)}
+.shared-chat-messages .chat-entry[data-system=true]{display:block;color:var(--ui-text-3);font-size:12px}
+.shared-chat-messages .chat-entry[data-system=true]>.role-ring{display:none}
+.shared-chat-messages .chat-entry[data-system=true] .chat-name{display:none}
+.shared-chat-messages .chat-entry[data-system=true] .chat-main{padding:0}
+.stage-pin{flex:none;padding:4px 8px;font-size:12px}
+.group-page .gv-working{padding:0;max-height:none;overflow:visible;background:transparent;backdrop-filter:none;animation:none}
+.group-page .gv-messages{max-width:none}
+
+
+body[data-delegated=true][data-form=work] #emergence>:is(.presence-header,#answer-stage){display:none!important}
+
+.conversation-work-layout{display:grid;grid-template-columns:minmax(0,1fr);min-height:0;min-width:0;flex:1;overflow:hidden}
+body.conversation-agent .conversation-work-layout{grid-area:2/1}
+.conversation-work-layout[data-preview=true]{grid-template-columns:minmax(320px,1fr) minmax(320px,1fr)}
+.shared-work-previews{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(var(--stage-rows,1),minmax(0,1fr));gap:16px;min-height:0;min-width:0;margin:16px;overflow:hidden}
+.shared-work-previews[hidden]{display:none}
+.shared-work-previews[data-columns="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.shared-work-previews .stage-head{min-width:0}
+.shared-work-previews .stage-body{overflow:auto}
+.shared-work-previews .stage-state{min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:760px){.conversation-work-layout[data-preview=true]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(160px,1fr) minmax(150px,.7fr)}}
+
+body.conversation-agent .conversation-work-layout>#conversation-scroll{grid-area:auto;min-width:0}
+body :is(#stage,.team-exec).shared-work-previews .stage-head>.stage-role{display:grid}
+
+/* Every conversation reads one profile and uses the same message/theme slots. */
+body .chat-viewport{box-sizing:border-box;padding:var(--chat-top) max(16px,var(--chat-right)) 24px max(16px,var(--chat-left));scrollbar-gutter:stable both-edges}
+body .chat-viewport .shared-chat-messages{max-width:none;margin-inline:0;gap:var(--chat-safe-gap)}
+
+/* Home previews use the remaining viewport, after drawers, rather than fixed halves. */
+/* Derive both columns from the live animated insets in the same layout pass. */
+/* Work geometry is local to the surfaces the session drawer translates: widths shrink by the settled inset, right edges stay inside the window. */
+body[data-form=work]{--preview-chat-width:calc((100vw - var(--workspace-inset,0px) - var(--al-push,0px) - 48px) / 2);--preview-stage-left:16px;--preview-stage-right:calc(var(--al-push,0px) + 16px + var(--workspace-inset,0px));--work-split:calc(100vw - var(--workspace-inset,0px) - var(--al-push,0px) - 16px)}
+body[data-form=work][data-preview-layout=side]{--preview-stage-left:calc(var(--preview-chat-width) + 32px);--work-split:calc(var(--preview-stage-left) - 8px)}
+body[data-form=work][data-preview-layout=side] #screen #conversation{inset:0 calc(100% - var(--preview-chat-width) - 16px) var(--chat-bottom-inset,0px) 16px!important;padding:var(--work-top) 12px 24px!important}
+body[data-form=work][data-preview-layout=stack] #screen #conversation{inset:0 16px calc(50vh + 8px) 16px!important;padding:var(--work-top) 12px 24px!important}
+body[data-form=work]:is([data-preview-layout=none],[data-preview-layout=hidden]) #screen #conversation{inset:0 16px var(--chat-bottom-inset,0px) 16px!important}
+.chat-link-receipt{margin-top:4px;color:var(--ui-text-2);font-size:12px}
+.chat-link-receipt>summary{cursor:pointer}
+.chat-link-receipt>pre{max-height:240px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ui-text-2);font:inherit}
+.chat-entry[data-history-preview=true]>.chat-main>.chat-text{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:8;overflow:hidden}
+
+/* A registered length lets the shared motion owner reveal the finished row
+   through legacy important geometry without scaling or duplicating its text. */
+@property --chat-row-height { syntax:'<length> | auto';inherits:false;initial-value:auto; }
+/* One fixed working row; only its transcript scrolls as model phases change.
+   Both the identity and the reading rectangle fit the full shared Halo. */
+body .chat-entry:is([data-work=true],[data-response=true]){height:var(--chat-row-height,auto);min-height:var(--eyra-avatar,120px);flex:none;content-visibility:visible;contain:layout;overflow:visible;animation:none}
+body .chat-entry:is([data-work=true],[data-response=true]) .chat-main{min-height:0;box-sizing:border-box;display:flex;flex-direction:column;padding:calc(var(--eyra-avatar,120px) * .2) 0 0!important;overflow:visible}
+body .chat-entry:is([data-work=true],[data-response=true]) .chat-name{flex:none;display:flex;align-items:flex-end;gap:8px;min-height:1.5em;margin:0 0 4px;white-space:nowrap;overflow:hidden}
+.chat-work-status{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--os-status-color,#e4f1ff);opacity:1;filter:none;font-size:12px;font-weight:400;letter-spacing:normal}
+body .chat-entry[data-response=true]:not([data-work=true]) .chat-text{height:auto;max-height:none;overflow:visible}
+body .chat-entry[data-work=true]{--chat-work-limit:min(calc(var(--eyra-avatar,120px) * 2),max(var(--eyra-avatar,120px),var(--chat-work-available-height,100vh)));max-height:var(--chat-work-limit)}
+body .chat-entry[data-work=true] .chat-main{height:auto;max-height:var(--chat-work-limit);overflow:hidden}
+body .chat-entry[data-work=true] .chat-text{flex:0 1 auto;min-height:0;height:auto;max-height:calc(var(--chat-work-limit) - var(--eyra-avatar,120px) * .2 - var(--chat-name-eyra,var(--chat-name,25px)) * 1.5 - 4px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;overflow-anchor:none}
+.work-transcript-block{min-width:0;margin:0 0 8px;overflow-wrap:anywhere}
+.work-transcript-block:last-child{margin-bottom:0}
+.work-transcript-label{display:block;color:var(--ui-text-3);font-size:12px;line-height:1.5}
+.work-transcript-label[hidden]{display:none}
+.work-transcript-text{font:inherit;color:inherit;min-width:0}
+.work-transcript-text>:first-child{margin-top:0}
+.work-transcript-text>:last-child{margin-bottom:0}
+/* Paragraph spacing separates paragraphs. The last paragraph must not add a
+   scrollable blank tail: it can push the final line outside a compact reader.
+   Match the shared appearance rule's specificity, keeping internal gaps intact. */
+body :is(.chat-text,.work-transcript-text).markdown>:last-child{margin-bottom:0}
+.work-transcript-block[data-kind=thinking]{font-size:calc(var(--chat-text,15px) - 1px);color:var(--ui-text-2)}
+.work-transcript-block[data-kind=brief]{font-size:calc(var(--chat-text,15px) - 1px);color:var(--ui-text-2)}
+/* Brief is the actual authored text. Its former working identity settles here. */
+body .chat-entry:is(.brief,.talk){min-height:calc(var(--eyra-avatar,120px) * .5);content-visibility:visible;align-items:start;}
+body .chat-entry:is(.brief,.talk) > .role-ring{width:var(--chat-small-avatar);height:var(--chat-small-avatar);justify-self:center;}
+body .chat-entry:is(.brief,.talk) .chat-main{padding-top:2px!important;min-width:0;}
+body .chat-entry:is(.brief,.talk) .chat-name{color:var(--ui-text,#f6f8ff);margin-bottom:3px;}
+body .chat-entry:is(.brief,.talk) .chat-text{font-size:calc(var(--chat-text,16px) - 1px);line-height:var(--chat-leading,1.8);color:var(--ui-text,#f6f8ff);overflow-wrap:anywhere;}
+body .chat-entry:is(.brief,.talk) .chat-text > :first-child{margin-top:0;}
+body .chat-entry:is(.brief,.talk) .chat-text > :last-child{margin-bottom:0;}
+.chat-follow-space{flex:none;min-height:0;pointer-events:none;overflow-anchor:none;}
+
+/* The original message hosts its editor; the independent composer and its
+   draft never become an intermediate buffer for resending a message. */
+
+/* Short turns sit on the composer; only real content consumes space above. */
+body .chat-bottom-flow{display:flex!important;flex-direction:column!important;}
+.chat-bottom-flow::before{content:"";margin-block-start:auto;}
+.chat-bottom-flow>*{flex:none;}
+body .chat-entry .chat-name + .chat-text { margin-block-start:.28em; }

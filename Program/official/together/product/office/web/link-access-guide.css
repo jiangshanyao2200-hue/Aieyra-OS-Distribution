@@ -1,0 +1,137 @@
+/* @file-map:start
+文件: link/office/web/link-access-guide.css
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: 无已解析的项目内静态导入
+上游: link/office/web/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test link/office/tests/unit/*.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .link-help-button
+  rule-2 | style | .link-help-button svg
+  rule-3 | style | .link-help-button:hover
+  rule-4 | style | .link-help-button:focus-visible
+  rule-5 | style | .link-access-guide
+  rule-6 | style | .link-access-guide::backdrop
+  rule-7 | style | .link-help-heading
+  rule-8 | style | .link-help-heading h2
+  rule-9 | style | .link-guide-close
+  rule-10 | style | .link-access-guide p
+  rule-11 | style | .link-guide-actions
+  rule-12 | style | .link-guide-actions select
+  rule-13 | style | .link-guide-instructions
+  rule-14 | style | .link-guide-status
+  rule-15 | style | @media (max-width: 540px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ .link-help-button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ui-text-2);
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+/* @chain-region rule-2 */ .link-help-button svg {
+  width: 20px;
+  height: 20px;
+}
+/* @chain-region rule-3 */ .link-help-button:hover {
+  color: var(--ui-text);
+  background: var(--ui-hover, #ffffff0c);
+}
+/* @chain-region rule-4 */ .link-help-button:focus-visible {
+  outline: 1px solid var(--ui-ring);
+  outline-offset: 3px;
+}
+/* @chain-region rule-5 */ .link-access-guide {
+  box-sizing: border-box;
+  width: min(760px, calc(100vw - 36px));
+  max-height: calc(100vh - 36px);
+  margin: auto;
+  padding: 22px;
+  border: 0;
+  border-radius: var(--ui-radius, 20px);
+  background: var(--ui-sheen), var(--ui-glass, rgba(16, 19, 26, 0.97));
+  color: var(--ui-text);
+  box-shadow: var(--ui-edge), var(--ui-shadow);
+  overflow: auto;
+}
+/* @chain-region rule-6 */ .link-access-guide::backdrop {
+  background: #080b12a6;
+}
+/* @chain-region rule-7 */ .link-help-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+/* @chain-region rule-8 */ .link-help-heading h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 550;
+}
+/* @chain-region rule-9 */ .link-guide-close {
+  flex: none;
+}
+/* @chain-region rule-10 */ .link-access-guide p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ui-text-2);
+  overflow-wrap: anywhere;
+}
+/* @chain-region rule-11 */ .link-guide-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+/* @chain-region rule-12 */ .link-guide-actions select {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ui-text);
+  background: var(--ui-field, #151b25);
+  border: 1px solid var(--ui-border, #ffffff20);
+  border-radius: var(--ui-radius-control, 10px);
+  padding: 8px;
+}
+/* @chain-region rule-13 */ .link-guide-instructions {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 48vh;
+  overflow: auto;
+  padding: 16px;
+  border-radius: var(--ui-radius-control, 10px);
+  background: var(--ui-field, #0b1018);
+  box-shadow: inset 0 0 0 1px var(--ui-border, #ffffff18);
+  color: var(--ui-text);
+  font:
+    14px/1.8 ui-monospace,
+    Consolas,
+    monospace;
+  user-select: text;
+}
+/* @chain-region rule-14 */ .link-guide-status {
+  min-height: 22px;
+}
+/* @chain-region rule-15 */ @media (max-width: 540px) {
+  .link-access-guide {
+    width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    padding: 16px;
+  }
+  .link-guide-instructions {
+    padding: 12px;
+  }
+  .link-connection-summary {
+    gap: 6px;
+  }
+}

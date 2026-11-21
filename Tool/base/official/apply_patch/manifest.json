@@ -1,0 +1,90 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.apply_patch",
+  "kind": "tool",
+  "name": "文件补丁",
+  "summary": "按稳定调用身份修改授权文件",
+  "version": "1.0.1",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/preview.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "contract/types.go": {
+      "sha256": "824212be1e466119fda78759fe0431dcf5c1b5fc55343c9da13dbf60e5b89809",
+      "size": 1812
+    },
+    "manual.txt": {
+      "sha256": "6e8c29a1ff014c750da84d17c6076d6733aab1d4194bd01c5cabed3bcece57d3",
+      "size": 1230
+    },
+    "native.json": {
+      "sha256": "3a82f78363952c78a18cfb87ed80fbfa9eb8320c7206a55bd9c6bb54374ac5b5",
+      "size": 102
+    },
+    "patch.go": {
+      "sha256": "94df21811c66ae09a4e4897da38498a8dc6b9f1d8557e634197d7f9365f29905",
+      "size": 18339
+    },
+    "patch_replace_other.go": {
+      "sha256": "508cfac154b32725274ba285e8d032740aa3c6afd29325b5cb2d44beb42cecb7",
+      "size": 125
+    },
+    "patch_replace_windows.go": {
+      "sha256": "66b22c17e7cee2699b5cb2cd27ba7d1a28993fe632a391ab50800aec94c3310c",
+      "size": 370
+    },
+    "patch_write.go": {
+      "sha256": "a1689bc3daa037364d375322a4f181538dba6b3fb47b8ece624a8b9c4a658ed2",
+      "size": 4841
+    },
+    "presentation/desktop.css": {
+      "sha256": "0c32d05c8235eb964734da41c506a53c0b042355323da9f654201d743bec8703",
+      "size": 3106
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "a3fb1fd5d31b887789eec387a510d13ff9f4cdb7e5ad70dd03edd104589abb84",
+      "size": 3823
+    },
+    "presentation/text/preview.go": {
+      "sha256": "c6bd9eea2c5e195d5291408b886c411c5b0923ce48573e30c3b145256f7c8356",
+      "size": 2177
+    },
+    "README.md": {
+      "sha256": "d1f95239969902f642cb384a2ea62fd00cee0f1d255d62842db95440aab091bd",
+      "size": 849
+    }
+  }
+}

@@ -1,0 +1,3359 @@
+[
+  {
+    "name": "classic",
+    "valid": true,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "preset": "classic"
+    }
+  },
+  {
+    "name": "prism",
+    "valid": true,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "script field",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ],
+      "script": "evil()"
+    }
+  },
+  {
+    "name": "url paint",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "url(https://invalid.test/x)",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "null opacity",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": null
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "unknown state",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "success"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "duplicate state",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "tool",
+            "tool"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "duplicate id",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "outline",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "negative radius",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": -1,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "path injection",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              "1 onclick=evil",
+              1
+            ],
+            [
+              2,
+              2
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "too fast",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 1,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "nonmonotonic",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 0,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "missing offset",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "unsupported version",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/2",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "incomplete ellipse",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "empty layer states",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8,
+          "states": []
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "mixed classic",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ],
+      "preset": "classic"
+    }
+  },
+  {
+    "name": "extra point",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8,
+              5
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  },
+  {
+    "name": "case sensitive fields",
+    "valid": false,
+    "value": {
+      "schema": "aieyra.halo/1",
+      "layers": [
+        {
+          "id": "outline",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              8
+            ],
+            [
+              87,
+              29
+            ],
+            [
+              87,
+              71
+            ],
+            [
+              50,
+              92
+            ],
+            [
+              13,
+              71
+            ],
+            [
+              13,
+              29
+            ]
+          ],
+          "stroke": "currentColor",
+          "width": 1.6,
+          "Opacity": 0.8
+        },
+        {
+          "id": "orbit",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 33,
+          "ry": 12,
+          "stroke": "#9DCBE8",
+          "width": 1.5,
+          "motion": {
+            "duration": 8000,
+            "easing": "linear",
+            "frames": [
+              {
+                "offset": 0,
+                "rotate": 0
+              },
+              {
+                "offset": 1,
+                "rotate": 360
+              }
+            ]
+          }
+        },
+        {
+          "id": "working",
+          "shape": "polygon",
+          "points": [
+            [
+              50,
+              25
+            ],
+            [
+              75,
+              50
+            ],
+            [
+              50,
+              75
+            ],
+            [
+              25,
+              50
+            ]
+          ],
+          "stroke": "#B2DEC8",
+          "width": 2,
+          "states": [
+            "thinking",
+            "body",
+            "tool",
+            "compacting",
+            "preparing"
+          ],
+          "motion": {
+            "duration": 2400,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.7,
+                "opacity": 0.3
+              },
+              {
+                "offset": 0.5,
+                "scale": 1,
+                "opacity": 0.9
+              },
+              {
+                "offset": 1,
+                "scale": 0.7,
+                "opacity": 0.3
+              }
+            ]
+          }
+        },
+        {
+          "id": "waiting",
+          "shape": "ellipse",
+          "cx": 50,
+          "cy": 50,
+          "rx": 8,
+          "ry": 8,
+          "states": [
+            "waiting",
+            "waiting_user",
+            "queued",
+            "connecting",
+            "confirming"
+          ],
+          "stroke": "#E8C58F",
+          "motion": {
+            "duration": 3000,
+            "easing": "ease-in-out",
+            "frames": [
+              {
+                "offset": 0,
+                "scale": 0.8,
+                "opacity": 0.4
+              },
+              {
+                "offset": 0.5,
+                "scale": 1.2,
+                "opacity": 1
+              },
+              {
+                "offset": 1,
+                "scale": 0.8,
+                "opacity": 0.4
+              }
+            ]
+          }
+        },
+        {
+          "id": "error",
+          "shape": "polyline",
+          "points": [
+            [
+              40,
+              40
+            ],
+            [
+              60,
+              60
+            ],
+            [
+              50,
+              50
+            ],
+            [
+              60,
+              40
+            ],
+            [
+              40,
+              60
+            ]
+          ],
+          "stroke": "#E8A0A0",
+          "states": [
+            "error",
+            "offline"
+          ],
+          "width": 2
+        }
+      ]
+    }
+  }
+]

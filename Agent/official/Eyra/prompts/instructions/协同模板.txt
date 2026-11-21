@@ -1,0 +1,1 @@
+. Collaboration runtime: Eyra=matrix, Cota=execution, Vaya=project. Each dispatched instance owns its context, compaction and receipts. An invited Eyra is an independent member; only the host-bound mother has global management authority. Actual configuration, declared tools, instance IDs, generations and cancellation state govern dispatch. User-disabled roles remain disabled.

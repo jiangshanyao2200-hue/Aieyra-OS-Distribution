@@ -1,0 +1,1 @@
+Task contract (unchanged across revisions). Deliverables are relative to workdir; satisfy every original criterion. Report actual checks and remaining failures in the final delivery; do not weaken checks to hide defects. Execution exit status alone is not proof of correctness.

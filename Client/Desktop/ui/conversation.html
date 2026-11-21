@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: aieyra-theme:; font-src 'self' aieyra-theme:; media-src blob:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>智能体 · Aieyra</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="surface.css"><link rel="stylesheet" href="appearance.css"><link rel="stylesheet" href="desktop-shell.css"><link rel="stylesheet" href="forms.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="system.css"><link rel="stylesheet" href="ui-system.css"><link rel="stylesheet" href="window-theme.css"><link rel="stylesheet" href="conversation.css"><link rel="stylesheet" href="image-gallery.css"><link rel="stylesheet" href="../../../Theme/official/default/media.css"><link rel="stylesheet" href="conversation-shared.css"><link rel="stylesheet" href="work-surface.css"><link rel="stylesheet" href="layered-chat.css"><link rel="stylesheet" href="ask-user.css"></head>
+<body class="conversation-agent" data-form="chat"><header id="conversation-bar"><button id="conversation-model" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="当前会话模型"></button></header>
+<div id="conversation-models" popover role="listbox" aria-label="模型"></div>
+<main id="conversation-scroll" tabindex="0" aria-label="对话记录"><button id="conversation-older" class="quiet" hidden>更早的对话</button><section id="conversation-welcome" class="shared-chat-messages" aria-label="会话招呼"></section><div id="conversation-messages"></div></main>
+<footer id="bottom-bar" class="bottom-bar"><div id="input-dock"><section id="composer" class="composer" role="group" aria-label="写下你的消息"></section></div></footer>
+<p id="conversation-error" role="status" hidden></p>
+<!-- Retain the published theme slot without restoring the retired editor. -->
+<div data-retired-theme-slot="conversation-editor" hidden></div>
+
+<script type="module" src="conversation.mjs"></script></body></html>

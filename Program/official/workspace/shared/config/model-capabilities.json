@@ -1,0 +1,175 @@
+{
+  "version": 4,
+  "updated": "2026-10-02",
+  "sources": [
+    "https://github.com/openai/codex/blob/main/codex-rs/models-manager/models.json",
+    "https://github.com/openai/openai-node/blob/master/src/resources/responses/responses.ts"
+  ],
+  "vendors": [
+    {
+      "id": "OPENAI",
+      "label": "OpenAI",
+      "protocol": "OpenAI Responses / Chat Completions"
+    }
+  ],
+  "reasoningEfforts": ["none", "minimal", "low", "medium", "high", "xhigh", "max", "ultra"],
+  "rules": [
+    {
+      "pattern": "^(?:gpt-image-|imagen-|flux-)",
+      "kind": "image",
+      "reasoningEfforts": [],
+      "defaultReasoningEffort": "",
+      "serviceTiers": ["standard"]
+    },
+    {
+      "pattern": "^gpt-6-astra(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "low",
+      "ultraReasoningEffort": "xhigh",
+      "reasoningContext": "all_turns",
+      "contextWindowTokens": 872000,
+      "maxOutputTokens": 128000,
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-6\\.1-sol(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "low",
+      "ultraReasoningEffort": "xhigh",
+      "defaultContextWindowTokens": 272000,
+      "contextWindowTokens": 872000,
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-6-sol(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "medium",
+      "defaultContextWindowTokens": 272000,
+      "contextWindowTokens": 872000,
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-6-luna(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+      "defaultReasoningEffort": "medium",
+      "defaultContextWindowTokens": 272000,
+      "contextWindowTokens": 872000,
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-5\\.6-sol(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "low",
+      "serviceTiers": ["standard", "fast", "ultrafast"]
+    },
+    {
+      "pattern": "^gpt-5\\.6-terra(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-5\\.6-luna(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-5\\.6(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-daybreak-blue-latest(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "low",
+      "serviceTiers": ["standard"]
+    },
+    {
+      "pattern": "^gpt-daybreak-red-latest(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max", "ultra"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard"]
+    },
+    {
+      "pattern": "^codex-auto-review(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh", "max"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-5\\.5(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-5\\.4-mini(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard"]
+    },
+    {
+      "pattern": "^gpt-5\\.4(?:[-.:]|$)",
+      "defaultContextWindowTokens": 272000,
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^gpt-5\\.2(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard"]
+    },
+    {
+      "pattern": "^gpt-5\\.3-codex-spark(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high", "xhigh"],
+      "defaultReasoningEffort": "high",
+      "serviceTiers": ["standard"]
+    },
+    {
+      "pattern": "^gpt-5(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard", "fast"]
+    },
+    {
+      "pattern": "^(?:o3|o4-mini)(?:[-.:]|$)",
+      "kind": "text",
+      "reasoningEfforts": ["low", "medium", "high"],
+      "defaultReasoningEffort": "medium",
+      "serviceTiers": ["standard"]
+    }
+  ],
+  "fallback": {
+    "kind": "text",
+    "reasoningEfforts": [],
+    "defaultReasoningEffort": "",
+    "serviceTiers": ["standard"]
+  }
+}

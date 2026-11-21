@@ -1,0 +1,19 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: #desktop-dock [data-unpinned]; #dock-pinned-apps; #dock-pinned-apps > button; #desktop-dock #dock-apps; body #desktop-dock; #desktop-dock [data-dock-overflow]
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/apps-menu.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* 顶栏排列：OS 首页固定最前，“应用”按钮固定最后。其余程序的顺序来自 Config/os-dock.json。 */
+#desktop-dock [data-unpinned] { display:none!important; }
+#dock-pinned-apps { display:contents; }
+#dock-pinned-apps > button { order:900; }
+#desktop-dock #dock-apps { order:1000; }
+/* A fixed flex basis keeps fitting independent of which optional entries are
+   visible. Session, Home and Apps keep their ordinary nodes and click regions. */
+body #desktop-dock { flex:1 1 0;min-width:calc(124px * var(--os-scale,1)); }
+#desktop-dock [data-dock-overflow] { display:none!important; }

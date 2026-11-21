@@ -1,0 +1,340 @@
+/* @file-map:start
+文件: link/desktop/ui/participation.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .surface>header:has(#situation-title)
+  rule-2 | style | .surface>header:has(#situation-title)>h1
+  rule-3 | style | #situation-title
+  rule-4 | style | .carousel-controls
+  rule-5 | style | .carousel-controls[hidden]
+  rule-6 | style | .carousel-controls button
+  rule-7 | style | .carousel-controls .icon
+  rule-8 | style | .carousel-position
+  rule-9 | style | .carousel-enter
+  rule-10 | style | @keyframes station-slide
+  rule-11 | style | .work-status
+  rule-12 | style | .station-heading,.station-links,.station-report-meta,.conversation-meta
+  rule-13 | style | .station-heading
+  rule-14 | style | .station-heading .eyebrow,.eyebrow:has(.icon),.section-heading h3
+  rule-15 | style | .station-admitted
+  rule-16 | style | .personal-desk
+  rule-17 | style | .station-illustration
+  rule-18 | style | .station-illustration>svg
+  rule-19 | style | .station-state
+  rule-20 | style | .station-state i,.status-dot
+  rule-21 | style | .personal-desk[data-state=working] .station-state
+  rule-22 | style | .personal-desk[data-state=waiting] .station-state
+  rule-23 | style | .personal-desk[data-state=error] .station-state
+  rule-24 | style | .personal-desk[data-state=working] .station-state i
+  rule-25 | style | .station-work
+  rule-26 | style | .station-work h2
+  rule-27 | style | .station-report
+  rule-28 | style | .station-report-meta
+  rule-29 | style | .station-report-meta button
+  rule-30 | style | .station-warning
+  rule-31 | style | .personal-conversation
+  rule-32 | style | .personal-conversation>.section-heading
+  rule-33 | style | .personal-conversation h3
+  rule-34 | style | .conversation-slide
+  rule-35 | style | .conversation-meta
+  rule-36 | style | .conversation-meta time
+  rule-37 | style | .conversation-slide>p
+  rule-38 | style | #conversation-history
+  rule-39 | style | #conversation-history summary
+  rule-40 | style | #personal-history article
+  rule-41 | style | #personal-history article p
+  rule-42 | style | .station-links
+  rule-43 | style | .station-links button
+  rule-44 | style | .station-links>span
+  rule-45 | style | .onboarding-stage.work-footer
+  rule-46 | style | .work-footer .agent-flow
+  rule-47 | style | .work-footer .flow-link
+  rule-48 | style | .work-footer .flow-node
+  rule-49 | style | .work-footer .flow-node .icon
+  rule-50 | style | .work-footer .flow-wire
+  rule-51 | style | .work-footer>.primary
+  rule-52 | style | .work-footer>.flow-activity
+  rule-53 | style | .work-footer>.onboarding-manage
+  rule-54 | style | .work-footer .onboarding-membership
+  rule-55 | style | .stage-mission
+  rule-56 | style | .stage-mission .mission-copy
+  rule-57 | style | .stage-mission h2
+  rule-58 | style | .stage-mission .eyebrow
+  rule-59 | style | .stage-mission .halo
+  rule-60 | style | .metrics .metric
+  rule-61 | style | .metrics .metric .icon
+  rule-62 | style | .stage-leadership
+  rule-63 | style | .election-summary
+  rule-64 | style | .election-summary h3
+  rule-65 | style | .election-status
+  rule-66 | style | .election-roles>div
+  rule-67 | style | .election-record-body>.connection-note
+  rule-68 | style | .quests
+  rule-69 | style | .quest
+  rule-70 | style | .quest h3
+  rule-71 | style | .quest>p:not(.candidate-goal)
+  rule-72 | style | .quest .author
+  rule-73 | style | .quest .actions
+  rule-74 | style | .quest .actions button
+  rule-75 | style | .quest[data-status=approved]>.eyebrow
+  rule-76 | style | .quest[data-status=approved] .status-dot,.stage-mission[data-phase=active] .status-dot
+  rule-77 | style | .quest[data-status=voting]>.eyebrow
+  rule-78 | style | .candidate-person
+  rule-79 | style | .candidate-person h3
+  rule-80 | style | .candidate-avatar
+  rule-81 | style | .candidate-support
+  rule-82 | style | .candidate-support b
+  rule-83 | style | .candidate-support small
+  rule-84 | style | .candidate-threshold
+  rule-85 | style | .candidate-threshold i
+  rule-86 | style | [data-contesting=true] .candidate-threshold i
+  rule-87 | style | .quest .candidate-goal
+  rule-88 | style | .candidate-goal .icon
+  rule-89 | style | .election-candidate>details
+  rule-90 | style | .election-candidate>details p
+  rule-91 | style | .vote-summary
+  rule-92 | style | .vote-totals
+  rule-93 | style | .vote-count
+  rule-94 | style | .vote-count .icon
+  rule-95 | style | .vote-count b
+  rule-96 | style | .vote-count span
+  rule-97 | style | .vote-count.oppose
+  rule-98 | style | .vote-meter
+  rule-99 | style | .vote-meter i:first-child
+  rule-100 | style | .vote-meter i+ i
+  rule-101 | style | .vote-updated
+  rule-102 | style | @keyframes vote-change
+  rule-103 | style | .vote-choice
+  rule-104 | style | .vote-choice>div:first-child
+  rule-105 | style | .vote-choice strong
+  rule-106 | style | .vote-choice small
+  rule-107 | style | .vote-choice .actions
+  rule-108 | style | .vote-option
+  rule-109 | style | .vote-option[aria-pressed=true]
+  rule-110 | style | .vote-option.oppose[aria-pressed=true]
+  rule-111 | style | .dialog-top
+  rule-112 | style | .dialog-top h2
+  rule-113 | style | #dialog-body>p
+  rule-114 | style | #dialog-body>details
+  rule-115 | style | #dialog-body>details p
+  rule-116 | style | .dialog-section
+  rule-117 | style | .comment-list article,.ballot-list article
+  rule-118 | style | .comment-list .row.between
+  rule-119 | style | .comment-list .row strong,.ballot-list strong
+  rule-120 | style | .comment-list .avatar,.ballot-list .avatar
+  rule-121 | style | .comment-list .row small,.ballot-list time
+  rule-122 | style | .comment-body
+  rule-123 | style | .comment-body details
+  rule-124 | style | .comment-body summary
+  rule-125 | style | .ballot-list article>.row
+  rule-126 | style | .ballot-list time
+  rule-127 | style | .ballot-list article>p
+  rule-128 | style | #comment-form
+  rule-129 | style | #comment-form label
+  rule-130 | style | #comment-form textarea
+  rule-131 | style | #comment-form>button
+  rule-132 | style | @media(max-width:800px)
+  rule-133 | style | @media(max-width:540px)
+  rule-134 | style | @media(prefers-reduced-motion:reduce)
+  rule-135 | style | html[data-hidden=true] :is(.carousel-enter,.vote-updated,.station-state i,.status-dot,.candidate-threshold i)
+  rule-136 | style | .conversation-slide.is-empty
+  rule-137 | style | .station-heading .work-sync
+  rule-138 | style | .personal-conversation:has(.conversation-slide.is-empty)
+  rule-139 | style | .stage-leadership .quests
+  rule-140 | style | .quest>details p
+  rule-141 | style | .quest .candidate-goal
+  rule-142 | style | .personal-conversation details>summary::before,.election-candidate details>summary::before,#dialog-body>details>summary::before
+  rule-143 | style | .personal-conversation details[open]>summary::before,.election-candidate details[open]>summary::before,#dialog-body>details[open]>summary::before
+  rule-144 | style | .read-detail
+  rule-145 | style | .read-detail:hover,.read-detail:focus-visible
+  rule-146 | style | .read-detail>span
+  rule-147 | style | .station-report-meta .read-detail
+  rule-148 | style | #dialog-body>.read-detail
+  rule-149 | style | .election-candidate>.read-detail
+  rule-150 | style | .personal-conversation .read-detail
+  rule-151 | style | .station-report
+  rule-152 | style | .reading-dialog
+  rule-153 | style | .detail-content
+  rule-154 | style | .detail-text
+  rule-155 | style | .detail-content pre
+  rule-156 | style | .detail-content>:first-child
+  rule-157 | style | .detail-content>:last-child
+  rule-158 | style | @media(max-width:620px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Personal station and participation: one primary reading path per section. */
+/* @chain-region rule-1 */ .surface>header:has(#situation-title){gap:20px;min-height:50px;margin-bottom:16px}
+/* @chain-region rule-2 */ .surface>header:has(#situation-title)>h1{min-width:0;font-size:21px;letter-spacing:-.4px;line-height:1.5}
+/* @chain-region rule-3 */ #situation-title{display:block;overflow-wrap:anywhere}
+/* @chain-region rule-4 */ .carousel-controls{display:flex;align-items:center;gap:3px;flex:none;color:var(--muted)}
+/* @chain-region rule-5 */ .carousel-controls[hidden]{display:none}
+/* @chain-region rule-6 */ .carousel-controls button{width:29px;min-height:29px;padding:5px}
+/* @chain-region rule-7 */ .carousel-controls .icon{width:14px;height:14px}
+/* @chain-region rule-8 */ .carousel-position{font-size:14px;min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+/* @chain-region rule-9 */ .carousel-enter{animation:station-slide .3s var(--ease) both}
+/* @chain-region rule-10 */ @keyframes station-slide{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+/* @chain-region rule-11 */ .work-status{max-width:1060px;margin-inline:auto;padding:10px 0 0}
+/* @chain-region rule-12 */ .station-heading,.station-links,.station-report-meta,.conversation-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+/* @chain-region rule-13 */ .station-heading{justify-content:space-between;margin-bottom:6px}
+/* @chain-region rule-14 */ .station-heading .eyebrow,.eyebrow:has(.icon),.section-heading h3{display:flex;align-items:center;gap:9px}
+/* @chain-region rule-15 */ .station-admitted{color:var(--muted);font-size:14px}
+/* @chain-region rule-16 */ .personal-desk{display:grid;grid-template-columns:minmax(160px,29%) 1fr;align-items:center;gap:36px;min-height:210px;padding:8px 0 20px}
+/* @chain-region rule-17 */ .station-illustration{display:flex;flex-direction:column;align-items:center;min-width:0;color:var(--accent)}
+/* @chain-region rule-18 */ .station-illustration>svg{width:100%;max-width:240px;max-height:190px;filter:drop-shadow(0 12px 18px #0004)}
+/* @chain-region rule-19 */ .station-state{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin-top:4px}
+/* @chain-region rule-20 */ .station-state i,.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex:none;display:inline-block}
+/* @chain-region rule-21 */ .personal-desk[data-state=working] .station-state{color:var(--cyan)}
+/* @chain-region rule-22 */ .personal-desk[data-state=waiting] .station-state{color:#ddc58c}
+/* @chain-region rule-23 */ .personal-desk[data-state=error] .station-state{color:var(--bad)}
+/* @chain-region rule-24 */ .personal-desk[data-state=working] .station-state i{animation:station-breathe 2.7s ease-in-out infinite}
+/* @chain-region rule-25 */ .station-work{min-width:0}
+/* @chain-region rule-26 */ .station-work h2{font-size:25px;font-weight:500;letter-spacing:-.5px;margin:8px 0 12px;overflow-wrap:anywhere}
+/* @chain-region rule-27 */ .station-report{color:var(--text);line-height:1.85;max-width:640px;font-size:14px}
+/* @chain-region rule-28 */ .station-report-meta{margin-top:18px;color:var(--muted);font-size:14px}
+/* @chain-region rule-29 */ .station-report-meta button{font-size:14px;padding:3px 9px;min-height:26px}
+/* @chain-region rule-30 */ .station-warning{color:#ddc58c;font-size:14px;margin-top:12px}
+/* @chain-region rule-31 */ .personal-conversation{border-top:1px solid var(--line);padding-top:22px}
+/* @chain-region rule-32 */ .personal-conversation>.section-heading{margin:0 0 18px}
+/* @chain-region rule-33 */ .personal-conversation h3{margin:0;font-size:14px;color:var(--muted)}
+/* @chain-region rule-34 */ .conversation-slide{min-height:70px;padding:0 0 16px;max-width:800px}
+/* @chain-region rule-35 */ .conversation-meta{gap:12px;margin-bottom:7px;font-size:14px;color:var(--muted)}
+/* @chain-region rule-36 */ .conversation-meta time{font-size:14px;opacity:.7}
+/* @chain-region rule-37 */ .conversation-slide>p{line-height:1.85;font-size:14px}
+/* @chain-region rule-38 */ #conversation-history{font-size:14px;color:var(--muted)}
+/* @chain-region rule-39 */ #conversation-history summary{width:fit-content;padding:4px 0}
+/* @chain-region rule-40 */ #personal-history article{padding:16px 0;border-bottom:1px solid var(--line)}
+/* @chain-region rule-41 */ #personal-history article p{color:var(--text);font-size:14px;line-height:1.85}
+/* @chain-region rule-42 */ .station-links{margin-top:20px;padding-top:14px;gap:6px;border-top:1px solid var(--line)}
+/* @chain-region rule-43 */ .station-links button{font-size:14px;padding:5px 10px}
+/* @chain-region rule-44 */ .station-links>span{font-size:14px;color:var(--muted);margin-left:auto}
+/* @chain-region rule-45 */ .onboarding-stage.work-footer{max-width:1060px;margin:22px auto 0;padding:18px 0;gap:12px 24px;grid-template-columns:1fr auto}
+/* @chain-region rule-46 */ .work-footer .agent-flow{justify-content:flex-start;gap:10px;grid-row:1;max-width:310px;transform:none}
+/* @chain-region rule-47 */ .work-footer .flow-link{width:34px;height:34px;font-size:14px}
+/* @chain-region rule-48 */ .work-footer .flow-node{font-size:14px;gap:3px}
+/* @chain-region rule-49 */ .work-footer .flow-node .icon{width:15px;height:15px}
+/* @chain-region rule-50 */ .work-footer .flow-wire{width:45px}
+/* @chain-region rule-51 */ .work-footer>.primary{font-size:14px;grid-row:1;grid-column:2;background:transparent;color:var(--muted);box-shadow:var(--ui-edge)}
+/* @chain-region rule-52 */ .work-footer>.flow-activity{grid-row:2;grid-column:1;font-size:14px;text-align:left;margin:0}
+/* @chain-region rule-53 */ .work-footer>.onboarding-manage{grid-row:2;grid-column:2;font-size:14px;justify-self:end}
+/* @chain-region rule-54 */ .work-footer .onboarding-membership{grid-column:1/-1;text-align:left}
+/* @chain-region rule-55 */ .stage-mission{padding-block:22px;min-height:190px}
+/* @chain-region rule-56 */ .stage-mission .mission-copy{min-width:0;max-width:720px}
+/* @chain-region rule-57 */ .stage-mission h2{margin:12px 0;font-size:26px}
+/* @chain-region rule-58 */ .stage-mission .eyebrow{display:flex;align-items:center;gap:8px}
+/* @chain-region rule-59 */ .stage-mission .halo{width:150px;height:150px;flex:none}
+/* @chain-region rule-60 */ .metrics .metric{gap:8px}
+/* @chain-region rule-61 */ .metrics .metric .icon{width:15px;height:15px;opacity:.65}
+/* @chain-region rule-62 */ .stage-leadership{margin-block:24px 32px}
+/* @chain-region rule-63 */ .election-summary{padding-block:8px 16px}
+/* @chain-region rule-64 */ .election-summary h3{display:flex;align-items:center;gap:8px}
+/* @chain-region rule-65 */ .election-status{font-size:14px;margin:8px 0 18px}
+/* @chain-region rule-66 */ .election-roles>div{gap:5px}
+/* @chain-region rule-67 */ .election-record-body>.connection-note{font-size:14px;line-height:1.8;margin-block:14px 20px}
+/* @chain-region rule-68 */ .quests{gap:26px 32px}
+/* @chain-region rule-69 */ .quest{padding:22px 24px;min-width:0}
+/* @chain-region rule-70 */ .quest h3{font-size:19px;line-height:1.55;margin:12px 0 10px;overflow-wrap:anywhere}
+/* @chain-region rule-71 */ .quest>p:not(.candidate-goal){color:var(--muted);font-size:14px;line-height:1.85;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+/* @chain-region rule-72 */ .quest .author{font-size:14px;margin:14px 0;color:var(--muted)}
+/* @chain-region rule-73 */ .quest .actions{margin-top:18px;gap:8px}
+/* @chain-region rule-74 */ .quest .actions button{font-size:14px}
+/* @chain-region rule-75 */ .quest[data-status=approved]>.eyebrow{color:var(--cyan)}
+/* @chain-region rule-76 */ .quest[data-status=approved] .status-dot,.stage-mission[data-phase=active] .status-dot{animation:station-breathe 2.7s ease-in-out infinite}
+/* @chain-region rule-77 */ .quest[data-status=voting]>.eyebrow{color:#b5aed8}
+/* @chain-region rule-78 */ .candidate-person{display:flex;align-items:center;gap:12px;margin:14px 0 16px;min-width:0}
+/* @chain-region rule-79 */ .candidate-person h3{font-size:20px;flex:1;margin:0;min-width:0}
+/* @chain-region rule-80 */ .candidate-avatar{display:grid;place-items:center;width:39px;height:39px;border-radius:50%;color:#c4b8e4;background:#b5a0df12;box-shadow:inset 0 0 0 1px #b5a0df24;flex:none;font-size:15px}
+/* @chain-region rule-81 */ .candidate-support{display:flex;flex-direction:column;align-items:flex-end;gap:1px;flex:none}
+/* @chain-region rule-82 */ .candidate-support b{font-size:27px;font-weight:500;color:var(--text);line-height:1.2;font-variant-numeric:tabular-nums}
+/* @chain-region rule-83 */ .candidate-support small{font-size:14px}
+/* @chain-region rule-84 */ .candidate-threshold{height:2px;background:#ffffff0a;margin:20px 0;overflow:hidden;border-radius:2px}
+/* @chain-region rule-85 */ .candidate-threshold i{display:block;height:100%;background:#b5a0df85;transition:width .6s var(--ease)}
+/* @chain-region rule-86 */ [data-contesting=true] .candidate-threshold i{background:linear-gradient(90deg,#b5a0df55,#c4b8e4);animation:station-breathe 3.5s ease-in-out infinite}
+/* @chain-region rule-87 */ .quest .candidate-goal{display:flex;align-items:flex-start;gap:9px;font-size:14px;margin:12px 0!important}
+/* @chain-region rule-88 */ .candidate-goal .icon{width:15px;height:15px;margin-top:4px;color:var(--muted)}
+/* @chain-region rule-89 */ .election-candidate>details{font-size:14px;color:var(--muted);margin-top:14px}
+/* @chain-region rule-90 */ .election-candidate>details p{margin-top:10px}
+/* @chain-region rule-91 */ .vote-summary{margin:16px 0 4px}
+/* @chain-region rule-92 */ .vote-totals{display:flex;align-items:center;gap:16px}
+/* @chain-region rule-93 */ .vote-count{padding:4px 0;gap:7px;border-radius:5px;color:var(--cyan);min-height:30px}
+/* @chain-region rule-94 */ .vote-count .icon{width:14px;height:14px}
+/* @chain-region rule-95 */ .vote-count b{font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+/* @chain-region rule-96 */ .vote-count span{font-size:14px;opacity:.85}
+/* @chain-region rule-97 */ .vote-count.oppose{color:var(--bad)}
+/* @chain-region rule-98 */ .vote-meter{display:flex;gap:2px;height:2px;max-width:170px;margin-top:7px;overflow:hidden;border-radius:2px}
+/* @chain-region rule-99 */ .vote-meter i:first-child{background:var(--cyan);opacity:.55}/* @chain-region rule-100 */ .vote-meter i+ i{background:var(--bad);opacity:.5}
+/* @chain-region rule-101 */ .vote-updated{animation:vote-change .65s var(--ease)}
+/* @chain-region rule-102 */ @keyframes vote-change{35%{color:var(--text);text-shadow:0 0 12px #c4b8e488;transform:translateY(-2px)}to{transform:none}}
+/* @chain-region rule-103 */ .vote-choice{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 0;margin:20px 0 6px;border-block:1px solid var(--line)}
+/* @chain-region rule-104 */ .vote-choice>div:first-child{display:flex;flex-direction:column;gap:4px}
+/* @chain-region rule-105 */ .vote-choice strong{font-size:14px;font-weight:500}/* @chain-region rule-106 */ .vote-choice small{font-size:14px}
+/* @chain-region rule-107 */ .vote-choice .actions{margin:0;gap:8px}
+/* @chain-region rule-108 */ .vote-option{min-width:78px;font-size:14px}
+/* @chain-region rule-109 */ .vote-option[aria-pressed=true]{background:#b5c78812;box-shadow:inset 0 0 0 1px #b5c78866;color:var(--cyan)}
+/* @chain-region rule-110 */ .vote-option.oppose[aria-pressed=true]{background:#dd9e9812;box-shadow:inset 0 0 0 1px #dd9e9866;color:var(--bad)}
+/* @chain-region rule-111 */ .dialog-top{position:sticky;top:0;z-index:2;background:#101217f2;backdrop-filter:blur(16px);border-radius:12px;padding-block:12px;gap:16px}
+/* @chain-region rule-112 */ .dialog-top h2{font-size:21px;line-height:1.6;overflow-wrap:anywhere}
+/* @chain-region rule-113 */ #dialog-body>p{line-height:1.9;margin-block:16px;color:var(--text)}
+/* @chain-region rule-114 */ #dialog-body>details{margin:14px 0;color:var(--muted);font-size:14px}
+/* @chain-region rule-115 */ #dialog-body>details p{margin-top:10px;line-height:1.9}
+/* @chain-region rule-116 */ .dialog-section{margin-top:28px;padding-top:24px}
+/* @chain-region rule-117 */ .comment-list article,.ballot-list article{padding:22px 0}
+/* @chain-region rule-118 */ .comment-list .row.between{gap:14px;align-items:flex-start}
+/* @chain-region rule-119 */ .comment-list .row strong,.ballot-list strong{font-size:14px;font-weight:500}
+/* @chain-region rule-120 */ .comment-list .avatar,.ballot-list .avatar{width:27px;height:27px;font-size:14px}
+/* @chain-region rule-121 */ .comment-list .row small,.ballot-list time{font-size:14px;color:var(--muted);white-space:nowrap}
+/* @chain-region rule-122 */ .comment-body{padding-left:39px;margin-top:10px;font-size:14px;line-height:1.9}
+/* @chain-region rule-123 */ .comment-body details{margin-top:6px}/* @chain-region rule-124 */ .comment-body summary{color:var(--muted);font-size:14px}
+/* @chain-region rule-125 */ .ballot-list article>.row{gap:10px;flex-wrap:wrap}/* @chain-region rule-126 */ .ballot-list time{margin-left:auto}
+/* @chain-region rule-127 */ .ballot-list article>p{padding-left:37px;font-size:14px;margin-top:10px;line-height:1.9}
+/* @chain-region rule-128 */ #comment-form{margin-top:24px;padding-top:20px}
+/* @chain-region rule-129 */ #comment-form label{font-size:14px;gap:10px;color:var(--muted)}
+/* @chain-region rule-130 */ #comment-form textarea{min-height:86px;line-height:1.8;font-size:14px;padding:12px 14px}
+/* @chain-region rule-131 */ #comment-form>button{margin-top:10px;font-size:14px}
+/* @chain-region rule-132 */ @media(max-width:800px){
+ .personal-desk{grid-template-columns:150px 1fr;gap:22px;min-height:210px}
+ .station-work h2{font-size:21px}.station-report{font-size:14px}
+ .surface>header:has(#situation-title)>h1{font-size:18px}
+ .stage-mission h2{font-size:22px}.stage-mission .halo{width:110px;height:110px}
+ .station-links>span{width:100%;margin:6px 10px 0}
+}
+/* @chain-region rule-133 */ @media(max-width:540px){
+ .surface>header:has(#situation-title){flex-wrap:wrap;gap:8px}
+ .surface>header:has(#situation-title)>.actions{margin-left:auto}
+ .personal-desk{grid-template-columns:1fr;gap:16px;padding-top:8px}
+ .station-illustration>svg{max-width:145px;max-height:125px}
+ .station-work h2{font-size:20px}.station-heading{gap:8px}
+ .onboarding-stage.work-footer{grid-template-columns:1fr;gap:12px}
+ .work-footer>.primary,.work-footer>.onboarding-manage,.work-footer>.flow-activity,.work-footer .agent-flow{grid-row:auto;grid-column:1;justify-self:start}
+ .comment-body{padding-left:0}.comment-list .row small{font-size:14px}
+ .stage-mission .halo{display:none}.vote-choice{align-items:flex-start}
+}
+/* @chain-region rule-134 */ @media(prefers-reduced-motion:reduce){
+ .carousel-enter,.vote-updated,.personal-desk .station-state i,.quest .status-dot,.stage-mission .status-dot,[data-contesting=true] .candidate-threshold i{animation:none!important}
+ .candidate-threshold i{transition:none}
+}
+/* @chain-region rule-135 */ html[data-hidden=true] :is(.carousel-enter,.vote-updated,.station-state i,.status-dot,.candidate-threshold i){animation-play-state:paused!important}
+
+/* @chain-region rule-136 */ .conversation-slide.is-empty{min-height:42px}/* @chain-region rule-137 */ .station-heading .work-sync{font-size:14px}/* @chain-region rule-138 */ .personal-conversation:has(.conversation-slide.is-empty){padding-top:18px}
+
+/* @chain-region rule-139 */ .stage-leadership .quests{grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:20px;align-items:start}
+/* @chain-region rule-140 */ .quest>details p{display:block;-webkit-line-clamp:unset;overflow:visible;padding:4px 0}
+/* @chain-region rule-141 */ .quest .candidate-goal{align-items:flex-start;line-height:1.8}
+/* @chain-region rule-142 */ .personal-conversation details>summary::before,.election-candidate details>summary::before,#dialog-body>details>summary::before{content:'›';display:inline-block;margin-right:7px;transition:transform .2s var(--ease)}
+/* @chain-region rule-143 */ .personal-conversation details[open]>summary::before,.election-candidate details[open]>summary::before,#dialog-body>details[open]>summary::before{transform:rotate(90deg)}
+
+/* Summary stays on the work surface; full text opens in a separate reading dialog. */
+/* @chain-region rule-144 */ .read-detail{display:inline-flex;align-items:center;gap:9px;padding:7px 11px;margin:5px 0;border:1px solid var(--line);border-radius:20px;font-size:14px;color:var(--muted);background:#ffffff02}
+/* @chain-region rule-145 */ .read-detail:hover,.read-detail:focus-visible{color:var(--text);border-color:#a9bdd766;background:#a9bdd70c}
+/* @chain-region rule-146 */ .read-detail>span{opacity:.6}/* @chain-region rule-147 */ .station-report-meta .read-detail{margin:0}
+/* @chain-region rule-148 */ #dialog-body>.read-detail{margin-right:10px}/* @chain-region rule-149 */ .election-candidate>.read-detail{margin-top:14px}
+/* @chain-region rule-150 */ .personal-conversation .read-detail{font-size:14px}/* @chain-region rule-151 */ .station-report{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+/* @chain-region rule-152 */ .reading-dialog{width:min(760px,calc(100vw - 40px));overscroll-behavior:contain;scroll-padding-top:90px}
+/* @chain-region rule-153 */ .detail-content{font-size:14px;line-height:1.95;overflow-wrap:anywhere;color:var(--text);padding:2px 0 18px}
+/* @chain-region rule-154 */ .detail-text{white-space:pre-wrap}/* @chain-region rule-155 */ .detail-content pre{white-space:pre-wrap;overflow-wrap:anywhere}
+/* @chain-region rule-156 */ .detail-content>:first-child{margin-top:0}/* @chain-region rule-157 */ .detail-content>:last-child{margin-bottom:0}
+/* @chain-region rule-158 */ @media(max-width:620px){.reading-dialog{width:calc(100vw - 24px);max-height:calc(100vh - 40px);padding:16px 20px}.reading-dialog .dialog-top{top:0}.reading-dialog .dialog-top h2{font-size:18px}.detail-content{font-size:14px}}

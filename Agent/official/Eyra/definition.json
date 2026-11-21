@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "id": "aieyra.eyra",
+  "version": "1.1.13",
+  "name": "Eyra",
+  "tool_choices": [
+    "project",
+    "update_plan",
+    "memory",
+    "report",
+    "terminal",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output",
+    "apply_patch",
+    "view_image",
+    "web_search",
+    "agents",
+    "community",
+    "link"
+  ],
+  "default_tools": [
+    "project",
+    "update_plan",
+    "memory",
+    "report",
+    "terminal",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output",
+    "apply_patch",
+    "view_image",
+    "web_search",
+    "agents",
+    "community",
+    "link"
+  ],
+  "prompts": {
+    "contract": "Matrix/运行协定/团队主控.txt",
+    "team": "Matrix/运行协定/团队沟通.txt",
+    "narration": "Matrix/运行协定/过程展示.txt",
+    "unavailable": "Matrix/运行协定/团队不可用.txt",
+    "base_stage": "Matrix/运行协定/基础能力阶段.txt",
+    "role_off": "Matrix/运行协定/团队角色关闭.txt",
+    "delivery": "Matrix/运行协定/团队结果交付.txt",
+    "default_self": "Matrix/默认/自我.txt",
+    "default_work": "Matrix/默认/工作.txt",
+    "default_boundary": "Matrix/默认/边界.txt",
+    "default_thinking": "Matrix/默认/思考方式.txt"
+  },
+  "context_provider": {
+    "id": "aieyra.context.pac",
+    "version": "1.0.0",
+    "state_schema": 1
+  },
+  "runtime": {
+    "model": {
+      "tool_calls": true,
+      "image_input": false,
+      "min_context_tokens": 0
+    },
+    "budget": {
+      "max_tokens": 1000000,
+      "timeout_seconds": 600
+    },
+    "policy": {
+      "work_mode": "direct-or-delegate",
+      "lifetime": "retained"
+    },
+    "prompt_order": [
+      "default_self",
+      "default_work",
+      "default_boundary",
+      "default_thinking"
+    ],
+    "prompt_files": {
+      "contract": "prompts/contracts/团队主控.txt",
+      "team": "prompts/contracts/团队沟通.txt",
+      "narration": "prompts/contracts/过程展示.txt",
+      "unavailable": "prompts/contracts/团队不可用.txt",
+      "base_stage": "prompts/contracts/基础能力阶段.txt",
+      "role_off": "prompts/contracts/团队角色关闭.txt",
+      "delivery": "prompts/contracts/团队结果交付.txt",
+      "default_self": "prompts/default/自我.txt",
+      "default_work": "prompts/default/工作.txt",
+      "default_boundary": "prompts/default/边界.txt",
+      "default_thinking": "prompts/default/思考方式.txt"
+    },
+    "tool_packages": [],
+    "programs": [],
+    "data_schema": 1,
+    "team": "team/definition.json"
+  }
+}

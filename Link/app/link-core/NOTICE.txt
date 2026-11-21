@@ -1,0 +1,14 @@
+Aieyra Link native CLI and managed installers
+
+The native CLI derives from Aieyra OS CORE/link and CORE/internal/privatefile.
+Managed installers, service template and guide derive from Aieyra OS scripts/link.
+These components retain the MIT license, Copyright (c) 2026 Aieyra contributors.
+The independent office/desktop code retains its separate root license.
+Origin paths, exact installer hashes and reuse scope are in SOURCES.json.
+
+LAN discovery reuses github.com/libp2p/zeroconf/v2 v2.2.0 (MIT),
+github.com/miekg/dns v1.1.68 (BSD-3-Clause) and pinned golang.org/x modules
+(BSD-3-Clause). Versions, upstream sources and exact license hashes are
+recorded in scripts/link/SOURCES.json. The complete notices and license texts
+are in licenses/link-cli-third-party.txt in source and THIRD_PARTY_LICENSES.txt
+in native packages. Test-only dependencies are not native runtime payloads.

@@ -1,0 +1,1 @@
+import{Ft as m}from"./index.js";var h=m("M6 4h12v18H6Zm3 0V2h6v2m-7 6h8m-8 4h8"),a=m("M3 9V3h6m12 6V3h-6M3 15v6h6m12-6v6h-6m0-9a3 3 0 1 1-6 0"),v=m("M21 12a9 9 0 0 0-15-6l-3 3M3 4v5h5m-5 3a9 9 0 0 0 15 6l3-3m0 5v-5h-5"),s=m("M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Zm-3-10 2 2 4-4");export{s as i,a as n,v as r,h as t};

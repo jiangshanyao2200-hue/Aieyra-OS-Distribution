@@ -1,0 +1,18 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Theme/official/AGENTS.md | ring 3
+ * Chains: module-local; query impact before editing
+ * Regions: html:has(body.has-space-background); html:has(body.settings-extension[data-placement=attached]); body.has-space-background; body.has-space-background::before; body.has-space-background::after; body.settings-extension[data-placement=attached]::before,body.settings-extension[data-placement=attached]::after; body.settings-extension[data-placement=attached]
+ * Impact: python -B scripts/code-atlas.py show Theme/official/default/window-theme.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Every detached surface uses the same background and non-home veil as OS. */
+html:has(body.has-space-background) { background:#08090b; }
+html:has(body.settings-extension[data-placement=attached]) { background:transparent; }
+body.has-space-background { background:transparent; }
+body.has-space-background::before { content:'';position:fixed;inset:-48px;z-index:-1;background:linear-gradient(rgba(8,9,11,var(--space-veil,.5)),rgba(8,9,11,var(--space-veil,.5))),var(--space-background) center/cover no-repeat;filter:blur(var(--space-blur,12px));pointer-events:none; }
+body.has-space-background::after { content:'';position:fixed;inset:0;z-index:-1;background:rgba(8,9,11,.4);pointer-events:none; }
+body.settings-extension[data-placement=attached]::before,body.settings-extension[data-placement=attached]::after { display:none; }
+body.settings-extension[data-placement=attached] { background:transparent; }

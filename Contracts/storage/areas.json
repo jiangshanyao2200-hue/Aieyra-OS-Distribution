@@ -1,0 +1,309 @@
+{
+  "schema": 1,
+  "areas": [
+    {
+      "id": "agents",
+      "relative": "Agents",
+      "owner": "agent-runtime",
+      "cleanup": "instance-receipt",
+      "description": "Explicitly created package Agent instances, pinned definitions, private overrides, separate memory and existing task archives. Installation does not instantiate or join a team.",
+      "profile_relative": "Agents/instances"
+    },
+    {
+      "id": "sessions",
+      "relative": "sessions",
+      "owner": "session-service",
+      "cleanup": "session-receipt",
+      "description": "Legacy standalone session archives; typed history and checkpoints remain authoritative.",
+      "profile_relative": "Sessions/standalone"
+    },
+    {
+      "id": "conversations",
+      "relative": "conversations",
+      "owner": "conversation-service",
+      "cleanup": "session-receipt",
+      "description": "Contact identities, independent sessions, results and per-session cleanup receipts.",
+      "profile_relative": "Sessions/conversations"
+    },
+    {
+      "id": "context",
+      "relative": "context",
+      "owner": "session-service",
+      "cleanup": "session-receipt",
+      "description": "Managed session catalogues and archive versions; provider state has its own namespace.",
+      "profile_relative": "Sessions/context"
+    },
+    {
+      "id": "memory",
+      "relative": "memory",
+      "owner": "memory-service",
+      "cleanup": "explicit-forget",
+      "description": "Shared memories, original transcript projection, PAC and durable transcription outbox. Closing a session does not forget shared memories.",
+      "profile_relative": "Memory"
+    },
+    {
+      "id": "attachments",
+      "relative": "runtime/attachments",
+      "owner": "asset-service",
+      "cleanup": "shared-reference",
+      "description": "Immutable attachment snapshots and draft/send references. Only unreferenced verified assets may be collected.",
+      "profile_relative": "Assets/attachments"
+    },
+    {
+      "id": "gallery",
+      "relative": "gallery",
+      "owner": "image-library",
+      "cleanup": "shared-reference",
+      "description": "User gallery and its referenced assets; closing a tool or changing theme retains them.",
+      "profile_relative": "Assets/gallery"
+    },
+    {
+      "id": "generated_images",
+      "relative": "generated-images",
+      "owner": "image-service",
+      "cleanup": "shared-reference",
+      "description": "Image generation receipts and results; unknown outcomes must not be replayed by cleanup.",
+      "profile_relative": "Assets/generated-images"
+    },
+    {
+      "id": "reports",
+      "relative": "reports",
+      "owner": "diagnostics-service",
+      "cleanup": "retention-policy",
+      "description": "Diagnostic and work reports; not the sole source of conversation history.",
+      "profile_relative": "Logs/reports"
+    },
+    {
+      "id": "logs",
+      "relative": "logs",
+      "owner": "diagnostics-service",
+      "cleanup": "retention-policy",
+      "description": "Rotated diagnostics, separate from authoritative archives and tool receipts.",
+      "profile_relative": "Logs/diagnostics"
+    },
+    {
+      "id": "runtime",
+      "relative": "runtime",
+      "owner": "host-runtime",
+      "cleanup": "owner-release",
+      "description": "Live host state. The attachment subtree has independent reference retention; never recursively clear this whole root.",
+      "profile_relative": "Runtime"
+    },
+    {
+      "id": "tasks",
+      "relative": "matrix",
+      "owner": "agent-runtime",
+      "cleanup": "task-receipt",
+      "description": "Task identities, generations, intents and receipts, with per-instance execution ownership.",
+      "profile_relative": "Sessions/tasks"
+    },
+    {
+      "id": "programs",
+      "relative": "Programs",
+      "owner": "program-service",
+      "cleanup": "explicit-remove",
+      "description": "Persistent program data, retained across package updates, disable and uninstall.",
+      "profile_relative": "Programs/mods"
+    },
+    {
+      "id": "packages",
+      "relative": "Packages",
+      "owner": "module-service",
+      "cleanup": "dependency-aware",
+      "description": "Immutable imported packages, activation and dependency locks.",
+      "profile_relative": "Packages/registry"
+    },
+    {
+      "id": "modules",
+      "relative": "Modules",
+      "owner": "module-service",
+      "cleanup": "explicit-remove",
+      "description": "User-authored or third-party module sources; never overwritten by official software updates.",
+      "profile_relative": "Packages/sources"
+    },
+    {
+      "id": "workflows",
+      "relative": "workflows",
+      "owner": "workflow-service",
+      "cleanup": "task-receipt",
+      "description": "Version-locked workflows, durable step intentions and receipts; updates or cancellation never erase results or replay unknown effects.",
+      "profile_relative": "Tools/workflows"
+    },
+    {
+      "id": "workspaces",
+      "relative": "workspaces",
+      "owner": "session-service",
+      "cleanup": "session-receipt",
+      "description": "Legacy workspace metadata, history, pending feedback and active selection.",
+      "profile_relative": "Sessions/workspaces"
+    },
+    {
+      "id": "cli_workspaces",
+      "relative": "cli/workspaces",
+      "owner": "session-service",
+      "cleanup": "session-receipt",
+      "description": "Legacy CLI archives; retained independently of the current runtime.",
+      "profile_relative": "Sessions/cli"
+    },
+    {
+      "id": "image_batches",
+      "relative": "image-batches",
+      "owner": "image-service",
+      "cleanup": "task-receipt",
+      "description": "Image batch intentions, request outcomes and retries; unknown effects must not be replayed.",
+      "profile_relative": "Tools/image-batches"
+    },
+    {
+      "id": "project_maps",
+      "relative": "project-maps",
+      "owner": "workspace-service",
+      "cleanup": "explicit-remove",
+      "description": "Project indexes tied to explicit user workspaces, never public products.",
+      "profile_relative": "Tools/project-maps"
+    },
+    {
+      "id": "stations",
+      "relative": "stations",
+      "owner": "agent-runtime",
+      "cleanup": "owner-release",
+      "description": "Agent station identity and credentials; release the writer before migration.",
+      "profile_relative": "Agents/stations"
+    },
+    {
+      "id": "matrix_api",
+      "relative": "matrix-api",
+      "owner": "agent-runtime",
+      "cleanup": "owner-release",
+      "description": "Authenticated task control endpoints and execution owner state.",
+      "profile_relative": "Runtime/matrix-api"
+    },
+    {
+      "id": "browser",
+      "relative": "agent-browser",
+      "owner": "browser-program",
+      "cleanup": "explicit-remove",
+      "description": "Browser profile and task data shared by user and Agent.",
+      "profile_relative": "Programs/browser"
+    },
+    {
+      "id": "preview",
+      "relative": "preview-storage",
+      "owner": "preview-service",
+      "cleanup": "owner-release",
+      "description": "Preview browser profile; release all views before maintenance.",
+      "profile_relative": "Programs/preview"
+    },
+    {
+      "id": "desktop_profile",
+      "relative": "workspace-desktop",
+      "owner": "desktop-client",
+      "cleanup": "owner-release",
+      "description": "Legacy desktop browser profile.",
+      "profile_relative": "Runtime/desktop"
+    },
+    {
+      "id": "matrix_profile",
+      "relative": "matrix-window-profile",
+      "owner": "desktop-client",
+      "cleanup": "owner-release",
+      "description": "Legacy task window browser profile.",
+      "profile_relative": "Runtime/task-windows"
+    },
+    {
+      "id": "captures",
+      "relative": "computer-captures",
+      "owner": "computer-tool",
+      "cleanup": "shared-reference",
+      "description": "Computer observations, screenshots and cancellation receipts.",
+      "profile_relative": "Assets/computer-captures"
+    },
+    {
+      "id": "settings_revisions",
+      "relative": "settings-revisions",
+      "owner": "settings-service",
+      "cleanup": "retention-policy",
+      "description": "Private settings recovery history, including credentials; never exported with a module.",
+      "profile_relative": "Config/revisions"
+    },
+    {
+      "id": "apps",
+      "relative": "apps",
+      "owner": "program-service",
+      "cleanup": "explicit-remove",
+      "description": "Legacy installed application payloads and private state.",
+      "profile_relative": "Programs/legacy-apps"
+    },
+    {
+      "id": "resources",
+      "relative": "center",
+      "owner": "module-service",
+      "cleanup": "dependency-aware",
+      "description": "Legacy resource packages and their retained user data.",
+      "profile_relative": "Packages/legacy-resources"
+    },
+    {
+      "id": "forum",
+      "relative": "matrix-home",
+      "owner": "community-program",
+      "cleanup": "explicit-remove",
+      "description": "Private community synchronization state.",
+      "profile_relative": "Programs/community"
+    },
+    {
+      "id": "updates",
+      "relative": "updates",
+      "owner": "updater",
+      "cleanup": "owner-release",
+      "description": "Staged updates and recovery receipts.",
+      "profile_relative": "Runtime/updates"
+    },
+    {
+      "id": "link",
+      "relative": "link",
+      "owner": "link-program",
+      "cleanup": "owner-release",
+      "description": "Local Link/Control private stores and identity. Separate product migration requires its owners to release.",
+      "profile_relative": "Programs/link"
+    },
+    {
+      "id": "notes",
+      "relative": "notes",
+      "owner": "notes-program",
+      "cleanup": "explicit-remove",
+      "description": "Isolated or explicitly mapped notes. User-selected external documents are not owned by this area.",
+      "profile_relative": "Programs/notes"
+    },
+    {
+      "id": "desk_mode",
+      "relative": "desk-mode.json",
+      "owner": "desktop-client",
+      "cleanup": "explicit-remove",
+      "description": "Private desktop mode selection.",
+      "profile_relative": "Config/desktop-mode.json"
+    },
+    {
+      "id": "module_order",
+      "relative": "module-order.json",
+      "owner": "desktop-client",
+      "cleanup": "explicit-remove",
+      "description": "Private module ordering.",
+      "profile_relative": "Config/module-order.json"
+    },
+    {
+      "id": "servers",
+      "relative": "servers",
+      "owner": "servers-program",
+      "cleanup": "explicit-remove",
+      "description": "Server identities, encrypted credentials and SSH service data.",
+      "profile_relative": "Programs/servers"
+    },
+    {
+      "id": "video_tasks",
+      "relative": "video-tasks",
+      "owner": "video-service",
+      "cleanup": "task-receipt",
+      "description": "Per-conversation video intents, original provider receipts and verified media; unknown submissions are never replayed.",
+      "profile_relative": "Tools/video-tasks"
+    }
+  ]
+}

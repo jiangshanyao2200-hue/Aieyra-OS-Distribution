@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "platform": "windows-amd64",
+  "python": "3.13.11",
+  "ddgs": "9.16.0",
+  "files": [
+    {
+      "name": "python-3.13.11-embed-amd64.zip",
+      "url": "https://www.python.org/ftp/python/3.13.11/python-3.13.11-embed-amd64.zip",
+      "sha256": "1ec066fb61ba5e8c73e29e048cd07c26850f74585e3a116005135b31b8004890",
+      "kind": "python"
+    },
+    {
+      "name": "click-8.5.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl",
+      "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360",
+      "kind": "wheel",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "ddgs-9.16.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/f9/0c/b43a87e81e45caf2c30fea9a5914dfd17b83a9f3c2c59ae22b6257bcf083/ddgs-9.16.0-py3-none-any.whl",
+      "sha256": "175d9198c958a263f51a06a54368ba0b41294942c0cd29f4aa71be03dbcd5f4a",
+      "kind": "wheel",
+      "license": "MIT"
+    },
+    {
+      "name": "lxml-6.1.3-cp313-cp313-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/c0/28/e46a7702bd95e9043291f7c3539b6184cba66f96cea9936f20939b284eeb/lxml-6.1.3-cp313-cp313-win_amd64.whl",
+      "sha256": "e477aca0bc0d19f3b4ae9e4f2a1cfd687c31bf772d78734910658186b40b2477",
+      "kind": "wheel",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "primp-2.0.1-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/bc/7b/1dd9f11c86743fde7a9c21552d0e20c444d4ea237f44844d4b0a998fe512/primp-2.0.1-cp310-abi3-win_amd64.whl",
+      "sha256": "0e27f3e233cf34cae6cbc8158af58b93fb0a87ceb1802b4611c7a14a2d822cdc",
+      "kind": "wheel",
+      "license": "MIT License"
+    }
+  ]
+}

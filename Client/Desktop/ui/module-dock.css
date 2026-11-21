@@ -1,0 +1,17 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body.module-dragging, body.module-dragging *; [data-module-state].module-dragging; [data-module-state].module-drag-out; [data-module-state=starting]
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/module-dock.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* OS 顶栏标签外嵌的手势反馈与右键菜单。由 ui/module-dock.mjs 使用。 */
+body.module-dragging, body.module-dragging * { cursor: grabbing !important; user-select: none !important; }
+[data-module-state].module-dragging { opacity: .45; background:#a9c0ec20!important; box-shadow:inset 0 0 0 1px #c3d4ee88; }
+[data-module-state].module-drag-out { opacity: 1; outline: 1px dashed #ffffff60; outline-offset: 2px; }
+[data-module-state=starting] { opacity: .5; pointer-events: none; }
+/* Pointer capture keeps release with the pressed entry. Leave the original
+   hover transitions intact instead of snapping labels on long press. */

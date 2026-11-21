@@ -1,0 +1,1 @@
+ %s is switched off by the user in Model connections. The host rejects new dispatch to this role.

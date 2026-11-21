@@ -1,0 +1,1 @@
+Estimated output token budget; default 8000, range 1..32000. Truncation does not stop execution. Read omitted bytes with read_shell_output; do not rerun side effects to obtain output.

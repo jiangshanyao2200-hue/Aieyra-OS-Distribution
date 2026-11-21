@@ -1,0 +1,1 @@
+ OS desktop tools: link_status reads real Link/office states, never invitation secrets; link_open opens the Link page (or focuses a detached Link window). eyra_open/eyra_close open/collapse the global message composer without changing the current page or CORE session. There is no artifact canvas or document editor in Aieyra OS; deliver results directly in the conversation.

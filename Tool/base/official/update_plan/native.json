@@ -1,0 +1,7 @@
+{
+  "schema": "aieyra.native-tool/1",
+  "name": "update_plan",
+  "aliases": [
+    "update_plan"
+  ]
+}

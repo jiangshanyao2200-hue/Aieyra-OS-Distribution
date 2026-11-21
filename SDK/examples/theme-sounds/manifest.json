@@ -1,0 +1,52 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.theme-sounds",
+  "kind": "theme",
+  "name": "轻声提示主题示例",
+  "summary": "任务完成、失败与待回答事件的短提示音。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "theme": "^1.4.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "theme": "theme.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "assets/attention.wav": {
+      "sha256": "21259bca5ffdcd4c6693fcd45ee0f9d7057f46fe2de363c4563f1d52282c1a07",
+      "size": 6444
+    },
+    "assets/complete.wav": {
+      "sha256": "2da6be6ddd8b1efe7f27e5c828f07a1f059edab603048ee5a2d8b40579e17dec",
+      "size": 6444
+    },
+    "assets/failure.wav": {
+      "sha256": "3a6ff57ba21eed9bdf1cc1900d431d1ad494e9a9521467ec7ffc9202ed47856d",
+      "size": 6444
+    },
+    "README.md": {
+      "sha256": "bd8515502b7a2e0450ec90d31ea009135601a6fa899fa36d78f017aecfdb60f6",
+      "size": 371
+    },
+    "theme.json": {
+      "sha256": "255d3e3d6d5c086ce9e036328981d6eaf1d4a44aacc23989416ceb47de2d243a",
+      "size": 458
+    }
+  }
+}

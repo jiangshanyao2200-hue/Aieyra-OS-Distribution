@@ -1,0 +1,70 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.video_gen",
+  "kind": "toolbox",
+  "name": "视频生成",
+  "summary": "会话内持久视频任务、单次提交与校验下载",
+  "version": "1.0.0",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/preview.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "README.md": {
+      "sha256": "b24be8c68a52fc375068507855a6f309678a5274fd845f4d6be76ac722080961",
+      "size": 599
+    },
+    "definition.go": {
+      "sha256": "be3a5e7c7f9062cf8f75811b03ada4ad2d64fd481b2d0c68bdd4c8255fea2a51",
+      "size": 855
+    },
+    "manual.txt": {
+      "sha256": "cabfc573fa251eca77770459eaad6de0d95cdcf74a5ad441daae28e2d27134c1",
+      "size": 2145
+    },
+    "native.json": {
+      "sha256": "3f218fc8759d28bf9dae1ab4a75de4e2eb170ae1dcdb7270ab32230ef04b961c",
+      "size": 77
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "bfadcca67dfa5838e9393f4ae0229a5ab768f51be8c1e9e7a42fe4500bcd415b",
+      "size": 406
+    },
+    "presentation/text/preview.go": {
+      "sha256": "f738c1400d6598dfd413496e0b322c54a5ee77b089741eb1a77b01c0f4976892",
+      "size": 454
+    }
+  }
+}

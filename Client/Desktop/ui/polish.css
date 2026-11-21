@@ -1,0 +1,76 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body #desktop-dock button; body #desktop-dock svg; body #onboarding #prompt-editor; body[data-eyra-placement=compact] #screen #conversation #answer-stage; body #status-anchor::before; .transcript-head .transcript-summary; body:is([data-form=chat],[data-form=work]) #screen #conversation
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/polish.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* 细节修正（Codex · AIDEBUG 单写，2026-10-10 起）。最后加载，只放覆盖规则；改动前先读 docs/UI设计知识库.md。 */
+
+/* 36px 圆内是 16px 图标 + 两侧各 10px。展开时仍使用原有标签动效。 */
+body #desktop-dock button {
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+body #desktop-dock svg { display: block; }
+
+/* 只让外层拖动改变高度。52vh 的旧最小高度会超出 44dvh 外框，
+   使真正的滚动框下缘连同渐变被 overflow:hidden 裁掉。 */
+body #onboarding #prompt-editor {
+  min-height: 0;
+  height: 100%;
+  resize: none;
+}
+
+/* 动态边缘：方向没有剩余内容时变量为 0；有内容时最多淡出 14px。
+   保留 scroll-edges 的几何量，不用固定上下遮罩掩盖完整内容。
+   后面的具体选择器覆盖旧样式中优先级更高的固定 mask。 */
+.soft-scroll,
+body #live-current.soft-scroll,
+body #onboarding #prompt-editor,
+body #onboarding #appearance-settings .appearance-preview,
+.glass-select-list,
+body[data-eyra-placement=compact] #screen #conversation #answer-stage {
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 0,
+    #000 min(14px, var(--fade-top, 0px)),
+    #000 calc(100% - min(14px, var(--fade-bottom, 0px))),
+    transparent 100%);
+  mask-image: linear-gradient(to bottom,
+    transparent 0,
+    #000 min(14px, var(--fade-top, 0px)),
+    #000 calc(100% - min(14px, var(--fade-bottom, 0px))),
+    transparent 100%);
+}
+
+/* 顶栏只在底部留 14px 过渡；整条栏的正文不参与大范围淡出。 */
+body #status-anchor::before {
+  inset: 0 0 -14px;
+  background: linear-gradient(180deg,
+    rgba(8,9,11,.88) 0,
+    rgba(8,9,11,.62) calc(100% - 14px),
+    transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 14px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 14px), transparent);
+}
+
+/* 单行摘要的水平溢出也用短过渡。 */
+.plan-current,
+.transcript-head .transcript-summary {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 14px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 14px), transparent);
+}
+
+/* 新聊天列的布局规则带 !important；这里仅缩短同一滚动边缘。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation {
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 0, #000 min(14px, var(--fade-top, 0px)),
+    #000 calc(100% - min(14px, var(--fade-bottom, 0px))), transparent 100%) !important;
+  mask-image: linear-gradient(to bottom,
+    transparent 0, #000 min(14px, var(--fade-top, 0px)),
+    #000 calc(100% - min(14px, var(--fade-bottom, 0px))), transparent 100%) !important;
+}

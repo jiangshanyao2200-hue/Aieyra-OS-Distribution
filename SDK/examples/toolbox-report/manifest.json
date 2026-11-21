@@ -1,0 +1,73 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.report",
+  "kind": "toolbox",
+  "name": "统计报告示例",
+  "summary": "统计报告示例：独立实现、手册和两端呈现。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.0.0"
+  },
+  "capabilities": [
+    "tool.invoke"
+  ],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "tool.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "apply_patch",
+      "reason": "创建用户指定的统计报告"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.tool",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "eb25374e74ffebdaa95c2013bf508b196cc501d734836930015544256f4b05c2",
+      "size": 79
+    },
+    "desktop.json": {
+      "sha256": "9edd6b97d8fdfcd36ea1560b638bfbbbb88d1885e82162d869b904b383afa20c",
+      "size": 283
+    },
+    "manual.md": {
+      "sha256": "95e2a96afc04a0d7a76bfe7c7c4a785755cd7f5568de8a5e25a138c9daaf523b",
+      "size": 776
+    },
+    "run.js": {
+      "sha256": "f1a55c59a01471afaf43ece82b644ae41d8aea6cf29956dce98c04d314c4013b",
+      "size": 732
+    },
+    "tool.json": {
+      "sha256": "909fe7104bcaed84691bb3bb6c309e9dfc4a4cf9893ca0071067258184d20d09",
+      "size": 567
+    }
+  }
+}

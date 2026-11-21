@@ -1,0 +1,119 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: @property --layer-input-height; @property --projection-stack-height; @property --chat-work-available-height; @property --chat-bottom-inset; @property --chat-input-left; body[data-chat-layer=true]; .chat-layer-veil; .chat-layer-surface; .chat-layer-veil.chat-layer-surface; .chat-layer-mini,.chat-layer-fold; body #screen>.chat-layer-veil; body #screen>.chat-layer-fold; body #screen>.chat-layer-mini; @layer aieyra-workspace; body #screen #conversation #emergence[hidden]; body[data-chat-layer=true]:has(#os-home) :is(#screen,#os-home); body[data-chat-layer=true]:has(#os-home) #os-home; body[data-chat-layer=true]:has(#os-home) #stage.shared-work-surface; body .chat-layer-summary; .scoped-report-surface; .scoped-report-surface[hidden]; .scoped-report-surface .document-header; body .scoped-report-surface #document-content,body .scoped-report-surface #document-html; body[data-program-agent=true] #status-rail; body .chat-layer-fold; .chat-layer-fold svg; .chat-layer-mini; body .chat-layer-avatar; .chat-layer-avatar>.role-ring; .chat-layer-details; .chat-layer-summary; .chat-layer-live; .chat-layer-live :is(.work-transcript-block,.work-transcript-text); .chat-layer-details[hidden],.chat-layer-live[hidden]; .chat-layer-mini; .chat-layer-mini[data-dragging=true],.chat-layer-mini[data-dragging=true] .chat-layer-avatar; .chat-layer-feed; .chat-layer-feed[hidden]; @layer aieyra-workspace; .chat-layer-feed .chat-entry; .chat-layer-feed .chat-text; body[data-chat-expanded=true] .chat-layer-feed; .chat-layer-name; .chat-layer-status; .chat-layer-mini[hidden],.chat-layer-fold[hidden],.chat-layer-veil[hidden],.chat-layer-status[hidden]; body[data-chat-layer=true][data-chat-expanded=true][data-chat-transition=waiting] .chat-layer-surface; body[data-chat-layer=true][data-chat-expanded=false] .chat-layer-surface; body[data-chat-layer=true][data-chat-expanded=false]:not([data-chat-closing=true]) .chat-layer-surface; body[data-chat-layer=true] #stage.shared-work-surface; body[data-chat-layer=true] #presence-caption; body[data-home-native-chat=true] :is(#conversation,#bottom-bar,.chat-layer-mini,.chat-layer-fold,.chat-layer-veil); body[data-chat-layer=true] .presence-work-status; body[data-chat-layer=true][data-program-agent=true]; body[data-chat-layer=true][data-program-agent=true] :is(.program-panel-edge,.panel-collapse); body[data-chat-layer=true][data-program-agent=true][data-chat-closing=true] :is(#bottom-bar,.program-recent); body[data-chat-layer=true] #stage.shared-work-surface; body[data-chat-layer=true] #stage.shared-work-surface>.stage-pane[data-kind=terminal]; body[data-chat-layer=true] #stage.shared-work-surface>.stage-pane[data-kind=terminal]>.stage-head; body[data-chat-layer=true] #stage.shared-work-surface>.stage-pane[data-kind=terminal]>.stage-body; body[data-chat-layer=true] #stage .terminal-view-toolbar; body[data-chat-layer=true] #stage .terminal-view-screen; @media(prefers-reduced-motion:reduce); @layer aieyra-workspace; body[data-chat-layer=true] .layered-chat-content; body[data-chat-layer=true] .layered-chat-content .shared-chat-messages; body[data-chat-layer=true] .layered-chat-content #conversation-content:empty + #emergence; body[data-chat-layer=true] .layered-chat-composer; body[data-chat-layer=true] :is(.program-panel-header,.panel-collapse,.program-panel-edge); body:is(.coding-page,[data-program-agent=true]) #status-rail; body[data-scoped-report-open=true] #status-rail; @layer aieyra-workspace; body #screen #conversation #emergence:is([data-work=true],[data-response=true]); body #screen #emergence:is([data-work=true],[data-response=true]) .presence-header; body #screen #emergence:is([data-work=true],[data-response=true]) #answer-stage; body #screen #emergence:is([data-work=true],[data-response=true]) .presence-identity; body #screen #emergence:is([data-work=true],[data-response=true]) #voice; body #screen #conversation #emergence[data-work=true]; body #screen #emergence[data-work=true] #answer-stage; body #screen #emergence[data-work=true] #voice
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/layered-chat.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* One overlay material and one fold grammar; program content remains below it. */
+/* Geometry belongs to these surfaces themselves. Non-inherited properties
+   preserve var() fallbacks while keeping their animation out of descendants. */
+@property --layer-input-height { syntax:"*";inherits:false; }
+@property --projection-stack-height { syntax:"*";inherits:false; }
+@property --chat-work-available-height { syntax:"*";inherits:false; }
+@property --chat-bottom-inset { syntax:"*";inherits:false; }
+@property --chat-input-left { syntax:"*";inherits:false; }
+body[data-chat-layer=true] { --chat-layer-top:var(--titlebar-height,48px);--work-ring:var(--eyra-avatar,110px); }
+/* Bright native pages still need a readable conversation and composer. */
+.chat-layer-veil { position:fixed;inset:var(--chat-layer-top,0px) 0 0 var(--workspace-inset,0px);background:rgb(5 6 10 / var(--chat-veil,.18));backdrop-filter:blur(var(--chat-blur,12px));z-index:8;pointer-events:auto; }
+.chat-layer-surface { z-index:9; }
+.chat-layer-veil.chat-layer-surface { z-index:8; }
+.chat-layer-mini,.chat-layer-fold { pointer-events:auto; }
+/* The home screen is already below the OS bar and may be translated by a drawer. */
+body #screen>.chat-layer-veil { position:absolute;inset:0; }
+body #screen>.chat-layer-fold { position:absolute;top:16px; }
+body #screen>.chat-layer-mini { position:absolute;left:16px; }
+/* Layer geometry belongs to the OS, including when a theme relocates the
+   original slots into columns. Theme colours and content layouts still apply. */
+@layer aieyra-workspace {
+ body #screen #conversation #emergence[hidden] { display:none!important; }
+ body[data-chat-layer=true]:has(#os-home) :is(#screen,#os-home) { position:fixed!important;inset:var(--titlebar-height) 0 0!important;width:calc(100% - var(--workspace-inset,0px))!important;height:auto!important;max-width:none!important;margin:0!important;padding:0!important;overflow:hidden!important; }
+ body[data-chat-layer=true]:has(#os-home) #os-home { translate:var(--workspace-x,0px) 0; }
+ body[data-chat-layer=true]:has(#os-home) #stage.shared-work-surface { position:absolute!important;inset:0!important;width:auto!important;height:auto!important; }
+}
+body .chat-layer-summary{align-items:flex-end}
+
+.scoped-report-surface { position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;min-height:0;border-radius:0;background:rgb(from var(--ui-glass) r g b / 1);box-shadow:none; }
+.scoped-report-surface[hidden] { display:none; }
+.scoped-report-surface .document-header { flex:none; }
+body .scoped-report-surface #document-content,body .scoped-report-surface #document-html { flex:1;min-height:0;overflow:auto; }
+body[data-program-agent=true] #status-rail { position:fixed;right:16px;top:calc(var(--chat-layer-top,0px) + 64px);bottom:auto;z-index:11; }
+body .chat-layer-fold { position:fixed;right:16px;top:calc(var(--chat-layer-top,0px) + 16px);width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:var(--ui-radius-control);padding:6px;background:var(--glass-surface);box-shadow:var(--ui-edge);color:var(--ui-text-2);z-index:11;app-region:no-drag; }
+.chat-layer-fold svg { width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:var(--ui-icon-stroke,1.5);stroke-linecap:round;stroke-linejoin:round; }
+.chat-layer-mini { position:fixed;left:calc(var(--workspace-inset,0px) + 16px);bottom:16px;display:flex;align-items:center;gap:12px;max-width:calc(100vw - var(--workspace-inset,0px) - 32px);height:calc(var(--eyra-avatar,110px) + 16px);z-index:11;app-region:no-drag; }
+body .chat-layer-avatar { display:grid;place-items:center;flex:none;width:calc(var(--eyra-avatar,110px) + 16px);height:calc(var(--eyra-avatar,110px) + 16px);border:0;padding:8px;border-radius:50%;background:transparent;box-shadow:none;cursor:pointer; }
+.chat-layer-avatar>.role-ring { width:var(--eyra-avatar,110px);height:var(--eyra-avatar,110px); }
+.chat-layer-details { display:flex;flex-direction:column;align-self:flex-start;min-width:0;width:min(320px,calc(100vw - var(--eyra-avatar,120px) - 64px));height:calc(var(--eyra-avatar,120px) + 16px + var(--chat-compact-extra,0px));transform:translateY(calc(-1 * var(--chat-compact-rise,0px)));box-sizing:border-box;padding-top:calc(var(--eyra-avatar,120px) * .2); }
+.chat-layer-summary { display:flex;align-items:center;gap:8px;flex:none;min-width:0;max-width:320px;min-height:1.5em;margin:0 0 4px;white-space:nowrap; }
+.chat-layer-live { flex:0 1 auto;min-height:0;overflow:hidden;pointer-events:none; }
+.chat-layer-live :is(.work-transcript-block,.work-transcript-text) { background:none;border:0;box-shadow:none; }
+.chat-layer-details[hidden],.chat-layer-live[hidden] { display:none; }
+.chat-layer-mini { touch-action:none;user-select:none;cursor:grab; }
+.chat-layer-mini[data-dragging=true],.chat-layer-mini[data-dragging=true] .chat-layer-avatar { cursor:grabbing; }
+.chat-layer-feed { position:absolute;left:8px;bottom:calc(100% + 8px + var(--chat-compact-rise,0px));width:min(400px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:var(--chat-brief-preview-height,calc(100vh - var(--eyra-avatar,110px) - 64px));overflow:hidden;pointer-events:none;user-select:none;padding:0;box-sizing:border-box;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;gap:8px; }
+.chat-layer-feed[hidden] { display:none; }
+@layer aieyra-workspace {
+ /* The folded preview shares message styling, with a fixed slot for its small avatar. */
+ .chat-layer-feed .chat-entry {
+  display:grid!important;
+  grid-template-columns:var(--chat-small-avatar) minmax(0,1fr)!important;
+  width:100%!important;
+  margin:0!important;
+  gap:8px;
+  box-sizing:border-box;
+ }
+}
+.chat-layer-feed .chat-text { display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;max-height:none;overflow:hidden; }
+body[data-chat-expanded=true] .chat-layer-feed { display:none; }
+.chat-layer-name { flex:none; }
+.chat-layer-status { min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
+.chat-layer-mini[hidden],.chat-layer-fold[hidden],.chat-layer-veil[hidden],.chat-layer-status[hidden] { display:none; }
+/* History and native viewport can become ready in either order. Keep the
+   retained layout measurable, but do not expose its pre-transition pixels. */
+body[data-chat-layer=true][data-chat-expanded=true][data-chat-transition=waiting] .chat-layer-surface { opacity:0;pointer-events:none!important; }
+body[data-chat-layer=true][data-chat-expanded=false] .chat-layer-surface { opacity:0;pointer-events:none!important; }
+body[data-chat-layer=true][data-chat-expanded=false]:not([data-chat-closing=true]) .chat-layer-surface { visibility:hidden; }
+body[data-chat-layer=true] #stage.shared-work-surface { inset:16px!important;z-index:2; }
+body[data-chat-layer=true] #presence-caption { display:none!important; }
+body[data-home-native-chat=true] :is(#conversation,#bottom-bar,.chat-layer-mini,.chat-layer-fold,.chat-layer-veil) { visibility:hidden!important; }
+body[data-chat-layer=true] .presence-work-status { max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+body[data-chat-layer=true][data-program-agent=true] { --chat-layer-top:0px; }
+body[data-chat-layer=true][data-program-agent=true] :is(.program-panel-edge,.panel-collapse) { display:none; }
+body[data-chat-layer=true][data-program-agent=true][data-chat-closing=true] :is(#bottom-bar,.program-recent) { display:block!important; }
+body[data-chat-layer=true] #stage.shared-work-surface { inset:0!important;gap:0;pointer-events:auto; }
+body[data-chat-layer=true] #stage.shared-work-surface>.stage-pane[data-kind=terminal] { --terminal-background:transparent;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;backdrop-filter:none!important; }
+body[data-chat-layer=true] #stage.shared-work-surface>.stage-pane[data-kind=terminal]>.stage-head { display:none; }
+body[data-chat-layer=true] #stage.shared-work-surface>.stage-pane[data-kind=terminal]>.stage-body { padding-top:0; }
+body[data-chat-layer=true] #stage .terminal-view-toolbar { display:none; }
+body[data-chat-layer=true] #stage .terminal-view-screen { padding:20px 24px; }
+@media(prefers-reduced-motion:reduce) { .chat-layer-surface { transition:none;animation:none; } }
+
+/* A single reading rectangle and input baseline for Home, Coding and native programs.
+   Only the host offset differs; profile width/position/top/size remain authoritative. */
+@layer aieyra-workspace {
+ body[data-chat-layer=true] .layered-chat-content { position:absolute!important;inset:0 max(64px,var(--chat-right,0px)) calc(var(--layer-input-height,56px) + 38px) max(24px,var(--chat-left,0px))!important;width:auto!important;height:auto!important;max-width:var(--chat-max,800px)!important;margin:0!important;padding:var(--chat-top,20px) 28px 24px!important;overflow:auto!important;box-sizing:border-box!important;background:transparent!important;box-shadow:none!important;scrollbar-gutter:stable both-edges;z-index:9!important; }
+ body[data-chat-layer=true] .layered-chat-content .shared-chat-messages { max-width:none;margin-inline:0; }
+ body[data-chat-layer=true] .layered-chat-content #conversation-content:empty + #emergence { margin-top:0!important; }
+ body[data-chat-layer=true] .layered-chat-composer { position:fixed!important;inset:auto max(64px,var(--chat-right,0px)) 26px var(--chat-input-left,calc(var(--workspace-inset,0px) + max(24px,var(--chat-left,0px))))!important;width:auto!important;height:auto!important;min-height:0!important;max-width:var(--chat-max,800px)!important;margin:0!important;padding:0!important;transform:none!important;translate:none!important;z-index:60!important; }
+ body[data-chat-layer=true] :is(.program-panel-header,.panel-collapse,.program-panel-edge) { display:none!important; }
+}
+
+/* Embedded chat documents have their own rail, outside Home navigation. */
+body:is(.coding-page,[data-program-agent=true]) #status-rail { display:flex; }
+
+/* Embedded reports are reading pages, with the same single report rail as Home. */
+body[data-scoped-report-open=true] #status-rail { z-index:31; }
+
+@layer aieyra-workspace {
+ body #screen #conversation #emergence:is([data-work=true],[data-response=true]){height:var(--chat-row-height,auto)!important;min-height:var(--eyra-avatar,120px)!important;max-height:none!important;grid-template-rows:minmax(0,1fr)!important;flex:none!important;contain:layout;}
+ body #screen #emergence:is([data-work=true],[data-response=true]) .presence-header{position:relative!important;top:0!important;grid-row:1!important;}
+ body #screen #emergence:is([data-work=true],[data-response=true]) #answer-stage{display:flex!important;flex-direction:column!important;grid-row:1!important;position:relative!important;inset:auto!important;height:auto!important;min-height:0!important;max-height:none!important;padding:calc(var(--eyra-avatar,120px) * .2) 0 0!important;overflow:visible!important;box-sizing:border-box!important;transition:none!important;}
+ body #screen #emergence:is([data-work=true],[data-response=true]) .presence-identity{flex:none;min-height:calc(var(--chat-name,25px) * 1.5);}
+ body #screen #emergence:is([data-work=true],[data-response=true]) #voice{display:block!important;min-height:0!important;height:auto!important;max-height:none!important;overflow:visible!important;mask-image:none!important;}
+ body #screen #conversation #emergence[data-work=true]{--chat-work-limit:min(calc(var(--eyra-avatar,120px) * 2),max(var(--eyra-avatar,120px),var(--chat-work-available-height,100vh)));max-height:var(--chat-work-limit)!important;}
+ body #screen #emergence[data-work=true] #answer-stage{height:auto!important;max-height:var(--chat-work-limit)!important;overflow:hidden!important;}
+ body #screen #emergence[data-work=true] #voice{flex:0 1 auto;height:auto!important;max-height:calc(var(--chat-work-limit) - var(--eyra-avatar,120px) * .2 - var(--chat-name,25px) * 1.5)!important;overflow:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;overflow-anchor:none;}
+}

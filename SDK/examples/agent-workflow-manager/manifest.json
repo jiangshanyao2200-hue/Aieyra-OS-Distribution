@@ -1,0 +1,72 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.workflow-manager",
+  "kind": "agent",
+  "name": "工作流专员",
+  "summary": "使用独立会话和记忆，通过已有执行器审阅工作目录。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "agent": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "agent": "agent.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "software_api",
+      "reason": "操作由用户绑定的单一工作流"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.agent",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "agent.json": {
+      "sha256": "548f3066add695837a0319f1633524d285efbeb38d5b1585a3f23ecc1aa26543",
+      "size": 819
+    },
+    "cli.json": {
+      "sha256": "7783dd92a3f7fba9aaf7cfb8cec5f47b08767d90bcf69cfb6eaaedba0f074ded",
+      "size": 86
+    },
+    "desktop.json": {
+      "sha256": "759ec47b5a64169d1a6f3357eceffe6f553d233a4b096feaa3b1b3235cc8f7dc",
+      "size": 86
+    },
+    "manual.md": {
+      "sha256": "bedf9ef995befb3981049c1c2b93896361e02d6b2ccc56d7463c58ed0a02794c",
+      "size": 571
+    },
+    "prompts/identity.txt": {
+      "sha256": "f2251b36c1d5a8271d089d5754f9b7be66cb15a3854c425e44eb251ce88426fc",
+      "size": 268
+    }
+  }
+}

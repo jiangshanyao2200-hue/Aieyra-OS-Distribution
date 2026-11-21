@@ -1,0 +1,54 @@
+/* @file-map:start
+文件: link/desktop/ui/workflow.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .workflow-overview
+  rule-2 | style | .workflow-overview h2
+  rule-3 | style | .workflow-summary
+  rule-4 | style | .workflow-goals
+  rule-5 | style | .workflow-goals>div
+  rule-6 | style | .workflow-goals strong
+  rule-7 | style | .workflow-overview .actions
+  rule-8 | style | .verification-row
+  rule-9 | style | .verification-row p
+  rule-10 | style | .verification-row code,.artifact-digest
+  rule-11 | style | .release-history
+  rule-12 | style | .release-history .snapshot-row
+  rule-13 | style | .local-run
+  rule-14 | style | .local-run strong
+  rule-15 | style | .local-run p
+  rule-16 | style | .local-runs-status
+  rule-17 | style | .task-detail dd
+  rule-18 | style | @media(max-width:540px)
+  rule-19 | style | .vm-console-preview
+  rule-20 | style | .vm-console-preview img
+  rule-21 | style | .vm-console-preview figcaption
+  rule-22 | style | .local-run-log
+  rule-23 | style | .local-run .secondary
+  rule-24 | style | .titlebar .release-transfer
+  rule-25 | style | .titlebar .release-transfer:is([data-transfer-state="downloading"],[data-transfer-state="verifying"],[data-transfer-state="saved"])
+  rule-26 | style | .titlebar .release-transfer[data-transfer-state="retrying"]
+  rule-27 | style | .release-artifact-heading
+  rule-28 | style | .release-artifact-heading small
+  rule-29 | style | .release-artifact-heading .actions
+  rule-30 | style | .release-artifact progress
+  rule-31 | style | .release-artifact .connection-note
+  rule-32 | style | @media(max-width:560px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ .workflow-overview{padding:clamp(20px,4vw,48px) 0;border-bottom:1px solid var(--line);margin-bottom:28px}/* @chain-region rule-2 */ .workflow-overview h2{font-size:clamp(26px,4vw,42px);letter-spacing:-.04em;margin:8px 0 14px}/* @chain-region rule-3 */ .workflow-summary{font-size:17px;line-height:1.6;opacity:.76}/* @chain-region rule-4 */ .workflow-goals{display:grid;gap:14px;margin:22px 0}/* @chain-region rule-5 */ .workflow-goals>div{display:flex;align-items:center;justify-content:space-between;gap:18px}/* @chain-region rule-6 */ .workflow-goals strong{font-size:18px;overflow-wrap:anywhere}/* @chain-region rule-7 */ .workflow-overview .actions{flex-wrap:wrap}/* @chain-region rule-8 */ .verification-row{padding:18px 0;border-bottom:1px solid var(--line)}/* @chain-region rule-9 */ .verification-row p{line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}/* @chain-region rule-10 */ .verification-row code,.artifact-digest{overflow-wrap:anywhere;white-space:normal}/* @chain-region rule-11 */ .release-history{margin:30px 0}/* @chain-region rule-12 */ .release-history .snapshot-row{width:100%}/* @chain-region rule-13 */ .local-run{padding:16px 0;border-bottom:1px solid var(--line)}/* @chain-region rule-14 */ .local-run strong{font-size:19px}/* @chain-region rule-15 */ .local-run p{line-height:1.6}/* @chain-region rule-16 */ .local-runs-status{font-size:24px;margin:14px 0}/* @chain-region rule-17 */ .task-detail dd{overflow-wrap:anywhere}/* @chain-region rule-18 */ @media(max-width:540px){.workflow-goals>div{align-items:flex-start;flex-direction:column;gap:8px}.workflow-overview .actions>button{flex:1 1 42%}}
+/* @chain-region rule-19 */ .vm-console-preview{margin:22px 0}/* @chain-region rule-20 */ .vm-console-preview img{display:block;width:100%;height:auto;background:#000}/* @chain-region rule-21 */ .vm-console-preview figcaption{font-size:14px;opacity:.65;margin-top:8px}/* @chain-region rule-22 */ .local-run-log{max-height:440px;white-space:pre-wrap;overflow-wrap:anywhere}/* @chain-region rule-23 */ .local-run .secondary{margin-top:6px}
+/* @chain-region rule-24 */ .titlebar .release-transfer{margin-left:0}
+/* @chain-region rule-25 */ .titlebar .release-transfer:is([data-transfer-state="downloading"],[data-transfer-state="verifying"],[data-transfer-state="saved"]){color:var(--ui-accent)}
+/* @chain-region rule-26 */ .titlebar .release-transfer[data-transfer-state="retrying"]{color:var(--ui-warning,#e4b983)}
+/* @chain-region rule-27 */ .release-artifact-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;overflow-wrap:anywhere}
+/* @chain-region rule-28 */ .release-artifact-heading small{display:block;color:var(--muted)}
+/* @chain-region rule-29 */ .release-artifact-heading .actions{margin:0}
+/* @chain-region rule-30 */ .release-artifact progress{width:100%;height:6px;margin:14px 0 0;accent-color:var(--ui-accent)}
+/* @chain-region rule-31 */ .release-artifact .connection-note{font-size:14px}
+/* @chain-region rule-32 */ @media(max-width:560px){.release-artifact-heading{grid-template-columns:minmax(0,1fr)}}

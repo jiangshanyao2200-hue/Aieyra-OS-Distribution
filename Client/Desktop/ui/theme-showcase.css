@@ -1,0 +1,18 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .theme-showcase; .theme-showcase[open]; .showcase-header,.showcase-controls; .showcase-controls label; .showcase-status; .showcase-stage; .showcase-frame; @media(max-width:650px)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/theme-showcase.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+.theme-showcase{width:min(1140px,calc(100vw - 32px));height:calc(100vh - 32px);max-width:none;max-height:none;padding:16px;border:0;border-radius:var(--ui-radius);color:var(--ui-text);background:var(--ui-glass);box-shadow:var(--ui-edge-hi),var(--ui-shadow);overflow:hidden}
+.theme-showcase[open]{display:flex;flex-direction:column;gap:12px}.theme-showcase::backdrop{background:var(--glass-veil)}
+.showcase-header,.showcase-controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px;flex:none}.showcase-header strong{flex:1;min-width:120px;font-size:16px}
+.showcase-controls label{display:flex;align-items:center;gap:8px;white-space:nowrap}.showcase-controls select{width:auto;max-width:200px}
+.showcase-status{margin:0;flex:none;color:var(--ui-text-2);font-size:12px;overflow-wrap:anywhere}.showcase-status[data-error=true]{color:var(--ui-error)}
+.showcase-stage{flex:1;min-height:120px;min-width:0;overflow:auto;display:flex;justify-content:center;box-shadow:var(--ui-edge);border-radius:var(--ui-radius-control)}
+.showcase-frame{height:100%;width:100%;flex:none;max-width:100%;border:0}.showcase-footer{margin:0;font-size:11px;color:var(--ui-text-3);flex:none}
+@media(max-width:650px){.theme-showcase{padding:12px;gap:8px}.showcase-controls{gap:8px}.showcase-controls select{max-width:150px}.showcase-header{gap:8px}}

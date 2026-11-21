@@ -1,0 +1,154 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .group-face; .group-face::before; .group-face-glyph; .group-face[data-active=true]::before; body.reduce-motion .group-face::before; @media(prefers-reduced-motion:reduce); #group-view; #group-view[hidden]; .gv-head; .gv-title; .gv-title h2; .gv-title small; .gv-icon; .gv-icon:is(:hover,:focus-visible); .gv-icon svg; .gv-station-button; .gv-station-ring; .gv-station-ring::after; .gv-station-button:is(:hover,:focus-visible) .gv-station-ring; .gv-station-button:focus-visible; .gv-station-button[data-busy=true] .gv-station-ring; .gv-station-button[data-busy=true] .gv-station-ring::before; .gv-station-button[data-busy=true] .gv-station-ring::after; .gv-station-count; .gv-station-count:empty; @keyframes gv-orbit; .gv-working; .gv-working[hidden]; .gv-working; .gv-working:has(.gv-work:nth-child(4)) .gv-work-thought; @media (max-height:560px); @keyframes gv-in; .gv-work; .gv-work .role-ring; .gv-work .role-ring .role-face; .gv-work-lines; .gv-work-head; .gv-work-task; .gv-work-thought,.gv-work-text; .gv-work-thought; .gv-work-thought[hidden]; .gv-work-text; .gv-chip; .gv-work[data-state=working] .gv-chip,.gs-member[data-state=working] .gv-chip; .gv-scroll; .gv-messages; .gv-msg; .gv-msg[data-mine=true]; .gv-msg .gv-avatar; .gv-msg .gv-avatar .role-face; .gv-body; .gv-msg[data-mine=true] .gv-body; .gv-meta; .gv-meta b; .gv-tag; .gv-text; .gv-text > :first-child; .gv-text > :last-child; .gv-msg[data-mine=true] .gv-text; .gv-msg:not([data-mine=true]) .gv-text; .gv-msg[data-kind=result] .gv-text; .gv-msg[data-kind=system]; .gv-system; .gv-empty; .gv-composer; .gv-composer textarea; .gv-send; .gv-send:hover; .gv-send:disabled; .gv-send:focus-visible; .gv-send svg; .gv-mention; .gv-mention[hidden]; .gv-pick; .gv-pick; .gv-pick[aria-selected]; .gv-pick[aria-selected=true]; .gv-mention .glide; .gv-pick .role-ring; .gv-pick .role-ring .role-face; .gv-station; .gv-station[hidden]; @keyframes gv-slide; .gv-station header; .gv-station h3; .gv-station header small; .gv-station header .gv-icon; .gv-station-body; .gv-station h4; .gs-member; .gs-member:hover; .gs-member .role-ring; .gs-member .role-ring .role-face; .gs-text; .gs-head; .gs-text small; .gs-actions; .gs-action; .gs-action:is(:hover,:focus-visible); .gs-note; .gs-note time; .gs-note b; .gs-note[data-kind=system]; .gs-empty; .group-editor; .ge-face; .ge-count; .ge-members; .ge-picks; .ge-picks .glide; .ge-pick; .ge-pick .role-ring; .ge-pick .role-ring .role-face; .ge-empty; .group-editor .ge-host-row; .group-editor .ge-host; .group-editor .ge-host:disabled; .group-editor .ge-host-menu; .group-editor .ge-host-menu .ge-host-option; .group-editor .ge-host-option:disabled; @media (prefers-reduced-motion:reduce); .gv-working,.gv-msg,.gv-station; .gv-station-button[data-busy=true] .gv-station-ring::before; .group-face; .gv-face; .gv-composer textarea:focus-visible; .group-editor .ge-members; .ge-search; .ge-picks; .group-editor .ge-pick; .group-editor .ge-pick[aria-checked=true]; .group-editor .ge-pick .ce-option-act; .group-editor .ge-pick[aria-checked=true] .ce-option-act; .group-editor .ge-pick .ce-option-act svg; @media(max-width:560px),(max-height:560px)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/groups.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Group chats: face, page, pinned work rows, station and editor. */
+.group-face { --size:40px; position:relative; flex:0 0 var(--size); width:var(--size); height:var(--size); border-radius:50%; }
+.group-face::before { content:''; position:absolute; inset:0; border-radius:50%; border:1px dashed #e6e9f05c; }
+.group-face-glyph { position:absolute; inset:round(13%,1px); display:grid; place-items:center; border-radius:50%; background:#10131a; box-shadow:inset 0 0 0 1px #ffffff2e; font-size:calc(var(--size) * .32); font-weight:600; color:var(--ui-text); }
+.group-face[data-active=true]::before { border-color:#a9c0ecb3; animation:role-orbit 8s linear infinite; }
+body.reduce-motion .group-face::before { animation:none!important; }
+@media(prefers-reduced-motion:reduce) { .group-face::before { animation:none!important; } }
+
+#group-view { position:relative; display:flex; flex-direction:column; height:100%; min-height:0; }
+#group-view[hidden] { display:none; }
+.gv-head { display:flex; align-items:center; gap:12px; padding:12px clamp(18px,4vw,48px) 10px; }
+.gv-title { flex:1; min-width:0; display:grid; gap:2px; }
+.gv-title h2 { margin:0; font-size:15px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.gv-title small { font-size:12px; color:var(--ui-text-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.gv-icon { display:grid; place-items:center; width:36px; height:36px; padding:0; border:0; border-radius:50%; background:#ffffff06; box-shadow:var(--ui-edge); color:var(--ui-text-2); cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease); }
+.gv-icon:is(:hover,:focus-visible) { color:var(--ui-text); background:#ffffff10; box-shadow:var(--ui-edge-hi); outline:none; }
+.gv-icon svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+/* The station entry is a ring: calm when idle, orbiting while members work. */
+.gv-station-button { position:relative; display:grid; place-items:center; width:36px; height:36px; padding:0; border:0; border-radius:50%; background:transparent; cursor:pointer; }
+.gv-station-ring { position:absolute; inset:3px; border-radius:50%; box-shadow:inset 0 0 0 1.5px #e6e9f0a6; transition:box-shadow var(--ui-fast) var(--ui-ease); }
+.gv-station-ring::after { content:''; position:absolute; inset:9px; border-radius:50%; background:#e6e9f0b3; transition:background-color var(--ui-fast) var(--ui-ease); }
+.gv-station-button:is(:hover,:focus-visible) .gv-station-ring { box-shadow:inset 0 0 0 1.5px #fff,0 0 12px #b9c8ff33; }
+.gv-station-button:focus-visible { outline:none; box-shadow:0 0 0 3px #a9c0ec40; }
+.gv-station-button[data-busy=true] .gv-station-ring { box-shadow:inset 0 0 0 1.5px #a9c0ec40; }
+.gv-station-button[data-busy=true] .gv-station-ring::before { content:''; position:absolute; inset:0; border-radius:50%; border:1.5px solid transparent; border-top-color:var(--ui-accent); animation:gv-orbit 1.6s linear infinite; }
+.gv-station-button[data-busy=true] .gv-station-ring::after { background:var(--ui-accent); }
+.gv-station-count { position:absolute; top:-2px; right:-3px; min-width:15px; height:15px; padding:0 4px; border-radius:8px; background:var(--ui-accent); color:#0d0f14; font-size:10px; font-weight:600; line-height:15px; text-align:center; }
+.gv-station-count:empty { display:none; }
+@keyframes gv-orbit { to { transform:rotate(360deg); } }
+/* Working members pin above the discussion: thought and body only, no scrolling log. */
+.gv-working { display:grid; gap:6px; padding:10px clamp(18px,4vw,48px); background:rgb(13 16 22 / .5); backdrop-filter:blur(18px); animation:gv-in var(--ui-enter) var(--ui-ease); }
+.gv-working[hidden] { display:none; }
+/* Pinned work never takes more than about three rows; the chat and input stay usable at any window size. */
+.gv-working { max-height:min(196px,30vh); overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; flex:none; }
+.gv-working:has(.gv-work:nth-child(4)) .gv-work-thought { display:none; }
+@media (max-height:560px) { .gv-working { max-height:min(120px,26vh); } .gv-working .gv-work-thought { display:none; } }
+@keyframes gv-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+.gv-work { display:flex; align-items:center; gap:12px; min-height:52px; }
+.gv-work .role-ring { width:44px; height:44px; flex:0 0 44px; cursor:pointer; }
+.gv-work .role-ring .role-face { font-size:16px; }
+.gv-work-lines { flex:1; min-width:0; display:grid; gap:2px; }
+.gv-work-head { display:flex; align-items:center; gap:8px; min-width:0; font-size:13px; }
+.gv-work-task { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--ui-text-3); font-size:12px; }
+.gv-work-thought,.gv-work-text { margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12.5px; line-height:1.5; }
+.gv-work-thought { color:var(--ui-text-3); font-style:italic; }
+.gv-work-thought[hidden] { display:none; }
+.gv-work-text { color:var(--ui-text-2); }
+.gv-chip { flex:none; padding:1px 8px; border-radius:9px; background:#ffffff0d; color:var(--ui-text-2); font-size:10.5px; }
+.gv-work[data-state=working] .gv-chip,.gs-member[data-state=working] .gv-chip { background:#a9c0ec24; color:#cbd8f2; }
+.gv-scroll { flex:1; min-height:0; overflow-y:auto; overflow-anchor:none; padding:14px clamp(18px,4vw,48px) 12px; }
+.gv-messages { display:grid; gap:14px; max-width:860px; margin:0 auto; }
+.gv-msg { display:flex; gap:10px; align-items:flex-start; animation:gv-in var(--ui-enter) var(--ui-ease); }
+.gv-msg[data-mine=true] { justify-content:flex-end; }
+.gv-msg .gv-avatar { width:34px; height:34px; flex:0 0 34px; }
+.gv-msg .gv-avatar .role-face { font-size:13px; }
+.gv-body { min-width:0; max-width:min(640px,78%); display:grid; gap:4px; }
+.gv-msg[data-mine=true] .gv-body { justify-items:end; }
+.gv-meta { display:flex; align-items:baseline; gap:8px; font-size:11.5px; color:var(--ui-text-3); }
+.gv-meta b { color:var(--ui-text-2); font-weight:600; }
+.gv-tag { padding:0 7px; border-radius:8px; background:#a9c0ec1c; color:#cbd8f2; font-size:10.5px; }
+.gv-text { padding:9px 13px; border-radius:16px; background:#ffffff08; box-shadow:var(--ui-edge); color:var(--ui-text); font-size:13.5px; line-height:1.7; overflow-wrap:anywhere; }
+.gv-text > :first-child { margin-top:0; }
+.gv-text > :last-child { margin-bottom:0; }
+.gv-msg[data-mine=true] .gv-text { background:#e6e9f014; box-shadow:inset 0 0 0 1px #e6e9f024; border-top-right-radius:6px; }
+.gv-msg:not([data-mine=true]) .gv-text { border-top-left-radius:6px; }
+.gv-msg[data-kind=result] .gv-text { box-shadow:inset 0 0 0 1px #a9c0ec40; }
+.gv-msg[data-kind=system] { justify-content:center; }
+.gv-system { margin:0; padding:3px 12px; border-radius:10px; background:#ffffff06; color:var(--ui-text-3); font-size:11.5px; }
+.gv-empty { margin:40px auto; color:var(--ui-text-3); font-size:12.5px; text-align:center; }
+.gv-composer { position:relative; display:flex; align-items:flex-end; gap:8px; width:min(720px,calc(100% - 48px));box-sizing:border-box;margin:10px auto 20px; }
+.gv-composer textarea { flex:1;min-width:0; min-height:24px; max-height:160px; padding:0; border:0; background:transparent; color:var(--ui-text); font:inherit; resize:none; outline:none; }
+.gv-send { display:grid; place-items:center; flex:none; width:34px; height:34px; padding:0; border:0; border-radius:50%; background:transparent; color:var(--ui-text-2); cursor:pointer; transition:background-color var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease); }
+.gv-send:hover { color:var(--ui-text);box-shadow:var(--ui-edge); }
+.gv-send:disabled { opacity:.5; cursor:default; }
+.gv-send:focus-visible { outline:none; box-shadow:0 0 0 3px #a9c0ec55; }
+.gv-send svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.gv-mention { position:absolute; left:10px; bottom:calc(100% + 8px); width:240px; max-height:260px; overflow-y:auto; display:grid; gap:2px; padding:6px; border-radius:var(--ui-radius-menu); background:#151821f5; backdrop-filter:var(--ui-blur); box-shadow:var(--ui-edge-hi),var(--ui-shadow); }
+.gv-mention[hidden] { display:none; }
+.gv-pick { display:flex; align-items:center; gap:10px; min-height:38px; padding:4px 10px; border:0; border-radius:10px; background:transparent; color:var(--ui-text); font:inherit; font-size:13px; text-align:left; cursor:pointer; }
+.gv-pick { position:relative; z-index:1; }
+.gv-pick[aria-selected] { color:var(--ui-text); }
+.gv-pick[aria-selected=true] { background:#ffffff10; }
+.gv-mention .glide { --glide-radius:10px; }
+.gv-pick .role-ring { width:26px; height:26px; flex:0 0 26px; }
+.gv-pick .role-ring .role-face { font-size:11px; }
+/* Station: the group's own Link page sliding over the right side. */
+.gv-station { position:absolute; z-index:5; top:0; right:0; bottom:0; width:min(380px,92%); display:flex; flex-direction:column; background:var(--ui-glass); backdrop-filter:var(--ui-blur); box-shadow:inset 1px 0 0 #ffffff12,-24px 0 60px #0006; animation:gv-slide var(--ui-enter) var(--ui-ease); }
+.gv-station[hidden] { display:none; }
+@keyframes gv-slide { from { opacity:0; transform:translateX(18px); } to { opacity:1; transform:none; } }
+.gv-station header { display:grid; grid-template-columns:1fr auto; align-items:center; padding:16px 14px 10px 20px; }
+.gv-station h3 { margin:0; font-size:14px; font-weight:600; }
+.gv-station header small { grid-column:1; font-size:11.5px; color:var(--ui-text-3); }
+.gv-station header .gv-icon { grid-row:1/3; grid-column:2; width:32px; height:32px; background:transparent; box-shadow:none; }
+.gv-station-body { flex:1; min-height:0; overflow-y:auto; padding:0 14px 20px; }
+.gv-station h4 { margin:14px 6px 8px; font-size:11.5px; font-weight:600; color:var(--ui-text-3); letter-spacing:.04em; }
+.gs-member { display:flex; align-items:center; gap:10px; padding:8px; border-radius:14px; }
+.gs-member:hover { background:#ffffff07; }
+.gs-member .role-ring { width:36px; height:36px; flex:0 0 36px; }
+.gs-member .role-ring .role-face { font-size:13px; }
+.gs-text { flex:1; min-width:0; display:grid; gap:2px; }
+.gs-head { display:flex; align-items:center; gap:6px; font-size:13px; }
+.gs-text small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11.5px; color:var(--ui-text-3); }
+.gs-actions { display:flex; gap:2px; }
+.gs-action { height:26px; padding:0 9px; border:0; border-radius:11px; background:transparent; color:var(--ui-text-2); font:inherit; font-size:12px; cursor:pointer; }
+.gs-action:is(:hover,:focus-visible) { background:#ffffff12; color:var(--ui-text); outline:none; }
+.gs-note { display:grid; grid-template-columns:auto auto 1fr; gap:8px; padding:6px 8px; font-size:12px; line-height:1.6; color:var(--ui-text-2); }
+.gs-note time { color:var(--ui-text-3); font-variant-numeric:tabular-nums; }
+.gs-note b { color:var(--ui-text); font-weight:600; }
+.gs-note[data-kind=system] { color:var(--ui-text-3); }
+.gs-empty { margin:4px 8px; font-size:12px; color:var(--ui-text-3); }
+.group-editor { height:min(560px,86vh); }
+.ge-face { display:grid; place-items:center; width:88px; height:88px; flex:none; }
+.ge-count { padding:0; font-size:12.5px; color:var(--ui-text-3); }
+.ge-members { display:flex; flex-direction:column; gap:8px; flex:1; min-height:0; padding:16px 24px 0; }
+.ge-picks { position:relative; flex:1; min-height:0; overflow-y:auto; display:grid; align-content:start; gap:2px; margin:0 -8px; scrollbar-width:none; }
+.ge-picks .glide { --glide-radius:12px; }
+.ge-pick { min-height:50px; border-radius:12px; }
+.ge-pick .role-ring { width:34px; height:34px; flex:0 0 34px; }
+.ge-pick .role-ring .role-face { font-size:13px; }
+.ge-empty { margin:6px 12px; font-size:13px; color:var(--ui-text-3); }
+.group-editor .ge-host-row { flex:none; padding:16px 28px 0; }
+.group-editor .ge-host { flex:1; justify-content:space-between; min-height:36px; height:auto; padding:8px 12px; border-radius:var(--ui-radius-control,12px); }
+.group-editor .ge-host:disabled { cursor:default; opacity:.65; }
+.group-editor .ge-host-menu { min-width:240px; max-width:min(380px,calc(100vw - 32px)); max-height:min(300px,calc(100vh - 32px)); overflow-y:auto; }
+.group-editor .ge-host-menu .ge-host-option { display:flex; align-items:center; gap:12px; min-height:44px; }
+.group-editor .ge-host-option:disabled { cursor:default; opacity:.65; }
+@media (prefers-reduced-motion:reduce) {
+ .gv-working,.gv-msg,.gv-station { animation:none; }
+ .gv-station-button[data-busy=true] .gv-station-ring::before { animation:none; }
+}
+.group-face { display:inline-block; vertical-align:middle; }
+.gv-face { display:grid; }
+.gv-composer textarea:focus-visible { outline:none; }
+/* The folded Eyra ring sits at the bottom left of detail pages; the composer starts after it. */
+
+.group-editor .ge-members { padding:20px 28px 0;gap:12px; }
+.ge-search { flex:none;width:100%;min-height:36px;padding:7px 12px;border:0;border-radius:12px;background:#ffffff07;box-shadow:var(--glass-edge);color:var(--ui-text);font:inherit; }
+.ge-picks { gap:6px;margin:0 -6px; }
+.group-editor .ge-pick { min-height:62px;padding:10px 12px;gap:14px; }
+.group-editor .ge-pick[aria-checked=true] { background:#ffffff0d; }
+.group-editor .ge-pick .ce-option-act { width:22px;height:22px;border-radius:7px;box-shadow:inset 0 0 0 1px #ffffff40; }
+.group-editor .ge-pick[aria-checked=true] .ce-option-act { background:#e6e9f0;box-shadow:none;color:#10131b; }
+.group-editor .ge-pick .ce-option-act svg { width:16px;height:16px; }
+@media(max-width:560px),(max-height:560px) { .group-editor .ge-members { padding:16px 20px 0; }.group-editor .ge-host-row { padding:12px 20px 0; }.group-editor .ge-pick { min-height:54px; } }

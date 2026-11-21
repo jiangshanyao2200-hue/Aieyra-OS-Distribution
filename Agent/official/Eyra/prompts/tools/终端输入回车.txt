@@ -1,0 +1,1 @@
+Input was sent unchanged. It contains literal backslash escape text, not a carriage return (0x0D). To submit the existing line, send press_enter:true with no chars. This explicitly adds Enter without changing the text already sent. If the literal text was intentional, ignore this note. Do not resend the prior text just to submit it.

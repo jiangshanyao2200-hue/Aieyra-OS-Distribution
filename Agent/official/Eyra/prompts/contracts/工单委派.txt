@@ -1,0 +1,3 @@
+原生任务投递数据：下方包含目标、负责人、范围、版本和验收要求。消息使用 reply_to 关联原交流，mentions 标记接收工位；工单与消息是不同记录，读取不等于领取或执行。
+
+带 delegation_id、dispatch_version、target 的投递以 fresh version、dispatch_id=delegation_id、dispatch_version、native_session_id=target.native_session_id、binding_version=target.binding_version 绑定领取。负责人、绑定或状态变化由服务校验；未知投递有原回执可查。这些字段不创建源码租约或开发副本。

@@ -1,0 +1,81 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: #settings-view; #settings-surface; body.settings-extension[data-placement=attached] #status-anchor; body.settings-extension[data-placement=attached] :is(#minimize-window,#maximize-window,#settings-extension-home,#brand-title); body.settings-extension[data-placement=attached]; body.settings-extension; body.settings-extension #status-anchor; body.settings-extension #view-surface; body.settings-extension #view-content; body.settings-extension #view-content > #onboarding; body.settings-extension #onboarding #settings-body; body.settings-extension #onboarding #settings-body:has(#prompt-settings:not([hidden])); body.settings-extension #onboarding #prompt-settings:not([hidden]); body.settings-extension #onboarding #prompt-settings .settings-head,body.settings-extension #onboarding #prompt-layers,body.settings-extension #onboarding .prompt-actions; body.settings-extension #onboarding #prompt-settings .prompt-area; body.settings-extension #onboarding #prompt-settings #prompt-editor; body.settings-extension #onboarding #prompt-settings #prompt-editor:focus; body.settings-extension #onboarding .prompt-actions; body.settings-extension #close-onboarding; body.settings-extension #close-window; body.settings-extension #settings-extension-actions; body.settings-extension #status-anchor .window-controls; body.settings-extension #settings-extension-actions button; body.settings-extension #settings-extension-position; #settings-extension-status:empty; #settings-extension-status[data-error=true]; body.settings-extension[data-visible=false] *; body.settings-extension[data-placement=attached][data-overlay-wide=true] #view-content > #onboarding; @media(max-width:760px); body.settings-extension #view-content > #onboarding; body.settings-extension[data-placement=attached] #view-content > #onboarding; body.settings-extension #onboarding .settings-tabs; body.settings-extension #onboarding .settings-tabs button[aria-selected=true]::before; body.settings-extension #onboarding #settings-body; body.settings-extension #onboarding .profile-card + .profile-card; body.settings-extension #settings-extension-position; body.settings-extension #onboarding .settings-actions [role=status]; @media(max-height:560px) and (min-width:560px) and (max-width:860px); body.settings-extension #onboarding .profile-card + .profile-card; @media(max-height:340px); body.settings-extension #view-content > #onboarding; body.settings-extension #onboarding #settings-body; body.settings-extension #onboarding .settings-tabs button; body.settings-extension #onboarding .settings-head; body.settings-extension #onboarding .settings-head h2; body.settings-extension #onboarding #prompt-layers; body.settings-extension #onboarding #prompt-layers button; body.settings-extension #onboarding #prompt-settings .prompt-area; body.settings-extension #onboarding #prompt-settings #prompt-editor; body.settings-extension #onboarding #settings-body .prompt-actions; .update-actions; body.settings-extension[data-placement=attached] #onboarding :is(.settings-area,.catalog-panel,.appearance-preview)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/settings-extension.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* The editor owns content only; the native container owns its titlebar. */
+#settings-view { height:100%;min-height:0;padding:0; }
+#settings-surface { width:100%;height:100%;min-height:0; }
+body.settings-extension[data-placement=attached] #status-anchor { -webkit-app-region:no-drag; }
+body.settings-extension[data-placement=attached] :is(#minimize-window,#maximize-window,#settings-extension-home,#brand-title) { display:none!important; }
+body.settings-extension[data-placement=attached] { background:transparent; }
+body.settings-extension { --rail-width:0px; grid-template-columns:minmax(0,1fr); grid-template-rows:54px minmax(0,1fr); }
+body.settings-extension #status-anchor { display:none!important; }
+body.settings-extension #view-surface { position:fixed;inset:0;height:100%;padding:0; }
+body.settings-extension #view-content { width:100%; overflow:hidden; }
+body.settings-extension #view-content > #onboarding { width:100%; max-width:1060px; padding:24px 24px 0; grid-template-columns:156px minmax(0,1fr); gap:0 28px; }
+body.settings-extension #onboarding #settings-body { padding-bottom:16px; }
+/* Use the actual editor container, including detached and narrow layouts. */
+body.settings-extension #onboarding #settings-body:has(#prompt-settings:not([hidden])) { display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto; }
+body.settings-extension #onboarding #prompt-settings:not([hidden]) { flex:1 0 auto;min-height:0;height:auto; }
+body.settings-extension #onboarding #prompt-settings .settings-head,body.settings-extension #onboarding #prompt-layers,body.settings-extension #onboarding .prompt-actions { flex-shrink:0; }
+body.settings-extension #onboarding #prompt-settings .prompt-area { flex:1 1 auto;margin-bottom:0;padding-bottom:0;min-height:0; }
+/* 编辑区按剩余高度铺满，不靠固定扣减：标题、分层页签变化后仍贴到底边。 */
+body.settings-extension #onboarding #prompt-settings #prompt-editor { flex:1 1 auto;min-height:180px;height:auto;max-height:720px;padding-block:.5lh;scroll-padding-block:.5lh; }
+/* Chromium reveals the caret rather than the whole line box. Never fade the
+   focused editor's glyphs when its automatic scroll stops above the padding. */
+body.settings-extension #onboarding #prompt-settings #prompt-editor:focus { mask-image:none;-webkit-mask-image:none; }
+body.settings-extension #onboarding .prompt-actions { position:static;flex:none;flex-wrap:wrap;margin-block:12px 16px; }
+body.settings-extension #close-onboarding { display:none!important; }
+/* The shared close control is the titlebar close target in this surface. */
+body.settings-extension #close-window { visibility:hidden; }
+body.settings-extension #settings-extension-actions { display:flex; align-items:center; gap:10px; margin-left:auto; app-region:no-drag; }
+body.settings-extension #status-anchor .window-controls { margin-left:0; }
+body.settings-extension #settings-extension-actions button { padding:4px 10px; min-height:28px; border-radius:999px; background:#ffffff08; color:var(--text-2); font-size:12px; }
+body.settings-extension #settings-extension-position { color:var(--text-3); font-size:11px; }
+#settings-extension-status:empty { display:none; }
+#settings-extension-status[data-error=true] { color:var(--ui-error); }
+body.settings-extension[data-visible=false] * { animation-play-state:paused!important; }
+/* With a wide work summary, or horizontal tabs, keep the scrolling content
+   above the actual native Eyra layer. The native viewport stays unchanged. */
+body.settings-extension[data-placement=attached][data-overlay-wide=true] #view-content > #onboarding { padding-bottom:var(--settings-overlay-space,0px); }
+@media(max-width:760px) {
+ body.settings-extension #view-content > #onboarding { grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr); gap:16px; padding:16px 18px 0; }
+ body.settings-extension[data-placement=attached] #view-content > #onboarding { padding-bottom:var(--settings-overlay-space,0px); }
+ body.settings-extension #onboarding .settings-tabs { max-width:100%; overflow-x:auto; }
+ /* Horizontal tabs: the vertical-rail marker becomes a short underline. */
+ body.settings-extension #onboarding .settings-tabs button[aria-selected=true]::before { left:14px; right:14px; top:auto; bottom:2px; width:auto; height:2px; }
+ body.settings-extension #onboarding #settings-body { grid-area:2 / 1; }
+ body.settings-extension #onboarding .profile-card + .profile-card { border-left:0; border-top:1px solid var(--s-line); }
+ body.settings-extension #settings-extension-position { display:none; }
+ body.settings-extension #onboarding .settings-actions [role=status] { min-width:0;overflow-wrap:anywhere; }
+}
+@media(max-height:560px) and (min-width:560px) and (max-width:860px) {
+ body.settings-extension #onboarding .profile-card + .profile-card { border:0; }
+}
+/* The attached editor can become short when the native input reserves space.
+   Compact chrome first; keep a few editable lines; the page scrolls to the actions. */
+@media(max-height:340px) {
+ body.settings-extension #view-content > #onboarding { padding-top:6px;gap:6px 16px; }
+ body.settings-extension #onboarding #settings-body { padding-bottom:6px; }
+ body.settings-extension #onboarding .settings-tabs button { min-height:28px;padding:2px 10px; }
+ body.settings-extension #onboarding .settings-head { margin-bottom:6px;gap:10px; }
+ body.settings-extension #onboarding .settings-head h2 { font-size:18px; }
+ body.settings-extension #onboarding #prompt-layers { gap:4px;margin-bottom:6px; }
+ body.settings-extension #onboarding #prompt-layers button { height:28px;min-height:28px;padding:0 10px; }
+ body.settings-extension #onboarding #prompt-settings .prompt-area { padding:4px 8px 0; }
+ body.settings-extension #onboarding #prompt-settings #prompt-editor { min-height:88px; }
+ body.settings-extension #onboarding #settings-body .prompt-actions { margin-top:4px; }
+}
+
+.update-actions { flex-wrap:wrap; }
+
+/* A transparent native renderer cannot sample the wallpaper in its parent
+   WebContents. Use the existing alpha surfaces, without cross-view backdrop
+   textures that can retain dark tiles after scroll or hover. */
+body.settings-extension[data-placement=attached] #onboarding :is(.settings-area,.catalog-panel,.appearance-preview) { backdrop-filter:none; }

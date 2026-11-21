@@ -1,0 +1,88 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Theme/official/AGENTS.md | ring 3
+ * Chains: chat
+ * Regions: body[data-os-appearance] :is(.module-bar,.extension-titlebar,.shell-bar,#tip,.module-dock-menu); body[data-os-appearance] :is(.agent-body,.agent-message,.extension-markdown); body[data-os-appearance] :is(.agent-thought,.agent-state,.agent-stage); body[data-os-appearance] :is(.eyra-text,#voice,#document-content,.history-message); body[data-os-appearance] :is(.user-text,.chat-history-entry[data-author="user"] .history-message); body[data-os-appearance] :is(#terminal-content,#scene,#thought,#background-terminal-output,#task-plan,.recent-action); body[data-os-appearance] :is(#message,.gv-composer textarea); body[data-os-appearance] :is(.message-identity,.history-heading,#eyra-name); body[data-os-appearance] :is(#side-menu,#status-anchor,#view-heading,#system-popover,#onboarding,.terminal-page-actions); body[data-os-appearance] :is(.eyra-text,.user-text,#voice,#document-content,.history-message) .markdown; body[data-os-appearance] :is(#terminal-content,#scene,#thought,#task-plan) :is(pre,.tool-heading,.terminal-output,.code-line); body[data-os-appearance] .message-meta; body[data-os-appearance] .markdown p; body[data-os-appearance] :is(#voice,#live-body-history,.eyra-text,.user-text,#document-content,.history-message).markdown > p; body[data-os-appearance] .markdown :is(pre,code,table,li,blockquote,h1,h2,h3,h4,h5,h6); #appearance-settings; #appearance-fields; #appearance-settings :is(input,select); .appearance-window; #appearance-preview; #appearance-preview .markdown; #appearance-preview .markdown>p.cjk-paragraph; .appearance-actions; #appearance-status; body #onboarding .settings-tabs; body[data-os-appearance] :is(.thinking-content,.tv-title,.tv-flow,.tv-text),body[data-os-appearance] .work-transcript-block[data-kind=thinking] .work-transcript-text; body[data-os-appearance] .tv-title; body .thinking-content; body .thinking-content .markdown p; body[data-os-appearance] :is(.presence-work-status,.chat-work-status,.chat-layer-status,.presence-summary-state); [data-name-animation=trace]; [data-name-animation=relay]; [data-name-animation=hinge]; [data-name-animation=stride]; [data-name-animation=press]; [data-name-animation=none]; :is([data-work=true],.chat-layer-mini[data-active=true],body[data-working=true]) :is(.presence-identity>.chat-name,.chat-layer-name,.work-name); :is([data-work=true],.chat-layer-mini[data-active=true],body[data-working=true]) :is(.presence-identity>.chat-name,.chat-layer-name,.work-name); @keyframes eyra-name-trace; @keyframes eyra-name-relay; @keyframes eyra-name-hinge; @keyframes eyra-name-stride; @keyframes eyra-name-press; :is(.presence-work-status,.chat-work-status,.presence-summary-state):not([hidden]):not(:empty)::before; @media(prefers-reduced-motion:reduce); body.reduce-motion :is(.presence-identity>.chat-name,.chat-layer-name,.work-name); [data-thought-animation=flow]; [data-thought-animation=fade]; [data-thought-animation=register]; [data-thought-animation=unfold]; [data-thought-animation=reveal]; @keyframes thought-register; @keyframes thought-unfold; @keyframes thought-reveal; [data-thought-animation=none]; @scope ([data-thought-animation=none]) to ([data-thought-animation]); :is(.tv-title,.tv-new); .tv-title.idle; @keyframes thought-fade; @keyframes thought-fade-out; .chat-failure-detail; .chat-failure-retry
+ * Impact: python -B scripts/code-atlas.py show Theme/official/default/appearance.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Shared region tokens for OS and every detached surface. */
+body[data-os-appearance] :is(.module-bar,.extension-titlebar,.shell-bar,#tip,.module-dock-menu) { font-family:var(--os-interface-font);font-size:var(--os-interface-size);font-weight:var(--os-interface-weight);line-height:var(--os-interface-line);letter-spacing:var(--os-interface-letter);text-shadow:var(--os-interface-shadow); }
+body[data-os-appearance] :is(.agent-body,.agent-message,.extension-markdown) { font-family:var(--os-assistant-font);font-size:var(--os-assistant-size);font-weight:var(--os-assistant-weight);line-height:var(--os-assistant-line);letter-spacing:var(--os-assistant-letter);text-shadow:var(--os-assistant-shadow); }
+body[data-os-appearance] :is(.agent-thought,.agent-state,.agent-stage) { font-family:var(--os-tools-font);font-size:var(--os-tools-size);line-height:var(--os-tools-line);letter-spacing:var(--os-tools-letter); }
+body[data-os-appearance] :is(.eyra-text,#voice,#document-content,.history-message) { --region-font:var(--os-assistant-font); --region-size:var(--os-assistant-size); --region-weight:var(--os-assistant-weight); --region-line:var(--os-assistant-line); --region-letter:var(--os-assistant-letter); --region-paragraph:var(--os-assistant-paragraph); --region-stroke:var(--os-assistant-stroke); --region-stroke-color:var(--os-assistant-strokeColor); --region-shadow:var(--os-assistant-shadow); }
+body[data-os-appearance] :is(.user-text,.chat-history-entry[data-author="user"] .history-message) { --region-font:var(--os-user-font); --region-size:var(--os-user-size); --region-weight:var(--os-user-weight); --region-line:var(--os-user-line); --region-letter:var(--os-user-letter); --region-paragraph:var(--os-user-paragraph); --region-stroke:var(--os-user-stroke); --region-stroke-color:var(--os-user-strokeColor); --region-shadow:var(--os-user-shadow); }
+body[data-os-appearance] :is(#terminal-content,#scene,#thought,#background-terminal-output,#task-plan,.recent-action) { --region-font:var(--os-tools-font); --region-size:var(--os-tools-size); --region-weight:var(--os-tools-weight); --region-line:var(--os-tools-line); --region-letter:var(--os-tools-letter); --region-paragraph:var(--os-tools-paragraph); --region-stroke:var(--os-tools-stroke); --region-stroke-color:var(--os-tools-strokeColor); --region-shadow:var(--os-tools-shadow); }
+body[data-os-appearance] :is(#message,.gv-composer textarea) { --region-font:var(--os-composer-font); --region-size:var(--os-composer-size); --region-weight:var(--os-composer-weight); --region-line:var(--os-composer-line); --region-letter:var(--os-composer-letter); --region-paragraph:var(--os-composer-paragraph); --region-stroke:var(--os-composer-stroke); --region-stroke-color:var(--os-composer-strokeColor); --region-shadow:var(--os-composer-shadow); }
+body[data-os-appearance] :is(.message-identity,.history-heading,#eyra-name) { --region-font:var(--os-identity-font); --region-size:var(--os-identity-size); --region-weight:var(--os-identity-weight); --region-line:var(--os-identity-line); --region-letter:var(--os-identity-letter); --region-paragraph:var(--os-identity-paragraph); --region-stroke:var(--os-identity-stroke); --region-stroke-color:var(--os-identity-strokeColor); --region-shadow:var(--os-identity-shadow); }
+body[data-os-appearance] :is(#side-menu,#status-anchor,#view-heading,#system-popover,#onboarding,.terminal-page-actions) { --region-font:var(--os-interface-font); --region-size:var(--os-interface-size); --region-weight:var(--os-interface-weight); --region-line:var(--os-interface-line); --region-letter:var(--os-interface-letter); --region-paragraph:var(--os-interface-paragraph); --region-stroke:var(--os-interface-stroke); --region-stroke-color:var(--os-interface-strokeColor); --region-shadow:var(--os-interface-shadow); }
+body[data-os-appearance] :is(.eyra-text,.user-text,#voice,#document-content,.history-message,#terminal-content,#scene,#thought,#background-terminal-output,#task-plan,.recent-action,:is(#message,.gv-composer textarea),.message-identity,.history-heading,#eyra-name,#side-menu,#status-anchor,#view-heading,#system-popover,#onboarding,.terminal-page-actions) { font-family:var(--region-font);font-size:var(--region-size);font-weight:var(--region-weight);line-height:var(--region-line);letter-spacing:var(--region-letter);-webkit-text-stroke:calc(var(--region-stroke) * 2) var(--region-stroke-color);paint-order:stroke fill;text-shadow:var(--region-shadow); }
+body[data-os-appearance] :is(.eyra-text,.user-text,#voice,#document-content,.history-message) .markdown { font:inherit;letter-spacing:inherit; }
+body[data-os-appearance] :is(#terminal-content,#scene,#thought,#task-plan) :is(pre,.tool-heading,.terminal-output,.code-line) { font-size:inherit;line-height:inherit; }
+body[data-os-appearance] :is(#side-menu,#onboarding,#view-heading,#system-popover) :is(button,input,select,label):not(:where(.ui-tabs button,.theme-sorts button)),body[data-os-appearance] :is(.message-name,#view-title) { font-family:inherit;font-size:inherit; }
+body[data-os-appearance] .message-meta { font-size:.85em; }
+body[data-os-appearance] .markdown p { margin-block:0 var(--region-paragraph,12px); text-indent:0; }
+body[data-os-appearance] :is(#voice,#live-body-history,.eyra-text,.user-text,#document-content,.history-message).markdown > p { text-indent:0; }
+body[data-os-appearance] .markdown > p.cjk-paragraph,body[data-os-appearance] :is(#voice,#live-body-history,.eyra-text,.user-text,#document-content,.history-message).markdown > p.cjk-paragraph { text-indent:var(--os-first-indent); }
+body[data-os-appearance] .markdown :is(pre,code,table,li,blockquote,h1,h2,h3,h4,h5,h6) { text-indent:0; }
+#appearance-settings { min-width:0;max-width:100%; }
+#appearance-fields { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:14px 20px; }
+#appearance-settings :is(input,select) { min-width:0;width:100%;max-width:100%; }
+.appearance-window { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr));gap:16px;margin:22px 0; }
+#appearance-preview { margin:22px 0;padding:18px 0;border-block:1px solid #ffffff22;overflow-wrap:anywhere;--region-paragraph:var(--sample-paragraph);font-family:var(--sample-font);font-size:var(--sample-size);font-weight:var(--sample-weight);line-height:var(--sample-line);letter-spacing:var(--sample-letter);text-shadow:var(--sample-shadow);-webkit-text-stroke:calc(var(--sample-stroke) * 2) var(--sample-strokeColor);paint-order:stroke fill; }
+#appearance-preview .markdown { font:inherit; }
+#appearance-preview .markdown>p.cjk-paragraph { text-indent:var(--os-first-indent); }
+.appearance-actions { display:flex;align-items:center;flex-wrap:wrap;gap:12px; }
+#appearance-status { flex:1 1 220px;line-height:1.6; }
+body #onboarding .settings-tabs { flex-wrap:wrap;min-width:0; }
+/* 描边和阴影只给读的正文。数字、图表、代码、表格、工具窗、单行对话和界面文字不带，自定义得再夸张也不会糊。 */
+body[data-os-appearance] :is(.usage-page,.stage-pane,.document-header,#status-anchor,#side-menu,#system-popover,code,pre,table),body[data-os-appearance] :is(.usage-page,.stage-pane,.document-header,#status-anchor,#side-menu,#system-popover,code,pre,table) * { -webkit-text-stroke:0 transparent!important; text-shadow:none!important; }
+
+/* One compact thought layout; only its motion is configurable. */
+body[data-os-appearance] :is(.thinking-content,.tv-title,.tv-flow,.tv-text),body[data-os-appearance] .work-transcript-block[data-kind=thinking] .work-transcript-text {
+ font-family:var(--os-thinking-font)!important;font-size:var(--os-thinking-size,14px)!important;font-weight:400!important;line-height:var(--os-thinking-line,1.6)!important;letter-spacing:var(--os-thinking-letter,.2px)!important;-webkit-text-stroke:0 transparent!important;text-shadow:none!important;font-style:normal!important;
+}
+body[data-os-appearance] .tv-title { font-weight:600!important; }
+body .thinking-content { --thought-height:88px;color:var(--os-thinking-color,#e8edf5); }
+body .thinking-content .markdown p { margin-block:0 8px;text-indent:0; }
+body[data-os-appearance] :is(.presence-work-status,.chat-work-status,.chat-layer-status,.presence-summary-state) {
+ font-family:var(--os-status-font,inherit);font-size:var(--os-status-size,14px);font-weight:var(--os-status-weight,400);line-height:1.5;letter-spacing:var(--os-status-letter,.2px);-webkit-text-stroke:0 transparent;text-shadow:none;color:var(--os-status-color,#e4f1ff);opacity:1;filter:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+[data-name-animation=trace] { --work-name-motion:eyra-name-trace; }
+[data-name-animation=relay] { --work-name-motion:eyra-name-relay; }
+[data-name-animation=hinge] { --work-name-motion:eyra-name-hinge; }
+[data-name-animation=stride] { --work-name-motion:eyra-name-stride; }
+[data-name-animation=press] { --work-name-motion:eyra-name-press; }
+[data-name-animation=none] { --work-name-motion:none; }
+:is([data-work=true],.chat-layer-mini[data-active=true],body[data-working=true]) :is(.presence-identity>.chat-name,.chat-layer-name,.work-name) {
+ display:inline-block;transform-origin:left bottom;animation:var(--work-name-motion,eyra-name-trace) 2.4s cubic-bezier(.32,0,.2,1) infinite;
+}
+:is([data-work=true],.chat-layer-mini[data-active=true],body[data-working=true]) :is(.presence-identity>.chat-name,.chat-layer-name,.work-name) { filter:none;text-shadow:none; }
+@keyframes eyra-name-trace { 0%,44%,100% {transform:none} 18% {transform:translateX(.09em)} 31% {transform:translateX(-.025em)} }
+@keyframes eyra-name-relay { 0%,53%,100% {transform:none} 18% {transform:translateY(-.08em)} 31% {transform:translate(.06em,-.08em)} }
+@keyframes eyra-name-hinge { 0%,55%,100% {transform:none} 23% {transform:perspective(130px) rotateX(-15deg) skewX(-3deg)} }
+@keyframes eyra-name-stride { 0%,65%,100% {transform:none} 18%,27% {transform:translateX(.04em)} 38%,47% {transform:translateX(.09em)} }
+@keyframes eyra-name-press { 0%,50%,100% {transform:none} 15% {transform:scaleY(.91)} 29% {transform:scaleY(1.025)} }
+:is(.presence-work-status,.chat-work-status,.presence-summary-state):not([hidden]):not(:empty)::before {content:"/";display:inline-block;margin-inline:.22em .55em;font-weight:400;color:currentColor;opacity:.75;position:static;background:none;width:auto;height:auto;animation:none}
+@media(prefers-reduced-motion:reduce) {body :is(.presence-identity>.chat-name,.chat-layer-name,.work-name){animation:none!important}}
+body.reduce-motion :is(.presence-identity>.chat-name,.chat-layer-name,.work-name){animation:none!important}
+[data-thought-animation=flow] { --thought-text-in:tv-emerge;--thought-title-in:tv-title-in;--thought-title-out:tv-title-out; }
+[data-thought-animation=fade] { --thought-text-in:thought-fade;--thought-title-in:thought-fade;--thought-title-out:thought-fade-out; }
+[data-thought-animation=register] { --thought-text-in:thought-register;--thought-title-in:thought-register;--thought-title-out:thought-fade-out }
+[data-thought-animation=unfold] { --thought-text-in:thought-unfold;--thought-title-in:thought-unfold;--thought-title-out:thought-fade-out }
+[data-thought-animation=reveal] { --thought-text-in:thought-reveal;--thought-title-in:thought-reveal;--thought-title-out:thought-fade-out }
+@keyframes thought-register { from {transform:translateX(.3em)} to {transform:none} }
+@keyframes thought-unfold { from {transform:perspective(140px) rotateX(-24deg);transform-origin:center bottom} to {transform:none} }
+@keyframes thought-reveal { from {clip-path:inset(0 0 95% 0)} to {clip-path:inset(0)} }
+[data-thought-animation=none] { --thought-text-in:none;--thought-title-in:none;--thought-title-out:none; }
+/* The preview owns its draft even when the saved window preference is static. */
+@scope ([data-thought-animation=none]) to ([data-thought-animation]) {
+ :is(.tv-title,.tv-new) { animation:none!important;filter:none!important;transform:none!important; }
+ .tv-title.idle { color:var(--os-thinking-color,#e8edf5);background:none; }
+}
+@keyframes thought-fade { from { opacity:0; } to { opacity:1; } }
+@keyframes thought-fade-out { from { opacity:1; } to { opacity:0; } }
+.chat-failure-detail { white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 .6em; }
+.chat-failure-retry { display:inline-flex;align-items:center;min-height:30px;padding:0 .8em;margin-inline-end:.75em;font:inherit;color:var(--ui-text);cursor:pointer; }

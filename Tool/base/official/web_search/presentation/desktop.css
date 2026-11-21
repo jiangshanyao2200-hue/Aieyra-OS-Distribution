@@ -1,0 +1,46 @@
+body :is(#stage,.team-exec) .search-query { margin:0 16px 10px; font-size:13px; color:#dfe4ec; overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .search-results { margin:0; padding:0 16px 14px; list-style:none; overflow:auto; scrollbar-width:none; display:grid; gap:10px; }
+body :is(#stage,.team-exec) .search-results li { display:grid; gap:2px; font-size:13px; }
+body :is(#stage,.team-exec) .search-results small { color:var(--text-3); font-size:12px; overflow-wrap:anywhere; }
+body[data-form=work] #stage .search-query { margin:0 12px 8px; font-size:12px; }
+body[data-form=work] #stage .search-results { padding:0 12px 10px; gap:6px; }
+body[data-form=work] #stage .search-results li, body[data-form=work] #stage .search-results small { font-size:12px; }
+/* —— 展示台 · 搜索（§15.11 V2）：像搜索引擎——关键词快速敲进搜索框，结果一条条浮上来；改搜的关键词也逐个显示。 —— */
+body :is(#stage,.team-exec) .search-pane { flex:1; min-height:0; overflow:auto; scrollbar-width:none; padding:2px 0 12px; mask-image:linear-gradient(to bottom,transparent 0,#000 10px,#000 calc(100% - 14px),transparent); }
+body :is(#stage,.team-exec) .search-pane::-webkit-scrollbar { display:none; }
+body :is(#stage,.team-exec) .search-group + .search-group { margin-top:14px; }
+body :is(#stage,.team-exec) .search-box { position:sticky; top:0; z-index:1; backdrop-filter:blur(14px); display:flex; align-items:center; gap:9px; height:36px; margin:2px 16px 8px; padding:0 14px; border-radius:999px; background:#ffffff0d; box-shadow:var(--glass-edge-1); font-size:14px; color:#e6e9f0; }
+body :is(#stage,.team-exec) .search-box svg { flex:none; width:15px; height:15px; fill:none; stroke:#a9c0ec; stroke-width:1.8; stroke-linecap:round; }
+body :is(#stage,.team-exec) .search-text { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body :is(#stage,.team-exec) .search-caret { flex:none; width:1.5px; height:16px; margin-left:-6px; background:#c9d6ff; animation:caret-blink 1s steps(1) infinite; }
+body :is(#stage,.team-exec) .search-group:not([data-state=running]) .search-caret { display:none; }
+@keyframes caret-blink { 50% { opacity:0; } }
+body :is(#stage,.team-exec) .search-meta { margin:0 20px 8px; font-size:12px; color:var(--text-3); }
+body :is(#stage,.team-exec) .search-group[data-state=failed] .search-meta { color:var(--ui-error); }
+body :is(#stage,.team-exec) .search-pane .search-results { display:grid; gap:9px; margin:0; padding:0 18px; overflow:visible; list-style:none; }
+body :is(#stage,.team-exec) .search-hit, body :is(#stage,.team-exec) .search-divider { animation:hit-in var(--ui-enter) var(--ease) both; animation-delay:calc(var(--i,0) * 55ms); }
+@keyframes hit-in { from { opacity:0; translate:0 8px; filter:blur(2px); } }
+body :is(#stage,.team-exec) .search-hit { display:grid; gap:3px; min-width:0; }
+body :is(#stage,.team-exec) .hit-title { overflow:hidden; font-size:13px; font-weight:500; color:#dfe4ec; text-overflow:ellipsis; white-space:nowrap; }
+body :is(#stage,.team-exec) .hit-site { display:flex; align-items:center; gap:6px; min-width:0; overflow:hidden; font-size:12px; color:#7f8899; white-space:nowrap; text-overflow:ellipsis; }
+body :is(#stage,.team-exec) .hit-dot { flex:none; display:grid; place-items:center; width:15px; height:15px; border-radius:50%; background:#a9c0ec26; color:#c9d6ff; font-size:11px; font-weight:600; }
+body :is(#stage,.team-exec) .search-divider { margin-top:4px; font-size:12px; color:#8a93a3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body :is(#stage,.team-exec) .search-skeleton { height:30px; border-radius:8px; background:linear-gradient(90deg,#ffffff08 25%,#ffffff14 50%,#ffffff08 75%) 0 0/300% 100%; animation:skeleton 1.3s ease-in-out infinite; animation-delay:calc(var(--i,0) * 120ms); }
+@keyframes skeleton { from { background-position:100% 0; } to { background-position:-100% 0; } }
+body :is(#stage,.team-exec) .search-hit { cursor:pointer; }
+body :is(#stage,.team-exec) .search-hit:not([data-rank=top]) .hit-title { color:var(--text-2); font-weight:400; }
+body :is(#stage,.team-exec) .search-hit.open :is(.hit-title,.hit-snippet) { display:block; overflow:visible; white-space:normal; -webkit-line-clamp:unset; overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .search-answer { cursor:pointer; }
+body :is(#stage,.team-exec) .search-answer.open { -webkit-line-clamp:unset; max-height:40vh; overflow-y:auto; }
+body :is(#stage,.team-exec) .search-answer { display:-webkit-box; margin:10px 18px 0; overflow:hidden; font-size:13px; line-height:1.6; color:#aab3c2; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+body.reduce-motion #stage :is(.search-hit,.search-divider,.search-skeleton,.search-caret) { animation:none!important; }
+
+
+body :is(#stage,.team-exec) .hit-url { overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .search-hit:not(.open) .hit-url { display:none; }
+/* In short panes the query scrolls with its sources, leaving the viewport
+   available for a complete result instead of covering it with sticky chrome. */
+body :is(#stage,.team-exec) .search-pane.compact { padding-bottom:4px; mask-image:none; }
+body :is(#stage,.team-exec) .search-pane.compact .search-box { position:static; height:28px; margin-bottom:4px; }
+body :is(#stage,.team-exec) .search-pane.compact .search-meta { margin-bottom:4px; }
+body :is(#stage,.team-exec) .search-pane.compact .search-hit:not(.open) .hit-snippet { display:none; }

@@ -1,0 +1,10 @@
+{
+  "schema": "aieyra.native-tool/1",
+  "name": "terminal",
+  "aliases": [
+    "terminal",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output"
+  ]
+}

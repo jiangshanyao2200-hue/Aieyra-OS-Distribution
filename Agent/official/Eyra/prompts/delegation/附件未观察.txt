@@ -1,0 +1,2 @@
+
+Use view_image with an image asset path if you need to inspect it; no visual observation has happened yet.

@@ -1,0 +1,65 @@
+{
+  "schema": "aieyra.default-profile/1",
+  "note": "Recommended profile for a fresh install. Images are filled by the random rotation from the bundled library (signed out) or the official library (signed in).",
+  "profile": {
+    "name": "User",
+    "eyraName": "Eyra",
+    "userRingColor": "#e6e9f0",
+    "roles": {
+      "project": {
+        "name": "",
+        "ring": "pulse"
+      },
+      "execution": {
+        "name": "",
+        "ring": "pulse"
+      },
+      "subconscious": {
+        "name": "",
+        "ring": "wave"
+      }
+    },
+    "backgroundBlur": 0,
+    "backgroundOpacity": 0,
+    "chatLayout": {
+      "eyraAvatar": 120,
+      "eyraName": 25,
+      "userAvatar": 80,
+      "userName": 25,
+      "textSize": 16,
+      "lineHeight": 1.3,
+      "top": 20,
+      "left": 60,
+      "right": 80,
+      "maxWidth": 800,
+      "position": 25,
+      "gap": 5,
+      "panelClear": 100,
+      "ring": 120
+    },
+    "mediaRotation": {
+      "avatar": {
+        "mode": "random",
+        "intervalSeconds": 86400
+      },
+      "background": {
+        "mode": "random",
+        "intervalSeconds": 600
+      },
+      "eyraAvatar": {
+        "mode": "random",
+        "intervalSeconds": 86400
+      },
+      "cotaAvatar": {
+        "mode": "random",
+        "intervalSeconds": 86400
+      },
+      "vayaAvatar": {
+        "mode": "random",
+        "intervalSeconds": 86400
+      }
+    },
+    "chatBlur": 12,
+    "chatOpacity": 0.18
+  }
+}

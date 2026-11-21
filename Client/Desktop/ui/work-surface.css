@@ -1,0 +1,37 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .shared-work-surface; .shared-work-surface[hidden],.shared-work-surface [hidden]; body .shared-work-surface .stage-pane; .shared-work-surface .stage-head; .shared-work-surface .stage-body,.work-terminal,.work-search,.work-browser; body .shared-work-surface .desktop-terminal-view; body #stage.shared-work-surface; body:is([data-preview-layout=none],[data-preview-layout=hidden]) #stage.shared-work-surface; body .shared-work-surface .stage-pane .stage-head; body :is(#stage,.shared-work-surface).tool-work-surface .projection-pane; .tool-work-surface .projection-halo; .tool-work-surface .projection-halo::before,.tool-work-surface .projection-halo::after; body :is(#stage,.shared-work-surface).tool-work-surface .projection-pane .stage-head::after; body #stage.tool-work-surface .stage-head; body #stage.tool-work-surface .stage-state; body #stage.tool-work-surface .stage-state::before; body #stage.tool-work-surface .stage-body; @media(prefers-reduced-motion:reduce); body[data-work-only=true]; body[data-work-only=true]::before,body[data-work-only=true]::after,body[data-work-only=true]>:not(#stage); body[data-work-only=true] #stage.tool-work-surface .projection-pane
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/work-surface.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import '../../../Tool/presentation/projection.css';
+@import '../../../Halo/official/instrument.css';
+/* One material and one responsive placement for home and Coding. */
+.shared-work-surface { min-width:0;min-height:0;display:flex;flex-direction:column;gap:16px;overflow:hidden; }
+.shared-work-surface[hidden],.shared-work-surface [hidden] { display:none!important; }
+body .shared-work-surface .stage-pane { flex:1 1 0;min-width:0;min-height:0;display:flex;flex-direction:column;border-radius:var(--ui-radius-panel,18px);background:var(--glass-surface,var(--ui-glass));box-shadow:var(--ui-edge);overflow:hidden; }
+.shared-work-surface .stage-head { display:flex;align-items:center;gap:12px;min-height:36px;padding:0 16px;color:var(--ui-text-2);font-size:12px; }
+.shared-work-surface .stage-body,.work-terminal,.work-search,.work-browser { flex:1;min-width:0;min-height:0;display:flex;overflow:hidden; }
+body .shared-work-surface .desktop-terminal-view { background:transparent;border-radius:0; }
+body #stage.shared-work-surface { position:absolute;inset:16px calc(var(--al-push,0px) + 16px) 16px 16px;z-index:2; }
+body:is([data-preview-layout=none],[data-preview-layout=hidden]) #stage.shared-work-surface { display:none; }
+body .shared-work-surface .stage-pane .stage-head { background:transparent;box-shadow:none;border:0; }
+/* A Brief can cover another reading surface in either the stage or a standalone host. */
+body :is(#stage,.shared-work-surface).tool-work-surface .projection-pane{background:var(--projection-mat)!important;border-radius:var(--projection-radius)!important;box-shadow:var(--glass-edge,var(--ui-edge)),var(--glass-shadow,0 8px 24px #0003)!important;}
+.tool-work-surface .projection-halo{position:relative;display:block;flex:0 0 22px;width:22px;height:22px;pointer-events:none;}
+.tool-work-surface .projection-halo::before,.tool-work-surface .projection-halo::after{content:none;}
+body :is(#stage,.shared-work-surface).tool-work-surface .projection-pane .stage-head::before,
+body :is(#stage,.shared-work-surface).tool-work-surface .projection-pane .stage-head::after{content:none;}
+body #stage.tool-work-surface .stage-head{height:auto!important;min-height:40px!important;padding:7px 14px!important;gap:12px!important;border-bottom:1px solid var(--projection-edge);background:transparent;}
+body #stage.tool-work-surface .stage-state{height:auto!important;max-width:34%;padding:0;background:transparent!important;color:#ecf9ff!important;line-height:1.6!important;border-radius:0!important;}
+body #stage.tool-work-surface .stage-state::before{display:none!important;}
+body #stage.tool-work-surface .stage-body{padding-top:0;overflow:auto;flex-direction:column;}
+@media(prefers-reduced-motion:reduce) { .shared-work-surface { animation:none;transition:none; } }
+
+body[data-work-only=true]{background:transparent!important;}
+body[data-work-only=true]::before,body[data-work-only=true]::after,body[data-work-only=true]>:not(#stage){display:none!important;}
+body[data-work-only=true] #stage.tool-work-surface .projection-pane{backdrop-filter:blur(var(--space-blur,0px))!important;}

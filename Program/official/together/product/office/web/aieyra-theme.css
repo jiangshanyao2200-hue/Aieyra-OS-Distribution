@@ -1,0 +1,45 @@
+/* @file-map:start
+文件: link/office/web/aieyra-theme.css
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: 无已解析的项目内静态导入
+上游: link/office/web/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test link/office/tests/unit/*.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | html, body
+  rule-2 | style | .home-sidebar
+  rule-3 | style | .home-orb
+  rule-4 | style | .home-orb:hover
+  rule-5 | style | .home-orb:focus-visible
+  rule-6 | style | .home-sidebar
+  rule-7 | style | #office-location, #open-account
+  rule-8 | style | #main.office-home
+  rule-9 | style | .home-grid
+  rule-10 | style | .home-seat .seat-name
+  rule-11 | style | .home-seat .seat-meta
+  rule-12 | style | .home-seat .seat-meta .seat-code
+  rule-13 | style | .home-seat .seat-meta .seat-status
+  rule-14 | style | .home-seat .seat-meta .seat-code::after
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Aieyra OS：Link 网页与 OS 同一风格——底色透明（背景由 OS 或 Link 窗口提供），不出现横向滚动条。 */
+/* @chain-region rule-1 */ html, body { background: transparent !important; overflow-x: hidden; }
+/* 左侧栏：玻璃面 + 细光边；圆形入口是 Eyra 的光环。 */
+/* @chain-region rule-2 */ .home-sidebar { overflow-x: hidden; background: rgba(14, 16, 22, .38); backdrop-filter: blur(22px) saturate(140%); border-right: 1px solid #ffffff10; }
+/* @chain-region rule-3 */ .home-orb { background: rgba(18, 21, 28, .45); box-shadow: inset 0 0 0 1px #ffffff1f; transition: box-shadow .16s cubic-bezier(.2,.8,.2,1), background-color .16s cubic-bezier(.2,.8,.2,1); }
+/* @chain-region rule-4 */ .home-orb:hover { background: rgba(24, 28, 38, .6); box-shadow: inset 0 0 0 1.5px #e6e9f0d9, 0 0 14px #b9c8ff2e; }
+/* @chain-region rule-5 */ .home-orb:focus-visible { outline: none; box-shadow: inset 0 0 0 1.5px #e6e9f0d9, 0 0 0 3px #a9c0ec26; }
+
+/* 用户要求：左侧栏不要底板和遮罩，只留圆形按钮；顶部“本地办公室”小字去掉；Link 与 Aieyra 共用一套账号，这里不单独登录。 */
+/* @chain-region rule-6 */ .home-sidebar { background: none !important; backdrop-filter: none !important; border-right: 0 !important; }
+/* @chain-region rule-7 */ #office-location, #open-account { display: none !important; }
+
+/* 工位首页更密集（用户 2026-10-10）：工位图更小、行距更紧；名字下面一行是"编号 · 状态"。 */
+/* @chain-region rule-8 */ #main.office-home { padding: 28px 24px 28px 96px; }
+/* @chain-region rule-9 */ .home-grid { row-gap: 18px; }
+/* @chain-region rule-10 */ .home-seat .seat-name { font-size: 13.5px; line-height: 1.5; margin-top: -6px; }
+/* @chain-region rule-11 */ .home-seat .seat-meta { display: flex; justify-content: center; align-items: baseline; gap: 6px; margin-top: 3px; line-height: 1.6; white-space: nowrap; }
+/* @chain-region rule-12 */ .home-seat .seat-meta .seat-code { margin: 0; font-size: 10px; line-height: inherit; }
+/* @chain-region rule-13 */ .home-seat .seat-meta .seat-status { margin: 0; font-size: 11px; line-height: inherit; }
+/* @chain-region rule-14 */ .home-seat .seat-meta .seat-code::after { content: '·'; margin-left: 6px; color: #6b7385; }

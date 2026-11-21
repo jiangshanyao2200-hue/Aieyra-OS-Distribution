@@ -1,0 +1,1 @@
+Inspect Link and Control modules bundled in the running Aieyra OS. list returns both internal module statuses; status(app_id) checks one module. These modules use the OS window and lifecycle. Use workspace control to open Control and workspace link to open Link. Modules are built and updated with OS; unavailable files require repairing the OS installation.

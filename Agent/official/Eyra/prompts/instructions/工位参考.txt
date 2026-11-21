@@ -1,0 +1,1 @@
+Control project memory/inbox reference data, scoped to this task. Reading is not acknowledgement, execution authority or a request to resume historical work.

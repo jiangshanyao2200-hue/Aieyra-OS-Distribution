@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'"><title>Aieyra 浏览器</title><link rel="stylesheet" href="browser-shell.css"></head>
+<body>
+<header id="browser-titlebar" class="browser-titlebar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c5 5 5 11 0 16-5-5-5-11 0-16"/></svg><span>浏览器</span></header>
+<div id="chrome">
+ <nav class="browser-navigation" aria-label="浏览器导航">
+  <div class="nav-actions"><button id="back" class="icon-button" aria-label="返回"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6M8 12h12"/></svg></button><button id="forward" class="icon-button" aria-label="前进"><svg viewBox="0 0 24 24"><path d="m10 6 6 6-6 6M16 12H4"/></svg></button><button id="reload" class="icon-button" aria-label="刷新"><svg viewBox="0 0 24 24"><path d="M20 7v5h-5m5 0a8 8 0 1 0-2.3 5.7"/></svg></button></div>
+  <div id="browser-tabs-bar"><div class="tab-row"><div id="tabs" role="tablist" aria-label="标签页"></div><button id="tab-stack" type="button" class="icon-button tab-stack" aria-controls="browser-panel" aria-expanded="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="14" height="13" rx="3"/><path d="M8 4h10a3 3 0 0 1 3 3v10"/></svg><span id="tab-stack-count" aria-hidden="true"></span></button><button id="new-tab" type="button" class="icon-button" aria-label="新建标签页" title="新建标签页 · Ctrl+T"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div></div>
+  <button id="address-toggle" type="button" class="icon-button" aria-label="输入网址" aria-controls="navigate" aria-expanded="false" title="输入网址 · Ctrl+L"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg></button>
+  <form id="navigate" hidden><span id="site-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c5 5 5 11 0 16-5-5-5-11 0-16"/></svg></span><input id="address" aria-label="网址" spellcheck="false" autocomplete="off" placeholder="搜索或输入网址"><button id="bookmark" class="icon-button" type="button" aria-label="收藏此页" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg></button></form>
+  <div class="nav-utilities"><button id="bookmarks-button" class="icon-button" type="button" aria-label="收藏夹" title="收藏夹" aria-controls="browser-panel" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M6 4h12a1 1 0 0 1 1 1v15l-7-4-7 4V5a1 1 0 0 1 1-1z"/></svg></button><button id="browser-menu" class="icon-button" aria-label="浏览器菜单" title="浏览器菜单"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+ </nav>
+ <div id="find-bar" hidden><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="find-query" aria-label="在页面中查找" autocomplete="off" placeholder="在此页面查找"><span id="find-count" role="status"></span><button id="find-previous" class="icon-button" aria-label="上一个结果"><svg viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></svg></button><button id="find-next" class="icon-button" aria-label="下一个结果"><svg viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></svg></button><button id="find-close" class="icon-button" aria-label="关闭查找"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+ <div id="notice" role="status" hidden></div><div id="loading-track" aria-hidden="true"></div>
+</div>
+<div id="page-placeholder" hidden><svg viewBox="0 0 24 24"><path d="M12 8v5m0 3v.1"/><circle cx="12" cy="12" r="9"/></svg><h2>暂时无法显示此页面</h2><p>可以刷新重试，或在地址栏打开另一个网址。</p><button id="retry-page" class="primary">重新加载</button></div>
+<div id="menu-shade" hidden></div><img id="panel-backdrop" alt="" aria-hidden="true" hidden><aside id="browser-panel" class="browser-panel" aria-labelledby="panel-title" hidden><div class="panel-heading"><h2 id="panel-title"></h2><button id="panel-close" class="icon-button" aria-label="关闭说明或侧栏"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><div id="panel-content"></div></aside>
+
+<footer id="downloads" aria-live="polite" hidden></footer>
+<dialog id="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-message">
+ <h1 id="dialog-title"></h1>
+ <p id="dialog-message"></p>
+ <input id="dialog-input" class="ui-dialog-input" hidden autocomplete="off" aria-label="输入内容">
+ <div class="ui-dialog-actions"><button id="dialog-cancel" type="button">取消</button><button id="dialog-accept" type="button" class="ui-primary">确定</button></div>
+</dialog>
+<script src="browser-navigation.js"></script><script src="browser-proxy-input.js"></script><script src="browser-panels.js"></script><script src="browser-shell.js"></script><script type="module" src="../../../../Desktop/renderer/tips.mjs"></script><script type="module" src="../../../../Theme/runtime/control-geometry.mjs"></script></body></html>

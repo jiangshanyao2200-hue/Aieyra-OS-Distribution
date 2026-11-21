@@ -1,0 +1,36 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.theme-blank",
+  "kind": "theme",
+  "name": "空白主题模板",
+  "summary": "主题定义布局与组件组合，保留同一份业务状态。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "theme": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "theme": "theme.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "theme.json": {
+      "sha256": "ddcf0fbe046a4a4d1197e8f300b1fb9c3b606e8e6c7fad8659219cf97d17eb5b",
+      "size": 105
+    }
+  }
+}

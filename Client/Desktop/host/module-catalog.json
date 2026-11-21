@@ -1,0 +1,21 @@
+[
+  {
+    "id": "home",
+    "title": "Eyra",
+    "tab": "dock-home",
+    "host": "surface",
+    "detachable": false
+  },
+  {
+    "id": "contacts",
+    "title": "联系人",
+    "tab": "dock-contacts",
+    "host": "surface"
+  },
+  {
+    "id": "settings",
+    "title": "设置",
+    "tab": "api-bubble",
+    "host": "surface"
+  }
+]

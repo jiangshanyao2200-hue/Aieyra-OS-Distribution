@@ -1,0 +1,19 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "ui/coding.html",
+    "native": "coding",
+    "navigation": {
+      "tab": "dock-coding",
+      "host": "surface",
+      "background": "sleep",
+      "order": 1
+    }
+  },
+  "operations": [
+    {"id": "status", "description": "读取 Coding 当前绑定、成员与工作状态，不启动任务。"},
+    {"id": "send", "description": "向 Cota 主持的 Coding 会话发送任务，明确提及时交由 Vaya 调查。"},
+    {"id": "cancel", "description": "按角色和当前任务代次停止 Coding 工作，保留记录。"}
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "id": "example.reviewer",
+  "version": "1.0.0",
+  "name": "独立审阅员",
+  "tool_choices": [
+    "project",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output",
+    "apply_patch",
+    "memory",
+    "agents"
+  ],
+  "default_tools": [
+    "project",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output",
+    "apply_patch",
+    "memory",
+    "agents"
+  ],
+  "prompts": {
+    "identity": "prompts/identity.txt"
+  },
+  "context_provider": {
+    "id": "aieyra.context.structured",
+    "version": "1.0.0",
+    "state_schema": 1
+  },
+  "runtime": {
+    "model": {
+      "tool_calls": true,
+      "image_input": false,
+      "min_context_tokens": 0
+    },
+    "budget": {
+      "max_tokens": 100000,
+      "timeout_seconds": 300
+    },
+    "policy": {
+      "work_mode": "direct-or-delegate",
+      "lifetime": "retained"
+    },
+    "prompt_order": [
+      "identity"
+    ],
+    "tool_packages": [],
+    "programs": [],
+    "data_schema": 1
+  }
+}

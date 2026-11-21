@@ -1,0 +1,663 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body; body; body:is([data-form=chat],[data-form=work]) #screen #conversation; body:is([data-form=chat],[data-form=work]) #screen #conversation::-webkit-scrollbar; body:is([data-form=chat],[data-form=work]) #screen #conversation, body:is([data-form=chat],[data-form=work]) #screen #conversation :not(.chat-name); body :is(#conversation,.chat-viewport); body:is([data-form=chat],[data-form=work]) #conversation-content; body .chat-entry; .chat-greeting-identity; body .chat-entry.talk .chat-text; body .chat-avatar; body .chat-avatar img; body .chat-avatar.eyra; body .chat-avatar.eyra::before; body .chat-avatar.eyra img; body .chat-main; body .chat-entry.eyra .chat-main; body .chat-name; body .chat-entry.user .chat-name; body .chat-text; body .chat-text > :first-child; body .chat-text > :last-child; body .chat-entry.user .chat-text; body .chat-attachments; body .chat-entry.fresh.user > *; body .chat-entry.fresh.eyra .chat-main; body .chat-entry.fresh.eyra .chat-avatar; @keyframes chat-in; @keyframes chat-settle; @keyframes chat-shadow; body:is([data-form=chat],[data-form=work]) #screen #conversation #emergence; body:is([data-form=chat],[data-form=work]) #screen .presence-header; body:is([data-form=chat],[data-form=work]) #screen :is(#eyra-trigger,.role-trigger); body:is([data-form=chat],[data-form=work]) #screen :is(#presence-label,#live-current,#presence-glyphs,#live-actions,#live-details); body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice); body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice):not([data-kind=question])::after; body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice)[hidden]; body:is([data-form=chat],[data-form=work]) #screen :is(#voice,.team-voice-text); body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice):is([data-kind=progress],[data-kind=final]) :is(#voice,.team-voice-text); body[data-os-appearance] :is(#screen :is(#voice,.team-voice-text).markdown,.chat-text) > p.cjk-paragraph; body:is([data-form=chat],[data-form=work]) #screen #conversation #eyra-name; body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice)[data-kind=thinking] :is(#voice,.team-voice-text); body:is([data-form=chat],[data-form=work]) #screen :is(#presence-caption,#reconnect); @keyframes type-glow; body[data-form=work]; body[data-form=work]; body :is(#stage,.team-exec) .stage-pane; body :is(#stage,.team-exec) .stage-pane.entering; body :is(#stage,.team-exec)[data-mode=carousel] .stage-pane.entering; body :is(#stage,.team-exec) .stage-pane.leaving; body :is(#stage,.team-exec) .stage-head; body :is(#stage,.team-exec) .stage-head svg:not(.halo):not(.halo-custom); body :is(#stage,.team-exec) .stage-title; body :is(#stage,.team-exec) .stage-state; body :is(#stage,.team-exec) .stage-state::before; body :is(#stage,.team-exec) .stage-pane[data-state=running] .stage-state::before; body :is(#stage,.team-exec) .stage-pane[data-state=failed] .stage-state; body :is(#stage,.team-exec) .stage-pane[data-state=failed] .stage-state::before; @keyframes stage-pulse; body :is(#stage,.team-exec) .stage-body; body :is(#stage,.team-exec) .stage-empty, body :is(#stage,.team-exec) .stage-error; body :is(#stage,.team-exec) .stage-error; body :is(#stage,.team-exec) .desktop-terminal-view; body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-toolbar; body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-state; body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-follow; body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-screen .xterm-viewport; body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-empty; body :is(#stage,.team-exec) .other-args; body :is(#stage,.team-exec) .other-outcome; body :is(#stage,.team-exec) .other-outcome; body #activity-orbits #plan-slot; body #activity-orbits; body #dynamic-menu .orbit-trigger; body #dynamic-menu .activity-orbit; body #dynamic-menu .orbit-summary; body #dynamic-menu .activity-orbit:is(:hover,:focus-within) .orbit-summary; body #status-rail; body[data-form=work] #status-rail; body:not([data-desktop-page=home]) #status-rail; body #status-rail > *; body #status-rail [hidden]; body #status-rail[data-compact=true]; body #status-rail[data-compact=true] #terminal-orbs:not([hidden]); body #status-rail[data-compact=true] > :is(.rail-orb,.sub-orb,.diary-orb); body #status-rail[data-compact=true] :is(.plan-pill,.sub-card,.diary-pill); body #status-rail[data-compact=true] > :is(.rail-orb,.sub-orb,.diary-orb):not(:hover):not(:focus-within) :is(.plan-pill,.sub-card,.diary-pill); body #status-rail[data-compact=true] > :is(.rail-orb,.sub-orb,.diary-orb):is(:hover,:focus-within) :is(.plan-pill,.sub-card,.diary-pill); body #status-rail[data-compact=true] .sub-card; body #status-rail[data-compact=true] .sub-steps; body .rail-orb; body .plan-ball; body .plan-ball:hover; body .plan-ball:focus-visible; body .plan-ring; body .plan-track; body .plan-arc; body .plan-glyph; body .plan-glyph circle; body .rail-orb[data-active=true] .plan-glyph path; body .rail-orb[data-active=true] .plan-glyph .l2; body .rail-orb[data-active=true] .plan-glyph .l3; @keyframes plan-scan; body .rail-orb[data-complete=true] .plan-arc; body .plan-pill; body .rail-orb[data-pill=hover]:not(:hover):not(:focus-within) .plan-pill, body[data-form=chat] .rail-orb[data-crowded=true]:not(:hover):not(:focus-within) .plan-pill; body .plan-track-text; body .plan-line; body .plan-line.in; body .plan-line.out; body .plan-pill small; body #status-rail #plan-orb[data-feedback=true] .plan-pill; body #status-rail[data-compact=true] #plan-orb[data-feedback=true] .plan-pill; body #status-rail #plan-orb[data-feedback=true] .plan-pill small:empty; body .plan-ball::after; body .rail-orb.pop .plan-ball; body .rail-orb.pop .plan-ball::after; @keyframes plan-pop; @keyframes plan-ripple; body .plan-sparks; body .plan-sparks i; body .plan-sparks i:nth-child(1); body .plan-sparks i:nth-child(4); body .rail-orb.pop .plan-sparks i; @keyframes plan-spark; body #plan-pop; body[data-form=work] #plan-pop; body #status-rail ~ #diary-pop; @starting-style; body #plan-pop[hidden]; body #plan-pop .plan-head h2; body #plan-pop .plan-meter; body #plan-pop .plan-meter span; body #plan-pop .plan-progress-text; body #plan-pop .plan-phase h3; body #plan-pop .plan-steps; body #plan-pop .plan-step; body #plan-pop .plan-dot; body #plan-pop .plan-step[data-state=completed] .plan-dot; body #plan-pop .plan-step[data-state=in_progress] .plan-dot; body #plan-pop .plan-step-body; body #plan-pop .plan-step-body strong; body #plan-pop .plan-step[data-state=completed] .plan-step-body strong; body #plan-pop .plan-step[data-state=pending] .plan-step-body strong; body #plan-pop .plan-step-body small; body #plan-pop .plan-result; body #plan-pop .plan-feedback; body #terminal-orbs; body .term-orb; body .term-orb:hover; body .term-orb svg; body .term-dot; body .term-orb[data-state=running] .term-dot, body .term-orb[data-count] .term-dot; body .term-count; body .term-tip; body .term-orb:is(:hover,:focus-visible) .term-tip; body[data-form=folded]; body[data-form=folded][data-eyra-placement] #screen #conversation #emergence; body[data-form=folded] #screen .presence-header; body[data-form=folded][data-eyra-placement] #screen :is(#eyra-trigger,.role-trigger); body[data-form=folded] #screen :is(#presence-label,#live-current,#presence-glyphs,#live-actions,#live-details); body[data-form=folded][data-eyra-placement] #screen #conversation :is(#answer-stage,.team-voice); body[data-form=folded] #screen #conversation :is(#answer-stage,.team-voice)::-webkit-scrollbar; body[data-form=folded] #screen :is(#voice,.team-voice-text); body[data-form=folded] #screen :is(#voice,.team-voice-text) > *; body[data-form=folded] #screen :is(#voice,.team-voice-text) > :last-child; body[data-form=folded] #screen :is(#presence-caption,#reconnect); body[data-form=folded][data-eyra-placement] #screen #conversation #emergence:has(#presence-caption:not([hidden])); body[data-view=onboarding][data-form=folded][data-eyra-placement] #screen #conversation #emergence:has(#presence-caption:not([hidden])); body[data-form=folded] #screen #presence-caption; body[data-form=folded] #screen #reconnect; body #control-view #control-surface; body.composer-open #control-view #control-surface; body.native-eyra-overlay:not(.composer-open) #control-view #control-surface; body.native-eyra-overlay #control-view #control-surface; body #panel; body #panel-content; body #panel-content::-webkit-scrollbar; body .hx; body .hx .chat-avatar; body .hx .chat-avatar.eyra; body .hx .chat-entry.eyra .chat-main; body .hx-list; body .hx-entry .chat-name; body .hx-entry .chat-name>span; body .hx-entry .chat-name>time; body .hx-entry .chat-name time, body .hx-step time; body .hx-entry:hover .chat-name time, body .hx-step:hover time; body .hx-state, body .hx-step-state; body .hx-day; body .hx-top; body .hx-top[hidden]; body .hx-process; body .hx-process > summary, body .hx-step-line; body .hx-process > summary::-webkit-details-marker, body .hx-step-line::-webkit-details-marker, body .hx-more::-webkit-details-marker; body .hx-process > summary strong, body .hx-step-line strong; body .hx-step-text; body .hx-dot; body .hx-process[data-state=running] > summary .hx-dot, body .hx-step[data-state=running] .hx-dot; body .hx-process[data-state=failed] > summary .hx-dot, body .hx-step[data-state=failed] .hx-dot; body .hx-process > summary:hover, body .hx-step-line:hover; body .hx-steps; body .hx-step time; body .hx-thought; body .hx-latest; @starting-style; body .hx-latest[hidden]; body .hx-latest svg; body .chat-avatar.eyra::before; body[data-form=folded] #onboarding #settings-body, body[data-form=folded] #panel-content, body[data-form=folded] #document-content; body.panel-open[data-form=folded] #screen #conversation :is(#answer-stage,.team-voice); body #terminal-pop; body[data-form=work] #terminal-pop; body #terminal-pop[hidden], body:not([data-desktop-page=home]) #terminal-pop; @starting-style; body .tp-head; body :is(.tp-collapse,.tp-stop); body :is(.tp-collapse,.tp-stop):hover; body .tp-stop:hover; body :is(.tp-collapse,.tp-stop) svg; body .tp-stop[hidden]; body .tp-state; body .tp-state::before; body .tp-state[data-state=active]; body .tp-state[data-state=active]::before; body .tp-state[data-state=failed]; body .tp-state[data-state=failed]::before; body .tp-title; body .tp-tabs; body .tp-tabs[hidden]; body .tp-tab; body .tp-tab[aria-current=true]; body .tp-tab[data-state=ended]; body .tp-screen; body .tp-screen[hidden]; body .tp-screen :is(.xterm,.xterm-viewport,.xterm-screen); body .tp-screen .xterm-viewport; body .tp-screen .xterm-viewport::-webkit-scrollbar; body .tp-error; body .tp-error:empty; body #terminal-orbs[data-open=true] .term-orb[aria-expanded=true]; body:is([data-form=chat],[data-form=work]) #screen #conversation; body .chat-entry .chat-main; body .chat-entry.eyra .chat-main; body .hx .chat-entry .chat-main; body .hx .chat-entry.eyra .chat-main; body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice); body .chat-entry.fresh.eyra .chat-main; body .chat-entry.fresh.eyra .chat-avatar; body :is(#presence-avatar,.role-instrument-avatar); body:is([data-form=chat],[data-form=work]) #screen #conversation; body.reduce-motion:is([data-form=chat],[data-form=work]) #screen #conversation; body #status-rail [data-crowded=true]:not(:hover):not(:focus-within) :is(.plan-pill,.sub-card,.diary-pill); body[data-form=folded][data-eyra-placement] #screen #conversation :is(#answer-stage,.team-voice); body[data-form=folded] #screen :is(#voice,.team-voice-text); body .plan-pill; body #plan-pop; body .rail-orb.done :is(.plan-line:not(.out),.plan-arc); @keyframes plan-done; body.reduce-motion .rail-orb.done :is(.plan-line,.plan-arc); body #strip-hide; body[data-form=folded] #strip-hide:not([hidden]); body[data-form=folded] .presence-header:hover #strip-hide:not([hidden]), body[data-form=folded] #strip-hide:not([hidden]):focus-visible; body #strip-hide svg; body #strip-hide .strip-show-icon, body.strip-dismissed #strip-hide .strip-hide-icon; body.strip-dismissed #strip-hide .strip-show-icon; body.strip-dismissed[data-form=folded] #screen #conversation :is(:is(#answer-stage,.team-voice)); body #document-viewer; body #document-viewer[data-kind=usage]; body #document-viewer .document-header; body #document-viewer .document-heading; body #document-viewer #document-meta; body #document-viewer .document-header h2; body #document-content; body #document-content::-webkit-scrollbar; body #document-content > :first-child; body #document-content :is(h1,h2,h3,h4); body #document-content h1; body #document-content p; body #document-content :is(ul,ol); body #document-content li; body #document-content li::marker; body #document-content pre; body #document-content :not(pre) > code; body #document-content blockquote; body #document-content a; body #document-content hr; body #document-content table; body #document-content :is(td,th); body #document-content th; body #document-content .usage-page; body #document-content .usage-tiles; body #document-content .usage-tile; body #document-content .usage-tile small; body #document-content .usage-tile b; body #document-content .usage-sub; body #document-content .usage-meter; body #document-content .usage-meter i; body #document-content .usage-section; body #document-content .usage-section h3; body #document-content .usage-head; body #document-content .usage-head h3; body #document-content .usage-legend; body #document-content .usage-legend span; body #document-content .usage-legend i; body #document-content .usage-plot; body #document-content .usage-axis; body #document-content .usage-bars; body #document-content .usage-bar; body #document-content .usage-bar:hover; body #document-content .usage-bar i; body #document-content .usage-bar i:first-child; body #document-content .usage-edge; body #document-content .usage-scroll; body #document-content .usage-table; body #document-content .usage-table td; body #document-content .usage-table td:first-child; body #document-content .usage-table .num; body #document-content .usage-more > summary; body #document-content .usage-more > summary:hover; body #document-content .usage-more .usage-section; body #document-content .usage-more h3:empty; body #document-content .usage-notes; body #document-content .usage-note; body :is(.tp-screen) .xterm .scrollbar; body #exit-ask; body #exit-ask::backdrop; body #exit-ask h2; body #exit-ask p; body #exit-ask .exit-actions; body #exit-ask button; body #exit-ask button:hover:not(:disabled); body #exit-ask button.quiet; body #exit-ask button.primary; body #exit-ask button.primary:hover:not(:disabled); @media (max-height:560px); body[data-form=folded]; body[data-form=folded][data-eyra-placement] #screen .presence-header; body[data-form=folded][data-eyra-placement=compact] #bottom-bar; body.composer-open[data-form=folded] #screen #conversation :is(:is(#answer-stage,.team-voice)); @media (max-height:480px); body[data-form=work]; @media (min-width:761px); body .chat-artifacts; body .artifact-chip; body .artifact-chip:hover, body .artifact-chip:focus-within; body .artifact-chip button; body .artifact-chip .artifact-open; body .artifact-chip svg; body .artifact-chip .artifact-open svg; body .artifact-chip .artifact-name; body .artifact-chip .artifact-reveal; body .artifact-chip:hover .artifact-reveal, body .artifact-chip:focus-within .artifact-reveal; body .artifact-chip .artifact-reveal:hover; body .artifact-chip.missing; body .chat-artifacts[hidden]; body #voice-artifacts:not([hidden]); body[data-form=folded] #voice-artifacts; @keyframes artifacts-in; body .report-ball .report-count; body .report-ball .report-count:empty; body .report-orb[data-unread=true] .report-ball; body:is([data-view=document-viewer],[data-scoped-report-open=true]) #status-rail; body:is([data-view=document-viewer],[data-scoped-report-open=true]) #status-rail > :not(#report-orb); body #document-viewer[data-report-entry]; body:is([data-view=document-viewer],[data-scoped-report-open=true]) #report-orb .plan-pill; body #report-pop; @starting-style; body #report-pop[hidden]; body #report-pop .plan-head h2; body #report-pop .plan-progress-text; body #report-pop .report-list; body #report-pop .report-item; body #report-pop .report-item:hover, body #report-pop .report-item:focus-visible; body #report-pop .report-item[data-state=open]; body #report-pop .report-format; body #report-pop .report-item strong; body #report-pop .report-item small; body[data-form=folded] #document-viewer #document-content; body[data-form=work]; body[data-form=work][data-eyra-placement=work] #bottom-bar; @media (max-width:900px); body[data-form=work]; body[data-form=work][data-eyra-placement=work] #bottom-bar; body[data-form=work] #screen #conversation; body[data-form=work] .chat-entry.progress .chat-text; @media (max-width:900px); body .chat-avatar.eyra::before; body[data-form=work] #status-rail > :is(.rail-orb,.sub-orb,.diary-orb); body[data-form=work] #status-rail :is(.plan-pill,.sub-card,.diary-pill); body .hx-turn; body .hx-turn>.chat-main; body .hx-turn .chat-name; body .hx-turn .chat-name time; body .hx-turn .hx-process; body .hx-message; body .hx-message .chat-text; body .hx-message .chat-text>:first-child; body .hx-message .chat-text>:last-child; body .hx-message-time; body .hx-message-time[hidden]; body .hx-turn .hx-process-line; body .hx-process-line::before; body .hx-process[open]>.hx-process-line::before; body .hx-turn .hx-steps; body .hx-step time; body .hx-step[data-kind=system]; body .hx-step[data-kind=system] .hx-dot; body .hx-turn .hx-inline-day; body .hx .chat-avatar,body .hx .chat-avatar::before,body .hx .chat-avatar::after,body .hx .chat-avatar *; body .hx-process summary:focus-visible,body .hx-receipt summary:focus-visible; @media(max-width:600px); @media(prefers-reduced-motion:reduce); body.reduce-motion .hx-process-line::before; .context-load-more; .context-load-more:hover; .context-load-more:focus-visible; .context-load-more[hidden]; body[data-form=work] #screen #conversation; body[data-form=work] #screen #conversation #emergence; body .role-trigger; body .role-instrument-glyph; body .role-trigger:has(.role-instrument[data-state=idle]) .role-instrument-glyph; body .team-voice[data-kind=progress] .team-voice-text; body :is(#stage,.team-exec) .stage-head > .stage-role; body :is(#stage,.team-exec) .stage-head > .stage-role .role-face; body[data-form=work][data-eyra-placement=work]:is(.sd-geom,.al-geom) #bottom-bar; body .page-back; body .page-back[hidden]; body .voice-tabs; body .voice-tabs[hidden]; body .voice-tab; body .voice-tab[data-current=true]; body .voice-tab[data-pinned=true]; body .role-instrument-glyph[hidden]; body #document-content .usage-session-select; body #document-content .usage-session-select select; .presence-identity; .presence-identity .chat-name; .presence-work-status; .presence-identity:has(.presence-work-status:not([hidden])) ~ #voice .tv-titles:has(.tv-title.idle); body[data-form=folded] .halo-surface[data-state] > .halo; body:is([data-form=chat],[data-form=work]) #conversation-queued:not([hidden]); .chat-send-status; body .chat-main:has(>.chat-send-status:is([data-delivery=pending],[data-delivery=prepared])); body .chat-send-status:is([data-delivery=pending],[data-delivery=prepared]); body .chat-send-status[data-delivery=pending]; @keyframes chat-send-stall; body.reduce-motion .chat-send-status[data-delivery=pending]; @media(prefers-reduced-motion:reduce); body #panel > .hx-search; body #panel > .hx-search .hx-search-input; body #panel > .hx-search[data-open=true] .hx-search-input; body #panel > .hx-search[data-open=true] .hx-search-toggle; body .hx-results; body .hx-results[hidden]; body .hx-results-status; body .hx-results-list; body .hx-hit; body .hx-hit header; body .hx-hit header strong; body .hx-hit header time; body .hx-hit-text; body .hx-hit.expanded .hx-hit-text; body .hx-hit-text mark; body .hx-results-more; body .hx-results-more[hidden]; body.reduce-motion #panel > .hx-search .hx-search-input; body #status-rail[data-compact=true] :is(.rail-orb,.sub-orb,.diary-orb,.term-orb); body #panel>.hx-pagination; .hx-pagination button; .hx-pagination button[aria-current=page]; .hx-pagination button:focus-visible; .hx-pagination button:disabled; body #panel-content:has(.hx); body #panel>.hx-search[data-open=true]; body #panel>.hx-search[data-open=true] .hx-search-input; body #panel>.hx-search .hx-search-input::placeholder; body #panel>.hx-search .hx-search-toggle; body .hx :is(.hx-process-line,.hx-step-line,.hx-day,.hx-top,.hx-when,.hx-step-text,.hx-message-time,.hx-results-status,.hx-hit time); body .hx-process-line; body .hx-list[hidden]
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/forms.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import '../../../Tool/base/official/web_search/presentation/desktop.css';
+@import '../../../Tool/base/official/view_image/presentation/desktop.css';
+/* ── Eyra 三种形态（docs/UI设计知识库.md 第 8 章“形态”；本文件里的 §N 都指那一章）──────────────────────────────
+   聊天 / 工作 / 折叠，全部挂在 body[data-form] 下。Claude 单写；细节修正在 polish.css（Codex）。
+   旧样式表里有大量 !important 定位规则，这里用更高特异性、后加载覆盖；位移动画用独立的 translate 属性。
+   尺寸全部是变量：个人设置 → 聊天排版（chat-layout.mjs）把它们写到 body 的行内样式上。 */
+
+/* 页面内容离顶栏多远，所有页面同一个值。弹出层跟着侧栏让位也读这里。 */
+body { --page-top:16px; --rail-panel-r:calc(var(--rail-panel-right,84px) + var(--al-push,0px)); }
+body { --eyra-avatar:80px; --user-avatar:44px; --eyra-ring-size:104px; --chat-name:14px; --chat-text:15px; --chat-leading:1.8; --chat-gap:26px; --chat-top:64px; --chat-left:80px; --chat-right:80px; --chat-max:780px;
+  --chat-axis:max(var(--eyra-avatar),var(--user-avatar)); --chat-small-avatar:calc(var(--eyra-avatar) * .46);
+  --glass-panel:rgba(13,15,21,.66); --glass-edge-1:inset 0 0 0 1px #ffffff14; }
+
+/* ── 聊天形态 §4：左上角一条聊天列，光圈在列尾 ── */
+body:is([data-form=chat],[data-form=work]) #screen #conversation { position:absolute!important; inset:0 var(--chat-right) var(--chat-bottom-inset,0px) var(--chat-left)!important; width:auto!important; max-width:var(--chat-max)!important; height:auto!important; padding:var(--chat-top) 0 24px!important; overflow-x:hidden!important; overflow-y:auto!important; overscroll-behavior:contain; scrollbar-width:none; pointer-events:auto!important; mask-image:linear-gradient(to bottom,transparent 0,#000 min(14px,var(--fade-top,0px)),#000 calc(100% - min(14px,var(--fade-bottom,0px))),transparent 100%)!important; }
+body:is([data-form=chat],[data-form=work]) #screen #conversation::-webkit-scrollbar { display:none; }
+/* The viewport itself reserves input space; its fade never covers the final line. */
+body:is([data-form=chat],[data-form=work]) #screen #conversation, body:is([data-form=chat],[data-form=work]) #screen #conversation :not(.chat-name) { text-align:left; }
+/* Reserve the pulse's full envelope (86% × 1.32), the avatar outline and a
+   readable base gap. The saved gap is additional spacing, never collision repair. */
+body :is(#conversation,.chat-viewport) { --chat-safe-gap:calc(max(6px,var(--eyra-avatar) * .08,var(--user-avatar) * .06) + 8px + var(--chat-gap)); --chat-axis:calc(max(var(--eyra-avatar),var(--user-avatar)) + max(8px,var(--eyra-avatar) * .16)); }
+body:is([data-form=chat],[data-form=work]) #conversation-content { position:static!important; inset:auto!important; transform:none!important; display:flex; flex-direction:column; gap:var(--chat-safe-gap); width:auto!important; max-width:none!important; max-height:none!important; overflow:visible!important; color:var(--text); }
+
+/* 一条消息：头像 · 粗体名字 · 正文。头像都落在同一条竖轴上；Eyra 的头像大，你的头像小。 */
+body .chat-entry { display:grid; flex:none; min-width:0; grid-template-columns:var(--chat-axis,80px) minmax(0,1fr); column-gap:16px; align-items:start; }
+.chat-greeting-identity { justify-self:center;min-width:0;width:var(--eyra-avatar); }
+/* 团队对话：Eyra、Vaya、Cota 之间只显示一句 brief，一行，比正文轻；小头像对齐在头像轴上 */
+body .chat-entry.talk .chat-text { white-space:pre-wrap; }
+/* Background veils provide contrast. Retained chat identities stay opaque in
+   work mode too; fading old avatars defeats that readability purpose. */
+body .chat-avatar { justify-self:center; display:grid; grid-template: minmax(0,1fr) / minmax(0,1fr); place-items:center; flex:none; aspect-ratio:1; width:var(--user-avatar,44px); height:var(--user-avatar,44px); border-radius:50%; overflow:hidden; background:#141820; box-shadow:0 0 0 1px #ffffff24; font-size:calc(var(--user-avatar,44px) * .36); font-weight:600; color:#cfd5e0; }
+body .chat-avatar img { width:100%; height:100%; object-fit:cover; }
+/* Eyra 的头像就是光圈"静止时的样子"：一圈细光环，头像在环内（与 #presence 的光环同比例）。 */
+body .chat-avatar.eyra { position:relative; width:var(--eyra-avatar,80px); height:var(--eyra-avatar,80px); overflow:visible; background:transparent; box-shadow:none; }
+body .chat-avatar.eyra::before { content:''; position:absolute; inset:11.5%; border-radius:50%; box-shadow:inset 0 0 0 1.5px #e6e9f0d9,0 0 14px #b9c8ff2e; background:#0d1016; }
+body .chat-avatar.eyra img { position:absolute; inset:15%; width:70%; height:70%; border-radius:50%; }
+body .chat-main { min-width:0; }
+body .chat-entry.eyra .chat-main { padding-top:calc(var(--eyra-avatar,80px) * .1); }
+body .chat-name { min-width:0;overflow-wrap:anywhere;margin:0 0 4px; font-size:var(--chat-name,14px); font-weight:650; line-height:1.45; letter-spacing:.02em; color:#eef1f7; }
+body .chat-entry.user .chat-name { color:#dfe4ec; }
+body .chat-text { font-size:var(--chat-text,15px); line-height:var(--chat-leading,1.8); color:var(--text); overflow-wrap:anywhere; }
+body .chat-text > :first-child { margin-top:0; }
+body .chat-text > :last-child { margin-bottom:0; }
+body .chat-entry.user .chat-text { white-space:pre-wrap; color:#dfe4ec; }
+body .chat-attachments { display:block; margin-top:4px; font-size:11.5px; color:var(--text-3); }
+/* 入场：用户消息淡入上移；Eyra 的回复原本就在光圈旁，只轻轻接上，头像像影子一样留下。 */
+body .chat-entry.fresh.user > * { animation:chat-in var(--t2) var(--ease) both; }
+body .chat-entry.fresh.eyra .chat-main { animation:chat-settle 180ms ease-out both; }
+body .chat-entry.fresh.eyra .chat-avatar { animation:chat-shadow 520ms var(--ease) both; }
+@keyframes chat-in { from { opacity:0; transform:translateY(8px); } }
+@keyframes chat-settle { from { opacity:.55; } }
+@keyframes chat-shadow { from { opacity:0; transform:scale(1.14); filter:blur(2px); } }
+
+/* 光圈所在的"下一句"位置：与消息同一网格，光圈就是 Eyra 的头像位。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation #emergence { position:relative!important; inset:auto!important; transform:none!important; display:grid!important; grid-template-columns:var(--chat-axis) minmax(0,1fr); grid-template-rows:auto auto auto; gap:0 16px!important; align-items:start!important; width:auto!important; max-width:none!important; height:auto!important; margin:var(--chat-safe-gap) 0 0!important; padding:0!important; text-align:left!important; }
+/* 小窗里长消息滚到底时，光圈停在对话区顶边，不随消息开头一起滚出去（seq239 光圈裁切）。 */
+body:is([data-form=chat],[data-form=work]) #screen .presence-header { grid-column:1; grid-row:1 / span 3; justify-self:center; width:var(--eyra-avatar)!important; display:block!important; padding:0!important; position:sticky!important; top:12px; align-self:start; z-index:1; }
+body:is([data-form=chat],[data-form=work]) #screen :is(#eyra-trigger,.role-trigger) { width:var(--eyra-avatar)!important; height:var(--eyra-avatar)!important; cursor:pointer; }
+body:is([data-form=chat],[data-form=work]) #screen :is(#presence-label,#live-current,#presence-glyphs,#live-actions,#live-details) { display:none!important; }
+body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice) { grid-column:2; grid-row:1; position:static!important; width:auto!important; max-width:none!important; max-height:none!important; margin:0!important; padding:calc(var(--eyra-avatar) * .1) 0 0!important; border:0!important; border-radius:0!important; background:none!important; box-shadow:none!important; backdrop-filter:none!important; text-align:left!important; overflow:visible!important; mask-image:none!important; }
+body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice):not([data-kind=question])::after { content:none; }
+/* 回复落进聊天列的那一刻，光圈旁的旧文本立即让位（不走退场过渡），否则两份同时占位、列会跳。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice)[hidden] { transition:none!important; }
+body:is([data-form=chat],[data-form=work]) #screen :is(#voice,.team-voice-text) { font-size:var(--chat-text); line-height:var(--chat-leading); color:var(--text); }
+/* 正文先占一行（AIDEBUG seq52）：回到聊天时结尾正文从空开始打，第一行出现会让聊天列增高 27px、平滑跟底把正在滑行的光圈往回拽。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice):is([data-kind=progress],[data-kind=final]) :is(#voice,.team-voice-text) { min-height:1lh; }
+/* 首行缩进默认 0（用户 2026-10-10）；外观里改了缩进，光圈旁与落进聊天后保持一致，落下时文字不跳。 */
+body[data-os-appearance] :is(#screen :is(#voice,.team-voice-text).markdown,.chat-text) > p.cjk-paragraph { text-indent:var(--os-first-indent,0); }
+/* The live identity uses the same heading as settled messages in every phase. */
+body:is([data-form=chat],[data-form=work]) #screen #conversation #eyra-name { display:block; position:static; margin:0; font-size:var(--chat-name); font-weight:650; line-height:1.45; letter-spacing:.02em; color:var(--ui-text); }
+/* 思考保留流动的尾部；姓名与正文共用文字列，不随阶段更换定位。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice)[data-kind=thinking] :is(#voice,.team-voice-text) { display:block!important; --thought-height:calc(var(--eyra-avatar) * .9 - 4px);height:auto;max-height:var(--thought-height)!important; overflow:hidden!important; font-style:normal; font-size:calc(var(--chat-text) - 1.5px); line-height:1.6; color:#7d8596; mask-image:none!important; }
+body:is([data-form=chat],[data-form=work]) #screen :is(#presence-caption,#reconnect) { grid-column:2; justify-self:start; margin:4px 0 0; text-align:left; }
+
+/* 光圈"收到"：一次涟漪向外散开，光环亮一下。 */
+body.reduce-motion :is(.chat-entry.fresh > *,.chat-entry.fresh .chat-main,.chat-entry.fresh .chat-avatar,:is(#eyra-trigger,.role-trigger).received,:is(#eyra-trigger,.role-trigger).received :is(#presence,.role-instrument)) { animation:none!important; }
+
+/* 打字机（§5）：写到哪里，哪里有一小段渐亮的光；打完即消失。 */
+body .typing > :is(p,h1,h2,h3,h4,blockquote):last-child::after, body .typing > [data-content-schema="aieyra.content.quote/1"]:last-child > blockquote::after, body .typing > :is(ul,ol):last-child > li:last-child::after { content:''; display:inline-block; width:.6em; height:1em; margin-left:2px; vertical-align:-.14em; border-radius:2px; background:linear-gradient(90deg,#c9d6ffaa,#c9d6ff00); animation:type-glow 1s ease-in-out infinite; }
+@keyframes type-glow { 50% { opacity:.35; } }
+
+/* ── 工作形态 §6：顶栏收起，光圈固定在左上，右侧一条正文条（高度 = 光圈），下方是展示台 ── */
+body[data-form=work] { --work-ring:var(--eyra-ring-size,104px); --work-top:64px; --work-left:32px; --work-rail:96px; }
+
+/* ── 展示台 §7：正文条以下、右侧栏以左；每种工具一个玻璃窗口，宽度 1/1、1/2、1/3 平滑变化 ── */
+/* 团队实时卡片：Vaya、Cota 工作时在展示台右边单独一列，展示台让出这一列宽度 */
+/* 右边距跟展示台最终的位置对齐（16px，见 ui-system.css）；顶边让开右上角的计划圆和计划条；窄窗口时展示台在下半屏，卡片也跟到下半屏。 */
+body[data-form=work] { --team-card-width:clamp(220px,22vw,300px); }
+/* 右上角的计划圆浮在第一块面板的标题行上：标题行右边留出圆的位置，状态文字不钻到圆底下。 */
+body :is(#stage,.team-exec) .stage-pane { position:relative; flex:1 1 0; min-width:0; display:flex; flex-direction:column; border-radius:18px; background:var(--glass-panel); backdrop-filter:blur(20px) saturate(1.1); box-shadow:var(--glass-edge-1),0 18px 50px #0005; overflow:hidden; transition:flex-grow 340ms var(--ease),opacity 260ms ease,translate 340ms var(--ease); }
+body :is(#stage,.team-exec) .stage-pane.entering { flex-grow:.0001; opacity:0; translate:28px 0; }
+body :is(#stage,.team-exec)[data-mode=carousel] .stage-pane.entering { translate:-28px 0; }
+body :is(#stage,.team-exec) .stage-pane.leaving { pointer-events:none; z-index:-1; }
+body :is(#stage,.team-exec) .stage-head { flex:none; display:flex; align-items:center; gap:8px; height:36px; padding:0 16px; font-size:12.5px; color:var(--text-2); letter-spacing:.02em; }
+body :is(#stage,.team-exec) .stage-head svg:not(.halo):not(.halo-custom) { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+body :is(#stage,.team-exec) .stage-title { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#dfe4ec; font-weight:500; }
+body :is(#stage,.team-exec) .stage-state { margin-left:8px; display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--text-3); white-space:nowrap; }
+body :is(#stage,.team-exec) .stage-state::before { content:''; width:6px; height:6px; border-radius:50%; background:#6b7385; }
+body :is(#stage,.team-exec) .stage-pane[data-state=running] .stage-state::before { background:#a9c0ec; box-shadow:0 0 8px #a9c0ec; animation:stage-pulse 1.4s ease-in-out infinite; }
+body :is(#stage,.team-exec) .stage-pane[data-state=failed] .stage-state { color:var(--ui-error); }
+body :is(#stage,.team-exec) .stage-pane[data-state=failed] .stage-state::before { background:var(--ui-error); }
+@keyframes stage-pulse { 50% { opacity:.35; } }
+body :is(#stage,.team-exec) .stage-body { position:relative; flex:1; min-height:0; display:flex; flex-direction:column; }
+body :is(#stage,.team-exec) .stage-empty, body :is(#stage,.team-exec) .stage-error { margin:12px 16px; font-size:12.5px; color:var(--text-3); }
+body :is(#stage,.team-exec) .stage-error { color:var(--ui-error); }
+/* 终端：透明底，命令与输出拼在同一个终端里；工具栏只留"跟随最新"，需要时浮在右下。 */
+body :is(#stage,.team-exec) .desktop-terminal-view { background:transparent; border-radius:0; }
+body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-toolbar { position:absolute; right:12px; bottom:10px; z-index:2; min-height:0; padding:0; border:0; }
+body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-state { display:none; }
+body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-follow { padding:4px 12px; border:0; border-radius:999px; background:#1a1f2acc; box-shadow:var(--glass-edge-1); color:#c9d6ff; }
+body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-screen .xterm-viewport { scrollbar-width:none; }
+body :is(#stage,.team-exec) .desktop-terminal-view .terminal-view-empty { inset:45% 16px auto; font-size:12.5px; }
+/* 补丁：文件名胶囊（当前文件带光环），增行用 Eyra 蓝、删行用暖红。 */
+/* 搜索与其他工具：查询词 + 结果标题 / 动作 + 参数摘要 + 结果。 */
+body :is(#stage,.team-exec) .other-args { margin:0 16px 10px; font-size:13px; color:#dfe4ec; overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .other-outcome { color:var(--text-3); font-size:12px; overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .other-outcome { margin:0 16px; }
+
+/* ── 右侧栏 §8 §9：计划泡泡与后台终端；只在首页出现，没有内容时整条不出现 ── */
+body #activity-orbits #plan-slot { display:none!important; }
+/* 协同圆钮也归左侧状态栏：排在计划等圆钮下面，说明文字悬停才出现，不压聊天。 */
+body #activity-orbits { top:var(--status-rail-bottom,calc(var(--titlebar-height) + 16px)); left:auto; right:calc(var(--rail-right,16px) + var(--al-push,0px)); }
+body #dynamic-menu .orbit-trigger { flex-basis:44px; width:44px; height:44px; }
+body #dynamic-menu .activity-orbit { position:relative; }
+body #dynamic-menu .orbit-summary { position:absolute; top:8px; left:auto; right:calc(100% + 8px); opacity:0; pointer-events:none; transition:opacity var(--ui-fast) var(--ui-ease); }
+body #dynamic-menu .activity-orbit:is(:hover,:focus-within) .orbit-summary { opacity:1; }
+body #status-rail { position:fixed; top:var(--rail-top,calc(var(--titlebar-height,56px) + 14px)); left:auto; right:calc(var(--rail-right,16px) + var(--al-push,0px)); z-index:72; display:flex; flex-direction:column; align-items:flex-end; gap:14px; pointer-events:none; }
+body[data-form=work] #status-rail { top:var(--rail-top,var(--work-top,64px)); }
+body:not([data-desktop-page=home]) #status-rail { display:none; }
+body #status-rail > * { pointer-events:auto; }
+body #status-rail [hidden] { display:none!important; }
+/* 空间不足时按输入框上缘分配圆的行数；详情旁浮，不再把下一颗圆往下挤。 */
+body #status-rail[data-compact=true] { display:grid; grid-auto-flow:column; grid-template-rows:repeat(var(--rail-rows,1),44px); grid-auto-columns:44px; align-items:center; gap:10px; direction:rtl; }
+body #status-rail[data-compact=true] #terminal-orbs:not([hidden]) { display:contents; }
+body #status-rail[data-compact=true] > :is(.rail-orb,.sub-orb,.diary-orb) { width:44px; height:44px; min-height:0; gap:0; }
+body #status-rail[data-compact=true] :is(.plan-pill,.sub-card,.diary-pill) { position:fixed; left:auto; right:var(--rail-panel-r,84px); top:var(--rail-detail-top,70px); max-height:var(--rail-space,180px); max-width:min(360px,calc(100vw - var(--rail-panel-r,84px) - 16px)); overflow:auto; overscroll-behavior:contain; }
+body #status-rail[data-compact=true] > :is(.rail-orb,.sub-orb,.diary-orb):not(:hover):not(:focus-within) :is(.plan-pill,.sub-card,.diary-pill) { max-width:0; padding:0; opacity:0; pointer-events:none; }
+body #status-rail[data-compact=true] > :is(.rail-orb,.sub-orb,.diary-orb):is(:hover,:focus-within) :is(.plan-pill,.sub-card,.diary-pill) { max-width:min(360px,calc(100vw - var(--rail-panel-r,84px) - 16px)); opacity:1; translate:0; }
+body #status-rail[data-compact=true] .sub-card { width:min(360px,calc(100vw - var(--rail-panel-r,84px) - 16px)); }
+body #status-rail[data-compact=true] .sub-steps { max-height:max(0px,calc(var(--rail-space,180px) - 74px)); overflow:auto; }
+body .rail-orb { position:relative; display:flex; flex-direction:row-reverse; align-items:center; gap:10px; }
+body .plan-ball { position:relative; display:grid; place-items:center; width:44px; height:44px; min-height:0; padding:0; border:0; border-radius:50%; background:rgba(13,15,21,.6); backdrop-filter:blur(14px); box-shadow:0 8px 24px #0005; cursor:pointer; transition:transform var(--t1) var(--ease); }
+body .plan-ball:hover { transform:scale(1.05); }
+body .plan-ball:focus-visible { outline:1px solid #ffffff55; outline-offset:4px; }
+body .plan-ring { position:absolute; inset:0; width:100%; height:100%; rotate:-90deg; overflow:visible; }
+body .plan-track { fill:none; stroke:#ffffff1f; stroke-width:1.6; }
+body .plan-arc { fill:none; stroke:#e6e9f0; stroke-width:2.2; stroke-linecap:round; stroke-dasharray:var(--dash,0 100); filter:drop-shadow(0 0 3px #b9c8ff88); transition:stroke-dasharray 640ms var(--ease); }
+body .plan-glyph { position:relative; width:20px; height:20px; fill:none; stroke:#dfe4ec; stroke-width:1.6; stroke-linecap:round; }
+body .plan-glyph circle { fill:#dfe4ec; stroke:none; }
+/* 进行中：三行像在被一行行读过去。 */
+body .rail-orb[data-active=true] .plan-glyph path { animation:plan-scan 2.4s ease-in-out infinite; }
+body .rail-orb[data-active=true] .plan-glyph .l2 { animation-delay:.32s; }
+body .rail-orb[data-active=true] .plan-glyph .l3 { animation-delay:.64s; }
+@keyframes plan-scan { 0%,60%,100% { opacity:.45; } 22% { opacity:1; stroke:#c9d6ff; } }
+body .rail-orb[data-complete=true] .plan-arc { stroke:#c9d6ff; }
+/* 当前任务胶囊：30 秒内自动展开；之后只在悬停时展开（data-pill=hover）。 */
+body .plan-pill { display:flex; align-items:center; gap:10px; max-width:min(380px,36vw); height:34px; padding:0 16px; border-radius:999px; background:rgba(13,15,21,.66); backdrop-filter:blur(16px); box-shadow:var(--glass-edge-1),0 8px 24px #0004; font-size:13px; color:#e6e9f0; overflow:hidden; transition:opacity 260ms ease,translate 300ms var(--ease),max-width 360ms var(--ease),padding 360ms var(--ease); }
+body .rail-orb[data-pill=hover]:not(:hover):not(:focus-within) .plan-pill, body[data-form=chat] .rail-orb[data-crowded=true]:not(:hover):not(:focus-within) .plan-pill { max-width:0; padding:0; opacity:0; translate:10px 0; pointer-events:none; }
+body .plan-track-text { display:grid; min-width:0; overflow:hidden; }
+body .plan-line { grid-area:1 / 1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; transition:translate 380ms var(--ease),opacity 300ms ease; }
+body .plan-line.in { translate:0 110%; opacity:0; }
+body .plan-line.out { translate:0 -110%; opacity:0; }
+body .plan-pill small { flex:none; font-size:11.5px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body #status-rail #plan-orb[data-feedback=true] .plan-pill { max-width:min(380px,36vw,var(--plan-feedback-room,0px)); }
+body #status-rail #plan-orb[data-feedback=true][data-feedback-inline=false] .plan-pill,
+body #status-rail[data-compact=true] #plan-orb[data-feedback=true] .plan-pill { display:none; }
+body #status-rail #plan-orb[data-feedback=true] .plan-pill small:empty { display:none; }
+/* "啵"：放大回弹、一圈涟漪、六粒光点向外一闪。 */
+body .plan-ball::after { content:''; position:absolute; inset:0; border-radius:50%; opacity:0; pointer-events:none; }
+body .rail-orb.pop .plan-ball { animation:plan-pop 460ms cubic-bezier(.34,1.56,.64,1); }
+body .rail-orb.pop .plan-ball::after { animation:plan-ripple 560ms ease-out; }
+@keyframes plan-pop { 0% { scale:1; } 34% { scale:1.2; } 100% { scale:1; } }
+@keyframes plan-ripple { 0% { opacity:1; box-shadow:0 0 0 0 #c9d6ffaa; } 100% { opacity:0; box-shadow:0 0 0 20px #c9d6ff00; } }
+body .plan-sparks { position:absolute; inset:0; pointer-events:none; }
+body .plan-sparks i { position:absolute; left:calc(50% - 1.5px); top:calc(50% - 1.5px); width:3px; height:3px; border-radius:50%; background:#eef2ff; box-shadow:0 0 6px #c9d6ff; opacity:0; }
+body .plan-sparks i:nth-child(1) { --a:0deg; } body .plan-sparks i:nth-child(2) { --a:60deg; } body .plan-sparks i:nth-child(3) { --a:120deg; }
+body .plan-sparks i:nth-child(4) { --a:180deg; } body .plan-sparks i:nth-child(5) { --a:240deg; } body .plan-sparks i:nth-child(6) { --a:300deg; }
+body .rail-orb.pop .plan-sparks i { animation:plan-spark 520ms ease-out; }
+@keyframes plan-spark { 0% { opacity:1; transform:rotate(var(--a)) translateY(-16px) scale(1); } 100% { opacity:0; transform:rotate(var(--a)) translateY(-32px) scale(.3); } }
+/* 完整计划：右侧的玻璃弹窗。已完成变暗打勾，当前一步带光环，未开始是弱色。 */
+body #plan-pop { --plan-top:clamp(calc(var(--titlebar-height,56px) + 12px),28vh,calc(var(--titlebar-height,56px) + 70px)); position:fixed; top:var(--plan-top); left:auto; right:var(--rail-panel-r,84px); z-index:96; width:min(440px,calc(100vw - var(--rail-panel-r,84px) - 16px)); max-height:min(70vh,640px,calc(100vh - var(--plan-top) - 16px)); overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#ffffff33 transparent; padding:22px 24px; border-radius:18px; background:var(--glass-surface); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge),var(--glass-shadow); transition:opacity 200ms ease,translate 260ms var(--ease),display 260ms allow-discrete; }
+body[data-form=work] #plan-pop { --plan-top:clamp(calc(var(--titlebar-height,56px) + 12px),28vh,calc(var(--work-top,64px) + 56px)); }
+/* 共用圆栏的侧向留白，日记自己的正文/滚动规则仍由 subconscious.css 管理。 */
+body #status-rail ~ #diary-pop { left:auto; right:var(--rail-panel-r,84px); width:min(520px,calc(100vw - var(--rail-panel-r,84px) - 16px)); }
+@starting-style { body #plan-pop { opacity:0; translate:0 -8px; } }
+body #plan-pop[hidden] { display:none; opacity:0; }
+body #plan-pop .plan-head h2 { margin:0 0 12px; font-size:15px; font-weight:600; color:#eef1f7; }
+body #plan-pop .plan-meter { height:3px; border-radius:2px; background:#ffffff14; overflow:hidden; }
+body #plan-pop .plan-meter span { display:block; height:100%; background:#e6e9f0; box-shadow:0 0 8px #b9c8ff88; }
+body #plan-pop .plan-progress-text { margin:8px 0 16px; font-size:12px; color:var(--text-3); }
+body #plan-pop .plan-phase h3 { margin:14px 0 8px; font-size:12px; font-weight:500; color:var(--text-3); }
+body #plan-pop .plan-steps { margin:0; padding:0; list-style:none; display:grid; gap:10px; }
+body #plan-pop .plan-step { display:grid; grid-template-columns:18px minmax(0,1fr); gap:10px; align-items:start; }
+body #plan-pop .plan-dot { width:12px; height:12px; margin-top:4px; border-radius:50%; box-shadow:inset 0 0 0 1.5px #ffffff33; }
+body #plan-pop .plan-step[data-state=completed] .plan-dot { background:#e6e9f0; box-shadow:none; }
+body #plan-pop .plan-step[data-state=in_progress] .plan-dot { box-shadow:inset 0 0 0 1.5px #e6e9f0,0 0 0 4px #b9c8ff1f,0 0 10px #b9c8ff66; }
+body #plan-pop .plan-step-body { display:grid; gap:2px; }
+body #plan-pop .plan-step-body strong { font-size:13.5px; font-weight:500; color:#e6e9f0; }
+body #plan-pop .plan-step[data-state=completed] .plan-step-body strong { color:#7d8596; }
+body #plan-pop .plan-step[data-state=pending] .plan-step-body strong { color:#9aa3b2; }
+body #plan-pop .plan-step-body small { font-size:11px; color:var(--text-3); }
+body #plan-pop .plan-result { margin:2px 0 0; font-size:12px; color:var(--text-2); }
+body #plan-pop .plan-feedback { margin:0; color:var(--ui-text); font-size:13.5px; line-height:1.6; overflow-wrap:anywhere; }
+/* 后台终端：每个运行中或后台常驻的会话一个小圆，悬停显示命令；多于 3 个合并成一个圆加数字。 */
+body #terminal-orbs { display:flex; flex-direction:column; align-items:flex-end; gap:14px; }
+body .term-orb { position:relative; display:grid; place-items:center; width:44px; height:44px; min-height:0; padding:0; border:0; border-radius:50%; background:rgba(13,15,21,.6); backdrop-filter:blur(14px); box-shadow:var(--glass-edge-1),0 8px 22px #0005; color:#dfe4ec; cursor:pointer; transition:transform var(--t1) var(--ease); }
+body .term-orb:hover { transform:scale(1.05); }
+body .term-orb svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+body .term-dot { position:absolute; right:7px; top:7px; width:6px; height:6px; border-radius:50%; background:#6b7385; }
+body .term-orb[data-state=running] .term-dot, body .term-orb[data-count] .term-dot { background:#a9c0ec; box-shadow:0 0 8px #a9c0ec; animation:stage-pulse 1.4s ease-in-out infinite; }
+body .term-count { position:absolute; right:-3px; bottom:-3px; display:grid; place-items:center; min-width:17px; height:17px; padding:0 4px; border-radius:9px; background:#e6e9f0; color:#0b0d12; font-size:10px; font-weight:700; }
+body .term-tip { position:absolute; left:calc(100% + 10px); top:50%; max-width:340px; padding:7px 14px; border-radius:14px; background:var(--ui-glass); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge-1); font-size:12px; color:#dfe4ec; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0; translate:6px -50%; pointer-events:none; transition:opacity 180ms ease,translate 220ms var(--ease); }
+body .term-orb:is(:hover,:focus-visible) .term-tip { opacity:1; translate:0 -50%; }
+
+/* ── 折叠态 §10：其他页面里光圈在左下角；右侧一条宽约半屏、不高于光圈的玻璃条，思考是"灵感浮现" ── */
+body[data-form=folded] { --fold-ring:clamp(64px,var(--eyra-ring-size,104px),144px); --fold-left:32px; --fold-bottom:32px; }
+body[data-form=folded][data-eyra-placement] #screen #conversation #emergence { position:fixed!important; left:var(--fold-left)!important; top:auto!important; right:auto!important; bottom:calc(var(--fold-bottom) + var(--composer-lift,0px))!important; transform:none!important; display:grid!important; grid-template-columns:var(--fold-ring) auto; column-gap:18px; align-items:center!important; width:auto!important; max-width:calc(100vw - 2 * var(--fold-left))!important; height:var(--fold-ring)!important; gap:0 18px!important; margin:0!important; padding:0!important; z-index:80; pointer-events:none; transition:opacity var(--ui-enter) var(--ui-ease); }
+body[data-form=folded] #screen .presence-header { grid-column:1; grid-row:1; display:block!important; padding:0!important; pointer-events:auto; translate:0 var(--composer-lift,0px); transition:translate var(--t3) var(--ease); }
+/* Folded identity floats above every page with the same transparent backing. */
+body[data-form=folded][data-eyra-placement] #screen :is(#eyra-trigger,.role-trigger) { width:var(--fold-ring)!important; height:var(--fold-ring)!important; cursor:pointer; background:transparent; }
+body[data-form=folded] #screen :is(#presence-label,#live-current,#presence-glyphs,#live-actions,#live-details) { display:none!important; }
+body[data-form=folded][data-eyra-placement] #screen #conversation :is(#answer-stage,.team-voice) { grid-column:2; grid-row:1; position:static!important; display:block; width:min(50vw,680px)!important; max-width:min(50vw,680px)!important; max-height:var(--fold-ring)!important; margin:0!important; padding:12px 18px!important; overflow-x:hidden!important; overflow-y:auto!important; overscroll-behavior:contain; scrollbar-width:none; border:0!important; border-radius:18px!important; background:var(--glass-panel)!important; backdrop-filter:blur(20px) saturate(1.1)!important; box-shadow:var(--glass-edge-1),0 16px 44px #0006!important; mask-image:linear-gradient(to bottom,transparent 0,#000 min(14px,var(--fade-top,0px)),#000 calc(100% - min(14px,var(--fade-bottom,0px))),transparent 100%)!important; pointer-events:auto; box-sizing:border-box; }
+body[data-form=folded] #screen #conversation :is(#answer-stage,.team-voice)::-webkit-scrollbar { display:none; }
+body[data-form=folded] #screen #conversation :is(#answer-stage,.team-voice)::before, body[data-form=folded] #screen #conversation :is(#answer-stage,.team-voice):not([data-kind=question])::after { content:none!important; }
+body[data-form=folded] #screen :is(#voice,.team-voice-text) { font-size:var(--chat-text); line-height:1.65; color:var(--text); }
+body[data-form=folded] #screen :is(#voice,.team-voice-text) > * { margin:0 0 4px!important; }
+body[data-form=folded] #screen :is(#voice,.team-voice-text) > :last-child { margin-bottom:0!important; }
+body[data-form=folded] #screen :is(#presence-caption,#reconnect) { grid-column:2; grid-row:1; align-self:center; margin:0; text-align:left; pointer-events:auto; }
+/* 离线时说明与重连按钮并排，不能和正文条一样叠在同一格。长错误只占一行。 */
+body[data-form=folded][data-eyra-placement] #screen #conversation #emergence:has(#presence-caption:not([hidden])) { grid-template-columns:var(--fold-ring) minmax(0,max-content) auto; }
+body[data-view=onboarding][data-form=folded][data-eyra-placement] #screen #conversation #emergence:has(#presence-caption:not([hidden])) { max-width:min(calc(100vw - 2 * var(--fold-left)),calc(var(--settings-status-edge,100vw) - var(--fold-left)))!important; }
+body[data-form=folded] #screen #presence-caption { position:static!important; width:auto!important; min-width:0; max-width:min(50vw,680px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+body[data-form=folded] #screen #reconnect { grid-column:3; white-space:nowrap; }
+/* Link 页的指挥中心是原生视图：给左下角放大后的光圈和正文条让出位置。 */
+body #control-view #control-surface { margin-bottom:calc(var(--eyra-ring-size,104px) + 44px)!important; }
+body.composer-open #control-view #control-surface { margin-bottom:calc(var(--eyra-ring-size,104px) + var(--composer-height,56px) + 56px)!important; }
+body.native-eyra-overlay:not(.composer-open) #control-view #control-surface { margin-bottom:0!important; }
+/* Link uses the full content width; the native Eyra ring may overlap locally. */
+body.native-eyra-overlay #control-view #control-surface { margin-left:0; }
+
+/* ── 历史弹窗（双击光圈）：与聊天列同一套元素；没有顶部控制栏，往上滚自动读更早的记录 ── */
+body #panel { width:min(940px,calc(100vw - 48px)); height:min(880px,calc(100vh - 56px)); border:0; border-radius:22px; background:rgba(12,14,19,.84); backdrop-filter:blur(28px) saturate(1.1); box-shadow:inset 0 0 0 1px #ffffff17,0 30px 90px #0008; }
+body #panel-content { padding:var(--page-top,16px) clamp(22px,5vw,60px) 0!important; scrollbar-width:none; mask-image:linear-gradient(to bottom,transparent 0,#000 min(14px,var(--fade-top,0px)),#000 calc(100% - min(14px,var(--fade-bottom,0px))),transparent 100%); }
+body #panel-content::-webkit-scrollbar { display:none; }
+body .hx { --hx-eyra:calc(var(--eyra-avatar,80px) * .62); --hx-user:calc(var(--user-avatar,44px) * .8); --chat-axis:max(var(--hx-eyra),var(--hx-user)); max-width:820px; margin:0 auto; padding-bottom:28px; }
+body .hx .chat-avatar { width:var(--hx-user); height:var(--hx-user); font-size:calc(var(--hx-user) * .38); }
+body .hx .chat-avatar.eyra { width:var(--hx-eyra); height:var(--hx-eyra); }
+body .hx .chat-entry.eyra .chat-main { padding-top:calc(var(--hx-eyra) * .1); }
+body .hx-list { display:flex; flex-direction:column; gap:22px; }
+body .hx-entry .chat-name { display:flex;flex-wrap:wrap;align-items:baseline; gap:10px; }
+body .hx-entry .chat-name>span { min-width:0; }
+body .hx-entry .chat-name>time { flex:none; }
+body .hx-entry .chat-name time, body .hx-step time { font-size:11px; font-weight:400; color:var(--text-3); font-variant-numeric:tabular-nums; opacity:0; transition:opacity var(--t1) ease; }
+body .hx-entry:hover .chat-name time, body .hx-step:hover time { opacity:1; }
+body .hx-state, body .hx-step-state { font-size:11px; font-style:normal; font-weight:400; color:#a9c0ec; }
+body .hx-day { align-self:center; margin:6px 0 -6px; font-size:11.5px; letter-spacing:.08em; color:var(--text-3); }
+body .hx-top { display:flex; justify-content:center; align-items:center; gap:10px; min-height:24px; margin:0 0 14px; font-size:12px; color:var(--text-3); }
+body .hx-top[hidden] { display:none; }
+/* 过程：每轮的工具与思考收成一行，展开后逐步列出；与正文同一列对齐。 */
+body .hx-process { margin:-8px 0 0 calc(var(--chat-axis) + 16px); }
+body .hx-process > summary, body .hx-step-line { display:flex; align-items:center; gap:10px; min-width:0; padding:5px 0; font-size:12.5px; color:var(--text-3); cursor:pointer; list-style:none; }
+body .hx-process > summary::-webkit-details-marker, body .hx-step-line::-webkit-details-marker, body .hx-more::-webkit-details-marker { display:none; }
+body .hx-process > summary strong, body .hx-step-line strong { flex:none; font-weight:500; color:var(--text-2); }
+body .hx-step-text { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body .hx-dot { flex:none; width:6px; height:6px; border-radius:50%; background:#6b7385; }
+body .hx-process[data-state=running] > summary .hx-dot, body .hx-step[data-state=running] .hx-dot { background:#a9c0ec; box-shadow:0 0 8px #a9c0ec; }
+body .hx-process[data-state=failed] > summary .hx-dot, body .hx-step[data-state=failed] .hx-dot { background:var(--ui-error); }
+body .hx-process > summary:hover, body .hx-step-line:hover { color:var(--text-2); }
+body .hx-steps { display:grid; gap:0; padding:2px 0 6px 16px; }
+body .hx-step time { margin-left:auto; flex:none; }
+body .hx-thought { padding:6px 0 10px 16px; font-size:13px; color:#8a92a2; }
+/* 回到最新：离开底部时右下角浮出一个圆。 */
+body .hx-latest { position:sticky; bottom:18px; left:100%; display:grid; place-items:center; width:40px; height:40px; min-height:0; margin:-40px 0 0 auto; padding:0; border:0; border-radius:50%; background:rgba(20,23,31,.86); backdrop-filter:blur(14px); box-shadow:var(--glass-edge-1),0 10px 28px #0007; color:#dfe4ec; cursor:pointer; transition:opacity 200ms ease,translate 240ms var(--ease),display 240ms allow-discrete; }
+@starting-style { body .hx-latest { opacity:0; translate:0 8px; } }
+body .hx-latest[hidden] { display:none; opacity:0; }
+body .hx-latest svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ── 验收一轮后的修正（2026-10-10 晚）── */
+/* 光环线宽不随尺寸放大：80–104px 的光圈也保持 2px 细环；留在聊天里的头像同样 2px，"影子"与光圈一模一样。 */
+body .chat-avatar.eyra::before { box-shadow:inset 0 0 0 2px #e6e9f0d9,0 0 14px #b9c8ff2e; }
+/* 输入框升起时，展示台的底边让出位置。 */
+/* 折叠态下其他页面的内容可以滚到左下角光圈之上，不被盖住；历史页本身就是完整记录，光圈旁不再重复正文。 */
+body[data-form=folded] #onboarding #settings-body, body[data-form=folded] #panel-content, body[data-form=folded] #document-content { padding-bottom:calc(var(--eyra-ring-size,104px) + 48px)!important; }
+body.panel-open[data-form=folded] #screen #conversation :is(#answer-stage,.team-voice) { display:none!important; }
+
+/* —— 终端弹窗（§15 K1/K2/K3）：后台终端与 PTY 同一种终端；贴着右侧栏的玻璃窗，左上角收起，旁边是状态；
+   没有翻页、字节数和跟随按钮；输入就是终端底部的光标。 —— */
+body #terminal-pop { position:fixed; top:calc(var(--titlebar-height,56px) + 14px); left:auto; right:var(--rail-panel-r,84px); z-index:96; display:flex; flex-direction:column; width:min(760px,calc(100vw - var(--rail-panel-r,84px) - 16px)); height:min(64vh,560px); padding:8px 6px 6px; border-radius:18px; background:var(--glass-surface); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge),var(--glass-shadow); transform-origin:top right; transition:opacity 200ms ease,translate 260ms var(--ease),scale 260ms var(--ease); }
+body[data-form=work] #terminal-pop { top:var(--work-top,64px); }
+body #terminal-pop[hidden], body:not([data-desktop-page=home]) #terminal-pop { display:none; }
+@starting-style { body #terminal-pop { opacity:0; translate:14px -6px; scale:.97; } }
+body .tp-head { display:flex; align-items:center; gap:10px; min-height:32px; padding:0 8px 6px 4px; }
+body :is(.tp-collapse,.tp-stop) { display:grid; place-items:center; flex:0 0 auto; width:28px; height:28px; min-height:0; padding:0; border:0; border-radius:50%; background:#ffffff0a; box-shadow:var(--glass-edge-1); color:#aab3c2; cursor:pointer; transition:background 160ms ease,color 160ms ease; }
+body :is(.tp-collapse,.tp-stop):hover { background:#ffffff16; color:#e6e9f0; }
+body .tp-stop:hover { color:var(--ui-error); }
+body :is(.tp-collapse,.tp-stop) svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+body .tp-stop[hidden] { display:none; }
+body .tp-state { display:inline-flex; align-items:center; gap:7px; flex:0 0 auto; font-size:12.5px; color:#aab3c2; white-space:nowrap; }
+body .tp-state::before { content:""; width:7px; height:7px; border-radius:50%; background:#6b7385; }
+body .tp-state[data-state=active] { color:#c9d6ff; }
+body .tp-state[data-state=active]::before { background:#a9c0ec; box-shadow:0 0 8px #a9c0ec; animation:stage-pulse 1.4s ease-in-out infinite; }
+body .tp-state[data-state=failed] { color:var(--ui-error); }
+body .tp-state[data-state=failed]::before { background:var(--ui-error); }
+body .tp-title { flex:1 1 auto; min-width:0; overflow:hidden; font-size:13px; font-weight:500; color:#dfe4ec; text-overflow:ellipsis; white-space:nowrap; }
+body .tp-tabs { display:flex; gap:6px; flex:0 1 auto; min-width:0; overflow:hidden; }
+body .tp-tabs[hidden] { display:none; }
+body .tp-tab { max-width:140px; min-height:0; padding:3px 10px; overflow:hidden; border:0; border-radius:999px; background:#ffffff0a; box-shadow:var(--glass-edge-1); color:#8a93a3; font-size:12px; text-overflow:ellipsis; white-space:nowrap; cursor:pointer; }
+body .tp-tab[aria-current=true] { background:#a9c0ec1f; color:#e6e9f0; }
+body .tp-tab[data-state=ended] { opacity:.6; }
+body .tp-screen { flex:1 1 auto; min-height:0; padding:4px 20px 6px 12px; overflow:hidden; }
+body .tp-screen[hidden] { display:none; }
+body .tp-screen :is(.xterm,.xterm-viewport,.xterm-screen) { background:transparent!important; }
+body .tp-screen .xterm-viewport { scrollbar-width:none; }
+body .tp-screen .xterm-viewport::-webkit-scrollbar { display:none; }
+body .tp-error { margin:0; padding:2px 12px 4px; font-size:12px; color:var(--ui-error); }
+body .tp-error:empty { display:none; }
+body #terminal-orbs[data-open=true] .term-orb[aria-expanded=true] { background:#a9c0ec26; color:#e6edfb; }
+
+/* ── 第二轮验收（docs/UI设计知识库.md 形态 §15，2026-10-10）── */
+/* R3 发光不被切：聊天列带遮罩和横向裁切，光圈与头像贴着列的左沿，光晕被直线切成方块。列的盒子向外各扩 28px，再用内边距还回去。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation { inset:0 max(0px,calc(var(--chat-right) - 28px)) var(--chat-bottom-inset,0px) max(0px,calc(var(--chat-left) - 28px))!important; max-width:calc(var(--chat-max) + 56px)!important; padding:var(--chat-top) 28px 24px!important; }
+/* Names start one fifth down the avatar, consistently in live and history. */
+body .chat-entry .chat-main { padding-top:calc(var(--user-avatar,44px) * .2); }
+body .chat-entry.eyra .chat-main { padding-top:calc(var(--eyra-avatar,80px) * .2); }
+body .hx .chat-entry .chat-main { padding-top:calc(var(--hx-user) * .2); }
+body .hx .chat-entry.eyra .chat-main { padding-top:calc(var(--hx-eyra) * .2); }
+/* C1 光圈托着最后一句：光圈旁的名字和正文与聊天列里的位置完全一致，落下时文字不动，只留下头像。 */
+body:is([data-form=chat],[data-form=work]) #screen #conversation :is(#answer-stage,.team-voice) { padding:calc(var(--eyra-avatar) * .2) 0 0!important; }
+body .chat-entry.fresh.eyra .chat-main { animation:none; }
+/* R4 抖动（AIDEBUG seq38 逐帧定位）：留下的历史头像完全静态，不再缩放淡入；活光圈里的头像只淡入淡出，不缩放；聊天列跟底改为平滑滚动，正文长出一行时不再整列跳动。 */
+body .chat-entry.fresh.eyra .chat-avatar { animation:none; }
+body :is(#presence-avatar,.role-instrument-avatar) { transform:none!important; }
+body:is([data-form=chat],[data-form=work]) #screen #conversation { scroll-behavior:smooth; }
+body.reduce-motion:is([data-form=chat],[data-form=work]) #screen #conversation { scroll-behavior:auto; }
+/* Keep the small circles outside the stage. Details expand only where the
+   measured main content leaves room; a crowded rail retains its circles. */
+body #status-rail[data-compact=true] > :not(:hover):not(:focus-within) :is(.plan-pill,.sub-card,.diary-pill),
+body #status-rail [data-crowded=true]:not(:hover):not(:focus-within) :is(.plan-pill,.sub-card,.diary-pill) { display:none; }
+
+/* R2 静止的光圈仍然活着：外圈呼吸，一小段流光沿光环缓缓转动；内部头像静止。只挂在活光圈 #presence 上，聊天记录里的头像不受影响。 */
+/* Idle SVG stroke changes repaint: bound them to 30 updates/s even on high-Hz
+   displays. The 9s orbit, 5.2s breath and independent pulsar beat stay intact.
+   At the default ring size each orbit step moves less than one CSS pixel. */
+
+/* T3 / P3 底板的透明度：像顶栏一样从暗到透明，与整体自然融合，不做实心玻璃块。 */
+body[data-form=folded][data-eyra-placement] #screen #conversation :is(#answer-stage,.team-voice) { padding:12px 56px 12px 18px!important; background:linear-gradient(90deg,rgba(9,11,16,.64),rgba(9,11,16,.42) 62%,rgba(9,11,16,0))!important; backdrop-filter:none!important; box-shadow:none!important; }
+body[data-form=folded] #screen :is(#voice,.team-voice-text) { text-shadow:0 1px 10px rgba(0,0,0,.75); }
+body .plan-pill { background:linear-gradient(270deg,rgba(10,12,17,.62),rgba(10,12,17,.38) 70%,rgba(10,12,17,.06)); backdrop-filter:none; box-shadow:none; text-shadow:0 1px 8px rgba(0,0,0,.7); }
+body #plan-pop { background:rgba(12,14,19,.56); backdrop-filter:blur(22px) saturate(1.1); }
+/* P2 计划完成：由慢到快、再由快到慢的闪烁。 */
+body .rail-orb.done :is(.plan-line:not(.out),.plan-arc) { animation:plan-done 1.8s linear; }
+@keyframes plan-done { 0% { opacity:1; } 12% { opacity:.25; } 24% { opacity:1; } 33% { opacity:.3; } 41% { opacity:1; } 47% { opacity:.35; } 53% { opacity:1; } 60% { opacity:.35; } 68% { opacity:1; } 79% { opacity:.4; } 100% { opacity:1; } }
+body.reduce-motion .rail-orb.done :is(.plan-line,.plan-arc) { animation:none; }
+
+/* F10 暂时收起：折叠态工作中，鼠标放到光圈上时头顶出现一个小圆钮；点了收起右侧的思考与正文，30 秒后自动恢复。 */
+body #strip-hide { display:none; }
+body[data-form=folded] #strip-hide:not([hidden]) { position:absolute; left:50%; top:-24px; z-index:2; display:grid; place-items:center; width:28px; height:28px; min-height:0; padding:0; border:0; border-radius:50%; background:rgba(12,14,19,.55); backdrop-filter:blur(10px); box-shadow:var(--glass-edge-1); color:#dfe4ec; cursor:pointer; opacity:0; translate:-50% 4px; pointer-events:none; transition:opacity 180ms ease,translate 220ms var(--ease); }
+body[data-form=folded] .presence-header:hover #strip-hide:not([hidden]), body[data-form=folded] #strip-hide:not([hidden]):focus-visible { opacity:1; translate:-50% 0; pointer-events:auto; }
+body #strip-hide svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+body #strip-hide .strip-show-icon, body.strip-dismissed #strip-hide .strip-hide-icon { display:none; }
+body.strip-dismissed #strip-hide .strip-show-icon { display:inline; }
+body.strip-dismissed[data-form=folded] #screen #conversation :is(:is(#answer-stage,.team-voice)) { opacity:0!important; translate:-12px 0; pointer-events:none!important; transition:opacity 240ms ease,translate 300ms var(--ease); }
+
+/* 折叠态的页面用满高度，光圈浮在左下角（用户 E4：不再给光圈整块让出页面高度）。
+   可滚动的内容区底部留出“光圈 + 间隙 + 打开的输入框”，滚到底时最后一项露在光圈上方。
+   浏览器采用完整原生画布，页面空间由browser.css单独管理。 */
+
+/* D1 信息窗（报告、历史里"查看原文"、用量是同一个窗口）：标题和正文对齐同一版心，标题清楚可读，收起与关闭在右侧；排版与聊天正文一致。 */
+body #document-viewer { --doc-measure:780px; --doc-gutter:max(clamp(22px,5vw,60px),calc((100% - var(--doc-measure)) / 2)); --doc-right-room:0px; }
+body #document-viewer[data-kind=usage] { --doc-measure:960px; }
+body #document-viewer .document-header { display:flex; align-items:center; gap:6px; padding:var(--page-top,16px) max(var(--doc-gutter),var(--doc-right-room)) 8px max(var(--doc-gutter),var(--doc-left-room,128px)); }
+body #document-viewer .document-heading { flex:1; min-width:0; }
+body #document-viewer #document-meta { margin:2px 0 0; font-size:12px; color:var(--ui-text-3); font-variant-numeric:tabular-nums; }
+body #document-viewer .document-header h2 { display:block!important; margin:0; font-size:18px; font-weight:600; line-height:1.4; letter-spacing:0; color:var(--ui-text); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #document-content { padding:14px max(var(--doc-gutter),var(--doc-right-room)) 28px max(var(--doc-gutter),var(--doc-left-room,128px))!important; color:var(--ui-text); scrollbar-width:thin!important; scrollbar-color:var(--ui-text-3) transparent; mask-image:none; }
+body #document-content::-webkit-scrollbar { display:block!important; width:6px!important; height:6px!important; }
+body #document-content > :first-child { margin-top:0; }
+body #document-content :is(h1,h2,h3,h4) { margin:1.4em 0 .5em; font-weight:650; line-height:1.4; color:var(--ui-text); }
+body #document-content h1 { font-size:20px; } body #document-content h2 { font-size:16px; } body #document-content h3 { font-size:15px; } body #document-content h4 { font-size:14px; }
+body #document-content p { margin:.45em 0 .8em; }
+body #document-content :is(ul,ol) { margin:.4em 0 .9em; padding-left:1.4em; }
+body #document-content li { margin:.3em 0; }
+body #document-content li::marker { color:var(--ui-text-3); }
+body #document-content pre { padding:14px 16px; border-radius:14px; background:var(--glass-panel); box-shadow:var(--glass-edge-1); font:13px/1.65 Consolas,"Cascadia Mono",monospace; }
+body #document-content :not(pre) > code { padding:1px 6px; border-radius:6px; background:var(--ui-glass-soft); font-size:.9em; }
+body #document-content blockquote { margin:.8em 0; padding:2px 0 2px 14px; border-left:2px solid var(--ui-text-3); color:var(--ui-text-2); }
+body #document-content a { color:var(--ui-accent); text-underline-offset:3px; }
+body #document-content hr { margin:1.6em 0; border:0; border-top:1px solid color-mix(in srgb,var(--ui-text) 15%,transparent); }
+body #document-content table { width:100%; margin:.8em 0 1.2em; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+body #document-content :is(td,th) { padding:7px 10px; border:0; border-bottom:1px solid color-mix(in srgb,var(--ui-text) 10%,transparent); text-align:left; vertical-align:top; }
+body #document-content th { font-size:12px; font-weight:500; color:var(--ui-text-3); border-bottom-color:color-mix(in srgb,var(--ui-text) 16%,transparent); }
+/* 用量：结论、图、分组、明细、小字，一层比一层安静。 */
+body #document-content .usage-page { display:grid; gap:26px; min-width:0; }
+body #document-content .usage-tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; }
+body #document-content .usage-tile { display:grid; align-content:start; gap:4px; min-width:0; padding:14px 16px; border-radius:18px; background:#ffffff06; box-shadow:inset 0 0 0 1px #ffffff0f; }
+body #document-content .usage-tile small { font-size:12px; color:var(--text-3); }
+body #document-content .usage-tile b { font-size:24px; font-weight:500; line-height:1.3; color:var(--text); font-variant-numeric:tabular-nums; }
+body #document-content .usage-sub { overflow:hidden; font-size:12px; color:var(--text-2); text-overflow:ellipsis; white-space:nowrap; font-variant-numeric:tabular-nums; }
+body #document-content .usage-meter { display:block; height:3px; margin:4px 0 2px; overflow:hidden; border-radius:4px; background:#ffffff14; }
+body #document-content .usage-meter i { display:block; height:100%; border-radius:4px; background:#c9d6ff; }
+body #document-content .usage-section { min-width:0; }
+body #document-content .usage-section h3 { margin:0 0 10px; font-size:13px; font-weight:500; line-height:1.5; color:var(--text-2); }
+body #document-content .usage-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 16px; margin-bottom:10px; }
+body #document-content .usage-head h3 { margin:0; }
+body #document-content .usage-legend { display:flex; flex-wrap:wrap; gap:4px 14px; font-size:12px; color:var(--text-2); font-variant-numeric:tabular-nums; }
+body #document-content .usage-legend span { display:inline-flex; align-items:center; gap:6px; }
+body #document-content .usage-legend i { width:8px; height:8px; border-radius:50%; }
+body #document-content .usage-plot { position:relative; display:grid; grid-template-columns:44px minmax(0,1fr); gap:8px; height:128px; }
+body #document-content .usage-axis { display:flex; flex-direction:column; justify-content:space-between; font-size:11px; line-height:1; color:var(--text-3); text-align:right; font-variant-numeric:tabular-nums; }
+body #document-content .usage-bars { display:flex; align-items:stretch; gap:2px; min-width:0; border-bottom:1px solid #ffffff14; }
+body #document-content .usage-bar { flex:1 1 0; display:flex; flex-direction:column; justify-content:flex-end; gap:2px; min-width:0; max-width:18px; border-radius:4px 4px 0 0; }
+body #document-content .usage-bar:hover { background:#ffffff0a; }
+body #document-content .usage-bar i { display:block; flex:none; min-height:2px; }
+body #document-content .usage-bar i:first-child { border-radius:4px 4px 0 0; }
+body #document-content .usage-edge { display:flex; justify-content:space-between; margin:4px 0 0 52px; font-size:11px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body #document-content .usage-scroll { overflow-x:auto; scrollbar-width:thin; scrollbar-color:#ffffff24 transparent; }
+body #document-content .usage-table { margin:0; font-size:12px; color:var(--text-2); }
+body #document-content .usage-table td { max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #document-content .usage-table td:first-child { color:var(--text); }
+body #document-content .usage-table .num { text-align:right; }
+body #document-content .usage-more > summary { cursor:pointer; font-size:13px; color:var(--text-2); }
+body #document-content .usage-more > summary:hover { color:var(--text); }
+body #document-content .usage-more .usage-section { margin-top:10px; }
+body #document-content .usage-more h3:empty { display:none; }
+body #document-content .usage-notes { display:grid; gap:2px; }
+body #document-content .usage-note { margin:0; font-size:12px; line-height:1.6; color:var(--text-3); }
+body :is(.tp-screen) .xterm .scrollbar { opacity:0!important; pointer-events:none!important; }
+
+/* 关 OS 时的询问（§15.11 L1）：与其他弹窗一样是玻璃，按钮靠右，主选项在最右。 */
+body #exit-ask { width:min(440px, 100vw - 48px); padding:22px 24px 18px; border:0; border-radius:20px; background:rgba(13,15,21,.78); color:#eef0f4; box-shadow:inset 0 0 0 1px #ffffff17, 0 24px 80px #0009; backdrop-filter:blur(24px) saturate(1.2); }
+body #exit-ask::backdrop { background:rgba(4,5,8,.42); backdrop-filter:blur(4px); }
+body #exit-ask h2 { margin:0 0 10px; font-size:15px; font-weight:600; }
+body #exit-ask p { margin:0; font-size:13px; line-height:1.7; color:#c9ceda; white-space:pre-line; }
+body #exit-ask .exit-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:20px; }
+body #exit-ask button { min-width:88px; height:32px; padding:0 14px; border-radius:10px; border:1px solid #ffffff1f; background:#ffffff0d; color:#e8ebf2; font:inherit; font-size:13px; cursor:pointer; }
+body #exit-ask button:hover:not(:disabled) { background:#ffffff1c; }
+body #exit-ask button.quiet { border-color:transparent; background:transparent; color:#aab0bd; }
+body #exit-ask button.primary { border-color:#b9c7ff55; background:#b9c7ff26; color:#f2f4ff; }
+body #exit-ask button.primary:hover:not(:disabled) { background:#b9c7ff3a; }
+
+/* 矮窗口里的底部预算（AIDEBUG I1 P2：761×362 时光圈被输入框托高，超出页面给它让出的底部空间，压住设置导航）：
+   光圈缩到 64px，页面按缩小后的光圈让位；输入框打开时光圈和输入框并排（光圈在左下、输入框在它右边），底部只占两者中较高的那个。
+   整个浮现区仍按 --composer-lift 抬到输入框上方，只把光圈本身同步下移同样的距离：两边用同一过渡，打开输入框时光圈原地不动，正文条和灵感留在输入框上方。 */
+@media (max-height:560px) {
+  body[data-form=folded] { --fold-ring:64px; }
+  body[data-form=folded][data-eyra-placement] #screen .presence-header { translate:0 var(--composer-lift,0px); transition:translate var(--t3) var(--ease); }
+  body[data-form=folded][data-eyra-placement=compact] #bottom-bar { left:calc(var(--fold-left) + var(--fold-ring) + 14px); bottom:var(--fold-bottom); }
+  /* 输入框上方已没有不压页面的位置（AIDEBUG I1 P2：正文条盖住设置导航）：打字时光圈旁的正文条和灵感先淡出，收起输入框后回来。 */
+  body.composer-open[data-form=folded] #screen #conversation :is(:is(#answer-stage,.team-voice)) { opacity:0!important; pointer-events:none!important; transition:opacity 240ms ease; }
+}
+@media (max-height:480px) {
+ body[data-form=work] { --work-ring:min(var(--eyra-ring-size,104px),52px); --work-top:calc(var(--titlebar-height,56px) + 8px); }
+}
+/* 矮窗口里设置导航放不下时在导航内滚动，底部同样让出光圈的位置，每一项都能滚到光圈上方。
+   只在纵向导航（宽于 760px）时生效，并禁止换行：限高后 flex-wrap 会把放不下的项挤到旁边一列被裁掉。 */
+@media (min-width:761px) { body[data-form=folded] #onboarding .settings-tabs { flex-wrap:nowrap; max-height:100%; overflow-y:auto; scrollbar-width:none; padding-bottom:24px; box-sizing:border-box; } }
+
+/* 回复里的产物卡片（README.md 运行时 · 产物 B1）：Eyra 这一轮新建或改过的文件。玻璃小卡片，点一下预览（网页、图片）或打开；悬停时才出现“在文件夹中显示”。 */
+body .chat-artifacts { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+body .artifact-chip { display:inline-flex; align-items:center; max-width:100%; height:34px; padding:0 4px 0 0; border-radius:12px; background:rgba(18,21,28,.42); backdrop-filter:blur(16px); box-shadow:var(--glass-edge-1); transition:background-color var(--t1) var(--ease),box-shadow var(--t1) var(--ease),opacity var(--t1) var(--ease); }
+body .artifact-chip:hover, body .artifact-chip:focus-within { background:rgba(30,34,44,.62); box-shadow:var(--glass-edge-1),0 0 14px var(--eyra-glow); }
+body .artifact-chip button { min-height:0; border:0; background:transparent; color:#dfe4ec; cursor:pointer; }
+body .artifact-chip .artifact-open { display:inline-flex; align-items:center; gap:8px; min-width:0; height:100%; padding:0 6px 0 12px; font-size:13px; }
+body .artifact-chip svg { width:15px; height:15px; flex:0 0 15px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+body .artifact-chip .artifact-open svg { color:#a9c0ec; }
+body .artifact-chip .artifact-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:260px; }
+body .artifact-chip .artifact-reveal { display:grid; place-items:center; width:26px; height:26px; padding:0; border-radius:8px; color:#9aa3b2; opacity:0; transition:opacity var(--t1) var(--ease),background-color var(--t1) var(--ease); }
+body .artifact-chip:hover .artifact-reveal, body .artifact-chip:focus-within .artifact-reveal { opacity:1; }
+body .artifact-chip .artifact-reveal:hover { background:#ffffff12; color:#eef1f7; }
+body .artifact-chip.missing { opacity:.45; }
+body .chat-artifacts[hidden] { display:none; }
+/* 托着的最新回复下面的卡片：随正文淡入；折叠态的正文条只有光圈高，不放卡片（回到首页或进聊天列后再显示）。 */
+body #voice-artifacts:not([hidden]) { animation:artifacts-in 360ms var(--ease) both; }
+body[data-form=folded] #voice-artifacts { display:none; }
+@keyframes artifacts-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+/* 报告入口：右侧栏一个圆（与计划同款），列表弹窗与计划弹窗同一种玻璃。 */
+body .report-ball .report-count { position:absolute; right:-2px; top:-2px; min-width:16px; height:16px; padding:0 4px; box-sizing:border-box; border-radius:999px; background:#e6e9f0; color:#0d0f15; font:600 10px/16px system-ui; text-align:center; font-variant-numeric:tabular-nums; }
+body .report-ball .report-count:empty { display:none; }
+body .report-orb[data-unread=true] .report-ball { box-shadow:0 8px 24px #0005,0 0 0 1.5px #c9d6ffaa,0 0 12px #b9c8ff55; }
+/* 读报告时右侧栏只留报告圆，方便在几份报告之间切换。 */
+body:is([data-view=document-viewer],[data-scoped-report-open=true]) #status-rail { display:flex; }
+body:is([data-view=document-viewer],[data-scoped-report-open=true]) #status-rail > :not(#report-orb) { display:none!important; }
+/* The report component owns this marker across theme moves and teardown. */
+body #document-viewer[data-report-entry] { --doc-right-room:calc(var(--rail-panel-right,84px) + 4px); }
+/* The reader already displays the report title. Its rail tooltip must not
+   cover the native minimize, close and report navigation hit areas. */
+body:is([data-view=document-viewer],[data-scoped-report-open=true]) #report-orb .plan-pill { display:none; }
+body #report-pop { position:fixed; top:calc(var(--titlebar-height,56px) + 12px); left:auto; right:var(--rail-panel-r,84px); z-index:96; width:min(400px,calc(100vw - var(--rail-panel-r,84px) - 16px)); max-height:min(70vh,560px,calc(100vh - var(--titlebar-height,56px) - 28px)); box-sizing:border-box; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#ffffff33 transparent; padding:20px 20px 14px; border-radius:18px; background:var(--glass-surface); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge),var(--glass-shadow); transition:opacity 200ms ease,translate 260ms var(--ease),display 260ms allow-discrete; }
+@starting-style { body #report-pop { opacity:0; translate:0 -8px; } }
+body #report-pop[hidden] { display:none; opacity:0; }
+body #report-pop .plan-head h2 { margin:0 0 4px; font-size:15px; font-weight:600; color:#eef1f7; }
+body #report-pop .plan-progress-text { margin:0 0 12px; font-size:12px; color:var(--text-3); }
+body #report-pop .report-list { margin:0; padding:0; list-style:none; display:grid; gap:4px; }
+body #report-pop .report-item { display:grid; grid-template-columns:34px minmax(0,1fr) auto; align-items:center; gap:10px; width:100%; min-height:40px; margin:0; padding:0 10px; border:0; border-radius:12px; background:transparent; color:#e6e9f0; text-align:left; cursor:pointer; }
+body #report-pop .report-item:hover, body #report-pop .report-item:focus-visible { background:#ffffff0d; outline:none; }
+body #report-pop .report-item[data-state=open] { background:#ffffff10; box-shadow:inset 0 0 0 1px #ffffff1c; }
+body #report-pop .report-format { font:600 10px/1 system-ui; letter-spacing:.04em; color:var(--text-3); }
+body #report-pop .report-item strong { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13.5px; font-weight:500; }
+body #report-pop .report-item small { font-size:11px; color:var(--text-3); }
+/* 让阅读视口真正止于底部控件上方；只有末尾 padding 无法避免滚动途中透字。 */
+body[data-form=folded] #document-viewer #document-content { padding-bottom:24px!important; scroll-padding-bottom:24px; }
+
+/* ── 工作形态半屏（2026-10-16）：左半边是光圈、正文条和输入框；右半边是展示台，窗口上下排列（最多三个），字更小、能看更多。 ── */
+body[data-form=work] { --work-split:50vw; }
+body[data-form=work][data-eyra-placement=work] #bottom-bar { left:var(--work-left); right:auto; width:calc(var(--work-split) - var(--work-left) - 16px); transform:none; }
+/* 窄窗口放不下两栏时，展示台回到正文条下方整宽。 */
+@media (max-width:900px) {
+ body[data-form=work] { --work-split:100vw; }
+ body[data-form=work][data-eyra-placement=work] #bottom-bar { width:min(720px,calc(100vw - 48px)); left:50%; transform:translateX(-50%); }
+}
+
+/* ── 工作形态 = 聊天列缩到左半边（用户 2026-10-16）：历史消息照常显示，本轮说过的过程正文像普通消息一样往上流，
+   光圈在列尾托着正在写的那一段；右半边是展示台。任务结束回到聊天形态，过程正文退场，聊天列恢复原宽。 ── */
+body[data-form=work] #screen #conversation { inset:0 calc(100% - var(--work-split) + 4px) var(--chat-bottom-inset,0px) var(--work-left)!important; max-width:none!important; padding:var(--work-top) 28px 24px!important; }
+body[data-form=work] .chat-entry.progress .chat-text { color:#d3d8e2; }
+@media (max-width:900px) { body[data-form=work] #screen #conversation { inset:0 var(--work-left) 52vh var(--work-left)!important; padding-bottom:24px!important; } }
+
+/* ── 光圈不要朦胧外发光（用户 2026-10-16）：去掉径向光晕、发光阴影与模糊；改成一圈单独的细外环，
+   清晰的线，缓慢放大、缩小来表现"活着"。工作、等待时外环节奏加快。 ── */
+body .chat-avatar.eyra::before { box-shadow:inset 0 0 0 2px #e6e9f0d9!important; }
+
+
+
+/* 工作形态：计划圆、子任务卡这些右侧悬浮物本来就置顶，不再给它们让出一条（展示台、正文都铺到右边距）；
+   悬浮物下方垫一层很淡的玻璃，文字落在窗口上方时也不会与窗口里的字交叉。 */
+body[data-form=work] #status-rail > :is(.rail-orb,.sub-orb,.diary-orb) { filter:drop-shadow(0 6px 18px rgba(0,0,0,.35)); }
+body[data-form=work] #status-rail :is(.plan-pill,.sub-card,.diary-pill) { background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0) 40%),rgba(14,16,22,.62)!important; backdrop-filter:blur(24px) saturate(1.3)!important; box-shadow:inset 0 0 0 1px #ffffff1c,0 12px 32px rgba(0,0,0,.35)!important; }
+
+
+
+/* Shared history: one identity per uninterrupted speaker turn. */
+body .hx-turn { align-items:start; }
+body .hx-turn>.chat-main { min-width:0; display:flex; flex-direction:column; gap:14px; }
+body .hx-turn .chat-name { margin:0; }
+body .hx-turn .chat-name time { opacity:.7; margin-left:auto; }
+body .hx-turn .hx-process { margin:0; }
+body .hx-message { min-width:0; position:relative; }
+body .hx-message .chat-text { line-height:var(--chat-leading,1.8); overflow-wrap:anywhere; }
+body .hx-message .chat-text>:first-child { margin-top:0; }
+body .hx-message .chat-text>:last-child { margin-bottom:0; }
+body .hx-message-time { display:block; margin-top:6px; color:var(--text-3); font-size:10px; font-variant-numeric:tabular-nums; opacity:.6; }
+body .hx-message-time[hidden] { display:none; }
+body .hx-turn .hx-process-line { min-height:30px; border-radius:10px; }
+body .hx-process-line::before { content:''; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(-45deg); transition:transform var(--t1) var(--ease); margin:0 4px; }
+body .hx-process[open]>.hx-process-line::before { transform:rotate(45deg); }
+body .hx-turn .hx-steps { padding-left:12px; border-left:1px solid #ffffff12; margin:6px 0 0 8px; }
+body .hx-step time { opacity:.65; }
+/* 系统步骤与工具步骤同列：同样的点、间距与时间位置，空心点区分非工具动作。 */
+body .hx-step[data-kind=system] { display:flex; align-items:center; gap:10px; padding:5px 0; font-size:12.5px; color:var(--text-3); }
+body .hx-step[data-kind=system] .hx-dot { background:transparent; box-shadow:inset 0 0 0 1px #6b7385; }
+body .hx-turn .hx-inline-day { align-self:flex-start; margin:8px 0 0; }
+body .hx .chat-avatar,body .hx .chat-avatar::before,body .hx .chat-avatar::after,body .hx .chat-avatar * { animation:none!important; }
+body .hx-process summary:focus-visible,body .hx-receipt summary:focus-visible { outline:1px solid var(--accent,#a9c0ec); outline-offset:4px; border-radius:6px; }
+@media(max-width:600px){body .hx{--hx-eyra:44px;--hx-user:36px}body .hx-list{gap:26px}body .hx-turn>.chat-main{gap:12px}body .hx-step-line{flex-wrap:wrap;gap:6px}body .hx-step-line .hx-step-text{flex-basis:65%}}
+@media(prefers-reduced-motion:reduce){body .hx-process-line::before{transition:none}}
+body.reduce-motion .hx-process-line::before{transition:none}
+
+/* Earlier public conversation is revealed in bounded pages. */
+.context-load-more { display:block; margin:0 0 20px calc(var(--chat-axis) + 16px); padding:8px 14px; border:0; border-radius:999px; background:#ffffff09; color:var(--text-2); font:inherit; font-size:13px; cursor:pointer; transition:background var(--t1),color var(--t1); }
+.context-load-more:hover { background:#ffffff12; color:var(--text); }
+.context-load-more:focus-visible { outline:1px solid var(--accent,#a9c0ec); outline-offset:3px; }
+.context-load-more[hidden] { display:none; }
+
+/* 工作中的 Eyra 光圈按“工作与其他页面的光圈”的设置，比历史头像大；Vaya、Cota 工作时以同样大小出现，最多三个。 */
+body[data-form=work] #screen #conversation { --chat-axis:calc(max(var(--work-ring),var(--eyra-avatar),var(--user-avatar)) + max(8px,var(--work-ring) * .16)); }
+body[data-form=work] #screen #conversation #emergence { --eyra-avatar:var(--work-ring,var(--eyra-ring-size,110px)); }
+/* Vaya、Cota 的光圈和文字走 Eyra 的规则；这里只排版。 */
+body .role-trigger { position:relative; display:block; padding:0; border:0; background:none; cursor:default!important; }
+body .role-instrument-glyph { position:absolute; inset:0; display:grid; place-items:center; font-size:calc(var(--eyra-avatar) * .26); color:rgba(var(--role-tone),.9); pointer-events:none; opacity:0; transition:opacity var(--ui-fast) var(--ui-ease); }
+body .role-trigger:has(.role-instrument[data-state=idle]) .role-instrument-glyph { opacity:1; }
+
+/* 正文只留最新的几行，三个人同时工作时聊天列也放得下。 */
+body .team-voice[data-kind=progress] .team-voice-text { max-height:calc(var(--eyra-avatar) * 1.8); overflow:hidden; }
+/* 展示台：头部换成角色头像；窗口多时桌面模式分两列。 */
+body :is(#stage,.team-exec) .stage-head > .stage-role { display:none; flex:none; width:24px; height:24px; }
+body :is(#stage,.team-exec) .stage-head > .stage-role .role-face { font-size:11px; }
+/* 聊天优先（U7）：放不下时展示台暂时收起，聊天用这块地方；相册在右边时展示台让开它。 */
+body[data-form=work][data-eyra-placement=work]:is(.sd-geom,.al-geom) #bottom-bar { left:calc(var(--work-left) + var(--sd-push,0px)); margin-left:0; width:calc(var(--work-split) - var(--sd-push,0px) - var(--work-left) - 16px); }
+/* 统一返回按钮（navigation.mjs），圆钮样式和联系人页同一套。 */
+body .page-back { position:absolute; left:var(--rail-left,16px); top:var(--page-top,16px); z-index:5; }
+body .page-back[hidden] { display:none; }
+/* 其他页面左下角：协同时点名字切换角色（voice-rotation.mjs）。 */
+body .voice-tabs { position:absolute; left:0; bottom:calc(var(--fold-ring,104px) + 6px); display:flex; gap:4px; pointer-events:auto; }
+body .voice-tabs[hidden] { display:none; }
+body .voice-tab { height:22px; min-height:0; padding:0 10px; border:0; border-radius:999px; background:rgba(13,15,21,.86); color:var(--ui-text-2,#c9ced8); font-size:11px; line-height:22px; cursor:pointer; }
+body .voice-tab[data-current=true] { color:var(--ui-text-1,#eef1f7); }
+body .voice-tab[data-pinned=true] { box-shadow:inset 0 0 0 1px currentColor; }
+body .role-instrument-glyph[hidden] { display:none; }
+/* 协同页：成员卡片在最上面，下面是对话和动作，设置收进折叠里。 */
+
+body #document-content .usage-session-select{display:flex;align-items:center;gap:12px;min-width:0;color:var(--ui-text-2)}
+body #document-content .usage-session-select select{min-width:0;max-width:70%;padding:8px 12px;border:0;border-radius:var(--ui-radius-control);background:var(--ui-glass);color:var(--ui-text);font:inherit}
+
+/* Shared identity line for the home and native compact work text. */
+.presence-identity { display:flex;align-items:flex-end;gap:8px;min-width:0;margin-bottom:4px; }
+.presence-identity .chat-name { flex:none;align-self:flex-end;min-width:0;max-width:100%;margin:0;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.presence-work-status { flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--os-status-color,#e4f1ff);opacity:1;filter:none;font-size:12px;line-height:1.5; }
+
+.presence-identity:has(.presence-work-status:not([hidden])) ~ #voice .tv-titles:has(.tv-title.idle) { display:none; }
+
+/* Thin contrast edges preserve the halo on white native pages without an
+   extra circular plate. Applied equally to main and native folded surfaces. */
+body[data-form=folded] .halo-surface[data-state] > .halo { filter:drop-shadow(0 0 1px #0b0d12); }
+
+/* Pending supplements follow the live turn they interrupted; the same keyed
+   user rows move back into ordinary history when Core consumes/completes it. */
+body:is([data-form=chat],[data-form=work]) #conversation-queued:not([hidden]){display:flex;flex-direction:column;gap:var(--chat-safe-gap);margin-top:var(--chat-safe-gap)}
+
+.chat-send-status{display:block;margin-top:6px;color:#d4d7dd;font-size:12px;font-weight:400}
+/* 正常发送在一两帧内就被确认：“发送中”不占排版、延迟出现，只有真的卡住才看得见，消息不因它上下跳。 */
+body .chat-main:has(>.chat-send-status:is([data-delivery=pending],[data-delivery=prepared])){position:relative}
+body .chat-send-status:is([data-delivery=pending],[data-delivery=prepared]){position:absolute;left:0;top:100%;margin-top:2px;white-space:nowrap;pointer-events:none}
+body .chat-send-status[data-delivery=pending]{opacity:0;animation:chat-send-stall 200ms ease-out 1200ms forwards}
+@keyframes chat-send-stall{to{opacity:.8}}
+body.reduce-motion .chat-send-status[data-delivery=pending]{opacity:.8}
+@media(prefers-reduced-motion:reduce){body .chat-send-status[data-delivery=pending]{opacity:.8}}
+
+/* 历史搜索：右上角放大镜与左上返回对称；输入框从按钮左侧展开，结果暂代记录列表。 */
+body #panel > .hx-search { position:absolute; top:var(--page-top,16px); right:var(--rail-left,16px); z-index:6; display:flex; align-items:center; gap:8px; }
+body #panel > .hx-search .hx-search-input { width:0; min-width:0; padding-inline:0; border-color:transparent; opacity:0; pointer-events:none; transition:width var(--ui-move,240ms) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease),padding var(--ui-move,240ms) var(--ui-ease); }
+body #panel > .hx-search[data-open=true] .hx-search-input { width:min(260px,calc(100vw - 160px)); padding-inline:14px; border-color:var(--ui-control-edge); opacity:1; pointer-events:auto; }
+body #panel > .hx-search[data-open=true] .hx-search-toggle { color:var(--ui-text); box-shadow:inset 0 0 0 1px #ffffff2c; }
+body .hx-results { display:flex; flex-direction:column; gap:18px; padding-top:8px; }
+body .hx-results[hidden] { display:none; }
+body .hx-results-status { margin:0; text-align:center; font-size:12px; color:var(--text-3); }
+body .hx-results-list { display:flex; flex-direction:column; gap:20px; }
+body .hx-hit { display:flex; flex-direction:column; gap:6px; cursor:pointer; border-radius:var(--ui-radius-control); outline-offset:6px; }
+body .hx-hit header { display:flex; align-items:baseline; gap:10px; font-size:13px; }
+body .hx-hit header strong { font-weight:600; color:var(--ui-text); }
+body .hx-hit header time { font-size:11px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body .hx-hit-text { margin:0; font-size:14px; line-height:1.65; color:#d6dbe4; white-space:pre-wrap; overflow-wrap:anywhere; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden; }
+body .hx-hit.expanded .hx-hit-text { display:block; -webkit-line-clamp:unset; }
+body .hx-hit-text mark { padding:0 1px; border-radius:4px; background:#a9c0ec3d; color:#fff; }
+body .hx-results-more { align-self:center; }
+body .hx-results-more[hidden] { display:none; }
+body.reduce-motion #panel > .hx-search .hx-search-input { transition:none; }
+/* R3：计划、报告、日记圆贴右，详情向左展开；紧凑多列时第一列贴边。 */
+body #status-rail[data-compact=true] :is(.rail-orb,.sub-orb,.diary-orb,.term-orb) { direction:ltr; }
+body #panel>.hx-pagination{position:absolute;z-index:6;right:var(--rail-left,16px);bottom:16px;display:flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--ui-edge,#ffffff40);border-radius:8px;background:var(--hx-control-bg,#20232ded);color:#f4f5f8;box-shadow:0 2px 12px #0004}
+.hx-pagination button{min-width:28px;height:30px;padding:0 5px;border:0;border-radius:5px;color:inherit;background:transparent;font-variant-numeric:tabular-nums}
+.hx-pagination button[aria-current=page]{background:#e0e5ef;color:#1c2028;font-weight:650}
+.hx-pagination button:focus-visible{outline:2px solid #e1e8f6;outline-offset:1px}
+.hx-pagination button:disabled{color:#aeb4c1}
+body #panel-content:has(.hx){padding-bottom:68px!important}
+body #panel>.hx-search[data-open=true]{background:var(--hx-control-bg,#20232ded);border-radius:8px}
+body #panel>.hx-search[data-open=true] .hx-search-input{background:#16191fea;color:#f3f4f7;border-color:#8a909e}
+body #panel>.hx-search .hx-search-input::placeholder{color:#cbd1dc;opacity:1}
+body #panel>.hx-search .hx-search-toggle{background:#20232deb;color:#f3f4f7}
+body .hx :is(.hx-process-line,.hx-step-line,.hx-day,.hx-top,.hx-when,.hx-step-text,.hx-message-time,.hx-results-status,.hx-hit time){color:var(--ui-text-2,#cdd2db);opacity:1;text-shadow:0 1px 2px #111a}
+body .hx-process-line{background:rgba(18,20,26,.82);padding-inline:9px}
+body .hx-list[hidden]{display:none!important}
+

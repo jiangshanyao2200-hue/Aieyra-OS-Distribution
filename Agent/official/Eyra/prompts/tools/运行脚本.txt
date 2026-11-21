@@ -1,0 +1,1 @@
+Run JavaScript in a fresh V8 execution cell. Pass code as a JSON string. Supports top-level await, Promise.all/Promise.allSettled, conditionals and result processing. The only nested tools are 

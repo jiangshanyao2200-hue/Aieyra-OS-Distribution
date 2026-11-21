@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: aieyra-theme:; font-src 'self' aieyra-theme:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>设置 · Aieyra</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="module-shell.css"><link rel="stylesheet" href="appearance.css"><link rel="stylesheet" href="window-theme.css"><link rel="stylesheet" href="ui-system.css"><link rel="stylesheet" href="program-agents.css"></head>
+<body data-module="settings">
+<header id="status-anchor" class="module-bar topbar"><div class="module-brand"><button class="module-mark" type="button" aria-label="展开或折叠对话"></button><strong>设置</strong></div><div class="module-spacer"></div>
+      <div id="session-indicators" class="session-indicators" hidden aria-label="当前会话">
+
+        <span class="model-slot"><button id="model-display" type="button" class="topbar-icon model-readout" aria-label="切换当前会话模型" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="model-orbit" d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 0v9m8-4.5L12 12l-8-4.5M12 12v9"/></svg><span id="model-name" hidden></span></button></span>
+        <button id="usage-anchor" class="topbar-icon usage-readout" type="button" aria-label="当前会话用量"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="usage-meter" d="M5 18V12M12 18V6M19 18V9"/></svg><span id="usage-total" class="usage-total"></span><span id="usage-current" class="usage-current"></span><span class="status-readout" hidden><span id="input-count"></span><span id="output-count"></span><span id="cache-count"></span><span id="compression-count"></span></span></button>
+      </div>
+<button id="account-status" class="account-status" type="button" aria-label="Aieyra 账号" aria-haspopup="dialog" hidden><span class="account-status-avatar" aria-hidden="true"></span></button>
+<nav class="window-controls" aria-label="窗口">
+<button id="module-dock" type="button" aria-label="放回 OS" title="放回 OS"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5h6.5v9H6M8.5 8H2m3-3L2 8l3 3"/></svg></button>
+<button id="minimize-window" type="button" aria-label="最小化"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5h10"/></svg></button>
+<button id="maximize-window" type="button" aria-label="最大化"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx=".5"/></svg></button>
+<button id="close-window" type="button" aria-label="关闭"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
+</nav></header><p id="module-notice" role="status" hidden></p><script type="module" src="settings-window.mjs"></script></body></html>

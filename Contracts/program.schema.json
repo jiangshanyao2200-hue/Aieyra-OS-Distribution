@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Aieyra Program v1 (native adapters require host 1.1; process renderers require 1.2)",
+  "type": "object",
+  "required": [
+    "schema",
+    "mode",
+    "desktop",
+    "operations"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "aieyra.program/1"
+    },
+    "mode": {
+      "enum": [
+        "observed",
+        "collaborative",
+        "human"
+      ]
+    },
+    "desktop": {
+      "type": "object",
+      "required": [
+        "entry"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entry": {
+          "type": "string",
+          "pattern": "\\.(html|mjs)$"
+        },
+        "native": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$"
+        },
+        "navigation": {
+          "type": "object",
+          "required": [
+            "tab",
+            "host",
+            "order"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "tab": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+            },
+            "host": {
+              "enum": [
+                "surface",
+                "browser",
+                "process"
+              ]
+            },
+            "background": {
+              "enum": [
+                "sleep"
+              ]
+            },
+            "order": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 64
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "native",
+              "navigation"
+            ],
+            "properties": {
+              "navigation": {
+                "required": [
+                  "host"
+                ],
+                "properties": {
+                  "host": {
+                    "const": "process"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "entry": {
+                "pattern": "\\.mjs$"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "entry": {
+                "pattern": "\\.html$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+            "not": {
+              "const": "snapshot"
+            }
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          }
+        }
+      },
+      "maxItems": 64
+    }
+  }
+}

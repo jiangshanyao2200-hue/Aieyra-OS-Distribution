@@ -1,0 +1,18 @@
+{
+  "schema": "aieyra.tool-view/1",
+  "result": "output",
+  "view": {
+    "kind": "table",
+    "title": "统计报告",
+    "columns": [
+      {
+        "key": "metric",
+        "label": "指标"
+      },
+      {
+        "key": "value",
+        "label": "结果"
+      }
+    ]
+  }
+}

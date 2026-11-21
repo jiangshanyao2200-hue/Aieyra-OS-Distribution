@@ -1,0 +1,23 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: html,body,body #screen; body; body:not([data-visible=true]); body #screen; body[data-form=folded][data-eyra-placement] #screen #conversation #emergence; body[data-form=folded][data-eyra-placement] #screen .presence-header; body[data-visible=false] *,body[data-visible=false] *::before,body[data-visible=false] *::after; body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after; #presence-summary; #presence-summary[hidden]; #summary-body
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/eyra-presence.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+html,body,body #screen{background:transparent!important;overflow:hidden!important}
+body{margin:0;--fold-ring:104px}
+body:not([data-visible=true]){visibility:hidden}
+body #screen{position:absolute;inset:0}
+/* The shared folded halo owns its backing and contrast on every page. */
+body[data-form=folded][data-eyra-placement] #screen #conversation #emergence{left:16px!important;bottom:16px!important;width:var(--fold-ring)!important;height:var(--fold-ring)!important;max-width:none!important;gap:0!important;transform:none!important;transition:opacity var(--ui-enter) var(--ui-ease)!important}
+body[data-form=folded][data-eyra-placement] #screen .presence-header{translate:none}
+body[data-visible=false] *,body[data-visible=false] *::before,body[data-visible=false] *::after{animation-play-state:paused!important;transition:none!important}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important}
+
+#presence-summary { position:absolute;left:calc(var(--fold-ring) + 12px);bottom:0;width:max(0px,calc(100vw - var(--fold-ring) - 44px));max-height:var(--fold-ring);overflow:hidden;box-sizing:border-box;padding:8px 12px;border-radius:var(--ui-radius);background:var(--ui-glass);color:var(--ui-text); }
+#presence-summary[hidden] { display:none; }
+#summary-body { white-space:pre-wrap;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;font-size:12px;line-height:1.5; }

@@ -1,0 +1,58 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: @font-face; @font-face; @font-face; @font-face; @font-face; @font-face
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/fonts.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* OFL licenses and provenance are in ../assets/fonts/. */
+@font-face {
+  font-family: "Aieyra Inter";
+  src: url("../assets/fonts/inter-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aieyra Sora";
+  src: url("../assets/fonts/sora-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aieyra Noto Sans SC";
+  src: url("../assets/fonts/notosanssc-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Aieyra Noto Serif SC";
+  src: url("../assets/fonts/notoserifsc-variable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+/* Prefer the small faces for their cmap coverage. The earlier faces supply
+   characters outside that coverage, with the same weight ranges. */
+@font-face {
+  font-family: "Aieyra Noto Sans SC";
+  src: url("../assets/fonts/notosanssc-common.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+2000-206F, U+3000-9FFF, U+FF00-FFEF;
+}
+@font-face {
+  font-family: "Aieyra Noto Serif SC";
+  src: url("../assets/fonts/notoserifsc-common.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  unicode-range: U+0020-024F, U+2000-206F, U+3000-9FFF, U+FF00-FFEF;
+}

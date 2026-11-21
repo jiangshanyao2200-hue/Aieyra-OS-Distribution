@@ -1,0 +1,256 @@
+/* @file-map:start
+文件: link/desktop/ui/appearance.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | #desktop-background
+  rule-2 | style | #desktop-background.enabled.has-image
+  rule-3 | style | .background-layer
+  rule-4 | style | .background-layer.visible
+  rule-5 | style | .background-shade
+  rule-6 | style | body>.titlebar,body>#workspace
+  rule-7 | style | body>.titlebar
+  rule-8 | style | .titlebar .system-settings
+  rule-9 | style | .titlebar #account
+  rule-10 | style | #workspace
+  rule-11 | style | .tree-search
+  rule-12 | style | .tree-search input
+  rule-13 | style | .surface:has(.work-status)
+  rule-14 | style | .surface:has(.work-status)>header
+  rule-15 | style | .surface:has(.work-status)>header::before
+  rule-16 | style | .surface:has(.work-status)>header h1
+  rule-17 | style | #situation-title
+  rule-18 | style | .situation-headline
+  rule-19 | style | .surface:has(.work-status)>header>.surface-tools
+  rule-20 | style | .surface:has(.work-status) .carousel-controls
+  rule-21 | style | .surface:has(.work-status)>header:is(:hover,:focus-within) .carousel-controls
+  rule-22 | style | .surface:has(.work-status) .carousel-controls button
+  rule-23 | style | .surface:has(.work-status) .carousel-position
+  rule-24 | style | .work-status
+  rule-25 | style | .work-status .personal-desk
+  rule-26 | style | .work-status .station-work h2
+  rule-27 | style | .work-status .station-report
+  rule-28 | style | .work-status .station-state i
+  rule-29 | style | .work-status .link-activity
+  rule-30 | style | .link-activity-scroll
+  rule-31 | style | .activity-row
+  rule-32 | style | .activity-row time
+  rule-33 | style | .activity-row p
+  rule-34 | style | .activity-row p>span
+  rule-35 | style | .activity-row .read-detail
+  rule-36 | style | .activity-row .read-detail:hover
+  rule-37 | style | .activity-row time
+  rule-38 | style | .activity-row .activity-copy
+  rule-39 | style | .activity-row .read-detail
+  rule-40 | style | .activity-row>i
+  rule-41 | style | .activity-footer:has(button[hidden])
+  rule-42 | style | .station-manage.onboarding-stage
+  rule-43 | style | .station-manage.onboarding-stage:is([open],:hover,:focus-within)
+  rule-44 | style | .system-settings-page
+  rule-45 | style | dialog:has(.system-settings-page)
+  rule-46 | style | .setting-row
+  rule-47 | style | .setting-row label
+  rule-48 | style | .setting-row>div
+  rule-49 | style | .setting-row :is(select,input[type=number])
+  rule-50 | style | .setting-row option
+  rule-51 | style | .setting-row>.background-select
+  rule-52 | style | .background-select-trigger
+  rule-53 | style | .background-select-trigger:is(:hover,[aria-expanded=true])
+  rule-54 | style | .background-select-arrow
+  rule-55 | style | .background-select-trigger[aria-expanded=true] .background-select-arrow
+  rule-56 | style | .background-options
+  rule-57 | style | .background-options[hidden]
+  rule-58 | style | .background-options [role=option]
+  rule-59 | style | .background-options [role=option]:is(:hover,:focus-visible)
+  rule-60 | style | .background-options [aria-selected=true]
+  rule-61 | style | .background-option-check
+  rule-62 | style | [aria-selected=true]>.background-option-check
+  rule-63 | style | .station-reconnect
+  rule-64 | style | .station-reconnect[hidden]
+  rule-65 | style | .station-reconnect p
+  rule-66 | style | .station-reconnect button
+  rule-67 | style | @keyframes background-menu-in
+  rule-68 | style | .setting-row input[type=number]
+  rule-69 | style | .setting-row input[type=range]
+  rule-70 | style | .setting-row input[type=checkbox]
+  rule-71 | style | .setting-row input[type=checkbox]:checked
+  rule-72 | style | .settings-background-actions
+  rule-73 | style | .background-upload
+  rule-74 | style | .background-upload input
+  rule-75 | style | .background-upload:focus-within
+  rule-76 | style | .wallpaper-gallery
+  rule-77 | style | .wallpaper-choice
+  rule-78 | style | .wallpaper-choice img
+  rule-79 | style | .wallpaper-choice:hover img
+  rule-80 | style | .wallpaper-choice[aria-pressed=true]
+  rule-81 | style | .settings-footer
+  rule-82 | style | #notice
+  rule-83 | style | @keyframes notice-appear
+  rule-84 | style | @keyframes atmosphere-orbit
+  rule-85 | style | @media(max-width:760px)
+  rule-86 | style | @media(max-width:480px)
+  rule-87 | style | .work-status .activity-row,.activity-history .activity-row
+  rule-88 | style | .work-status .activity-row>i,.activity-history .activity-row>i
+  rule-89 | style | .activity-history .activity-row p
+  rule-90 | style | .development-card
+  rule-91 | style | .development-fill
+  rule-92 | style | .development-card[data-busy=true] .development-fill
+  rule-93 | style | .development-card[data-indeterminate=true] .development-fill
+  rule-94 | style | .development-heading
+  rule-95 | style | .development-mark
+  rule-96 | style | .development-mark img
+  rule-97 | style | .development-mark i
+  rule-98 | style | .development-card[data-busy=true] .development-mark i
+  rule-99 | style | .development-card[data-busy=true] .development-mark img
+  rule-100 | style | .development-title
+  rule-101 | style | .development-heading h2
+  rule-102 | style | .development-status
+  rule-103 | style | .development-status:has(.development-state:empty):has(.development-amount:empty)
+  rule-104 | style | .development-state
+  rule-105 | style | .development-state:empty,.development-amount:empty
+  rule-106 | style | .development-state.development-error
+  rule-107 | style | .development-amount
+  rule-108 | style | .development-percent
+  rule-109 | style | .development-percent small
+  rule-110 | style | .development-percent[hidden]
+  rule-111 | style | .development-heading .actions
+  rule-112 | style | .development-heading .actions button
+  rule-113 | style | .development-meter
+  rule-114 | style | @keyframes development-breathe
+  rule-115 | style | @keyframes development-scan
+  rule-116 | style | .development-footer
+  rule-117 | style | .development-footer>.text-button
+  rule-118 | style | .development-source
+  rule-119 | style | .development-source code
+  rule-120 | style | .development-source button
+  rule-121 | style | .development-conflicts
+  rule-122 | style | @media(max-width:760px)
+  rule-123 | style | @media(max-width:500px)
+  rule-124 | style | @media(prefers-reduced-motion:reduce)
+  rule-125 | style | .development-logs
+  rule-126 | style | .development-logs p
+  rule-127 | style | .repository-intro
+  rule-128 | style | .surface .repository-intro h2
+  rule-129 | style | .engineering:has(>.repository-intro)>.version-track
+  rule-130 | style | .engineering:has(>.repository-intro)>.context-details
+  rule-131 | style | .member-menu
+  rule-132 | style | .member-menu:popover-open
+  rule-133 | style | .member-menu-name
+  rule-134 | style | .member-menu button
+  rule-135 | style | .member-menu button:is(:hover,:focus-visible)
+  rule-136 | style | .member-menu button.danger
+  rule-137 | style | html[data-hidden=true] .surface>header::before
+  rule-138 | style | html[data-motion=reduced] *,html[data-motion=reduced] *::before,html[data-motion=reduced] *::after
+  rule-139 | style | @media(prefers-reduced-motion:reduce)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Shared atmosphere, with composited transitions and stable reading surfaces. */
+/* @chain-region rule-1 */ #desktop-background{position:fixed;inset:0;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1.2s ease;z-index:0;background:#080b12}
+/* @chain-region rule-2 */ #desktop-background.enabled.has-image{opacity:1}
+/* @chain-region rule-3 */ .background-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.025);transition:opacity 1.8s ease,transform 14s cubic-bezier(.2,.65,.3,1);will-change:opacity}
+/* @chain-region rule-4 */ .background-layer.visible{opacity:1;transform:scale(1)}
+/* @chain-region rule-5 */ .background-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,11,18,.22),rgba(8,11,18,.42)),rgba(8,11,18,var(--wallpaper-shade,.68))}
+/* @chain-region rule-6 */ body>.titlebar,body>#workspace{position:relative;z-index:1}
+/* @chain-region rule-7 */ body>.titlebar{background:rgba(8,11,18,.58);backdrop-filter:blur(20px);border-bottom-color:#ffffff0b}
+/* @chain-region rule-8 */ .titlebar .system-settings{margin-left:auto;flex:none;width:34px;height:34px;padding:7px;-webkit-app-region:no-drag}
+/* @chain-region rule-9 */ .titlebar #account{margin-left:0}
+/* @chain-region rule-10 */ #workspace{background:transparent}
+/* @chain-region rule-11 */ .tree-search{background:transparent;backdrop-filter:blur(16px);border-radius:12px}
+/* @chain-region rule-12 */ .tree-search input{background:#141a24b8}
+/* @chain-region rule-13 */ .surface:has(.work-status){padding:24px clamp(20px,4vw,64px);contain:layout style}
+/* @chain-region rule-14 */ .surface:has(.work-status)>header{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;max-width:1120px;min-height:160px;margin:0 auto 26px;padding:32px 80px 42px;border:1px solid #ffffff12;border-radius:24px;background:linear-gradient(115deg,#a9c9ff12,#a9c9ff03 45%,#a6ffe60a);overflow:hidden}
+/* @chain-region rule-15 */ .surface:has(.work-status)>header::before{content:'';position:absolute;inset:-90%;z-index:-1;pointer-events:none;background:conic-gradient(from 0deg,transparent 0deg,#a1c9ff14 85deg,transparent 140deg,#b8a6ff10 250deg,transparent 310deg);animation:atmosphere-orbit 36s linear infinite;will-change:transform}
+/* @chain-region rule-16 */ .surface:has(.work-status)>header h1{width:100%;text-align:center;margin:0;max-width:none;min-width:0}
+/* @chain-region rule-17 */ #situation-title{max-width:none;min-height:1.5em;text-align:center}
+/* @chain-region rule-18 */ .situation-headline{font-size:clamp(27px,3.4vw,42px);font-weight:460;line-height:1.5;text-wrap:balance;letter-spacing:.025em;color:#eef4ff;text-shadow:0 2px 28px #adcaff18}
+/* @chain-region rule-19 */ .surface:has(.work-status)>header>.surface-tools{position:absolute;inset:auto 0 12px;display:flex;justify-content:center;margin:0}
+/* @chain-region rule-20 */ .surface:has(.work-status) .carousel-controls{gap:14px;opacity:.38;transition:opacity .25s ease}
+/* @chain-region rule-21 */ .surface:has(.work-status)>header:is(:hover,:focus-within) .carousel-controls{opacity:1}
+/* @chain-region rule-22 */ .surface:has(.work-status) .carousel-controls button{width:28px;height:28px;min-height:28px;padding:5px}
+/* @chain-region rule-23 */ .surface:has(.work-status) .carousel-position{font-size:14px}
+/* @chain-region rule-24 */ .work-status{max-width:1120px;margin:0 auto;width:100%;padding-top:0}
+/* @chain-region rule-25 */ .work-status .personal-desk{padding:8px 0 26px;gap:32px;min-height:190px}
+/* @chain-region rule-26 */ .work-status .station-work h2{font-size:clamp(26px,3vw,34px);font-weight:450;text-wrap:balance}
+/* @chain-region rule-27 */ .work-status .station-report{display:block;-webkit-line-clamp:unset;overflow:visible;white-space:pre-wrap;overflow-wrap:anywhere;color:#d1dae8;font-size:18px}
+/* @chain-region rule-28 */ .work-status .station-state i{box-shadow:0 0 12px currentColor}
+/* @chain-region rule-29 */ .work-status .link-activity{padding-top:10px;border-top-color:#ffffff10}
+/* @chain-region rule-30 */ .link-activity-scroll{max-height:clamp(180px,34vh,420px);mask-image:linear-gradient(#000 95%,transparent)}
+/* @chain-region rule-31 */ .activity-row{grid-template-columns:104px minmax(0,1fr) 4px;padding:15px 0;gap:20px;contain:layout style;border-bottom-color:#ffffff09}
+/* @chain-region rule-32 */ .activity-row time{color:#a3b1c6;font-size:14px;line-height:2}
+/* @chain-region rule-33 */ .activity-row p{display:flex;align-items:center;min-width:0;white-space:nowrap;font-size:18px;line-height:1.85}
+/* @chain-region rule-34 */ .activity-row p>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* @chain-region rule-35 */ .activity-row .read-detail{display:inline-flex;vertical-align:baseline;white-space:nowrap;font-size:14px;line-height:1.6;min-height:28px;margin:0 0 0 12px;padding:2px 9px;border-radius:8px;color:#c0d6fb;background:#b5d0ff09;box-shadow:none}
+/* @chain-region rule-36 */ .activity-row .read-detail:hover{background:#b5d0ff1a}
+/* @chain-region rule-37 */ .activity-row time{white-space:nowrap;overflow-wrap:normal;word-break:normal}
+/* @chain-region rule-38 */ .activity-row .activity-copy{min-width:0}
+/* @chain-region rule-39 */ .activity-row .read-detail{flex-shrink:0}
+/* @chain-region rule-40 */ .activity-row>i{margin-top:14px;color:#accbff;background:currentColor;box-shadow:0 0 9px #accbff36}
+/* @chain-region rule-41 */ .activity-footer:has(button[hidden]){display:none}
+/* @chain-region rule-42 */ .station-manage.onboarding-stage{max-width:1120px;margin:22px auto 0;opacity:.65;transition:opacity .25s ease}
+/* @chain-region rule-43 */ .station-manage.onboarding-stage:is([open],:hover,:focus-within){opacity:1}
+/* @chain-region rule-44 */ .system-settings-page{width:min(680px,100%)}
+/* @chain-region rule-45 */ dialog:has(.system-settings-page){width:min(760px,calc(100vw - 40px))}
+/* @chain-region rule-46 */ .setting-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid #ffffff0c}
+/* @chain-region rule-47 */ .setting-row label{font-size:17px;margin:0}
+/* @chain-region rule-48 */ .setting-row>div{display:flex;align-items:center;gap:10px;color:var(--muted)}
+/* @chain-region rule-49 */ .setting-row :is(select,input[type=number]){width:150px;min-height:38px;border:1px solid #ffffff16;border-radius:10px;background:#ffffff07;color:var(--text);padding:4px 12px;font-size:16px}
+/* @chain-region rule-50 */ .setting-row option{background:#141b27}
+/* @chain-region rule-51 */ .setting-row>.background-select{position:relative;display:block;flex:none;width:200px;color:var(--text)}
+/* @chain-region rule-52 */ .background-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:46px;padding:8px 10px 8px 16px;border:1px solid #ffffff24;border-radius:12px;background:linear-gradient(120deg,#ffffff0e,#ffffff05);color:var(--text);font-size:16px;box-shadow:inset 0 1px #ffffff05;transition:background .16s ease,border-color .16s ease}
+/* @chain-region rule-53 */ .background-select-trigger:is(:hover,[aria-expanded=true]){background:#ffffff0d;border-color:#b8cef34d}
+/* @chain-region rule-54 */ .background-select-arrow{display:block;flex:none;width:26px;height:26px;padding:3px;border-radius:8px;background:#ffffff08;color:#c8d7ed;transition:transform .16s ease}
+/* @chain-region rule-55 */ .background-select-trigger[aria-expanded=true] .background-select-arrow{transform:rotate(180deg)}
+/* @chain-region rule-56 */ .background-options{position:fixed;inset:auto;margin:0;box-sizing:border-box;z-index:5;width:200px;max-height:calc(100vh - 16px);overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain;padding:6px;border:1px solid #b8cef338;border-radius:14px;background:#1b2332;box-shadow:0 12px 28px #0006,inset 0 1px #ffffff08;animation:background-menu-in .14s cubic-bezier(.2,.8,.2,1)}
+/* @chain-region rule-57 */ .background-options[hidden]{display:none}
+/* @chain-region rule-58 */ .background-options [role=option]{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;padding:10px 12px;border-radius:8px;background:transparent;box-shadow:none;text-align:left;font-size:16px;color:#c6d1e2}
+/* @chain-region rule-59 */ .background-options [role=option]:is(:hover,:focus-visible){background:#b8cef312;color:#eef4ff}
+/* @chain-region rule-60 */ .background-options [aria-selected=true]{color:#e3edff;background:#b8cef310}
+/* @chain-region rule-61 */ .background-option-check{font-size:15px;color:#bdd4ff;opacity:0}
+/* @chain-region rule-62 */ [aria-selected=true]>.background-option-check{opacity:1}
+/* @chain-region rule-63 */ .station-reconnect{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 0 20px;padding:16px 20px;border:1px solid #b8cef326;border-radius:14px;background:#a9c9ff08}
+/* @chain-region rule-64 */ .station-reconnect[hidden]{display:none}
+/* @chain-region rule-65 */ .station-reconnect p{font-size:17px;color:#d4e0f1;margin:0}
+/* @chain-region rule-66 */ .station-reconnect button{flex:none}
+/* @chain-region rule-67 */ @keyframes background-menu-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+/* @chain-region rule-68 */ .setting-row input[type=number]{width:90px}
+/* @chain-region rule-69 */ .setting-row input[type=range]{width:180px;accent-color:#b8cef3}
+/* @chain-region rule-70 */ .setting-row input[type=checkbox]{width:44px;height:24px;padding:0;border:0;border-radius:24px;background:radial-gradient(circle at 12px 50%,#a7b4c8 8px,transparent 8.5px),#ffffff12;box-shadow:inset 0 0 0 1px #ffffff12;transition:background-color .25s ease}
+/* @chain-region rule-71 */ .setting-row input[type=checkbox]:checked{background:radial-gradient(circle at 32px 50%,#111721 8px,transparent 8.5px),#b8cef3;box-shadow:none}
+/* @chain-region rule-72 */ .settings-background-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 16px}
+/* @chain-region rule-73 */ .background-upload{display:inline-flex;align-items:center;cursor:pointer;padding:6px 14px;margin:0;font-size:15px;border:1px solid #ffffff18;border-radius:30px}
+/* @chain-region rule-74 */ .background-upload input{position:absolute;width:1px;height:1px;opacity:0}
+/* @chain-region rule-75 */ .background-upload:focus-within{outline:2px solid var(--accent);outline-offset:3px}
+/* @chain-region rule-76 */ .wallpaper-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+/* @chain-region rule-77 */ .wallpaper-choice{padding:0;overflow:hidden;aspect-ratio:16/10;border-radius:10px;box-shadow:inset 0 0 0 1px #ffffff12;transition:transform .3s ease,box-shadow .3s ease}
+/* @chain-region rule-78 */ .wallpaper-choice img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+/* @chain-region rule-79 */ .wallpaper-choice:hover img{transform:scale(1.05)}
+/* @chain-region rule-80 */ .wallpaper-choice[aria-pressed=true]{outline:2px solid #b8cef3;outline-offset:3px}
+/* @chain-region rule-81 */ .settings-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;color:var(--muted);font-size:14px}
+/* @chain-region rule-82 */ #notice{inset:auto 24px 22px auto;transform:none;max-width:min(440px,calc(100vw - 48px));background:#121a28e8;animation:notice-appear .3s ease}
+/* @chain-region rule-83 */ @keyframes notice-appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* @chain-region rule-84 */ @keyframes atmosphere-orbit{to{transform:rotate(360deg)}}
+/* @chain-region rule-85 */ @media(max-width:760px){.surface:has(.work-status)>header{min-height:145px;padding:24px 24px 42px;border-radius:18px}.activity-row{grid-template-columns:84px minmax(0,1fr) 4px;gap:12px}.activity-row p{font-size:17px}.activity-row time{font-size:14px}.work-status .personal-desk{gap:18px}.wallpaper-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* @chain-region rule-86 */ @media(max-width:480px){.setting-row{gap:10px}.setting-row input[type=range]{width:130px}.wallpaper-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.surface:has(.work-status){padding-inline:16px}}
+/* @chain-region rule-87 */ .work-status .activity-row,.activity-history .activity-row{grid-template-columns:max-content minmax(0,1fr);gap:14px;align-items:center}
+/* @chain-region rule-88 */ .work-status .activity-row>i,.activity-history .activity-row>i{display:none}
+/* @chain-region rule-89 */ .activity-history .activity-row p{font-size:16px}
+/* @chain-region rule-90 */ .development-card{position:relative;isolation:isolate;overflow:hidden;padding:28px;margin-bottom:28px;border:1px solid #bdd5ff24;border-radius:20px;background:linear-gradient(115deg,#a6c8ff12,#8796e708);box-shadow:0 16px 48px #00000014}
+/* @chain-region rule-91 */ .development-fill{position:absolute;inset:0;z-index:-1;transform:scaleX(var(--development-progress,0));transform-origin:left;background:linear-gradient(100deg,#9dbdff16,#9ab8fa2b);box-shadow:inset -1px 0 #c0d7ff60;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .4s ease;pointer-events:none;opacity:0}
+/* @chain-region rule-92 */ .development-card[data-busy=true] .development-fill{opacity:1}/* @chain-region rule-93 */ .development-card[data-indeterminate=true] .development-fill{width:35%;transform:none;animation:development-scan 2.8s ease-in-out infinite;background:linear-gradient(90deg,transparent,#b2cdff18,transparent);box-shadow:none}
+/* @chain-region rule-94 */ .development-heading{display:flex;align-items:center;gap:22px;flex-wrap:wrap;min-width:0}/* @chain-region rule-95 */ .development-mark{position:relative;width:60px;height:60px;display:grid;place-items:center;flex:none}/* @chain-region rule-96 */ .development-mark img{width:48px;height:48px;opacity:.9}/* @chain-region rule-97 */ .development-mark i{position:absolute;inset:0;border:1px solid #bdd5ff1a;border-radius:50%;opacity:0;transition:opacity .3s}/* @chain-region rule-98 */ .development-card[data-busy=true] .development-mark i{opacity:1;border-top-color:#c5d9ffb3;border-right-color:#bdd5ff44;animation:atmosphere-orbit 3s linear infinite}/* @chain-region rule-99 */ .development-card[data-busy=true] .development-mark img{animation:development-breathe 3s ease-in-out infinite}
+/* @chain-region rule-100 */ .development-title{display:flex;flex-direction:column;justify-content:center;gap:4px;flex:1;min-width:0}/* @chain-region rule-101 */ .development-heading h2{margin:0;font-size:27px;font-weight:450;line-height:1.5;white-space:nowrap}/* @chain-region rule-102 */ .development-status{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0}/* @chain-region rule-103 */ .development-status:has(.development-state:empty):has(.development-amount:empty){display:none}/* @chain-region rule-104 */ .development-state{font-size:15px;line-height:1.7;color:#bacbe3;overflow-wrap:anywhere}/* @chain-region rule-105 */ .development-state:empty,.development-amount:empty{display:none}/* @chain-region rule-106 */ .development-state.development-error{color:var(--ui-warn)}/* @chain-region rule-107 */ .development-amount{font-size:14px;color:#9eafc8;font-variant-numeric:tabular-nums;white-space:nowrap}/* @chain-region rule-108 */ .development-percent{font-size:32px;font-weight:350;line-height:1;font-variant-numeric:tabular-nums;color:#d6e4fb;white-space:nowrap;min-width:72px;text-align:right}/* @chain-region rule-109 */ .development-percent small{font-size:14px;margin-left:3px;color:#a9bddb}/* @chain-region rule-110 */ .development-percent[hidden]{display:none}/* @chain-region rule-111 */ .development-heading .actions{margin:0;flex-wrap:wrap;gap:10px;flex:none}/* @chain-region rule-112 */ .development-heading .actions button{white-space:nowrap;min-width:92px}/* @chain-region rule-113 */ .development-meter{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+/* @chain-region rule-114 */ @keyframes development-breathe{0%,100%{transform:scale(.94);opacity:.7}50%{transform:scale(1.04);opacity:1}}/* @chain-region rule-115 */ @keyframes development-scan{0%{translate:-110%}100%{translate:390%}}
+/* @chain-region rule-116 */ .development-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;border-top:1px solid #bdd5ff16;padding-top:14px}/* @chain-region rule-117 */ .development-footer>.text-button{flex:none;white-space:nowrap}/* @chain-region rule-118 */ .development-source{display:flex;align-items:center;gap:14px;min-width:0}/* @chain-region rule-119 */ .development-source code{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9daec6;font-size:14px}/* @chain-region rule-120 */ .development-source button{white-space:nowrap;flex:none}/* @chain-region rule-121 */ .development-conflicts{font-size:14px;color:var(--ui-warn);padding-left:20px;overflow-wrap:anywhere}
+/* @chain-region rule-122 */ @media(max-width:760px){.development-card{padding:20px}.development-heading{gap:16px}.development-mark{width:46px;height:46px}.development-mark img{width:36px;height:36px}.development-heading h2{font-size:24px}.development-heading .actions{margin-left:auto}.development-source code{display:none}.development-percent{font-size:28px;min-width:60px}.development-amount{font-size:14px}}
+/* @chain-region rule-123 */ @media(max-width:500px){.development-heading{gap:12px}.development-title{min-width:120px}.development-heading .actions{width:100%;justify-content:flex-end}.development-percent{font-size:26px}.development-heading .actions button{min-height:40px}.development-footer{gap:8px}.development-state{font-size:14px}}
+/* @chain-region rule-124 */ @media(prefers-reduced-motion:reduce){.development-fill,.development-mark img,.development-mark i{animation:none!important;transition:none!important}}
+/* @chain-region rule-125 */ .development-logs{font:14px/1.9 Consolas,monospace;padding:12px;border-radius:12px;background:#080d1690;min-width:0}/* @chain-region rule-126 */ .development-logs p{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* @chain-region rule-127 */ .repository-intro{padding:0 0 20px;border:0}/* @chain-region rule-128 */ .surface .repository-intro h2{font-size:24px;line-height:1.5;margin:0}/* @chain-region rule-129 */ .engineering:has(>.repository-intro)>.version-track{padding:14px 0 18px;margin:0}/* @chain-region rule-130 */ .engineering:has(>.repository-intro)>.context-details{margin-top:10px}
+/* @chain-region rule-131 */ .member-menu{position:fixed;inset:auto;margin:0;min-width:176px;max-width:calc(100vw - 20px);padding:7px;border:1px solid #bdd5ff24;border-radius:13px;background:#19212f;color:var(--ui-text);box-shadow:0 14px 38px #0005;font:15px/1.5 'Aieyra Inter','Aieyra Noto Sans SC',sans-serif;overflow:hidden}/* @chain-region rule-132 */ .member-menu:popover-open{display:flex;flex-direction:column;gap:3px;animation:background-menu-in .12s ease}/* @chain-region rule-133 */ .member-menu-name{padding:7px 10px;color:#a8b8ce;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:250px;border-bottom:1px solid #ffffff0b;margin-bottom:3px}/* @chain-region rule-134 */ .member-menu button{justify-content:flex-start;padding:9px 11px;min-height:38px;border-radius:7px;background:transparent;box-shadow:none}/* @chain-region rule-135 */ .member-menu button:is(:hover,:focus-visible){background:#b8cef310;outline-offset:-2px}/* @chain-region rule-136 */ .member-menu button.danger{color:#edb5b0}
+/* @chain-region rule-137 */ html[data-hidden=true] .surface>header::before{animation-play-state:paused}
+/* @chain-region rule-138 */ html[data-motion=reduced] *,html[data-motion=reduced] *::before,html[data-motion=reduced] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+/* @chain-region rule-139 */ @media(prefers-reduced-motion:reduce){.background-layer,#desktop-background{transition:none}.surface:has(.work-status)>header::before{animation:none}.link-activity-scroll{scroll-behavior:auto}}

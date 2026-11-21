@@ -1,0 +1,36 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.halo-classic",
+  "kind": "halo",
+  "name": "官方经典光圈",
+  "summary": "独立光圈图形与状态动画，不改变主题、角色或对话。",
+  "version": "1.0.0",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "halo": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "halo": "halo.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "halo.json": {
+      "sha256": "f48d29cde9abbb36abee0821b9adca13068139253be1dcff5145f235edb9f023",
+      "size": 55
+    }
+  }
+}

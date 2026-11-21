@@ -1,0 +1,216 @@
+{
+ "schema": "aieyra.builtin-media/1",
+ "note": "Bundled defaults used while signed out; signed-in accounts use the official library. Files are selected from the official gallery.",
+ "items": [
+  {
+   "id": "builtin.bg-01",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "静蓝停泊",
+   "file": "backgrounds/bg-01.jpg",
+   "sha256": "66cbc4f313efc3507219a287ac345354c8fb9e445405572f9ee4c9f98860cc91",
+   "size": 597033
+  },
+  {
+   "id": "builtin.bg-02",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "掌心星序",
+   "file": "backgrounds/bg-02.jpg",
+   "sha256": "b5cc32f20f5074ebbce50c434a9df474af13a005765f1d2e582be1c69f3b2669",
+   "size": 307096
+  },
+  {
+   "id": "builtin.bg-03",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "掌心月白",
+   "file": "backgrounds/bg-03.jpg",
+   "sha256": "72ae0a39fd3e449125cb9eefab9e18ec367fbd4fdf941ddefcd5daeebf341319",
+   "size": 225070
+  },
+  {
+   "id": "builtin.bg-04",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "星间来信 · 017",
+   "file": "backgrounds/bg-04.jpg",
+   "sha256": "d0b1545622857a1f53e80d5ba988621ebbc373887514ca2e4d658d86b9cbffd3",
+   "size": 384371
+  },
+  {
+   "id": "builtin.bg-05",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "雨后的片刻 · 019",
+   "file": "backgrounds/bg-05.jpg",
+   "sha256": "500b433497826e99d2deca883b77a141d840ceeb981f626bdac5fbf1e1a198d5",
+   "size": 269990
+  },
+  {
+   "id": "builtin.bg-06",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "未完的梦境 · 096",
+   "file": "backgrounds/bg-06.jpg",
+   "sha256": "a2552ccdd3b2785342cecb70785395015789c7405c7316c65d0aac47f4233b22",
+   "size": 246824
+  },
+  {
+   "id": "builtin.bg-07",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "星间来信 · 097",
+   "file": "backgrounds/bg-07.jpg",
+   "sha256": "3f2d8fdd8dc80fcb859883b330917bc087941eaf1fd528e42aa7d23987074e22",
+   "size": 254622
+  },
+  {
+   "id": "builtin.bg-08",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "安静的远方 · 101",
+   "file": "backgrounds/bg-08.jpg",
+   "sha256": "cb1ce21de8aa5351731df3432dcf6751a955747b169a33f74e7c880cf31d9ec7",
+   "size": 329361
+  },
+  {
+   "id": "builtin.bg-09",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "未完的梦境 · 112",
+   "file": "backgrounds/bg-09.jpg",
+   "sha256": "4da294a010a57cd54c3572bda74a76a04360a0fbd043a02c1132517386a4ceec",
+   "size": 382687
+  },
+  {
+   "id": "builtin.bg-10",
+   "category": "background",
+   "orientation": "landscape",
+   "width": 1920,
+   "height": 1080,
+   "title": "星间来信 · 113",
+   "file": "backgrounds/bg-10.jpg",
+   "sha256": "828fbd3dff77f444d7db8c3fe86a9a42353934219744cce511693c571a3678ed",
+   "size": 374573
+  },
+  {
+   "id": "builtin.avatar-01",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "笑意越过界面",
+   "file": "avatars/av-01.png",
+   "sha256": "b58d2ab271dcbd9353bcc81c8ec20b449f4c56d3db27a779088fc9b1809e1dc7",
+   "size": 121671
+  },
+  {
+   "id": "builtin.avatar-02",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "墨白主权",
+   "file": "avatars/av-02.png",
+   "sha256": "b9fb558a1db95aeee59548dd9275eea1e5812e34c3fc8cd99ced3ba669c81939",
+   "size": 97259
+  },
+  {
+   "id": "builtin.avatar-03",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "朱砂轻笑",
+   "file": "avatars/av-03.png",
+   "sha256": "39a7c90f2db6b37011aebf8b3f47a34005f96d66226f5f4ca8c231274889f8d3",
+   "size": 113497
+  },
+  {
+   "id": "builtin.avatar-04",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "风中的星序 · 007",
+   "file": "avatars/av-04.png",
+   "sha256": "ab647dcd660ce6f4fa6e02394830718cd6c0684a74abb96e835d77b421795c0c",
+   "size": 124286
+  },
+  {
+   "id": "builtin.avatar-05",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "星间来信 · 009",
+   "file": "avatars/av-05.png",
+   "sha256": "35168526d0668529b85b6873bf0468f659f55328c27cd395ee69c23233795626",
+   "size": 120278
+  },
+  {
+   "id": "builtin.avatar-06",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "光落在此刻 · 012",
+   "file": "avatars/av-06.png",
+   "sha256": "3dcb1c8e32b15d722dfb00d3d44af6f7f880a95c7f9b150e61a7966b36f6669f",
+   "size": 113788
+  },
+  {
+   "id": "builtin.avatar-07",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "风中的星序 · 015",
+   "file": "avatars/av-07.png",
+   "sha256": "0471095baf78b1585bfa0a800b8499fda22d98d828db74e6a0207d8be16f5a9a",
+   "size": 113230
+  },
+  {
+   "id": "builtin.avatar-08",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "风中的星序 · 023",
+   "file": "avatars/av-08.png",
+   "sha256": "0cd7c6850ab2e570e73b02fe38ffd76a5e50c919fe1ba5fa43f5485b20b3f6ff",
+   "size": 97597
+  },
+  {
+   "id": "builtin.avatar-09",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "光落在此刻 · 028",
+   "file": "avatars/av-09.png",
+   "sha256": "89f3007a0b14913541696dab905523bcff201572326e1484bbfd9650000e01e7",
+   "size": 109980
+  },
+  {
+   "id": "builtin.avatar-10",
+   "category": "avatar",
+   "width": 256,
+   "height": 256,
+   "title": "未完的梦境 · 040",
+   "file": "avatars/av-10.png",
+   "sha256": "af36365734f260284f26b3e4d82b07e0406f5d0374c27180fe3ad837c2d228b9",
+   "size": 123859
+  }
+ ]
+}

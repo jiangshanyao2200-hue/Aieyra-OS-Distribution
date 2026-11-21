@@ -1,0 +1,23 @@
+/* —— 展示台 · 看图（§15.11 V1）：显示 Eyra 实际看过的那张图；读入时一道光扫过；窗口太小时换成"眼睛"，图在圆里慢慢移动。 —— */
+body :is(#stage,.team-exec) .image-view { position:relative; flex:1; min-height:0; display:grid; grid-template-rows:minmax(0,1fr) auto; gap:8px; padding:4px 16px 14px; }
+body :is(#stage,.team-exec) .image-frame { position:relative; min-height:0; display:grid; place-items:center; overflow:hidden; border-radius:12px; }
+body :is(#stage,.team-exec) .image-frame img { max-width:100%; max-height:100%; object-fit:contain; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.35),var(--glass-edge-1); opacity:0; transition:opacity 260ms ease; }
+body :is(#stage,.team-exec) .image-frame img[src] { opacity:1; }
+body :is(#stage,.team-exec) .image-view.arrived .image-frame::after { content:""; position:absolute; inset:0; background:linear-gradient(100deg,transparent 35%,#c9d6ff2e 50%,transparent 65%); background-size:250% 100%; animation:image-scan 1.1s var(--ease) both; pointer-events:none; }
+@keyframes image-scan { from { background-position:120% 0; } to { background-position:-30% 0; } }
+body :is(#stage,.team-exec) .image-caption { margin:0; overflow:hidden; font-size:12px; color:var(--text-3); text-overflow:ellipsis; white-space:nowrap; }
+body :is(#stage,.team-exec) .image-eye { position:absolute; left:50%; top:42%; display:none; width:44px; height:44px; translate:-50% -50%; color:#c9d6ff; }
+body :is(#stage,.team-exec) .image-eye svg, body :is(#stage,.team-exec) .image-lens svg { width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+body :is(#stage,.team-exec) .image-view[data-state=looking] .image-frame { display:none; }
+body :is(#stage,.team-exec) .image-view[data-state=looking] .image-eye { display:block; animation:eye-look 1.6s ease-in-out infinite; }
+@keyframes eye-look { 0%,100% { opacity:.55; scale:1; } 50% { opacity:1; scale:1.08; } }
+body :is(#stage,.team-exec) .image-lens { display:none; }
+body :is(#stage,.team-exec) .image-view.compact .image-frame { display:none; }
+body :is(#stage,.team-exec) .image-view.compact { grid-template-columns:80px minmax(0,1fr); grid-template-rows:minmax(0,1fr); align-items:center; gap:12px; padding:4px 16px; }
+body :is(#stage,.team-exec) .image-view.compact:not([data-state=looking]):not([data-state=failed]) .image-lens { position:relative; display:block; justify-self:center; align-self:center; width:64px; aspect-ratio:1; border-radius:50%; background:var(--src) 0 0/320% no-repeat,#0c0e13; box-shadow:0 0 0 1.5px #e6e9f0cc,0 0 22px #b9c8ff55; animation:lens-pan 9s ease-in-out infinite alternate; }
+body :is(#stage,.team-exec) .image-view.compact .image-caption { white-space:normal; overflow-wrap:anywhere; }
+body :is(#stage,.team-exec) .image-view.compact[data-state=failed] .image-caption { grid-column:1 / -1; }
+body :is(#stage,.team-exec) .image-view.compact .image-lens span { position:absolute; right:-6px; top:-6px; width:26px; height:26px; padding:4px; border-radius:50%; background:#0c0e13; box-shadow:var(--glass-edge-1); color:#c9d6ff; }
+@keyframes lens-pan { 0% { background-position:0% 0%; } 33% { background-position:100% 20%; } 66% { background-position:30% 100%; } 100% { background-position:85% 70%; } }
+body.reduce-motion #stage :is(.image-lens,.image-eye,.image-frame::after) { animation:none!important; }
+

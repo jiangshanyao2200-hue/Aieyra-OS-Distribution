@@ -1,0 +1,1 @@
+Input bytes as a JSON string; omit or empty to poll. For Windows tty line input, send U+000D (byte 0x0D). Example JSON: {"chars":"hello\u000d"}. The JSON escape is decoded once. Do not double-escape it: literal backslash-r does NOT press Enter. If a prior input lacked Enter, send only the carriage return. Do not rewrite bytes for non-TTY programs.

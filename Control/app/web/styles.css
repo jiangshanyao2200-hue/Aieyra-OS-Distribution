@@ -1,0 +1,581 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Control/app/web/AGENTS.md | ring 2
+ * Chains: module-local; query impact before editing
+ * Regions: @layer reset; ::after; body; select; select; button; button:disabled; a; button; p; select; svg; [hidden]; @layer base; :root; body; body:has(dialog[open]); ::selection; :focus-visible; button; select; textarea::placeholder; textarea; select; select option; input[type='search']::-webkit-search-cancel-button; code; pre; small; time; button:disabled; .sr-only; .skip-link; .skip-link:focus; ::-webkit-scrollbar; ::-webkit-scrollbar-track; ::-webkit-scrollbar-thumb; *; @layer layout; kbd; main; h1; @layer components; .toast; dialog; dialog::backdrop; dialog h2; .boot; .boot small; .boot-mark; @keyframes spin; 100%; @keyframes skeleton; 100%; @layer responsive; @media (min-width: 1600px); main; @media (max-width: 1250px); main; @media (max-width: 800px); main; .toast; @media (max-width: 560px); main; dialog; dialog h2; @media (max-width: 360px); main; @media (prefers-reduced-motion: reduce); ::after; :root; body; body; #app; #main; .floor-seat; .desk-side; .desk-top; .desk-leg; .monitor-back; .monitor-screen; .monitor-lines; .keyboard; .seat-chair; .seat-signal; .seat-name; .seat-idle; .seat-busy; .seat-waiting_user; .seat-busy .monitor-lines; .seat-busy .seat-signal; @keyframes terminal-scan; 100%; 50%; @keyframes signal-breathe; 100%; 50%; select:focus-visible; @media (prefers-reduced-motion: reduce); ::after; #main; .work-orbit; .seat-busy .work-orbit; .floor-seat; .floor-seat .monitor-screen; .floor-seat:hover .monitor-screen; .seat-busy .monitor-screen; .seat-busy .monitor-lines; @keyframes work-orbit; 100%; @media (prefers-reduced-motion: reduce); ::after; .seat-paused; .floor-seat .desk-top; .floor-seat .desk-side; .floor-seat .seat-chair; .floor-seat .seat-name; summary; .seat-name; :root; .floor-seat:focus-visible; :is(button, a, summary, input, textarea, select):focus-visible; @media (prefers-reduced-motion: reduce); #toast; button:disabled
+ * Impact: python -B scripts/code-atlas.py show Control/app/web/styles.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Current home foundations and original desk artwork; superseded selectors removed. */
+@layer reset, base, layout, components, responsive;
+
+@layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    margin: 0px;
+    min-height: 100%;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    color: inherit;
+  }
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0px;
+  }
+  button,
+  select {
+    touch-action: manipulation;
+  }
+  svg {
+    flex-shrink: 0;
+  }
+  [hidden] {
+    display: none !important;
+  }
+}
+@layer base {
+  :root {
+    color-scheme: dark;
+    --bg: #101319;
+    --sidebar: #12171e;
+    --panel: #181e26;
+    --raised: #1c242d;
+    --line: #2b343e;
+    --line-soft: #242c35;
+    --text: #e0e6ec;
+    --secondary: #a5b1bd;
+    --muted: #7f8c9b;
+    --mint: #acb9d7;
+    --lavender: #b9b0d7;
+    --blue: #9fbfdc;
+    --amber: #dcc297;
+    --red: #e0a2a7;
+    --radius: 14px;
+    --font:
+      'Segoe UI Variable Text', 'Segoe UI', 'Microsoft YaHei UI', 'PingFang SC', system-ui,
+      sans-serif;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.6 var(--font);
+    letter-spacing: 0.01em;
+  }
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+  ::selection {
+    background: rgb(56, 66, 89);
+    color: rgb(246, 247, 251);
+  }
+  :focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 4px;
+    border-radius: 5px;
+  }
+  button {
+    border: 0px;
+    background: none;
+  }
+  input,
+  textarea,
+  select {
+    color: var(--text);
+    background: none;
+    border: 0px;
+    min-width: 0px;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted);
+  }
+  textarea {
+    resize: vertical;
+  }
+  select {
+    cursor: pointer;
+  }
+  select option {
+    background: var(--raised);
+    color: var(--text);
+  }
+  input[type='search']::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
+  pre,
+  code {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    letter-spacing: 0px;
+  }
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  small {
+    font-size: 12px;
+  }
+  time {
+    white-space: nowrap;
+  }
+  button:disabled {
+    opacity: 0.42;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0px, 0px, 0px, 0px);
+    white-space: nowrap;
+    border: 0px;
+  }
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    transform: translateY(-200%);
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: var(--mint);
+    color: rgb(20, 27, 42);
+  }
+  .skip-link:focus {
+    transform: none;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: padding-box rgb(59, 71, 83);
+    border: 2px solid transparent;
+    border-radius: 10px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(59, 71, 83) transparent;
+  }
+}
+@layer layout {
+  kbd {
+    font: 10px var(--font);
+    color: rgb(140, 152, 166);
+    padding: 1px 4px;
+    border: 1px solid rgb(52, 64, 75);
+    border-radius: 4px;
+  }
+  main {
+    max-width: 1560px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 34px 38px 30px;
+    flex: 1 1 0%;
+    min-width: 0px;
+  }
+  h1 {
+    font-size: 28px;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    font-weight: 550;
+  }
+}
+@layer components {
+  .toast {
+    position: fixed;
+    bottom: 26px;
+    left: calc(50% + 80px);
+    transform: translateX(-50%);
+    z-index: 90;
+    background: rgb(41, 47, 62);
+    border: 1px solid rgb(93, 102, 124);
+    color: rgb(211, 217, 232);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 9px 36px;
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 12px;
+    max-width: min(90vw, 520px);
+  }
+  dialog {
+    color: var(--text);
+    background: rgb(25, 31, 39);
+    border: 1px solid rgb(58, 71, 81);
+    border-radius: 18px;
+    width: min(640px, -36px + 100vw);
+    max-height: min(85vh, 900px);
+    padding: 25px 30px 28px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 32px 120px;
+    overscroll-behavior: contain;
+  }
+  dialog::backdrop {
+    background: rgba(8, 12, 18, 0.72);
+    backdrop-filter: blur(5px);
+  }
+  dialog h2 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    margin-bottom: 22px;
+  }
+  .boot {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--secondary);
+  }
+  .boot small {
+    color: var(--muted);
+  }
+  .boot-mark {
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+    background: rgb(36, 43, 58);
+    color: var(--mint);
+    border-radius: 16px;
+    width: 60px;
+    height: 60px;
+  }
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes skeleton {
+    100% {
+      background-position: -220% 0px;
+    }
+  }
+}
+@layer responsive {
+  @media (min-width: 1600px) {
+    main {
+      padding-top: 42px;
+    }
+  }
+  @media (max-width: 1250px) {
+    main {
+      padding: 28px 25px;
+    }
+  }
+  @media (max-width: 800px) {
+    main {
+      padding: 26px 24px;
+    }
+    .toast {
+      left: 50%;
+    }
+  }
+  @media (max-width: 560px) {
+    main {
+      padding: 25px 17px;
+    }
+    dialog {
+      width: calc(-24px + 100vw);
+      padding: 20px;
+      border-radius: 14px;
+      max-height: 88dvh;
+    }
+    dialog h2 {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 360px) {
+    main {
+      padding-left: 13px;
+      padding-right: 13px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation: auto ease 0s 1 normal none running none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+:root {
+  --scene-bg: #11171e;
+  --scene-line: #ffffff12;
+  --scene-ink: #e6e8ee;
+  --scene-muted: #878d9c;
+  --scene-accent: #9facca;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--scene-bg);
+}
+body {
+  font-family: Inter, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  color: var(--scene-ink);
+}
+#app {
+  display: block;
+  height: 100%;
+  min-height: 0px;
+}
+#main {
+  position: relative;
+  max-width: none;
+  padding: 0px;
+  margin: 0px;
+  min-height: 0px;
+  overflow: hidden;
+  outline: none;
+}
+.floor-seat {
+  cursor: pointer;
+  outline: none;
+  --seat-color: #657781;
+}
+.desk-side {
+  fill: rgb(25, 36, 45);
+  stroke: rgb(74, 91, 101);
+  stroke-width: 0.6;
+}
+.desk-top {
+  fill: rgb(78, 87, 107);
+  stroke: rgb(142, 150, 167);
+  stroke-width: 0.7;
+}
+.desk-leg {
+  fill: none;
+  stroke: rgb(51, 68, 79);
+  stroke-width: 5;
+}
+.monitor-back {
+  fill: rgb(26, 39, 49);
+  stroke: rgb(100, 110, 135);
+  stroke-width: 1.2;
+}
+.monitor-screen {
+  fill: rgb(38, 61, 73);
+  stroke: var(--seat-color);
+  stroke-opacity: 0.5;
+  stroke-width: 0.6;
+}
+.monitor-lines {
+  stroke: var(--seat-color);
+  stroke-width: 1.2;
+  opacity: 0.3;
+}
+.keyboard {
+  fill: rgb(39, 57, 67);
+  stroke: rgb(105, 114, 136);
+  stroke-width: 0.6;
+}
+.seat-chair {
+  fill: rgb(35, 52, 63);
+  stroke: rgb(91, 101, 125);
+  stroke-width: 1;
+}
+.seat-signal {
+  fill: var(--seat-color);
+  opacity: 0.55;
+}
+.seat-name {
+  font-size: 11px;
+  fill: rgb(192, 196, 206);
+  font-weight: 500;
+}
+.seat-idle {
+  --seat-color: #8a9dc9;
+}
+.seat-running,
+.seat-busy {
+  --seat-color: #adb9d5;
+}
+.seat-waiting_user {
+  --seat-color: #d4be84;
+}
+.seat-running .monitor-lines,
+.seat-busy .monitor-lines {
+  opacity: 1;
+  animation: 2.7s ease-in-out 0s infinite normal none running terminal-scan;
+}
+.seat-running .seat-signal,
+.seat-busy .seat-signal {
+  opacity: 1;
+  animation: 2.7s ease-in-out 0s infinite normal none running signal-breathe;
+}
+@keyframes terminal-scan {
+  0%,
+  100% {
+    stroke-opacity: 0.5;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+@keyframes signal-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+button:focus-visible,
+select:focus-visible {
+  outline: rgb(179, 187, 205) solid 2px;
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: auto ease 0s 1 normal none running none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+#main {
+  height: 100%;
+  width: 100%;
+}
+.work-orbit {
+  fill: none;
+  stroke: rgb(173, 183, 205);
+  stroke-opacity: 0;
+  stroke-width: 1.6;
+  stroke-dasharray: 30, 190;
+  pointer-events: none;
+}
+.seat-running .work-orbit,
+.seat-busy .work-orbit {
+  stroke-opacity: 0.5;
+  animation: 5s linear 0s infinite normal none running work-orbit;
+}
+.floor-seat {
+  transition: opacity 0.35s;
+}
+.floor-seat .monitor-screen {
+  transition: fill 0.3s;
+}
+.floor-seat:hover .monitor-screen {
+  fill: rgb(73, 81, 100);
+}
+.seat-running .monitor-screen,
+.seat-busy .monitor-screen {
+  fill: rgb(52, 60, 80);
+}
+.seat-running .monitor-lines,
+.seat-busy .monitor-lines {
+  animation: 1.8s steps(4) 0s infinite normal none running terminal-scan;
+}
+@keyframes work-orbit {
+  100% {
+    stroke-dashoffset: -440;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: auto ease 0s 1 normal none running none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+.seat-paused {
+  --seat-color: #b8ad88;
+}
+.floor-seat .desk-top {
+  fill: color-mix(in srgb, var(--station-accent) 65%, #24323b);
+  stroke: var(--station-accent);
+  stroke-width: 1.1;
+}
+.floor-seat .desk-side {
+  fill: color-mix(in srgb, var(--station-accent) 24%, #19242d);
+}
+.floor-seat .seat-chair {
+  fill: color-mix(in srgb, var(--station-accent) 28%, #23343f);
+}
+.floor-seat .seat-name {
+  font-size: 12px;
+  fill: rgb(216, 219, 225);
+}
+summary {
+  min-height: 28px;
+  padding: 4px 0px;
+  line-height: 1.6;
+}
+.seat-name {
+  font-size: 12px;
+}
+:root {
+  --panel: #171b26;
+  --raised: #1d222e;
+  --line: #343842;
+  --line-soft: #282c35;
+  --text: #dadde5;
+  --secondary: #b0b5c0;
+  --muted: #9197a5;
+  --mint: #b7becf;
+  --control-ease: cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+.floor-seat:focus-visible {
+  outline: none;
+}
+:is(button, a, summary, input, textarea, select):focus-visible {
+  outline: rgb(183, 194, 221) solid 2px;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #toast {
+    animation: auto ease 0s 1 normal none running none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+button:disabled {
+  cursor: default;
+}

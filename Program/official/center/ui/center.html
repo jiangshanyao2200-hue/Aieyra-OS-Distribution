@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: aieyra-theme:; font-src 'self' data: aieyra-theme:"><title>中枢</title><link rel="stylesheet" href="../../../../Client/Desktop/ui/fonts.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/app-shell.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/surface.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/forms.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/system.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/look.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/ui-system.css"><link rel="stylesheet" href="../../../../Client/Desktop/ui/settings.css"><link rel="stylesheet" href="center.css"></head><body class="center-page">
+<main id="onboarding" class="center-content">
+  <div class="center-situation" aria-label="态势感知" data-tone="unknown">
+    <div id="center-update-dock" class="center-update-dock">
+      <button id="center-update-toggle" type="button" class="quiet center-update-toggle" title="版本与更新" aria-label="版本与更新" aria-expanded="false" aria-controls="update-settings">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M5.7 7.4A7 7 0 0 1 18 6l2 3M4 15l2 3a7 7 0 0 0 12.3-1.4"/></svg>
+      </button>
+    </div>
+    <span class="center-halo" aria-hidden="true"></span>
+    <h1 id="center-situation-message" aria-live="polite">正在感知</h1>
+  </div>
+  <div class="center-core">
+    <canvas id="center-topology" aria-hidden="true"></canvas>
+    <div id="center-neurons" class="center-neurons" role="group" aria-label="神经拓扑"></div>
+  </div>
+  <section class="center-health" aria-label="总体健康">
+    <div id="center-selection" class="center-selection" aria-live="polite" hidden>
+      <div class="center-node-reading">
+        <strong id="center-active-name"></strong><span id="center-active-state"></span>
+        <span id="center-active-detail"></span>
+      </div>
+      <button id="center-node-action" type="button" class="quiet" hidden></button>
+    </div>
+    <p id="center-observed" role="status" class="link-hint" hidden></p>
+    <div id="center-nodes" class="center-nodes" aria-label="分类健康度" hidden></div>
+    <button id="center-health-toggle" class="center-health-toggle" type="button" aria-expanded="false" aria-controls="center-nodes">
+      <span>总体健康</span>
+      <span id="center-health-points" class="center-health-points" aria-hidden="true"></span>
+      <strong id="center-score-value">—</strong>
+      <span class="center-chevron" aria-hidden="true"></span>
+    </button>
+  </section>
+  <div id="center-panels" class="center-panels" hidden>
+  <button id="center-close-panel" type="button" class="quiet">返回态势</button>
+  <section id="center-incidents" class="center-incidents" aria-labelledby="center-incidents-title" hidden>
+    <h2 id="center-incidents-title">感知日志</h2>
+    <ol id="center-incident-items"></ol>
+  </section>
+  <section class="center-learning" id="center-learning" aria-labelledby="center-learning-title" hidden>
+    <h2 id="center-learning-title">数据与学习</h2>
+    <div class="center-learning-grid">
+      <div>
+        <p class="center-chart-title">本地基线 <span id="center-learning-state"></span></p>
+        <div id="center-learning-chart" class="center-band-chart" role="img" aria-label="等待本地采样"></div>
+      </div>
+      <div>
+        <label class="center-learning-choice">
+          <input id="center-learning-sync" type="checkbox" disabled aria-describedby="center-learning-status">
+          允许将健康摘要同步至官网
+        </label>
+        <p id="center-learning-status" class="link-hint" role="status"></p>
+      </div>
+    </div>
+    <div id="center-learning-summary" class="center-summary"></div>
+  </section>
+  <section id="update-settings" class="center-release" aria-label="版本与更新" hidden>
+        <div class="settings-area" id="center-update-area">
+          <p id="update-status" role="status" aria-live="polite"></p>
+          <h2>版本与更新</h2><p id="update-checked" class="link-hint"></p>
+          <div class="link-row link-list"><span class="link-name">当前版本</span><span id="update-current" class="link-control"></span></div>
+          <div class="link-row link-list"><span class="link-name">状态</span><span id="update-phase" class="link-control" role="status"></span></div>
+          <div class="link-row link-list"><span class="link-name">待更新版本</span><span id="update-release" class="link-control"></span></div>
+          <div id="update-next-row" class="link-row link-list" hidden><span class="link-name">后续版本</span><span id="update-next" class="link-control"></span></div>
+          <div class="link-row link-list"><span class="link-name">完整性检查</span><span id="update-integrity" class="link-control" role="status">尚未检查</span></div>
+          <p id="update-integrity-note" class="link-hint"></p><div id="update-integrity-details" hidden><h3>模块详情</h3><ul id="update-integrity-modules"></ul></div>
+          <div class="settings-actions"><button id="update-integrity-check" type="button" class="secondary">检查完整性</button></div>
+          <p id="update-reason" class="link-hint"></p><p id="update-publication" class="link-hint" hidden></p><p id="update-changes" class="link-hint"></p><p id="update-progress" role="status"></p>
+          <div id="update-last-row" class="link-row link-list" hidden><span class="link-name">上次结果</span><span id="update-last" class="link-control"></span></div>
+        </div>
+        <div class="settings-actions update-actions"><button id="update-check" type="button" class="secondary">核对更新</button><button id="update-defer" type="button" class="quiet">稍后处理</button><button id="update-download" type="button" class="secondary" hidden>官网下载</button><button id="update-assist" type="button" class="secondary">交给 Nova</button><button id="update-now" type="button">安全更新</button></div>
+        <section class="settings-area update-feed" aria-labelledby="release-heading">
+          <h3 id="release-heading">官方版本</h3>
+          <div id="update-posts"></div><p id="update-posts-status" class="link-hint" role="status"></p>
+          <div class="settings-actions"><button id="update-posts-more" type="button" class="quiet" hidden>更多发布</button><button id="update-posts-refresh" type="button" class="secondary">同步发布帖</button></div>
+          <section id="release-feedback" class="release-feedback" aria-labelledby="feedback-title" hidden>
+            <h4 id="feedback-title"></h4>
+            <ol id="feedback-items"></ol>
+            <p id="feedback-status" class="link-hint" role="status"></p>
+            <div class="settings-actions"><button id="feedback-refresh" type="button" class="secondary">刷新反馈</button><button id="feedback-more" type="button" class="quiet" hidden>更早反馈</button></div>
+            <form id="feedback-form">
+              <label for="feedback-text">问题说明</label>
+              <textarea id="feedback-text" required maxlength="1800" rows="4"></textarea>
+              <label class="feedback-confirm"><input id="feedback-confirm" type="checkbox" required>确认公开此问题说明</label>
+              <div class="settings-actions"><button id="feedback-send" type="submit">提交反馈</button></div>
+            </form>
+          </section>
+        </section>
+  </section>
+  </div>
+</main>
+<div id="app-notice" role="status" hidden></div>
+<script type="module" src="center.mjs"></script>
+</body></html>

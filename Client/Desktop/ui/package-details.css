@@ -1,0 +1,26 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .mk-icon; .mk-icon.role-instrument; .mk-tag; .mk-tag.on; .mk-detail; .mk-detail article; .mk-detail header; .mk-detail .mk-icon; .mk-detail h2; .mk-detail small; .mk-detail p; .mk-perms; .mk-detail footer
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/package-details.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+@import url('../../../Tool/workbox/presentation/desktop.css');
+@import url('../../../Agent/presentation/desktop.css');
+@import url('../../../Halo/official/instrument.css');
+.mk-icon { grid-row:span 2; display:grid; place-items:center; width:48px; height:48px; border-radius:14px; background:linear-gradient(150deg,#a9c0ec33,#ffffff0a); box-shadow:var(--ui-edge); font:500 20px/1 "Aieyra Sora","Aieyra Noto Sans SC",sans-serif; }
+.mk-icon.role-instrument { position:relative; --eyra-light:var(--ui-accent); }
+.mk-tag { padding:1px 8px; border-radius:999px; background:#ffffff0d; }
+.mk-tag.on { background:#a9c0ec26; color:#c9d6ff; }
+.mk-detail { width:min(560px,calc(100vw - 40px)); max-height:calc(100vh - 80px); }
+.mk-detail article { display:grid; gap:14px; padding:24px 26px 22px; }
+.mk-detail header { display:grid; grid-template-columns:56px minmax(0,1fr); align-items:center; gap:14px; }
+.mk-detail .mk-icon { grid-row:auto; width:56px; height:56px; font-size:24px; }
+.mk-detail h2 { margin:0; font:500 18px/1.3 "Aieyra Sora","Aieyra Noto Sans SC",sans-serif; }
+.mk-detail small { color:var(--ui-text-3); }
+.mk-detail p { margin:0; color:var(--ui-text-2); overflow-wrap:anywhere; }
+.mk-perms { display:flex; flex-wrap:wrap; gap:6px; }
+.mk-detail footer { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; margin-top:4px; }

@@ -1,0 +1,22 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/renderer/AGENTS.md | ring 2
+ * Chains: module-local; query impact before editing
+ * Regions: main; .actions button:disabled; main,main *; :root; body; .dialog-symbol; .actions button; .actions button:hover; .actions .primary; button:focus-visible; ::-webkit-scrollbar-thumb
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/renderer/styled-dialog.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+main{padding:15px 30px 24px;height:calc(100vh - 36px);display:flex;flex-direction:column}.dialog-symbol{color:#91e2da;font-size:26px;line-height:1;margin:3px 0 6px}h1{font-size:20px;margin:5px 0 12px}p{font-size:13px;margin:0;flex:1;max-height:none;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}.actions{margin-top:22px}.actions button{min-width:90px}header{-webkit-app-region:drag}::-webkit-scrollbar{width:7px}::-webkit-scrollbar-thumb{background:#344756;border-radius:8px}
+.actions button:disabled{opacity:.38;cursor:default;filter:saturate(.35)}
+main,main *{-webkit-app-region:no-drag}main{min-height:0;gap:4px}p{min-height:0;line-height:1.75;padding-right:6px;overscroll-behavior:contain}.actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;flex:none;margin-top:16px}.actions button{min-height:40px;max-width:100%;white-space:normal;overflow-wrap:anywhere;transition:background-color .16s,border-color .16s}button:focus-visible{outline:2px solid #b9c7ff;outline-offset:3px}@media(prefers-reduced-motion:no-preference){main{animation:dialog-reveal .16s ease-out}}@keyframes dialog-reveal{from{opacity:0}to{opacity:1}}
+/* Match the workspace, including the native title overlay and keyboard focus. */
+:root{--bg:#0a0a0a;--line:#333;--muted:#aaa;--ink:#eee;--accent:#eee;accent-color:#eee}
+body{font-size:12px}main{padding:14px 24px 20px}h1{font-size:16px;line-height:1.5;margin:5px 0 10px}p{font-size:12px;color:#ccc;line-height:1.75}
+.dialog-symbol{color:#ddd;font-size:22px}.mark{color:#eee}.brand{letter-spacing:.1em}
+.actions button{min-height:36px;height:auto;font-size:12px;border-color:#444;color:#ddd;border-radius:8px;padding:8px 14px}
+.actions button:hover{background:#292929;color:#fff}.actions button:active{background:#363636}
+.actions .primary{color:#111;background:#eee;border-color:#eee}.actions .primary:hover{background:#fff;color:#111}
+button:focus-visible{outline:2px solid #ddd;outline-offset:-2px}button.primary:focus-visible{outline-color:#333}
+::-webkit-scrollbar-thumb{background:#444}::selection{background:#555;color:#fff}

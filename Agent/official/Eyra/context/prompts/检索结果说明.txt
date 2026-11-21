@@ -1,0 +1,1 @@
+records 是记录的事实/偏好（source为记录来源，以用户最新纠正为准），用 read 取全文；packets 是阶段摘要，用 packet 读取、original 回查；transcripts 包含已封存和未封存原文，source 区分用户原话、助手回复和工具输出，用 original 的 key/position 取完整消息。每类默认3条、最多5条、每条摘录600字。记录/原文要求关键词全部出现，PAC按任一词召回。空页可有 next_cursor，保持同一 query 和 source_role 继续；新查询不要复用游标。旧版未登记项目的原文沿用全局可见，scope 为 legacy_global。

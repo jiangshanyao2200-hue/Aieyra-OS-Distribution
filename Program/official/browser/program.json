@@ -1,0 +1,67 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "ui/browser-shell.html",
+    "native": "browser",
+    "navigation": {
+      "tab": "browser-bubble",
+      "host": "browser",
+      "order": 1
+    }
+  },
+  "operations": [
+    {
+      "id": "open",
+      "description": "浏览器：open；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "clear_site_data",
+      "description": "清理此标签当前网站的 Cookie 或 HTTP 缓存。传 tab_id 和完整 origin，可用 data_types 选择 cookies、cache。网站共享的域 Cookie 一并清理。"
+    },
+    {
+      "id": "navigate",
+      "description": "浏览器：navigate；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "click",
+      "description": "浏览器：click；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "fill",
+      "description": "浏览器：fill；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "scroll",
+      "description": "浏览器：scroll；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "screenshot",
+      "description": "浏览器：screenshot；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "tabs",
+      "description": "浏览器：tabs；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "close",
+      "description": "浏览器：close；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "find",
+      "description": "浏览器：find；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "wait_for",
+      "description": "浏览器：wait_for；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "key",
+      "description": "浏览器：key；复用已有控制权、语义目标及参数校验。"
+    },
+    {
+      "id": "select",
+      "description": "浏览器：select；复用已有控制权、语义目标及参数校验。"
+    }
+  ]
+}

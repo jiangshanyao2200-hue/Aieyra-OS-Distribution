@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-11",
+  "reference": "Aieyra OS public main desktop UI, default Theme; never private preferences",
+  "fonts": "Original SIL OFL 1.1 files and licenses preserved; unmodified",
+  "files": [
+    {
+      "source": "Client/Desktop/assets/fonts/inter-variable.woff2",
+      "target": "link/desktop/ui/fonts/inter-variable.woff2",
+      "sha256": "13b4cddc57045d40b411008e61588c8f81aa0bd72fe884624831a0ff9c4d159a"
+    },
+    {
+      "source": "Client/Desktop/assets/fonts/inter-OFL.txt",
+      "target": "link/desktop/ui/fonts/inter-OFL.txt",
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    {
+      "source": "Client/Desktop/assets/fonts/sora-variable.woff2",
+      "target": "link/desktop/ui/fonts/sora-variable.woff2",
+      "sha256": "0e65a6701cc0d013c8fed9904787fdbf64dd9014c4c0736f7c732eb978a528a7"
+    },
+    {
+      "source": "Client/Desktop/assets/fonts/sora-OFL.txt",
+      "target": "link/desktop/ui/fonts/sora-OFL.txt",
+      "sha256": "ba0b9729c9428ba79a0459ab8ec575791b51509dbec213e383d0316d37fec299"
+    },
+    {
+      "source": "Client/Desktop/assets/fonts/notosanssc-variable.woff2",
+      "target": "link/desktop/ui/fonts/notosanssc-variable.woff2",
+      "sha256": "aef8c34277afad81ecd0227138a830263c0caea65b7aea66d1195395f097b55a"
+    },
+    {
+      "source": "Client/Desktop/assets/fonts/notosanssc-OFL.txt",
+      "target": "link/desktop/ui/fonts/notosanssc-OFL.txt",
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "source": "Theme/official/default/ui-foundation.css",
+      "target": "link/desktop/ui/os-foundation.css",
+      "sha256": "f51a49158b2d443881d16c817c8d3733b7924b4c08cb3c3798f74c850c2357d4"
+    }
+  ]
+}

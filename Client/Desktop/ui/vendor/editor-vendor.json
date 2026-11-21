@@ -1,0 +1,41 @@
+[
+  {
+    "package": "codemirror",
+    "version": "6.0.2",
+    "source": "esbuild 0.28.2 --bundle --format=esm --minify of entry.mjs (EditorView, basicSetup, EditorState, Compartment, keymap, placeholder, indentWithTab, markdown, HighlightStyle, syntaxHighlighting, tags)",
+    "path": "CONFIG/ui/vendor/codemirror.mjs",
+    "sha256": "d19969746101dee6af5111f84c61fc8abd80529773bb35c85576656b0c155606",
+    "bundled": [
+      "@codemirror/autocomplete@6.20.4",
+      "@codemirror/commands@6.11.1",
+      "@codemirror/lang-css@6.3.1",
+      "@codemirror/lang-html@6.4.12",
+      "@codemirror/lang-javascript@6.2.5",
+      "@codemirror/lang-markdown@6.5.2",
+      "@codemirror/language@6.13.1",
+      "@codemirror/lint@6.9.7",
+      "@codemirror/search@6.7.2",
+      "@codemirror/state@6.7.6",
+      "@codemirror/streamparser@6.0.0",
+      "@codemirror/view@6.43.15",
+      "@lezer/common@1.5.5",
+      "@lezer/css@1.3.9",
+      "@lezer/highlight@1.2.5",
+      "@lezer/html@1.3.13",
+      "@lezer/javascript@1.5.6",
+      "@lezer/lr@1.4.12",
+      "@lezer/markdown@1.8.1",
+      "codemirror@6.0.2",
+      "crelt@1.0.7",
+      "style-mod@4.1.4",
+      "w3c-keyname@2.2.8"
+    ]
+  },
+  {
+    "package": "codemirror",
+    "version": "6.0.2",
+    "source": "LICENSE files of the bundled packages",
+    "path": "CONFIG/ui/vendor/codemirror.LICENSE",
+    "sha256": "400998ac1bcc495a74fb3719adff0359cbd023170900e88ef174752732e90fcf"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.statistics",
+  "kind": "tool",
+  "name": "数字统计示例",
+  "summary": "数字统计示例：独立实现、手册和两端呈现。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "tool.json",
+    "manual": "manual.md"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.tool",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "eb25374e74ffebdaa95c2013bf508b196cc501d734836930015544256f4b05c2",
+      "size": 79
+    },
+    "desktop.json": {
+      "sha256": "71659f5d0443cee5f333af4e99d4db10703fdfa3bb0fb299c63194559556288e",
+      "size": 125
+    },
+    "manual.md": {
+      "sha256": "b67c663aabeef7f64a4dca0c1bdd8e8f8b8f63ec109b72387617221a406d72c6",
+      "size": 501
+    },
+    "run.js": {
+      "sha256": "3a8af37717e108c2e78c1a172423c4aa9b3064da174aa749d5f1f366048da35d",
+      "size": 277
+    },
+    "tool.json": {
+      "sha256": "f9b37715a5ec39a02b2ff7fb420c57e51f27c42ce40e54207b40ad0ec388c348",
+      "size": 416
+    }
+  }
+}

@@ -1,0 +1,33 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body #tool-tray; body #tool-tray[hidden]; body #tool-tray[data-open=true]; body #tool-tray::after; body #tool-tray .tool-tray-list; body #tool-tray li; body #tool-tray li > i; body #tool-tray li > span; body #tool-tray li[data-state=running] > i; body #tool-tray li[data-state=done]; body #tool-tray li[data-state=failed]; body #tool-tray li[data-state=failed] > i; body #tool-tray li[data-state=waiting] > i; body #tool-tray .tool-tray-action; body #tool-tray .tool-tray-action:hover; body #tool-tray .tool-tray-action:focus-visible; body #tool-tray .tool-tray-action[hidden]; @keyframes tool-tray-in; @media (prefers-reduced-motion:reduce); body.reduce-motion #tool-tray, body.reduce-motion #tool-tray li, body.reduce-motion #tool-tray li > i
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/tool-tray.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* 首页工具临时区（第109轮 R2）：从头像上缘向上浮起的小气泡，只写给人看的几行字；收起只是展示状态，回执仍在历史里。
+   气泡浮在上一条消息之上，不占版面、不推动头像；面用接近不透明的 --ui-glass，避免下面的头像透出来。 */
+body #tool-tray { position:absolute; left:0; bottom:calc(100% + 4px); z-index:4; box-sizing:border-box; width:max-content; max-width:min(320px,calc(100vw - 32px)); padding:4px 14px 4px 12px; border-radius:14px; background:var(--ui-glass); box-shadow:var(--glass-edge),var(--glass-shadow); color:var(--ui-text); font-size:13px; line-height:1.5; pointer-events:none; transform-origin:24px 100%; opacity:0; translate:0 6px; scale:.94; transition:opacity var(--ui-fast) var(--ui-ease),translate var(--ui-enter) var(--ui-ease),scale var(--ui-enter) var(--ui-ease); }
+body #tool-tray[hidden] { display:none; }
+body #tool-tray[data-open=true] { opacity:1; translate:0 0; scale:1; }
+/* 一小段连到头像的尾巴：说明这是 Eyra 正在做的事，而不是一条消息。 */
+body #tool-tray::after { content:''; position:absolute; left:22px; bottom:-4px; width:8px; height:8px; border-radius:2px; background:var(--ui-glass); box-shadow:inset -1px -1px 0 #ffffff12; rotate:45deg; }
+body #tool-tray .tool-tray-list { display:grid; gap:4px; margin:0; padding:0; list-style:none; }
+body #tool-tray li { display:flex; align-items:baseline; gap:10px; min-width:0; animation:tool-tray-in var(--ui-enter) var(--ui-ease) both; }
+body #tool-tray li > i { flex:none; width:6px; height:6px; border-radius:50%; background:var(--ui-text-3); translate:0 -1px; }
+body #tool-tray li > span { min-width:0; overflow-wrap:anywhere; }
+body #tool-tray li[data-state=running] > i { background:var(--ui-accent); box-shadow:0 0 8px var(--ui-accent); animation:stage-pulse 1.4s ease-in-out infinite; }
+body #tool-tray li[data-state=done] { color:var(--ui-text-2); }
+body #tool-tray li[data-state=failed] { color:var(--ui-error); }
+body #tool-tray li[data-state=failed] > i { background:var(--ui-error); box-shadow:0 0 8px var(--ui-error); }
+body #tool-tray li[data-state=waiting] > i { background:var(--ui-warn); animation:stage-pulse 2s ease-in-out infinite; }
+body #tool-tray .tool-tray-action { pointer-events:auto; margin:6px 0 2px 16px; padding:4px 12px; min-height:0; border:0; border-radius:999px; background:#ffffff12; color:var(--ui-text); font:inherit; font-size:12px; cursor:pointer; transition:background var(--ui-fast) var(--ui-ease); }
+body #tool-tray .tool-tray-action:hover { background:#ffffff22; }
+body #tool-tray .tool-tray-action:focus-visible { outline:1px solid var(--ui-accent); outline-offset:3px; }
+body #tool-tray .tool-tray-action[hidden] { display:none; }
+@keyframes tool-tray-in { from { opacity:0; translate:0 6px; } }
+@media (prefers-reduced-motion:reduce) { body #tool-tray, body #tool-tray li, body #tool-tray li > i { transition:none; animation:none; } }
+body.reduce-motion #tool-tray, body.reduce-motion #tool-tray li, body.reduce-motion #tool-tray li > i { transition:none; animation:none; }

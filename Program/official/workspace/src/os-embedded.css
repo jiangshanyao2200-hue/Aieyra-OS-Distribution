@@ -1,0 +1,34 @@
+/* The OS owns the window titlebar. Preserve Workspace's canvas. */
+:root:has(.workspace-command-bar), body:has(.workspace-command-bar), .ide-shell.unified-workspace {
+  background: transparent;
+}
+.ide-shell.unified-workspace {
+  grid-template-rows:var(--program-toolbar-height) minmax(0,1fr);
+}
+.ide-shell.unified-workspace > .ide-main.canvas-only.agent-mode { grid-row: 2; grid-template-columns: minmax(0,1fr); }
+.ide-shell.unified-workspace .canvas-panel { grid-column: 1; }
+
+.auth-shell { grid-template-rows: minmax(0, 1fr); }
+.auth-shell > .auth-topbar { display: none; }
+
+/* 第109轮 R15：Workspace 融入 OS。
+   1. 配色与 OS 的深色一致：中性蓝灰的底与面、OS 的强调色；画布网格同步变淡。 */
+:root[data-theme="dark"], :root.theme-dark {
+  --bg: #0d1016; --canvas: #0c0f14; --surface: #12161d; --surface-solid: #161a22; --surface-raised: #1c212b;
+  --ink: #e6e9f0; --ink-soft: #c2c8d3; --muted: #9aa3b2; --line: #252b36; --line-strong: #3b4354;
+  --accent: #a9c0ec; --accent-strong: #c6d5f3; --accent-ink: #0f1726; --accent-soft: color-mix(in srgb, var(--accent) 16%, transparent);
+  --control-bg: #11151c; --hover-bg: #1e2430; --active-bg: #222c40;
+  --workflow-canvas-bg: #0c0f14; --workflow-canvas-grid: rgba(154, 163, 178, 0.07);
+  --ui-surface-backdrop: rgba(4, 6, 10, 0.56);
+}
+
+/* 2. 对话由 OS 统一侧栏承担。原聊天栏保持挂载（引用入草稿、任务状态仍由它提供），但不显示。 */
+.matrix-canvas-workbench { display: none !important; }
+
+/* 4. 底部透明：缩放与任务栏直接浮在画布上，不再是一条实心底栏。 */
+.ide-shell.unified-workspace .canvas-footer { background: transparent !important; border: 0 !important; box-shadow: none; }
+
+/* OS mounts the canvas directly; local restore never opens a standalone boot page. */
+.workspace-startup-recovery { position: fixed; z-index: 100; inset: auto 24px 24px auto; max-width: min(440px, calc(100vw - 48px)); padding: 20px; border: 1px solid var(--border, #ffffff24); border-radius: 16px; background: var(--panel, #202026e8); backdrop-filter: blur(20px); box-shadow: 0 12px 40px #0004; }
+.workspace-startup-recovery h2 { margin: 0 0 12px; font-size: 16px; }
+.workspace-startup-recovery p { font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }

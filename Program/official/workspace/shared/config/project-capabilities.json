@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "capabilityRevision": "agent-foundation-v1",
+  "projects": [
+    {
+      "kind": "agent",
+      "label": "Matrix",
+      "shortLabel": "Matrix",
+      "description": "独立Matrix工作区，由 Codex 执行任务、编辑文件与验证。",
+      "status": "available",
+      "releaseVisibility": "public",
+      "defaultPromptOverlay": "通用 Agent 工作区，以用户任务和真实文件为依据；不使用项目经验，不要求创建需求节点。",
+      "allowedArtifactKinds": [],
+      "allowedTools": [],
+      "executionEngine": "codex-app-server",
+      "importRules": [],
+      "viewerKinds": [
+        "text",
+        "image"
+      ],
+      "canvasLayout": "agent-workspace",
+      "resetPolicy": "managed-artifacts"
+    },
+    {
+      "kind": "image",
+      "label": "项目",
+      "shortLabel": "项目",
+      "description": "同一个无限画布，由 Matrix 管理任务、图片与成果。",
+      "status": "available",
+      "releaseVisibility": "public",
+      "defaultPromptOverlay": "当前是图片项目。围绕真实图片成果、来源关系与需求节点工作；用户要求持续改进到满意时保存目标、最初参考和反馈，画完先供查看再等反馈，允许关闭便签；图片执行只使用 image_gen。",
+      "allowedArtifactKinds": [
+        "image",
+        "image-container",
+        "image-layer",
+        "requirement"
+      ],
+      "allowedTools": [
+        "image_gen",
+        "workspace_goal",
+        "shell_command",
+        "apply_patch",
+        "update_plan",
+        "view_image",
+        "view_images",
+        "web_search",
+        "experience",
+        "workflow",
+        "ask_user"
+      ],
+      "importRules": [
+        {
+          "extensions": [
+            "png",
+            "jpg",
+            "jpeg",
+            "webp"
+          ],
+          "maximumBytes": 33554432
+        }
+      ],
+      "viewerKinds": [
+        "image",
+        "image-layer"
+      ],
+      "canvasLayout": "infinite-artifact",
+      "resetPolicy": "managed-artifacts"
+    },
+    {
+      "kind": "writing",
+      "label": "工作",
+      "shortLabel": "工作",
+      "description": "交给 AI 处理资料、小说、论文、HTML 与数据任务，逐步核对并交付。",
+      "status": "planned",
+      "releaseVisibility": "development",
+      "defaultPromptOverlay": "当前是工作项目。先读取用户资料和目标，关键未知用 ask_user 澄清；AI 自行组织必要节点，用户通过阶段成果核对。小说依次核对需求、简介、剧情、角色、大纲，再写样章；其他任务按实际缺口和交付风险决定核对点。用户明确要求持续目标时按需保存目标与反馈，复用已有阶段审核，不频繁增加便签。保护原件、版本和来源，不使用经验。基础工具与 workspace_observe 常驻，专业工具先 toolbox / open_tool 再 call_tool。",
+      "allowedArtifactKinds": [
+        "outline",
+        "character",
+        "source-document",
+        "chapter",
+        "review",
+        "document"
+      ],
+      "allowedTools": [],
+      "importRules": [
+        {
+          "extensions": [
+            "txt",
+            "md",
+            "markdown",
+            "html",
+            "htm",
+            "csv",
+            "tsv",
+            "json",
+            "xlsx"
+          ],
+          "maximumBytes": 8388608
+        },
+        {
+          "extensions": [
+            "docx"
+          ],
+          "maximumBytes": 67108864
+        },
+        {
+          "extensions": [
+            "pdf"
+          ],
+          "maximumBytes": 67108864
+        }
+      ],
+      "viewerKinds": [
+        "text",
+        "markdown",
+        "revision-diff"
+      ],
+      "canvasLayout": "infinite-artifact",
+      "resetPolicy": "managed-artifacts"
+    },
+    {
+      "kind": "data",
+      "label": "数据与报告",
+      "shortLabel": "数据",
+      "description": "CSV、Excel、图表、报告与演示文稿的数据工作流。",
+      "status": "planned",
+      "releaseVisibility": "development",
+      "defaultPromptOverlay": "当前是 Data 项目。只依据受控数据与确定性 Worker 创建 artifact；必须保留输入 revision、SHA、参数、warning 与可复算来源。重算和结构编辑必须携带当前 expected revision，不得静默覆盖用户更新。",
+      "allowedArtifactKinds": [
+        "dataset",
+        "clean",
+        "transform",
+        "analysis",
+        "chart",
+        "report",
+        "presentation"
+      ],
+      "allowedTools": [],
+      "importRules": [
+        {
+          "extensions": [
+            "csv",
+            "tsv",
+            "json",
+            "xlsx"
+          ],
+          "maximumBytes": 33554432
+        }
+      ],
+      "viewerKinds": [
+        "table",
+        "analysis",
+        "chart",
+        "report",
+        "presentation"
+      ],
+      "canvasLayout": "infinite-artifact",
+      "resetPolicy": "managed-artifacts"
+    },
+    {
+      "kind": "finance",
+      "label": "财经分析",
+      "shortLabel": "财经",
+      "description": "带时间、来源、币种和风险口径的行情、财报与估值分析。",
+      "status": "planned",
+      "releaseVisibility": "development",
+      "defaultPromptOverlay": "当前是 Finance 项目。所有事实与结论必须带 as-of、来源、币种、单位、时区和免责声明；缺少真实数据时必须停止，不得伪造实时行情、估值或投资结论。",
+      "allowedArtifactKinds": [
+        "market-data",
+        "financial-statement",
+        "valuation",
+        "portfolio",
+        "scenario-workbook",
+        "risk-review",
+        "finance-report"
+      ],
+      "allowedTools": [],
+      "importRules": [
+        {
+          "extensions": [
+            "csv",
+            "tsv",
+            "json",
+            "xlsx"
+          ],
+          "maximumBytes": 33554432
+        }
+      ],
+      "viewerKinds": [
+        "table",
+        "analysis",
+        "report",
+        "finance"
+      ],
+      "canvasLayout": "infinite-artifact",
+      "resetPolicy": "managed-artifacts"
+    }
+  ]
+}

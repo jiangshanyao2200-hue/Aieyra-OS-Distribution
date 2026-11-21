@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "controller": "aieyra.eyra",
+  "controller_role": "matrix",
+  "members": [
+    {
+      "role": "project",
+      "agent": "aieyra.vaya",
+      "tools_setting": "vision_tools"
+    },
+    {
+      "role": "execution",
+      "agent": "aieyra.cota",
+      "tools_setting": "execution_tools"
+    }
+  ],
+  "grantable_toolbox": [
+    "image_gen",
+    "settings",
+    "software_api",
+    "link",
+    "server",
+    "browser",
+    "computer"
+  ]
+}

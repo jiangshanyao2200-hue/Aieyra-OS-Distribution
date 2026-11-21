@@ -1,0 +1,37 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.api-local-gateway",
+  "kind": "api",
+  "name": "本地网关适配样板",
+  "summary": "同一Responses协议的路径、请求头、型号别名和额外参数适配。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "api": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "adapter": "adapter.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "adapter.json": {
+      "sha256": "182abad0aa723424b256f9a2a9f144bb77c43db0a4bb88bed0d211df9eb27b4f",
+      "size": 494
+    }
+  }
+}

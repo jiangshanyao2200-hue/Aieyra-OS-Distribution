@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "product_name": "Aieyra OS",
+  "release_stage": {
+    "team_collaboration": true,
+    "toolbox": true,
+    "link_situation": false,
+    "cli": false,
+    "os_first_ring": true
+  },
+  "toolbox_capabilities": [
+    "image_gen",
+    "video_gen",
+    "computer",
+    "settings",
+    "browser",
+    "software_api",
+    "tool_factory",
+    "community",
+    "link",
+    "server",
+    "human"
+  ],
+  "official_updates_enabled": false,
+  "identity_palette": [
+    {
+      "name": "冷白",
+      "color": "#e6e9f0"
+    },
+    {
+      "name": "红",
+      "color": "#ed8c98"
+    },
+    {
+      "name": "橙",
+      "color": "#e9ab7f"
+    },
+    {
+      "name": "金",
+      "color": "#e3ce88"
+    },
+    {
+      "name": "绿",
+      "color": "#92cdb2"
+    },
+    {
+      "name": "蓝",
+      "color": "#94b7ec"
+    },
+    {
+      "name": "紫",
+      "color": "#c4b5f0"
+    }
+  ],
+  "control_port": 17930,
+  "prompt_layout_version": 1,
+  "settings_reload": "request_boundary",
+  "prompt_reload": "request_boundary",
+  "startup_reopen": {
+    "window_seconds": 300
+  },
+  "desktop_extensions": {
+    "width": 1180,
+    "height": 780,
+    "min_width": 900,
+    "min_height": 600,
+    "titlebar_height": 48,
+    "orb_size": 54,
+    "tool_orb_size": 42,
+    "orb_gap": 12
+  }
+}

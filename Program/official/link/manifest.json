@@ -1,0 +1,64 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.link",
+  "kind": "program",
+  "name": "Link",
+  "summary": "用户与Agent共用办公室、工位、消息、任务与共享记忆。",
+  "version": "1.2.2",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "program": "^1.2.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "program": "program.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "agent.cjs": {
+      "sha256": "72c2f7ea11c4f3fde3b77f4f1fdd7196952d7d85d7bc386c21678af35cd164e6",
+      "size": 15426
+    },
+    "AGENTS.md": {
+      "sha256": "83c1ba4351fec10a5c6ffcec5ca65550b947e8e6deaabec497e18ce16e98b548",
+      "size": 1557
+    },
+    "desktop.cjs": {
+      "sha256": "88e66139cda56f2f5bf24f4ca8e7a39ebbfb9253cd15f9a8b86277ed83883bdd",
+      "size": 2157
+    },
+    "program.json": {
+      "sha256": "eab45bfed7240da511bf594a7f331cbde32276a124851cc14c7fb2a15b780c74",
+      "size": 3468
+    },
+    "README.md": {
+      "sha256": "743ca063041d147e17b08b00b7a0f95c4fd905af7b1449f6b979ce7d52a1fb10",
+      "size": 873
+    },
+    "service.cjs": {
+      "sha256": "f6ded55145f31a216d32b4797603116c0d6684a4f8e8911964be1ed620fccbdc",
+      "size": 11203
+    },
+    "ui/control.mjs": {
+      "sha256": "4fdcbbf28ef3a69f45bef57c77d4e4eb8b6c29ce88a0a356d540fcaac4aa464c",
+      "size": 7531
+    },
+    "ui/link.mjs": {
+      "sha256": "544ab44b34fc2a82f007cb5868e75fd6c845fd33ec62ed4bf478ed1ac311687c",
+      "size": 4340
+    }
+  }
+}

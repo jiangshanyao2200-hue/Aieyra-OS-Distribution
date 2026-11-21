@@ -1,0 +1,60 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "ui/center.html",
+    "native": "center",
+    "navigation": {
+      "tab": "dock-center",
+      "host": "surface",
+      "order": 7,
+      "background": "sleep"
+    }
+  },
+  "operations": [
+    {
+      "id": "telemetry",
+      "description": "读取本机硬件与 OS、进程资源、运行软件、构建和 AIDEBUG 回执、帧观测与持续学习模型。只读。"
+    },
+    {
+      "id": "diagnostics",
+      "description": "读取软件 API、官方程序已声明操作和当前模块运行状态。"
+    },
+    {
+      "id": "health",
+      "description": "读取中心的程序链路、完整性、签名更新与 Agent 状态，不启动或更改模块。"
+    },
+    {
+      "id": "status",
+      "description": "读取版本、维护及完整性状态。"
+    },
+    {
+      "id": "check",
+      "description": "检查共同更新服务。"
+    },
+    {
+      "id": "posts",
+      "description": "读取可用的官方版本讨论及发布帖编号。"
+    },
+    {
+      "id": "feedback",
+      "description": "按 release_topic 读取官方版本讨论反馈，使用 cursor 继续分页。"
+    },
+    {
+      "id": "feedback_events",
+      "description": "按 release_topic 与 after 读取新增反馈事件，保留 nextCursor 续读。"
+    },
+    {
+      "id": "report_issue",
+      "description": "以 Agent 标记提交公开问题。使用 release_topic、request_id、content 和已获用户授权的 confirmed。"
+    },
+    {
+      "id": "feedback_receipt",
+      "description": "按 release_topic 和原 request_id 核对提交回执。"
+    },
+    {
+      "id": "integrity",
+      "description": "检查当前程序完整性。"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.reviewer",
+  "kind": "agent",
+  "name": "独立审阅员",
+  "summary": "使用独立会话和记忆，通过已有执行器审阅工作目录。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "agent": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "agent": "agent.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "project",
+      "reason": "审阅工作目录并保存独立任务结果"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "exec_command",
+      "reason": "审阅工作目录并保存独立任务结果"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "write_stdin",
+      "reason": "审阅工作目录并保存独立任务结果"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "read_shell_output",
+      "reason": "审阅工作目录并保存独立任务结果"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "apply_patch",
+      "reason": "审阅工作目录并保存独立任务结果"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "memory",
+      "reason": "审阅工作目录并保存独立任务结果"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "agents",
+      "reason": "审阅工作目录并保存独立任务结果"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.agent",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "agent.json": {
+      "sha256": "2321c37848ac8bba380831fd38a34bf621bb52d2f7d33e31fa7a0dc9d7baf955",
+      "size": 982
+    },
+    "cli.json": {
+      "sha256": "0ad99ff24bf67ebd8b42d3ed7711a68f7518c9f426c56421bf9dc543ea3e8867",
+      "size": 86
+    },
+    "desktop.json": {
+      "sha256": "42f0ff6580eeda5fdfceeceba6dec8b7bcdd790a0f1f1b013af56cc28297923f",
+      "size": 86
+    },
+    "manual.md": {
+      "sha256": "30ebbf77bdc85f0472d4414aa5402731b45d49520f4aee2790c665bf40d89a14",
+      "size": 531
+    },
+    "prompts/identity.txt": {
+      "sha256": "8726796aedc7736f38dd53163ecd846583621b4cbe4ff0ff721144a93a527a95",
+      "size": 340
+    }
+  }
+}

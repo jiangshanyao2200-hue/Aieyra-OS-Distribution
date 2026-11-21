@@ -1,0 +1,73 @@
+{
+  "schema": "aieyra.code-chains/1",
+  "rings": {
+    "0": {"name": "市中心：契约、执行与资料边界", "modules": ["contracts", "core", "api", "agent", "context"]},
+    "1": {"name": "一环：可复用组件与共同运行服务", "modules": ["theme", "halo", "tool", "program", "agent.presentation", "desktop.ui", "desktop.host"]},
+    "2": {"name": "二环：场景装配与平台适配", "modules": ["client", "control", "link", "desktop", "desktop.src", "desktop.renderer"]},
+    "3": {"name": "三环：具体程序、样例与开发验收", "modules": ["sdk", "aidebug", "scripts", "desktop.tools", "desktop.compatibility", "program.official", "agent.official", "theme.official", "halo.official", "tool.base.official", "tool.toolbox.official"]}
+  },
+  "chains": [
+    {
+      "id": "development",
+      "purpose": "从私人任务恢复，经有界代码上下文定位共同所有者，再以真实观察、持久分诊和对应复验形成开发闭环。",
+      "files": ["scripts/code-atlas.py", "scripts/development-session.py", "scripts/development-docs.py", "AIDEBUG/aidebug.cjs", "AIDEBUG/core/live-instance.cjs"],
+      "invariants": ["任务原文、证据和活动资源只保存在私人任务或工程外；上下文包只输出索引范围内导航，改来源和规则后必须失效。", "检查点与分诊追加原件、保留旧证据；固定版本摘要防止覆盖，不执行记录中的动作或自动重放未知副作用。", "fixed与verified分开，复验必须沿原套件核验来源、场景、回执和实看；旧失败不能改写成通过。"],
+      "suites": ["development_walkthrough"],
+      "scenes": ["floating-work-user", "core-tool-visuals-user", "theme-sessions-user"]
+    },
+    {
+      "id": "chat",
+      "purpose": "全部聊天、协作Brief、折叠投影与会话入口共用身份、外观、输入和阅读生命周期。",
+      "files": ["Client/Desktop/ui/chat-layout.mjs", "Client/Desktop/ui/chat-column.mjs", "Client/Desktop/ui/work-transcript.mjs", "Client/Desktop/ui/chat-reading.mjs", "Client/Desktop/ui/layered-chat.mjs", "Client/Desktop/ui/companion.mjs", "Client/Desktop/ui/conversation.mjs", "Client/Desktop/ui/program-agent-surface.mjs", "Core/conversation_link.go", "Client/Desktop/ui/chat-status.mjs", "Theme/runtime/appearance.mjs", "Theme/official/default/appearance.css"],
+      "invariants": ["个人外观保存、订阅、所有消费者及原生投影保持同一配方；小头像按共同头像比例派生。", "工作Brief沿真实消息ID与作者；归档作者只提供历史身份，不恢复席位或执行权限；沟通原文只进历史和完整回执。", "折叠只减少当前轮数；工作保留当前姓名/状态/正文，空闲只显示头像；唯一输入、草稿、附件和读位保留。"],
+      "suites": ["chat102", "chat_status", "chat_reading"],
+      "scenes": ["theme-sessions-user", "team-lifecycle-user", "core-upgrade-fold-user", "status-orbit-user", "chat-reading-intent-user"]
+    },
+    {
+      "id": "projection",
+      "purpose": "真实工具或程序的只读背景投影，复用原服务与完整回执，不再执行副作用。",
+      "files": ["Client/Desktop/ui/work-surface.mjs", "Tool/presentation/projection.mjs", "Client/Desktop/host/browser.cjs", "Client/Desktop/ui/program-agent-overlay.mjs"],
+      "invariants": ["来源包含持久会话、Agent、代次、调用和真实程序实例；迟到结果不能发布到新scope。", "工具窗口无标签页，保留窗口顶栏；聊天在透明前景，工具在背景，不改变聊天几何。", "隐藏同步停止读取并释放媒体，恢复读事实；投影不创建第二执行器或抢其他实例控制。"],
+      "suites": [],
+      "scenes": ["core-tool-visuals-user", "floating-work-user"]
+    },
+    {
+      "id": "program",
+      "purpose": "程序定义、共同人机服务、固定Agent、独立OS会话、窗口与投影构成一套接入体系。",
+      "files": ["Program/contract/definition.go", "Program/runtime/desktop.cjs", "Core/program_agents.go", "Core/program_agent_tools.go", "Client/Desktop/ui/program-agent-surface.mjs", "Client/Desktop/ui/program-agent-window.mjs", "Client/Desktop/host/program-service-authority.cjs"],
+      "invariants": ["先复用服务和共同聊天；固定program_session与联系人OS sessions、任务、草稿和权限分开。", "程序内操作真实程序本体，不重复自投影；其他会话按实际owner/实例投影。", "不可凭包名/native字段授予官方权限；新包遵循原签名摘要、版本与安装生命周期。"],
+      "suites": ["program_workspace"],
+      "scenes": ["program-agents-user", "program-delegation-user", "floating-work-user"]
+    },
+    {
+      "id": "browser-instance",
+      "purpose": "浏览器服务和Navi共用真实浏览器能力，按owner、工作实例及登录身份隔离冲突。",
+      "files": ["Program/official/browser/service/browser-runtime.cjs", "Program/official/browser/service/browser-control.cjs", "Client/Desktop/host/browser.cjs", "Core/program_agents.go"],
+      "invariants": ["owner是会话授权归属，group_id是工作实例，profile是登录身份，三者不能互相替代。", "同一实例动作串行；并行工作不能抢固定Navi正在使用的实例。只有同owner明确可复用时才能复用，否则新建独立实例。", "多实例无明确group_id时拒绝任选；保留真人直接输入、旧快照、取消和代次围栏。"],
+      "suites": [],
+      "scenes": ["floating-work-user"]
+    },
+    {
+      "id": "native-chat",
+      "purpose": "共同聊天动效、原生几何及可见视口确认只有一个所有者。",
+      "files": ["Client/Desktop/ui/layered-chat.mjs", "Client/Desktop/ui/chat-reading.mjs", "Client/Desktop/ui/program-agent-overlay.mjs", "Client/Desktop/host/program-agent-overlay.cjs"],
+      "invariants": ["先获得同一已就绪视口的源/目标坐标，再交接绘制；waiting时不露出旧完整布局。", "反向从当前几何接续；隐藏、减少动效、scope切换、close释放原动画与观察器。", "检查开始/中间/结束、DOM身份与原生实际可见性；节点有尺寸不代表已绘制。"],
+      "suites": [],
+      "scenes": ["core-upgrade-fold-user", "layered-theme-user"]
+    },
+    {
+      "id": "aidebug",
+      "purpose": "从实际程序与Core事实集中观察、留证、收集问题、正常退出，再集中修复并受影响复验。",
+      "files": ["AIDEBUG/aidebug.cjs", "AIDEBUG/core/live-instance.cjs", "AIDEBUG/core/artifacts.cjs", "AIDEBUG/tools/desktop-shortcut.cjs"],
+      "invariants": ["只使用日常桌面快捷方式、正常用户资料与运行映像。", "点击绑定真实可见 Windows 窗口，截图采前台屏幕像素，后台只读同一个进程。", "按原会话和代次核对回执，保持未知结果可回查。"],
+      "suites": [],
+      "scenes": []
+    }
+  ],
+  "program_recipe": {
+    "reference": "Program/official/browser",
+    "document": "docs/程序标准链路.md",
+    "required": ["定义与包生命周期", "同一人机服务与工具API", "持久固定Agent及独立会话", "共同聊天/外观/折叠/决策", "内嵌/单开/恢复", "顶栏悬停预览", "实例/owner/控制权隔离", "真实背景投影", "隐藏与资源释放", "成功/失败/取消/重开实机验收"],
+    "rule": "逐项登记实际实现入口、受影响消费者与真实证据；缺项留缺项，不把模板或标准文档当成已实现。"
+  }
+}

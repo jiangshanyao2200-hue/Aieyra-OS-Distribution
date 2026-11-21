@@ -1,0 +1,553 @@
+/* @file-map:start
+文件: link/desktop/ui/focus.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | :root
+  rule-2 | style | .rail
+  rule-3 | style | .surface,dialog
+  rule-4 | style | .surface>header h1
+  rule-5 | style | .surface>header>.actions button
+  rule-6 | style | .rail .ui-rail-label
+  rule-7 | style | .surface .empty
+  rule-8 | style | .surface .eyebrow,dialog .eyebrow
+  rule-9 | style | .surface .section-heading h3
+  rule-10 | style | .surface .section-heading>small
+  rule-11 | style | .surface .mission-copy h2
+  rule-12 | style | .surface .mission-copy>p
+  rule-13 | style | .surface .mission-copy>small
+  rule-14 | style | .surface .metric
+  rule-15 | style | .surface .metric b
+  rule-16 | style | .surface .quest
+  rule-17 | style | .surface .quest h3
+  rule-18 | style | .surface .quest>p
+  rule-19 | style | .surface .quest .author
+  rule-20 | style | .surface .quest .actions button,.surface .vote-count
+  rule-21 | style | .surface .vote-count span,.surface .candidate-support small
+  rule-22 | style | .surface .vote-count b
+  rule-23 | style | .surface .lanes
+  rule-24 | style | .surface .lanes button
+  rule-25 | style | .surface .lanes .count
+  rule-26 | style | .surface .pager
+  rule-27 | style | .surface .pager button
+  rule-28 | style | .context-details
+  rule-29 | style | .context-details>summary
+  rule-30 | style | .context-details>summary::before
+  rule-31 | style | .context-details[open]>summary::before
+  rule-32 | style | .context-details>summary::-webkit-details-marker
+  rule-33 | style | .context-details p
+  rule-34 | style | .context-details .actions
+  rule-35 | style | .surface .election-status
+  rule-36 | style | .surface .election-roles small
+  rule-37 | style | .surface .election-roles strong
+  rule-38 | style | .surface .election-roles span
+  rule-39 | style | .surface .election-records>summary
+  rule-40 | style | .surface .election-record-body>.connection-note
+  rule-41 | style | .surface .election-pool li
+  rule-42 | style | .surface .election-pool li>span
+  rule-43 | style | .surface .election-candidate .candidate-statement,.surface .election-candidate .candidate-goal
+  rule-44 | style | .surface .election-candidate>.read-detail
+  rule-45 | style | .surface .engineering-intro h2
+  rule-46 | style | .surface .engineering-intro p,.surface .engineering-empty>p
+  rule-47 | style | .surface .engineering-facts span,.surface .engineering-strip
+  rule-48 | style | .surface .engineering-facts b
+  rule-49 | style | .surface .engineering-strip button
+  rule-50 | style | .surface .state-pill,dialog .state-pill
+  rule-51 | style | .surface .engineering-steps strong
+  rule-52 | style | .surface .engineering-steps span,.surface .engineering-steps b
+  rule-53 | style | .surface .construction-board
+  rule-54 | style | .surface .construction-lane h3
+  rule-55 | style | .surface .construction-lane>header>span
+  rule-56 | style | .surface .construction-task
+  rule-57 | style | .surface .construction-task strong
+  rule-58 | style | .surface .task-domain,.surface .task-owner
+  rule-59 | style | .surface .task-owner small
+  rule-60 | style | .surface .version-track li
+  rule-61 | style | .surface .version-track h3
+  rule-62 | style | .surface .version-track p
+  rule-63 | style | .surface .version-track code
+  rule-64 | style | .surface .repository-await strong
+  rule-65 | style | .surface .repository-await p
+  rule-66 | style | .surface .snapshot-row strong
+  rule-67 | style | .surface .snapshot-row small
+  rule-68 | style | .surface .tree button,.surface .tree input
+  rule-69 | style | .surface .source>header
+  rule-70 | style | .surface .source>header small
+  rule-71 | style | .surface .source-find input
+  rule-72 | style | .surface .source pre
+  rule-73 | style | .surface .member
+  rule-74 | style | .surface .message header strong
+  rule-75 | style | .surface .message time
+  rule-76 | style | .surface .message .markdown
+  rule-77 | style | .surface .message header button
+  rule-78 | style | .surface .composer textarea
+  rule-79 | style | .surface .composer footer
+  rule-80 | style | .surface .composer footer>.actions
+  rule-81 | style | .surface .composer small
+  rule-82 | style | .surface .composer button,.surface .new-messages
+  rule-83 | style | .surface .compose-error
+  rule-84 | style | .surface .admin-list h3
+  rule-85 | style | .surface .admin-list p,.surface .admin-list details
+  rule-86 | style | .surface .admin-list small,.surface #admin-clock
+  rule-87 | style | .surface .admin-list button
+  rule-88 | style | .surface .audit
+  rule-89 | style | dialog .dialog-top h2
+  rule-90 | style | dialog #dialog-body>p,dialog .inbox-body
+  rule-91 | style | dialog .task-detail
+  rule-92 | style | dialog .task-detail dt
+  rule-93 | style | dialog .task-detail dd
+  rule-94 | style | dialog .connection-note,dialog .muted,dialog small
+  rule-95 | style | dialog .vote-choice small
+  rule-96 | style | dialog .vote-choice strong
+  rule-97 | style | dialog .vote-choice
+  rule-98 | style | dialog .vote-choice+#engagement,dialog .vote-choice+.actions:empty+#engagement
+  rule-99 | style | dialog #dialog-body>.actions:empty
+  rule-100 | style | dialog .vote-choice button,dialog button.secondary,dialog button.primary
+  rule-101 | style | dialog label
+  rule-102 | style | dialog textarea,dialog input
+  rule-103 | style | dialog .comment-body
+  rule-104 | style | dialog .comment-list .row strong,dialog .ballot-list strong
+  rule-105 | style | dialog .comment-list time,dialog .ballot-list time
+  rule-106 | style | dialog .engineering-guide,dialog .snapshot-files button
+  rule-107 | style | dialog .read-detail
+  rule-108 | style | dialog .conversation-meta
+  rule-109 | style | dialog .inbox-title
+  rule-110 | style | @media(max-width:620px)
+  rule-111 | style | @media(prefers-reduced-motion:reduce)
+  rule-112 | style | @media(max-width:540px)
+  rule-113 | style | @media(max-height:600px)
+  rule-114 | style | dialog[open]
+  rule-115 | style | dialog>.dialog-top
+  rule-116 | style | dialog>#dialog-body,dialog>.detail-content
+  rule-117 | style | dialog #action-form
+  rule-118 | style | dialog #action-form label
+  rule-119 | style | dialog #action-form :is(input,textarea,select)
+  rule-120 | style | dialog #action-form :is(input,textarea,select):focus
+  rule-121 | style | dialog #action-form .actions
+  rule-122 | style | dialog #action-form .error
+  rule-123 | style | dialog>.detail-content
+  rule-124 | style | dialog>#dialog-body
+  rule-125 | style | @media(max-width:620px)
+  rule-126 | style | .surface-tools
+  rule-127 | style | .surface-tools>.actions
+  rule-128 | style | .surface-tools>.actions:empty
+  rule-129 | style | .surface-status:not([hidden])
+  rule-130 | style | .connection-message
+  rule-131 | style | .surface-status button
+  rule-132 | style | .surface-status button .icon
+  rule-133 | style | .surface-status button[aria-busy=true] .icon
+  rule-134 | style | @keyframes connection-spin
+  rule-135 | style | .load-failure
+  rule-136 | style | .load-failure>.icon
+  rule-137 | style | .load-failure h2
+  rule-138 | style | @media(max-width:760px)
+  rule-139 | style | body
+  rule-140 | style | body :is(button,input,textarea,select)
+  rule-141 | style | body :is(button,summary)
+  rule-142 | style | body :is(input,textarea,select)
+  rule-143 | style | body :is(button.primary,button.secondary,button.danger)
+  rule-144 | style | body .titlebar button
+  rule-145 | style | .surface>header>.actions button,.surface .quest .actions button,dialog .actions button
+  rule-146 | style | .surface :is(summary,.pager button,.lanes button,.read-detail),dialog :is(summary,.read-detail)
+  rule-147 | style | .surface :is(p,.markdown,.empty,.profile p),dialog :is(p,.markdown,.profile p)
+  rule-148 | style | .surface :is(small,time,.connection-note,.conversation-meta),dialog :is(small,time,.connection-note,.conversation-meta)
+  rule-149 | style | .surface :is(.message time,.message header button,.composer small,.task-owner small),dialog :is(.ballot-list time,.comment-list time)
+  rule-150 | style | .surface .markdown code,dialog .markdown code
+  rule-151 | style | .surface .source pre,.surface .source code,dialog :is(.snapshot-source,.engineering-guide,code)
+  rule-152 | style | .surface .source>header
+  rule-153 | style | .source>header strong
+  rule-154 | style | .surface .section-heading
+  rule-155 | style | .surface :is(.task-owner,.snapshot-row small),dialog .state-pill
+  rule-156 | style | .surface .empty
+  rule-157 | style | .surface .mission-copy>p
+  rule-158 | style | .surface .quest>p
+  rule-159 | style | .surface .vote-count
+  rule-160 | style | .surface .engineering-steps b,.surface .engineering-steps span
+  rule-161 | style | .surface .construction-task
+  rule-162 | style | .surface .construction-task .task-owner small
+  rule-163 | style | .surface .stage-leadership .election-roles>div
+  rule-164 | style | .surface .stage-leadership
+  rule-165 | style | .surface .version-track
+  rule-166 | style | .surface .version-track li
+  rule-167 | style | .surface .tree
+  rule-168 | style | .surface .tree :is(button,input)
+  rule-169 | style | .surface .tree-search input
+  rule-170 | style | .surface .composer textarea
+  rule-171 | style | .surface .message header
+  rule-172 | style | .surface .message header button
+  rule-173 | style | .surface .composer footer .actions
+  rule-174 | style | .surface .composer footer .secondary
+  rule-175 | style | .surface .attachment-preview button
+  rule-176 | style | .surface .admin-list .row>strong
+  rule-177 | style | .surface .audit
+  rule-178 | style | .audit-entry
+  rule-179 | style | .audit-entry time
+  rule-180 | style | .audit-entry strong
+  rule-181 | style | .audit-action
+  rule-182 | style | .audit-actor
+  rule-183 | style | .audit-entry p
+  rule-184 | style | dialog .dialog-top button
+  rule-185 | style | dialog #dialog-body>p
+  rule-186 | style | dialog #dialog-body>h3
+  rule-187 | style | dialog #dialog-body>h3:first-child
+  rule-188 | style | dialog #dialog-body>h4
+  rule-189 | style | dialog :is(.verification-row,.local-run)
+  rule-190 | style | dialog :is(.verification-row,.local-run)>.context-details:last-child
+  rule-191 | style | dialog .dialog-section>:is(.verification-row,.snapshot-row):last-child
+  rule-192 | style | dialog :is(.verification-row,.local-run)>p
+  rule-193 | style | dialog :is(.verification-row,.local-run)>strong
+  rule-194 | style | dialog .snapshot-row strong
+  rule-195 | style | dialog .snapshot-row small
+  rule-196 | style | dialog :is(.checkpoint small,.code-pheromones small,.inbox-preview-row span,.inbox-preview-row small,.vm-console-preview figcaption)
+  rule-197 | style | dialog .dialog-section h3
+  rule-198 | style | dialog .dialog-section
+  rule-199 | style | dialog #dialog-body>.dialog-section:first-child,dialog #dialog-body>.live-status+.dialog-section
+  rule-200 | style | dialog .context-details p
+  rule-201 | style | dialog .task-detail
+  rule-202 | style | dialog .task-detail dt
+  rule-203 | style | dialog .task-detail dd
+  rule-204 | style | dialog .task-detail dd>p
+  rule-205 | style | dialog .record-meta
+  rule-206 | style | .run-heading
+  rule-207 | style | .run-heading>p
+  rule-208 | style | .dialog-empty
+  rule-209 | style | .local-workspaces
+  rule-210 | style | .surface .workflow-overview
+  rule-211 | style | .surface .workflow-goals
+  rule-212 | style | .local-workspaces h3,.local-web-previews h3,.local-executions h3
+  rule-213 | style | .context-details .task-detail
+  rule-214 | style | .station-work .station-report-meta:empty
+  rule-215 | style | .surface .station-report-meta>span
+  rule-216 | style | .work-status .station-report-meta button,.activity-footer button,.station-links button
+  rule-217 | style | .work-status .activity-row
+  rule-218 | style | .activity-row>i
+  rule-219 | style | .work-status .activity-row time,.work-status .activity-row small
+  rule-220 | style | .work-status .activity-row .read-detail
+  rule-221 | style | .work-status .activity-row p
+  rule-222 | style | .work-status .activity-footer
+  rule-223 | style | .surface:has(.work-status) .situation-summary
+  rule-224 | style | @media(max-width:620px)
+  rule-225 | style | .station-manage.onboarding-stage
+  rule-226 | style | .station-manage summary
+  rule-227 | style | .station-manage .flow-activity
+  rule-228 | style | .welcome-stage .flow-node
+  rule-229 | style | .welcome-stage .welcome-actions button
+  rule-230 | style | .welcome-stage .welcome-check-heading p
+  rule-231 | style | .welcome-stage .welcome-check-count
+  rule-232 | style | .welcome-stage .welcome-checks>div>span
+  rule-233 | style | .login-stage.welcome-stage,.login-stage.onboarding-stage.welcome-stage
+  rule-234 | style | @media(max-height:400px)
+  rule-235 | style | :where(button,[role=button],summary,a[href],input,textarea,select,[tabindex]):focus-visible
+  rule-236 | style | @media(max-width:620px)
+  rule-237 | style | @media(max-width:460px)
+  rule-238 | style | @media(max-height:360px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Shared reading hierarchy: facts and actions first, explanations on demand. */
+/* @chain-region rule-1 */ :root{--focus-body:16px;--focus-meta:14px;--focus-label:15px;--focus-heading:22px;--focus-title:30px;--ui-text-2:#b0bac9;--ui-text-3:#9aa6b8}
+/* @chain-region rule-2 */ .rail{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+/* @chain-region rule-3 */ .surface,dialog{font-size:var(--focus-body)}
+/* @chain-region rule-4 */ .surface>header h1{font-size:26px;line-height:1.5;letter-spacing:0;font-weight:450}
+/* @chain-region rule-5 */ .surface>header>.actions button{font-size:14px;min-height:34px}
+/* @chain-region rule-6 */ .rail .ui-rail-label{font-size:14px!important}
+/* @chain-region rule-7 */ .surface .empty{font-size:16px;line-height:1.8}
+/* @chain-region rule-8 */ .surface .eyebrow,dialog .eyebrow{font-size:14px;letter-spacing:.04em}
+/* @chain-region rule-9 */ .surface .section-heading h3{font-size:22px;font-weight:450}
+/* @chain-region rule-10 */ .surface .section-heading>small{font-size:14px}
+/* @chain-region rule-11 */ .surface .mission-copy h2{font-size:clamp(26px,3vw,34px);line-height:1.45;letter-spacing:0}
+/* @chain-region rule-12 */ .surface .mission-copy>p{font-size:17px;line-height:1.8}
+/* @chain-region rule-13 */ .surface .mission-copy>small{font-size:14px}
+/* @chain-region rule-14 */ .surface .metric{font-size:15px;gap:9px}
+/* @chain-region rule-15 */ .surface .metric b{font-size:28px;font-weight:450}
+/* @chain-region rule-16 */ .surface .quest{padding:24px 22px;background:transparent;box-shadow:none;border-bottom:1px solid var(--line);border-radius:0}
+/* @chain-region rule-17 */ .surface .quest h3{font-size:22px;font-weight:450;line-height:1.5;letter-spacing:0}
+/* @chain-region rule-18 */ .surface .quest>p{font-size:16px;line-height:1.8}
+/* @chain-region rule-19 */ .surface .quest .author{font-size:14px;color:var(--muted)}
+/* @chain-region rule-20 */ .surface .quest .actions button,.surface .vote-count{font-size:15px;min-height:36px;padding:6px 10px}
+/* @chain-region rule-21 */ .surface .vote-count span,.surface .candidate-support small{font-size:14px}
+/* @chain-region rule-22 */ .surface .vote-count b{font-size:22px;font-weight:450}
+/* @chain-region rule-23 */ .surface .lanes{gap:8px;flex-wrap:wrap}
+/* @chain-region rule-24 */ .surface .lanes button{font-size:15px;min-height:36px}
+/* @chain-region rule-25 */ .surface .lanes .count{font-size:14px}
+/* @chain-region rule-26 */ .surface .pager{font-size:14px}
+/* @chain-region rule-27 */ .surface .pager button{font-size:14px;min-height:36px}
+/* @chain-region rule-28 */ .context-details{border-top:1px solid var(--line);padding:14px 0;margin:12px 0 20px;color:var(--muted)}
+/* @chain-region rule-29 */ .context-details>summary{font-size:15px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;min-height:30px}
+/* @chain-region rule-30 */ .context-details>summary::before{content:'›';font-size:20px;transform:rotate(0);transition:transform var(--ui-fast)}
+/* @chain-region rule-31 */ .context-details[open]>summary::before{transform:rotate(90deg)}
+/* @chain-region rule-32 */ .context-details>summary::-webkit-details-marker{display:none}
+/* @chain-region rule-33 */ .context-details p{font-size:15px;line-height:1.9;margin:12px 0}
+/* @chain-region rule-34 */ .context-details .actions{margin-top:14px}
+/* @chain-region rule-35 */ .surface .election-status{font-size:15px;line-height:1.7}
+/* @chain-region rule-36 */ .surface .election-roles small{font-size:14px}
+/* @chain-region rule-37 */ .surface .election-roles strong{font-size:22px;font-weight:450}
+/* @chain-region rule-38 */ .surface .election-roles span{font-size:14px}
+/* @chain-region rule-39 */ .surface .election-records>summary{font-size:16px;min-height:36px}
+/* @chain-region rule-40 */ .surface .election-record-body>.connection-note{font-size:15px}
+/* @chain-region rule-41 */ .surface .election-pool li{gap:12px;flex-wrap:wrap}
+/* @chain-region rule-42 */ .surface .election-pool li>span{font-size:14px}
+/* @chain-region rule-43 */ .surface .election-candidate .candidate-statement,.surface .election-candidate .candidate-goal{font-size:16px}
+/* @chain-region rule-44 */ .surface .election-candidate>.read-detail{font-size:14px;min-height:32px}
+/* @chain-region rule-45 */ .surface .engineering-intro h2{font-size:clamp(26px,3vw,32px);line-height:1.5;letter-spacing:0}
+/* @chain-region rule-46 */ .surface .engineering-intro p,.surface .engineering-empty>p{font-size:16px;line-height:1.9}
+/* @chain-region rule-47 */ .surface .engineering-facts span,.surface .engineering-strip{font-size:15px}
+/* @chain-region rule-48 */ .surface .engineering-facts b{font-size:28px}
+/* @chain-region rule-49 */ .surface .engineering-strip button{font-size:14px;min-height:36px}
+/* @chain-region rule-50 */ .surface .state-pill,dialog .state-pill{font-size:14px;line-height:1.6}
+/* @chain-region rule-51 */ .surface .engineering-steps strong{font-size:17px}
+/* @chain-region rule-52 */ .surface .engineering-steps span,.surface .engineering-steps b{font-size:14px}
+/* @chain-region rule-53 */ .surface .construction-board{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:24px}
+/* @chain-region rule-54 */ .surface .construction-lane h3{font-size:18px}
+/* @chain-region rule-55 */ .surface .construction-lane>header>span{font-size:15px}
+/* @chain-region rule-56 */ .surface .construction-task{padding:16px 12px}
+/* @chain-region rule-57 */ .surface .construction-task strong{font-size:17px;line-height:1.65}
+/* @chain-region rule-58 */ .surface .task-domain,.surface .task-owner{font-size:14px}
+/* @chain-region rule-59 */ .surface .task-owner small{font-size:14px}
+/* @chain-region rule-60 */ .surface .version-track li{min-width:0;overflow-wrap:anywhere}
+/* @chain-region rule-61 */ .surface .version-track h3{font-size:20px}
+/* @chain-region rule-62 */ .surface .version-track p{font-size:15px;line-height:1.7}
+/* @chain-region rule-63 */ .surface .version-track code{font-size:14px}
+/* @chain-region rule-64 */ .surface .repository-await strong{font-size:21px;font-weight:450}
+/* @chain-region rule-65 */ .surface .repository-await p{font-size:16px;line-height:1.8}
+/* @chain-region rule-66 */ .surface .snapshot-row strong{font-size:17px;line-height:1.7}
+/* @chain-region rule-67 */ .surface .snapshot-row small{font-size:14px}
+/* @chain-region rule-68 */ .surface .tree button,.surface .tree input{font-size:14px;min-height:34px}
+/* @chain-region rule-69 */ .surface .source>header{font-size:15px}
+/* @chain-region rule-70 */ .surface .source>header small{font-size:14px}
+/* @chain-region rule-71 */ .surface .source-find input{font-size:14px}
+/* @chain-region rule-72 */ .surface .source pre{font-size:14px;line-height:1.9}
+/* @chain-region rule-73 */ .surface .member{font-size:17px;min-height:80px}
+/* @chain-region rule-74 */ .surface .message header strong{font-size:16px;color:var(--text);font-weight:450}
+/* @chain-region rule-75 */ .surface .message time{font-size:14px}
+/* @chain-region rule-76 */ .surface .message .markdown{font-size:16px;line-height:1.85}
+/* @chain-region rule-77 */ .surface .message header button{font-size:14px;min-height:28px}
+/* @chain-region rule-78 */ .surface .composer textarea{font-size:16px;line-height:1.8}
+/* @chain-region rule-79 */ .surface .composer footer{flex-wrap:wrap;gap:10px}
+/* @chain-region rule-80 */ .surface .composer footer>.actions{margin:0}
+/* @chain-region rule-81 */ .surface .composer small{font-size:14px}
+/* @chain-region rule-82 */ .surface .composer button,.surface .new-messages{font-size:15px;min-height:36px}
+/* @chain-region rule-83 */ .surface .compose-error{font-size:15px}
+/* @chain-region rule-84 */ .surface .admin-list h3{font-size:20px;font-weight:450}
+/* @chain-region rule-85 */ .surface .admin-list p,.surface .admin-list details{font-size:16px;line-height:1.9}
+/* @chain-region rule-86 */ .surface .admin-list small,.surface #admin-clock{font-size:14px}
+/* @chain-region rule-87 */ .surface .admin-list button{font-size:15px;min-height:36px}
+/* @chain-region rule-88 */ .surface .audit{font-size:15px;line-height:2;white-space:pre-wrap;overflow-wrap:anywhere}
+/* @chain-region rule-89 */ dialog .dialog-top h2{font-size:23px;font-weight:450;line-height:1.5}
+/* @chain-region rule-90 */ dialog #dialog-body>p,dialog .inbox-body{font-size:16px;line-height:1.9}
+/* @chain-region rule-91 */ dialog .task-detail{grid-template-columns:minmax(80px,auto) minmax(0,1fr);font-size:16px;line-height:1.85;gap:14px 22px}
+/* @chain-region rule-92 */ dialog .task-detail dt{font-size:14px}
+/* @chain-region rule-93 */ dialog .task-detail dd{min-width:0;overflow-wrap:anywhere}
+/* @chain-region rule-94 */ dialog .connection-note,dialog .muted,dialog small{font-size:14px;line-height:1.85}
+/* @chain-region rule-95 */ dialog .vote-choice small{font-size:14px}
+/* @chain-region rule-96 */ dialog .vote-choice strong{font-size:17px}
+/* @chain-region rule-97 */ dialog .vote-choice{border-bottom:0;margin-bottom:0}
+/* @chain-region rule-98 */ dialog .vote-choice+#engagement,dialog .vote-choice+.actions:empty+#engagement{margin-top:0}
+/* @chain-region rule-99 */ dialog #dialog-body>.actions:empty{display:none}
+/* @chain-region rule-100 */ dialog .vote-choice button,dialog button.secondary,dialog button.primary{font-size:15px;min-height:36px}
+/* @chain-region rule-101 */ dialog label{font-size:16px;line-height:1.8}
+/* @chain-region rule-102 */ dialog textarea,dialog input{font-size:16px;line-height:1.7}
+/* @chain-region rule-103 */ dialog .comment-body{font-size:16px;line-height:1.9}
+/* @chain-region rule-104 */ dialog .comment-list .row strong,dialog .ballot-list strong{font-size:16px}
+/* @chain-region rule-105 */ dialog .comment-list time,dialog .ballot-list time{font-size:14px}
+/* @chain-region rule-106 */ dialog .engineering-guide,dialog .snapshot-files button{font-size:14px;line-height:1.9}
+/* @chain-region rule-107 */ dialog .read-detail{font-size:14px;min-height:30px}
+/* @chain-region rule-108 */ dialog .conversation-meta{font-size:14px}
+/* @chain-region rule-109 */ dialog .inbox-title{font-size:18px;line-height:1.6}
+/* @chain-region rule-110 */ @media(max-width:620px){
+ .surface>header{flex-wrap:wrap;gap:10px}
+ .surface>header h1{font-size:24px}
+ .surface>header>.actions{max-width:100%;flex-wrap:wrap}
+ .surface .quest{padding-inline:4px}
+ .surface .version-track p{font-size:14px}
+ .surface .composer{padding:12px}
+ .surface .composer footer>.actions{gap:6px;flex-wrap:wrap}
+ .surface .composer footer>button{margin-left:auto}
+ dialog .task-detail{grid-template-columns:1fr;gap:5px}
+ dialog .task-detail dd{margin-bottom:13px}
+}
+/* @chain-region rule-111 */ @media(prefers-reduced-motion:reduce){.context-details>summary::before{transition:none}}
+/* @chain-region rule-112 */ @media(max-width:540px){.titlebar .account>span:not(.avatar){display:none}.titlebar .account{width:36px;min-width:36px;padding:0;justify-content:center}}
+/* @chain-region rule-113 */ @media(max-height:600px){
+ .surface.chat-surface{padding:12px 20px}
+ .chat-surface>header{padding-bottom:10px;margin-bottom:8px}
+ .surface.chat-surface .composer{padding:8px 10px;border-radius:14px}
+ .surface.chat-surface .composer textarea{height:48px;min-height:44px;max-height:72px}
+ .surface.chat-surface .composer footer{margin-top:4px}
+ .surface.chat-surface .chat-log{gap:18px;padding-top:8px;padding-bottom:14px}
+}
+/* Each dialog has one body scroller; its title never shares the text's scroll plane. */
+/* @chain-region rule-114 */ dialog[open]{display:flex;flex-direction:column;overflow:hidden;max-height:calc(100vh - 64px)}
+/* @chain-region rule-115 */ dialog>.dialog-top{position:static;flex:none;margin:0 0 16px;padding:0 0 16px;border-radius:0;border-bottom:1px solid var(--line);background:transparent;backdrop-filter:none}
+/* @chain-region rule-116 */ dialog>#dialog-body,dialog>.detail-content{min-height:0;min-width:0;max-width:100%;overflow:auto;overscroll-behavior:contain;padding:6px 8px 14px;scrollbar-width:none}
+/* @chain-region rule-117 */ dialog #action-form{min-width:0;max-width:100%;margin:0}/* @chain-region rule-118 */ dialog #action-form label{min-width:0}/* @chain-region rule-119 */ dialog #action-form :is(input,textarea,select){box-sizing:border-box;width:100%;max-width:100%;min-width:0}/* @chain-region rule-120 */ dialog #action-form :is(input,textarea,select):focus{outline:2px solid #b8cef37a;outline-offset:-2px;border-color:#b8cef35c;background:#b8cef309}/* @chain-region rule-121 */ dialog #action-form .actions{justify-content:flex-end}/* @chain-region rule-122 */ dialog #action-form .error{overflow-wrap:anywhere}
+/* @chain-region rule-123 */ dialog>.detail-content{font-size:16px;line-height:1.95;outline-offset:-2px}
+/* @chain-region rule-124 */ dialog>#dialog-body{font-size:16px;line-height:1.85}
+/* @chain-region rule-125 */ @media(max-width:620px){dialog[open]{max-height:calc(100vh - 32px)}dialog>.dialog-top h2{font-size:21px}dialog>.detail-content{font-size:16px}}
+/* @chain-region rule-126 */ .surface-tools{display:flex;align-items:center;justify-content:flex-end;gap:18px;min-width:0;margin-left:auto}
+/* @chain-region rule-127 */ .surface-tools>.actions{margin:0;flex:none}
+/* @chain-region rule-128 */ .surface-tools>.actions:empty{display:none}
+/* @chain-region rule-129 */ .surface-status:not([hidden]){display:flex;align-items:center;gap:10px;min-width:0;max-width:100%;color:var(--ui-warn);font-size:14px;line-height:1.5}
+/* @chain-region rule-130 */ .connection-message{min-width:0;max-width:26ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* @chain-region rule-131 */ .surface-status button{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:32px;padding:5px 9px;border-radius:10px;color:var(--ui-text-2);font-size:14px}
+/* @chain-region rule-132 */ .surface-status button .icon{width:15px;height:15px}
+/* @chain-region rule-133 */ .surface-status button[aria-busy=true] .icon{animation:connection-spin 1s linear infinite}
+/* @chain-region rule-134 */ @keyframes connection-spin{to{transform:rotate(360deg)}}
+/* @chain-region rule-135 */ .load-failure{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;min-height:min(320px,55vh);text-align:center}
+/* @chain-region rule-136 */ .load-failure>.icon{width:36px;height:36px;color:var(--muted);opacity:.65}
+/* @chain-region rule-137 */ .load-failure h2{font-size:22px;font-weight:450;line-height:1.6;margin:0}
+/* @chain-region rule-138 */ @media(max-width:760px){.surface-tools{gap:8px}.surface-status{gap:6px}.connection-message{max-width:18ch}.surface-status button span{display:none}}
+
+/* One type scale across complete pages, including nested content and empty states. */
+/* @chain-region rule-139 */ body{font-size:var(--focus-body);line-height:1.7}
+/* @chain-region rule-140 */ body :is(button,input,textarea,select){line-height:1.5}
+/* @chain-region rule-141 */ body :is(button,summary){touch-action:manipulation}
+/* @chain-region rule-142 */ body :is(input,textarea,select){font-size:var(--focus-body)}
+/* @chain-region rule-143 */ body :is(button.primary,button.secondary,button.danger){font-size:var(--focus-label);min-height:38px}
+/* @chain-region rule-144 */ body .titlebar button{min-height:32px}
+/* @chain-region rule-145 */ .surface>header>.actions button,.surface .quest .actions button,dialog .actions button{font-size:var(--focus-label);min-height:38px}
+/* @chain-region rule-146 */ .surface :is(summary,.pager button,.lanes button,.read-detail),dialog :is(summary,.read-detail){font-size:var(--focus-label);line-height:1.6;min-height:36px}
+/* @chain-region rule-147 */ .surface :is(p,.markdown,.empty,.profile p),dialog :is(p,.markdown,.profile p){font-size:var(--focus-body);line-height:1.85}
+/* @chain-region rule-148 */ .surface :is(small,time,.connection-note,.conversation-meta),dialog :is(small,time,.connection-note,.conversation-meta){font-size:var(--focus-meta);line-height:1.7;color:var(--muted)}
+/* @chain-region rule-149 */ .surface :is(.message time,.message header button,.composer small,.task-owner small),dialog :is(.ballot-list time,.comment-list time){font-size:var(--focus-meta)}
+/* @chain-region rule-150 */ .surface .markdown code,dialog .markdown code{font-size:14px;line-height:1.85}
+/* @chain-region rule-151 */ .surface .source pre,.surface .source code,dialog :is(.snapshot-source,.engineering-guide,code){font-size:14px;line-height:1.85}
+/* @chain-region rule-152 */ .surface .source>header{flex-wrap:wrap;gap:6px 14px}
+/* @chain-region rule-153 */ .source>header strong{min-width:0;overflow-wrap:anywhere}
+/* @chain-region rule-154 */ .surface .section-heading{flex-wrap:wrap;gap:12px;align-items:center}
+/* @chain-region rule-155 */ .surface :is(.task-owner,.snapshot-row small),dialog .state-pill{color:var(--muted)}
+/* @chain-region rule-156 */ .surface .empty{min-height:110px}
+/* @chain-region rule-157 */ .surface .mission-copy>p{max-width:48em}
+/* @chain-region rule-158 */ .surface .quest>p{max-width:65ch}
+/* @chain-region rule-159 */ .surface .vote-count{min-height:40px}
+/* @chain-region rule-160 */ .surface .engineering-steps b,.surface .engineering-steps span{color:var(--muted)}
+/* @chain-region rule-161 */ .surface .construction-task{gap:8px}
+/* @chain-region rule-162 */ .surface .construction-task .task-owner small{display:none}
+/* @chain-region rule-163 */ .surface .stage-leadership .election-roles>div{background:transparent;border:0;padding:8px 0}
+/* @chain-region rule-164 */ .surface .stage-leadership{border-top:0}
+/* @chain-region rule-165 */ .surface .version-track{gap:20px}
+/* @chain-region rule-166 */ .surface .version-track li{padding-right:0}
+/* @chain-region rule-167 */ .surface .tree{flex:0 0 clamp(160px,23vw,280px);scroll-padding-top:58px;scroll-padding-bottom:6px}
+/* @chain-region rule-168 */ .surface .tree :is(button,input){font-size:14px;min-height:36px}
+/* @chain-region rule-169 */ .surface .tree-search input{width:100%}
+/* @chain-region rule-170 */ .surface .composer textarea{font-size:16px}
+/* @chain-region rule-171 */ .surface .message header{flex-wrap:wrap;gap:6px 12px}
+/* @chain-region rule-172 */ .surface .message header button{min-height:28px}
+/* @chain-region rule-173 */ .surface .composer footer .actions{gap:8px}
+/* @chain-region rule-174 */ .surface .composer footer .secondary{min-height:36px}
+/* @chain-region rule-175 */ .surface .attachment-preview button{width:28px;min-height:28px;right:-7px;top:-7px}
+/* @chain-region rule-176 */ .surface .admin-list .row>strong{font-size:17px}
+/* @chain-region rule-177 */ .surface .audit{font-family:inherit;line-height:1.8}
+/* @chain-region rule-178 */ .audit-entry{display:grid;grid-template-columns:130px minmax(0,1fr);gap:8px 20px;padding:16px 0;border-bottom:1px solid var(--line)}
+/* @chain-region rule-179 */ .audit-entry time{font-variant-numeric:tabular-nums}
+/* @chain-region rule-180 */ .audit-entry strong{font-size:16px;font-weight:500}
+/* @chain-region rule-181 */ .audit-action{display:flex;align-items:baseline;gap:8px 16px;flex-wrap:wrap}
+/* @chain-region rule-182 */ .audit-actor{font-size:14px;color:var(--muted)}
+/* @chain-region rule-183 */ .audit-entry p{margin-top:6px;color:var(--muted)}
+/* @chain-region rule-184 */ dialog .dialog-top button{width:36px;height:36px;min-height:36px}
+/* @chain-region rule-185 */ dialog #dialog-body>p{margin-block:12px}
+/* @chain-region rule-186 */ dialog #dialog-body>h3{font-size:20px;line-height:1.5;margin:24px 0 12px;font-weight:500}
+/* @chain-region rule-187 */ dialog #dialog-body>h3:first-child{margin-top:0}
+/* @chain-region rule-188 */ dialog #dialog-body>h4{font-size:17px;line-height:1.6;margin:18px 0 10px}
+/* @chain-region rule-189 */ dialog :is(.verification-row,.local-run){padding:18px 0}
+/* @chain-region rule-190 */ dialog :is(.verification-row,.local-run)>.context-details:last-child{margin-bottom:0;padding-bottom:0}
+/* @chain-region rule-191 */ dialog .dialog-section>:is(.verification-row,.snapshot-row):last-child{border-bottom:0;padding-bottom:0}
+/* @chain-region rule-192 */ dialog :is(.verification-row,.local-run)>p{margin:8px 0}
+/* @chain-region rule-193 */ dialog :is(.verification-row,.local-run)>strong{font-size:18px;font-weight:500;line-height:1.6}
+/* @chain-region rule-194 */ dialog .snapshot-row strong{font-size:17px;line-height:1.6}
+/* @chain-region rule-195 */ dialog .snapshot-row small{font-size:14px;line-height:1.7}
+/* @chain-region rule-196 */ dialog :is(.checkpoint small,.code-pheromones small,.inbox-preview-row span,.inbox-preview-row small,.vm-console-preview figcaption){opacity:1}
+/* @chain-region rule-197 */ dialog .dialog-section h3{font-size:20px;line-height:1.6;margin-bottom:12px}
+/* @chain-region rule-198 */ dialog .dialog-section{margin-top:20px;padding-top:16px}
+/* @chain-region rule-199 */ dialog #dialog-body>.dialog-section:first-child,dialog #dialog-body>.live-status+.dialog-section{margin-top:0;padding-top:0;border-top:0}
+/* @chain-region rule-200 */ dialog .context-details p{font-size:16px}
+/* @chain-region rule-201 */ dialog .task-detail{margin:18px 0}
+/* @chain-region rule-202 */ dialog .task-detail dt{font-size:15px;color:var(--muted)}
+/* @chain-region rule-203 */ dialog .task-detail dd{font-size:16px}
+/* @chain-region rule-204 */ dialog .task-detail dd>p{margin-bottom:8px}
+/* @chain-region rule-205 */ dialog .record-meta{font-size:14px;color:var(--muted);margin:8px 0}
+/* @chain-region rule-206 */ .run-heading{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin:8px 0 18px}
+/* @chain-region rule-207 */ .run-heading>p{color:var(--muted)}
+/* @chain-region rule-208 */ .dialog-empty{padding:20px 0;color:var(--muted)}
+/* @chain-region rule-209 */ .local-workspaces{margin-top:24px}
+/* @chain-region rule-210 */ .surface .workflow-overview{padding:20px 0;margin:20px 0}
+/* @chain-region rule-211 */ .surface .workflow-goals{margin:12px 0;gap:12px}
+/* @chain-region rule-212 */ .local-workspaces h3,.local-web-previews h3,.local-executions h3{font-size:20px;line-height:1.6;margin:20px 0 10px}
+/* @chain-region rule-213 */ .context-details .task-detail{margin-bottom:6px}
+/* @chain-region rule-214 */ .station-work .station-report-meta:empty{display:none}
+/* @chain-region rule-215 */ .surface .station-report-meta>span{font-size:14px}
+/* @chain-region rule-216 */ .work-status .station-report-meta button,.activity-footer button,.station-links button{font-size:15px;min-height:36px}
+/* @chain-region rule-217 */ .work-status .activity-row{grid-template-columns:125px minmax(0,1fr);gap:16px}
+/* @chain-region rule-218 */ .activity-row>i{display:none}
+/* @chain-region rule-219 */ .work-status .activity-row time,.work-status .activity-row small{font-size:14px;line-height:1.8}
+/* @chain-region rule-220 */ .work-status .activity-row .read-detail{font-size:14px;min-height:32px}
+/* @chain-region rule-221 */ .work-status .activity-row p{font-size:16px}
+/* @chain-region rule-222 */ .work-status .activity-footer{flex-wrap:wrap}
+/* A rotating summary must not move the station or the text being read below it. */
+/* @chain-region rule-223 */ .surface:has(.work-status) .situation-summary{min-height:1.7em}
+/* @chain-region rule-224 */ @media(max-width:620px){
+ .surface:has(.work-status) .situation-headline{min-height:2.9em}
+}
+/* @chain-region rule-225 */ .station-manage.onboarding-stage{padding:16px 0;border-top:1px solid var(--line)}
+/* @chain-region rule-226 */ .station-manage summary{font-size:15px;min-height:36px}
+/* @chain-region rule-227 */ .station-manage .flow-activity{font-size:14px}
+/* @chain-region rule-228 */ .welcome-stage .flow-node{font-size:14px}
+/* @chain-region rule-229 */ .welcome-stage .welcome-actions button{font-size:15px;min-height:36px}
+/* @chain-region rule-230 */ .welcome-stage .welcome-check-heading p{flex-wrap:wrap}
+/* @chain-region rule-231 */ .welcome-stage .welcome-check-count{font-size:16px}
+/* @chain-region rule-232 */ .welcome-stage .welcome-checks>div>span{font-size:14px}
+/* @chain-region rule-233 */ .login-stage.welcome-stage,.login-stage.onboarding-stage.welcome-stage{justify-content:safe center}
+/* @chain-region rule-234 */ @media(max-height:400px){
+ .welcome-checking.onboarding-stage{gap:3px;padding-block:2px}
+}
+/* @chain-region rule-235 */ :where(button,[role=button],summary,a[href],input,textarea,select,[tabindex]):focus-visible{outline-width:2px;outline-offset:3px}
+/* @chain-region rule-236 */ @media(max-width:620px){
+ .surface .version-track{grid-template-columns:1fr;gap:18px;padding-top:18px}
+ .surface .version-track li{padding-top:14px}
+ .surface .version-track p{margin:4px 0 8px}
+ .surface .tree{flex-basis:135px;width:135px}
+ .surface .source pre{font-size:14px}
+ .surface .snapshot-row{gap:10px;flex-wrap:wrap}
+ .surface .snapshot-row>div{flex-basis:60%}
+ .work-status .activity-row{grid-template-columns:1fr;gap:3px}
+ .audit-entry{grid-template-columns:1fr;gap:4px}
+}
+/* @chain-region rule-237 */ @media(max-width:460px){
+ .titlebar{gap:6px;padding-inline:6px}
+ .titlebar #tabs{gap:3px!important;overflow:auto;scrollbar-width:none}
+ .titlebar #tabs button{width:32px;height:32px;min-height:32px;flex:0 0 32px}
+ .titlebar .account{width:30px;min-width:30px;padding:0}
+ .titlebar .avatar{width:28px;height:28px}
+ .titlebar .window-actions{gap:0}
+ .titlebar .window-actions button{width:24px;min-width:24px}
+ .surface{padding-inline:10px}
+ .surface .repository{flex-direction:column}
+ .surface .tree{width:100%;flex:0 0 110px;padding:0 0 10px;border-right:0;border-bottom:1px solid var(--line)}
+ .surface .engineering-facts{gap:14px;flex-wrap:wrap}
+ .surface .snapshot-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:10px 0}
+ .surface .snapshot-row>.snapshot-line{display:none}
+ .surface .snapshot-row>div{grid-column:1/-1;min-width:0}
+ .surface .snapshot-row strong{line-height:1.6}
+ .surface .snapshot-row small{line-height:1.6}
+ .surface .snapshot-row>.state-pill{justify-self:start}
+ .surface .workflow-overview .actions>button{flex-basis:100%}
+ .surface .mission{align-items:flex-start}
+ .surface .mission .halo{width:64px;height:64px}
+}
+/* @chain-region rule-238 */ @media(max-height:360px){
+ .surface{overflow:auto}
+ .surface .members{grid-template-columns:1fr;gap:10px;padding-block:8px}
+ .surface .member{flex-direction:row;gap:14px;padding:10px;min-height:68px;text-align:left}
+ .surface .member .avatar{width:44px;height:44px;font-size:20px}
+ .surface>#content.scroll{flex:1 0 120px;min-height:120px}
+ .surface.chat-surface .chat-log{flex:1 0 110px;min-height:110px;max-height:180px}
+ .welcome-checking .agent-flow{display:none}
+ .welcome-stage .welcome-check-heading h1{font-size:22px}
+ .welcome-checking.onboarding-stage{justify-content:flex-start;flex:0 0 auto}
+ .surface:has(.welcome-stage)>#content{overflow:auto}
+ .welcome-checking .welcome-checks>div{padding-block:5px}
+ .welcome-stage .welcome-actions{gap:6px}
+}

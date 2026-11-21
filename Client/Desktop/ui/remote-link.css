@@ -1,0 +1,34 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .remote-link-panel; .remote-link-panel[hidden]; .remote-link-panel h2; .remote-link-panel button; .remote-link-panel button:focus-visible; .remote-link-panel button:disabled; .remote-link-heading,.remote-link-actions,.remote-link-servers; .remote-link-heading h2; .remote-link-servers [aria-pressed="true"]; .remote-link-panel dl; .remote-link-panel dt; .remote-link-panel code,.remote-link-panel small; .remote-link-panel fieldset; .remote-link-panel label; .remote-link-panel input[type="checkbox"]; .remote-link-plan; .remote-link-jobs article; .remote-link-sessions; .remote-link-notice; .remote-link-terminal-surface; body #control-remote; body.composer-open #control-remote; #pane-remote; @media(max-width:520px)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/remote-link.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+.remote-link-panel{flex:1;min-height:0;min-width:0;overflow:auto;padding:12px;overscroll-behavior:contain;color:inherit}
+.remote-link-panel[hidden]{display:none}
+.remote-link-panel h2{font-size:22px;margin:0 0 10px}.remote-link-panel h3{font-size:15px;margin:0 0 10px}
+.remote-link-panel button{font:inherit;cursor:pointer;border:0;background:#ffffff0c;color:inherit;border-radius:999px;padding:8px 12px}
+.remote-link-panel button:focus-visible{outline:1px solid #e6e9f0b0;outline-offset:2px}
+.remote-link-panel button:disabled{cursor:default;opacity:.5}
+.remote-link-heading,.remote-link-actions,.remote-link-servers{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.remote-link-heading h2{margin:0 auto 0 0}
+.remote-link-servers [aria-pressed="true"]{background:#ffffff0d;box-shadow:inset 0 0 0 1px #e6e9f0b0,0 0 12px #b9c8ff18}
+.remote-link-panel dl{display:grid;grid-template-columns:minmax(80px,110px) minmax(0,1fr);gap:7px 12px;margin:12px 0}
+.remote-link-panel dt{opacity:.7}.remote-link-panel dd{margin:0;overflow-wrap:anywhere}
+.remote-link-panel code,.remote-link-panel small{overflow-wrap:anywhere;word-break:break-word}
+.remote-link-panel fieldset{border:0;margin:14px 0;padding:0;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.remote-link-panel label{display:flex;gap:8px;align-items:center;cursor:pointer;margin:8px 0}
+.remote-link-panel input[type="checkbox"]{width:16px;height:16px;flex:none}
+.remote-link-plan{padding:12px;background:#ffffff08;border-radius:14px;margin:10px 0}.remote-link-jobs article{padding:12px 0;margin:10px 0}
+.remote-link-jobs article{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.remote-link-sessions{padding:0;list-style:none}.remote-link-sessions li{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:8px 0}
+.remote-link-notice{line-height:1.6}.remote-link-warning{color:#edc88d}
+.remote-link-terminal-surface{height:480px;min-height:240px;max-height:65vh;border-radius:14px;background:#10141b55}
+body #control-remote{margin-bottom:calc(var(--eyra-ring-size,104px) + 44px);padding:24px clamp(20px,5vw,64px)}
+body.composer-open #control-remote{margin-bottom:calc(var(--eyra-ring-size,104px) + var(--composer-height,56px) + 56px)}
+#pane-remote{height:100%;box-sizing:border-box}
+@media(max-width:520px){.remote-link-panel{padding:8px}.remote-link-panel dl{grid-template-columns:84px minmax(0,1fr)}.remote-link-sessions li{align-items:flex-start;flex-direction:column}.remote-link-panel button{max-width:100%}}

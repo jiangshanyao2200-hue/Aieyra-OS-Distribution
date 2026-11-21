@@ -1,0 +1,26 @@
+{
+  "schema": "aieyra.api/1",
+  "protocol": "responses",
+  "path": "/gateway/responses",
+  "headers": {
+    "x-adapter-fixture": "local-gateway"
+  },
+  "model_aliases": {
+    "local-model": "gateway-model"
+  },
+  "defaults": [
+    {
+      "spec": {
+        "key": "adapter_depth",
+        "type": "integer",
+        "min": 0,
+        "max": 8,
+        "source": "Author documented gateway depth",
+        "wire_path": [
+          "adapter_depth"
+        ]
+      },
+      "value": 2
+    }
+  ]
+}

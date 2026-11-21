@@ -1,0 +1,1 @@
+ Bundled rg (ripgrep) is available on the child PATH. Use terminal(action=exec) for source exploration: rg for text search, rg --files for file discovery, Get-Content/cat/sed for reading and pwd/Get-Location for the working directory. Narrow the search directory and output to the task. rg exit 1 means no matches.

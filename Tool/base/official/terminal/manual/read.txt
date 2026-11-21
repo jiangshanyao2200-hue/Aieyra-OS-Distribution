@@ -1,0 +1,1 @@
+Read a saved shell log without starting or repeating a command. Use after truncated output or to revisit earlier diagnostics. Offsets count original log bytes; advance using next_offset. The returned text is terminal-control-free. log_incomplete means some original bytes were not saved.

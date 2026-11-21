@@ -1,0 +1,522 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aieyra.invalid/contracts/theme.schema.json",
+  "title": "Aieyra declarative theme",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "elements"
+  ],
+  "properties": {
+    "schema": {
+      "const": "aieyra.theme/1"
+    },
+    "elements": {
+      "const": "1.0.0"
+    },
+    "tokens": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^--ui-[a-z0-9-]{1,64}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 512
+      }
+    },
+    "styles": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "element",
+          "properties"
+        ],
+        "properties": {
+          "element": {
+            "enum": [
+              "body",
+              "button",
+              "input",
+              "textarea",
+              "select",
+              "range",
+              "checkbox",
+              "radio",
+              "navigation",
+              "dialog",
+              "menu",
+              "tooltip",
+              "notice",
+              "tab",
+              "table",
+              "code",
+              "image",
+              "link",
+              "role",
+              "identity",
+              "message",
+              "body-text",
+              "thinking",
+              "composer",
+              "history",
+              "usage",
+              "tool",
+              "tool-heading",
+              "tool-body",
+              "tool-state",
+              "terminal",
+              "diff",
+              "attachment",
+              "workflow",
+              "surface",
+              "window-controls",
+              "program-content",
+              "program-navigation",
+              "conversation",
+              "messages",
+              "message-content",
+              "composer-dock",
+              "live",
+              "tool-stage",
+              "window-title",
+              "window-actions",
+              "native-tooltip",
+              "native-menu",
+              "notice-list",
+              "notice-heading",
+              "account-card",
+              "application-list",
+              "presence",
+              "activity-rail",
+              "activity-item",
+              "independent-history",
+              "independent-messages",
+              "independent-navigation",
+              "extension-content",
+              "markdown",
+              "code-block",
+              "inline-code",
+              "quotation",
+              "content-table",
+              "content-media",
+              "attachment-card",
+              "progress",
+              "tree",
+              "tree-item",
+              "separator",
+              "popover",
+              "switch",
+              "session-panel",
+              "session-list",
+              "session-row",
+              "gallery-panel",
+              "image-viewer",
+              "image-heading",
+              "image-viewport",
+              "image-controls",
+              "attachment-name",
+              "attachment-metadata",
+              "media-viewer",
+              "media-controls"
+            ]
+          },
+          "state": {
+            "enum": [
+              "default",
+              "hover",
+              "focus",
+              "active",
+              "disabled",
+              "selected",
+              "expanded",
+              "busy",
+              "readonly",
+              "failed",
+              "cancelled",
+              "running",
+              "unknown",
+              "loading",
+              "empty",
+              "dragging",
+              "stale",
+              "offline",
+              "completed",
+              "checked"
+            ]
+          },
+          "properties": {
+            "$ref": "#/$defs/properties"
+          }
+        }
+      }
+    },
+    "layouts": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "workspace",
+          "live",
+          "application",
+          "message",
+          "tool",
+          "conversation",
+          "extension",
+          "native-shell",
+          "native-menu",
+          "native-tooltip",
+          "presence",
+          "folded",
+          "activity-rail"
+        ]
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "renderers": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "aieyra.content.code/1",
+          "aieyra.content.quote/1",
+          "aieyra.content.table/1",
+          "aieyra.content.thinking/1",
+          "aieyra.content.tool-result/1",
+          "aieyra.content.image/1",
+          "aieyra.content.attachment/1",
+          "aieyra.content.media/1"
+        ]
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "assets": {
+      "type": "object",
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]{0,47}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "mime"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "maxLength": 240,
+            "pattern": "^assets/(?:[a-zA-Z0-9_-]+/)*[a-zA-Z0-9_-]+\\.(?:png|jpg|jpeg|woff2|wav)$"
+          },
+          "mime": {
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "font/woff2",
+              "audio/wav"
+            ]
+          },
+          "fallback": {
+            "enum": [
+              "sans-serif",
+              "serif",
+              "monospace"
+            ]
+          }
+        }
+      }
+    },
+    "presets": {
+      "type": "object",
+      "maxProperties": 16,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "extends": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          },
+          "values": {
+            "$ref": "#/$defs/presetValues"
+          }
+        }
+      }
+    },
+    "sounds": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]{0,47}$"
+      },
+      "propertyNames": {
+        "enum": [
+          "task.completed",
+          "task.failed",
+          "attention.pending"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "properties": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "display",
+          "position",
+          "inset",
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "width",
+          "height",
+          "min-width",
+          "min-height",
+          "max-width",
+          "max-height",
+          "margin",
+          "margin-top",
+          "margin-right",
+          "margin-bottom",
+          "margin-left",
+          "padding",
+          "padding-top",
+          "padding-right",
+          "padding-bottom",
+          "padding-left",
+          "gap",
+          "row-gap",
+          "column-gap",
+          "grid-template-columns",
+          "grid-template-rows",
+          "grid-template-areas",
+          "grid-area",
+          "grid-column",
+          "grid-row",
+          "grid-auto-flow",
+          "align-items",
+          "align-self",
+          "align-content",
+          "justify-items",
+          "justify-self",
+          "justify-content",
+          "flex",
+          "flex-direction",
+          "flex-wrap",
+          "flex-grow",
+          "flex-shrink",
+          "flex-basis",
+          "order",
+          "overflow",
+          "overflow-x",
+          "overflow-y",
+          "color",
+          "background",
+          "background-color",
+          "border",
+          "border-width",
+          "border-style",
+          "border-color",
+          "border-radius",
+          "box-shadow",
+          "font-family",
+          "font-size",
+          "font-weight",
+          "font-style",
+          "line-height",
+          "letter-spacing",
+          "text-align",
+          "text-indent",
+          "text-decoration",
+          "text-shadow",
+          "white-space",
+          "overflow-wrap",
+          "word-break",
+          "opacity",
+          "transform",
+          "transform-origin",
+          "aspect-ratio",
+          "object-fit",
+          "box-sizing",
+          "isolation",
+          "z-index",
+          "cursor",
+          "outline",
+          "outline-color",
+          "outline-width",
+          "outline-offset",
+          "backdrop-filter",
+          "filter",
+          "grid-auto-rows",
+          "background-image",
+          "background-size",
+          "background-repeat",
+          "background-position"
+        ]
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 512
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "slot": {
+          "type": "string"
+        },
+        "tag": {
+          "enum": [
+            "div",
+            "section",
+            "article",
+            "header",
+            "footer",
+            "nav",
+            "aside",
+            "main",
+            "span"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "style": {
+          "$ref": "#/$defs/properties"
+        },
+        "children": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "slot"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "children"
+                ]
+              },
+              {
+                "required": [
+                  "tag"
+                ]
+              },
+              {
+                "required": [
+                  "label"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "children"
+          ],
+          "not": {
+            "required": [
+              "slot"
+            ]
+          }
+        }
+      ]
+    },
+    "presetValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokens": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/properties/tokens/propertyNames"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "layouts": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/properties/layouts/propertyNames"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/node"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "renderers": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/properties/renderers/propertyNames"
+          },
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/node"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "styles": {
+          "anyOf": [
+            {
+              "$ref": "#/properties/styles"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "$comment": "Runtime also validates CSS values, 64 KiB total, max depth 12 and each surface slot exactly once. JSON Schema alone is not an admission check."
+}

@@ -1,0 +1,201 @@
+/* @file-map:start
+文件: link/desktop/ui/station-overview.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | *,*::before,*::after
+  rule-2 | style | *::-webkit-scrollbar
+  rule-3 | style | .surface:has(.welcome-stage)
+  rule-4 | style | .surface:has(.welcome-stage)>header
+  rule-5 | style | .surface:has(.welcome-stage)>#content
+  rule-6 | style | .welcome-stage
+  rule-7 | style | .login-stage.welcome-stage,.login-stage.onboarding-stage.welcome-stage
+  rule-8 | style | .login-stage.welcome-stage::before
+  rule-9 | style | .welcome-stage h1
+  rule-10 | style | .welcome-stage>p
+  rule-11 | style | .welcome-stage .halo
+  rule-12 | style | .login-stage.welcome-stage>.primary
+  rule-13 | style | .welcome-checking.onboarding-stage
+  rule-14 | style | .welcome-check-heading
+  rule-15 | style | .welcome-check-heading h1
+  rule-16 | style | .welcome-check-heading p
+  rule-17 | style | .welcome-check-count
+  rule-18 | style | .welcome-checks
+  rule-19 | style | .welcome-checks>div
+  rule-20 | style | .welcome-checks>div>span
+  rule-21 | style | .welcome-checks strong
+  rule-22 | style | .welcome-checks [data-check-state=passed]>span
+  rule-23 | style | .welcome-checks [data-check-state=current] strong
+  rule-24 | style | .welcome-checking .agent-flow
+  rule-25 | style | .welcome-checking .flow-link
+  rule-26 | style | .welcome-checking .flow-link::before
+  rule-27 | style | .welcome-checking .flow-node
+  rule-28 | style | .welcome-checking .flow-node .icon
+  rule-29 | style | .welcome-checking .flow-wire
+  rule-30 | style | .welcome-checking .flow-activity
+  rule-31 | style | .welcome-actions
+  rule-32 | style | .welcome-actions button
+  rule-33 | style | .surface:has(.work-status)>header
+  rule-34 | style | #situation-title
+  rule-35 | style | .situation-kicker
+  rule-36 | style | .situation-headline
+  rule-37 | style | .situation-summary
+  rule-38 | style | .work-status
+  rule-39 | style | .work-status .personal-desk
+  rule-40 | style | .work-status .station-illustration>svg
+  rule-41 | style | .work-status .station-state
+  rule-42 | style | .station-identity
+  rule-43 | style | .station-identity>span
+  rule-44 | style | .station-identity small
+  rule-45 | style | .station-report-label
+  rule-46 | style | .work-status .station-work h2
+  rule-47 | style | .work-status .station-report
+  rule-48 | style | .work-status .station-report-meta
+  rule-49 | style | .work-status .station-report-meta button
+  rule-50 | style | .station-agendas
+  rule-51 | style | .station-agendas>span
+  rule-52 | style | .station-agendas button
+  rule-53 | style | .link-activity
+  rule-54 | style | .link-activity .section-heading
+  rule-55 | style | .work-status .link-activity h3
+  rule-56 | style | .link-activity #work-activity
+  rule-57 | style | .link-activity-scroll
+  rule-58 | style | .activity-row
+  rule-59 | style | .activity-row time
+  rule-60 | style | .activity-row p
+  rule-61 | style | .activity-row small
+  rule-62 | style | .activity-row .read-detail
+  rule-63 | style | .activity-row>i
+  rule-64 | style | .activity-empty
+  rule-65 | style | .activity-footer
+  rule-66 | style | .activity-footer button,.station-links button
+  rule-67 | style | .station-manage.onboarding-stage
+  rule-68 | style | .station-manage summary
+  rule-69 | style | .station-manage .station-connection,.station-manage .work-sync
+  rule-70 | style | .station-manage .agent-flow
+  rule-71 | style | .station-manage .flow-activity
+  rule-72 | style | .station-manage .actions
+  rule-73 | style | .station-warning
+  rule-74 | style | .task-brief h3
+  rule-75 | style | .task-brief .task-detail dd
+  rule-76 | style | #notice
+  rule-77 | style | @media(max-width:760px)
+  rule-78 | style | @media(max-width:520px)
+  rule-79 | style | @media(max-height:500px)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* Focus on the current work; connection details stay available on demand. */
+/* @chain-region rule-1 */ *,*::before,*::after{scrollbar-width:none}
+/* @chain-region rule-2 */ *::-webkit-scrollbar{display:none;width:0;height:0}
+/* @chain-region rule-3 */ .surface:has(.welcome-stage){padding:12px 24px}
+/* @chain-region rule-4 */ .surface:has(.welcome-stage)>header{display:none}
+/* @chain-region rule-5 */ .surface:has(.welcome-stage)>#content{display:flex;flex-direction:column}
+/* @chain-region rule-6 */ .welcome-stage{max-width:740px;margin:auto;width:100%;min-height:0;flex:1;text-align:center}
+/* @chain-region rule-7 */ .login-stage.welcome-stage,.login-stage.onboarding-stage.welcome-stage{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:clamp(12px,2.4vh,22px);min-height:0;padding:16px;overflow:auto}
+/* @chain-region rule-8 */ .login-stage.welcome-stage::before{inset:0;width:auto;height:auto;aspect-ratio:auto}
+/* @chain-region rule-9 */ .welcome-stage h1{font-size:clamp(24px,3vw,34px);font-weight:450;line-height:1.4;letter-spacing:.02em;margin:0}
+/* @chain-region rule-10 */ .welcome-stage>p{font-size:17px;line-height:1.6;color:var(--muted);margin:0}
+/* @chain-region rule-11 */ .welcome-stage .halo{width:clamp(64px,22vh,164px);height:clamp(64px,22vh,164px);margin:0;flex:none}
+/* @chain-region rule-12 */ .login-stage.welcome-stage>.primary{font-size:16px;height:42px;min-height:42px;margin:0;padding-inline:24px;flex:none}
+/* @chain-region rule-13 */ .welcome-checking.onboarding-stage{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:12px;min-height:0;max-width:620px;padding:12px 4px}
+/* @chain-region rule-14 */ .welcome-check-heading{text-align:left;margin:0}
+/* @chain-region rule-15 */ .welcome-check-heading h1{margin:0 0 8px;font-size:30px}
+/* @chain-region rule-16 */ .welcome-check-heading p{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:16px;line-height:1.6;color:var(--muted);margin:0}
+/* @chain-region rule-17 */ .welcome-check-count{font-size:18px;font-variant-numeric:tabular-nums;color:var(--text);white-space:nowrap}
+/* @chain-region rule-18 */ .welcome-checks{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;text-align:left}
+/* @chain-region rule-19 */ .welcome-checks>div{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+/* @chain-region rule-20 */ .welcome-checks>div>span{font-size:14px;width:24px;flex:none;color:var(--muted);font-variant-numeric:tabular-nums}
+/* @chain-region rule-21 */ .welcome-checks strong{font-size:17px;font-weight:450}
+/* @chain-region rule-22 */ .welcome-checks [data-check-state=passed]>span{color:var(--ui-ok)}
+/* @chain-region rule-23 */ .welcome-checks [data-check-state=current] strong{color:var(--accent)}
+/* @chain-region rule-24 */ .welcome-checking .agent-flow{margin:0 auto;max-width:340px;height:32px;gap:14px}
+/* @chain-region rule-25 */ .welcome-checking .flow-link{width:auto;height:auto;font-size:16px;border:0;box-shadow:none;transform:none}
+/* @chain-region rule-26 */ .welcome-checking .flow-link::before{display:none}
+/* @chain-region rule-27 */ .welcome-checking .flow-node{flex-direction:row;font-size:14px;gap:6px}
+/* @chain-region rule-28 */ .welcome-checking .flow-node .icon{width:16px;height:16px}
+/* @chain-region rule-29 */ .welcome-checking .flow-wire{height:1px}
+/* @chain-region rule-30 */ .welcome-checking .flow-activity{font-size:14px;line-height:1.5;min-height:21px;margin:0}
+/* @chain-region rule-31 */ .welcome-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+/* @chain-region rule-32 */ .welcome-actions button{font-size:14px;min-height:34px;margin:0;padding:5px 12px}
+/* @chain-region rule-33 */ .surface:has(.work-status)>header{max-width:1060px;width:100%;margin:0 auto 8px;padding:12px 0 20px;border-bottom:1px solid var(--line);align-items:center;min-height:130px;gap:20px;flex:none}
+/* @chain-region rule-34 */ #situation-title{display:block;min-width:0;max-width:850px}
+/* @chain-region rule-35 */ .situation-kicker{display:block;font-size:14px;font-weight:450;color:var(--muted);letter-spacing:.08em;line-height:1.6;margin-bottom:6px}
+/* @chain-region rule-36 */ .situation-headline{display:block;font-size:clamp(23px,2.5vw,31px);font-weight:450;letter-spacing:0;line-height:1.45;overflow-wrap:anywhere}
+/* @chain-region rule-37 */ .situation-summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;font-size:15px;line-height:1.7;color:var(--muted);font-weight:400;margin-top:7px;letter-spacing:0}
+/* @chain-region rule-38 */ .work-status{padding-top:8px}
+/* @chain-region rule-39 */ .work-status .personal-desk{min-height:178px;gap:28px;padding:6px 0 20px;grid-template-columns:minmax(120px,22%) 1fr}
+/* @chain-region rule-40 */ .work-status .station-illustration>svg{max-height:160px}
+/* @chain-region rule-41 */ .work-status .station-state{font-size:14px}
+/* @chain-region rule-42 */ .station-identity{display:flex;gap:14px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+/* @chain-region rule-43 */ .station-identity>span{font-size:16px;color:var(--accent)}
+/* @chain-region rule-44 */ .station-identity small{font-size:14px;color:var(--muted)}
+/* @chain-region rule-45 */ .station-report-label{font-size:14px;color:var(--muted)}
+/* @chain-region rule-46 */ .work-status .station-work h2{font-size:28px;margin:6px 0 12px;line-height:1.45}
+/* @chain-region rule-47 */ .work-status .station-report{font-size:17px;line-height:1.8}
+/* @chain-region rule-48 */ .work-status .station-report-meta{margin-top:14px;gap:10px;font-size:14px}
+/* @chain-region rule-49 */ .work-status .station-report-meta button{font-size:14px;padding:5px 10px;min-height:32px}
+/* @chain-region rule-50 */ .station-agendas{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 20px;font-size:15px;padding-top:8px}
+/* @chain-region rule-51 */ .station-agendas>span{color:var(--muted);font-size:14px;margin-right:4px}
+/* @chain-region rule-52 */ .station-agendas button{font-size:15px;max-width:420px;text-align:left;overflow-wrap:anywhere;padding:5px 8px;min-height:32px}
+/* @chain-region rule-53 */ .link-activity{padding-top:20px;border-top:1px solid var(--line)}
+/* @chain-region rule-54 */ .link-activity .section-heading{margin:0 0 12px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+/* @chain-region rule-55 */ .work-status .link-activity h3{font-size:18px;font-weight:450;margin:0}
+/* @chain-region rule-56 */ .link-activity #work-activity{font-size:14px;color:var(--muted)}
+/* @chain-region rule-57 */ .link-activity-scroll{max-height:260px;min-height:80px;overflow:auto;overflow-anchor:none;overscroll-behavior:contain;outline-offset:4px}
+/* @chain-region rule-58 */ .activity-row{display:grid;grid-template-columns:112px minmax(0,1fr) 5px;gap:16px;padding:14px 0;align-items:start;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+/* @chain-region rule-59 */ .activity-row time{font-size:14px;line-height:1.9;color:var(--muted);font-variant-numeric:tabular-nums}
+/* @chain-region rule-60 */ .activity-row p{margin:0;font-size:16px;line-height:1.8;overflow-wrap:anywhere}
+/* @chain-region rule-61 */ .activity-row small{color:var(--muted);font-size:14px}
+/* @chain-region rule-62 */ .activity-row .read-detail{font-size:14px;min-height:28px;margin-left:8px;padding:2px 6px}
+/* @chain-region rule-63 */ .activity-row>i{width:4px;height:4px;border-radius:50%;background:var(--muted);margin-top:10px;opacity:.5}
+/* @chain-region rule-64 */ .activity-empty{font-size:16px;line-height:1.9;color:var(--muted);padding:18px 0}
+/* @chain-region rule-65 */ .activity-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+/* @chain-region rule-66 */ .activity-footer button,.station-links button{font-size:14px;min-height:32px;padding:5px 10px}
+/* @chain-region rule-67 */ .station-manage.onboarding-stage{display:block;min-height:0;max-width:1060px;margin:16px auto;padding:0;font-size:14px}
+/* @chain-region rule-68 */ .station-manage summary{font-size:14px}
+/* @chain-region rule-69 */ .station-manage .station-connection,.station-manage .work-sync{font-size:14px;text-align:left;white-space:normal;line-height:1.7;margin-top:12px}
+/* @chain-region rule-70 */ .station-manage .agent-flow{max-width:340px;margin:16px 0;justify-content:flex-start;transform:none}
+/* @chain-region rule-71 */ .station-manage .flow-activity{text-align:left;font-size:14px}
+/* @chain-region rule-72 */ .station-manage .actions{margin-top:14px}
+/* @chain-region rule-73 */ .station-warning{font-size:16px;line-height:1.7;margin:0 0 16px;color:var(--ui-warn)}
+/* @chain-region rule-74 */ .task-brief h3{font-size:22px;margin-top:12px}
+/* @chain-region rule-75 */ .task-brief .task-detail dd{white-space:pre-wrap;overflow-wrap:anywhere}
+/* @chain-region rule-76 */ #notice{font-size:15px;line-height:1.6}
+/* @chain-region rule-77 */ @media(max-width:760px){
+ .surface:has(.work-status)>header{min-height:118px;padding-top:8px;gap:8px}
+ .surface:has(.work-status)>header .carousel-controls{gap:2px}
+ .surface:has(.work-status)>header .carousel-controls button{width:28px;min-height:28px}
+ .work-status .personal-desk{grid-template-columns:100px 1fr;gap:18px}
+ .work-status .station-work h2{font-size:25px}
+ .activity-row{grid-template-columns:88px minmax(0,1fr) 4px;gap:10px}
+}
+/* @chain-region rule-78 */ @media(max-width:520px){
+ .work-status .personal-desk{grid-template-columns:1fr;gap:8px}
+ .work-status .station-illustration>svg{max-height:90px}
+ .work-status .station-illustration{display:flex;align-items:center;justify-content:space-between}
+ .station-identity{margin-top:10px}
+ .welcome-checks{gap:0 14px}
+ .welcome-check-heading h1{font-size:25px}
+ .welcome-check-heading p{font-size:14px}
+ .surface:has(.work-status)>header{align-items:flex-start}
+ .situation-headline{font-size:23px}
+ .situation-summary{font-size:14px}
+}
+/* @chain-region rule-79 */ @media(max-height:500px){
+ .surface:has(.welcome-stage){padding:8px 18px}
+ .login-stage.welcome-stage,.login-stage.onboarding-stage.welcome-stage{gap:12px;padding:8px}
+ .welcome-stage .halo{width:64px;height:64px}
+ .welcome-stage h1{font-size:24px}
+ .welcome-stage>p{font-size:16px}
+ .welcome-checking.onboarding-stage{gap:4px;padding:4px}
+ .welcome-check-heading h1{font-size:24px;margin-bottom:4px}
+ .welcome-check-heading p{font-size:14px}
+ .welcome-checks>div{padding:7px 0}
+ .welcome-checks strong{font-size:16px}
+ .welcome-checking .agent-flow{height:26px}
+ .welcome-checking .flow-activity{font-size:14px}
+}

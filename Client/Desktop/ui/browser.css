@@ -1,0 +1,22 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body[data-view=browser-view] #view-content; body[data-view=browser-view] #view-content>#browser-view; body[data-view=browser-view] :is(#screen,#bottom-bar,#status-rail); #browser-view; #browser-surface; #browser-error:empty; #browser-empty; #browser-empty [hidden]; #browser-detached; .browser-empty-actions; #browser-groups
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/browser.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* The browser owns its entire content area. Chat remains available from Home. */
+body[data-view=browser-view] #view-content{padding:0!important}
+body[data-view=browser-view] #view-content>#browser-view{height:100%!important;max-height:none!important;padding:0!important;gap:0!important;background:transparent!important}
+body[data-view=browser-view] :is(#screen,#bottom-bar,#status-rail) {display:none!important;visibility:hidden!important;pointer-events:none!important}
+#browser-view{position:relative;min-height:0;overflow:hidden}
+#browser-surface{flex:1;min-height:0;min-width:0}
+#browser-error:empty{display:none}#browser-error{flex:none;padding:10px 18px;background:#452c2533;color:#dfb5ac;font-size:12px;overflow-wrap:anywhere}
+#browser-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:safe center;gap:16px;text-align:center;padding:24px;overflow:auto}
+#browser-empty [hidden]{display:none!important}
+#browser-detached{margin:0;font-size:18px;font-weight:500;color:var(--ui-text)}
+.browser-empty-actions{display:flex;gap:10px;margin-top:10px}.browser-empty-actions button{font:12px/1.5 var(--os-interface-font,'Segoe UI',sans-serif);border:0;border-radius:10px;min-height:38px;padding:9px 16px;cursor:pointer;color:#c5d4eb;background:#ffffff07;box-shadow:inset 0 0 0 1px #ffffff0c;transition:background var(--ui-fast) var(--ui-ease)}.browser-empty-actions button:hover{background:#ffffff12}#browser-placement{background:#b5c9e9;color:#172133}
+#browser-groups{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px}#browser-groups button{font-size:11px;padding:6px 10px;border:0;border-radius:8px;background:#ffffff05;color:#96a8c0}

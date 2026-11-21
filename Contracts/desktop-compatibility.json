@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "purpose": "Fixed public resources consumed by the unchanged official Program packages; Client/Desktop is the only editable desktop source.",
+  "files": {
+    "Desktop/renderer/tips.mjs": {
+      "size": 352,
+      "sha256": "573faa76d57133c6dfb2ccb276da958fb3c3face27b37bfb80b908a4733c6bbe"
+    },
+    "Desktop/ui/app-shell.css": {
+      "size": 5106,
+      "sha256": "726c1d35a934f256e83c3d2c6335817a467bb1eefe8d06656aaeccb1de1e3b42"
+    },
+    "Desktop/ui/app-shell.mjs": {
+      "size": 1905,
+      "sha256": "6f03ead0411495fecad32faf34dce0075d8b26d3722a15af77cb12f8d3bb9cd0"
+    },
+    "Desktop/ui/fonts.css": {
+      "size": 833,
+      "sha256": "83a3deeb719ffc36a91961204231c79cf37a8cc5058aa1058e8fa9b333e95149"
+    },
+    "Desktop/ui/image-crop.css": {
+      "size": 3790,
+      "sha256": "b4f4832184a28a0cc62f18af5dc1185de3efe9b0222151b64393ada98556dd18"
+    },
+    "Desktop/ui/image-crop.mjs": {
+      "size": 6802,
+      "sha256": "a4f0d2fcbb205b5a26080d5406f22edba9c0de69efad6bb2733e5574bc99a8d5"
+    },
+    "Desktop/ui/markdown.mjs": {
+      "size": 158,
+      "sha256": "1e29ed408e50a492eaa11a47e2cba97c0e4d3803efac5acecf902a298673587d"
+    },
+    "Desktop/ui/terminal-host.mjs": {
+      "size": 595,
+      "sha256": "22df8b9592556ff270093114b05480f534ddd06357f62aca5e5e4ed9fc4dbd98"
+    },
+    "Desktop/ui/ui-foundation.css": {
+      "size": 63,
+      "sha256": "1c6346912f3e32fed7cbe0f6d52c4c3ff819942fab5ab103eb31868da400166e"
+    },
+    "Desktop/ui/vendor/codemirror.mjs": {
+      "size": 614208,
+      "sha256": "d19969746101dee6af5111f84c61fc8abd80529773bb35c85576656b0c155606"
+    },
+    "Desktop/ui/vendor/xterm-fit.mjs": {
+      "size": 1967,
+      "sha256": "2d87e1bddc73be9111de8beee5370c3bb7aac9c94e18e6f245f02ca741ef1769"
+    },
+    "Desktop/ui/vendor/xterm.css": {
+      "size": 7112,
+      "sha256": "854a7c0fb70e8b1a083c16797ab827299fb18744f5ad34f227b48337e33293c6"
+    },
+    "Desktop/ui/vendor/xterm.mjs": {
+      "size": 344970,
+      "sha256": "b336ec65a086c056d4804b3d4c2347da5663d3f23c3f25be866467bd8857ad59"
+    },
+    "Desktop/ui/tooltip.mjs": {
+      "size": 4538,
+      "sha256": "ac0288da794ff003ff997bd9c901d32619edf368b86aa06406378746aa529a67"
+    },
+    "Desktop/ui/appearance.mjs": {
+      "size": 52,
+      "sha256": "8c5c23ea7d43e66e40879b22a770c2f6ef3850e0a22e534d19d27ada24353c65"
+    },
+    "Desktop/ui/motion.mjs": {
+      "size": 4067,
+      "sha256": "7141eb5c6d5e26777277921eaeebfdd0a2856c2628f49f91db90f49fc6d3c31d"
+    },
+    "Desktop/assets/fonts/inter-variable.woff2": {
+      "size": 350460,
+      "sha256": "13b4cddc57045d40b411008e61588c8f81aa0bd72fe884624831a0ff9c4d159a"
+    },
+    "Desktop/assets/fonts/sora-variable.woff2": {
+      "size": 49240,
+      "sha256": "0e65a6701cc0d013c8fed9904787fdbf64dd9014c4c0736f7c732eb978a528a7"
+    },
+    "Desktop/assets/fonts/notosanssc-variable.woff2": {
+      "size": 7782072,
+      "sha256": "aef8c34277afad81ecd0227138a830263c0caea65b7aea66d1195395f097b55a"
+    },
+    "Desktop/assets/fonts/notoserifsc-variable.woff2": {
+      "size": 11032420,
+      "sha256": "4ee9b0921ec9bd3f8b04587c7bc66c62731045e89d74eec054f37fc7a2d26383"
+    },
+    "Desktop/ui/tidy-range.mjs": {
+      "size": 1311,
+      "sha256": "75e34c1ca2e6e011f5a07f1e13a8c7b6aee2ab664fc59ad1c8b83651d3fbf6d0"
+    }
+  }
+}

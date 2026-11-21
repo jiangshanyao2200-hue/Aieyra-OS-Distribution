@@ -1,0 +1,217 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body, body.has-task-tabs; body #status-anchor; body #task-tabs; body #status-anchor .brand; body .brand-copy; body .brand-state-slot; body #brand-model; body #brand-status; body #usage-anchor; body #usage-anchor .usage-separator; body #status-anchor .window-controls; body #screen, body #view-surface; body #side-menu; body #bubbles, body #dynamic-menu; body #dynamic-menu; body #bubbles; body #api-slot; body #bubbles > .bubble-slot:has(#matrix-bubble); body #login-slot; body #document-slot; body #side-menu .bubble; body #plan-slot; body #plan-summary; body #bottom-bar; body #input-dock; body .input-toggle-slot; body #input-bubble; body #input-bubble.has-draft::after; body #composer, body.composer-open #composer; body #message; body #input-caret; body .send-recovery; body .send-recovery p; body .send-recovery textarea; body .send-recovery-actions, body .send-recovery .composer-attachment; body #composer, body.composer-open #composer; body #composer .paste-review; body #composer #composer-attachments; body .send-recovery:not([hidden]) ~ #input-dock #composer .paste-review; body .send-recovery:not([hidden]) ~ #input-dock #composer #composer-attachments; body #composer #message; body #composer .composer-actions; body #composer .composer-actions button; body #composer .composer-actions svg; body #composer .composer-attachment; body #composer .composer-attachment > span; body #composer .composer-attachment button; body #composer .paste-block; body #composer .paste-block details; body #composer .paste-block summary; body #composer .paste-block pre; body #composer .paste-block button; body #stop; body #view-surface; body #view-heading; body #home-button; body #home-button svg; body #view-title; body #view-content; body #view-content > .workspace-view; body #view-content > .workspace-view:is([open],:not([hidden])); body #view-content > :is(#panel,#plan-view,#browser-view,#document-viewer); body #panel .panel-heading, body #onboarding .onboard-header h1, body #document-viewer .document-header h2; body #onboarding .onboard-header; body #onboarding .settings-tabs; body #settings-body, body #plan-content; body #panel-content, body #document-content; body #plan-content #task-plan; body #plan-content .plan-phases; body #system-slot; body #system-bubble; body #system-popover; body #system-popover .system-heading; body #system-popover .system-entry; body #system-popover summary; body #system-popover summary::before; body #system-popover details[open] summary::before; body #system-popover .system-title; body #system-popover .system-read-status; body #system-popover .system-read-status, body #system-popover time; body #system-popover .unread .system-read-status; body #system-popover time, body #system-popover .system-preview; body #system-popover .system-preview; body #system-popover .system-content; body #system-popover .system-content > :first-child; body #system-popover .system-content > :last-child; body #system-popover .system-content pre; body #system-popover .system-actions; body #system-popover .system-actions button; body #system-popover .system-load-status; body.custom-background :is(#status-anchor,#bottom-bar,#task-tabs); @media (max-width: 1000px); @media (max-width: 620px); @media (prefers-reduced-motion: no-preference); body[data-conversation-mode] #screen; body[data-conversation-mode] #screen #conversation; body[data-conversation-mode] #screen #conversation #emergence; body[data-conversation-mode] #screen .presence-header; body[data-conversation-mode] #screen :is(#presence,.role-instrument); body[data-conversation-mode] #screen #presence-label, body[data-conversation-mode] #screen #eyra-name; body #eyra-name, body .message-meta; body .message-meta; body .message-run; body .message-identity; body[data-conversation-mode] #screen #live-current; body[data-conversation-mode] #screen #activity-detail; body[data-conversation-mode] #screen #activity-detail :is(#answer-stage,.team-voice); body[data-conversation-mode] #screen #activity-detail #work; body[data-conversation-mode] #screen #live-terminal; body[data-conversation-mode] #screen #live-terminal > header; body[data-conversation-mode] #screen #terminal-content; body[data-conversation-mode] #screen #terminal-content[data-reading="true"]; body[data-conversation-mode] #terminal-content .terminal-current, body[data-conversation-mode] #terminal-content .terminal-reading; body[data-conversation-mode] #terminal-content[data-reading="true"] .terminal-current; body[data-conversation-mode] #terminal-content .terminal-entry; body[data-conversation-mode] #terminal-content .transcript-detail; body[data-conversation-mode] #terminal-content[data-continuous="true"] .terminal-current .transcript-detail; body[data-conversation-mode] #terminal-content .transcript-command, body[data-conversation-mode] #terminal-content .transcript-output; body[data-conversation-mode="work"] #screen #conversation; body[data-conversation-mode="work"] #screen #conversation #emergence; body[data-conversation-mode="work"] #screen #live-actions; body[data-conversation-mode="work"] #screen #live-actions .recent-action; body[data-conversation-mode="work"] #screen #live-actions .recent-action p; body[data-conversation-mode="work"] #screen .presence-header; body[data-conversation-mode="work"] #screen :is(#presence,.role-instrument); body[data-conversation-mode="work"] #screen #activity-detail; body[data-conversation-mode="work"] #screen #activity-detail #live-current; body[data-conversation-mode="work"] #screen #activity-detail :is(#answer-stage,.team-voice); body[data-conversation-mode="work"] #screen #presence-caption; body[data-conversation-mode="work"] #screen #presence-caption:empty; body #view-content #task-plan; body #view-content #task-plan .task-progress; body #usage-anchor; body #screen .activity-return; body #screen .activity-body-reading; body #screen .tool-presentation .tool-view; body #screen .tool-presentation .tool-heading; body #screen .explore-output; body #screen .raw-receipt:not(.chat-link-receipt) > summary; body #screen .diff-marker; body #screen .tool-presentation .code-line; body #screen #live-actions .recent-action[data-kind="body"]; body #screen #live-actions .process-summary; body #screen #live-actions .process-summary .message-identity; body #screen #live-actions .process-summary .message-avatar; body #screen #live-actions .process-summary .eyra-text; body #screen #live-actions .process-summary .eyra-text > *; body [hidden], body #view-content > [hidden], body #screen [hidden]; @media (max-height: 620px); @media (max-height: 460px); @media (max-width: 620px); #terminal-view; #terminal-view[hidden]; #background-terminals; #background-terminals button[aria-current=true]; #background-terminal-detail; #background-terminal-detail[hidden]; #background-terminal-detail>header; #background-terminal-command; #background-terminal-path; #background-terminal-output; #background-terminal-output[hidden],.terminal-page-actions[hidden]; #background-terminal-screen; #background-terminal-screen[hidden],#terminal-screen-controls[hidden]; #terminal-screen-controls; #terminal-screen-controls small; .terminal-page-actions,.terminal-input-options; #terminal-input-form; #terminal-input; .terminal-input-options label; #terminal-input-status,#terminal-private-notice,#terminal-output-range; .plan-acceptance,.plan-completion; .plan-criterion; #terminal-input.private-input; #control-view; #control-surface; .plugin-view-header; #control-error:empty; #link-view; #link-identity,.link-explanation,#link-error; #link-error:empty; .link-section; .link-section h3; .link-section ul; .link-section li; .link-section li span,.link-section small,.link-explanation; .link-stale; #collaboration-error:empty; .message-attachments; body #desktop-dock #browser-slot
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/surface.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Shared page geometry. Tool activity has its own bounded flow inside Home. */
+body, body.has-task-tabs { --rail-width: 62px; --titlebar-height: 54px; display: grid; grid-template-columns: minmax(0,1fr) var(--rail-width); grid-template-rows: var(--titlebar-height) auto minmax(0,1fr) auto; }
+body #status-anchor { grid-area: 1 / 1 / 2 / -1; position: relative; inset: auto; height: auto; min-height: 0; padding: 0 14px 0 22px; gap: 12px; box-shadow: none; }
+body #task-tabs { grid-area: 2 / 1 / 3 / -1; position: relative; inset: auto; }
+body #status-anchor .brand { flex: 0 1 auto; min-width: 0; }
+body .brand-copy { display: flex; align-items: center; gap: 12px; min-width: 0; }
+body .brand-state-slot { min-width: 0; }
+body #brand-model { display: block; max-width: 25vw; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+body #brand-status { display: none; }
+body #usage-anchor { position: static; inset: auto; margin: 0; gap: 5px; min-width: 0; max-width: none; font-size: 10px; font-weight: 600; align-items: center; app-region: no-drag; cursor: pointer; }
+body #usage-anchor .usage-separator { opacity: .4; }
+body #status-anchor .window-controls { flex: 0 0 auto; margin-left: auto; }
+body #screen, body #view-surface { grid-area: 3 / 1; position: relative; inset: auto; width: 100%; height: 100%; min-width: 0; min-height: 0; max-width: none; max-height: none; margin: 0; padding: 0 28px; overflow: hidden; }
+body #side-menu { grid-area: 3 / 2; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 12px 9px; gap: 20px; }
+body #bubbles, body #dynamic-menu { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0; }
+body #dynamic-menu { min-height: 0; overflow-y: auto; overflow-x: visible; }
+body #bubbles { flex: 0 0 auto; }
+body #api-slot { order: 0; }
+body #bubbles > .bubble-slot:has(#matrix-bubble) { order: 1; }
+body #login-slot { order: 2; }
+body #document-slot { order: -1; display: flex; flex-direction: column; gap: 10px; max-width: none; max-height: 35vh; padding: 4px 0; overflow: auto; mask-image: linear-gradient(transparent,#000 6px,#000 calc(100% - 6px),transparent); }
+body #side-menu .bubble { flex-shrink: 0; width: 38px; height: 38px; }
+body #plan-slot { position: relative; display: flex; flex-direction: column; gap: 5px; }
+body #plan-summary { width: 56px; font-size: 10px; line-height: 1.45; max-height: 3em; overflow: hidden; overflow-wrap: anywhere; color: #aaa; text-align: center; }
+body #bottom-bar { grid-area: 4 / 1 / 5 / -1; position: relative; inset: auto; display: block; width: 100%; height: auto; min-height: 52px; padding: 0 22px; background: transparent; border: 0; box-shadow: none; }
+body #input-dock { position: relative; inset: auto; display: flex; flex-direction: row; align-items: flex-end; gap: 12px; width: 100%; max-width: 1120px; margin: 0 auto; padding: 8px 0 12px; min-height: 0; }
+body .input-toggle-slot { flex: 0 0 36px; margin-bottom: 2px; }
+body #input-bubble { width: 36px; height: 36px; }
+body #input-bubble.has-draft::after { content: ''; position: absolute; right: 1px; top: 1px; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+body #composer, body.composer-open #composer { position: relative; inset: auto; transform: none; display: flex; flex: 1 1 auto; min-width: 0; width: auto; max-width: none; margin: 0; padding: 8px 0; min-height: 36px; gap: 10px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+body #message { flex: 1 1 auto; min-width: 0; width: 100%; min-height: 24px; max-height: none; margin: 0; padding: 0; line-height: 24px; resize: none; background: transparent; border: 0; box-shadow: none; }
+body #input-caret { display: none; }
+body .send-recovery { max-width: 1120px; max-height: min(14vh,160px); overflow: auto; margin: 0 auto; padding-top: 6px; font-size: 12px; overflow-wrap: anywhere; }
+body .send-recovery p { margin: 0 0 4px; }
+body .send-recovery textarea { display: block; width: 100%; min-height: 48px; resize: vertical; }
+body .send-recovery-actions, body .send-recovery .composer-attachment { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+body #composer, body.composer-open #composer { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; row-gap: 0; }
+body #composer .paste-review { grid-area: 1 / 1 / 2 / -1; display: flex; flex-direction: column; gap: 6px; min-width: 0; width: 100%; max-height: min(18vh,200px); overflow: auto; padding: 0; margin: 0 0 10px; text-align: left; background: transparent; border: 0; box-shadow: none; }
+body #composer #composer-attachments { grid-area: 2 / 1 / 3 / -1; display: flex; flex-wrap: wrap; gap: 5px 12px; max-height: min(8vh,110px); overflow: auto; margin-bottom: 10px; }
+/* Recovery shares the existing preview budget with the newer draft. */
+body .send-recovery:not([hidden]) ~ #input-dock #composer .paste-review { max-height: min(6vh,200px); }
+body .send-recovery:not([hidden]) ~ #input-dock #composer #composer-attachments { max-height: min(6vh,110px); }
+body #composer #message { grid-area: 3 / 1; }
+body #composer .composer-actions { grid-area: 3 / 2; height: 28px; gap: 10px; }
+body #composer .composer-actions button { width: 26px; height: 26px; padding: 2px; background: transparent; }
+body #composer .composer-actions svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+body #composer .composer-attachment { display: flex; align-items: center; gap: 6px; min-width: 0; max-width: 100%; font-size: 12px; }
+body #composer .composer-attachment > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+body #composer .composer-attachment button { flex: 0 0 24px; background: transparent; padding: 2px; font-size: 18px; }
+body #composer .paste-block { display: flex; align-items: start; gap: 8px; min-width: 0; }
+body #composer .paste-block details { flex: 1; min-width: 0; }
+body #composer .paste-block summary { cursor: pointer; overflow-wrap: anywhere; color: var(--muted); font-size: 12px; }
+body #composer .paste-block pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0; font: inherit; user-select: text; }
+body #composer .paste-block button { flex: 0 0 24px; padding: 0; font-size: 18px; line-height: 24px; background: transparent; }
+body #stop { position: relative; inset: auto; flex: 0 0 30px; width: 30px; height: 30px; margin: 0 0 5px auto; }
+body #view-surface { display: flex; flex-direction: column; padding: 0 24px 12px 32px; }
+body #view-heading { display: flex; flex: 0 0 auto; align-items: center; gap: 12px; min-height: 56px; }
+body #home-button { padding: 8px; display: grid; place-items: center; }
+body #home-button svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+body #view-title { font-size: 17px; font-weight: 500; margin: 0; }
+body #view-content { position: relative; flex: 1 1 auto; min-width: 0; min-height: 0; display: flex; }
+body #view-content > .workspace-view { position: relative; inset: auto; width: 100%; max-width: none; height: 100%; max-height: none; min-height: 0; margin: 0; border: 0; border-radius: 0; padding: 0; color: inherit; background: transparent; box-shadow: none; backdrop-filter: none; transform: none; transition: none; }
+body #view-content > .workspace-view:is([open],:not([hidden])) { display: flex; flex-direction: column; opacity: 1; }
+/* Navigation pages live in the OS surface.  Their old dialog styles remain
+   available for the small confirmation dialogs elsewhere, but these pages
+   must never become centered glass popups when the active view is switched. */
+body #view-content > :is(#panel,#plan-view,#browser-view,#document-viewer) {
+  position: relative; inset: auto; width: 100%; max-width: none; height: 100%; max-height: none;
+  min-width: 0; min-height: 0; margin: 0; border: 0; border-radius: 0; padding: 0;
+  background: transparent; box-shadow: none; backdrop-filter: none; transform: none;
+  transition: none; overflow: hidden;
+}
+body #panel .panel-heading, body #onboarding .onboard-header h1, body #document-viewer .document-header h2 { display: none; }
+body #onboarding .onboard-header { grid-template-columns: minmax(0,1fr) auto; border: 0; margin: 0 0 14px; padding: 0; }
+body #onboarding .settings-tabs { grid-area: 1 / 1; }
+body #settings-body, body #plan-content { min-height: 0; overflow: auto; flex: 1 1 auto; padding: 4px 10px 20px 0; }
+body #panel-content, body #document-content { padding: 12px 12px 24px 0; }
+body #plan-content #task-plan { max-height: none; width: 100%; }
+body #plan-content .plan-phases { max-height: none; overflow: visible; }
+body #system-slot { position: relative; flex: 0 0 auto; app-region: no-drag; }
+body #system-bubble { padding: 4px; font-size: 17px; }
+body #system-popover { position: fixed; z-index: 80; box-sizing: border-box; padding: 12px; overflow: auto; overscroll-behavior: contain; overflow-wrap: anywhere; }
+body #system-popover .system-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 8px; }
+body #system-popover .system-entry { width: 100%; margin: 8px 0; text-align: left; }
+body #system-popover summary { display: grid; grid-template-columns: 10px minmax(0,1fr) auto; gap: 2px 8px; cursor: pointer; font-size: 12px; }
+body #system-popover summary::before { content: '▸'; grid-area: 1 / 1; }
+body #system-popover details[open] summary::before { content: '▾'; }
+body #system-popover .system-title { font-weight: 600; grid-area: 1 / 2; }
+body #system-popover .system-read-status { grid-area: 1 / 3; }
+body #system-popover .system-read-status, body #system-popover time { font-size: 10px; color: #999; }
+body #system-popover .unread .system-read-status { color: #cfddf4; }
+body #system-popover time, body #system-popover .system-preview { grid-column: 2 / -1; }
+body #system-popover .system-preview { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #bbb; }
+body #system-popover .system-content { max-height: min(38vh,280px); overflow: auto; overscroll-behavior: contain; margin: 8px 0; font-size: 13px; line-height: 1.65; }
+body #system-popover .system-content > :first-child { margin-top: 0; }
+body #system-popover .system-content > :last-child { margin-bottom: 0; }
+body #system-popover .system-content pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+body #system-popover .system-actions { display: flex; gap: 8px; }
+body #system-popover .system-actions button { font-size: 11px; }
+body #system-popover .system-load-status { font-size: 12px; }
+body.custom-background :is(#status-anchor,#bottom-bar,#task-tabs) { background: transparent; backdrop-filter: none; }
+@media (max-width: 1000px) { body #usage-anchor { gap: 3px; font-size: 9px; } body #usage-anchor > span:first-child, body #usage-anchor .usage-separator { display: none; } body #brand-model { max-width: 18vw; font-size: 9px; } body #status-anchor { gap: 8px; padding-left: 14px; } }
+@media (max-width: 620px) { body { --rail-width: 50px; } body #screen { padding: 0 16px; } body .brand-title { font-size: 13px; } body .brand-copy { gap: 6px; } body #brand-model { max-width: 12vw; } body #usage-anchor { flex-wrap: wrap; max-width: 155px; justify-content: flex-start; row-gap: 1px; } body #view-surface { padding-left: 16px; } body #side-menu { padding-inline: 5px; } }
+@media (prefers-reduced-motion: no-preference) { body:not(.reduce-motion) #composer { animation: composer-enter 180ms ease-out; } @keyframes composer-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } } }
+
+/* One column with an activity anchor measured against the available surface.
+   Text and tool output only scroll inside their own bounded regions. */
+body[data-conversation-mode] #screen { display: block; }
+body[data-conversation-mode] #screen #conversation { position: relative; inset: auto; display: flex; flex-direction: column; width: 100%; max-width: 1120px; height: 100%; min-height: 0; margin: 0 auto; padding: 18px 0; overflow: auto; }
+body[data-conversation-mode] #screen #conversation #emergence { width: 100%; height: auto; min-height: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto; }
+body[data-conversation-mode] #screen .presence-header { position: relative; display: grid; grid-template-columns: 66px minmax(0,1fr); grid-template-rows: 66px; min-height: 0; padding: 0; align-items: center; gap: 0 14px; }
+body[data-conversation-mode] #screen :is(#presence,.role-instrument) { grid-area: 1 / 1; width: 66px; height: 66px; margin: 0; }
+body[data-conversation-mode] #screen #presence-label, body[data-conversation-mode] #screen #eyra-name { grid-area: 1 / 2; }
+body #eyra-name, body .message-meta { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; min-width: 0; }
+body .message-meta { font-size: 11px; line-height: 1.5; color: #96969f; font-weight: 400; }
+body .message-run { color: #b9b9c2; }
+body .message-identity { flex-wrap: wrap; }
+body[data-conversation-mode] #screen #live-current { grid-column: 2; width: 100%; max-width: none; min-width: 0; }
+body[data-conversation-mode] #screen #activity-detail { display: flex; flex-direction: column; gap: 12px; min-height: 0; width: 100%; }
+body[data-conversation-mode] #screen #activity-detail :is(#answer-stage,.team-voice) { position: relative; inset: auto; width: 100%; max-height: none; height: auto; min-height: 0; margin: 0; padding: 0 0 12px 80px; flex: 0 0 auto; }
+body[data-conversation-mode] #screen #activity-detail #work { position: relative; inset: auto; display: flex; flex-direction: column; width: 100%; height: auto; max-height: none; min-height: 0; margin: 0; padding: 0; flex: 1 1 auto; background: transparent; backdrop-filter: none; box-shadow: none; border: 0; border-radius: 0; }
+body[data-conversation-mode] #screen #live-terminal { width: 100%; height: 100%; display: flex; flex-direction: column; min-height: 0; margin: 0; padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+body[data-conversation-mode] #screen #live-terminal > header { display: none; }
+body[data-conversation-mode] #screen #terminal-content { display: flex; flex-direction: column; width: 100%; min-height: 0; height: 100%; flex: 1 1 auto; overflow: hidden; margin: 0; padding: 0; max-height: none; }
+body[data-conversation-mode] #screen #terminal-content[data-reading="true"] { display: flex !important; }
+body[data-conversation-mode] #terminal-content .terminal-current, body[data-conversation-mode] #terminal-content .terminal-reading { min-height: 0; flex: 1 1 auto; overflow: auto; padding: 4px 0 14px; }
+body[data-conversation-mode] #terminal-content[data-reading="true"] .terminal-current { display: none; }
+body[data-conversation-mode] #terminal-content .terminal-entry { margin: 0; padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+body[data-conversation-mode] #terminal-content .transcript-detail { max-height: none; overflow: auto; padding: 8px 0 14px; background: transparent; border: 0; }
+body[data-conversation-mode] #terminal-content[data-continuous="true"] .terminal-current .transcript-detail { overflow: visible; }
+body[data-conversation-mode] #terminal-content .transcript-command, body[data-conversation-mode] #terminal-content .transcript-output { background: transparent; border: 0; padding: 0; margin-block: 8px; }
+body[data-conversation-mode="work"] #screen #conversation { overflow: hidden; padding: 0; }
+body[data-conversation-mode="work"] #screen #conversation #emergence { position: absolute; inset: 0; height: 100%; display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,calc(40% - 24px)) 48px minmax(0,1fr); gap: 0; }
+body[data-conversation-mode="work"] #screen #live-actions { grid-area: 1 / 1; display: block; width: 100%; max-height: 180px; height: auto; min-height: 0; align-self: end; overflow-y: auto; overflow-x: hidden; margin: 0; padding: 12px 0; scrollbar-width: none; mask-image: linear-gradient(transparent,#000 16px,#000 calc(100% - 16px),transparent); }
+body[data-conversation-mode="work"] #screen #live-actions .recent-action { height: 30px; min-height: 30px; margin: 0; padding: 4px 0 4px 62px; overflow: hidden; opacity: .7; white-space: nowrap; line-height: 22px; cursor: pointer; }
+body[data-conversation-mode="work"] #screen #live-actions .recent-action p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-indent: 0; }
+body[data-conversation-mode="work"] #screen .presence-header { grid-area: 2 / 1; grid-template-columns: 48px minmax(0,1fr); grid-template-rows: 48px; gap: 0 14px; }
+body[data-conversation-mode="work"] #screen :is(#presence,.role-instrument) { width: 48px; height: 48px; }
+body[data-conversation-mode="work"] #screen #activity-detail { grid-area: 3 / 1; min-height: 0; padding: 8px 0 8px 62px; overflow: hidden; }
+body[data-conversation-mode="work"] #screen #activity-detail #live-current { grid-area: auto; max-height: 100%; height: auto; min-height: 24px; flex: 0 1 auto; overflow: auto; }
+body[data-conversation-mode="work"] #screen #activity-detail :is(#answer-stage,.team-voice) { min-height: 0; max-height: 100%; flex: 1 1 auto; padding: 0; overflow: auto; }
+body[data-conversation-mode="work"] #screen #presence-caption { position: absolute; top: calc(40% + 25px); left: 62px; }
+body[data-conversation-mode="work"] #screen #presence-caption:empty { display: none; }
+body #view-content #task-plan { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; padding: 0; }
+body #view-content #task-plan .task-progress { max-height: none; background: transparent; border: 0; padding: 0; }
+body #usage-anchor { display: flex; }
+body #screen .activity-return { position: absolute; right: 0; top: 0; max-width: calc(100% - 90px); padding: 4px 8px; font-size: 11px; color: #bbb; background: transparent; }
+body #screen .activity-body-reading { min-height: 0; flex: 1 1 auto; overflow: auto; padding: 4px 0 16px; }
+body #screen .tool-presentation .tool-view { background: transparent; border: 0; border-radius: 0; padding: 0; overflow: visible; }
+body #screen .tool-presentation .tool-heading { display: none; }
+body #screen .explore-output { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; }
+body #screen .raw-receipt:not(.chat-link-receipt) > summary { cursor: pointer; color: #aaa; padding-block: 8px; font-size: 12px; }
+body #screen .diff-marker { flex: 0 0 1ch; text-align: center; }
+body #screen .tool-presentation .code-line { gap: 8px; }
+body #screen #live-actions .recent-action[data-kind="body"] { height: auto; min-height: 30px; white-space: normal; }
+body #screen #live-actions .process-summary { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 10px; margin: 0; padding: 0; }
+body #screen #live-actions .process-summary .message-identity { margin: 0; gap: 6px; }
+body #screen #live-actions .process-summary .message-avatar { width: 20px; height: 20px; font-size: 10px; }
+body #screen #live-actions .process-summary .eyra-text { min-width: 0; margin: 0; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; font-size: inherit; }
+body #screen #live-actions .process-summary .eyra-text > * { margin: 0; }
+body [hidden], body #view-content > [hidden], body #screen [hidden] { display: none !important; }
+@media (max-height: 620px) { body[data-conversation-mode="work"] #screen #live-actions { max-height: 114px; } }
+@media (max-height: 460px) { body[data-conversation-mode="work"] #screen #live-actions { max-height: 84px; } }
+@media (max-width: 620px) { body[data-conversation-mode] #screen .presence-header { grid-template-columns: 48px minmax(0,1fr); grid-template-rows: 48px; } body[data-conversation-mode] #screen :is(#presence,.role-instrument) { width: 48px; height: 48px; } body[data-conversation-mode] #screen #activity-detail :is(#answer-stage,.team-voice) { padding-left: 62px; } body[data-conversation-mode="work"] #screen #activity-detail :is(#answer-stage,.team-voice) { padding-left: 0; } }
+/* Native task terminal projection, within the shared content surface. */
+#terminal-view{display:flex;flex-direction:column;gap:12px;overflow:auto;min-height:0}
+#terminal-view[hidden]{display:none}
+#background-terminals{display:flex;flex-wrap:wrap;gap:8px}
+#background-terminals button[aria-current=true]{color:var(--text);text-decoration:underline}
+#background-terminal-detail{display:flex;flex-direction:column;gap:10px;min-height:0;flex:1}
+#background-terminal-detail[hidden]{display:none}
+#background-terminal-detail>header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+#background-terminal-command{white-space:pre-wrap;overflow-wrap:anywhere}
+#background-terminal-path{overflow-wrap:anywhere;opacity:.7}
+#background-terminal-output{flex:1;min-height:120px;max-height:55vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;user-select:text;font:13px/1.65 var(--font-mono,monospace);margin:0}
+#background-terminal-output[hidden],.terminal-page-actions[hidden]{display:none}
+#background-terminal-screen{flex:1;min-height:140px;height:38vh;max-height:50vh;overflow:hidden;min-width:0}
+#background-terminal-screen[hidden],#terminal-screen-controls[hidden]{display:none}
+#terminal-screen-controls{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+#terminal-screen-controls small{opacity:.65}
+.terminal-page-actions,.terminal-input-options{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#terminal-input-form{display:flex;flex-direction:column;gap:8px}
+#terminal-input{resize:vertical;min-height:48px;max-height:150px;width:100%;box-sizing:border-box;background:transparent;color:inherit;font:inherit;border:1px solid currentColor;border-radius:6px;padding:8px}
+.terminal-input-options label{display:flex;align-items:center;gap:6px}
+#terminal-input-status,#terminal-private-notice,#terminal-output-range{opacity:.75;line-height:1.6}
+.plan-acceptance,.plan-completion{margin:12px 0;line-height:1.7}
+.plan-criterion{margin:8px 0;overflow-wrap:anywhere}
+#terminal-input.private-input{-webkit-text-security:disc}
+#control-view{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden;gap:8px}
+#control-surface{flex:1;min-height:0;min-width:0}
+.plugin-view-header{display:flex;gap:12px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+#control-error:empty{display:none}
+#link-view{overflow:auto;min-height:0}
+#link-identity,.link-explanation,#link-error{line-height:1.7;overflow-wrap:anywhere}
+#link-error:empty{display:none}
+.link-section{margin:22px 0;overflow-wrap:anywhere}
+.link-section h3{font-size:inherit;font-weight:600}
+.link-section ul{list-style:none;margin:0;padding:0}
+.link-section li{display:flex;flex-direction:column;gap:4px;margin:14px 0}
+.link-section li span,.link-section small,.link-explanation{opacity:.7}
+.link-stale{color:var(--muted)}
+#collaboration-error:empty{display:none}
+.message-attachments{list-style:none;margin:8px 0 0;padding:0;opacity:.8;font-size:.9em;line-height:1.6;overflow-wrap:anywhere}
+
+/* Shared browser lives beside Home; native pages keep their own layout bounds. */
+body #desktop-dock #browser-slot{order:1;display:flex}
+

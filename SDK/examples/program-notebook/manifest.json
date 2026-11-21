@@ -1,0 +1,48 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.notebook",
+  "kind": "program",
+  "name": "共用便签示例",
+  "summary": "用户与 Eyra 通过同一个状态读写便签。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "program": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "program": "program.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "app.js": {
+      "sha256": "5bc32bdb06ae09b94085e3540ca707bcca300ac40d0d2a098d3d62cac91d5847",
+      "size": 553
+    },
+    "index.html": {
+      "sha256": "41450e8a2b982164c922652735c67df398930541ca5fd5afacbc05e6a7473d66",
+      "size": 435
+    },
+    "program.json": {
+      "sha256": "0853165bc2f80d81c879a634db8909cd4f5e7d444a01153ac8ab429f54d9fa19",
+      "size": 227
+    },
+    "style.css": {
+      "sha256": "6417c7ecbbe9d9959d0206d2db6346f6fb6a4d518c2332321b7d1b6940c20ab1",
+      "size": 456
+    }
+  }
+}

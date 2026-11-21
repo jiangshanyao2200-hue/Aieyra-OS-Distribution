@@ -1,0 +1,36 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.halo-prism",
+  "kind": "halo",
+  "name": "棱镜光圈",
+  "summary": "独立光圈图形与状态动画，不改变主题、角色或对话。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "halo": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "halo": "halo.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "halo.json": {
+      "sha256": "3d56749978f93d4375d06b0dd100661128d66e05384bff3bfbe625e8c02348ad",
+      "size": 2935
+    }
+  }
+}

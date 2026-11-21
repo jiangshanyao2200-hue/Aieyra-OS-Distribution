@@ -1,0 +1,152 @@
+[
+  {
+    "id": "browser",
+    "name": "Navi",
+    "description": "负责浏览器",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "browser",
+      "software_api",
+      "project",
+      "terminal",
+      "exec_command",
+      "write_stdin",
+      "read_shell_output",
+      "apply_patch",
+      "update_plan",
+      "human"
+    ],
+    "prompt": "Program/browser.txt",
+    "previous_name": "Navi",
+    "previous_description": "浏览器专员，负责网页操作、观察与网页开发调试。"
+  },
+  {
+    "id": "settings",
+    "name": "Sera",
+    "description": "负责设置",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "settings",
+      "software_api",
+      "human"
+    ],
+    "prompt": "Program/settings.txt",
+    "previous_name": "设置 Agent",
+    "previous_description": "负责OS设置、参数、模型连接、诊断和更新。"
+  },
+  {
+    "id": "contacts",
+    "name": "Mira",
+    "description": "负责联系人",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "human"
+    ],
+    "prompt": "Program/contacts.txt",
+    "previous_name": "联系人 Agent",
+    "previous_description": "负责创建与管理智能体、联系人、群聊及其资料和工具。"
+  },
+  {
+    "id": "link",
+    "name": "Lira",
+    "description": "负责 Link",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "link",
+      "software_api"
+    ],
+    "prompt": "Program/link.txt",
+    "previous_name": "Link Agent",
+    "previous_description": "负责Link连接、工位整理、协作状态与事项管理。"
+  },
+  {
+    "id": "together",
+    "name": "Together Agent",
+    "description": "负责 Together 的本地协作、工位和工单状态。",
+    "tools": ["agents", "software_api"],
+    "prompt": "Program/generic.txt"
+  },
+  {
+    "id": "servers",
+    "name": "Astra",
+    "description": "负责服务器",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "server",
+      "project",
+      "terminal",
+      "exec_command",
+      "write_stdin",
+      "read_shell_output"
+    ],
+    "prompt": "Program/servers.txt",
+    "previous_name": "服务器 Agent",
+    "previous_description": "负责用户服务器、连接、探针及运行状态。"
+  },
+  {
+    "id": "workspace",
+    "name": "Aria",
+    "description": "负责 Workspace",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "software_api",
+      "image_gen",
+      "video_gen",
+      "project",
+      "terminal",
+      "exec_command",
+      "write_stdin",
+      "read_shell_output",
+      "apply_patch",
+      "update_plan"
+    ],
+    "prompt": "Program/workspace.txt",
+    "previous_name": "画布 Agent",
+    "previous_description": "负责Workspace完整画布、选区和引用、素材与Image Gen。"
+  },
+  {
+    "id": "computer",
+    "name": "电脑助手",
+    "description": "负责桌面与外部应用操作",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "computer"
+    ],
+    "prompt": "Program/computer.txt",
+    "standalone": true
+  },
+  {
+    "id": "center",
+    "name": "Nova",
+    "description": "负责程序健康检查、故障维护、受管更新与发布反馈",
+    "tools": [
+      "view_image",
+      "web_search",
+      "agents",
+      "toolbox",
+      "software_api"
+    ],
+    "prompt": "Program/center.txt"
+  }
+]

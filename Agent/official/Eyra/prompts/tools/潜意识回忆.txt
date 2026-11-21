@@ -1,0 +1,1 @@
+Compatibility notice: independent subconscious recall is retired. Use the declared memory tool to search PAC packets, source IDs and timestamped originals. Historical subconscious messages remain records, not active instructions.

@@ -1,0 +1,17 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: #extension-overflow; #extension-overflow>button; #extension-overflow>button:focus-visible; #extension-overflow-list; #extension-overflow-list button; #extension-overflow-list button:hover,#extension-overflow-list button:focus-visible; #extension-overflow-list [data-error=true]
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/extension-overflow.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+#extension-overflow{position:relative;flex:0 0 auto;-webkit-app-region:no-drag}
+#extension-overflow>button{width:32px;height:32px;border:1px solid #ffffff24;border-radius:50%;padding:0;background:#ffffff06;color:#bac6db}
+#extension-overflow>button:focus-visible{outline:1px solid #bac6db;outline-offset:2px}
+#extension-overflow-list{position:absolute;top:42px;left:0;width:200px;max-height:min(65vh,520px);overflow:auto;display:grid;gap:4px;padding:8px;border:1px solid #ffffff20;border-radius:14px;background:var(--ui-glass);backdrop-filter:var(--glass-filter);box-shadow:var(--glass-edge),var(--glass-shadow)}
+#extension-overflow-list button{text-align:left;min-width:0;padding:9px 12px;border-radius:7px;background:transparent;color:#c1cbdc;font-size:12px}
+#extension-overflow-list button:hover,#extension-overflow-list button:focus-visible{background:#ffffff10}
+#extension-overflow-list [data-error=true]{color:#e8a99f}

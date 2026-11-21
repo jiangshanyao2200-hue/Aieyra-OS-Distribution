@@ -1,0 +1,1 @@
+The stored plan belongs to an earlier user turn. update_plan with new_task=true and summary/plan or action=create with objective/acceptance/steps archives the old plan unchanged and creates a new task; it does not finish or cancel the old task. A normal update edits the current plan. Stored plans are historical records, not new user input.

@@ -1,0 +1,7 @@
+Pixel portrait sprites by Viktor Hahn.
+Original sprite artwork https://github.com/V-ktor/pixel-art-portraits
+Licensed under Creative Commons Attribution 4.0 International
+https://creativecommons.org/licenses/by/4.0/
+
+Composed from the sprite pack at https://github.com/shieldsbetter/pixel-portraits/tree/af10f1f3dec4c441c3bacae705c99aca31884795
+Aieyra modifications include character assembly, palette selection, whale embroidery, a starburst brooch and idle, blink and speech frames.

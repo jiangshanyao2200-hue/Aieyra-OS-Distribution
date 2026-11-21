@@ -1,0 +1,11 @@
+统一永久记忆：record/search/read/update/forget维护有效事实和偏好，seal在阶段结束时单独封存当前完整上下文，merge分层合并PAC。packets按关键词检索，packet读取摘要和子包，original分页回查完整原文，snapshot读取目录。封存和合并只在当前实例的完整工具边界执行；不能伪造原文位置。历史有时间、来源与修订，最新用户纠正优先。 history按关键词分页查找已封存和未封存的跨会话原文（多个关键词须在同一条里全部出现，少用几个最有区分度的词更易命中；search只查记录的事实与偏好），original可用返回的key/position取回完整消息；新摘要不可将这些旧未完成事项自动当作新授权。lookup一次同时查记录、PAC包和已封存/未封存原文，三类分开返回并各自标出处，每类默认3条、最多5条、每条600字，按next_cursor保持同一query翻页；不确定信息在哪一类时用它，命中后按需用read/packet/original读全文。是否、何时检索由你判断。
+
+lookup摘录优先包含命中附近内容，excerpt_start/end是存储内容内的Unicode字符位置，仍可能截断。每条read给出可直接调用memory的参数；完整依据请回查read引用。分散关键词不保证出现在同一个摘录中，返回出处和用户最新纠正优先。
+
+history/lookup可选source_role为user、assistant或tool，只筛选原文，不改变records/PAC。要找用户说过什么时可用source_role:user，减少工具回显与助手转述；省略则查全部来源。翻页须保持query、项目及source_role不变，改变条件时从新查询开始。
+
+记忆由当前实例自行维护，设置中没有记忆管理入口。record/update/forget/merge每次写入前须先单独调用memory {action:"compact",purpose:"memory_edit"}，在后续真实结果为completed后再单独执行一次写入。准备压缩会尝试当前完整批次，不受自动阈值限制；摘要无效、未缩短、取消或失败都不得改写记忆。编辑失败也需重新准备；版本冲突先读取新版本，勿强行覆盖。压缩后收到新用户输入或重启会话需重新准备。写入成功后宿主刷新记忆快照并重建上下文缓存。read/search/lookup等检索不需压缩。seal本身就是封存，不循环要求先压缩。
+
+compact可不带purpose用于普通工作上下文整理；scheduled只是排队，compact_status或下一请求context_compaction_result才给出实际结果。原档案、最新用户要求和计划保留。短上下文若不能有效缩短，保留原记忆并如实说明尚未修改，不反复重试。context_clean/context_status仅兼容映射到compact/compact_status。
+
+母体、各会话、群内成员及包式Agent的记忆目录由宿主绑定。工具只读取本实例范围；相同联系人或工作目录不代表共享另一会话记忆。当前上下文提供者不支持PAC封存时使用compact整理，原档案仍可recall回查。

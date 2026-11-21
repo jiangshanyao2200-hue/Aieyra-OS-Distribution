@@ -1,0 +1,443 @@
+/* @file-map:start
+文件: link/desktop/ui/workspace.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: link/office/web/station-visual.css, link/office/web/station-visual.mjs
+上游: link/desktop/ui/index.html, link/desktop/ui/login.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | @font-face
+  rule-2 | style | @font-face
+  rule-3 | style | @font-face
+  rule-4 | style | :root
+  rule-5 | style | *
+  rule-6 | style | body
+  rule-7 | style | button,input,textarea,select
+  rule-8 | style | button
+  rule-9 | style | button:hover:not(:disabled)
+  rule-10 | style | button:active:not(:disabled)
+  rule-11 | style | button:disabled
+  rule-12 | style | button.primary
+  rule-13 | style | button.primary:hover:not(:disabled)
+  rule-14 | style | button.secondary
+  rule-15 | style | button.danger
+  rule-16 | style | h1,h2,h3,p
+  rule-17 | style | h1
+  rule-18 | style | h2
+  rule-19 | style | h3
+  rule-20 | style | p
+  rule-21 | style | small,.muted
+  rule-22 | style | small
+  rule-23 | style | a
+  rule-24 | style | .icon
+  rule-25 | style | i[data-icon]
+  rule-26 | style | .sr-only
+  rule-27 | style | .titlebar
+  rule-28 | style | .titlebar nav#tabs
+  rule-29 | style | .titlebar button
+  rule-30 | style | .titlebar #tabs button
+  rule-31 | style | .titlebar #tabs button .icon
+  rule-32 | style | .titlebar #tabs button span
+  rule-33 | style | .titlebar #tabs button.active
+  rule-34 | style | .titlebar #tabs button:is(:hover,:focus-visible)
+  rule-35 | style | .titlebar .account
+  rule-36 | style | .account .avatar
+  rule-37 | style | .account>span:not(.avatar)
+  rule-38 | style | .account:not(:has(.avatar))
+  rule-39 | style | .window-actions
+  rule-40 | style | .window-actions button
+  rule-41 | style | .window-actions svg
+  rule-42 | style | .window-actions button[data-window=close]:hover
+  rule-43 | style | .brand-icon
+  rule-44 | style | .login-window .titlebar strong
+  rule-45 | style | #workspace
+  rule-46 | style | #notice
+  rule-47 | style | aside.rail
+  rule-48 | style | .rail button
+  rule-49 | style | .rail .rail-bottom
+  rule-50 | style | .rail button .ui-rail-icon
+  rule-51 | style | .rail button.active .ui-rail-icon
+  rule-52 | style | .rail button.active
+  rule-53 | style | .surface
+  rule-54 | style | .surface>header,.heading
+  rule-55 | style | .surface>header h1
+  rule-56 | style | .surface>header>.actions
+  rule-57 | style | .scroll
+  rule-58 | style | .scroll::-webkit-scrollbar,.tree::-webkit-scrollbar,pre::-webkit-scrollbar
+  rule-59 | style | .row
+  rule-60 | style | .row.between
+  rule-61 | style | .actions
+  rule-62 | style | .actions.bottom
+  rule-63 | style | .empty
+  rule-64 | style | .empty .icon
+  rule-65 | style | .status-dot
+  rule-66 | style | .eyebrow
+  rule-67 | style | .pill-state
+  rule-68 | style | .login-stage
+  rule-69 | style | .login-stage h1
+  rule-70 | style | .login-stage p
+  rule-71 | style | .login-stage>.primary
+  rule-72 | style | .login-stage:before
+  rule-73 | style | .halo
+  rule-74 | style | .halo svg
+  rule-75 | style | .halo .orbit-inner
+  rule-76 | style | .halo .orbit-main
+  rule-77 | style | .halo .orbit-track
+  rule-78 | style | .halo .orbit-runner
+  rule-79 | style | .halo .orbit-points
+  rule-80 | style | .halo .orbit-arc
+  rule-81 | style | .halo strong
+  rule-82 | style | .halo strong:empty:after
+  rule-83 | style | .mission
+  rule-84 | style | .mission-copy
+  rule-85 | style | .mission-copy h2
+  rule-86 | style | .mission-copy>p
+  rule-87 | style | .mission-copy details
+  rule-88 | style | .progress
+  rule-89 | style | .progress i
+  rule-90 | style | .metrics
+  rule-91 | style | .metric
+  rule-92 | style | .metric b
+  rule-93 | style | .section-heading
+  rule-94 | style | .section-heading h3
+  rule-95 | style | .quests
+  rule-96 | style | .quest
+  rule-97 | style | .quest:hover
+  rule-98 | style | .quest[data-status=voting] .status-dot
+  rule-99 | style | .quest[data-status=completed] .status-dot
+  rule-100 | style | .quest[data-status=rejected] .status-dot
+  rule-101 | style | .quest h3
+  rule-102 | style | .quest p
+  rule-103 | style | .quest .actions
+  rule-104 | style | .quest .author
+  rule-105 | style | .vote-count
+  rule-106 | style | .vote-count.oppose
+  rule-107 | style | .vote-meter
+  rule-108 | style | .vote-meter i
+  rule-109 | style | .vote-meter i:last-child
+  rule-110 | style | .lanes
+  rule-111 | style | .lanes button
+  rule-112 | style | .lanes .active
+  rule-113 | style | .lanes .count
+  rule-114 | style | .members
+  rule-115 | style | .member
+  rule-116 | style | .member>span:last-child
+  rule-117 | style | .avatar
+  rule-118 | style | .member .avatar
+  rule-119 | style | .member:is(:hover,:focus-visible) .avatar
+  rule-120 | style | .pager
+  rule-121 | style | .repository
+  rule-122 | style | .tree
+  rule-123 | style | .tree-search
+  rule-124 | style | .tree input
+  rule-125 | style | .tree button
+  rule-126 | style | .tree .node-name
+  rule-127 | style | .tree button .icon
+  rule-128 | style | .tree .chevron
+  rule-129 | style | .tree button.selected
+  rule-130 | style | .tree button.selected .icon
+  rule-131 | style | .tree button:focus-visible
+  rule-132 | style | .source
+  rule-133 | style | .source>header
+  rule-134 | style | .source>header strong
+  rule-135 | style | .source>header small
+  rule-136 | style | .source pre
+  rule-137 | style | .code-line
+  rule-138 | style | .code-line:before
+  rule-139 | style | .code-line.current-line
+  rule-140 | style | .source-find
+  rule-141 | style | .source-find input
+  rule-142 | style | .source-find small
+  rule-143 | style | .download-row
+  rule-144 | style | .download-row>img
+  rule-145 | style | .download-row>div
+  rule-146 | style | .download-row h2
+  rule-147 | style | .download-row p
+  rule-148 | style | .download-row .primary
+  rule-149 | style | .download-row+small
+  rule-150 | style | .chat-surface
+  rule-151 | style | .chat-surface>header
+  rule-152 | style | .chat-log
+  rule-153 | style | .chat-log>.secondary
+  rule-154 | style | .message
+  rule-155 | style | .message .avatar
+  rule-156 | style | .message>div
+  rule-157 | style | .message header
+  rule-158 | style | .message header strong
+  rule-159 | style | .message time
+  rule-160 | style | .message header button
+  rule-161 | style | .message[data-own=true] header strong
+  rule-162 | style | .markdown
+  rule-163 | style | .markdown pre
+  rule-164 | style | .markdown code
+  rule-165 | style | .markdown pre code
+  rule-166 | style | .markdown h2,.markdown h3
+  rule-167 | style | .markdown ul
+  rule-168 | style | .markdown blockquote
+  rule-169 | style | .message-images
+  rule-170 | style | .message-images img
+  rule-171 | style | .composer
+  rule-172 | style | .composer:focus-within
+  rule-173 | style | .composer textarea
+  rule-174 | style | .composer footer
+  rule-175 | style | .composer footer .secondary
+  rule-176 | style | .composer small
+  rule-177 | style | .composer #send
+  rule-178 | style | .attachment-preview
+  rule-179 | style | .attachment-preview:empty
+  rule-180 | style | .attachment-preview>div
+  rule-181 | style | .attachment-preview img
+  rule-182 | style | .attachment-preview button
+  rule-183 | style | .compose-error
+  rule-184 | style | .compose-error:empty
+  rule-185 | style | .chat-preview
+  rule-186 | style | .new-messages
+  rule-187 | style | .admin-list article
+  rule-188 | style | .admin-list article:first-child
+  rule-189 | style | .admin-list p
+  rule-190 | style | .admin-list .row>strong
+  rule-191 | style | .admin-list .avatar
+  rule-192 | style | .admin-unlock
+  rule-193 | style | .admin-unlock .halo
+  rule-194 | style | .admin-unlock p
+  rule-195 | style | .audit
+  rule-196 | style | #admin-clock
+  rule-197 | style | input,textarea,select
+  rule-198 | style | input:hover,textarea:hover
+  rule-199 | style | textarea
+  rule-200 | style | input::placeholder,textarea::placeholder
+  rule-201 | style | label
+  rule-202 | style | form .actions
+  rule-203 | style | dialog
+  rule-204 | style | dialog::backdrop
+  rule-205 | style | .dialog-top
+  rule-206 | style | .dialog-top button
+  rule-207 | style | .dialog-top h2
+  rule-208 | style | dialog textarea,dialog input
+  rule-209 | style | dialog .profile
+  rule-210 | style | .profile .avatar
+  rule-211 | style | .profile h2
+  rule-212 | style | .profile p
+  rule-213 | style | .error
+  rule-214 | style | .error:empty
+  rule-215 | style | .error .secondary
+  rule-216 | style | details
+  rule-217 | style | summary
+  rule-218 | style | details p
+  rule-219 | style | .dialog-section
+  rule-220 | style | .dialog-section h3
+  rule-221 | style | .loading
+  rule-222 | style | .pending-surface
+  rule-223 | style | .pending-surface:after
+  rule-224 | style | .resource-error
+  rule-225 | style | @keyframes orbit
+  rule-226 | style | @keyframes breathe
+  rule-227 | style | @keyframes enter
+  rule-228 | style | @keyframes message-in
+  rule-229 | style | @keyframes dialog-in
+  rule-230 | style | @keyframes loading-scan
+  rule-231 | style | @media(max-width:850px)
+  rule-232 | style | @media(max-width:620px)
+  rule-233 | style | .agent-list
+  rule-234 | style | .agent-entry
+  rule-235 | style | .agent-entry h2
+  rule-236 | style | .agent-entry .checks
+  rule-237 | style | .agent-entry .checks span
+  rule-238 | style | .agent-entry .checks .passed
+  rule-239 | style | .agent-entry .checks span:before
+  rule-240 | style | .agent-entry .checks .passed:before
+  rule-241 | style | .agent-entry .actions
+  rule-242 | style | .agent-history
+  rule-243 | style | .agent-history h2
+  rule-244 | style | .agent-history li
+  rule-245 | style | .agent-code
+  rule-246 | style | @media(max-width:720px)
+  rule-247 | style | @media(prefers-reduced-motion:reduce)
+  rule-248 | style | html[data-hidden=true] *,html[data-hidden=true] *::before,html[data-hidden=true] *::after
+  rule-249 | style | .rail button.ui-rail-button:hover:not(:disabled)
+  rule-250 | style | .vote-meter i[style="flex:0"]
+  rule-251 | style | .election-summary
+  rule-252 | style | .election-summary h2
+  rule-253 | style | .election-summary p
+  rule-254 | style | .election-roles
+  rule-255 | style | .election-roles>div
+  rule-256 | style | .election-roles strong
+  rule-257 | style | .election-roles span
+  rule-258 | style | .election-pool
+  rule-259 | style | .election-pool li
+  rule-260 | style | .election-pool li span
+  rule-261 | style | .election-candidate h4
+  rule-262 | style | .election-candidate>p
+  rule-263 | style | #selection-form fieldset
+  rule-264 | style | #selection-form .selection-option
+  rule-265 | style | #selection-form input[type=checkbox]
+  rule-266 | style | .agent-entry .checks span
+  rule-267 | style | .agent-entry small
+  rule-268 | style | .agent-entry .check-help
+  rule-269 | style | .stage-leadership
+  rule-270 | style | .stage-leadership .election-summary
+  rule-271 | style | .stage-leadership .section-heading
+  rule-272 | style | .stage-leadership .section-heading h3
+  rule-273 | style | .stage-leadership .election-status
+  rule-274 | style | .stage-leadership .election-roles
+  rule-275 | style | .stage-leadership .election-roles>div
+  rule-276 | style | .stage-leadership .election-roles strong
+  rule-277 | style | .stage-leadership .election-roles span
+  rule-278 | style | .election-records>summary
+  rule-279 | style | .election-records>summary:focus-visible
+  rule-280 | style | .election-record-body
+  rule-281 | style | .election-record-body .connection-note
+  rule-282 | style | .stage-leadership .election-pool
+  rule-283 | style | .stage-leadership .election-pool ol
+  rule-284 | style | .stage-leadership .election-pool button
+  rule-285 | style | .stage-leadership .quests
+  rule-286 | style | @media(max-width:800px)
+  rule-287 | style | .stage-mission
+  rule-288 | style | .stage-mission .halo
+  rule-289 | style | .stage-mission .mission-copy h2
+  rule-290 | style | .stage-mission .mission-copy>p
+  rule-291 | style | .stage-mission+.metrics
+  rule-292 | style | @media(max-width:800px)
+  rule-293 | style | .onboarding-stage
+  rule-294 | style | .onboarding-stage h2
+  rule-295 | style | .onboarding-caption
+  rule-296 | style | .onboarding-stage>.primary
+  rule-297 | style | .agent-flow
+  rule-298 | style | .flow-node
+  rule-299 | style | .flow-node .icon
+  rule-300 | style | .flow-link
+  rule-301 | style | .flow-link:before
+  rule-302 | style | .flow-wire
+  rule-303 | style | .flow-wire i
+  rule-304 | style | .agent-busy .agent-wire i,.api-busy .api-wire i
+  rule-305 | style | .agent-busy .flow-link,.api-busy .flow-link
+  rule-306 | style | .flow-activity
+  rule-307 | style | .onboarding-membership
+  rule-308 | style | .onboarding-manage
+  rule-309 | style | .onboarding-manage .actions
+  rule-310 | style | .onboarding-manage summary
+  rule-311 | style | .onboarding-stage .primary .icon
+  rule-312 | style | @keyframes request-transit
+  rule-313 | style | @media(max-width:760px)
+  rule-314 | style | @media(prefers-reduced-motion:reduce)
+  rule-315 | style | .work-status
+  rule-316 | style | .work-heading
+  rule-317 | style | .work-heading h2
+  rule-318 | style | .work-heading p,.work-connection,.work-sync,.work-item small
+  rule-319 | style | .work-sync
+  rule-320 | style | .work-sync small
+  rule-321 | style | .work-sync.is-stale
+  rule-322 | style | .work-connection
+  rule-323 | style | .work-connection strong
+  rule-324 | style | .work-metrics
+  rule-325 | style | .work-metrics span
+  rule-326 | style | .work-metrics b
+  rule-327 | style | .work-columns
+  rule-328 | style | .work-status h3
+  rule-329 | style | .work-item
+  rule-330 | style | .work-item span
+  rule-331 | style | .work-actions
+  rule-332 | style | .work-status .muted,.work-people p
+  rule-333 | style | .work-people
+  rule-334 | style | .work-footer
+  rule-335 | style | .work-footer .agent-flow
+  rule-336 | style | .work-footer .flow-link
+  rule-337 | style | .work-footer .flow-link:before
+  rule-338 | style | .work-footer .flow-node
+  rule-339 | style | .work-footer .flow-node .icon
+  rule-340 | style | .work-footer .flow-activity
+  rule-341 | style | .work-footer>.primary
+  rule-342 | style | .work-footer .onboarding-manage
+  rule-343 | style | .work-footer .onboarding-manage .actions
+  rule-344 | style | @media(max-width:760px)
+  rule-345 | style | @media(max-width:540px)
+  rule-346 | style | .work-live:before
+  rule-347 | style | .work-live.is-busy:before
+  rule-348 | style | @keyframes work-request
+  rule-349 | style | @media(prefers-reduced-motion:reduce)
+  rule-350 | style | .live-message
+  rule-351 | style | .live-entry
+  rule-352 | style | .code-pheromones
+  rule-353 | style | .code-pheromones p
+  rule-354 | style | .code-pheromones small
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+@import url('../../office/web/station-visual.css');
+/* @chain-region rule-1 */ @font-face{font-family:Aieyra Inter;src:url('./fonts/inter-variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+/* @chain-region rule-2 */ @font-face{font-family:Aieyra Sora;src:url('./fonts/sora-variable.woff2') format('woff2');font-weight:100 800;font-display:swap}
+/* @chain-region rule-3 */ @font-face{font-family:Aieyra Noto Sans SC;src:url('./fonts/notosanssc-variable.woff2') format('woff2');font-weight:100 900;font-display:swap}
+/* @chain-region rule-4 */ :root{color-scheme:dark;--titlebar-height:56px;--bg:#08090b;--panel:#11141b;--text:var(--ui-text);--muted:var(--ui-text-2);--line:#ffffff14;--accent:var(--ui-accent);--cyan:var(--ui-ok);--bad:var(--ui-error);--ease:var(--ui-ease);font:16px/1.7 'Aieyra Inter','Aieyra Noto Sans SC','Segoe UI',sans-serif;color:var(--ui-text);background:var(--bg)}
+/* @chain-region rule-5 */ *{box-sizing:border-box}/* @chain-region rule-6 */ body{margin:0;height:100vh;overflow:hidden}/* @chain-region rule-7 */ button,input,textarea,select{font:inherit}/* @chain-region rule-8 */ button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:32px;padding:5px 13px;border:0;border-radius:var(--ui-radius-pill);background:transparent;color:var(--ui-text-2);cursor:pointer;transition:background-color var(--ui-fast) var(--ui-ease),color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease),opacity var(--ui-fast) var(--ui-ease)}/* @chain-region rule-9 */ button:hover:not(:disabled){color:var(--ui-text);background:#ffffff0c}/* @chain-region rule-10 */ button:active:not(:disabled){opacity:.72}/* @chain-region rule-11 */ button:disabled{opacity:.38;cursor:default}/* @chain-region rule-12 */ button.primary{background:var(--ui-text);color:var(--bg);font-weight:550;padding-inline:18px}/* @chain-region rule-13 */ button.primary:hover:not(:disabled){background:#fff;color:#08090b;box-shadow:0 0 24px #c1d6ff1a}/* @chain-region rule-14 */ button.secondary{box-shadow:var(--ui-edge-hi);color:var(--ui-text)}/* @chain-region rule-15 */ button.danger{color:var(--ui-error)}/* @chain-region rule-16 */ h1,h2,h3,p{margin:0}/* @chain-region rule-17 */ h1{font-family:'Aieyra Sora','Aieyra Noto Sans SC',sans-serif;font-size:25px;font-weight:450;letter-spacing:-.8px;line-height:1.5}/* @chain-region rule-18 */ h2{font-size:23px;font-weight:500;line-height:1.5}/* @chain-region rule-19 */ h3{font-size:16px;font-weight:500;line-height:1.55}/* @chain-region rule-20 */ p{white-space:pre-wrap;overflow-wrap:anywhere}/* @chain-region rule-21 */ small,.muted{color:var(--ui-text-2)}/* @chain-region rule-22 */ small{font-size:14px}/* @chain-region rule-23 */ a{color:var(--ui-accent)}/* @chain-region rule-24 */ .icon{display:block;flex:none;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}/* @chain-region rule-25 */ i[data-icon]{display:contents}/* @chain-region rule-26 */ .sr-only{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
+/* The main OS desktop bar: stable circular hit areas and one continuous drag surface. */
+/* @chain-region rule-27 */ .titlebar{position:relative;z-index:5;height:var(--titlebar-height);display:flex;align-items:center;gap:16px;padding:0 8px 0 14px;background:var(--ui-topbar-surface);backdrop-filter:var(--ui-topbar-filter);box-shadow:var(--ui-topbar-shadow);-webkit-app-region:drag;user-select:none}/* @chain-region rule-28 */ .titlebar nav#tabs{display:flex;align-items:center;gap:8px;height:36px;min-width:0;flex:1;-webkit-app-region:drag}/* @chain-region rule-29 */ .titlebar button{-webkit-app-region:no-drag}/* @chain-region rule-30 */ .titlebar #tabs button{position:relative;width:36px;height:36px;min-height:36px;padding:0;flex:none;border-radius:50%;background:#ffffff06;box-shadow:var(--ui-edge);color:var(--ui-text-2)}/* @chain-region rule-31 */ .titlebar #tabs button .icon{width:18px;height:18px}/* @chain-region rule-32 */ .titlebar #tabs button span{display:none}/* @chain-region rule-33 */ .titlebar #tabs button.active{color:var(--ui-text);background:#ffffff0d;box-shadow:inset 0 0 0 1.5px #e6e9f0c7,0 0 14px #b9c8ff1f}/* @chain-region rule-34 */ .titlebar #tabs button:is(:hover,:focus-visible){background:#ffffff14;color:var(--ui-text);box-shadow:var(--ui-edge-hi)}/* @chain-region rule-35 */ .titlebar .account{max-width:190px;min-width:36px;height:36px;padding:0 10px 0 3px;gap:9px;color:var(--ui-text);font-size:14px}/* @chain-region rule-36 */ .account .avatar{width:29px;height:29px;font-size:14px}/* @chain-region rule-37 */ .account>span:not(.avatar){max-width:130px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}/* @chain-region rule-38 */ .account:not(:has(.avatar)){padding-inline:15px;box-shadow:var(--ui-edge-hi)}/* @chain-region rule-39 */ .window-actions{display:flex;align-items:center;gap:2px;flex:none;height:32px}/* @chain-region rule-40 */ .window-actions button{display:grid;place-items:center;width:34px;height:32px;padding:0;border-radius:10px;color:#8a91a0}/* @chain-region rule-41 */ .window-actions svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4}/* @chain-region rule-42 */ .window-actions button[data-window=close]:hover{background:#e3a29c2e;color:#f6dcd9}/* @chain-region rule-43 */ .brand-icon{width:30px;height:30px}/* @chain-region rule-44 */ .login-window .titlebar strong{flex:1;font-weight:500;font-size:14px}
+/* @chain-region rule-45 */ #workspace{height:calc(100vh - var(--titlebar-height));display:flex;position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 70% 20%,#a9c0ec08,transparent 65%)}/* @chain-region rule-46 */ #notice{position:fixed;z-index:15;left:50%;top:calc(var(--titlebar-height) + 14px);transform:translateX(-50%);max-width:min(560px,85vw);padding:11px 18px;border:1px solid var(--line);border-radius:14px;background:var(--ui-glass);box-shadow:var(--ui-shadow);backdrop-filter:var(--glass-filter);font-size:14px;white-space:pre-wrap}/* @chain-region rule-47 */ aside.rail{width:88px;flex:none;display:flex;flex-direction:column;align-items:center;gap:20px;padding:28px 8px 24px}/* @chain-region rule-48 */ .rail button{width:64px;flex:none}/* @chain-region rule-49 */ .rail .rail-bottom{margin-top:auto}/* @chain-region rule-50 */ .rail button .ui-rail-icon{background:#ffffff04!important;box-shadow:inset 0 0 0 1px #ffffff28!important}/* @chain-region rule-51 */ .rail button.active .ui-rail-icon{box-shadow:inset 0 0 0 1.5px #e6e9f0c7,0 0 22px #b9c8ff16!important}/* @chain-region rule-52 */ .rail button.active{color:var(--ui-text)}/* @chain-region rule-53 */ .surface{flex:1;min-width:0;display:flex;flex-direction:column;padding:28px 36px 24px 20px;overflow:hidden;animation:enter var(--ui-enter) var(--ui-ease)}/* @chain-region rule-54 */ .surface>header,.heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:none;min-height:38px;margin-bottom:24px}/* @chain-region rule-55 */ .surface>header h1{min-width:0;overflow-wrap:anywhere}/* @chain-region rule-56 */ .surface>header>.actions{flex-shrink:0}/* @chain-region rule-57 */ .scroll{overflow:auto;min-height:0;flex:1;scrollbar-width:none;overscroll-behavior:contain}/* @chain-region rule-58 */ .scroll::-webkit-scrollbar,.tree::-webkit-scrollbar,pre::-webkit-scrollbar{display:none}/* @chain-region rule-59 */ .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}/* @chain-region rule-60 */ .row.between{justify-content:space-between}/* @chain-region rule-61 */ .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}/* @chain-region rule-62 */ .actions.bottom{margin-top:24px}/* @chain-region rule-63 */ .empty{display:flex;align-items:center;justify-content:center;gap:12px;min-height:130px;color:var(--ui-text-2);font-size:14px}/* @chain-region rule-64 */ .empty .icon{width:24px;height:24px;opacity:.55}/* @chain-region rule-65 */ .status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ui-ok);box-shadow:0 0 12px #9fd8b444;margin-right:7px;animation:breathe 3.6s ease-in-out infinite}/* @chain-region rule-66 */ .eyebrow{display:inline-flex;align-items:center;gap:5px;font-size:14px;letter-spacing:.08em;color:var(--ui-accent)}/* @chain-region rule-67 */ .pill-state{padding:4px 10px;border-radius:99px;background:#a9c0ec0d;font-size:14px;color:var(--ui-accent)}
+/* One quiet field of light, with state carried by the orbit rather than fake telemetry. */
+/* @chain-region rule-68 */ .login-stage{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;position:relative;overflow:auto;padding:28px}/* @chain-region rule-69 */ .login-stage h1{font-size:clamp(27px,3.8vw,40px);letter-spacing:-1.6px;line-height:1.6}/* @chain-region rule-70 */ .login-stage p{font-size:14px;color:var(--ui-text-2);max-width:480px}/* @chain-region rule-71 */ .login-stage>.primary{margin-top:12px;height:38px}/* @chain-region rule-72 */ .login-stage:before{content:'';position:absolute;z-index:-1;width:min(640px,90vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#a9c0ec0c,transparent 65%);pointer-events:none}/* @chain-region rule-73 */ .halo{width:212px;height:212px;flex:none;position:relative;display:grid;place-items:center;color:var(--ui-text);margin:12px}/* @chain-region rule-74 */ .halo svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}/* @chain-region rule-75 */ .halo .orbit-inner{stroke:var(--ui-accent);stroke-width:1;opacity:.22}/* @chain-region rule-76 */ .halo .orbit-main{stroke:#dce6fc;stroke-width:2.2;filter:drop-shadow(0 0 5px #a9c0ec66);animation:breathe 4.6s ease-in-out infinite}/* @chain-region rule-77 */ .halo .orbit-track{stroke:#a9c0ec;stroke-width:.7;stroke-dasharray:1 7;opacity:.26}/* @chain-region rule-78 */ .halo .orbit-runner{stroke:var(--ui-accent);stroke-width:1.5;stroke-dasharray:38 720;transform-origin:center;animation:orbit 18s linear infinite}/* @chain-region rule-79 */ .halo .orbit-points{fill:var(--ui-text);transform-origin:center;animation:orbit 36s linear reverse infinite}/* @chain-region rule-80 */ .halo .orbit-arc{stroke:var(--ui-ok);stroke-width:3;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 720ms var(--ui-ease)}/* @chain-region rule-81 */ .halo strong{font-family:'Aieyra Sora',sans-serif;font-size:30px;font-weight:350;letter-spacing:-1px}/* @chain-region rule-82 */ .halo strong:empty:after{content:'';display:block;width:8px;height:8px;border-radius:50%;background:#dce6fc;box-shadow:0 0 24px #c8d8ff88}/* @chain-region rule-83 */ .mission{display:flex;gap:28px;align-items:center;justify-content:space-between;min-height:260px;padding:12px 0 30px;border-bottom:1px solid var(--line);margin-bottom:24px}/* @chain-region rule-84 */ .mission-copy{max-width:620px;min-width:0}/* @chain-region rule-85 */ .mission-copy h2{font-size:clamp(25px,3vw,34px);font-weight:450;letter-spacing:-.7px;line-height:1.5;margin:12px 0}/* @chain-region rule-86 */ .mission-copy>p{color:var(--ui-text-2);max-width:56ch;font-size:14px;line-height:1.85}/* @chain-region rule-87 */ .mission-copy details{font-size:14px}/* @chain-region rule-88 */ .progress{height:2px;background:#ffffff10;margin:20px 0 8px;overflow:hidden;max-width:420px}/* @chain-region rule-89 */ .progress i{display:block;height:100%;background:var(--ui-accent);box-shadow:0 0 12px var(--ui-accent);transition:width 720ms var(--ui-ease)}/* @chain-region rule-90 */ .metrics{display:flex;gap:28px;margin:20px 0 26px;flex-wrap:wrap}/* @chain-region rule-91 */ .metric{color:var(--ui-text-2);font-size:14px;display:flex;align-items:baseline;gap:8px}/* @chain-region rule-92 */ .metric b{font-family:'Aieyra Sora',sans-serif;font-size:25px;font-weight:350;color:var(--ui-text);font-variant-numeric:tabular-nums}/* @chain-region rule-93 */ .section-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}/* @chain-region rule-94 */ .section-heading h3{font-size:14px;color:var(--ui-text-2);font-weight:450}/* @chain-region rule-95 */ .quests{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px}/* @chain-region rule-96 */ .quest{position:relative;min-width:0;padding:20px 20px 18px;border-radius:16px;background:linear-gradient(135deg,#a9c0ec08,transparent 80%);box-shadow:inset 0 0 0 1px #ffffff0a;animation:enter var(--ui-move) var(--ui-ease) both;transition:box-shadow var(--ui-enter) var(--ui-ease),background-color var(--ui-enter) var(--ui-ease)}/* @chain-region rule-97 */ .quest:hover{box-shadow:inset 0 0 0 1px #a9c0ec2b;background-color:#a9c0ec03}/* @chain-region rule-98 */ .quest[data-status=voting] .status-dot{background:var(--ui-warn);box-shadow:0 0 12px #e3c19c44}/* @chain-region rule-99 */ .quest[data-status=completed] .status-dot{animation:none}/* @chain-region rule-100 */ .quest[data-status=rejected] .status-dot{background:var(--ui-error);animation:none}/* @chain-region rule-101 */ .quest h3{margin:12px 0 8px;overflow-wrap:anywhere}/* @chain-region rule-102 */ .quest p{color:var(--ui-text-2);font-size:14px;line-height:1.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}/* @chain-region rule-103 */ .quest .actions{margin-top:14px}/* @chain-region rule-104 */ .quest .author{font-size:14px;color:var(--ui-text-3);margin-top:14px}/* @chain-region rule-105 */ .vote-count{color:var(--ui-ok);font-size:14px;padding:4px 8px}/* @chain-region rule-106 */ .vote-count.oppose{color:var(--ui-error)}/* @chain-region rule-107 */ .vote-meter{display:flex;gap:3px;height:2px;margin-top:12px;width:100%;opacity:.75}/* @chain-region rule-108 */ .vote-meter i{background:var(--ui-ok);border-radius:2px;min-width:2px}/* @chain-region rule-109 */ .vote-meter i:last-child{background:var(--ui-error)}/* @chain-region rule-110 */ .lanes{display:flex;gap:6px;margin:20px 0 24px;flex-wrap:wrap}/* @chain-region rule-111 */ .lanes button{font-size:14px;padding:5px 12px}/* @chain-region rule-112 */ .lanes .active{color:var(--ui-text);background:#ffffff0c;box-shadow:var(--ui-edge-hi)}/* @chain-region rule-113 */ .lanes .count{font-variant-numeric:tabular-nums;opacity:.55;font-size:14px}/* @chain-region rule-114 */ .members{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:26px 16px;padding:14px 0}/* @chain-region rule-115 */ .member{display:flex;flex-direction:column;gap:16px;align-items:center;padding:22px 10px;border-radius:18px;animation:enter var(--ui-move) var(--ui-ease) both}/* @chain-region rule-116 */ .member>span:last-child{max-width:100%;overflow-wrap:anywhere;color:var(--ui-text);font-size:14px}/* @chain-region rule-117 */ .avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;object-fit:cover;background:#a9c0ec0c;color:var(--ui-accent);box-shadow:inset 0 0 0 1px #a9c0ec36;flex:none}/* @chain-region rule-118 */ .member .avatar{width:64px;height:64px;font-size:23px;box-shadow:0 0 0 5px #a9c0ec05,0 0 0 6px #a9c0ec1a;transition:box-shadow var(--ui-move) var(--ui-ease)}/* @chain-region rule-119 */ .member:is(:hover,:focus-visible) .avatar{box-shadow:0 0 0 5px #a9c0ec09,0 0 0 6px #a9c0ec55,0 0 32px #a9c0ec12}/* @chain-region rule-120 */ .pager{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:24px 0 4px;color:var(--ui-text-2);font-size:14px}
+/* @chain-region rule-121 */ .repository{display:flex;flex:1;min-height:0;gap:24px;overflow:hidden}/* @chain-region rule-122 */ .tree{width:238px;flex:none;overflow:auto;scrollbar-width:none;border-right:1px solid var(--line);padding-right:14px}/* @chain-region rule-123 */ .tree-search{position:sticky;top:0;z-index:1;padding-bottom:12px;background:var(--bg)}/* @chain-region rule-124 */ .tree input{width:100%;font-size:14px;min-height:36px}/* @chain-region rule-125 */ .tree button{justify-content:flex-start;max-width:100%;width:100%;font-family:'Aieyra Inter','Aieyra Noto Sans SC',sans-serif;font-size:14px;white-space:nowrap;min-height:30px;padding:4px 7px;border-radius:7px;gap:6px}/* @chain-region rule-126 */ .tree .node-name{overflow:hidden;text-overflow:ellipsis;min-width:0}/* @chain-region rule-127 */ .tree button .icon{width:14px;height:14px;opacity:.6}/* @chain-region rule-128 */ .tree .chevron{font-size:16px;display:block;flex:none;width:10px;line-height:1}/* @chain-region rule-129 */ .tree button.selected{color:var(--ui-text);background:#a9c0ec15}/* @chain-region rule-130 */ .tree button.selected .icon{opacity:1;color:var(--ui-accent)}/* @chain-region rule-131 */ .tree button:focus-visible{outline-offset:-1px}/* @chain-region rule-132 */ .source{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}/* @chain-region rule-133 */ .source>header{display:flex;align-items:center;justify-content:space-between;font-size:14px;gap:12px;border-bottom:1px solid var(--line);padding:0 0 14px}/* @chain-region rule-134 */ .source>header strong{font-weight:450;overflow-wrap:anywhere;min-width:0}/* @chain-region rule-135 */ .source>header small{flex:none;font-size:14px}/* @chain-region rule-136 */ .source pre{font:14px/1.85 'Cascadia Code',Consolas,'Aieyra Noto Sans SC',monospace;overflow:auto;padding:18px 0;margin:0;scrollbar-width:none;tab-size:4;flex:1;white-space:pre;counter-reset:source-line}/* @chain-region rule-137 */ .code-line{display:block;min-height:1.85em;counter-increment:source-line}/* @chain-region rule-138 */ .code-line:before{content:counter(source-line);display:inline-block;width:3.5em;padding-right:1.5em;color:var(--ui-text-3);text-align:right;user-select:none}/* @chain-region rule-139 */ .code-line.current-line{background:#e3c19c1c}/* @chain-region rule-140 */ .source-find{display:flex;align-items:center;gap:8px;margin-top:12px}/* @chain-region rule-141 */ .source-find input{flex:1;min-width:0;font-size:14px;height:32px}/* @chain-region rule-142 */ .source-find small{flex:none}/* @chain-region rule-143 */ .download-row{display:flex;align-items:center;gap:24px;padding:30px 0}/* @chain-region rule-144 */ .download-row>img{width:76px;height:76px}/* @chain-region rule-145 */ .download-row>div{flex:1;min-width:0}/* @chain-region rule-146 */ .download-row h2{font-family:'Aieyra Sora','Aieyra Noto Sans SC',sans-serif;font-weight:450}/* @chain-region rule-147 */ .download-row p{color:var(--ui-text-2);margin-top:6px;font-size:14px}/* @chain-region rule-148 */ .download-row .primary{flex:none}/* @chain-region rule-149 */ .download-row+small{display:block;margin-left:100px}
+/* Incremental messages keep their DOM, image decode, selection and scroll position. */
+/* @chain-region rule-150 */ .chat-surface{padding:28px 40px 22px;max-width:1080px;margin-inline:auto;width:100%}/* @chain-region rule-151 */ .chat-surface>header{padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:10px}/* @chain-region rule-152 */ .chat-log{display:flex;flex-direction:column;gap:24px;overflow:auto;min-height:0;flex:1;scrollbar-width:none;overscroll-behavior:contain;padding:12px 2px 28px;overflow-anchor:none}/* @chain-region rule-153 */ .chat-log>.secondary{align-self:center;font-size:14px}/* @chain-region rule-154 */ .message{display:flex;align-items:flex-start;gap:13px;animation:message-in var(--ui-enter) var(--ui-ease) both}/* @chain-region rule-155 */ .message .avatar{width:34px;height:34px;font-size:14px;flex:none}/* @chain-region rule-156 */ .message>div{min-width:0;flex:1}/* @chain-region rule-157 */ .message header{display:flex;align-items:center;gap:10px;margin:1px 0 6px}/* @chain-region rule-158 */ .message header strong{font-size:14px;font-weight:500;color:var(--ui-text-2)}/* @chain-region rule-159 */ .message time{font-size:14px;color:var(--ui-text-3)}/* @chain-region rule-160 */ .message header button{font-size:14px;min-height:22px;padding:0 6px;margin-left:auto}/* @chain-region rule-161 */ .message[data-own=true] header strong{color:var(--ui-accent)}/* @chain-region rule-162 */ .markdown{font-size:14px;line-height:1.85;color:var(--ui-text);overflow-wrap:anywhere}/* @chain-region rule-163 */ .markdown pre{border:1px solid var(--line);background:#07090c;padding:14px 16px;border-radius:12px;overflow:auto;scrollbar-width:none}/* @chain-region rule-164 */ .markdown code{font:14px/1.8 'Cascadia Code',Consolas,'Aieyra Noto Sans SC',monospace;background:#ffffff08;border-radius:4px;padding:2px 4px}/* @chain-region rule-165 */ .markdown pre code{padding:0;background:none}/* @chain-region rule-166 */ .markdown h2,.markdown h3{font-size:16px;margin:12px 0}/* @chain-region rule-167 */ .markdown ul{margin:8px 0;padding-left:22px}/* @chain-region rule-168 */ .markdown blockquote{margin:8px 0;border-left:2px solid var(--ui-accent);padding-left:14px;color:var(--ui-text-2)}/* @chain-region rule-169 */ .message-images{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}/* @chain-region rule-170 */ .message-images img{max-width:min(320px,100%);max-height:260px;border-radius:12px;object-fit:contain;cursor:zoom-in}/* @chain-region rule-171 */ .composer{flex:none;position:relative;padding:14px 16px 12px;border:1px solid #ffffff1a;border-radius:18px;background:#ffffff03;transition:border-color var(--ui-enter) var(--ui-ease),box-shadow var(--ui-enter) var(--ui-ease)}/* @chain-region rule-172 */ .composer:focus-within{border-color:#a9c0ec55;box-shadow:0 0 28px #a9c0ec06}/* @chain-region rule-173 */ .composer textarea{width:100%;height:76px;min-height:50px;resize:vertical;max-height:min(180px,28vh);border:0!important;outline:none!important;background:none;padding:2px 0;font-size:14px;line-height:1.75;border-radius:0}/* @chain-region rule-174 */ .composer footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:12px}/* @chain-region rule-175 */ .composer footer .secondary{box-shadow:none;padding:3px 6px;min-height:28px}/* @chain-region rule-176 */ .composer small{font-size:14px;color:var(--ui-text-3)}/* @chain-region rule-177 */ .composer #send{height:32px;min-width:76px}/* @chain-region rule-178 */ .attachment-preview{display:flex;gap:8px;max-height:70px;margin-bottom:8px}/* @chain-region rule-179 */ .attachment-preview:empty{display:none}/* @chain-region rule-180 */ .attachment-preview>div{position:relative}/* @chain-region rule-181 */ .attachment-preview img{max-width:80px;max-height:60px;border-radius:8px}/* @chain-region rule-182 */ .attachment-preview button{position:absolute;right:-6px;top:-6px;width:22px;min-height:22px;padding:0;background:var(--panel);box-shadow:var(--ui-edge-hi);color:var(--ui-text)}/* @chain-region rule-183 */ .compose-error{color:var(--ui-error);font-size:14px}/* @chain-region rule-184 */ .compose-error:empty{display:none}/* @chain-region rule-185 */ .chat-preview{max-height:180px;overflow:auto;scrollbar-width:none;padding:0 0 12px}/* @chain-region rule-186 */ .new-messages{align-self:center;font-size:14px;margin:0 0 12px;box-shadow:var(--ui-edge-hi);color:var(--ui-accent)}
+/* @chain-region rule-187 */ .admin-list article{padding:20px 0;border-bottom:1px solid var(--line)}/* @chain-region rule-188 */ .admin-list article:first-child{padding-top:8px}/* @chain-region rule-189 */ .admin-list p{font-size:14px;color:var(--ui-text-2);margin:10px 0}/* @chain-region rule-190 */ .admin-list .row>strong{font-size:14px;font-weight:500}/* @chain-region rule-191 */ .admin-list .avatar{width:30px;height:30px}/* @chain-region rule-192 */ .admin-unlock{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;flex:1;text-align:center;padding:16px}/* @chain-region rule-193 */ .admin-unlock .halo{width:150px;height:150px}/* @chain-region rule-194 */ .admin-unlock p{font-size:14px}/* @chain-region rule-195 */ .audit{font:14px/1.9 'Cascadia Code','Aieyra Noto Sans SC',monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ui-text-2)}/* @chain-region rule-196 */ #admin-clock{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ui-warn)}
+/* @chain-region rule-197 */ input,textarea,select{border:1px solid var(--line);border-radius:10px;background:#ffffff04;color:var(--ui-text);padding:10px 12px;min-width:0;transition:border-color var(--ui-fast) var(--ui-ease)}/* @chain-region rule-198 */ input:hover,textarea:hover{border-color:#ffffff2a}/* @chain-region rule-199 */ textarea{min-height:100px;resize:vertical}/* @chain-region rule-200 */ input::placeholder,textarea::placeholder{color:var(--ui-text-3)}/* @chain-region rule-201 */ label{display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--ui-text-2);margin:18px 0}/* @chain-region rule-202 */ form .actions{margin-top:24px}/* @chain-region rule-203 */ dialog{color:var(--ui-text);background:var(--ui-glass);border:1px solid #ffffff24;border-radius:18px;box-shadow:0 30px 100px #0009;backdrop-filter:var(--glass-filter);width:min(660px,calc(100vw - 48px));max-height:calc(100vh - 104px);padding:26px 30px;overflow:auto;scrollbar-width:none;animation:dialog-in var(--ui-enter) var(--ui-ease)}/* @chain-region rule-204 */ dialog::backdrop{background:#050609a3;backdrop-filter:blur(8px)}/* @chain-region rule-205 */ .dialog-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 22px}/* @chain-region rule-206 */ .dialog-top button{width:30px;height:30px;min-height:30px;padding:0;flex:none}/* @chain-region rule-207 */ .dialog-top h2{font-size:20px;font-weight:500;overflow-wrap:anywhere;line-height:1.6}/* @chain-region rule-208 */ dialog textarea,dialog input{width:100%}/* @chain-region rule-209 */ dialog .profile{display:flex;flex-direction:column;align-items:center;gap:18px;padding:12px 0 8px;text-align:center}/* @chain-region rule-210 */ .profile .avatar{width:72px;height:72px;font-size:27px}/* @chain-region rule-211 */ .profile h2{font-size:22px}/* @chain-region rule-212 */ .profile p{font-size:14px;color:var(--ui-text-2)}/* @chain-region rule-213 */ .error{color:var(--ui-error);padding:10px 0;font-size:14px}/* @chain-region rule-214 */ .error:empty{display:none}/* @chain-region rule-215 */ .error .secondary{margin-left:8px}/* @chain-region rule-216 */ details{margin-top:14px}/* @chain-region rule-217 */ summary{cursor:pointer;color:var(--ui-text-2);font-size:14px}/* @chain-region rule-218 */ details p{padding:10px 0;font-size:14px}/* @chain-region rule-219 */ .dialog-section{margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}/* @chain-region rule-220 */ .dialog-section h3{font-size:15px}/* @chain-region rule-221 */ .loading{width:22px;height:22px;border:2px solid #a9c0ec22;border-top-color:var(--ui-accent);border-radius:50%;animation:orbit .9s linear infinite;margin:40px auto}/* @chain-region rule-222 */ .pending-surface{position:relative}/* @chain-region rule-223 */ .pending-surface:after{content:'';position:absolute;top:0;left:0;width:30%;height:1px;background:var(--ui-accent);animation:loading-scan 1.4s ease-in-out infinite}/* @chain-region rule-224 */ .resource-error{padding:20px 0;font-size:14px;color:var(--ui-error)}
+/* @chain-region rule-225 */ @keyframes orbit{to{transform:rotate(360deg)}}/* @chain-region rule-226 */ @keyframes breathe{50%{opacity:.55}}/* @chain-region rule-227 */ @keyframes enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}/* @chain-region rule-228 */ @keyframes message-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}/* @chain-region rule-229 */ @keyframes dialog-in{from{opacity:0;transform:translateY(9px) scale(.985)}to{opacity:1;transform:none}}/* @chain-region rule-230 */ @keyframes loading-scan{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
+/* @chain-region rule-231 */ @media(max-width:850px){.surface{padding:22px 24px 20px 14px}.surface>header{gap:10px;margin-bottom:18px}h1{font-size:22px}.titlebar{gap:12px}.account>span:not(.avatar){max-width:80px}.mission{gap:12px;min-height:230px;padding-bottom:24px}.mission .halo{width:160px;height:160px;margin:6px}.mission-copy h2{font-size:26px}.tree{width:190px}.metrics{gap:18px}aside.rail{width:80px;padding-inline:4px;gap:18px}.repository{gap:16px}.chat-surface{padding:22px 28px}.composer small{display:none}}
+/* @chain-region rule-232 */ @media(max-width:620px){.surface{padding:18px 16px 18px 10px}h1{font-size:19px}.surface>header>.actions{gap:4px}.surface>header>.actions button{padding-inline:9px;font-size:14px}.mission{gap:8px;min-height:200px}.mission .halo{width:118px;height:118px;margin:0}.mission .halo strong{font-size:23px}.mission-copy h2{font-size:23px}.mission-copy>p{font-size:14px}.mission-copy .actions.bottom{margin-top:14px}aside.rail{width:66px;gap:16px;padding-top:20px}.rail button{width:58px!important}.rail .ui-rail-icon{width:38px!important;height:38px!important}.rail .ui-rail-label{font-size:14px!important}.metrics{gap:15px}.metric b{font-size:21px}.metric{font-size:14px}.tree{width:150px;padding-right:8px}.repository{gap:12px}.source pre{font-size:14px}.account>span:not(.avatar){max-width:68px}.titlebar #tabs{gap:6px!important}.titlebar{gap:8px;padding-left:10px}.window-actions button{width:30px}.chat-surface{padding:18px 20px}.download-row{flex-wrap:wrap;gap:16px}.download-row>img{width:54px;height:54px}.download-row>.primary{margin-left:70px}.download-row+small{margin-left:70px}dialog{padding:20px;width:calc(100vw - 32px)}.members{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
+/* @chain-region rule-233 */ .agent-list{display:grid;gap:18px}/* @chain-region rule-234 */ .agent-entry{border-bottom:1px solid var(--line);padding:0 0 18px}/* @chain-region rule-235 */ .agent-entry h2{font-size:17px;font-weight:600;margin:0}/* @chain-region rule-236 */ .agent-entry .checks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 16px;margin:14px 0}/* @chain-region rule-237 */ .agent-entry .checks span{font-size:14px;color:var(--ui-text-2);white-space:normal}/* @chain-region rule-238 */ .agent-entry .checks .passed{color:var(--ui-ok)}/* @chain-region rule-239 */ .agent-entry .checks span:before{content:'○';margin-right:6px}/* @chain-region rule-240 */ .agent-entry .checks .passed:before{content:'✓'}/* @chain-region rule-241 */ .agent-entry .actions{margin-top:12px}/* @chain-region rule-242 */ .agent-history{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}/* @chain-region rule-243 */ .agent-history h2{font-size:15px}/* @chain-region rule-244 */ .agent-history li{font-size:14px;color:var(--ui-text-2);padding:4px 0;overflow-wrap:anywhere}/* @chain-region rule-245 */ .agent-code{width:100%;font:14px/1.7 'Cascadia Code',monospace;word-break:break-all;padding:12px;background:#ffffff09;border:1px solid var(--line);border-radius:6px}/* @chain-region rule-246 */ @media(max-width:720px){.agent-entry .checks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* @chain-region rule-247 */ @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}/* @chain-region rule-248 */ html[data-hidden=true] *,html[data-hidden=true] *::before,html[data-hidden=true] *::after{animation-play-state:paused!important}
+
+/* @chain-region rule-249 */ .rail button.ui-rail-button:hover:not(:disabled){background:transparent}/* @chain-region rule-250 */ .vote-meter i[style="flex:0"]{display:none}
+
+/* Leadership choices remain compact at 720p and 125% scaling. */
+/* @chain-region rule-251 */ .election-summary{padding:14px 0 20px;max-width:960px}
+/* @chain-region rule-252 */ .election-summary h2{font-size:24px;margin:10px 0}
+/* @chain-region rule-253 */ .election-summary p{line-height:1.7;color:var(--text-secondary,#b1b7c6);max-width:780px}
+/* @chain-region rule-254 */ .election-roles{display:flex;flex-wrap:wrap;gap:32px;margin-top:18px}
+/* @chain-region rule-255 */ .election-roles>div{display:grid;gap:5px;min-width:140px}
+/* @chain-region rule-256 */ .election-roles strong{font-size:20px}/* @chain-region rule-257 */ .election-roles span{font-size:14px}
+/* @chain-region rule-258 */ .election-pool{padding:10px 0 24px}/* @chain-region rule-259 */ .election-pool li{padding:8px 0;line-height:1.7}
+/* @chain-region rule-260 */ .election-pool li span{display:block;font-size:14px;color:var(--text-secondary,#b1b7c6)}
+/* @chain-region rule-261 */ .election-candidate h4{font-size:15px;margin:16px 0 4px}/* @chain-region rule-262 */ .election-candidate>p{overflow-wrap:anywhere}
+/* @chain-region rule-263 */ #selection-form fieldset{border:1px solid #ffffff24;border-radius:12px;padding:12px;margin:12px 0}
+/* @chain-region rule-264 */ #selection-form .selection-option{display:flex;align-items:center;gap:10px}
+/* @chain-region rule-265 */ #selection-form input[type=checkbox]{width:18px;height:18px;flex-shrink:0}
+/* @chain-region rule-266 */ .agent-entry .checks span{font-weight:600}/* @chain-region rule-267 */ .agent-entry small{color:#bac2d2}
+/* @chain-region rule-268 */ .agent-entry .check-help{display:block;font-size:14px;font-weight:400;line-height:1.8;margin:5px 0 0 18px;color:var(--ui-text-2)}
+
+/* Stage leadership shares the goals surface; completed elections become a record. */
+/* @chain-region rule-269 */ .stage-leadership{margin:4px 0 28px;padding:22px 0;border-block:1px solid #ffffff14;min-width:0}
+/* @chain-region rule-270 */ .stage-leadership .election-summary{padding:0;max-width:none}
+/* @chain-region rule-271 */ .stage-leadership .section-heading{margin:0 0 10px;gap:14px;flex-wrap:wrap}
+/* @chain-region rule-272 */ .stage-leadership .section-heading h3{margin:7px 0 0;font-size:18px}
+/* @chain-region rule-273 */ .stage-leadership .election-status{margin:0;font-size:14px;color:var(--ui-text-2)}
+/* @chain-region rule-274 */ .stage-leadership .election-roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+/* @chain-region rule-275 */ .stage-leadership .election-roles>div{min-width:0;padding:13px 16px;border-radius:14px;background:#ffffff04;border:1px solid #ffffff0b}
+/* @chain-region rule-276 */ .stage-leadership .election-roles strong{font-size:17px;overflow-wrap:anywhere}
+/* @chain-region rule-277 */ .stage-leadership .election-roles span{font-size:14px;color:var(--ui-text-2)}
+/* @chain-region rule-278 */ .election-records>summary{cursor:pointer;color:var(--ui-text-2);padding:8px 0;font-size:14px}
+/* @chain-region rule-279 */ .election-records>summary:focus-visible{outline:2px solid var(--ui-text);outline-offset:4px;border-radius:4px}
+/* @chain-region rule-280 */ .election-record-body{padding-top:6px}/* @chain-region rule-281 */ .election-record-body .connection-note{margin-top:0}
+/* @chain-region rule-282 */ .stage-leadership .election-pool{padding:12px 0}/* @chain-region rule-283 */ .stage-leadership .election-pool ol{padding-left:22px}
+/* @chain-region rule-284 */ .stage-leadership .election-pool button{text-align:left;white-space:normal;overflow-wrap:anywhere}
+/* @chain-region rule-285 */ .stage-leadership .quests{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+/* @chain-region rule-286 */ @media(max-width:800px){.stage-leadership{padding:18px 0}.stage-leadership .election-roles{gap:9px}.stage-leadership .election-roles>div{padding:12px}.stage-leadership .section-heading>.secondary{font-size:14px}}
+
+/* @chain-region rule-287 */ .stage-mission{min-height:162px;padding:4px 0 18px;margin-bottom:12px;gap:20px}
+/* @chain-region rule-288 */ .stage-mission .halo{width:142px;height:142px;margin:4px 10px}
+/* @chain-region rule-289 */ .stage-mission .mission-copy h2{font-size:28px;margin:8px 0;line-height:1.45}
+/* @chain-region rule-290 */ .stage-mission .mission-copy>p{margin:8px 0;font-size:14px}
+/* @chain-region rule-291 */ .stage-mission+.metrics{margin:16px 0 18px}
+/* @chain-region rule-292 */ @media(max-width:800px){.stage-mission{min-height:140px;gap:12px}.stage-mission .halo{width:98px;height:98px;margin:0}.stage-mission .mission-copy h2{font-size:22px}}
+
+/* Admission animation runs only while the main process has an actual request in flight. */
+/* @chain-region rule-293 */ .onboarding-stage{min-height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:17px;padding:24px 12px 36px}/* @chain-region rule-294 */ .onboarding-stage h2{font-size:27px;font-weight:450;letter-spacing:-.7px}/* @chain-region rule-295 */ .onboarding-caption{color:var(--muted);max-width:38em}/* @chain-region rule-296 */ .onboarding-stage>.primary{margin-top:9px;min-height:40px}/* @chain-region rule-297 */ .agent-flow{display:flex;align-items:center;width:min(490px,90%);margin-bottom:2px;gap:15px}/* @chain-region rule-298 */ .flow-node{display:flex;align-items:center;flex-direction:column;gap:13px;color:var(--muted);font-size:14px;min-width:42px}/* @chain-region rule-299 */ .flow-node .icon{width:23px;height:23px}/* @chain-region rule-300 */ .flow-link{position:relative;flex:none;display:grid;place-items:center;width:108px;height:108px;border:1px solid #dae5ff6b;border-radius:50%;box-shadow:0 0 40px #c6d6ff0a,inset 0 0 25px #c6d6ff08;font-family:'Aieyra Sora',sans-serif;font-size:24px;font-weight:350;letter-spacing:-1px}/* @chain-region rule-301 */ .flow-link:before{content:'';position:absolute;inset:-12px;border:1px solid #dae5ff17;border-radius:50%}/* @chain-region rule-302 */ .flow-wire{position:relative;height:1px;background:#dce6fc24;flex:1;overflow:visible}/* @chain-region rule-303 */ .flow-wire i{display:block;position:absolute;left:0;top:-2px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:0;box-shadow:0 0 12px var(--accent)}/* @chain-region rule-304 */ .agent-busy .agent-wire i,.api-busy .api-wire i{opacity:1;animation:request-transit 900ms ease-in-out infinite alternate}/* @chain-region rule-305 */ .agent-busy .flow-link,.api-busy .flow-link{box-shadow:0 0 45px #c6d6ff20,inset 0 0 25px #c6d6ff10}/* @chain-region rule-306 */ .flow-activity{min-height:20px;font-size:14px;color:var(--muted);margin:15px 0 7px}/* @chain-region rule-307 */ .onboarding-membership{font-size:14px;color:var(--muted);margin-top:4px}/* @chain-region rule-308 */ .onboarding-manage{font-size:14px;margin-top:12px;color:var(--muted)}/* @chain-region rule-309 */ .onboarding-manage .actions{margin-top:14px;justify-content:center}/* @chain-region rule-310 */ .onboarding-manage summary{cursor:pointer}/* @chain-region rule-311 */ .onboarding-stage .primary .icon{width:15px;height:15px}/* @chain-region rule-312 */ @keyframes request-transit{from{left:0}to{left:calc(100% - 5px)}}/* @chain-region rule-313 */ @media(max-width:760px){.agent-flow{max-width:390px;gap:12px}.flow-link{width:88px;height:88px}.onboarding-stage h2{font-size:23px}.onboarding-stage{padding-inline:0}}/* @chain-region rule-314 */ @media(prefers-reduced-motion:reduce){.agent-flow *{animation:none!important;transition:none!important}.agent-busy .agent-wire i,.api-busy .api-wire i{left:50%;opacity:1}}
+
+/* A connected Agent opens the project workspace; request animation remains factual. */
+/* @chain-region rule-315 */ .work-status{max-width:1120px;margin:0 auto;padding:10px 8px 20px}/* @chain-region rule-316 */ .work-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}/* @chain-region rule-317 */ .work-heading h2{font-size:27px;font-weight:450;letter-spacing:-.7px;margin:8px 0 10px}/* @chain-region rule-318 */ .work-heading p,.work-connection,.work-sync,.work-item small{color:var(--muted);font-size:14px}/* @chain-region rule-319 */ .work-sync{text-align:right;white-space:nowrap;padding-top:7px}/* @chain-region rule-320 */ .work-sync small{display:block;margin-top:8px}/* @chain-region rule-321 */ .work-sync.is-stale{color:#e4c18d}/* @chain-region rule-322 */ .work-connection{display:flex;gap:12px;flex-wrap:wrap;margin:23px 0 18px}/* @chain-region rule-323 */ .work-connection strong{color:var(--text)}/* @chain-region rule-324 */ .work-metrics{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid #dae5ff18;padding:18px 0;gap:12px}/* @chain-region rule-325 */ .work-metrics span{display:flex;gap:10px;align-items:baseline;font-size:14px;color:var(--muted)}/* @chain-region rule-326 */ .work-metrics b{font-size:24px;font-weight:400;color:var(--text)}/* @chain-region rule-327 */ .work-columns{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:20px 0}/* @chain-region rule-328 */ .work-status h3{font-size:14px;font-weight:500;margin:18px 0 12px}/* @chain-region rule-329 */ .work-item{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:8px;padding:12px 0;width:100%;line-height:1.6;overflow-wrap:anywhere;border-radius:0;border-bottom:1px solid #dae5ff12}/* @chain-region rule-330 */ .work-item span{font-size:14px}/* @chain-region rule-331 */ .work-actions{padding-left:18px;font-size:14px;line-height:2;color:var(--muted)}/* @chain-region rule-332 */ .work-status .muted,.work-people p{font-size:14px;line-height:1.8}/* @chain-region rule-333 */ .work-people{margin-bottom:20px}/* @chain-region rule-334 */ .work-footer{min-height:0;max-width:1120px;margin:auto;padding:20px 8px;display:grid;grid-template-columns:minmax(200px,1fr) auto;gap:10px 24px;text-align:left;border-top:1px solid #dae5ff18}/* @chain-region rule-335 */ .work-footer .agent-flow{max-width:300px;width:100%;gap:12px;grid-row:span 2}/* @chain-region rule-336 */ .work-footer .flow-link{width:48px;height:48px;font-size:16px}/* @chain-region rule-337 */ .work-footer .flow-link:before{inset:-6px}/* @chain-region rule-338 */ .work-footer .flow-node{font-size:14px;gap:5px}/* @chain-region rule-339 */ .work-footer .flow-node .icon{width:16px;height:16px}/* @chain-region rule-340 */ .work-footer .flow-activity{margin:0;font-size:14px}/* @chain-region rule-341 */ .work-footer>.primary{margin:0;min-height:32px;grid-column:2;grid-row:2}/* @chain-region rule-342 */ .work-footer .onboarding-manage{grid-column:1/-1;margin-top:12px}/* @chain-region rule-343 */ .work-footer .onboarding-manage .actions{justify-content:flex-start}/* @chain-region rule-344 */ @media(max-width:760px){.work-heading h2{font-size:23px}.work-columns{gap:20px}.work-metrics span{flex-direction:column;gap:4px}.work-status{padding-inline:0}.work-footer{padding-inline:0}}/* @chain-region rule-345 */ @media(max-width:540px){.work-columns{grid-template-columns:1fr;gap:0}.work-heading{gap:10px}.work-footer{grid-template-columns:1fr}.work-footer .agent-flow{grid-row:auto}.work-footer>.primary,.work-footer .onboarding-manage{grid-column:1;grid-row:auto}.work-sync{font-size:14px}}
+
+/* @chain-region rule-346 */ .work-live:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:currentColor;margin-right:6px;opacity:.4}/* @chain-region rule-347 */ .work-live.is-busy:before{background:var(--accent);animation:work-request 900ms ease-in-out infinite alternate}/* @chain-region rule-348 */ @keyframes work-request{to{opacity:1;box-shadow:0 0 9px var(--accent)}}/* @chain-region rule-349 */ @media(prefers-reduced-motion:reduce){.work-live.is-busy:before{animation:none;opacity:1}}
+
+/* @chain-region rule-350 */ .live-message{white-space:pre-wrap;overflow-wrap:anywhere}
+/* @chain-region rule-351 */ .live-entry{align-items:center;flex-wrap:wrap}
+/* @chain-region rule-352 */ .code-pheromones{margin:16px 0;padding-inline-start:14px;border-inline-start:2px solid var(--accent,#b9a5ed);overflow-wrap:anywhere}
+/* @chain-region rule-353 */ .code-pheromones p{white-space:pre-wrap}
+/* @chain-region rule-354 */ .code-pheromones small{opacity:.7}

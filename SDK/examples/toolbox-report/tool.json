@@ -1,0 +1,33 @@
+{
+  "schema": "aieyra.tool/1",
+  "executor": "javascript/1",
+  "name": "report",
+  "description": "统计报告示例",
+  "entry": "run.js",
+  "input": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "values": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      },
+      "workdir": {
+        "type": "string"
+      },
+      "file": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "values",
+      "workdir",
+      "file"
+    ]
+  },
+  "capabilities": [
+    "apply_patch"
+  ]
+}

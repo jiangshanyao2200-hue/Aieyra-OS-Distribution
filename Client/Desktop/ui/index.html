@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: aieyra-theme:; font-src 'self' aieyra-theme:; media-src blob: aieyra-theme:; connect-src 'none'; frame-src about:; base-uri 'none'; form-action 'none'"
+    />
+    <title>Aieyra OS</title>
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <link rel="stylesheet" href="surface.css" />
+    <link rel="stylesheet" href="appearance.css" />
+    <link rel="stylesheet" href="desktop-shell.css" />
+    <link rel="stylesheet" href="settings.css" />
+    <link rel="stylesheet" href="image-crop.css" />
+    <link rel="stylesheet" href="module-dock.css" />
+    <link rel="stylesheet" href="forms.css" />
+    <link rel="stylesheet" href="work-surface.css" />
+    <link rel="stylesheet" href="polish.css" />
+    <link rel="stylesheet" href="look.css" />
+    <link rel="stylesheet" href="subconscious.css" />
+    <link rel="stylesheet" href="tool-tray.css" />
+    <link rel="stylesheet" href="ask-user.css" />
+    <link rel="stylesheet" href="vendor/xterm.css" />
+    <link rel="stylesheet" href="system.css" />
+    <link rel="stylesheet" href="../../../Tool/base/official/apply_patch/presentation/desktop.css" />
+    <link rel="stylesheet" href="settings-extension.css" />
+    <link rel="stylesheet" href="window-theme.css" />
+    <link rel="stylesheet" href="extension-overflow.css" />
+    <link rel="stylesheet" href="ui-system.css" />
+  <link rel="stylesheet" href="conversation-surface.css">
+  <link rel="stylesheet" href="contacts.css">
+  <link rel="stylesheet" href="groups.css">
+    <link rel="stylesheet" href="image-gallery.css" />
+    <link rel="stylesheet" href="browser.css" />
+    <link rel="stylesheet" href="module-surfaces.css" />
+    <link rel="stylesheet" href="apps-menu.css" />
+<link rel="stylesheet" href="../../../Theme/official/default/media.css"><link rel="stylesheet" href="conversation-shared.css"><link rel="stylesheet" href="theme-library.css">
+<link rel="stylesheet" href="program-agents.css"><link rel="stylesheet" href="layered-chat.css">
+</head>
+  <body data-land="core">
+    <header id="status-anchor" class="titlebar topbar" data-ready="false">
+      <div class="brand">
+        <span class="brand-copy">
+          <span id="brand-title" class="brand-title" >Aieyra <b>OS</b></span>
+          <span class="brand-state-slot"><span id="brand-model" hidden></span><span id="brand-status" hidden></span></span>
+        </span>
+      </div>
+    <nav id="desktop-dock" aria-label="桌面导航">
+
+      <button id="dock-home" class="quiet" type="button" aria-current="page" aria-label="OS 首页" title="OS 首页"><span class="dock-label">OS</span></button>
+      <button id="dock-center" class="quiet" type="button" data-view-key="center" aria-current="false" aria-label="中枢" title="中枢"><span class="dock-label">中枢</span></button>
+      <button id="dock-coding" class="quiet" type="button" data-view-key="coding" aria-current="false" aria-label="Coding"><span class="dock-label">Coding</span></button>
+      <span id="browser-slot"><button id="browser-bubble" class="quiet" type="button" data-view-key="browser" aria-expanded="false" aria-current="false" aria-label="浏览器" title="浏览器"><span class="dock-label">浏览器</span></button></span>
+      <span id="api-slot"><button id="api-bubble" class="quiet" type="button" data-view-key="settings" aria-expanded="false" aria-label="Settings" title="Settings"><span class="dock-label">Settings</span></button></span>
+      <button id="dock-link" hidden data-unpinned class="quiet" type="button" aria-current="false" aria-label="Link" title="Link"><span class="dock-label">Link</span></button><span id="dock-situation" class="dock-situation" role="status" aria-live="polite" hidden></span>
+      <button id="dock-servers" class="quiet" type="button" data-view-key="servers" aria-current="false" aria-label="服务器"><span class="dock-label">服务器</span></button>
+      <button id="dock-together" class="quiet" type="button" data-view-key="together" aria-current="false" aria-label="Together" title="Together"><span class="dock-label">Together</span></button>
+      <button id="dock-workspace" class="quiet" type="button" data-view-key="workspace" aria-current="false" aria-label="Workspace"><span class="dock-label">Workspace</span></button>
+    </nav>
+      <div id="session-indicators" class="session-indicators" aria-label="当前会话">
+
+        <span class="model-slot"><button id="model-display" type="button" class="topbar-icon model-readout" aria-label="切换当前会话模型" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="model-orbit" d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 0v9m8-4.5L12 12l-8-4.5M12 12v9"/></svg><span id="model-name" hidden></span></button></span>
+        <button id="usage-anchor" class="topbar-icon usage-readout" type="button" aria-label="当前会话用量"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="usage-meter" d="M5 18V12M12 18V6M19 18V9"/></svg><span id="usage-total" class="usage-total"></span><span id="usage-current" class="usage-current"></span><span class="status-readout" hidden><span id="input-count"></span><span id="output-count"></span><span id="cache-count"></span><span id="compression-count"></span></span></button>
+      </div>
+      <div id="system-slot" hidden><button id="system-bubble" class="topbar-icon" aria-label="系统信息" title="系统信息" aria-controls="system-popover" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6v1.1M6.6 10.4a5.4 5.4 0 0 1 10.8 0c0 3.6 1.4 5.1 2.1 5.7H4.5c.7-.6 2.1-2.1 2.1-5.7Z"/><path d="M10.2 18.6a2 2 0 0 0 3.6 0"/></svg></button><div id="system-popover" hidden role="region" aria-label="系统信息"></div></div>
+      <nav id="settings-extension-actions" aria-label="设置窗口" hidden><span id="settings-extension-position">随主界面</span><button id="settings-extension-placement" type="button">独立</button><button id="settings-extension-home" type="button">Eyra</button></nav>
+      <button id="account-status" class="account-status" type="button" aria-label="Aieyra 账号" aria-haspopup="dialog" hidden><span class="account-status-avatar" aria-hidden="true"></span></button>
+
+      <nav class="window-controls" aria-label="窗口">
+      <button id="minimize-window" type="button" aria-label="最小化"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5h10"/></svg></button>
+      <button id="maximize-window" type="button" aria-label="最大化"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx=".5"/></svg></button>
+      <button id="close-window" type="button" aria-label="关闭"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
+      </nav>
+    </header>
+    <nav id="task-tabs" role="tablist" aria-label="Eyra 与分裂任务" hidden></nav>
+    <section id="startup" aria-label="Eyra 启动" role="status" hidden>
+      <svg class="startup-halo" viewBox="0 0 200 200" aria-hidden="true"><circle class="startup-ripple" cx="100" cy="100" r="76"/><circle class="startup-edge" cx="100" cy="100" r="76"/></svg>
+      <h1>我是Eyra，稍等。</h1><p id="startup-copy">我正在整理Aieyra OS。</p>
+      <button id="startup-skip" class="quiet">立刻进入</button>
+      <p id="startup-error" hidden></p><div id="startup-actions" hidden><button id="startup-retry" class="quiet">重新连接</button><button id="startup-settings" class="quiet">打开设置</button></div>
+    </section>
+    <section id="os-home" aria-label="OS 首页">
+    </section>
+    <section id="view-surface" aria-label="当前页面" hidden><header id="view-heading" hidden><button id="home-button" type="button">OS</button><h1 id="view-title"></h1></header><div id="view-content"></div></section>
+    <main id="screen" aria-label="与 Eyra 相处的画布">
+      <div id="conversation" tabindex="0" aria-label="当前实时对话">
+        <div id="conversation-content" aria-label="聊天记录"></div>
+        <section id="emergence" aria-label="Eyra 当前状态">
+          <div id="live-actions" aria-label="最近动作"></div>
+          <div class="presence-header">
+          <button id="eyra-trigger" type="button" aria-label="双击查看历史" aria-controls="composer" aria-expanded="true" title="双击查看历史">
+          </button>
+          <button id="strip-hide" type="button" aria-label="收起右侧的思考与正文" title="收起右侧的思考与正文" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path class="strip-hide-icon" d="M5 12h9M11 8l-4 4 4 4M19 6v12"/><path class="strip-show-icon" d="M5 12h9M10 8l4 4-4 4M19 6v12"/></svg></button>
+          <span id="presence-label" aria-live="polite"></span>
+          <div id="live-current" aria-label="当前动作"></div>
+          <div id="presence-glyphs" aria-hidden="true" hidden></div>
+          </div>
+          <section id="thought-stream" class="thought-stream" hidden><p id="thought"></p></section>
+          <section id="answer-stage" hidden><div class="presence-identity"><span id="eyra-name" class="chat-name">Eyra</span><span id="eyra-work-status" class="presence-work-status" hidden></span></div><div id="live-body-history" aria-label="本轮过程正文"></div><div id="voice" aria-label="Eyra 的回复"></div><div id="voice-artifacts" class="chat-artifacts" aria-label="这一轮做出的文件" hidden></div><button id="live-details" class="quiet inline-document" hidden>查看完整内容</button><button id="welcome-start" type="button" class="quiet ui-outline" hidden>开始使用</button></section>
+          <div id="voice-tabs" class="voice-tabs" hidden></div>
+          <div id="presence-caption" role="status"></div>
+          <div data-retired-theme-slot="home-team" hidden></div>
+          <button id="reconnect" class="quiet" hidden>重新连接</button>
+          <details id="startup-connection-details" hidden>
+            <summary id="startup-connection-summary">连接详情</summary>
+            <p id="startup-connection-reason"></p>
+          </details>
+        </section>
+        <div id="task-plan" aria-label="任务进度" hidden></div>
+      </div>
+      <section id="stage" class="team-exec" hidden aria-label="工作预览"></section>
+      <section id="work" hidden aria-label="本轮命令输出"><section id="live-terminal" hidden aria-label="当前命令终端"><header><span id="terminal-label">终端状态</span><span id="terminal-status">已执行 0 轮</span></header><div id="terminal-content" tabindex="0" aria-label="命令输入与输出"></div></section></section>
+    </main>
+    <aside id="notice" role="status" hidden></aside>
+    <nav id="activity-orbits" aria-label="计划与协同"><div id="dynamic-menu"></div></nav>
+    <nav id="status-rail" aria-label="状态栏">
+      <div id="plan-orb" class="rail-orb" data-pill="open" hidden>
+        <button id="plan-bubble" class="plan-ball" type="button" aria-label="当前计划" aria-expanded="false" aria-controls="plan-pop">
+          <svg class="plan-ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="plan-track" cx="22" cy="22" r="20"/><circle class="plan-arc" cx="22" cy="22" r="20" pathLength="100"/></svg>
+          <svg class="plan-glyph" viewBox="0 0 24 24" aria-hidden="true"><path class="l1" d="M8 8h9"/><path class="l2" d="M8 12h6"/><path class="l3" d="M8 16h8"/><circle cx="5.2" cy="8" r=".9"/><circle cx="5.2" cy="12" r=".9"/><circle cx="5.2" cy="16" r=".9"/></svg>
+          <span class="plan-sparks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </button>
+        <div class="plan-pill"><span class="plan-track-text" id="plan-current"></span><small id="plan-count"></small></div>
+      </div>
+      <div id="diary-orb" class="diary-orb" data-pill="open" hidden>
+        <button id="diary-ball" class="diary-ball" type="button" aria-label="Eyra 给你看的日记" aria-expanded="false" aria-controls="diary-pop">
+          <svg class="diary-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5H16a2 2 0 0 1 2 2v13H8.5a2 2 0 0 1-2-2z"/><path d="M6.5 17.5a2 2 0 0 1 2-2H18"/><path d="M10 8.5h5M10 11.5h3.5"/></svg>
+          <span class="diary-motes" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        </button>
+        <div class="diary-pill"><small>Eyra 的日记</small><span id="diary-current"></span></div>
+      </div>
+      <div id="terminal-orbs" aria-label="后台终端" hidden></div>
+    </nav>
+    <section id="plan-pop" aria-label="完整计划" hidden><div id="plan-pop-content"></div></section>
+    <section id="diary-pop" role="dialog" aria-label="Eyra 的日记" hidden>
+      <header class="diary-head"><small id="diary-pop-meta"></small><h2 id="diary-pop-title"></h2><button id="diary-pop-close" class="ui-icon-button" type="button" aria-label="看完了，收起日记" title="看完了"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button></header>
+      <article id="diary-pop-body" class="diary-body"></article>
+    </section>
+    <section id="terminal-pop" role="dialog" aria-label="终端" hidden>
+      <header class="tp-head">
+        <button id="terminal-collapse" class="tp-collapse" type="button" aria-label="收起终端" title="收起"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h10M11 8l4 4-4 4M19 6v12"/></svg></button>
+        <span id="terminal-pop-state" class="tp-state" role="status"></span>
+        <strong id="terminal-pop-title" class="tp-title"></strong>
+        <nav id="terminal-pop-tabs" class="tp-tabs" aria-label="终端会话" hidden></nav>
+        <button id="terminal-stop" class="tp-stop" type="button" aria-label="结束这个终端" title="结束" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="7.5" width="9" height="9" rx="2"/></svg></button>
+      </header>
+      <div id="terminal-pop-screen" class="tp-screen" aria-label="终端，点一下就能直接输入" hidden></div>
+      <p id="terminal-pop-error" class="tp-error" role="status"></p>
+    </section>
+    <footer id="bottom-bar" class="bottom-bar" aria-label="输入区域">
+    <div id="input-dock">
+    <section
+      id="composer"
+      class="composer"
+      role="group"
+      aria-label="写下你的消息"
+    >
+    </section>
+    </div>
+    </footer>
+
+    <section id="plan-view" class="workspace-page" aria-label="当前计划" hidden><div id="plan-content"></div></section>
+    <section id="browser-view" class="workspace-page" aria-label="浏览器" hidden>
+      <div id="browser-error" role="status"></div>
+      <section id="browser-empty" aria-label="浏览器窗口" hidden>
+        <h2 id="browser-detached" hidden>浏览器已在独立窗口打开</h2>
+        <div class="browser-empty-actions"><button id="browser-placement" type="button" hidden>放回此处</button><button id="browser-retry" type="button" hidden>重试</button></div>
+        <nav id="browser-groups" aria-label="浏览器会话" hidden></nav>
+      </section><div id="browser-surface" aria-label="原生浏览器页面"></div>
+    </section>
+    <section id="control-view" class="embedded-panel" aria-label="Link" hidden><header class="plugin-view-header"><span id="control-status" role="status"></span><button id="control-retry" class="quiet" type="button">重新连接</button></header><small id="control-error" role="status"></small><div id="control-surface" aria-label="Aieyra Control 原生页面"></div></section>
+    <section id="link-view" class="embedded-panel" aria-label="Link 跨设备协同" hidden><div class="link-connection"><span id="link-status" role="status"></span><small id="link-error" role="status" hidden></small></div><p id="link-quiet" role="status">等待附近设备</p><div id="link-details"></div></section>
+    <section id="settings-view" class="embedded-panel" aria-label="设置" hidden><div id="settings-surface" aria-label="设置编辑器"></div></section>
+    <section id="conversation-view" class="embedded-panel conversation-page" aria-label="智能体会话" hidden><div id="conversation-surface" class="conversation-surface"></div></section>
+    <section
+      id="panel"
+      class="panel workspace-page"
+      aria-labelledby="panel-title"
+      hidden
+    >
+      <div class="panel-heading">
+        <h2 id="panel-title">历史记录</h2>
+        <button id="close-panel" class="quiet icon-button" aria-label="关闭历史"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+      </div>
+      <div id="panel-content" tabindex="0"></div>
+    </section>
+    <dialog id="onboarding">
+      <div class="onboard-header"><h1>Settings</h1><nav class="settings-tabs" aria-label="设置分类"><button id="profile-tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c1.2-3.6 4-5.5 7-5.5s5.8 1.9 7 5.5"/></svg><span>个人</span></button><button id="appearance-tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M7.5 16 12 4l4.5 12M9.2 11.5h5.6"/></svg><span>外观</span></button><button id="aieyra-tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><span>Aieyra API</span></button><button id="providers-tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 3.5 8 12 12.5 20.5 8 12 3.5Z"/><path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16l8.5 4.5 8.5-4.5"/></svg><span>供应商</span></button><button id="connection-tab" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3v4M15 3v4M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0V7ZM12 16v5"/></svg><span>模型连接</span></button><button id="requests-tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4zM9 8.5h6M9 12h6M9 15.5h3.5"/></svg><span>请求记录</span></button><button id="prompts-tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h8l3 3v15h-11zM9.5 9.5h5M9.5 13h5M9.5 16.5h3"/></svg><span>提示词</span></button></nav><button id="close-onboarding" class="quiet icon-button" aria-label="关闭设置"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button></div>
+      <div id="settings-body">
+      <p id="settings-extension-status" role="status" aria-live="polite"></p>
+      <section id="profile-settings" hidden>
+        <header class="settings-head"><h2>个人</h2></header>
+        <div class="settings-area profile-pair">
+          <div class="profile-card user-profile" data-empty="true">
+            <span class="avatar-slot" id="avatar-user" role="img" aria-label="你的头像"><img id="avatar-user-img" alt="" hidden><span class="avatar-initial" id="avatar-user-initial" aria-hidden="true"></span></span>
+            <div class="identity-controls">
+              <input id="display-name" aria-label="用户名字" maxlength="40" autocomplete="off" placeholder="如何称呼你">
+              <div id="user-ring-colors" class="identity-palette" role="group" aria-label="用户头像框颜色"></div>
+              <button id="avatar-user-source" class="media-source" type="button">默认头像</button>
+            </div>
+          </div>
+          <div class="profile-card eyra" data-empty="true">
+            <span class="avatar-slot" id="avatar-eyra" role="img" aria-label="Eyra 的头像"><img id="avatar-eyra-img" alt="" hidden><span class="avatar-initial" id="avatar-eyra-initial" aria-hidden="true"></span></span>
+            <div class="identity-controls">
+              <input id="eyra-display-name" aria-label="Eyra的名字" maxlength="40" autocomplete="off" placeholder="Eyra">
+              <button id="avatar-eyra-source" class="media-source" type="button">默认头像</button>
+            </div>
+          </div>
+          <div id="role-settings"></div>
+        </div>
+        <div class="settings-area background-area">
+          <div class="area-head"><h3>背景与遮罩</h3></div>
+          <div class="background-grid">
+            <div class="background-controls">
+              <div id="background-random-time"></div>
+              <h4 class="media-effects-title">程序整体</h4>
+              <label class="slider-field"><span>整体模糊</span><input type="range" id="background-blur" min="0" max="32" step=".01"><output id="background-blur-value"></output></label>
+              <label class="slider-field"><span>整体遮罩</span><input type="range" id="background-opacity" min="0" max="100" step=".01"><output id="background-opacity-value"></output></label>
+              <h4 class="media-effects-title">聊天展开时</h4>
+              <label class="slider-field"><span>聊天模糊</span><input type="range" id="chat-blur" min="0" max="32" step=".01"><output id="chat-blur-value"></output></label>
+              <label class="slider-field"><span>聊天遮罩</span><input type="range" id="chat-opacity" min="0" max="100" step=".01"><output id="chat-opacity-value"></output></label>
+              <div class="button-row"><button type="button" class="quiet" id="background-choose">选择背景</button><button type="button" class="quiet" id="background-random">随机</button><button type="button" class="quiet" id="background-custom">自定义</button><button type="button" class="quiet" id="background-clear">移除</button></div>
+            </div>
+            <div class="background-preview" id="background-preview" data-empty="true"><span class="bg-image"></span><span class="bg-veil"></span><span class="bg-chat">聊天层预览</span><span class="bg-ball" aria-hidden="true"></span><span class="bg-empty">尚未设置背景</span></div>
+          </div>
+        </div>
+        <div class="settings-actions profile-actions"><span id="profile-status" role="status"></span><button id="save-profile" type="button">保存</button></div>
+      </section>
+      <section id="appearance-settings" hidden>
+        <header class="settings-head"><h2>外观</h2><nav class="look-tabs ui-tabs" id="look-tabs" role="tablist" aria-label="外观分类"></nav></header>
+        <div class="look-stage" id="look-stage" aria-label="实景预览" aria-hidden="true"></div>
+        <div id="look-fields"></div>
+        <div class="settings-actions appearance-actions"><span id="look-status" role="status"></span><button id="look-theme-remove" type="button" class="quiet" hidden>移除主题</button><button id="look-reset" type="button" class="quiet">恢复默认</button><button id="look-save" type="button">保存外观</button></div>
+      </section>
+      <section id="request-settings" hidden>
+        <header class="settings-head"><h2>请求记录</h2><span id="request-hint" hidden></span>
+        <nav class="ui-tabs" id="request-sources" aria-label="记录来源"><button type="button" data-source="local" aria-selected="true">Aieyra OS</button><button type="button" data-source="official" aria-selected="false">账号全部</button></nav></header>
+        <div class="request-summary-row"><dl class="request-summary" id="request-summary"></dl><nav id="request-range" class="ui-tabs" aria-label="请求时间范围"><button type="button" data-days="3" aria-selected="true">3天</button><button type="button" data-days="7" aria-selected="false">7天</button><button type="button" data-days="0" aria-selected="false">全部</button></nav></div>
+        <div class="request-breakdown" id="request-breakdown" hidden></div>
+        <div class="settings-area request-area"><table class="request-table"><thead><tr><th>时间</th><th>模型</th><th id="request-role-head">来源</th><th>输入</th><th>输出</th><th>缓存</th><th id="request-extra-head">线路</th><th>耗时</th></tr></thead><tbody id="request-rows"></tbody></table><p class="request-empty" id="request-empty" hidden></p></div>
+        <div class="settings-actions request-actions ui-pages"><span id="request-status" role="status" aria-live="polite"></span><button id="request-prev" type="button" class="quiet ui-outline">上一页</button><span id="request-pages" class="ui-page-numbers"></span><button id="request-next" type="button" class="quiet ui-outline">下一页</button><button id="request-reload" type="button" class="glass-pill">刷新</button></div>
+      </section>
+      <section id="prompt-settings" hidden>
+        <header class="settings-head"><h2>提示词</h2></header>
+        <nav class="ui-tabs" id="prompt-layers" aria-label="提示词层"></nav>
+        <div class="settings-area prompt-area">
+        <label class="sr-only" for="prompt-editor" id="prompt-title">提示词内容</label>
+        <div class="prompt-editor-frame"><textarea id="prompt-editor" spellcheck="false"></textarea></div>
+        </div>
+        <div class="settings-actions prompt-actions"><span id="prompt-status" role="status"></span><button id="restore-prompt" type="button" class="quiet ui-outline">恢复默认</button><button id="save-prompt" type="button">保存</button></div>
+      </section>
+      <section id="aieyra-page" class="model-page" hidden>
+        <header class="settings-head"><h2>Aieyra API</h2><div class="settings-head-actions"><button id="aieyra-sync" type="button" class="glass-pill" hidden title="同步当前登录账号的 Key 和可用状态"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 7a7 7 0 0 1 11.6-1L20 9M4 15l2.3 3A7 7 0 0 0 17.9 17"/></svg><span>同步 Key</span></button><button id="aieyra-logout" type="button" class="glass-pill" hidden>退出</button></div></header>
+        <div class="aieyra-account" id="aieyra-account" data-signed-in="false">
+          <span class="aieyra-avatar" id="aieyra-avatar" aria-hidden="true">A</span>
+          <span class="aieyra-who"><strong id="aieyra-name">Aieyra 账号</strong><small id="aieyra-meta">尚未登录</small></span>
+          <dl class="aieyra-stats" id="aieyra-stats" hidden><div><dt>余额</dt><dd id="aieyra-balance">—</dd></div><div><dt>已用</dt><dd id="aieyra-used">—</dd></div><div><dt>请求</dt><dd id="aieyra-requests">—</dd></div></dl>
+          
+          
+        </div>
+        <div class="settings-area key-list" id="aieyra-keys" hidden></div>
+        <div id="aieyra-pool"></div>
+        <div class="settings-actions model-actions"><p class="model-status" id="aieyra-status" role="status" aria-live="polite"></p><button type="button" class="settings-clear text-button" data-clear-source="aieyra" aria-label="清空Aieyra模型池">清空</button><button type="button" class="settings-save" data-save="aieyra-status">保存</button><button id="aieyra-login" type="button" class="primary-pill">登录</button></div>
+      </section>
+      <section id="providers-page" class="model-page" hidden>
+        <header class="settings-head"><h2>供应商</h2></header>
+        <div id="provider-add-area"></div>
+        <div id="providers-body"></div>
+        <div id="providers-pool"></div>
+        <div class="settings-actions model-actions"><p class="model-status" id="providers-status" role="status" aria-live="polite"></p><button type="button" class="settings-clear text-button" data-clear-source="provider" aria-label="清空供应商模型池">清空</button><button type="button" class="settings-save" data-save="providers-status">保存</button></div>
+      </section>
+      <section id="links-page" class="model-page" hidden>
+        <header class="settings-head"><h2>模型连接</h2></header>
+        <div id="links-body"></div>
+        <div class="settings-actions model-actions"><p class="model-status" id="links-status" role="status" aria-live="polite"></p><button type="button" class="settings-save" data-save="links-status">保存</button></div>
+      </section>
+      </div>
+    </dialog>
+    <dialog id="exit-ask" aria-labelledby="exit-ask-title" aria-describedby="exit-ask-text"><h2 id="exit-ask-title">退出 Aieyra OS</h2><p id="exit-ask-text">只退出 OS：独立窗口继续使用，点 X 关闭各自窗口。<br>全部退出：保存草稿并关闭本次运行的所有窗口。</p><div class="exit-actions"><button id="exit-cancel" class="quiet" type="button">取消</button><button id="exit-os" type="button">只退出 OS</button><button id="exit-all" class="primary" type="button">全部退出</button></div></dialog>
+    <dialog id="restore-prompts-dialog" aria-labelledby="restore-prompts-title"><h2 id="restore-prompts-title">恢复默认提示词？</h2><p>人格与沟通、执行与工作、安全与边界、思考方式将恢复系统默认。未保存编辑会被替换，已保存的自定义内容会保留备份。</p><p id="restore-prompts-status" role="status"></p><div class="crop-actions"><button type="button" id="cancel-restore-prompts" class="quiet">取消</button><button type="button" id="confirm-restore-prompts">确认</button></div></dialog>
+    <section id="document-viewer" class="workspace-page" aria-labelledby="document-title" hidden><div class="document-header"><div class="document-heading"><h2 id="document-title">文档</h2><p id="document-meta" hidden></p></div><button id="previous-document" type="button" class="quiet ui-icon-button" aria-label="上一份报告" title="上一份报告" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6"/></svg></button><button id="next-document" type="button" class="quiet ui-icon-button" aria-label="下一份报告" title="下一份报告" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg></button><button id="minimize-document" type="button" class="quiet ui-icon-button" aria-label="最小化报告" title="最小化报告"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12"/></svg></button><button id="close-document" type="button" class="quiet ui-icon-button" aria-label="关闭报告" title="关闭报告"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button></div><p id="document-status" role="status" hidden></p><article id="document-content" tabindex="0" aria-label="文档正文"></article><iframe id="document-html" title="HTML 文档" sandbox="allow-same-origin" referrerpolicy="no-referrer" hidden></iframe></section>
+    <script type="module" src="../host/entry.mjs"></script>
+  </body>
+</html>

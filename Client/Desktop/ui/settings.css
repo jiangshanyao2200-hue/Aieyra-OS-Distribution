@@ -1,0 +1,817 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body #view-content > #onboarding; body #onboarding #settings-body; body.settings-extension.has-space-background #view-content > #onboarding; body #onboarding .settings-tabs; body #onboarding .settings-tabs button; body #onboarding .settings-tabs button svg; body #onboarding .settings-tabs button:hover; body #onboarding .settings-tabs button[aria-selected=true]; body #onboarding .settings-tabs button[aria-selected=true]::before; body.settings-extension #onboarding .settings-head h2; body #onboarding :is(input,textarea)::placeholder; body #onboarding .settings-tabs button; body #onboarding .settings-tabs button svg; body #onboarding .settings-tabs button[aria-selected=true]; body #onboarding .settings-tabs button[aria-selected=true]::before; body #onboarding button:disabled; body #onboarding :is(.settings-actions button:not(.quiet,.text-button),.primary-pill,.picker-save,.picker-toggle[data-added=true],.picker-check[aria-checked=true]); body #onboarding #provider-add-submit; body #onboarding #provider-add-submit:hover:not(:disabled); body #onboarding dialog.model-picker .picker-check:not([aria-checked=true]) > svg; body #onboarding :is([data-error=true],[role=alert],.error); body.settings-extension :is(.glass-select-list,.glass-color-panel); body.settings-extension :is(.glass-select-list,.glass-color-panel) *; body.settings-extension .glass-select-option[aria-disabled=true]; body.settings-extension .glass-select-desc:empty::before; body #onboarding .settings-tabs #control-slot; body #onboarding .settings-tabs > :not(.settings-tool-entry) + .settings-tool-entry; body #onboarding button:focus-visible; body:not([data-input-mode=keys]) #onboarding .settings-tabs button:focus-visible; body #onboarding #settings-body; body #onboarding .memory-row; body #onboarding .memory-row :is(input,select); body #onboarding #memory-settings textarea; body #onboarding #memory-settings :is(#memory-context,#memory-clean-preview); body #onboarding .memory-hint,body #onboarding #memory-overview; body #onboarding #memory-settings .memory-option; body #onboarding #memory-settings .memory-option input; body #onboarding .memory-actions; body #onboarding #memory-status; body #onboarding #memory-status[data-error=true]; body #onboarding .memory-record-list; body #onboarding .memory-record-list button; body #onboarding .memory-record-detail; body #onboarding .runtime-prompts :is(select,textarea); body #onboarding #prompt-settings .runtime-prompts textarea; body #onboarding .runtime-prompt-path; body #onboarding #settings-body > :is(section,form); body #onboarding .settings-area; body #onboarding .area-head h3; body #onboarding .area-head p; body #onboarding label; body #onboarding :is(input:not([type=checkbox]):not([type=color]):not([type=range]),select); body #onboarding input[type=number]:is(input,:hover,:focus); body #onboarding select; body #onboarding select option; body #onboarding :is(input:not([type=checkbox]):not([type=color]):not([type=range]),select):hover:not(:disabled); body #onboarding :is(input:not([type=checkbox]):not([type=color]):not([type=range]),select):focus; body #onboarding .slider-field; body #onboarding .slider-field input[type=range]; body #onboarding .slider-field output; body #onboarding :is(.secondary,.quiet):not(.settings-tabs button,.settings-actions button,.settings-head-actions button); body #onboarding :is(.secondary,.quiet):not(.settings-tabs button,.settings-actions button,.settings-head-actions button):hover:not(:disabled); body #onboarding .text-button:not(.settings-actions button); body #onboarding .text-button:not(.settings-actions button):hover:not(:disabled); body #onboarding button:disabled; body #onboarding .button-row; body #onboarding .button-row > button; body #onboarding .settings-actions; body #onboarding .settings-actions [role=status]; body #onboarding .profile-pair; body #onboarding .profile-card; body #onboarding .profile-card + .profile-card; body #onboarding .profile-card .field; body #onboarding .profile-card .text-button; body #onboarding .profile-card[data-empty=true] .text-button; body #onboarding .avatar-slot; body #onboarding .avatar-slot img; body #onboarding .avatar-initial; body #onboarding .avatar-slot img:not([hidden]) + .avatar-initial; body #onboarding .profile-card.eyra[data-empty=true] .avatar-slot; body #onboarding .profile-card.eyra[data-empty=true] .avatar-initial; body #onboarding .avatar-slot:focus-visible; body #onboarding .background-grid; body #onboarding .background-preview; body #onboarding .background-preview .bg-image; body #onboarding .background-preview .bg-veil; body #onboarding .background-preview[data-empty=true] :is(.bg-image,.bg-veil); body #onboarding .background-preview .bg-ball; body #onboarding .background-preview .bg-empty; body #onboarding .background-preview:not([data-empty=true]) .bg-empty; body #onboarding .background-controls; @media (max-width:860px); body #onboarding .profile-pair; body #onboarding .profile-card + .profile-card; body #onboarding #appearance-settings .appearance-preview; body #onboarding #appearance-settings .appearance-preview #appearance-sample-text > :first-child; body #onboarding .region-chips; body #onboarding .region-chips .region-chip; body #onboarding .region-chips .region-chip:hover; body #onboarding .region-chips .region-chip[aria-selected=true]; body #onboarding .group-grid; body #onboarding .appearance-group .select-field; body #onboarding .color-field; body #onboarding .color-field input[type=color]; body #onboarding .color-field input[type=color]::-webkit-color-swatch; @media (max-width:860px); body #onboarding #prompt-layers .layer-state; body #onboarding .prompt-area; body #onboarding .prompt-editor-frame; body #onboarding .prompt-editor-frame:focus-within; body #onboarding #prompt-editor; body #onboarding #prompt-editor:focus; body #onboarding #connect-form; body #onboarding #connect-form .settings-area:not(:has(label:not([hidden]),section:not([hidden]))); body #onboarding #connect-form #account-pane; body #onboarding #connect-form .model-controls; body #onboarding #connect-form #model-parameters; body #onboarding #connect-form .catalog-line; body #onboarding #connect-form :is(#onboard-status,#response-observation); body #onboarding #connect-form :is(#onboard-status,#response-observation):empty; body #view-content > #onboarding; body #onboarding #appearance-fields; body #onboarding #appearance-settings .appearance-window; body #onboarding .appearance-group .group-grid, body #onboarding .appearance-window .group-grid; body #onboarding .appearance-group:first-child .group-grid; body #onboarding .slider-field; @media (max-width:980px); body #onboarding .appearance-group:nth-child(3) .group-grid; body #onboarding .color-field; body #onboarding .settings-head p; body #onboarding .settings-area; body #onboarding .area-head; body #onboarding .area-head p; body #onboarding .settings-tabs > :not(.settings-tool-entry) + .settings-tool-entry; body #onboarding .profile-pair; body #onboarding .profile-card; body #onboarding .profile-card + .profile-card; body #onboarding .profile-card .text-button; body #onboarding .avatar-slot; body #onboarding .avatar-slot:focus-visible; body #onboarding :is(#display-name,#eyra-display-name); body #onboarding :is(#display-name,#eyra-display-name):hover:not(:focus); body #onboarding :is(#display-name,#eyra-display-name):focus; @media (max-width:860px); body #onboarding .group-grid; body #onboarding .color-field; body #onboarding .color-field input[type=color]; body #onboarding .color-field input[type=color]::-webkit-color-swatch-wrapper; body #onboarding #prompt-layers; body #onboarding .prompt-actions; body #onboarding .settings-head .account-chip; body #onboarding .account-chip .account-avatar; body #onboarding .account-chip[data-signed-in=true] .account-avatar; body #onboarding .account-chip .account-text; body #onboarding .account-chip #account-identity; body #onboarding .account-chip #account-balance; body #onboarding .account-chip #account-balance:empty; body #onboarding .account-chip button; body #onboarding .account-chip #account-login; body #onboarding .account-chip #account-logout; body #onboarding .account-chip #account-logout:hover; body #onboarding #connect-form #account-pane:not([hidden]); body #onboarding #connect-form #account-status; body #onboarding #connect-form #account-status:empty; body #onboarding #connect-form .model-controls; body #onboarding #connect-form #model-field; body #onboarding #connect-form .catalog-line; body #onboarding #connect-form #model-parameters; body #onboarding #connect-form #model-parameters[hidden]; body #onboarding #connect-form #parameter-fields; body #onboarding #connect-form #parameter-fields > *; .glass-select-native; body #onboarding .glass-select .glass-select-value; .glass-select-list; .glass-select-list[data-side=up]; .glass-select-list.shown; .glass-select-option; .glass-select-option:hover, .glass-select-option.active; .glass-select-option[aria-selected=true]; .glass-select-option[aria-disabled=true]; body.reduce-motion .glass-select-list; body #onboarding #settings-body :is(.settings-actions,.connection-actions,.profile-actions,.prompt-actions,.appearance-actions); body #onboarding .appearance-group .group-grid; body #onboarding .appearance-group .color-field; body #onboarding .settings-head .account-menu; body #onboarding .account-menu .account-avatar; body #onboarding .account-menu[data-signed-in=true] .account-avatar; body #onboarding .account-menu .account-avatar:focus-visible; body #onboarding .account-pop; body #onboarding .account-pop::before; body #onboarding .account-menu:is(:hover,:focus-within) .account-pop; body #onboarding .account-who; body #onboarding .account-pop-avatar; body #onboarding .account-menu[data-signed-in=false] .account-pop-avatar; body #onboarding .account-names; body #onboarding .account-names strong; body #onboarding .account-names small; body #onboarding .account-stats; body #onboarding .account-stats[hidden]; body #onboarding .account-stats div; body #onboarding .account-stats dt; body #onboarding .account-stats dd; body #onboarding .account-pop button:not(.account-avatar); body #onboarding .account-pop #account-login; body #onboarding .account-pop #account-logout; body #onboarding .account-pop #account-logout:hover; body #onboarding .account-pop [hidden]; body #onboarding .chat-layout-area .area-head; body #onboarding .chat-layout-area .area-head .text-button; body #onboarding .chat-layout-area .area-head .text-button:hover; body #onboarding .chat-layout-preview; body #onboarding .chat-layout-fields h4; body #onboarding .chat-layout-fields .group-grid; @media (max-width:980px); .glass-select-list:is(.rich,.searchable); .glass-select-list:is(.rich,.searchable) .glass-select-body; .glass-select-search; .glass-select-search:focus; .glass-select-group; .glass-select-group[hidden], .glass-select-option[hidden]; .glass-select-option; .glass-select-name; .glass-select-note; .glass-select-option.muted:not(:hover,.active,[aria-selected=true]); .glass-select-desc; .glass-select-desc:empty::before; .glass-select-list.catalog; .glass-select-list.catalog .glass-select-search; .glass-select-list.catalog .glass-select-search:focus-visible; .glass-select-content; .glass-select-list.catalog .glass-select-body; .glass-select-list.catalog .glass-select-option; .glass-select-list.catalog .glass-select-name; .glass-select-capabilities; .glass-select-capability; .glass-select-capability svg; .glass-select-list.catalog .glass-select-option[aria-disabled=true]; .glass-select-list.catalog .glass-select-option:is(:hover,.active); .glass-select-list.catalog .glass-select-option[aria-selected=true]; .glass-select-list.catalog .glass-select-group; .glass-select-list.catalog button.glass-select-group; .glass-select-list.catalog button.glass-select-group::after; .glass-select-list.catalog button.glass-select-group[aria-expanded=true]::after; .glass-select-list.catalog button.glass-select-group:hover; .glass-select-body:focus-visible, .glass-select-details:focus-visible, .glass-select-group:focus-visible; .glass-select-details; .glass-detail-name; .glass-detail-id; .glass-detail-note, .glass-detail-summary; .glass-detail-section; .glass-detail-section h5; .glass-detail-section dl; .glass-detail-section dt; .glass-detail-section dd; .glass-select-empty; .glass-select-list.catalog[data-detail=dock] .glass-select-content; .glass-select-list.catalog[data-detail=dock] .glass-select-body; .glass-select-list.catalog[data-detail=dock] .glass-select-details; .glass-select-list.catalog[data-detail=dock] .glass-select-option; .glass-select-list.catalog [hidden]; @media (max-width:980px); body #onboarding #connect-form .model-controls; body #onboarding #connect-form #model-field; body #onboarding #connect-form .catalog-line; body #onboarding #connect-form #model-parameters; body #onboarding #connect-form #parameter-fields; body #onboarding #connect-form #model-info; body #onboarding #connect-form #model-info[hidden], body #onboarding #connect-form .model-context[hidden], body #onboarding #connect-form #model-roles[hidden]; body #onboarding #connect-form .model-context; body #onboarding #connect-form .model-context-grid; body #onboarding #connect-form .model-context-hint; body #onboarding #connect-form #role-rows; body #onboarding #connect-form .role-row; body #onboarding #connect-form .role-name; body #onboarding #connect-form .role-pick; body #onboarding #connect-form .role-pick:hover:not(:disabled); body #onboarding #connect-form .role-pick[aria-pressed=true]; body #onboarding #connect-form .role-now; body #onboarding .model-page; body #onboarding .primary-pill; body #onboarding .model-status; body #onboarding .model-status.error; body #onboarding .model-status:empty; body #onboarding .aieyra-account; body #onboarding .aieyra-avatar; body #onboarding .aieyra-account[data-signed-in=true] .aieyra-avatar; body #onboarding .aieyra-who; body #onboarding .aieyra-who strong; body #onboarding .aieyra-who small; body #onboarding .aieyra-stats; body #onboarding .aieyra-stats[hidden]; body #onboarding .aieyra-stats div; body #onboarding .aieyra-stats dt; body #onboarding .aieyra-stats dd; body #onboarding .aieyra-account > button; body #onboarding .aieyra-account > button[hidden]; body #onboarding #aieyra-sync; body #onboarding #aieyra-sync[hidden]; body #onboarding #aieyra-sync svg; body #onboarding #aieyra-sync[aria-busy=true] svg; @keyframes account-sync-turn; @media (prefers-reduced-motion:reduce); body #onboarding .aieyra-key; body #onboarding .aieyra-key[hidden]; body #onboarding #aieyra-catalog[hidden]; body #onboarding #aieyra-catalog .catalog-panel; body #onboarding .catalog-panel; body #onboarding .catalog-tools; body #onboarding #settings-body .catalog-tools .catalog-search; body #onboarding #settings-body .catalog-tools .catalog-search:focus; body #onboarding .catalog-count; body #onboarding .catalog-rows; body #onboarding .catalog-row; body #onboarding .catalog-row:hover; body #onboarding .catalog-name; body #onboarding .catalog-note; body #onboarding .catalog-add; body #onboarding .catalog-add:hover:not(:disabled); body #onboarding .catalog-add[data-state=added]; body #onboarding .catalog-add[data-state=busy]; @keyframes catalog-spin; body.reduce-motion #onboarding .catalog-add[data-state=busy]; body #onboarding .catalog-empty; body #onboarding .model-pool; body #onboarding .pool-head; body #onboarding .pool-head h3; body #onboarding .pool-count; body #onboarding .pool-head .pool-fetch; body #onboarding .pool-chips; body #onboarding .pool-chip; body #onboarding .pool-chip-name; body #onboarding .pool-chip-label; body #onboarding .pool-chip-x; body #onboarding .pool-chip-x:hover:not(:disabled); body #onboarding .pool-empty; body #onboarding .provider-head; body #onboarding .provider-head h3; body #onboarding .provider-host; body #onboarding .provider-head > button:first-of-type; body #onboarding .key-row; body #onboarding .key-hint; body #onboarding .key-meta; body #onboarding .key-x; body #onboarding .key-x:hover:not(:disabled); body #onboarding :is(.key-x,.text-button)[data-armed=true]; body #onboarding .key-new .key-input; body #onboarding .add-line; body #onboarding .add-line > label; body #onboarding .add-line > label[hidden]; body #onboarding .add-line > button; body #onboarding .links-area; body #onboarding .link-row; body #onboarding .link-row.link-list; body #onboarding .link-name; body #onboarding .link-control, body #onboarding .link-param; body #onboarding .link-chips; body #onboarding .link-add-wrap; body #onboarding .link-add-wrap .glass-select; body #onboarding .link-param .glass-select; body #onboarding .link-switch-line; body #onboarding .link-switch; body #onboarding .link-switch-knob; body #onboarding .link-switch[aria-checked=true]; body #onboarding .link-switch[aria-checked=true] .link-switch-knob; body #onboarding .link-hint; body #onboarding .link-row > .link-switch-line; body #onboarding .pool-chip-tag; @media (max-height:560px); body #onboarding .settings-tabs; body #onboarding .settings-tabs button; body #onboarding .settings-tabs button[aria-selected=true]::before; @media (max-width:980px); body #onboarding .link-row; body #onboarding .link-row.link-list; body #onboarding .aieyra-account; body #onboarding .aieyra-stats; body #onboarding .key-list; body #onboarding .key-line; body #onboarding .key-line:last-child; body #onboarding .key-line[data-enabled=false] :is(.key-line-name,.key-line-mask,.key-line-meta); body #onboarding #aieyra-keys .key-line[data-enabled=false] .key-line-meta; body #onboarding .key-line-name; body #onboarding .key-line-mask; body #onboarding .key-line-meta; body #onboarding .key-switch; body #onboarding .key-switch-knob; body #onboarding .key-switch[aria-checked=true]; body #onboarding .key-switch[aria-checked=true] .key-switch-knob; body #onboarding .key-line-fetch; body #onboarding .key-line-fetch:hover:not(:disabled); body #onboarding .key-line-fetch svg, body #onboarding .key-line-x svg; body #onboarding .key-line-x; body #onboarding .key-line-x:hover:not(:disabled); body #onboarding .key-empty; body #onboarding .provider-list; body #onboarding .provider-card; body #onboarding .provider-card:last-child; body #onboarding .provider-row; body #onboarding .provider-row:hover; body #onboarding .provider-row strong; body #onboarding .provider-sum; body #onboarding .provider-chevron; body #onboarding .provider-chevron svg; body #onboarding .provider-row[aria-expanded=true] .provider-chevron; body #onboarding .provider-keys; @keyframes keys-in; body #onboarding .provider-actions; body #onboarding .text-button.danger[data-armed=true], body #onboarding .text-button.danger:hover; body #onboarding .key-new; body #onboarding .add-line; body #onboarding .add-line > label.add-preset; body #onboarding .add-line > label.add-name; body #onboarding .add-line > label.add-url; body #onboarding .add-line > label.add-key; @media (max-width:760px); body #onboarding .key-line[data-editable=true]; body #onboarding .provider-edit; body #onboarding .provider-edit [hidden]; body #onboarding .provider-edit .add-line; body #onboarding .provider-edit .add-line > label; body #onboarding .provider-edit-confirm:not([hidden]), body #onboarding .provider-edit-actions; body #onboarding .provider-edit-confirm, body #onboarding .provider-edit-note; body #onboarding .provider-edit-note; @media (max-width:760px); body #onboarding #links-body; body #onboarding #links-body > .settings-area; body #onboarding .link-pool-empty; body #onboarding .link-pool-empty strong; body #onboarding .link-pool-actions; body #onboarding .role-box; body #onboarding .role-box :is(.link-row,.param-row); body #onboarding .role-box .link-name; body #onboarding .role-box .link-control; body #onboarding .role-box .link-control > :first-child; body #onboarding .link-unavailable; body #onboarding .link-info; body #onboarding .link-info:hover, body #onboarding .link-info:focus-visible; body #onboarding .link-params; body #onboarding .link-param-field; body #onboarding .link-param-field :is(select,input); body #onboarding .link-param-field .glass-select; @container (max-width:340px); body #onboarding .role-box :is(.link-row,.param-row); body #onboarding #prompt-settings:not([hidden]); body #onboarding #prompt-settings .prompt-area; body #onboarding #prompt-settings .prompt-editor-frame; body dialog.model-picker; body dialog.model-picker:not([open]); body dialog.model-picker[open]; body dialog.model-picker::backdrop; @keyframes picker-in; @keyframes picker-fade; body .model-picker button; body .model-picker svg; body .picker-head; body .picker-head h2; body .picker-count; body .picker-x; body .picker-x:hover; body .picker-all; body .picker-search; body .picker-search:focus; body .picker-selected; body .picker-bulk; body .picker-bulk:hover:not(:disabled); body .picker-bulk:disabled; body .picker-check; body .picker-rows; body .picker-row; body .picker-name; body .picker-name:focus-visible; body .picker-source; body .picker-note; body .picker-note[data-state=ok]; body .picker-note[data-state=fail]; body .picker-note[data-state=testing]; body .picker-icon; body .picker-icon:hover:not(:disabled); body .picker-icon[data-state=testing]; body .picker-icon[data-state=ok]; body .picker-icon[data-state=fail]; body .picker-toggle[data-added=false]; body .picker-toggle[data-added=false]:hover:not(:disabled); body .picker-toggle[data-added=true]; body .picker-toggle[data-added=true]:hover:not(:disabled); body .picker-toggle[data-busy=true]; @keyframes picker-spin; body.reduce-motion .picker-icon[data-state=testing]; body .picker-empty; body .picker-foot; body .picker-status; body .picker-status.error; body .picker-close; body .picker-close:hover; body .picker-save; body .picker-save:hover:not(:disabled); body #onboarding dialog.model-picker label.picker-all; body #onboarding dialog.model-picker input.picker-check; body #onboarding dialog.model-picker input.picker-search; body #onboarding dialog.model-picker input.picker-search:focus; body #onboarding dialog.model-picker label.picker-all; body #onboarding .role-box .link-control.link-switch-line; body #onboarding .role-box .link-control.link-switch-line > .link-switch; body #onboarding dialog.model-picker .picker-tools > label.picker-all; body #onboarding .model-page > #aieyra-pool, body #onboarding .model-page > #providers-pool; body #onboarding .link-params; body #onboarding .param-row; body #onboarding .param-name; body #onboarding .param-seg; body #onboarding .param-seg .param-seg-item; body #onboarding .param-seg .param-seg-item:hover:not(:disabled):not([aria-checked=true]); body #onboarding .param-seg .param-seg-item[aria-checked=true]; body #onboarding .param-seg .param-seg-item:disabled; body #onboarding .param-slider; body #onboarding .param-slider input[type=range]; body #onboarding .param-slider[data-set=false] input[type=range]; body #onboarding .param-budget; body #onboarding .param-budget input[type=number]; body #onboarding .param-value; body #onboarding .param-context; body #onboarding .param-context-controls; body #onboarding .param-context-controls input[type=number]; body #onboarding .param-context-hint; body #onboarding .context-slider; body #onboarding .context-slider input; body #onboarding .context-value; body #onboarding .context-slider:is(:hover,:focus-within) .context-value,body #onboarding .context-slider:has(input:active) .context-value; body #onboarding .param-slider[data-set=false] .param-value:not([data-set]); body #onboarding .param-reset; body #onboarding .param-reset:hover; @media (max-width:760px); body dialog.model-picker; body dialog.model-picker::backdrop; body .picker-head; body .picker-head h2; body .picker-tools; body #onboarding dialog.model-picker label.picker-search, body dialog.model-picker label.picker-search; body dialog.model-picker label.picker-search:focus-within; body dialog.model-picker label.picker-search svg; body #onboarding dialog.model-picker label.picker-search input; body dialog.model-picker label.picker-search input::-webkit-search-cancel-button; body .picker-actions; body dialog.model-picker .picker-tool; body dialog.model-picker .picker-tool svg; body dialog.model-picker .picker-tool:hover:not(:disabled); body dialog.model-picker .picker-tool:disabled; body dialog.model-picker .picker-tool.picker-all[aria-pressed=true]; body dialog.model-picker .picker-tool.picker-danger:hover:not(:disabled); body .picker-rows; body .picker-row, body .picker-row:has(.picker-source); body .picker-row:has(.picker-source); body .picker-row:hover; body .picker-row[data-selected=true]; body dialog.model-picker .picker-check; body dialog.model-picker .picker-check svg; body dialog.model-picker .picker-check:hover; body dialog.model-picker .picker-check[aria-checked=true]; body .picker-name; body .picker-row[data-added=true] .picker-name; body .picker-tags; body .picker-tags i; body .picker-result; body .picker-result-text; body .picker-result[data-state=ok]; body .picker-result[data-state=fail]; body .picker-dots; body .picker-dots i; body .picker-dots i:nth-child(2); body .picker-dots i:nth-child(3); @keyframes picker-dot; body dialog.model-picker .picker-icon; body dialog.model-picker .picker-icon svg; body dialog.model-picker .picker-icon.picker-test; body dialog.model-picker .picker-icon:hover:not(:disabled); body dialog.model-picker .picker-icon:disabled; body dialog.model-picker .picker-toggle[data-added=false]; body dialog.model-picker .picker-toggle[data-added=false]:hover:not(:disabled); body dialog.model-picker .picker-toggle[data-added=true]; body dialog.model-picker .picker-toggle[data-added=true]:hover:not(:disabled); body dialog.model-picker .picker-toggle[data-busy=true]; body .picker-foot; body .picker-status; body dialog.model-picker .picker-save; body dialog.model-picker .picker-x; body.reduce-motion .picker-dots i; @media (max-width:620px); body #onboarding .glass-pill; body #onboarding .glass-pill:hover:not(:disabled); body #onboarding .key-line-fetch; body #onboarding .key-line-fetch:hover:not(:disabled); body #onboarding dialog.model-picker .picker-tools > label.picker-search; body #onboarding #prompt-settings .prompt-editor-frame; body #onboarding #prompt-settings .prompt-area; body #onboarding #prompt-settings #prompt-editor; body #onboarding .key-line-x[data-armed=true]; body #onboarding .key-line-x[data-armed=true]; body #onboarding .key-line-x[data-armed=true] svg; body #onboarding .key-line-x[data-armed=true] span; body #onboarding .key-line-x[data-armed=true]::after, body #onboarding .provider-remove[data-armed=true]::after; body #onboarding .provider-remove; body #onboarding .provider-remove[data-armed=true]; @keyframes arm-pop; @keyframes arm-countdown; body #onboarding .settings-save[data-saved=true]; body #onboarding .settings-save[data-saved=true]::before; body #onboarding .settings-save[data-saved=false]; @keyframes save-pulse; @keyframes save-shake; body .picker-log; body .picker-log p; body .picker-log i; body .picker-log .log-text; body .picker-log .log-sent .log-text; body .picker-log .log-reply .log-text; body .picker-log[data-state=fail] .log-reply .log-text, body .picker-log[data-state=fail] .log-reply i; body .picker-log .log-time; body .picker-log[data-state=ok] .log-time; body .picker-log .log-wait; body .picker-log[data-fresh=true]; body .picker-log[data-fresh=true] .log-sent .log-text; body .picker-log[data-fresh=true][data-state=ok] .log-reply, body .picker-log[data-fresh=true][data-state=fail] .log-reply; @keyframes log-in; @keyframes log-type; @keyframes log-reply; body .picker-mark; body .picker-mark[data-state=ok]; body .picker-mark[data-state=fail]; body .picker-mark[data-state=testing]; @keyframes mark-beat; body #onboarding .request-summary; .request-summary-row; .context-controls; .context-presets; .context-presets [aria-pressed=true]; body #onboarding .request-summary:empty; body #onboarding .request-summary div; body #onboarding .request-summary dt; body #onboarding .request-summary dd; body #onboarding .request-area; body #onboarding .request-table; body #onboarding .request-table th; body #onboarding .request-table th:nth-child(-n+2); body #onboarding .request-table td; body #onboarding .request-table tbody tr:hover td; body #onboarding .request-table td.time; body #onboarding .request-table td.model; body #onboarding .request-table td.host; body #onboarding .request-table tr[title] td.num; body #onboarding .request-empty; body #onboarding .request-actions; body #onboarding .request-actions #request-status; body #onboarding .request-breakdown; body #onboarding .request-breakdown[hidden]; body #onboarding .request-chip; body #onboarding .request-chip:hover; body #onboarding .request-chip[aria-pressed=true]; body #onboarding .request-chip strong; body #onboarding .request-chip small; body #onboarding .request-table td.role; body #onboarding .request-table th:nth-child(3); body #onboarding .aieyra-avatar img; .update-feed; .update-post; body #onboarding .update-post-title; .update-post p; #update-integrity-modules; body #onboarding .range-value; body #onboarding .range-value input[type=number].range-number; body #onboarding .range-number::-webkit-inner-spin-button,body #onboarding .range-number::-webkit-outer-spin-button; body #onboarding .range-number:is(:hover,:focus); body #onboarding .range-unit; body #onboarding .media-effects-title; body #onboarding .background-preview .bg-chat; body #onboarding .settings-area.profile-pair; body #onboarding .prompt-area:focus-within; body #onboarding #prompt-editor:focus
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/settings.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* ── Aieyra OS 设置（beta 新装修）──────────────────────────────────────────────
+   只管设置页 #onboarding 与裁切弹窗；最后加载，覆盖旧四层样式中的设置规则。
+   设计规则见 docs/UI设计知识库.md §3–§4、§9：淡面区域、无框输入、滑动条、一个主操作。 */
+
+body #view-content > #onboarding { --s-face:#ffffff0b; --s-face-2:#ffffff12; --s-line:#ffffff19; --s-line-2:#ffffff29; --s-accent:#b1d0e0;
+  --settings-surface:rgba(27,30,34,.94);
+  --settings-edge:inset 0 0 0 1px var(--s-line);
+  --settings-shadow:none;
+  --ui-radius:8px;
+  background:transparent!important;backdrop-filter:none;isolation:isolate;
+  grid-template-columns:184px minmax(0,1fr); gap:0 56px; max-width:1060px; padding:44px clamp(24px,5vw,64px) 0; }
+/* The editor shares the user's global background; it adds no local veil. */
+body #onboarding #settings-body {
+  --text:#f0f2f3;--text-2:#cbd0d5;--text-3:#b4bec6;
+  --ui-text:var(--text);--ui-text-2:var(--text-2);--ui-text-3:var(--text-3);color:var(--text);
+}
+body.settings-extension.has-space-background #view-content > #onboarding {
+ background:transparent!important;
+ backdrop-filter:none;
+}
+
+/* 左侧分类：图标 + 名称，当前项是一块柔和的面和一道细光。 */
+body #onboarding .settings-tabs { gap:4px; padding-top:2px; }
+body #onboarding .settings-tabs button { position:relative; gap:12px; align-items:center; min-height:40px; padding:0 14px; border-radius:12px; font-size:13px; letter-spacing:.02em; color:#8a91a0; transition:color var(--t1) var(--ease),background-color var(--t1) var(--ease); }
+body #onboarding .settings-tabs button svg { flex:0 0 16px; width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:.85; }
+body #onboarding .settings-tabs button:hover { color:#d6dbe5; background:var(--s-face-2); }
+body #onboarding .settings-tabs button[aria-selected=true] { color:#eef1f7; background:#ffffff0c; }
+body #onboarding .settings-tabs button[aria-selected=true]::before { content:''; position:absolute; left:0; top:12px; bottom:12px; width:2px; border-radius:2px; background:var(--s-accent); }
+body.settings-extension #onboarding .settings-head h2 { text-shadow:0 1px 3px #000c; }
+body #onboarding :is(input,textarea)::placeholder { color:var(--text-3);opacity:1; }
+body #onboarding .settings-tabs button { opacity:1; }
+body #onboarding .settings-tabs button svg { opacity:1; }
+body #onboarding .settings-tabs button[aria-selected=true] { background:#c7ddff20;box-shadow:inset 0 0 0 1px #d6e6ff80,0 4px 16px #0002;font-weight:600; }
+body #onboarding .settings-tabs button[aria-selected=true]::before { width:3px;background:#fff; }
+body #onboarding button:disabled { opacity:.58;cursor:not-allowed; }
+body #onboarding :is(.settings-actions button:not(.quiet,.text-button),.primary-pill,.picker-save,.picker-toggle[data-added=true],.picker-check[aria-checked=true]) { background:#34454e!important;box-shadow:inset 0 0 0 1px #70868f!important;color:#f4f7f8!important; }
+body #onboarding :is(.settings-actions button:not(.quiet,.text-button),.primary-pill,.picker-save,.picker-toggle[data-added=true],.picker-check[aria-checked=true]):hover:not(:disabled) { background:#425862!important; }
+body #onboarding #provider-add-submit { background:#343e4c!important; }
+body #onboarding #provider-add-submit:hover:not(:disabled) { background:#465366!important; }
+body #onboarding dialog.model-picker .picker-check:not([aria-checked=true]) > svg { visibility:hidden; }
+body #onboarding :is([data-error=true],[role=alert],.error) { color:#ffd0c8!important; }
+body.settings-extension :is(.glass-select-list,.glass-color-panel) { --text:#fff;--text-2:#fff;--text-3:#fff;--ui-text:#fff;--ui-text-2:#fff;--ui-text-3:#fff;background-color:rgba(12,20,33,.96); }
+body.settings-extension :is(.glass-select-list,.glass-color-panel) * { color:#fff!important; }
+body.settings-extension .glass-select-option[aria-disabled=true] { opacity:1;outline:1px dashed #ffffff50;outline-offset:-2px; }
+body.settings-extension .glass-select-desc:empty::before { color:#fff; }
+/* 指挥中心、协同与工位属于 Link（UI设计知识库 设置 L1），不在设置里出现。 */
+body #onboarding .settings-tabs #control-slot { display:none!important; }
+body #onboarding .settings-tabs > :not(.settings-tool-entry) + .settings-tool-entry { margin-top:16px; }
+/* 焦点环：统一成细的强调色环；分类只在键盘操作时显示（旧样式是一圈粗白框，鼠标打开设置时会落在第一个分类上）。 */
+body #onboarding button:focus-visible { outline:1px solid var(--ui-accent); outline-offset:2px; }
+body:not([data-input-mode=keys]) #onboarding .settings-tabs button:focus-visible { outline:none; }
+
+/* 右侧：页标题、区域。 */
+body #onboarding #settings-body { padding:0 12px 120px 0; }
+body #onboarding .memory-row { display:flex; align-items:center; gap:12px; margin-top:12px; flex-wrap:wrap; }
+body #onboarding .memory-row :is(input,select) { flex:1; min-width:120px; }
+body #onboarding #memory-settings textarea { display:block; width:100%; box-sizing:border-box; resize:vertical; min-height:84px; margin:12px 0; padding:14px; line-height:1.65; border-radius:12px; background:#0002; color:var(--text); border:1px solid var(--s-line); font-family:var(--font-mono,monospace); }
+body #onboarding #memory-settings :is(#memory-context,#memory-clean-preview) { min-height:260px; }
+body #onboarding .memory-hint,body #onboarding #memory-overview { color:var(--text-2); font-size:12px; line-height:1.7; }
+body #onboarding #memory-settings .memory-option { display:flex; flex-direction:row; align-items:center; gap:10px; font-size:13px; }
+body #onboarding #memory-settings .memory-option input { width:auto; flex:none; margin:0; }
+body #onboarding .memory-actions { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px; }
+body #onboarding #memory-status { min-height:24px; color:var(--text-2); font-size:13px; line-height:1.7; }
+body #onboarding #memory-status[data-error=true] { color:#efb3aa; }
+body #onboarding .memory-record-list { display:grid; gap:6px; margin-top:12px; }
+body #onboarding .memory-record-list button { text-align:left; overflow:hidden; overflow-wrap:anywhere; white-space:normal; max-width:100%; line-height:1.6; padding:10px 12px; }
+body #onboarding .memory-record-detail { max-height:360px; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; padding:14px; background:#0003; border-radius:12px; font:12px/1.65 var(--font-mono,monospace); }
+body #onboarding .runtime-prompts :is(select,textarea) { width:100%; margin:12px 0; box-sizing:border-box; }
+body #onboarding #prompt-settings .runtime-prompts textarea { min-height:260px; padding:14px; resize:vertical; background:#0002; border:1px solid var(--s-line); border-radius:12px; color:var(--text); font:12px/1.65 var(--font-mono,monospace); }
+body #onboarding .runtime-prompt-path { overflow-wrap:anywhere; font-size:12px; color:var(--text-2); }
+body #onboarding #settings-body > :is(section,form) { max-width:760px; }
+body #onboarding .settings-area { border:0; border-radius:var(--ui-radius); background:var(--settings-surface); backdrop-filter:var(--glass-filter); box-shadow:var(--settings-edge),var(--settings-shadow); }
+body #onboarding .area-head h3 { margin:0; font-size:13px; font-weight:500; letter-spacing:.04em; color:#cfd5e0; }
+body #onboarding .area-head p { margin:6px 0 0; font-size:12px; line-height:1.65; color:var(--text-3); }
+
+/* 文字输入：没有框，只有一条底线；聚焦时底线点亮。下拉同样处理。 */
+body #onboarding label { display:grid; gap:6px; font-size:12px; letter-spacing:.02em; color:var(--text-3); }
+body #onboarding :is(input:not([type=checkbox]):not([type=color]):not([type=range]),select) { min-height:36px; padding:6px 0; border:0; border-bottom:1px solid var(--s-line-2); border-radius:0; background:transparent; box-shadow:none; color:var(--text); font-size:14px; transition:border-color var(--t1) var(--ease); }
+body #onboarding input[type=number]:is(input,:hover,:focus){border:0;text-decoration:none;box-shadow:none}
+body #onboarding select { padding-right:22px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa3b2' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") no-repeat right 0 center/14px; appearance:none; }
+body #onboarding select option { background:#12151c; color:var(--text); }
+body #onboarding :is(input:not([type=checkbox]):not([type=color]):not([type=range]),select):hover:not(:disabled) { border-bottom-color:#ffffff33; }
+body #onboarding :is(input:not([type=checkbox]):not([type=color]):not([type=range]),select):focus { border-bottom-color:var(--s-accent); box-shadow:none; outline:none; }
+
+/* 滑动条：细轨道，走过的部分点亮（--fill 由 profile-media.mjs 的 fillRange 设置）。 */
+body #onboarding .slider-field { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:10px 12px; font-size:12px; color:var(--text-3); }
+body #onboarding .slider-field input[type=range] { grid-column:1 / -1; grid-row:2; }
+body #onboarding .slider-field output { grid-column:2; grid-row:1; font-size:12px; font-variant-numeric:tabular-nums; color:var(--text-2); }
+
+/* 主操作沿用白字玻璃胶囊；其余为轻面或纯文字。 */
+body #onboarding :is(.secondary,.quiet):not(.settings-tabs button,.settings-actions button,.settings-head-actions button) { border:0; background:var(--s-face-2); color:#c9cfda; }
+body #onboarding :is(.secondary,.quiet):not(.settings-tabs button,.settings-actions button,.settings-head-actions button):hover:not(:disabled) { background:#ffffff12; color:var(--text); }
+body #onboarding .text-button:not(.settings-actions button) { min-height:28px; padding:0 4px; border:0; background:none; color:var(--text-3); font-size:12px; }
+body #onboarding .text-button:not(.settings-actions button):hover:not(:disabled) { color:var(--text); }
+body #onboarding button:disabled { opacity:1; cursor:not-allowed; }
+body #onboarding .button-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+body #onboarding .button-row > button { flex-shrink:0; white-space:nowrap; }
+body #onboarding .settings-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:12px; margin-top:6px; }
+body #onboarding .settings-actions [role=status] { margin-right:auto; font-size:12px; color:var(--text-3); }
+
+/* ── 个人：两张名片 + 背景 ── */
+body #onboarding .profile-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+body #onboarding .profile-card { display:grid; align-items:center; }
+body #onboarding .profile-card + .profile-card { border-left:1px solid var(--s-line); }
+body #onboarding .profile-card .field { grid-column:2; grid-row:1; }
+body #onboarding .profile-card .text-button { grid-column:2; grid-row:2; justify-self:start; }
+body #onboarding .profile-card[data-empty=true] .text-button { visibility:hidden; }
+body #onboarding .avatar-slot { position:relative; display:grid; place-items:center; min-height:0; padding:0; border:0; border-radius:50%; overflow:hidden; background:radial-gradient(circle at 30% 25%,#2a3142,#141820 70%); cursor:pointer; }
+body #onboarding .avatar-slot img { width:100%; height:100%; object-fit:cover; }
+body #onboarding .avatar-initial { font-size:26px; font-weight:300; color:#d6dce8; }
+body #onboarding .avatar-slot img:not([hidden]) + .avatar-initial { display:none; }
+/* Eyra 没有头像时，就是她的圆。 */
+body #onboarding .profile-card.eyra[data-empty=true] .avatar-slot { background:#0d1016; box-shadow:inset 0 0 0 2.5px #e6e9f0e6,0 0 18px #b9c8ff26; }
+body #onboarding .profile-card.eyra[data-empty=true] .avatar-initial { font-size:13px; letter-spacing:.12em; color:var(--text-3); }
+body #onboarding .avatar-slot:focus-visible { outline:none; }
+
+body #onboarding .background-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:20px; align-items:start; }
+body #onboarding .background-preview { position:relative; aspect-ratio:16 / 10; max-height:236px; border-radius:8px; overflow:hidden; background:#14171a; box-shadow:inset 0 0 0 1px var(--s-line); }
+body #onboarding .background-preview .bg-image { position:absolute; inset:-12px; background:var(--bg-image) center/cover no-repeat; filter:blur(var(--bg-blur,0px)); }
+body #onboarding .background-preview .bg-veil { position:absolute; inset:0; background:rgba(8,9,11,var(--bg-veil,.5)); }
+body #onboarding .background-preview[data-empty=true] :is(.bg-image,.bg-veil) { display:none; }
+body #onboarding .background-preview .bg-ball { position:absolute; left:50%; top:40%; width:30px; height:30px; transform:translate(-50%,-50%); border-radius:50%; box-shadow:inset 0 0 0 1.5px #e6e9f0e6,0 0 12px #b9c8ff33; }
+body #onboarding .background-preview .bg-empty { position:absolute; left:0; right:0; bottom:12px; text-align:center; font-size:11px; color:var(--text-3); }
+body #onboarding .background-preview:not([data-empty=true]) .bg-empty { display:none; }
+body #onboarding .background-controls { display:grid; gap:10px; }
+
+@media (max-width:860px) {
+  body #onboarding .profile-pair { grid-template-columns:minmax(0,1fr); }
+  body #onboarding .profile-card + .profile-card { border-left:0; border-top:1px solid var(--s-line); }
+}
+
+/* ── 裁切弹窗 ── */
+
+/* ── 外观（UI设计知识库 设置 S3）：示范置顶吸附；区域胶囊；分组两列；滑动条与色点。 ── */
+body #onboarding #appearance-settings .appearance-preview { position:sticky; top:0; z-index:3; max-height:236px; margin:0 0 16px; padding:20px 24px; overflow:auto; border:0; border-radius:var(--ui-radius); background:var(--settings-surface); backdrop-filter:var(--glass-filter); box-shadow:var(--settings-edge),var(--settings-shadow); scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; -webkit-mask-image:linear-gradient(#000 calc(100% - 18px),transparent); mask-image:linear-gradient(#000 calc(100% - 18px),transparent); }
+body #onboarding #appearance-settings .appearance-preview #appearance-sample-text > :first-child { margin-top:0; }
+body #onboarding .region-chips { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+body #onboarding .region-chips .region-chip { min-height:30px; padding:0 14px; border:0; border-radius:999px; background:transparent; box-shadow:inset 0 0 0 1px #ffffff17; color:#8a91a0; font-size:12px; }
+body #onboarding .region-chips .region-chip:hover { color:#d6dbe5; box-shadow:inset 0 0 0 1px #ffffff2b; }
+body #onboarding .region-chips .region-chip[aria-selected=true] { color:#eef1f7; background:#ffffff0c; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 12px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding .group-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:end; }
+body #onboarding .appearance-group .select-field { grid-column:auto; }
+body #onboarding .color-field { justify-content:space-between; font-size:12px; color:var(--text-3); }
+body #onboarding .color-field input[type=color] { -webkit-appearance:none; appearance:none; min-height:0; padding:0; border:0; border-radius:50%; background:none; cursor:pointer; }
+body #onboarding .color-field input[type=color]::-webkit-color-swatch { border:0; border-radius:50%; }
+@media (max-width:860px) { body #onboarding .group-grid { grid-template-columns:minmax(0,1fr); } }
+
+/* ── 提示词（UI设计知识库 设置 S4）：四层卡片 + 玻璃编辑区。 ── */
+body #onboarding #prompt-layers .layer-state { font-size:11px; letter-spacing:.04em; color:#7d8596; }
+body #onboarding .prompt-area { padding:18px 20px 16px; }
+body #onboarding .prompt-editor-frame { margin:0; padding:0; border:0; background:none; box-shadow:none; }
+/* 外框已是无边框的平面，聚焦时也不再画 workspace.css 的白色描边（Codex D1 复测）；聚焦由明亮光标表达。 */
+body #onboarding .prompt-editor-frame:focus-within { outline:none; }
+body #onboarding #prompt-editor { display:block; width:100%; min-height:min(52vh,460px); padding:4px 12px; border:0; border-radius:10px; background:rgba(8,10,14,.68); box-shadow:none; resize:vertical; font-size:14px; line-height:1.85; color:#e6e9f0; caret-color:#e6edfb; -webkit-text-fill-color:currentColor; -webkit-text-stroke:0 transparent; text-shadow:none; }
+body #onboarding #prompt-editor:focus { outline:none; box-shadow:none; }
+
+/* ── 连接与账号（UI设计知识库 设置 S5）：来源 / 接口与密钥 / 模型。整组字段都隐藏时，区域一起隐藏。 ── */
+body #onboarding #connect-form { display:block; }
+body #onboarding #connect-form .settings-area:not(:has(label:not([hidden]),section:not([hidden]))) { display:none; }
+body #onboarding #connect-form #account-pane { grid-column:1 / -1; margin-top:18px; padding:14px 16px; border-radius:14px; background:#ffffff06; box-shadow:inset 0 0 0 1px #ffffff10; }
+body #onboarding #connect-form .model-controls { grid-template-columns:minmax(0,1fr) auto; }
+body #onboarding #connect-form #model-parameters { grid-column:1 / -1; }
+body #onboarding #connect-form .catalog-line { display:flex; align-items:center; }
+body #onboarding #connect-form :is(#onboard-status,#response-observation) { margin:0 4px 8px; font-size:12px; color:var(--text-3); }
+body #onboarding #connect-form :is(#onboard-status,#response-observation):empty { display:none; }
+
+/* 页框固定宽度：各分类之间左侧导航不再左右移动。外观分组一组一行，组内两列。 */
+body #view-content > #onboarding { width:100%; }
+body #onboarding #appearance-fields { display:grid; grid-template-columns:minmax(0,1fr); gap:0; margin:0; }
+body #onboarding #appearance-settings .appearance-window { display:block; }
+body #onboarding .appearance-group .group-grid, body #onboarding .appearance-window .group-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+body #onboarding .appearance-group:first-child .group-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body #onboarding .slider-field { white-space:nowrap; }
+@media (max-width:980px) { body #onboarding .appearance-group .group-grid, body #onboarding .appearance-window .group-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+/* 效果组：描边、描边颜色、阴影、阴影颜色排成一行；色点与滑动条同一基线。 */
+body #onboarding .appearance-group:nth-child(3) .group-grid { grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr) 64px; }
+body #onboarding .color-field { display:grid; align-items:center; min-height:0; }
+
+/* ── 细节一轮（UI 设计知识库 §2、§4、§5）：去说明、去横线、更紧凑；不框套框。 ── */
+body #onboarding .settings-head p { margin:0; font-size:12.5px; line-height:1.5; color:var(--text-3); }
+body #onboarding .settings-area { margin:0 0 12px; padding:16px clamp(12px,2.2vw,20px); }
+body #onboarding .area-head { margin:0 0 14px; }
+body #onboarding .area-head p { display:none; }
+body #onboarding .settings-tabs > :not(.settings-tool-entry) + .settings-tool-entry { padding-top:0; border-top:0; }
+
+/* 个人：两张名片不放在框里，用留白分组；头像一圈描边环；名字平时无下划线，编辑时出现，回车保存；没有“移除头像”。 */
+body #onboarding .profile-pair { gap:0 40px; margin:0 0 18px; padding:20px 22px; border:0; border-radius:0; background:transparent; backdrop-filter:none; box-shadow:none; }
+body #onboarding .profile-card { grid-template-columns:72px minmax(0,1fr); grid-template-rows:auto; gap:0 18px; padding:0; }
+body #onboarding .profile-card + .profile-card { border:0; }
+body #onboarding .profile-card .text-button { display:none; }
+body #onboarding .avatar-slot { grid-row:1; width:72px; height:72px; box-shadow:0 0 0 2.5px rgba(8,9,11,.6),0 0 0 4px #e6e9f0b3,0 0 16px #b9c8ff26; }
+body #onboarding .avatar-slot:focus-visible { box-shadow:0 0 0 2.5px rgba(8,9,11,.6),0 0 0 4px #e6e9f0e6,0 0 0 8px #a9c0ec33; }
+body #onboarding :is(#display-name,#eyra-display-name) { min-height:32px; padding:2px 0; font-size:16px; font-weight:500; letter-spacing:.02em; border-bottom-color:transparent; }
+body #onboarding :is(#display-name,#eyra-display-name):hover:not(:focus) { border-bottom-color:transparent; }
+body #onboarding :is(#display-name,#eyra-display-name):focus { border-bottom-color:var(--s-accent); }
+@media (max-width:860px) { body #onboarding .profile-pair { gap:22px 0; } body #onboarding .profile-card + .profile-card { border:0; } }
+
+/* 外观：组与组更紧；色点与同组滑动条落在同一条轨道线上（两者底行都是 18px）。 */
+body #onboarding .group-grid { gap:14px 28px; }
+body #onboarding .color-field { grid-template-rows:auto 18px; align-self:end; justify-items:start; gap:10px; }
+body #onboarding .color-field input[type=color] { width:18px; height:18px; align-self:center; box-shadow:inset 0 0 0 1px #ffffff40,0 0 0 2px #ffffff0a; }
+body #onboarding .color-field input[type=color]::-webkit-color-swatch-wrapper { padding:2px; }
+
+/* 提示词：四个名称胶囊，像外观的区域选择；未保存时名称后一个小点。 */
+body #onboarding #prompt-layers { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; }
+body #onboarding .prompt-actions { margin-top:10px; padding-top:0; border-top:0; }
+
+/* 连接与账号：标题右侧是 Aieyra 账号（头像、名字、余额）；账号区不套框，“选择 Key”与连接来源同一行；模型 · 获取列表 · 思考 一行。 */
+body #onboarding .settings-head .account-chip { display:flex; align-items:center; gap:10px; margin-left:auto; align-self:center; }
+body #onboarding .account-chip .account-avatar { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#141820; box-shadow:0 0 0 2px rgba(8,9,11,.55),0 0 0 3px #ffffff2b; font-size:13px; color:#cfd5e0; }
+body #onboarding .account-chip[data-signed-in=true] .account-avatar { color:#eef1f7; box-shadow:0 0 0 2px rgba(8,9,11,.55),0 0 0 3.5px var(--eyra-ring,#e6e9f0d9),0 0 12px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding .account-chip .account-text { display:grid; line-height:1.3; }
+body #onboarding .account-chip #account-identity { font-size:13px; color:var(--text); }
+body #onboarding .account-chip #account-balance { font-size:11px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body #onboarding .account-chip #account-balance:empty { display:none; }
+body #onboarding .account-chip button { min-height:28px; padding:0 14px; }
+body #onboarding .account-chip #account-login { background:#eef1f7; color:#0b0d12; font-weight:500; }
+body #onboarding .account-chip #account-logout { padding:0 6px; background:none; color:var(--text-3); }
+body #onboarding .account-chip #account-logout:hover { background:none; color:var(--text); }
+body #onboarding #connect-form #account-pane:not([hidden]) { display:contents; }
+body #onboarding #connect-form #account-status { grid-column:1 / -1; margin:-4px 0 0; font-size:12px; color:var(--text-3); }
+body #onboarding #connect-form #account-status:empty { display:none; }
+body #onboarding #connect-form .model-controls { display:flex; align-items:flex-end; gap:24px; }
+body #onboarding #connect-form #model-field { order:1; flex:1 1 0; min-width:0; }
+body #onboarding #connect-form .catalog-line { order:2; flex:none; }
+body #onboarding #connect-form #model-parameters { order:3; flex:0 1 240px; min-width:0; margin:0; padding:0; border:0; background:none; box-shadow:none; }
+body #onboarding #connect-form #model-parameters[hidden] { display:none; }
+body #onboarding #connect-form #parameter-fields { display:flex; gap:16px; margin:0; padding:0; }
+body #onboarding #connect-form #parameter-fields > * { flex:1 1 0; min-width:0; }
+
+/* 玻璃下拉：原生下拉视觉隐藏（仍承载取值、事件与表单）；闭合时像一段文字加小箭头，悬停才出现细线；展开是一张玻璃列表，当前项带光环。 */
+.glass-select-native { position:absolute!important; width:1px!important; height:1px!important; min-height:0!important; margin:-1px!important; padding:0!important; overflow:hidden!important; clip-path:inset(50%)!important; border:0!important; opacity:0!important; pointer-events:none!important; }
+body #onboarding .glass-select .glass-select-value { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.glass-select-list { position:fixed; z-index:400; box-sizing:border-box; padding:6px; overflow:auto; border:1px solid #ffffff14; border-radius:14px; background:var(--ui-glass); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge),var(--glass-shadow); opacity:0; transform:none; transition:opacity var(--t2,240ms) var(--ease,ease); scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; }
+.glass-select-list[data-side=up] { transform:none; }
+.glass-select-list.shown { opacity:1; transform:none; }
+.glass-select-option { padding:8px 12px; border-radius:10px; font-size:13px; color:#c9cfda; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:background-color var(--t1,160ms) var(--ease,ease),color var(--t1,160ms) var(--ease,ease); }
+.glass-select-option:hover, .glass-select-option.active { background:#ffffff0d; color:#eef1f7; }
+.glass-select-option[aria-selected=true] { color:#eef1f7; box-shadow:inset 0 0 0 1.5px #e6e9f0b3; }
+.glass-select-option[aria-disabled=true] { opacity:.4; cursor:default; }
+body.reduce-motion .glass-select-list { transition:none; }
+
+/* 细节一轮·二：胶囊按内容宽度；操作行上方不再有线；效果组顶部对齐，色点与滑动条轨道同一高度。 */
+body #onboarding #settings-body :is(.settings-actions,.connection-actions,.profile-actions,.prompt-actions,.appearance-actions) { margin-top:8px; padding-top:0; border-top:0; }
+body #onboarding .appearance-group .group-grid { align-items:start; }
+body #onboarding .appearance-group .color-field { align-self:start; row-gap:10px; }
+/* 滑动条高度固定 18px（旧规则的最小高度会把轨道往下推，色点就对不齐）。 */
+
+/* ── 细节一轮·三（2026-10-10）──
+   连接与账号：标题右侧只有一个账号头像，悬停/聚焦时在下方展开菜单（名字、资料、余额、已用、请求、登录或退出）。
+   个人：聊天排版（头像与名字、版式），上方是用同一套聊天元素画的实时预览。 */
+body #onboarding .settings-head .account-menu { position:relative; margin-left:auto; align-self:center; padding:4px 8px 4px 0; }
+body #onboarding .account-menu .account-avatar { display:grid; place-items:center; width:34px; height:34px; min-height:0; padding:0; border:0; border-radius:50%; background:#141820; color:#cfd5e0; font-size:13.5px; font-weight:600; box-shadow:inset 0 0 0 1px #ffffff2b; cursor:pointer; transform:none; transition:box-shadow var(--t1) ease; }
+body #onboarding .account-menu[data-signed-in=true] .account-avatar { color:#eef1f7; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 10px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding .account-menu .account-avatar:focus-visible { outline:1px solid #ffffff55; outline-offset:3px; }
+body #onboarding .account-pop { position:absolute; right:8px; top:calc(100% + 6px); z-index:30; width:272px; padding:16px; border-radius:18px; background:var(--ui-glass); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge),var(--glass-shadow); opacity:0; visibility:hidden; translate:0 -6px; transition:opacity 160ms ease,translate 220ms var(--ease),visibility 0s linear 220ms; }
+body #onboarding .account-pop::before { content:''; position:absolute; left:0; right:0; top:-12px; height:12px; }
+body #onboarding .account-menu:is(:hover,:focus-within) .account-pop { opacity:1; visibility:visible; translate:0 0; transition-delay:0s; }
+body #onboarding .account-who { display:flex; align-items:center; gap:12px; min-width:0; }
+body #onboarding .account-pop-avatar { flex:none; display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:#141820; color:#eef1f7; font-size:15px; font-weight:600; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9); }
+body #onboarding .account-menu[data-signed-in=false] .account-pop-avatar { color:#9aa3b2; box-shadow:inset 0 0 0 1px #ffffff2b; }
+body #onboarding .account-names { display:grid; gap:2px; min-width:0; }
+body #onboarding .account-names strong { font-size:14px; font-weight:600; color:#eef1f7; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #onboarding .account-names small { font-size:11.5px; color:var(--text-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #onboarding .account-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:14px 0 4px; }
+body #onboarding .account-stats[hidden] { display:none; }
+body #onboarding .account-stats div { display:grid; gap:2px; }
+body #onboarding .account-stats dt { font-size:11px; color:var(--text-3); }
+body #onboarding .account-stats dd { margin:0; font-size:14px; color:#e6e9f0; font-variant-numeric:tabular-nums; }
+body #onboarding .account-pop button:not(.account-avatar) { display:block; width:100%; min-height:32px; margin-top:12px; padding:0 14px; border:0; border-radius:999px; font-size:12.5px; transform:none; }
+body #onboarding .account-pop #account-login { background:#eef1f7; color:#0b0d12; font-weight:500; }
+body #onboarding .account-pop #account-logout { background:transparent; color:var(--text-3); box-shadow:inset 0 0 0 1px #ffffff17; }
+body #onboarding .account-pop #account-logout:hover { color:#eef1f7; box-shadow:inset 0 0 0 1px #ffffff2b; }
+body #onboarding .account-pop [hidden] { display:none!important; }
+
+body #onboarding .chat-layout-area .area-head { display:flex; align-items:baseline; justify-content:space-between; gap:16px; }
+body #onboarding .chat-layout-area .area-head .text-button { display:inline-block; min-height:0; padding:0; border:0; background:none; color:var(--text-3); font-size:12px; cursor:pointer; }
+body #onboarding .chat-layout-area .area-head .text-button:hover { color:#eef1f7; }
+body #onboarding .chat-layout-preview { display:flex; flex-direction:column; gap:var(--chat-gap,26px); margin:0 0 18px; padding:6px 0 4px; pointer-events:none; }
+body #onboarding .chat-layout-fields h4 { margin:16px 0 12px; font-size:12px; font-weight:500; letter-spacing:.04em; color:var(--text-3); }
+body #onboarding .chat-layout-fields .group-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px 28px; }
+@media (max-width:980px) { body #onboarding .chat-layout-fields .group-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* 模型列表（E1）：档次分组标题、右侧短注、淡显的参考行；搜索框和底部说明不随列表滚动。 */
+.glass-select-list:is(.rich,.searchable) { display:flex; flex-direction:column; overflow:hidden; }
+.glass-select-list:is(.rich,.searchable) .glass-select-body { flex:1 1 auto; min-height:0; overflow:auto; }
+.glass-select-search { flex:none; margin:2px 2px 6px; padding:7px 10px; border:0; border-radius:9px; background:#ffffff0a; color:#eef1f7; font:inherit; font-size:12.5px; outline:none; box-shadow:inset 0 0 0 1px #ffffff12; }
+.glass-select-search:focus { box-shadow:inset 0 0 0 1px #ffffff33; }
+.glass-select-group { padding:10px 12px 4px; font-size:11px; letter-spacing:.06em; color:#7d8494; }
+.glass-select-group[hidden], .glass-select-option[hidden] { display:none; }
+.glass-select-option { display:flex; align-items:baseline; gap:12px; }
+.glass-select-name { flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.glass-select-note { flex:none; font-size:11px; color:#8a91a0; font-variant-numeric:tabular-nums; }
+.glass-select-option.muted:not(:hover,.active,[aria-selected=true]) { color:#8a91a0; }
+.glass-select-desc { flex:none; min-height:17px; margin:6px 2px 0; padding:8px 10px 4px; border-top:1px solid #ffffff10; font-size:12px; line-height:1.4; color:#aab1be; white-space:normal; }
+.glass-select-desc:empty::before { content:'把鼠标移到模型上看说明'; color:#6f7685; }
+
+/* 模型数据中心：一张薄玻璃上排列列表与资料，不再叠一层卡片。
+   空间不足时资料放到下方；两个区域独立滚动，搜索始终可见。 */
+.glass-select-list.catalog { padding:10px; border-color:#ffffff1f; border-radius:18px; background:rgba(16,18,24,.72); }
+.glass-select-list.catalog .glass-select-search { min-height:32px; margin:0 0 8px; padding:6px 10px; background:#ffffff07; }
+.glass-select-list.catalog .glass-select-search:focus-visible { outline:1px solid #ffffff45; outline-offset:-1px; box-shadow:none; }
+.glass-select-content { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:16px; flex:1 1 auto; min-height:0; }
+.glass-select-list.catalog .glass-select-body { overscroll-behavior:contain; scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; padding:0 3px 0 0; }
+.glass-select-list.catalog .glass-select-option { display:flex; align-items:center; gap:12px; min-height:32px; box-sizing:border-box; padding:7px 10px; }
+.glass-select-list.catalog .glass-select-name { font-size:12.5px; }
+.glass-select-capabilities { display:flex; flex:none; align-items:center; gap:8px; margin-left:auto; color:#a5adbb; }
+.glass-select-capability { display:inline-flex; width:14px; height:14px; }
+.glass-select-capability svg { width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.glass-select-list.catalog .glass-select-option[aria-disabled=true] { opacity:1; }
+.glass-select-list.catalog .glass-select-option:is(:hover,.active) { background:#ffffff0a; }
+.glass-select-list.catalog .glass-select-option[aria-selected=true] { box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0b3); }
+.glass-select-list.catalog .glass-select-group { display:flex; align-items:center; gap:8px; min-height:30px; box-sizing:border-box; padding:7px 10px 4px; color:#a5adbb; }
+.glass-select-list.catalog button.glass-select-group { width:100%; margin:0; border:0; border-radius:9px; background:none; box-shadow:none; font:inherit; font-size:11px; font-weight:400; text-align:left; cursor:pointer; transform:none; }
+.glass-select-list.catalog button.glass-select-group::after { content:''; flex:0 0 14px; width:14px; height:14px; margin-left:auto; background:currentColor; opacity:.7; -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat; transform:rotate(-90deg); transition:transform 160ms ease; }
+.glass-select-list.catalog button.glass-select-group[aria-expanded=true]::after { transform:none; }
+.glass-select-list.catalog button.glass-select-group:hover { background:#ffffff08; }
+.glass-select-body:focus-visible, .glass-select-details:focus-visible, .glass-select-group:focus-visible { outline:1px solid #ffffff45; outline-offset:-1px; }
+.glass-select-details { min-width:0; min-height:0; padding:2px 5px 12px 0; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; color:#c9cfda; font-size:11.5px; line-height:1.6; overflow-wrap:anywhere; }
+.glass-detail-name { margin:0 0 2px; color:#eef1f7; font-size:14px; line-height:1.5; font-weight:500; }
+.glass-detail-id { margin:0 0 6px; color:#a5adbb; font-size:10.5px; }
+.glass-detail-note, .glass-detail-summary { margin:3px 0; color:#a5adbb; }
+.glass-detail-section { margin:14px 0 0; }
+.glass-detail-section h5 { margin:0 0 5px; color:#e6e9f0; font-size:11.5px; font-weight:500; }
+.glass-detail-section dl { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:12px; row-gap:3px; margin:0; }
+.glass-detail-section dt { color:#a5adbb; }
+.glass-detail-section dd { min-width:0; margin:0; text-align:right; font-variant-numeric:tabular-nums; }
+.glass-select-empty { padding:16px 10px; margin:0; color:#a5adbb; font-size:12px; }
+.glass-select-list.catalog[data-detail=dock] .glass-select-content { display:flex; flex-direction:column; gap:10px; }
+.glass-select-list.catalog[data-detail=dock] .glass-select-body { flex:1 1 56%; }
+.glass-select-list.catalog[data-detail=dock] .glass-select-details { flex:0 1 44%; padding:4px 10px 12px; }
+.glass-select-list.catalog[data-detail=dock] .glass-select-option { gap:10px; }
+.glass-select-list.catalog [hidden] { display:none!important; }
+@media (max-width:980px) {
+ body #onboarding #connect-form .model-controls { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px 18px; }
+ body #onboarding #connect-form #model-field { grid-column:1; min-width:0; }
+ body #onboarding #connect-form .catalog-line { grid-column:2; }
+ body #onboarding #connect-form #model-parameters { grid-column:1 / -1; width:100%; }
+ body #onboarding #connect-form #parameter-fields { max-width:300px; }
+}
+
+/* 连接与账号 · 模型（E1）：选中模型的一行说明；“上下文窗口 / 开始压缩”两根拉条；测试通过后的“主意识 / 潜意识”两行。 */
+body #onboarding #connect-form #model-info { margin:12px 0 0; font-size:12px; line-height:1.5; color:var(--text-3); }
+body #onboarding #connect-form #model-info[hidden], body #onboarding #connect-form .model-context[hidden], body #onboarding #connect-form #model-roles[hidden] { display:none; }
+body #onboarding #connect-form .model-context { margin:18px 0 0; }
+body #onboarding #connect-form .model-context-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 28px; }
+body #onboarding #connect-form .model-context-hint { margin:10px 0 0; font-size:12px; line-height:1.5; color:var(--text-3); }
+body #onboarding #connect-form #role-rows { display:grid; gap:6px; }
+body #onboarding #connect-form .role-row { display:grid; grid-template-columns:64px auto minmax(0,1fr); align-items:center; gap:16px; min-height:40px; }
+body #onboarding #connect-form .role-name { font-size:13px; color:var(--text); }
+body #onboarding #connect-form .role-pick { min-height:30px; max-width:320px; padding:0 16px; border:0; border-radius:15px; background:transparent; color:var(--text-2); font-size:12.5px; box-shadow:inset 0 0 0 1px #ffffff1f; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; transform:none; }
+body #onboarding #connect-form .role-pick:hover:not(:disabled) { color:#eef1f7; background:transparent; box-shadow:inset 0 0 0 1px #ffffff3d; transform:none; }
+body #onboarding #connect-form .role-pick[aria-pressed=true] { color:#eef1f7; background:#ffffff0c; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 12px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding #connect-form .role-now { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; color:var(--text-3); }
+
+/* ── 设置 · 模型（2026-10-14 轨 S）：Aieyra API / 供应商 / 模型连接。
+   不套框：账号一行、Key 一行；模型池是一排从左到右的小卡片，每张一个 ×；列表每行一个 +。 */
+body #onboarding .model-page { display:block; }
+body #onboarding .primary-pill { padding:0 22px; border:0; font-weight:500; }
+body #onboarding .model-status { margin:2px 2px 12px; font-size:12px; line-height:1.5; color:var(--text-3); }
+body #onboarding .model-status.error { color:var(--ui-error); }
+body #onboarding .model-status:empty { display:none; }
+
+/* Aieyra 账号：头像（登录后带 Eyra 光环）· 名字与资料 · 余额 / 已用 / 请求 · 登录或退出，同一行。 */
+body #onboarding .aieyra-account { display:flex; flex-wrap:wrap; align-items:center; gap:16px; min-width:0; margin:0 0 22px; }
+body #onboarding .aieyra-avatar { flex:none; display:grid; place-items:center; width:44px; height:44px; border-radius:50%; background:#141820; color:#9aa3b2; font-size:16px; font-weight:600; box-shadow:inset 0 0 0 1px #ffffff2b; }
+body #onboarding .aieyra-account[data-signed-in=true] .aieyra-avatar { color:#eef1f7; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 14px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding .aieyra-who { display:grid; gap:2px; min-width:0; flex:0 1 auto; }
+body #onboarding .aieyra-who strong { font-size:15px; font-weight:650; color:#eef1f7; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #onboarding .aieyra-who small { font-size:12px; color:var(--text-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #onboarding .aieyra-stats { display:flex; order:-1; flex:1; gap:24px; margin:0; }
+body #onboarding .aieyra-stats[hidden] { display:none; }
+body #onboarding .aieyra-stats div { display:grid; gap:2px; }
+body #onboarding .aieyra-stats dt { font-size:11px; color:var(--text-3); }
+body #onboarding .aieyra-stats dd { margin:0; font-size:15px; color:#e6e9f0; font-variant-numeric:tabular-nums; }
+body #onboarding .aieyra-account > button { flex:none; }
+body #onboarding .aieyra-account > button[hidden] { display:none; }
+body #onboarding #aieyra-sync { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-width:104px; }
+body #onboarding #aieyra-sync[hidden] { display:none; }
+body #onboarding #aieyra-sync svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+body #onboarding #aieyra-sync[aria-busy=true] svg { animation:account-sync-turn 1.1s linear infinite; }
+@keyframes account-sync-turn { to { transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce) { body #onboarding #aieyra-sync[aria-busy=true] svg { animation:none; } }
+body #onboarding .aieyra-key { width:min(360px,100%); margin:0 0 18px; }
+body #onboarding .aieyra-key[hidden] { display:none; }
+body #onboarding #aieyra-catalog[hidden] { display:none; }
+body #onboarding #aieyra-catalog .catalog-panel { margin:0 0 16px; padding:14px 16px 10px; border:0; border-radius:var(--ui-radius); background:var(--glass-surface); backdrop-filter:var(--glass-filter); box-shadow:var(--glass-edge); }
+
+/* 模型列表：搜索 · 数量；每行 名称 · 短注 · +。 */
+body #onboarding .catalog-panel { margin:6px 0 10px; }
+body #onboarding .catalog-tools { display:flex; align-items:center; gap:14px; margin:0 0 6px; }
+body #onboarding #settings-body .catalog-tools .catalog-search { flex:1 1 auto; min-height:30px; padding:4px 10px; border:0; border-radius:9px; background:#ffffff07; box-shadow:inset 0 0 0 1px #ffffff10; font-size:12.5px; }
+body #onboarding #settings-body .catalog-tools .catalog-search:focus { box-shadow:inset 0 0 0 1px #ffffff33; }
+body #onboarding .catalog-count { flex:none; font-size:11.5px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body #onboarding .catalog-rows { max-height:min(252px,38vh); overflow:auto; overscroll-behavior:contain; scrollbar-width:thin;scrollbar-color:#ffffff24 transparent; padding-right:2px; }
+body #onboarding .catalog-row { display:grid; grid-template-columns:minmax(0,1fr) auto 26px; align-items:center; gap:12px; min-height:34px; padding:2px 4px 2px 10px; border-radius:9px; transition:background-color var(--t1) var(--ease); }
+body #onboarding .catalog-row:hover { background:#ffffff08; }
+body #onboarding .catalog-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; color:#d6dbe5; }
+body #onboarding .catalog-note { font-size:11px; color:#8a91a0; white-space:nowrap; font-variant-numeric:tabular-nums; }
+body #onboarding .catalog-add { display:grid; place-items:center; width:26px; height:26px; min-height:0; padding:0; border:0; border-radius:50%; background:transparent; box-shadow:inset 0 0 0 1px #ffffff1f; color:#c9cfda; font-size:16px; line-height:1; }
+body #onboarding .catalog-add:hover:not(:disabled) { color:#0b0d12; background:#eef1f7; box-shadow:none; }
+body #onboarding .catalog-add[data-state=added] { opacity:1; box-shadow:none; color:var(--s-accent); font-size:13px; }
+body #onboarding .catalog-add[data-state=busy] { opacity:1; box-shadow:none; background:conic-gradient(from 0deg,#a9c0ec 0 25%,#ffffff14 25% 100%); -webkit-mask:radial-gradient(circle,transparent 9px,#000 9.5px); mask:radial-gradient(circle,transparent 9px,#000 9.5px); animation:catalog-spin 900ms linear infinite; }
+@keyframes catalog-spin { to { rotate:360deg; } }
+body.reduce-motion #onboarding .catalog-add[data-state=busy] { animation:none; }
+body #onboarding .catalog-empty { margin:10px; font-size:12px; color:var(--text-3); }
+
+/* 模型池：标题 · 数量 · 获取模型列表；下方从左到右的小卡片。 */
+body #onboarding .model-pool { margin:8px 0 0; padding:16px; }
+body #onboarding .pool-head { display:flex; align-items:center; gap:8px; margin:0 0 12px; }
+body #onboarding .pool-head h3 { margin:0; font-size:14px; font-weight:600; color:var(--ui-text); }
+body #onboarding .pool-count { font-size:12px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body #onboarding .pool-head .pool-fetch { margin-left:auto; min-height:30px; padding:0 14px; font-size:12.5px; }
+body #onboarding .pool-chips { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+body #onboarding .pool-chip { display:inline-flex; align-items:center; gap:6px; max-width:min(260px,100%); min-height:30px; box-sizing:border-box; padding:0 4px 0 12px; border-radius:10px; background:#ffffff08; box-shadow:inset 0 0 0 1px #ffffff14; font-size:12.5px; color:#d6dbe5; }
+body #onboarding .pool-chip-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body #onboarding .pool-chip-label { flex:none; padding:1px 7px; border-radius:999px; font-size:10.5px; color:#eef1f7; box-shadow:inset 0 0 0 1px var(--eyra-ring,#e6e9f0d9); }
+body #onboarding .pool-chip-x { flex:none; display:grid; place-items:center; width:22px; height:22px; min-height:0; padding:0; border:0; border-radius:50%; background:none; color:var(--text-3); font-size:14px; line-height:1; }
+body #onboarding .pool-chip-x:hover:not(:disabled) { color:#eef1f7; background:#ffffff12; }
+body #onboarding .pool-empty { margin:0; font-size:13px; line-height:1.5; color:var(--ui-text-2); }
+
+/* 供应商：每个供应商一块；标题 · 地址 · + Key · 移除；下面每把 Key 一行。 */
+body #onboarding .provider-head { display:flex; align-items:baseline; gap:10px; min-width:0; margin:0 0 4px; }
+body #onboarding .provider-head h3 { margin:0; font-size:14px; font-weight:600; color:#e6e9f0; white-space:nowrap; }
+body #onboarding .provider-host { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; color:var(--text-3); }
+body #onboarding .provider-head > button:first-of-type { margin-left:auto; }
+body #onboarding .key-row { display:flex; align-items:center; gap:14px; min-height:36px; }
+body #onboarding .key-hint { flex:none; font-size:13px; color:var(--text-2); font-variant-numeric:tabular-nums; letter-spacing:.02em; }
+body #onboarding .key-meta { flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; color:var(--text-3); }
+body #onboarding .key-x { flex:none; display:grid; place-items:center; width:24px; height:24px; min-height:0; padding:0; border:0; border-radius:50%; background:none; color:var(--text-3); font-size:15px; line-height:1; }
+body #onboarding .key-x:hover:not(:disabled) { color:#eef1f7; background:#ffffff12; }
+body #onboarding :is(.key-x,.text-button)[data-armed=true] { color:var(--ui-error); }
+body #onboarding .key-new .key-input { flex:1 1 auto; min-width:0; }
+body #onboarding .add-line { display:flex; }
+body #onboarding .add-line > label { flex:1 1 150px; min-width:0; }
+body #onboarding .add-line > label[hidden] { display:none; }
+body #onboarding .add-line > button { flex:none; }
+
+/* 模型连接：一行 名称 · 模型 · 思考；备选与生图是一排小卡片加“添加…”。 */
+body #onboarding .links-area { padding:6px 22px; }
+body #onboarding .link-row { display:grid; grid-template-columns:112px minmax(0,1fr) 150px; align-items:center; gap:10px 20px; min-height:52px; }
+body #onboarding .link-row.link-list { grid-template-columns:112px minmax(0,1fr); padding:6px 0; }
+body #onboarding .link-name { font-size:13px; font-weight:500; color:#cfd5e0; white-space:nowrap; }
+body #onboarding .link-control, body #onboarding .link-param { min-width:0; }
+body #onboarding .link-chips { display:flex; flex-wrap:wrap; align-items:center; gap:8px; min-width:0; }
+/* 团队角色的可用工具：点一下分配或收回 */
+body #onboarding .link-add-wrap { flex:0 1 180px; min-width:110px; }
+body #onboarding .link-add-wrap .glass-select { min-height:30px; padding:4px 0; color:var(--text-3); font-size:12.5px; }
+body #onboarding .link-param .glass-select { color:var(--text-2); font-size:13px; }
+body #onboarding .link-switch-line { display:flex; align-items:center; gap:14px; }
+body #onboarding .link-switch { position:relative; flex:none; width:40px; height:22px; min-height:0; padding:0; border:0; border-radius:999px; background:#ffffff14; box-shadow:inset 0 0 0 1px #ffffff17; transition:background-color var(--t1) var(--ease),box-shadow var(--t1) var(--ease); }
+body #onboarding .link-switch-knob { position:absolute; left:3px; top:3px; width:16px; height:16px; border-radius:50%; background:#9aa3b2; transition:translate var(--t2) var(--ease),background-color var(--t1) var(--ease); }
+body #onboarding .link-switch[aria-checked=true] { background:#a9c0ec40; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 10px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding .link-switch[aria-checked=true] .link-switch-knob { translate:18px 0; background:#eef1f7; }
+body #onboarding .link-hint { font-size:12px; color:var(--text-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+body #onboarding .link-row > .link-switch-line { grid-column:2 / -1; }
+body #onboarding .pool-chip-tag { flex:none; font-size:10.5px; color:var(--text-3); }
+/* 矮窗口：设置分类收紧，六个分类都留在光圈上方。 */
+@media (max-height:560px) {
+ body #onboarding .settings-tabs { gap:0; }
+ body #onboarding .settings-tabs button { min-height:30px; padding:4px 12px; }
+ body #onboarding .settings-tabs button[aria-selected=true]::before { top:8px; bottom:8px; }
+}
+@media (max-width:980px) {
+ body #onboarding .link-row { grid-template-columns:96px minmax(0,1fr) 128px; gap:8px 14px; }
+ body #onboarding .link-row.link-list { grid-template-columns:96px minmax(0,1fr); }
+ body #onboarding .aieyra-account { flex-wrap:wrap; }
+ body #onboarding .aieyra-stats { flex-basis:100%; padding:0; }
+}
+
+/* ── 设置 · 模型（2026-10-16）：Key 一行一把、供应商折叠、模型列表弹窗、模型悬停卡、角色各占一框、右下角保存 ── */
+/* Key 行：名称 · 截断 Key · 在池数 · 启用开关 · 获取模型列表 · 移除。 */
+body #onboarding .key-list { padding:6px 18px; }
+body #onboarding .key-line { display:grid; grid-template-columns:minmax(80px,1fr) auto minmax(0,auto) auto auto auto; align-items:center; gap:14px; min-height:46px; border-bottom:1px solid var(--s-line); transition:opacity var(--t2) var(--ease); }
+body #onboarding .key-line:last-child { border-bottom:0; }
+body #onboarding .key-line[data-enabled=false] :is(.key-line-name,.key-line-mask,.key-line-meta) { opacity:1; }
+body #onboarding #aieyra-keys .key-line[data-enabled=false] .key-line-meta { opacity:1; color:var(--text-2); }
+body #onboarding .key-line-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13.5px; color:#e6e9f0; }
+body #onboarding .key-line-mask { font:12px/1 Consolas,"Cascadia Mono",monospace; color:var(--text-3); letter-spacing:.02em; }
+body #onboarding .key-line-meta { font-size:11.5px; color:var(--text-3); white-space:nowrap; }
+body #onboarding .key-switch { position:relative; flex:none; width:36px; height:20px; min-height:0; padding:0; border:0; border-radius:999px; background:#ffffff14; box-shadow:inset 0 0 0 1px #ffffff1a; cursor:pointer; transition:background-color var(--t2) var(--ease),box-shadow var(--t2) var(--ease); }
+body #onboarding .key-switch-knob { position:absolute; left:3px; top:3px; width:14px; height:14px; border-radius:50%; background:#8a91a0; transition:translate var(--t2) var(--ease),background-color var(--t2) var(--ease); }
+body #onboarding .key-switch[aria-checked=true] { background:#a9c0ec40; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9),0 0 10px var(--eyra-glow,#b9c8ff2e); }
+body #onboarding .key-switch[aria-checked=true] .key-switch-knob { translate:16px 0; background:#eef1f7; }
+body #onboarding .key-line-fetch { display:inline-flex; align-items:center; gap:6px; min-height:28px; padding:0 12px; border:0; color:var(--text-2); font-size:12px; white-space:nowrap; }
+body #onboarding .key-line-fetch:hover:not(:disabled) { color:#eef1f7; }
+body #onboarding .key-line-fetch svg, body #onboarding .key-line-x svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+body #onboarding .key-line-x { display:grid; place-items:center; width:26px; height:26px; min-height:0; padding:0; border:0; border-radius:50%; background:none; color:var(--text-3); }
+body #onboarding .key-line-x:hover:not(:disabled) { color:#eef1f7; background:#ffffff12; }
+body #onboarding .key-empty { margin:10px 4px; font-size:12.5px; color:var(--text-3); }
+/* 供应商：默认只有名称一排，点开展开 Key。 */
+body #onboarding .provider-list { padding:4px 10px; }
+body #onboarding .provider-card { padding:0; border-bottom:1px solid var(--s-line); }
+body #onboarding .provider-card:last-child { border-bottom:0; }
+body #onboarding .provider-row { display:flex; align-items:center; gap:10px; width:100%; min-height:48px; padding:0 10px; border:0; border-radius:12px; background:none; color:#e6e9f0; text-align:left; cursor:pointer; }
+body #onboarding .provider-row:hover { background:#ffffff06; }
+body #onboarding .provider-row strong { font-size:14px; font-weight:600; }
+body #onboarding .provider-sum { margin-left:auto; font-size:12px; color:var(--text-3); }
+body #onboarding .provider-chevron { display:grid; place-items:center; width:16px; height:16px; color:var(--text-3); transition:rotate var(--t2) var(--ease); }
+body #onboarding .provider-chevron svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+body #onboarding .provider-row[aria-expanded=true] .provider-chevron { rotate:90deg; }
+body #onboarding .provider-keys { padding:0 10px 10px 36px; animation:keys-in 220ms var(--ease) both; }
+@keyframes keys-in { from { opacity:0; translate:0 -4px; } }
+body #onboarding .provider-actions { display:flex; gap:16px; padding-top:6px; }
+body #onboarding .text-button.danger[data-armed=true], body #onboarding .text-button.danger:hover { color:var(--ui-error); }
+body #onboarding .key-new { display:flex; align-items:center; gap:10px; padding-top:8px; }
+body #onboarding .add-line { flex-wrap:nowrap; align-items:flex-end; gap:14px; }
+body #onboarding .add-line > label.add-preset { flex:0 0 150px; }
+body #onboarding .add-line > label.add-name { flex:0 1 150px; }
+body #onboarding .add-line > label.add-url { flex:1.2 1 180px; }
+body #onboarding .add-line > label.add-key { flex:1 1 160px; }
+@media (max-width:760px) { body #onboarding .add-line { flex-wrap:wrap; } body #onboarding .key-line { grid-template-columns:minmax(0,1fr) auto auto; } body #onboarding .key-line :is(.key-line-mask,.key-line-meta) { display:none; } }
+/* Existing provider edit uses the same fields and buttons as the add row. */
+body #onboarding .key-line[data-editable=true] { grid-template-columns:minmax(80px,1fr) auto minmax(0,auto) auto auto auto auto; }
+body #onboarding .provider-edit { display:grid; gap:8px; padding:8px 0 16px; min-width:0; }
+body #onboarding .provider-edit [hidden] { display:none; }
+body #onboarding .provider-edit .add-line { flex-wrap:wrap; }
+body #onboarding .provider-edit .add-line > label { flex:1 1 160px; min-width:0; }
+body #onboarding .provider-edit-confirm:not([hidden]), body #onboarding .provider-edit-actions { display:flex; align-items:center; gap:8px; }
+body #onboarding .provider-edit-confirm, body #onboarding .provider-edit-note { font-size:12px; color:var(--ui-text-2); }
+body #onboarding .provider-edit-note { margin:0; overflow-wrap:anywhere; }
+@media (max-width:760px) { body #onboarding .key-line[data-editable=true] { grid-template-columns:minmax(0,1fr) auto auto auto auto; gap:8px; } }
+/* 模型连接：所选默认模型的参数显示在对应连接下方。 */
+body #onboarding #links-body { display:grid; gap:8px; container-type:inline-size; }
+body #onboarding #links-body > .settings-area { margin:0; }
+body #onboarding .link-pool-empty { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; padding:12px 16px; }
+body #onboarding .link-pool-empty strong { font-size:14px; font-weight:600; }
+body #onboarding .link-pool-actions { display:flex; flex-wrap:wrap; gap:8px; }
+body #onboarding .role-box { padding:6px 16px; }
+body #onboarding .role-box :is(.link-row,.param-row) { grid-template-columns:max(8em,104px) minmax(0,1fr); column-gap:16px; }
+body #onboarding .role-box .link-name { white-space:normal; }
+body #onboarding .role-box .link-control { display:flex; align-items:center; gap:10px; }
+body #onboarding .role-box .link-control > :first-child { flex:1 1 auto; min-width:0; }
+body #onboarding .link-unavailable { font-size:13px; color:var(--ui-text-2); }
+body #onboarding .link-info { display:grid; place-items:center; flex:none; width:22px; height:22px; border-radius:50%; font:italic 600 11px/1 Georgia,serif; color:var(--text-3); box-shadow:inset 0 0 0 1px #ffffff26; cursor:help; }
+body #onboarding .link-info:hover, body #onboarding .link-info:focus-visible { outline:none; color:#eef1f7; box-shadow:inset 0 0 0 1px #ffffff66; }
+body #onboarding .link-params { flex-wrap:wrap; animation:keys-in 220ms var(--ease) both; }
+body #onboarding .link-param-field { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-3); }
+body #onboarding .link-param-field :is(select,input) { min-height:28px; width:auto; min-width:84px; max-width:140px; padding:2px 10px; font-size:12.5px; }
+body #onboarding .link-param-field .glass-select { min-width:96px; }
+@container (max-width:340px) {
+ body #onboarding .role-box :is(.link-row,.param-row) { grid-template-columns:minmax(0,1fr); gap:6px; padding-block:6px; }
+}
+/* 右下角保存：贴在页面底部右侧，滚动时也能看到。 */
+/* 提示词：编辑框占满剩余高度。 */
+body #onboarding #prompt-settings:not([hidden]) { display:flex;flex-direction:column;min-height:0; }
+body #onboarding #prompt-settings .prompt-area { flex:none;display:flex;flex-direction:column;min-height:0; }
+body #onboarding #prompt-settings .prompt-editor-frame { flex:1 1 auto; height:auto; }
+
+/* 模型列表弹窗：玻璃面板；顶部 全选 · 搜索 · 批量；每行 选择 · 名称 · 状态 · 测试 · 添加/移除；右下角 保存。 */
+body dialog.model-picker { padding:0; border:0; color:#e6e9f0; overflow:hidden; display:flex; flex-direction:column; }
+body dialog.model-picker:not([open]) { display:none; }
+body dialog.model-picker[open] { animation:picker-in 240ms cubic-bezier(.2,.8,.2,1) both; }
+body dialog.model-picker::backdrop { animation:picker-fade 240ms ease both; }
+@keyframes picker-in { from { opacity:0; } }
+@keyframes picker-fade { from { opacity:0; } }
+body .model-picker button { min-height:0; font-size:12.5px; }
+body .model-picker svg { width:15px; height:15px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+body .picker-head { display:flex; align-items:center; }
+body .picker-head h2 { margin:0; font-weight:600; color:#eef1f7; }
+body .picker-count { font-size:12px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body .picker-x { margin-left:auto; display:grid; place-items:center; width:30px; height:30px; padding:0; border:0; border-radius:50%; background:none; color:var(--text-3); cursor:pointer; }
+body .picker-x:hover { background:#ffffff12; color:#eef1f7; }
+body .picker-all { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-2); white-space:nowrap; cursor:pointer; }
+body .picker-search { flex:1 1 auto; min-width:0; min-height:30px; padding:4px 12px; border:0; border-radius:999px; background:#ffffff0a; color:#e6e9f0; font-size:12.5px; box-shadow:inset 0 0 0 1px #ffffff12; outline:none; }
+body .picker-search:focus { box-shadow:inset 0 0 0 1px #ffffff40; }
+body .picker-selected { font-size:12px; color:var(--text-3); white-space:nowrap; font-variant-numeric:tabular-nums; }
+body .picker-bulk { display:inline-flex; align-items:center; gap:5px; height:30px; padding:0 12px; border:0; border-radius:999px; background:#ffffff0a; box-shadow:inset 0 0 0 1px #ffffff14; color:var(--text-2); cursor:pointer; white-space:nowrap; transition:background-color 160ms ease,color 160ms ease,opacity 160ms ease; }
+body .picker-bulk:hover:not(:disabled) { background:#ffffff16; color:#eef1f7; }
+body .picker-bulk:disabled { opacity:.35; cursor:default; }
+body .picker-check { width:15px; height:15px; margin:0; accent-color:#a9c0ec; cursor:pointer; }
+body .picker-rows { flex:1 1 auto; min-height:120px; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#ffffff2a transparent; }
+body .picker-row { display:grid; grid-template-columns:20px minmax(0,1fr) auto auto 30px 30px; align-items:center; gap:10px; min-height:40px; padding:0 6px; border-radius:10px; transition:background-color 120ms ease; }
+body .picker-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; outline:none; }
+body .picker-name:focus-visible { text-decoration:underline; text-underline-offset:3px; }
+body .picker-source { font-size:11px; color:var(--text-3); white-space:nowrap; max-width:120px; overflow:hidden; text-overflow:ellipsis; }
+body .picker-note { max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; color:#8a91a0; font-variant-numeric:tabular-nums; }
+body .picker-note[data-state=ok] { color:var(--ui-ok); }
+body .picker-note[data-state=fail] { color:var(--ui-error); }
+body .picker-note[data-state=testing] { color:#a9c0ec; }
+body .picker-icon { display:grid; place-items:center; width:30px; height:30px; padding:0; border:0; border-radius:50%; background:none; color:var(--text-3); cursor:pointer; transition:background-color 140ms ease,color 140ms ease; }
+body .picker-icon:hover:not(:disabled) { background:#ffffff12; color:#eef1f7; }
+body .picker-icon[data-state=testing] { color:#a9c0ec; background:conic-gradient(from 0deg,#a9c0ec66 0 25%,transparent 25%); animation:picker-spin 900ms linear infinite; }
+body .picker-icon[data-state=ok] { color:var(--ui-ok); }
+body .picker-icon[data-state=fail] { color:var(--ui-error); }
+body .picker-toggle[data-added=false] { color:#c9d0db; box-shadow:inset 0 0 0 1px #ffffff1f; }
+body .picker-toggle[data-added=false]:hover:not(:disabled) { background:#eef1f7; color:#0b0d12; }
+body .picker-toggle[data-added=true] { color:var(--text-3); }
+body .picker-toggle[data-added=true]:hover:not(:disabled) { color:var(--ui-error); background:#e3a29c14; }
+body .picker-toggle[data-busy=true] { opacity:.5; }
+@keyframes picker-spin { to { rotate:1turn; } }
+body.reduce-motion .picker-icon[data-state=testing] { animation:none; }
+body .picker-empty { margin:24px; text-align:center; font-size:12.5px; color:var(--text-3); }
+body .picker-foot { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+body .picker-status { margin-right:auto; flex:1 1 160px; font-size:12px; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body .picker-status.error { color:var(--ui-error); }
+body .picker-close { height:34px; padding:0 18px; border:0; border-radius:999px; background:none; color:var(--text-2); cursor:pointer; }
+body .picker-close:hover { background:#ffffff0d; color:#eef1f7; }
+body .picker-save { height:34px; min-width:116px; flex:none; white-space:nowrap; padding:0 22px; border:0; border-radius:999px; background:#eef1f7; color:#0b0d12; font-weight:500; cursor:pointer; }
+body .picker-save:hover:not(:disabled) { background:#fff; }
+
+/* 弹窗在 #onboarding 里，挡住设置页的全局输入框与标签样式。 */
+body #onboarding dialog.model-picker label.picker-all { display:flex; grid:none; gap:6px; align-items:center; font-size:12px; color:var(--text-2); }
+body #onboarding dialog.model-picker input.picker-check { flex:none; width:15px; height:15px; min-height:0; margin:0; padding:0; border:0; border-radius:3px; background:none; box-shadow:none; }
+body #onboarding dialog.model-picker input.picker-search { min-height:30px; padding:4px 12px; border:0; border-radius:999px; background:#ffffff0a; box-shadow:inset 0 0 0 1px #ffffff12; font-size:12.5px; }
+body #onboarding dialog.model-picker input.picker-search:focus { border:0; box-shadow:inset 0 0 0 1px #ffffff40; }
+body #onboarding dialog.model-picker label.picker-all { white-space:nowrap; flex:none; }
+body #onboarding .role-box .link-control.link-switch-line { display:flex; justify-content:flex-start; }
+body #onboarding .role-box .link-control.link-switch-line > .link-switch { flex:none; width:40px; }
+body #onboarding dialog.model-picker .picker-tools > label.picker-all { display:inline-flex!important; flex-direction:row; align-items:center; gap:6px; }
+body #onboarding .model-page > #aieyra-pool, body #onboarding .model-page > #providers-pool { margin-bottom:6px; }
+
+/* 模型参数（用户 2026-10-16）：一个参数一行，名称在左、控件紧挨在右；档位是一排胶囊，数值是拉条。 */
+body #onboarding .link-params { display:grid!important; gap:4px!important; padding:4px 0 8px!important; }
+body #onboarding .param-row { display:grid; grid-template-columns:112px minmax(0,1fr); align-items:center; column-gap:20px; min-height:36px; }
+body #onboarding .param-name { font-size:12.5px; color:var(--text-2); }
+body #onboarding .param-seg { display:inline-flex; flex-wrap:wrap; gap:2px; justify-self:start; padding:3px; border-radius:999px; background:#ffffff08; box-shadow:inset 0 0 0 1px #ffffff12; }
+body #onboarding .param-seg .param-seg-item { min-height:26px!important; height:26px; padding:0 12px!important; border:0; border-radius:999px!important; background:transparent!important; color:var(--text-2)!important; font-size:12px!important; transition:background-color var(--t1) var(--ease),color var(--t1) var(--ease); }
+body #onboarding .param-seg .param-seg-item:hover:not(:disabled):not([aria-checked=true]) { color:#eef1f7!important; background:#ffffff0c!important; }
+body #onboarding .param-seg .param-seg-item[aria-checked=true] { background:#bfd9ff22!important; color:#fff!important;box-shadow:inset 0 0 0 1px #d8e9ffb3; font-weight:500; }
+body #onboarding .param-seg .param-seg-item:disabled { opacity:1; }
+body #onboarding .param-slider { display:grid; grid-template-columns:minmax(120px,320px) 44px 22px; align-items:center; gap:12px; justify-self:start; width:100%; max-width:420px; }
+body #onboarding .param-slider input[type=range] { --s-accent:#e6e9f0; }
+body #onboarding .param-slider[data-set=false] input[type=range] { --s-accent:#ffffff40; }
+body #onboarding .param-budget { grid-template-columns:minmax(70px,1fr) 112px 22px; }
+body #onboarding .param-budget input[type=number] { width:100%; min-width:0; padding:5px 7px; font-size:12px; font-variant-numeric:tabular-nums; }
+body #onboarding .param-value { font-size:12.5px; font-variant-numeric:tabular-nums; color:#eef1f7; text-align:right; }
+body #onboarding .param-context { width:100%; max-width:510px; min-width:0; }
+body #onboarding .param-context-controls { display:grid; grid-template-columns:minmax(70px,1fr) 112px 52px 22px; align-items:center; gap:10px; }
+body #onboarding .param-context-controls input[type=number] { width:100%; min-width:0; padding:5px 7px; font-size:12px; font-variant-numeric:tabular-nums; }
+body #onboarding .param-context-hint { display:block; color:var(--text-3); font-size:11px; margin-top:3px; }
+body #onboarding .context-slider { position:relative; width:100%; max-width:420px; min-width:90px; }
+body #onboarding .context-slider input { display:block; width:100%; }
+body #onboarding .context-value { position:absolute; bottom:calc(100% + 4px); left:calc(7px + (100% - 14px) * var(--position,0)); transform:translateX(-50%); padding:3px 7px; border-radius:7px; background:#252b35; color:#eef1f7; font-size:11px; line-height:1.4; font-variant-numeric:tabular-nums; pointer-events:none; opacity:0; transition:opacity 100ms; }
+body #onboarding .context-slider:is(:hover,:focus-within) .context-value,body #onboarding .context-slider:has(input:active) .context-value { opacity:1; }
+body #onboarding .param-slider[data-set=false] .param-value:not([data-set]) { color:var(--text-3); }
+body #onboarding .param-reset { display:grid; place-items:center; width:22px; height:22px; min-height:0!important; padding:0!important; border:0; border-radius:50%!important; background:transparent!important; color:var(--text-3)!important; font-size:14px!important; line-height:1; }
+body #onboarding .param-reset:hover { color:#eef1f7!important; background:#ffffff10!important; }
+@media (max-width:760px) { body #onboarding .param-row { grid-template-columns:1fr; row-gap:6px; padding:4px 0; } }
+
+/* ── 模型列表弹窗 · 透明玻璃（用户 2026-10-16，按 docs/UI设计知识库.md：透明是我们的元素，强调只用 Eyra 的白环，不框套框）。
+   左边短搜索框，右边 全选 · 测试 · 添加 · 移除；每行：选择圈 · 名称 · 结果 · 测试 · 添加。 ── */
+body dialog.model-picker { width:min(720px,calc(100vw - 48px))!important; max-height:min(80vh,720px)!important; border-radius:var(--ui-radius)!important; background:var(--glass-surface)!important; backdrop-filter:var(--glass-filter)!important; box-shadow:var(--glass-edge),var(--glass-shadow)!important; }
+body dialog.model-picker::backdrop { background:var(--glass-veil)!important; backdrop-filter:blur(6px)!important; }
+body .picker-head { padding:18px 16px 6px 22px!important; gap:10px!important; }
+body .picker-head h2 { font-size:15px!important; }
+body .picker-tools { display:flex!important; align-items:center!important; justify-content:space-between; gap:12px!important; padding:8px 16px 12px 22px!important; border-bottom:0!important; }
+body #onboarding dialog.model-picker label.picker-search, body dialog.model-picker label.picker-search { display:inline-flex!important; align-items:center; gap:7px; flex:0 1 220px; min-width:120px; height:32px; padding:0 12px; border-radius:999px; background:rgba(255,255,255,.05); box-shadow:inset 0 0 0 1px #ffffff17; color:var(--text-3); transition:box-shadow var(--t1) var(--ease),background-color var(--t1) var(--ease); }
+body dialog.model-picker label.picker-search:focus-within { background:rgba(255,255,255,.08); box-shadow:inset 0 0 0 1px #ffffff40; color:var(--text-2); }
+body dialog.model-picker label.picker-search svg { flex:none; width:14px!important; height:14px!important; }
+body #onboarding dialog.model-picker label.picker-search input { flex:1; min-width:0; width:100%; min-height:0!important; height:30px; margin:0; padding:0!important; border:0!important; border-radius:0!important; background:none!important; box-shadow:none!important; color:#e6e9f0; font-size:12.5px!important; outline:none; }
+body dialog.model-picker label.picker-search input::-webkit-search-cancel-button { display:none; }
+body .picker-actions { display:flex; align-items:center; gap:6px; flex:none; }
+body dialog.model-picker .picker-tool { display:inline-flex; align-items:center; gap:6px; height:32px!important; min-height:0!important; padding:0 13px!important; border:0; border-radius:999px!important; background:rgba(255,255,255,.05)!important; box-shadow:inset 0 0 0 1px #ffffff17; color:var(--text-2)!important; font-size:12.5px!important; white-space:nowrap; cursor:pointer; transition:background-color var(--t1) var(--ease),color var(--t1) var(--ease),box-shadow var(--t1) var(--ease),opacity var(--t1) var(--ease); }
+body dialog.model-picker .picker-tool svg { width:14px!important; height:14px!important; }
+body dialog.model-picker .picker-tool:hover:not(:disabled) { background:rgba(255,255,255,.1)!important; color:#eef1f7!important; box-shadow:inset 0 0 0 1px #ffffff2e; }
+body dialog.model-picker .picker-tool:disabled { opacity:.38; cursor:default; }
+body dialog.model-picker .picker-tool.picker-all[aria-pressed=true] { color:#eef1f7!important; box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9); }
+body dialog.model-picker .picker-tool.picker-danger:hover:not(:disabled) { color:#f0c8c3!important; box-shadow:inset 0 0 0 1px #e3a29c55; background:#e3a29c12!important; }
+body .picker-rows { padding:2px 10px 8px 14px!important; mask-image:linear-gradient(to bottom,transparent 0,#000 8px,#000 calc(100% - 12px),transparent); }
+body .picker-row, body .picker-row:has(.picker-source) { grid-template-columns:26px minmax(0,1fr) auto max-content 32px!important; gap:8px!important; min-height:42px!important; padding:0 6px 0 8px!important; border-radius:12px!important; }
+body .picker-row:has(.picker-source) { grid-template-columns:26px minmax(0,1fr) auto auto max-content 32px!important; }
+body .picker-row:hover { background:rgba(255,255,255,.04)!important; }
+body .picker-row[data-selected=true] { background:rgba(255,255,255,.055)!important; }
+body dialog.model-picker .picker-check { display:grid; place-items:center; width:18px!important; height:18px!important; min-height:0!important; padding:0!important; border:0; border-radius:50%!important; background:none!important; box-shadow:inset 0 0 0 1.5px #ffffff38; color:transparent; cursor:pointer; transition:box-shadow var(--t1) var(--ease),background-color var(--t1) var(--ease),color var(--t1) var(--ease); }
+body dialog.model-picker .picker-check svg { width:11px!important; height:11px!important; stroke-width:2.4!important; }
+body dialog.model-picker .picker-check:hover { box-shadow:inset 0 0 0 1.5px #ffffff70; }
+body dialog.model-picker .picker-check[aria-checked=true] { background:#eef1f7!important; box-shadow:none; color:#0d0f15; }
+body .picker-name { font-size:13px!important; color:#d3d9e3!important; cursor:default; }
+body .picker-row[data-added=true] .picker-name { color:#f1f4f9!important; }
+body .picker-tags { display:inline-flex; gap:5px; }
+body .picker-tags i { padding:1px 8px; border-radius:999px; background:rgba(255,255,255,.06); font-style:normal; font-size:10.5px; line-height:17px; color:var(--text-2); }
+body .picker-result { display:inline-flex; align-items:center; gap:6px; max-width:240px; min-width:0; font-size:11.5px; color:var(--text-2); font-variant-numeric:tabular-nums; }
+body .picker-result-text { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body .picker-result[data-state=ok] { color:var(--ui-ok); }
+body .picker-result[data-state=fail] { color:#e8b3ad; }
+body .picker-dots { display:inline-flex; gap:3px; }
+body .picker-dots i { width:4px; height:4px; border-radius:50%; background:#e6e9f0; opacity:.25; animation:picker-dot 1s ease-in-out infinite; }
+body .picker-dots i:nth-child(2) { animation-delay:.15s; }
+body .picker-dots i:nth-child(3) { animation-delay:.3s; }
+@keyframes picker-dot { 40% { opacity:1; translate:0 -2px; } }
+body dialog.model-picker .picker-icon { width:30px!important; height:30px!important; min-height:0!important; padding:0!important; border:0; border-radius:50%!important; background:none!important; box-shadow:none!important; color:var(--text-3)!important; animation:none!important; transition:background-color var(--t1) var(--ease),color var(--t1) var(--ease),box-shadow var(--t1) var(--ease); }
+body dialog.model-picker .picker-icon svg { width:14px!important; height:14px!important; }
+body dialog.model-picker .picker-icon.picker-test { display:inline-flex; align-items:center; justify-content:center; gap:5px; width:auto!important; padding:0 9px!important; border-radius:999px!important; font-size:12px; line-height:1.2; white-space:nowrap; }
+body dialog.model-picker .picker-icon:hover:not(:disabled) { background:rgba(255,255,255,.08)!important; color:#eef1f7!important; }
+body dialog.model-picker .picker-icon:disabled { opacity:.4; cursor:default; }
+body dialog.model-picker .picker-toggle[data-added=false] { color:#dfe4ec!important; box-shadow:inset 0 0 0 1px #ffffff2a!important; }
+body dialog.model-picker .picker-toggle[data-added=false]:hover:not(:disabled) { box-shadow:inset 0 0 0 1.5px var(--eyra-ring,#e6e9f0d9)!important; background:rgba(255,255,255,.06)!important; }
+body dialog.model-picker .picker-toggle[data-added=true] { color:#0d0f15!important; background:#eef1f7!important; }
+body dialog.model-picker .picker-toggle[data-added=true]:hover:not(:disabled) { color:#f0c8c3!important; background:#e3a29c22!important; box-shadow:inset 0 0 0 1px #e3a29c55!important; }
+body dialog.model-picker .picker-toggle[data-busy=true] { opacity:.6; }
+body .picker-foot { padding:10px 16px 16px 22px!important; border-top:0!important; }
+body .picker-status { color:var(--text-2)!important; }
+body dialog.model-picker .picker-save { height:34px!important; min-height:0!important; padding:0 24px!important; border:0; border-radius:999px!important; background:#eef1f7!important; color:#0b0d12!important; font-weight:500; }
+body dialog.model-picker .picker-x { width:30px!important; height:30px!important; min-height:0!important; padding:0!important; border-radius:50%!important; }
+body.reduce-motion .picker-dots i { animation:none; opacity:.6; }
+@media (max-width:620px) { body .picker-tools { flex-wrap:wrap; } body dialog.model-picker .picker-tool span { display:none; } body dialog.model-picker .picker-tool { padding:0 10px!important; } }
+/* Aieyra API · 退出：透明胶囊。 */
+body #onboarding .glass-pill { height:32px; min-height:0; padding:0 16px; border:0; border-radius:999px; background:rgba(255,255,255,.05); box-shadow:inset 0 0 0 1px #ffffff1c; color:var(--text-2); font-size:12.5px; }
+body #onboarding .glass-pill:hover:not(:disabled) { background:rgba(255,255,255,.09); color:#eef1f7; box-shadow:inset 0 0 0 1px #ffffff33; }
+/* Key 行“获取列表”：同一种透明胶囊。 */
+body #onboarding .key-line-fetch { background:rgba(255,255,255,.05)!important; box-shadow:inset 0 0 0 1px #ffffff1a!important; }
+body #onboarding .key-line-fetch:hover:not(:disabled) { background:rgba(255,255,255,.09)!important; box-shadow:inset 0 0 0 1px #ffffff33!important; }
+body #onboarding dialog.model-picker .picker-tools > label.picker-search { display:flex!important; flex-direction:row!important; align-items:center!important; gap:7px!important; grid:none!important; font-size:12.5px; }
+
+/* ── 2026-10-16 夜：设置细节 ──
+   1. 提示词：编辑框撑满整个外框（外框往下延伸到底），文字区不再只剩两行。
+   2. 移除要点两次：第一次点，× 原地展开成红色“确认移除”胶囊，下沿一条 6 秒倒计时细线；供应商同理。
+   3. 保存：按钮原地变成“已保存”并跳一下（脉冲），不再弹提示。
+   4. 测试过程：每行下面两行小字——发：我们发的那句；回：对方回的话 + 用时；等待时三个点在跳、秒数在走。 */
+body #onboarding #prompt-settings .prompt-editor-frame { display:flex; flex-direction:column; min-height:0; resize:none; }
+body #onboarding #prompt-settings .prompt-area { padding:0; }
+body #onboarding #prompt-settings #prompt-editor { flex:1 1 auto;height:clamp(220px,calc(100dvh - 304px),720px);min-height:220px;resize:none;box-sizing:border-box;padding:18px 20px;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;font-family:var(--os-interface-font,"Segoe UI",sans-serif);font-size:14px;line-height:1.85;scrollbar-width:thin;scrollbar-color:#ffffff36 transparent; }
+
+body #onboarding .key-line-x[data-armed=true] { width:auto; min-width:0; padding:0 12px 0 9px; gap:5px; border-radius:999px; color:#f0b4ab; background:rgba(227,154,143,.12); box-shadow:inset 0 0 0 1px rgba(227,154,143,.42); position:relative; overflow:hidden; animation:arm-pop .32s cubic-bezier(.3,1.4,.5,1); }
+body #onboarding .key-line-x[data-armed=true] { display:inline-flex; align-items:center; height:26px; }
+body #onboarding .key-line-x[data-armed=true] svg { width:12px; height:12px; flex:none; }
+body #onboarding .key-line-x[data-armed=true] span { font-size:12px; line-height:1; white-space:nowrap; }
+body #onboarding .key-line-x[data-armed=true]::after, body #onboarding .provider-remove[data-armed=true]::after { content:''; position:absolute; left:10px; right:10px; bottom:3px; height:1px; border-radius:1px; background:currentColor; opacity:.55; transform-origin:left; animation:arm-countdown 6s linear var(--arm-delay,0s) forwards; }
+body #onboarding .provider-remove { position:relative; }
+body #onboarding .provider-remove[data-armed=true] { padding:4px 12px; border-radius:999px; color:#f0b4ab; background:rgba(227,154,143,.12); box-shadow:inset 0 0 0 1px rgba(227,154,143,.42); animation:arm-pop .32s cubic-bezier(.3,1.4,.5,1); }
+@keyframes arm-pop { 0% { scale:.86; } 60% { scale:1.04; } 100% { scale:1; } }
+@keyframes arm-countdown { from { transform:scaleX(1); } to { transform:scaleX(0); } }
+
+body #onboarding .settings-save[data-saved=true] { background:#dfe9e0; color:#0b0d12; animation:save-pulse .5s cubic-bezier(.3,1.4,.5,1); }
+body #onboarding .settings-save[data-saved=true]::before { content:''; display:inline-block; width:10px; height:5px; margin:0 7px 3px 0; border:solid currentColor; border-width:0 0 1.6px 1.6px; rotate:-45deg; }
+body #onboarding .settings-save[data-saved=false] { animation:save-shake .36s ease; }
+@keyframes save-pulse { 0% { scale:1; box-shadow:0 0 0 0 rgba(230,233,240,.5); } 45% { scale:1.05; } 100% { scale:1; box-shadow:0 0 0 12px rgba(230,233,240,0); } }
+@keyframes save-shake { 25% { translate:-3px 0; } 75% { translate:3px 0; } }
+
+body .picker-log { margin:-4px 6px 6px 42px; padding:6px 12px 7px; border-radius:10px; background:rgba(255,255,255,.025); box-shadow:inset 1px 0 0 rgba(230,233,240,.18); font-size:11.5px; line-height:1.65; color:var(--ui-text-2,#aab1bf); }
+body .picker-log p { display:flex; align-items:baseline; gap:8px; margin:0; min-width:0; }
+body .picker-log i { flex:none; width:16px; font-style:normal; font-size:10.5px; color:var(--ui-text-3,#7d8495); }
+body .picker-log .log-text { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+body .picker-log .log-sent .log-text { color:#c9cfdb; font-family:ui-monospace,'Cascadia Mono',Consolas,monospace; font-size:11px; }
+body .picker-log .log-reply .log-text { color:#e6e9f0; }
+body .picker-log[data-state=fail] .log-reply .log-text, body .picker-log[data-state=fail] .log-reply i { color:#eba59b; white-space:normal; }
+body .picker-log .log-time { flex:none; margin-left:auto; font-variant-numeric:tabular-nums; color:var(--ui-text-3,#7d8495); }
+body .picker-log[data-state=ok] .log-time { color:#b9d3bd; }
+body .picker-log .log-wait { display:inline-flex; align-items:center; gap:8px; color:var(--ui-text-3,#7d8495); }
+body .picker-log[data-fresh=true] { animation:log-in .3s cubic-bezier(.2,.8,.2,1); }
+body .picker-log[data-fresh=true] .log-sent .log-text { animation:log-type .5s steps(24,end); }
+body .picker-log[data-fresh=true][data-state=ok] .log-reply, body .picker-log[data-fresh=true][data-state=fail] .log-reply { animation:log-reply .42s cubic-bezier(.2,.8,.2,1); }
+@keyframes log-in { from { opacity:0; translate:0 -4px; } }
+@keyframes log-type { from { clip-path:inset(0 100% 0 0); } to { clip-path:inset(0 0 0 0); } }
+@keyframes log-reply { 0% { opacity:0; translate:-6px 0; } 100% { opacity:1; translate:0 0; } }
+body .picker-mark { display:inline-block; width:7px; height:7px; padding:0!important; border-radius:50%; background:#6b7385!important; }
+body .picker-mark[data-state=ok] { background:var(--ui-ok)!important; }
+body .picker-mark[data-state=fail] { background:var(--ui-error)!important; }
+body .picker-mark[data-state=testing] { background:#e6e9f0!important; animation:mark-beat 1.25s cubic-bezier(.3,.7,.4,1) infinite; }
+@keyframes mark-beat { 0%,100% { scale:1; opacity:.6; } 12% { scale:1.4; opacity:1; } 24% { scale:1; } 36% { scale:1.2; } 50% { scale:1; opacity:.6; } }
+
+/* 请求记录（用户 2026-11-02）：来源胶囊同提示词层；汇总同 Aieyra 账号统计；表格不套框、数字等宽右对齐。 */
+body #onboarding .request-summary { display:flex; flex-wrap:wrap; gap:26px; margin:0; padding:0 4px; }
+.request-summary-row { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:16px; }
+.context-controls { display:grid;gap:12px;flex:1;min-width:0; }
+.context-presets { flex-wrap:wrap; }
+.context-presets [aria-pressed=true] { background:var(--ui-control-active,#ffffff18);color:var(--ui-text); }
+body #onboarding .request-summary:empty { display:none; }
+body #onboarding .request-summary div { display:grid; gap:2px; }
+body #onboarding .request-summary dt { font-size:11px; color:var(--text-3); }
+body #onboarding .request-summary dd { margin:0; font-size:15px; color:#e6e9f0; font-variant-numeric:tabular-nums; }
+body #onboarding .request-area { padding:6px 0; overflow-x:auto; }
+body #onboarding .request-table { width:100%; border-collapse:collapse; font-size:12.5px; color:var(--text-2); }
+body #onboarding .request-table th { padding:8px 14px; font-size:11px; font-weight:400; color:var(--text-3); text-align:right; white-space:nowrap; }
+body #onboarding .request-table th:nth-child(-n+2) { text-align:left; }
+body #onboarding .request-table td { padding:7px 14px; text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+body #onboarding .request-table tbody tr:hover td { background:#ffffff08; color:#e6e9f0; }
+body #onboarding .request-table td.time { text-align:left; color:var(--text-3); }
+body #onboarding .request-table td.model { text-align:left; max-width:260px; overflow:hidden; text-overflow:ellipsis; color:var(--text); }
+body #onboarding .request-table td.host { color:var(--text-3); }
+body #onboarding .request-table tr[title] td.num { color:#c9b79c; }
+body #onboarding .request-empty { margin:18px 14px; font-size:12.5px; color:var(--text-3); }
+body #onboarding .request-actions { display:flex; align-items:center; gap:8px; margin-top:10px; padding-top:0; border-top:0; }
+body #onboarding .request-actions #request-status { margin-right:auto; font-size:12px; color:var(--text-3); }
+
+body #onboarding .request-breakdown { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:8px; margin:0 4px 14px; }
+body #onboarding .request-breakdown[hidden] { display:none; }
+body #onboarding .request-chip { display:grid; gap:3px; min-width:0; min-height:0; padding:10px 14px; border:0; border-radius:14px; background:#ffffff08; box-shadow:var(--ui-edge); color:var(--text-2); text-align:left; transition:background-color var(--ui-fast) var(--ui-ease),box-shadow var(--ui-fast) var(--ui-ease); }
+body #onboarding .request-chip:hover { background:#ffffff12; }
+body #onboarding .request-chip[aria-pressed=true] { background:#a9c0ec1f; box-shadow:inset 0 0 0 1px #a9c0ec66; }
+body #onboarding .request-chip strong { overflow:hidden; font-size:12.5px; font-weight:500; color:var(--text); text-overflow:ellipsis; white-space:nowrap; }
+body #onboarding .request-chip small { font-size:11px; color:var(--text-3); font-variant-numeric:tabular-nums; }
+body #onboarding .request-table td.role { text-align:left; color:var(--text-2); }
+body #onboarding .request-table th:nth-child(3) { text-align:left; }
+
+/* Role selection keeps independent drafts over the shared prompt service. */
+
+body #onboarding .aieyra-avatar img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+
+
+.update-feed{margin-bottom:24px}
+.update-post{padding:16px 0;border-bottom:1px solid var(--ui-text-3)}
+body #onboarding .update-post-title{padding:0;background:none;border:0;border-radius:0;color:var(--ui-text);text-align:left;font:inherit;font-weight:500}
+.update-post p{white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ui-text-2);line-height:1.7}
+#update-integrity-modules{padding-left:20px;color:var(--ui-text-2);line-height:1.8}
+
+body #onboarding .range-value { display:flex;align-items:baseline;justify-content:flex-end;gap:4px;min-width:0;line-height:1.5; }
+body #onboarding .range-value input[type=number].range-number { width:72px;min-width:0;max-width:90px;min-height:0;padding:0;box-sizing:border-box;border:0;border-radius:0;background:transparent;box-shadow:none;outline:0;font:inherit;line-height:inherit;text-align:right;font-variant-numeric:tabular-nums;appearance:textfield;text-decoration:none; }
+body #onboarding .range-number::-webkit-inner-spin-button,body #onboarding .range-number::-webkit-outer-spin-button { appearance:none;margin:0; }
+body #onboarding .range-number:is(:hover,:focus) { background:transparent;box-shadow:none;outline:0; }
+body #onboarding .range-unit { font:inherit;line-height:inherit;color:var(--ui-text-3);white-space:nowrap; }
+body #onboarding .media-effects-title { margin:8px 0 0;font-size:12px;font-weight:500;color:var(--ui-text-2); }
+body #onboarding .background-preview .bg-chat { position:absolute;inset:40% 0 0;display:grid;place-items:center;background:rgb(5 6 10 / var(--bg-chat-veil,.18));backdrop-filter:blur(var(--bg-chat-blur,4px));color:var(--ui-text-2);font-size:12px;border-top:1px solid #ffffff18; }
+body #onboarding .settings-area.profile-pair { border:0;background:transparent;backdrop-filter:none;box-shadow:none; }
+body #onboarding .prompt-area:focus-within { box-shadow:var(--settings-edge),inset 0 0 0 1px #dceaff38,var(--settings-shadow); }
+body #onboarding #prompt-editor:focus { box-shadow:none; }

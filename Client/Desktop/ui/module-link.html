@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: aieyra-theme:; font-src 'self' aieyra-theme:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Aieyra Link</title><link rel="stylesheet" href="fonts.css"><link rel="stylesheet" href="module-shell.css"><link rel="stylesheet" href="appearance.css"><link rel="stylesheet" href="window-theme.css"><link rel="stylesheet" href="ui-system.css"></head>
+<body data-module="link">
+<header class="module-bar">
+ <div class="module-brand"><svg class="module-mark" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><circle class="module-mark-core" cx="8" cy="8" r="2.4"/></svg><strong>Aieyra Link</strong></div>
+ <nav class="module-tabs" role="tablist" aria-label="Link 页面" hidden>
+  <button id="tab-devices" type="button" role="tab" aria-selected="false" aria-controls="pane-devices" hidden>设备</button>
+  <button id="tab-control" type="button" role="tab" aria-selected="false" aria-controls="pane-control" hidden>Link</button>
+ </nav>
+ <div id="module-situation" class="module-situation" role="status" aria-live="polite" hidden></div>
+ <div class="module-spacer"></div>
+ <nav class="window-controls" aria-label="窗口">
+  <button id="module-dock" type="button" hidden aria-label="放回 OS" title="放回 OS"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5h6.5v9H6M8.5 8H2m3-3L2 8l3 3"/></svg></button>
+  <button id="minimize-window" type="button" aria-label="最小化"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5h10"/></svg></button>
+  <button id="maximize-window" type="button" aria-label="最大化"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx=".5"/></svg></button>
+  <button id="close-window" type="button" aria-label="关闭"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></button>
+ </nav>
+</header>
+<p id="module-notice" role="status" hidden></p>
+<main>
+ <section id="pane-devices" role="tabpanel" aria-labelledby="tab-devices" hidden>
+  <p id="link-quiet" class="quiet-state" role="status">等待附近设备</p>
+  <div id="link-live" hidden><h2 id="link-status" role="status"></h2><ul id="link-sessions" aria-label="已连接的会话"></ul></div>
+  <footer class="link-identity"><small id="link-error" role="status" hidden></small></footer>
+ </section>
+ <section id="pane-control" role="tabpanel" aria-labelledby="tab-control" hidden>
+  <div id="control-host"></div>
+  <div id="control-state" role="status"><p id="control-message">正在连接 Link…</p><button id="control-retry" type="button" hidden>重新连接</button></div>
+  <section id="pane-remote" role="region" aria-label="连接详情"></section>
+ </section>
+</main>
+<script type="module" src="module-link.mjs"></script>
+</body></html>

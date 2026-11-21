@@ -1,0 +1,8 @@
+{
+  "schema": "aieyra.tool-view/1",
+  "result": "output",
+  "view": {
+    "kind": "cards",
+    "title": "数字统计"
+  }
+}

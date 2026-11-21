@@ -1,0 +1,10 @@
+{
+  "schema": "aieyra.context/1",
+  "id": "example.context-project",
+  "version": "1.0.0",
+  "name": "项目连续性上下文",
+  "state_schema": 1,
+  "engine": "structured",
+  "keep_turns": 12,
+  "summary_guidance": "保留用户最新纠正及其来源，将已经完成的工作与未完成事项分别记录。关键决策记录原因、适用范围和原文索引；无法证实的结论放入 uncertainties。不要把计划当作完成，不修改来源摘要或省略必需字段。"
+}

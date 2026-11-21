@@ -1,0 +1,59 @@
+{
+  "source": "Aieyra OS/Control/app/service/coordination_core",
+  "date": "2026-11-10",
+  "purpose": "Together independent Link collaboration runtime; no private data copied",
+  "files": [
+    {
+      "file": "UPSTREAM.json",
+      "sha256": "0a7410dbcb0709589a242ccef8b266c61fd1373b3cddbd90060564f6db6dd8fb"
+    },
+    {
+      "file": "__init__.py",
+      "sha256": "d2990679286f546217737c132dfb2a0b83912db300b21fd9ff130894057d3b52"
+    },
+    {
+      "file": "collaboration.py",
+      "sha256": "3e968f9a5396d9a705b02643ee992e6ac2892a84ebdf6c83892853e4b265b30e"
+    },
+    {
+      "file": "core.py",
+      "sha256": "efdd5a572504b62a7852a1bdeb3c0e294c6e87bf4a09df9353408e4e78969e7c"
+    },
+    {
+      "file": "hub.py",
+      "sha256": "fbc0cf1c26b364d23114e34154a5821f141e823d47e95911dc3ffe1fe4784491"
+    },
+    {
+      "file": "intake.py",
+      "sha256": "5ceb50345127b98d4ebd356c37e38e8ee0b1932ba7ca1d56c53d394b64bd816c"
+    },
+    {
+      "file": "jobs.py",
+      "sha256": "c0caaa068433fe8989125df34410db997ed8082aa83a9002f3eac52333b418a2"
+    },
+    {
+      "file": "library.py",
+      "sha256": "4f28b722fe7e8f4328730e2d3ad19fc7a6dcb541493bb446df62c99fa9e44192"
+    },
+    {
+      "file": "message_policy.py",
+      "sha256": "dcf965b84ae938e4f2b595ed1f2c090e5dc673aa002d025073ab8931aa94d994"
+    },
+    {
+      "file": "mobile.py",
+      "sha256": "0be5c4d904b33072d70efe4513ce4f82a7908c779b2b7378820d9ccb1a7c2d3e"
+    },
+    {
+      "file": "registry.py",
+      "sha256": "2edef47967a4aa9abedc6af3725523825c03e35fbb2e93e682ef279312a96b94"
+    },
+    {
+      "file": "task_policy.py",
+      "sha256": "254e3a345d7fa94769a6956c9ada11be8fda821983895614899a0dd6fec6c123"
+    },
+    {
+      "file": "workorders.py",
+      "sha256": "09e789ddff18a5c72ec0b58d9da2489081872cbc887081bde56dca22b494c6cc"
+    }
+  ]
+}

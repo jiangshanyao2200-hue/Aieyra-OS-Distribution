@@ -1,0 +1,1 @@
+Goal %s has independent runnable steps. Keep the affected steps blocked with reasons, reactivate the goal with update_plan and continue the other work. Do not report the entire goal blocked while independent work remains. Explicit user pauses remain valid.

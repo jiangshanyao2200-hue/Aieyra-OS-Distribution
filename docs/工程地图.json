@@ -1,0 +1,3664 @@
+{
+  "schema": "aieyra.project-map/1",
+  "reviewed": "2026-11-18",
+  "scope": "当前迁入工作树的实际模块与导航；unavailable_original_*保留未提供的原地图，不作为已实现入口。静态地图不等于运行验收。",
+  "modules": [
+    {
+      "id": "core",
+      "path": "Core",
+      "agreement": "Core/AGENTS.md",
+      "entries": [
+        "Core/api.go",
+        "Core/workspace.go",
+        "Core/go.mod"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md",
+        "docs/UI协约.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "contracts",
+        "api",
+        "agent",
+        "tool",
+        "program",
+        "theme",
+        "halo",
+        "internal-link"
+      ],
+      "status": "active",
+      "data_ownership": "所有路径通过 platform 与 Contracts/storage 绑定。会话、记忆、附件与私人配置由授权宿主持有，不因重开、换主题或包卸载清空。禁止直接打开真实用户 SQLite。",
+      "verification": [
+        "在 Core 串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./、go vet ./ 并检查 gofmt；改子包时加对应包测试。四产物由主工程构建，实际 GUI 与重任务串行。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R20",
+        "R23",
+        "R25",
+        "R26",
+        "R27",
+        "R28"
+      ],
+      "responsibility": "负责模型/工具/Agent/任务的授权、执行、取消、事件、持久提交及恢复；workspace_* 是共同 RPC，客户端不另建执行器。host 负责平台装配，extensionhost 负责 Mod 类型装配，modules、sessionservice、memoryservice、userdata 各有下层协约。"
+    },
+    {
+      "id": "core.cmd",
+      "path": "Core/cmd",
+      "agreement": "Core/cmd/AGENTS.md",
+      "entries": [
+        "Core/cmd/aieyra-os/main.go",
+        "Core/cmd/aieyra-cli/main.go",
+        "Core/cmd/aieyra-link/main.go",
+        "Core/cmd/aieyra-module/main.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "启动参数固定本进程配置所有者；不以进程当前目录猜私人资料根。图标、syso、rc 属构建资源。",
+      "verification": [
+        "在 Core 对改动入口运行对应 go test/go vet；平台入口通过主工程构建验证，不能用其他平台的编译结果替代 Windows 实启。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [],
+      "responsibility": "aieyra-os 装配 OS/显式 CLI；aieyra-cli 转交 Client/CLI；aieyra-link 与 aieyra-module 装配独立模块。配置、控制台和平台入口保留各自旗标和资源。"
+    },
+    {
+      "id": "core.host",
+      "path": "Core/host",
+      "agreement": "Core/host/AGENTS.md",
+      "entries": [
+        "Core/host/app.go",
+        "Core/host/workspace.go",
+        "Core/host/module_runtime.go",
+        "Core/host/managed_update.go",
+        "Core/host/desktop_bootstrap.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "配置绑定、发现文件、活动 owner 和更新回执是各自的事实；持有通信租约不代表持有任务执行权。",
+      "verification": [
+        "在 Core 执行 go test ./host/...、go vet ./host/...；Windows 生命周期需主会话串行实启/退出。更新失败、锁冲突和旧用户进程保留是必查路径。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [],
+      "responsibility": "装配 OS/配置/模块入口、Workspace 进程与所有者租约、Control 发现/启动、成套更新；linkclient 子目录提供受控 Link 子进程适配。"
+    },
+    {
+      "id": "core.extensionhost",
+      "path": "Core/extensionhost",
+      "agreement": "Core/extensionhost/AGENTS.md",
+      "entries": [
+        "Core/extensionhost/desktop.go",
+        "Core/extensionhost/official.go",
+        "Core/extensionhost/workbox.go",
+        "Core/extensionhost/legacy.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "只读宿主编译的官方摘要，外部路径、名字和自报 official 均不授予官方身份；私人实例与凭据不入包。",
+      "verification": [
+        "在 Core 执行 go test ./extensionhost 与 go vet ./extensionhost；改变准入需验证拒绝路径、SDK 对应样板和共同登记消费者。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R05",
+        "R11",
+        "R15",
+        "R17",
+        "R28"
+      ],
+      "responsibility": "将各类型契约、能力、依赖与官方来源接入共同 modules 注册器；这里装配 Desktop 支持范围，不把 JSON Schema 当最终执行校验。"
+    },
+    {
+      "id": "core.modules",
+      "path": "Core/modules",
+      "agreement": "Core/modules/AGENTS.md",
+      "entries": [
+        "Core/modules/manager.go",
+        "Core/modules/manifest.go",
+        "Core/modules/package.go",
+        "Core/modules/object.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "不可变载荷与 registry/source 分开，经 storage 映射定位；卸载保留用户资料，原子登记和跨进程锁防止半写。",
+      "verification": [
+        "在 Core 执行 go test ./modules、go vet ./modules；核对同版本不同内容、签名换钥、路径/链接、依赖及 revision/request_id 重放拒绝。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R01",
+        "R05",
+        "R11",
+        "R15",
+        "R17",
+        "R28"
+      ],
+      "responsibility": "唯一包服务负责文件夹/ZIP检查、身份/签名/摘要、版本依赖、授权、登记、resolve、启停、升级回退和卸载。"
+    },
+    {
+      "id": "core.platform",
+      "path": "Core/platform",
+      "agreement": "Core/platform/AGENTS.md",
+      "entries": [
+        "Core/platform/paths.go",
+        "Core/platform/layout.go",
+        "Core/platform/config-file.cjs",
+        "Core/platform/profile_processes.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "解析本身不是创建、搬迁或删除授权；显式不可写工作目录必须报告失败，默认回退按现有策略处理。",
+      "verification": [
+        "在 Core 执行 go test ./platform、go vet ./platform；JS 锁与路径消费者用 Desktop 自测，覆盖外置配置、旧布局、只读安装根及链接拒绝。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R26",
+        "R27"
+      ],
+      "responsibility": "提供配置/资源/资料根解析、平台进程识别与共同配置文件锁/CAS，Go 和桌面调用同一布局规则。"
+    },
+    {
+      "id": "core.sessionservice",
+      "path": "Core/sessionservice",
+      "agreement": "Core/sessionservice/AGENTS.md",
+      "entries": [
+        "Core/sessionservice/archive.go",
+        "Core/sessionservice/catalog.go",
+        "Core/sessionservice/cleanup.go",
+        "Core/sessionservice/records.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core.internal"
+      ],
+      "status": "active",
+      "data_ownership": "JSONL 原文、检查点、目录指针及清理回执各有身份。上下文提供者只占自己的命名空间，不能拥有整个会话目录。",
+      "verification": [
+        "在 Core 执行 go test ./sessionservice、go vet ./sessionservice；使用工程外合成档案覆盖尾损坏、版本冲突、失败提交、逐项删除重试和重开不重放。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R20",
+        "R21",
+        "R27"
+      ],
+      "responsibility": "共同档案追加/尾恢复、主会话版本目录、任务/联系人/Agent/Workbox有界记录快照与目录、逐项可重试清理；领域授权与恢复策略由Core适配。"
+    },
+    {
+      "id": "core.memoryservice",
+      "path": "Core/memoryservice",
+      "agreement": "Core/memoryservice/AGENTS.md",
+      "entries": [
+        "Core/memoryservice/history.go",
+        "Core/memoryservice/pac.go",
+        "Core/memoryservice/lookup.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "仅操作调用者授权的记忆根，真实用户库不直接打开验收；存在旧 Config 记忆及侧车时拒绝另建 Data 第二份库。",
+      "verification": [
+        "在 Core 执行 go test ./memoryservice、go vet ./memoryservice；兼容/恢复验收用合成库与原字节副本，关闭会话不能误删长期共享记忆。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R20",
+        "R21",
+        "R22",
+        "R27"
+      ],
+      "responsibility": "提供 SQLite 事务、长期记忆、完整原文投影、检索纠正遗忘、PAC 与旧格式兼容；不包含模型选择或桌面编辑器。"
+    },
+    {
+      "id": "core.userdata",
+      "path": "Core/userdata",
+      "agreement": "Core/userdata/AGENTS.md",
+      "entries": [
+        "Core/userdata/init.go",
+        "Core/userdata/inventory.go",
+        "Core/userdata/migrate.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "仅目标身份与同次迁移可接续。配置、提示词、未知文件和原目录保留；目标启用后不能以 cancel 覆盖新写入。",
+      "verification": [
+        "在 Core 执行 go test ./userdata、go vet ./userdata；工程外合成根验证中断、冲突、再次搬家、激活交接与移走旧源后的真实消费者恢复。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [
+        "R23",
+        "R27"
+      ],
+      "responsibility": "实现 cli profile 的初始化、盘点、可接续离线迁移与取消，使用 Contracts/storage 的37类分区和历史 origin 映射。"
+    },
+    {
+      "id": "core.internal",
+      "path": "Core/internal",
+      "agreement": "Core/internal/AGENTS.md",
+      "entries": [
+        "Core/internal/privatefile/snapshot.go",
+        "Core/internal/privatefile/file.go",
+        "Core/internal/osowner/lease.go"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/项目地图/49-私人资料路径与清理归属.md"
+      ],
+      "depends_on": [
+        "core"
+      ],
+      "status": "active",
+      "data_ownership": "旧读者看完整旧字节，新读者看新版本；租约与暂存文件由拥有者释放，不能全目录清理。",
+      "verification": [
+        "在 Core 执行 go test ./internal/...、go vet ./internal/...；文件共享/替换与进程锁必须覆盖目标平台。"
+      ],
+      "pending": [
+        "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+      ],
+      "requirements": [],
+      "responsibility": "privatefile 提供私有原子文件与 Windows 可替换快照，osowner 提供进程所有者租约；为 Core 内部基础设施，不暴露业务调度。"
+    },
+    {
+      "id": "api",
+      "path": "API",
+      "agreement": "API/AGENTS.md",
+      "entries": [
+        "API/transport/client.go",
+        "API/request/responses.go",
+        "API/codec/responses.go",
+        "API/README.md"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "请求间深拷贝参数/原生消息；真实 usage、未知缓存和明确零值保留区别。诊断默认关闭，正文跟踪由调用者选目录，不记录请求头。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。 真实供应商验收需要单独的有界调用记录；本机夹具不构成供应商认证。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19",
+        "R25",
+        "R26"
+      ],
+      "responsibility": "transport 管连接，request 管四协议编码，codec 管流式/原生解码，parameters/catalog 管规则和能力；images/search/adapter 各按下层协约独立。"
+    },
+    {
+      "id": "api.transport",
+      "path": "API/transport",
+      "agreement": "API/transport/AGENTS.md",
+      "entries": [
+        "API/transport/client.go",
+        "API/transport/request.go",
+        "API/transport/errors.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "会话身份及缓存键按能力发送；缓存键稳定不等于命中，日志不带认证头。",
+      "verification": [
+        "在 API 运行 go test ./transport 与 go vet ./transport；覆盖取消、响应上限、重定向、错误体和并发参数隔离。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "统一 HTTP 客户端、禁止凭据重定向、路由/认证头、超时取消、错误分类和有界诊断。"
+    },
+    {
+      "id": "api.request",
+      "path": "API/request",
+      "agreement": "API/request/AGENTS.md",
+      "entries": [
+        "API/request/chat.go",
+        "API/request/responses.go",
+        "API/request/native.go",
+        "API/request/images.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "不同供应商不沿用不透明签名；序列化不修改共享消息和参数，不重复读取附件。",
+      "verification": [
+        "在 API 运行 go test ./request 与 go vet ./request；验证系统消息、连续工具结果、多图、跨供应商签名及数字原样。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "把公共消息编码为 Chat/Responses/Anthropic/Google 请求，保留工具批次、图片顺序和同供应商原生续接。"
+    },
+    {
+      "id": "api.codec",
+      "path": "API/codec",
+      "agreement": "API/codec/AGENTS.md",
+      "entries": [
+        "API/codec/responses.go",
+        "API/codec/chat.go",
+        "API/codec/native.go",
+        "API/codec/types.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "只有完整校验的工具响应才可执行；尾帧、空正文、未知用量和非 JSON 元数据保留实际语义。",
+      "verification": [
+        "在 API 运行 go test ./codec 与 go vet ./codec；双轮工具、坏参数、尾帧、断流、思考转正文和用量存在性均需覆盖。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "解析四协议流、装配完整响应、验证工具身份与参数，输出正文、公开思考、usage 和终态。"
+    },
+    {
+      "id": "api.parameters",
+      "path": "API/parameters",
+      "agreement": "API/parameters/AGENTS.md",
+      "entries": [
+        "API/parameters/values.go",
+        "API/parameters/paths.go",
+        "API/parameters/profile.go",
+        "API/parameters/catalog.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "区分用户指定值、厂商默认、显式 false/0；不把“HTTP 接受”直接记为语义能力。",
+      "verification": [
+        "在 API 运行 go test ./parameters 与 go vet ./parameters；核对值域、默认/显式值、思考预算和嵌套路径。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "检查参数值/路径并应用厂商思考字段、通用映射和经过审定的规则。"
+    },
+    {
+      "id": "api.catalog",
+      "path": "API/catalog",
+      "agreement": "API/catalog/AGENTS.md",
+      "entries": [
+        "API/catalog/types.go",
+        "API/catalog/query.go",
+        "API/catalog/endpoints.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "目录能力只是声明与已记录证据，不替代当前供应商真实响应；不包含 API Key。",
+      "verification": [
+        "在 API 运行 go test ./catalog 与 go vet ./catalog；覆盖不同渠道同名型号、别名和未知能力。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "解析宿主提供的模型资料，按渠道、原生型号、协议查询能力与参数规则。"
+    },
+    {
+      "id": "api.adapter",
+      "path": "API/adapter",
+      "agreement": "API/adapter/AGENTS.md",
+      "entries": [
+        "API/adapter/definition.go",
+        "Contracts/api-adapter.schema.json"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "绑定属于模型连接，公共包没有服务器凭据；路径只能附加到用户已有 Base URL，认证仍由连接层提供。",
+      "verification": [
+        "在 API 运行 go test ./adapter；集成查 Core 的 API 绑定测试和 Desktop 模型诊断消费者，覆盖停用、升级、回滚、损坏与内置恢复。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "定义 aieyra.api/1 的附加路径、静态非凭据头、型号别名和有界额外参数，复用现有四协议。"
+    },
+    {
+      "id": "api.images",
+      "path": "API/images",
+      "agreement": "API/images/AGENTS.md",
+      "entries": [
+        "API/images/generator.go",
+        "API/images/request.go",
+        "API/images/usage.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "调用前记录未知用量，付费回包先保存再解析；无凭据下载，禁止携凭据重定向。",
+      "verification": [
+        "在 API 运行 go test ./images 与 go vet ./images；损坏回包、未知副作用、下载失败和多段表单使用有界夹具，真实生图另验。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "处理生图/编辑 HTTP、多段表单、稳定请求 ID、下载上限和真实图片用量。"
+    },
+    {
+      "id": "api.videos",
+      "path": "API/videos",
+      "agreement": "API/videos/AGENTS.md",
+      "entries": [
+        "API/videos/client.go",
+        "API/videos/client_test.go",
+        "API/videos/media.go",
+        "API/videos/media_test.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "API只处理协议，Core持有原任务ID、来源连接、未知提交和私人回执；媒体下载不带Bearer或Cookie。",
+      "verification": [
+        "在API运行go test ./videos与go vet ./videos，随后验证Core持久任务与真实Muse边界。"
+      ],
+      "pending": [
+        "Core持久任务/工具入口已接入，正验证；真实聚合层未部署本地修复，普通轮询曾503，不能用管理员渠道兜底或声称已通过。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "Muse视频JSON创建、同源任务查询和无凭据有界下载；不自动重发未知付费提交，不提供上游未实现的取消。"
+    },
+    {
+      "id": "api.search",
+      "path": "API/search",
+      "agreement": "API/search/AGENTS.md",
+      "entries": [
+        "API/search/search.go",
+        "API/search/search_test.go"
+      ],
+      "documents": [
+        "API/README.md",
+        "docs/项目地图/44-API与公共模型协议.md"
+      ],
+      "depends_on": [
+        "api"
+      ],
+      "status": "active",
+      "data_ownership": "联网能力须匹配来源和协议，普通回答不能伪装成已搜索；凭据不随重定向发送。",
+      "verification": [
+        "在 API 运行 go test ./search 与 go vet ./search；验证来源、取消、错误分类和后备条件，实际联网结果另验。"
+      ],
+      "pending": [
+        "Qwen实测403、GLM503保留失败；Claude原生Messages缺可用网关未验，声明式适配不增加第五种wire codec。"
+      ],
+      "requirements": [
+        "R19"
+      ],
+      "responsibility": "拥有供应商选择、原生搜索请求、来源解析与明确不支持时的后备策略。"
+    },
+    {
+      "id": "contracts",
+      "path": "Contracts",
+      "agreement": "Contracts/AGENTS.md",
+      "entries": [
+        "Contracts/mod.schema.json",
+        "Contracts/product-layout.json",
+        "Contracts/layout.go",
+        "Contracts/development-documents.json"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [],
+      "status": "active",
+      "data_ownership": "只放公共声明、类型和布局，不放凭据、对话或真实配置。source_trees/source_files 是打包与更新消费者的共同库存。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。 变更 Schema 要检查 SDK 样板及实际解码器一致性；改布局同时核对源包选择器、更新器和隐私检查。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [
+        "R01",
+        "R25",
+        "R26",
+        "R28"
+      ],
+      "responsibility": "维护 Mod/类型 JSON Schema、公共 Go 类型及软件交付布局；protocol/context/storage/resources/search/privacy 各定义可复用边界。"
+    },
+    {
+      "id": "contracts.protocol",
+      "path": "Contracts/protocol",
+      "agreement": "Contracts/protocol/AGENTS.md",
+      "entries": [
+        "Contracts/protocol/types.go",
+        "Contracts/protocol/model.go",
+        "Contracts/protocol/snapshot.go",
+        "Contracts/protocol/terminal.go"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "快照深拷贝嵌套工具参数、原生签名、图片与非 JSON 元数据；缓存未知与零命中用字段存在性区别。",
+      "verification": [
+        "在 Contracts 运行 go test ./protocol、go vet ./protocol，并回归受影响 API/Client/Core 消费者。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [],
+      "responsibility": "作为 Core/API/Tool/CLI 共用的消息、模型事件、工具定义、用量、附件与终端接口源；旧 Core 类型仅保留兼容别名。"
+    },
+    {
+      "id": "contracts.storage",
+      "path": "Contracts/storage",
+      "agreement": "Contracts/storage/AGENTS.md",
+      "entries": [
+        "Contracts/storage/areas.json",
+        "Contracts/storage/paths.go",
+        "Contracts/storage/paths.cjs",
+        "Contracts/storage/README.md"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "只有有效 .aieyra-userdata.json 使用新布局；Bind 固定配置所有者，旧 Data/Config 继续兼容；声明不授权递归删除。",
+      "verification": [
+        "在 Contracts 运行 go test ./storage、go vet ./storage；路径/旧引用/双次搬家还需 Core userdata 与 Desktop 对应测试。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [
+        "R20",
+        "R27"
+      ],
+      "responsibility": "37类分区、旧/统一资料根路径、归属/保留策略和迁移 origin 供 Go 与 JS 同读；不做实际搬迁。"
+    },
+    {
+      "id": "contracts.resources",
+      "path": "Contracts/resources",
+      "agreement": "Contracts/resources/AGENTS.md",
+      "entries": [
+        "Contracts/resources/prompts.go",
+        "Contracts/resources/prompts.cjs"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "公开默认与个人四层分离；已有空个人文件属于显式覆盖，备份不当作默认资源。",
+      "verification": [
+        "在 Contracts 运行 go test ./resources；修改索引或公开文案同步核对宿主编辑器、公共隐私哈希与旧位置覆盖测试。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [],
+      "responsibility": "提供逻辑提示词名到模块公共文件的共同解析，两种语言保持相同入口。"
+    },
+    {
+      "id": "contracts.context",
+      "path": "Contracts/context",
+      "agreement": "Contracts/context/AGENTS.md",
+      "entries": [
+        "Contracts/context/provider.go",
+        "Contracts/context-policy.schema.json"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "只传授权后的数据与精确版本；公共定义不含原始会话、私有命名空间或 Key。",
+      "verification": [
+        "在 Contracts 运行 go test ./context；接口变化需 Agent 两种内置策略、声明式包和 Core 切换/恢复测试。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [],
+      "responsibility": "规定 provider 的版本身份、状态 schema 和可序列化命名空间，供档案、Agent 包与 Context 共同引用。"
+    },
+    {
+      "id": "contracts.search",
+      "path": "Contracts/search",
+      "agreement": "Contracts/search/AGENTS.md",
+      "entries": [
+        "Contracts/search/result.go",
+        "Contracts/search/text.go"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "保留来源 URL、标题与实际结果，不把模型自由回答包装成联网证据。",
+      "verification": [
+        "在 Contracts 运行 go test ./search 与 go vet ./search，并验证 API/search 与 Tool/web_search 消费者。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [],
+      "responsibility": "规定可追溯来源、结果与文本投影，API 原生搜索与 Tool 的后备路径共享。"
+    },
+    {
+      "id": "contracts.privacy",
+      "path": "Contracts/privacy",
+      "agreement": "Contracts/privacy/AGENTS.md",
+      "entries": [
+        "Contracts/privacy/text.go"
+      ],
+      "documents": [
+        "Contracts/README.md",
+        "Contracts/storage/README.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "脱敏不是公开授权；私人会话/提示词仍留在本地，出站内容须按实际接口授权。",
+      "verification": [
+        "在 Contracts 运行 go test ./privacy 与 go vet ./privacy；公开导出仍走 scripts/public-privacy.py，不因使用此函数跳过检查。"
+      ],
+      "pending": [
+        "契约兼容仅限已声明版本与能力；未知平台/版本明确拒绝，不承诺全部第三方包。"
+      ],
+      "requirements": [],
+      "responsibility": "提供各消费者共享的文本隐私处理基础，避免不同界面各自猜测脱敏。"
+    },
+    {
+      "id": "agent",
+      "path": "Agent",
+      "agreement": "Agent/AGENTS.md",
+      "entries": [
+        "Agent/contract/definition.go",
+        "Agent/official/definitions.go",
+        "Agent/context/contract/provider.go",
+        "Agent/README.md"
+      ],
+      "documents": [
+        "Agent/README.md",
+        "docs/项目地图/47-Agent定义与执行契约.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "公共包无私人提示词和模型配置；每个实例/任务独立档案和记忆，团队关系与用户停用状态由宿主保存。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。 包变动同时核对 Core/agent_package_*、Desktop 实例管理和 CLI 同服务消费者。"
+      ],
+      "pending": [
+        "真实供应商失败和自然模型行为按实际记录；个人四提示词与关闭角色状态不因验收改写。"
+      ],
+      "requirements": [
+        "R10",
+        "R16",
+        "R17",
+        "R18",
+        "R21",
+        "R22"
+      ],
+      "responsibility": "contract 管定义/任务/包/实例，official 管 Eyra/Vaya/Cota 公共设计，context 管预算/历史/策略，presentation 管只读展示。执行器仍为 Core AgentManager。"
+    },
+    {
+      "id": "agent.contract",
+      "path": "Agent/contract",
+      "agreement": "Agent/contract/AGENTS.md",
+      "entries": [
+        "Agent/contract/definition.go",
+        "Agent/contract/task.go",
+        "Agent/contract/package.go",
+        "Agent/contract/instance.go"
+      ],
+      "documents": [
+        "Agent/README.md",
+        "docs/项目地图/47-Agent定义与执行契约.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md"
+      ],
+      "depends_on": [
+        "agent"
+      ],
+      "status": "active",
+      "data_ownership": "公共包定义和私人实例覆盖分离；导出只能读原始公共包，不能重建自个人配置。",
+      "verification": [
+        "在 Agent 运行 go test ./contract、go vet ./contract；定义/版本变更验证 Core 准入、旧 JSON 和精确依赖拒绝。"
+      ],
+      "pending": [
+        "真实供应商失败和自然模型行为按实际记录；个人四提示词与关闭角色状态不因验收改写。"
+      ],
+      "requirements": [],
+      "responsibility": "校验身份、团队引用、提示词资源、工具/Program/Context 依赖、预算/生命周期及任务验收和回执结构。"
+    },
+    {
+      "id": "agent.official",
+      "path": "Agent/official",
+      "agreement": "Agent/official/AGENTS.md",
+      "entries": [
+        "Agent/official/definitions.go",
+        "Agent/official/definitions.cjs",
+        "Agent/official/Eyra/definition.json",
+        "Agent/official/Eyra/team/definition.json"
+      ],
+      "documents": [
+        "Agent/README.md",
+        "docs/项目地图/47-Agent定义与执行契约.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md",
+        "docs/提示词目录.md",
+        "docs/官方默认提示词.md"
+      ],
+      "depends_on": [
+        "agent"
+      ],
+      "status": "active",
+      "data_ownership": "本协约逐角色覆盖整个 Eyra/Vaya/Cota 子树。它们是 manifest 包载荷，禁止为了补文档向包内散放 AGENTS 或临时材料；公开默认不含个人四层，已有旧个人覆盖含空文件保留。",
+      "verification": [
+        "在 Agent 运行 go test ./official/...；definitions.test.cjs 通过 Desktop 自测。修改公共文案须同步索引与隐私哈希；角色/默认视觉通过实际团队场景验证。"
+      ],
+      "pending": [
+        "真实供应商失败和自然模型行为按实际记录；个人四提示词与关闭角色状态不因验收改写。"
+      ],
+      "requirements": [
+        "R16",
+        "R18",
+        "R21"
+      ],
+      "responsibility": "官方角色定义及所属全部公共提示词；独立工具手册归Tool，私人角色层归Data。"
+    },
+    {
+      "id": "agent.context",
+      "path": "Agent/context",
+      "agreement": "Agent/context/AGENTS.md",
+      "entries": [
+        "Agent/context/budget.go",
+        "Agent/context/contract/provider.go",
+        "Agent/context/history/policy.go",
+        "Agent/context/summary/summary.go"
+      ],
+      "documents": [
+        "Agent/README.md",
+        "docs/项目地图/47-Agent定义与执行契约.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md"
+      ],
+      "depends_on": [
+        "agent"
+      ],
+      "status": "active",
+      "data_ownership": "状态按 Contracts/context 身份和命名空间保存；原文、纠正与工具回执保留来源，取消/坏摘要不得提交检查点。",
+      "verification": [
+        "在 Agent 运行 go test ./context/...；涉及持久化须验证 Core/context_provider 和 context_package 的拒绝/恢复路径，长原文与多次压缩不能只用短样例替代。"
+      ],
+      "pending": [
+        "真实供应商失败和自然模型行为按实际记录；个人四提示词与关闭角色状态不因验收改写。"
+      ],
+      "requirements": [
+        "R20",
+        "R21",
+        "R22"
+      ],
+      "responsibility": "budget 管余量/校准；history 管完整轮次、工具配对及近期100条原文/回查；summary 管严格摘要候选；structured 是独立内置策略，packaged 在同引擎上应用声明式策略；Eyra PAC 在 official/Eyra/context。"
+    },
+    {
+      "id": "agent.presentation",
+      "path": "Agent/presentation",
+      "agreement": "Agent/presentation/AGENTS.md",
+      "entries": [
+        "Agent/presentation/desktop.css"
+      ],
+      "documents": [
+        "Agent/README.md",
+        "docs/项目地图/47-Agent定义与执行契约.md",
+        "docs/项目地图/48-上下文策略与宿主边界.md"
+      ],
+      "depends_on": [
+        "agent"
+      ],
+      "status": "active",
+      "data_ownership": "只呈现当前实例，不在 CSS/DOM 属性中嵌入私人提示词、模型连接或完整历史。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 实例创建、停用、切版与团队投影要保持可读和可操作。"
+      ],
+      "pending": [
+        "真实供应商失败和自然模型行为按实际记录；个人四提示词与关闭角色状态不因验收改写。"
+      ],
+      "requirements": [],
+      "responsibility": "为标准 Agent 包的桌面实例管理与状态提供展示样式，不定义人格、权限或任务事实。"
+    },
+    {
+      "id": "client",
+      "path": "Client",
+      "agreement": "Client/AGENTS.md",
+      "entries": [
+        "Client/README.md",
+        "Client/CLI/host/cli.go",
+        "Client/Desktop/README.md",
+        "Client/Mobile/README.md"
+      ],
+      "documents": [
+        "Client/README.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "core",
+        "contracts",
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "所有客户端共享授权任务、会话和资料路径；网络重连先补事件/查原请求，不另启任务执行器。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。 CLI 跨平台依赖用 check-modules；Android CLI 可编译不代表 Mobile App 或触控验收通过。"
+      ],
+      "pending": [
+        "Mobile仅契约；跨设备和macOS实机未验，旧用户实例兼容资源待自然退役。"
+      ],
+      "requirements": [
+        "R24",
+        "R25",
+        "R26"
+      ],
+      "responsibility": "CLI和Desktop为实际实现；Mobile仅保留OS手机App契约。客户端共享Core服务，不复制执行和资料。"
+    },
+    {
+      "id": "client.cli",
+      "path": "Client/CLI",
+      "agreement": "Client/CLI/AGENTS.md",
+      "entries": [
+        "Client/CLI/README.md",
+        "Client/CLI/host/cli.go",
+        "Client/CLI/terminal/display.go",
+        "Client/CLI/mdrender/markdown.go",
+        "Client/CLI/host/remote_service.go"
+      ],
+      "documents": [
+        "Client/README.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "client"
+      ],
+      "status": "active",
+      "data_ownership": "host/internal 及交互状态只服务终端；用户档案仍归共同资料根，退出 CLI 不擅自取消运行中宿主任务。",
+      "verification": [
+        "在 Client 运行 go test ./CLI/...、go vet ./CLI/...；交互更改验证 Unicode/换行/取消/确认与退出码，不能只测 JSON RPC。"
+      ],
+      "pending": [
+        "CLI共同RPC与真实产品PTY输入已验；独立CLI交互键盘全组合、远端设备未验。"
+      ],
+      "requirements": [],
+      "responsibility": "host 装配命令/Workspace/包/Agent RPC；terminal 管输入与状态，mdrender 管终端文本布局。terminal/mdrender 不导入执行宿主或工具执行器。"
+    },
+    {
+      "id": "client.mobile",
+      "path": "Client/Mobile",
+      "agreement": "Client/Mobile/AGENTS.md",
+      "entries": [
+        "Client/Mobile/README.md"
+      ],
+      "documents": [
+        "Client/README.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "client"
+      ],
+      "status": "contract",
+      "data_ownership": "恢复以游标补事件，以 request_id 查操作；前后台切换不得重放工具副作用，推送不是真实任务权威。",
+      "verification": [
+        "当前只检查契约与目录可达；Android CLI 和 Control/mobile 是另外的产品范围，不能冒充本 App 的构建/实测。"
+      ],
+      "pending": [
+        "OS Mobile App未实现，Android CLI不等于手机App。"
+      ],
+      "requirements": [
+        "R24",
+        "R25"
+      ],
+      "responsibility": "仅预留 OS 手机客户端职责：触控/输入法、前后台、连接恢复、通知和文件选择；不在本轮开发新 App。"
+    },
+    {
+      "id": "theme",
+      "path": "Theme",
+      "agreement": "Theme/AGENTS.md",
+      "entries": [
+        "Theme/contract/elements.json",
+        "Theme/runtime/layout.mjs",
+        "Theme/runtime/settings.cjs",
+        "Theme/README.md"
+      ],
+      "documents": [
+        "Theme/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "用户明确覆盖优先于主题与默认；主题/预设切换保留草稿、焦点、滚位和媒体状态，独立设置和原生恢复入口始终可用。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 完整生产表面、辅助输入与性能尚需本轮最终复核，目录展示不代替业务验收。"
+      ],
+      "pending": [
+        "触摸/系统IME组合、macOS实机未验；rAF与PrintWindow不等于物理屏幕FPS。"
+      ],
+      "requirements": [
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R12"
+      ],
+      "responsibility": "拥有布局组合、外观配置、内容渲染、用户覆盖/预设、离线媒体与声音及组件展示；不能缩减成七种配色或 CSS 皮肤。"
+    },
+    {
+      "id": "theme.contract",
+      "path": "Theme/contract",
+      "agreement": "Theme/contract/AGENTS.md",
+      "entries": [
+        "Theme/contract/elements.json",
+        "Theme/contract/definition.go",
+        "Theme/contract/definition.mjs",
+        "Theme/contract/assets.go"
+      ],
+      "documents": [
+        "Theme/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md"
+      ],
+      "depends_on": [
+        "theme"
+      ],
+      "status": "active",
+      "data_ownership": "只允许公开声明式样式、受限离线资产与完整唯一槽位；不允许作者私有 DOM 选择器、网络或执行脚本。",
+      "verification": [
+        "在 Theme 运行 go test ./contract 与 go vet ./contract；Desktop 自测校验 JS/Schema/目录一致性，变更运行 theme-catalog.cjs 的现有生成/检查流程。"
+      ],
+      "pending": [
+        "触摸/系统IME组合、macOS实机未验；rAF与PrintWindow不等于物理屏幕FPS。"
+      ],
+      "requirements": [],
+      "responsibility": "规定元素/状态/属性/布局/语义槽位、资源、预设和声音；elements.json 是目录源，elements.mjs 是生成投影。"
+    },
+    {
+      "id": "theme.runtime",
+      "path": "Theme/runtime",
+      "agreement": "Theme/runtime/AGENTS.md",
+      "entries": [
+        "Theme/runtime/layout.mjs",
+        "Theme/runtime/settings.cjs",
+        "Theme/runtime/overrides.cjs",
+        "Theme/runtime/recovery.cjs"
+      ],
+      "documents": [
+        "Theme/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md"
+      ],
+      "depends_on": [
+        "theme"
+      ],
+      "status": "active",
+      "data_ownership": "预览选择不落盘，隐藏/关闭撤销快照；声音默认关闭且初始/重开快照不重放；用户改动和撤销记录独立保留。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 覆盖停用/损坏回退、冲突/撤销、流式增量、原生窗口热更新、媒体位置与隐藏释放。"
+      ],
+      "pending": [
+        "触摸/系统IME组合、macOS实机未验；rAF与PrintWindow不等于物理屏幕FPS。"
+      ],
+      "requirements": [],
+      "responsibility": "layout/markdown/thinking/media 复用并移动业务节点；settings/projection/overrides/presets 管配置CAS和三方合并；assets/preview/sounds 管受限资源与生命周期。"
+    },
+    {
+      "id": "theme.official",
+      "path": "Theme/official",
+      "agreement": "Theme/official/AGENTS.md",
+      "entries": [
+        "Theme/official/default/theme.json",
+        "Theme/official/default/ui-foundation.css",
+        "Theme/official/default/window-theme.css"
+      ],
+      "documents": [
+        "Theme/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md"
+      ],
+      "depends_on": [
+        "theme"
+      ],
+      "status": "active",
+      "data_ownership": "默认资源不能含个人头像、背景、字体路径或配置。用户明确偏好保留，恢复默认不重置身份和历史。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 默认左侧大头像、文字层级和三角色，以及双主题/125%窄窗/原生表面均需实际查看。"
+      ],
+      "pending": [
+        "触摸/系统IME组合、macOS实机未验；rAF与PrintWindow不等于物理屏幕FPS。"
+      ],
+      "requirements": [],
+      "responsibility": "default 持有默认外观、基础控件令牌、窗口与媒体样式、布局 schema。本协约覆盖 default，结构不同的作者样板在 SDK/examples。"
+    },
+    {
+      "id": "theme.showcase",
+      "path": "Theme/showcase",
+      "agreement": "Theme/showcase/AGENTS.md",
+      "entries": [
+        "Theme/showcase/catalog.mjs",
+        "Theme/showcase/fixtures.mjs"
+      ],
+      "documents": [
+        "Theme/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md"
+      ],
+      "depends_on": [
+        "theme"
+      ],
+      "status": "active",
+      "data_ownership": "预览不保存主题选择；关闭、隐藏、替换或到期撤销资源，单窗口有界。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 核对目录与样例一致、状态语义、键鼠焦点和页面收起恢复；展示计数不代替所有业务页面覆盖。"
+      ],
+      "pending": [
+        "触摸/系统IME组合、macOS实机未验；rAF与PrintWindow不等于物理屏幕FPS。"
+      ],
+      "requirements": [],
+      "responsibility": "展示元件、状态、八类内容与公开布局样例，使用真实共同渲染器与明确的合成内容。"
+    },
+    {
+      "id": "halo",
+      "path": "Halo",
+      "agreement": "Halo/AGENTS.md",
+      "entries": [
+        "Halo/contract/definition.go",
+        "Halo/runtime/desktop.mjs",
+        "Halo/official/package.go",
+        "Halo/README.md"
+      ],
+      "documents": [
+        "Halo/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "选择用精确包摘要保存，停用/损坏回默认但保留原选择；不能修改角色姓名、头像、模型或用户关闭状态。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 状态、隐藏暂停、减少动效、切页动画及原生窗口释放需实际观察，不以静态图判定动画完成。"
+      ],
+      "pending": [
+        "最终64项、30帧实看及动画/隐藏暂停断言通过；未做无界长时或所有平台压力。"
+      ],
+      "requirements": [
+        "R30"
+      ],
+      "responsibility": "独立拥有光圈图形、工作状态动画、形态切换和配置；Theme 管页面，Agent 管身份，Desktop 只提供几何与共同 motion。"
+    },
+    {
+      "id": "halo.contract",
+      "path": "Halo/contract",
+      "agreement": "Halo/contract/AGENTS.md",
+      "entries": [
+        "Halo/contract/definition.go",
+        "Halo/contract/definition.mjs",
+        "Halo/contract/cases.json",
+        "Contracts/halo.schema.json"
+      ],
+      "documents": [
+        "Halo/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "halo"
+      ],
+      "status": "active",
+      "data_ownership": "仅声明式图形和有界周期，不带外部 URL、私有身份和可执行内容。",
+      "verification": [
+        "在 Halo 运行 go test ./contract 与 go vet ./contract，Desktop 自测对照 cases；边界包括层/点数、非法状态与周期。"
+      ],
+      "pending": [
+        "最终64项、30帧实看及动画/隐藏暂停断言通过；未做无界长时或所有平台压力。"
+      ],
+      "requirements": [],
+      "responsibility": "Go 与 JS 同时验证图层、状态筛选、0–100坐标及严格递增的关键帧；公共 cases 校对两端。"
+    },
+    {
+      "id": "halo.runtime",
+      "path": "Halo/runtime",
+      "agreement": "Halo/runtime/AGENTS.md",
+      "entries": [
+        "Halo/runtime/desktop.mjs",
+        "Halo/runtime/transition.mjs",
+        "Halo/runtime/settings.cjs"
+      ],
+      "documents": [
+        "Halo/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "halo"
+      ],
+      "status": "active",
+      "data_ownership": "隐藏/减少动效/关闭必须停或释放动画与订阅；选择失败回默认且不丢用户原选择。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 实际跨主头像/团队/历史/设置/原生浮窗检查脉冲、轨道、涟漪与状态切换；静态截图不能验证时间行为。"
+      ],
+      "pending": [
+        "最终64项、30帧实看及动画/隐藏暂停断言通过；未做无界长时或所有平台压力。"
+      ],
+      "requirements": [],
+      "responsibility": "渲染同一文档的图形状态与过渡，处理设置 CAS、公开原生投影、暂停和 dispose。"
+    },
+    {
+      "id": "halo.official",
+      "path": "Halo/official",
+      "agreement": "Halo/official/AGENTS.md",
+      "entries": [
+        "Halo/official/package.go",
+        "Halo/official/classic/manifest.json",
+        "Halo/official/classic/halo.json",
+        "Halo/official/instrument.mjs"
+      ],
+      "documents": [
+        "Halo/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "halo"
+      ],
+      "status": "active",
+      "data_ownership": "不向 classic 目录添加 AGENTS、测试产物或其他未声明载荷；改官方包需更新 manifest 和编译来源兼容。",
+      "verification": [
+        "在 Halo 运行 go test ./...，并通过 Desktop 自测及实际经典/自定义对照场景；要观察动画而非只看初始帧。"
+      ],
+      "pending": [
+        "最终64项、30帧实看及动画/隐藏暂停断言通过；未做无界长时或所有平台压力。"
+      ],
+      "requirements": [],
+      "responsibility": "classic 是共同 Mod 包；instrument/effects/pulsar-burst 及样式提供原版头像、状态、切页特效。本协约覆盖 classic 的全部载荷。"
+    },
+    {
+      "id": "program",
+      "path": "Program",
+      "agreement": "Program/AGENTS.md",
+      "entries": [
+        "Program/contract/definition.go",
+        "Program/runtime/desktop.cjs",
+        "Program/official/browser/README.md",
+        "Program/README.md"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/50-浏览器页面与会话悬停预览.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "程序内容和私人浏览身份由 storage 定位，停用/升级/卸载保留；运行实例锁定包版本和依赖。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 控制权、内嵌/拆出、暂停/重开及原生关闭须实际验收；服务器仅拒绝连接样例不等于远程 SSH 通过。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "responsibility": "contract定义人观察/协同/人用三种模式；runtime管理第三方沙箱、原生共同准入和生命周期；official持有浏览器、服务器、Link和Workspace实际业务与视图。旧便签已退役，仅保留源码、原包及资料。"
+    },
+    {
+      "id": "program.contract",
+      "path": "Program/contract",
+      "agreement": "Program/contract/AGENTS.md",
+      "entries": [
+        "Program/contract/definition.go",
+        "Contracts/program.schema.json",
+        "Program/contract/legacy.go"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/50-浏览器页面与会话悬停预览.md"
+      ],
+      "depends_on": [
+        "program"
+      ],
+      "status": "active",
+      "data_ownership": "只描述公共包能力；包内没有用户身份、连接凭据或实际授权。",
+      "verification": [
+        "在 Program 运行 go test ./contract、go vet ./contract；模式/操作变更验证宿主准入、SDK notebook 与人机权限拒绝。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15",
+        "T03",
+        "T11"
+      ],
+      "responsibility": "定义三种程序模式及公开操作；纯转换旧.aieyra为共同Mod清单，保留来源摘要并拒绝宽网络/原生权限。"
+    },
+    {
+      "id": "program.runtime",
+      "path": "Program/runtime",
+      "agreement": "Program/runtime/AGENTS.md",
+      "entries": [
+        "Program/runtime/desktop.cjs",
+        "Program/runtime/native.cjs"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/50-浏览器页面与会话悬停预览.md"
+      ],
+      "depends_on": [
+        "program"
+      ],
+      "status": "active",
+      "data_ownership": "程序存储按精确身份隔离；更新/停用取消新请求，未知执行结果查询原 request_id。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 覆盖 CSP/导航、超时/取消、旧摘要、窗口关闭与控制权；独立沙箱样板实际运行另验。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15",
+        "T03",
+        "T11"
+      ],
+      "responsibility": "持有通用 Program 桌面沙箱、请求端口与生命周期，复用共同模块窗口，不为每个包生成独立执行核心。"
+    },
+    {
+      "id": "program.official",
+      "path": "Program/official",
+      "agreement": "Program/official/AGENTS.md",
+      "entries": [
+        "Program/official/browser/README.md",
+        "Program/official/servers/service.cjs",
+        "Program/official/catalog.json",
+        "Program/official/packages.go",
+        "Program/official/catalog.cjs",
+        "Program/official/link/service.cjs",
+        "Program/official/workspace/service.cjs"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/50-浏览器页面与会话悬停预览.md"
+      ],
+      "depends_on": [
+        "program"
+      ],
+      "status": "active",
+      "data_ownership": "服务器分区和浏览器身份使用共同路径；旧便签原内容保全在原授权工作目录，源码归位不搬真实资料。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 浏览器、服务器和Link分别核实际消费者；退役便签仅核拒绝执行与原资料保全；旧路径仍被用户运行宿主引用时保留转接。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15",
+        "T03",
+        "T11"
+      ],
+      "responsibility": "browser管网页/身份/控制；servers管服务器资料和领域操作；link管设备、工位和收件业务，各自service与ui是唯一业务实现。notes已退役，不进入当前运行/发现目录。 Workspace持有原版无限画布、侧栏、素材与文档，模型和任务使用OS共同Core。"
+    },
+    {
+      "id": "program.official.browser",
+      "path": "Program/official/browser",
+      "agreement": "Program/official/browser/AGENTS.md",
+      "entries": [
+        "Program/official/browser/service/browser-runtime.cjs",
+        "Program/official/browser/service/browser-control.cjs",
+        "Program/official/browser/ui/browser-shell.html"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/50-浏览器页面与会话悬停预览.md"
+      ],
+      "depends_on": [
+        "program.official"
+      ],
+      "status": "active",
+      "data_ownership": "宿主注入 storage 解析的浏览器资料根，窗口关闭不清身份；截图缓存按页面/导航代次有界并拒绝迟到结果。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 视觉/工作流测试分别覆盖控制权、实际网页/滚位、拆放重开与低对比网页；合成模型不称真实模型。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15",
+        "T03",
+        "T11"
+      ],
+      "responsibility": "service 拥有网页执行/语义目标、标签、快照/过期动作、人机控制、身份、书签和偏好；ui 拥有真实导航、侧栏与页面。"
+    },
+    {
+      "id": "program.official.servers",
+      "path": "Program/official/servers",
+      "agreement": "Program/official/servers/AGENTS.md",
+      "entries": [
+        "Program/official/servers/service.cjs",
+        "Program/official/servers/desktop.cjs",
+        "Program/official/servers/ui/app-servers.mjs"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/50-浏览器页面与会话悬停预览.md"
+      ],
+      "depends_on": [
+        "program.official"
+      ],
+      "status": "active",
+      "data_ownership": "连接信息在原有私人服务器分区，日志/终端回执按所有者保存；不在源码、样板或地图内写凭据。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 资料管理、拒绝连接和窄窗可用性可离线验；远程 SSH 仅按用户实际授权另验，离线失败样例不冒称成功。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15",
+        "T03",
+        "T11"
+      ],
+      "responsibility": "管理服务器条目、连接/终端领域操作和用户/Agent共用页面；不在 UI 内复制 SSH 执行器。"
+    },
+    {
+      "id": "program.official.link",
+      "path": "Program/official/link",
+      "agreement": "Program/official/link/AGENTS.md",
+      "entries": [
+        "Program/official/link/program.json",
+        "Program/official/link/desktop.cjs",
+        "Program/official/link/service.cjs",
+        "Program/official/link/agent.cjs",
+        "Program/official/link/ui/control.mjs",
+        "Program/official/link/ui/link.mjs"
+      ],
+      "documents": [
+        "Program/official/link/README.md",
+        "docs/项目地图/43-Mod与主题程序运行时.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "program.official",
+        "contracts",
+        "control",
+        "link"
+      ],
+      "status": "active",
+      "data_ownership": "沿宿主注入的原runtime/link-agent.json保存工位actor/native、cursor、pending和原请求；停用/卸载保留，Control拥有办公室数据与认证。",
+      "verification": [
+        "Go程序契约与extensionhost、Desktop Link/原生Program定向及完整检查；无OS.exe独立包实际启动、关闭重开、停用与回执恢复，源码冻结后实看原生图。"
+      ],
+      "pending": [
+        "远程SSH、生产跨设备通信未验；本机夹具与拒连负例不代表远程服务成功。"
+      ],
+      "requirements": [
+        "R13",
+        "R14",
+        "R15",
+        "T03",
+        "T11"
+      ],
+      "responsibility": "设备连接、邀请与办公室Agent操作、工位轮询和实际Link界面；desktop统一准入、等待在途操作、停用释放和重新启用。"
+    },
+    {
+      "id": "tool",
+      "path": "Tool",
+      "agreement": "Tool/AGENTS.md",
+      "entries": [
+        "Tool/contract/package.go",
+        "Tool/base/official/terminal/definition.go",
+        "Tool/workbox/definition.go",
+        "Tool/README.md",
+        "Tool/catalog.json",
+        "Tool/packages.go"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "说明、schema、实现、完整回执及可视化属于一个能力；资料与用量由宿主归属，不在工具源码旁写运行记录。",
+      "verification": [
+        "在本目录所属 Go 模块根串行执行 GOMAXPROCS=1 GOFLAGS=-p=1 go test ./... 与 go vet ./...，并检查 gofmt；跨宿主变更再执行 scripts/check-modules.py。修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 运行/取消/未知/失败与 Desktop/CLI完整回执等价验证，安装可见不等于工具实际可用。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "responsibility": "base 管日常原子工具，toolbox 管强能力如 imagegen，workbox 管组合步骤/审阅/恢复；contract/runtime/presentation 承担共同包、受限执行输入和双端回执。"
+    },
+    {
+      "id": "tool.contract",
+      "path": "Tool/contract",
+      "agreement": "Tool/contract/AGENTS.md",
+      "entries": [
+        "Tool/contract/schema.go",
+        "Tool/contract/custom.go",
+        "Tool/contract/package.go",
+        "Tool/contract/packages.md"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "完整回执保留原字段和未知状态，包身份锁 id 与完整摘要；手册不能含私人配置或凭据。",
+      "verification": [
+        "在 Tool 运行 go test ./contract、go vet ./contract；schema/renderer新增检查 SDK 样板及两端缺能力拒绝。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [],
+      "responsibility": "统一输入schema、自建工具版本、动态 tool/toolbox 的执行/手册/桌面与CLI呈现定义；不按名称猜类型。"
+    },
+    {
+      "id": "tool.runtime",
+      "path": "Tool/runtime",
+      "agreement": "Tool/runtime/AGENTS.md",
+      "entries": [
+        "Tool/runtime/javascript.go"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "稳定调用身份与参数快照交给宿主；重开仅恢复回执，未知执行不能再生成一个新请求。",
+      "verification": [
+        "在 Tool 运行 go test ./runtime、go vet ./runtime，并用 Core 动态包执行测试验证真实准入/回执。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [],
+      "responsibility": "将已通过schema的动态工具调用转为现有 JS cell 输入，不加载任意原生 Go 或另建工具调度器。"
+    },
+    {
+      "id": "tool.presentation",
+      "path": "Tool/presentation",
+      "agreement": "Tool/presentation/AGENTS.md",
+      "entries": [
+        "Tool/presentation/desktop.mjs",
+        "Tool/presentation/receipt.mjs",
+        "Tool/presentation/projection.mjs",
+        "Tool/presentation/projection.css",
+        "Tool/presentation/text/preview.go"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "完整事实保留，折叠/分页只影响呈现；旧代回执不能因主题或迟到刷新变成当前任务。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 在 Tool 运行 go test ./presentation/...；长值、最后一页、详情、失败/取消/unknown和主题切换验证。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [],
+      "responsibility": "把已有工具回执呈现为 cards/table、完整 JSON 与 CLI 文本；frame/value 负责安全布局和有界预览。text 子目录只读格式化。"
+    },
+    {
+      "id": "tool.base",
+      "path": "Tool/base",
+      "agreement": "Tool/base/AGENTS.md",
+      "entries": [
+        "Tool/base/official/apply_patch/README.md",
+        "Tool/base/official/terminal/README.md",
+        "Tool/base/official/update_plan/README.md",
+        "Tool/base/official/view_image/README.md",
+        "Tool/base/official/web_search/README.md"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "实际文件/终端/计划/图片资料由宿主授权与保存，不放源码目录；恢复凭原请求日志。",
+      "verification": [
+        "在 Tool 运行 go test ./base/...、go vet ./base/...，仅对改动能力选择实际消费者回归；不重复未受影响的重测试。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [],
+      "responsibility": "official 下每个目录拥有相应原子能力、输入契约、手册和双端呈现；apply_patch/terminal/update_plan/view_image/web_search 各有就近协约。"
+    },
+    {
+      "id": "tool.base.official.apply_patch",
+      "path": "Tool/base/official/apply_patch",
+      "agreement": "Tool/base/official/apply_patch/AGENTS.md",
+      "entries": [
+        "Tool/base/official/apply_patch/patch.go",
+        "Tool/base/official/apply_patch/manual.txt"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "文件操作遵循工作目录/链接边界，原件和恢复回执保留；未知写入先核已保存意图。",
+      "verification": [
+        "在 Tool 运行 go test ./base/official/apply_patch/...；Desktop 差异视图与 CLI回执按影响验收，覆盖预检失败、原子替换和取消。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R07",
+        "R12"
+      ],
+      "responsibility": "拥有补丁解析、上下文预检、写入/恢复、输入与完整回执，contract 和 presentation 子目录共享同一事实。"
+    },
+    {
+      "id": "tool.base.official.terminal",
+      "path": "Tool/base/official/terminal",
+      "agreement": "Tool/base/official/terminal/AGENTS.md",
+      "entries": [
+        "Tool/base/official/terminal/definition.go",
+        "Tool/base/official/terminal/decode.go",
+        "Tool/base/official/terminal/call.go"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "退出码、输入确认、输出游标和未知字段必须保留；双PTY独立取消/输入，不跨任务继承旧代结果。",
+      "verification": [
+        "在 Tool 运行 go test ./base/official/terminal/...；实际验证中文输入、长日志、停止继续、双PTY和完整重开不重放。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R07",
+        "R12"
+      ],
+      "responsibility": "拥有终端动作/旧名解码、输入契约、调用服务适配、手册及桌面/CLI回执；PTY/进程和日志仍归Core。"
+    },
+    {
+      "id": "tool.base.official.update_plan",
+      "path": "Tool/base/official/update_plan",
+      "agreement": "Tool/base/official/update_plan/AGENTS.md",
+      "entries": [
+        "Tool/base/official/update_plan/definition.go",
+        "Tool/base/official/update_plan/plan.go",
+        "Tool/base/official/update_plan/snapshot.go",
+        "Tool/base/official/update_plan/manual.txt"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "任务身份与revision/request_id绑定；重开读回而不把旧完成步骤再次执行。",
+      "verification": [
+        "在 Tool 运行 go test ./base/official/update_plan/...；Core计划提交与实际步骤/编辑/冲突/重开按受影响范围验证。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R07",
+        "R12"
+      ],
+      "responsibility": "拥有步骤、状态、修订、依赖及输入/回执领域规则和配套视图；持久提交与任务授权归Core。"
+    },
+    {
+      "id": "tool.base.official.view_image",
+      "path": "Tool/base/official/view_image",
+      "agreement": "Tool/base/official/view_image/AGENTS.md",
+      "entries": [
+        "Tool/base/official/view_image/definition.go",
+        "Tool/base/official/view_image/prepare.go",
+        "Tool/base/official/view_image/compose.go",
+        "Tool/base/official/view_image/manual.txt"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "路径/内容摘要/尺寸与输出回执一致，损坏或缺图保留事实；不把模型“看过”当人工实看。",
+      "verification": [
+        "在 Tool 运行 go test ./base/official/view_image/...；Desktop看图/引用/缩放及CLI文本按影响验证，保留失败图片原件。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R07",
+        "R12"
+      ],
+      "responsibility": "拥有图片读取预备、尺寸/字节限制、拼图与完整事实/视图；Core负责不可变快照和最终授权。"
+    },
+    {
+      "id": "tool.base.official.web_search",
+      "path": "Tool/base/official/web_search",
+      "agreement": "Tool/base/official/web_search/AGENTS.md",
+      "entries": [
+        "Tool/base/official/web_search/definition.go",
+        "Tool/base/official/web_search/execute.go",
+        "Tool/base/official/web_search/local.go",
+        "Tool/base/official/web_search/ddgs_bridge.py"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "结果保留精确网址与来源，generation/task/Agent/Core代次失效时拒绝迟到投影；unknown不盲目重发。",
+      "verification": [
+        "在 Tool 运行 go test ./base/official/web_search/...；实际来源详情、窄窗滚动/焦点和取消按场景验证，联网调用另列。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R07",
+        "R12"
+      ],
+      "responsibility": "拥有schema/手册、取消/本地有界子进程、来源回执和双端视图；原生供应商协议在API/search。"
+    },
+    {
+      "id": "tool.toolbox",
+      "path": "Tool/toolbox",
+      "agreement": "Tool/toolbox/AGENTS.md",
+      "entries": [
+        "Tool/toolbox/official/imagegen/README.md"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "运行状态、模型选择、付费用量和产物由Core持久，工具箱包不附私人连接或历史。",
+      "verification": [
+        "在 Tool 执行 go test ./toolbox/...、go vet ./toolbox/...；改动能力同步验证输入、错误与双端呈现。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R08",
+        "R09",
+        "R11"
+      ],
+      "responsibility": "统一14项强能力的发现和查询schema；当前imagegen与videogen是官方独立工具包，其他业务归各自服务。"
+    },
+    {
+      "id": "tool.toolbox.official.imagegen",
+      "path": "Tool/toolbox/official/imagegen",
+      "agreement": "Tool/toolbox/official/imagegen/AGENTS.md",
+      "entries": [
+        "Tool/toolbox/official/imagegen/definition.go",
+        "Tool/toolbox/official/imagegen/execute.go",
+        "Tool/toolbox/official/imagegen/image.go",
+        "Tool/toolbox/official/imagegen/manual.txt"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "付费回包与未知用量先保留，原图及引用身份不随任务换代丢失；未知副作用不可自动重试。",
+      "verification": [
+        "在 Tool 运行 go test ./toolbox/official/imagegen/...；实际生成→引用编辑/相册/取消按影响验证，合成HTTP与真实供应商分开记录。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R08",
+        "R11",
+        "R12"
+      ],
+      "responsibility": "拥有一次生图/编辑的规则、参考图/mask检查、schema/手册及完整图片/批次回执和视图。"
+    },
+    {
+      "id": "tool.toolbox.official.videogen",
+      "path": "Tool/toolbox/official/videogen",
+      "agreement": "Tool/toolbox/official/videogen/AGENTS.md",
+      "entries": [
+        "Tool/toolbox/official/videogen/definition.go",
+        "Tool/toolbox/official/videogen/manual.txt"
+      ],
+      "documents": [
+        "Tool/toolbox/official/videogen/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "Core按真实会话持有video_tasks；任务固定原连接与公开ID，未知提交不重投，模型摘要不含签名URL。",
+      "verification": [
+        "Tool目录与双端回执、Core持久提交/查询/取消/恢复及API媒体合同；真实供应商独立验收。"
+      ],
+      "pending": [
+        "Muse视频创建、查询与下载须分别验证真实供应商响应，本地协议测试不代表生产链路通过。"
+      ],
+      "requirements": [
+        "R08",
+        "R11",
+        "R12"
+      ],
+      "responsibility": "视频输入schema、手册与双端完整回执，执行由Core/video_tasks.go接API/videos。"
+    },
+    {
+      "id": "tool.workbox",
+      "path": "Tool/workbox",
+      "agreement": "Tool/workbox/AGENTS.md",
+      "entries": [
+        "Tool/workbox/definition.go",
+        "Tool/workbox/state.go",
+        "Tool/workbox/bindings.go",
+        "Tool/workbox/README.md"
+      ],
+      "documents": [
+        "Tool/README.md",
+        "docs/项目地图/46-工具实现与配套呈现.md",
+        "docs/项目地图/51-可导入工具包与回执呈现.md",
+        "docs/项目地图/52-工作流与持久专职Agent.md"
+      ],
+      "depends_on": [
+        "tool"
+      ],
+      "status": "active",
+      "data_ownership": "定义归包，实例/回执/用量归私人workflows，产物归用户工作目录；临时/保留专员独立记忆档案，不能自行批准审阅。",
+      "verification": [
+        "在 Tool 运行 go test ./workbox/...；Core工作流恢复与实际Node统计/写文件/图片/审阅/完整重开按影响验证。"
+      ],
+      "pending": [
+        "13项Toolbox目录是能力发现/服务归属，不是13个独立Mod。终端旧瞬时抓帧差异最新场未复现，根因未证实；搜索后端合成。"
+      ],
+      "requirements": [
+        "R09",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "responsibility": "定义多工具工作流、输入绑定、步骤/审阅/恢复状态与请求契约；presentation负责详情/步骤回执。Core复用工具、图片批次和AgentManager执行。"
+    },
+    {
+      "id": "sdk",
+      "path": "SDK",
+      "agreement": "SDK/AGENTS.md",
+      "entries": [
+        "SDK/README.md",
+        "SDK/tools/package.cjs",
+        "SDK/tools/theme-catalog.cjs",
+        "SDK/examples/program-notebook/manifest.json"
+      ],
+      "documents": [
+        "SDK/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "contracts",
+        "theme",
+        "program",
+        "tool",
+        "agent",
+        "api",
+        "halo"
+      ],
+      "status": "active",
+      "data_ownership": "作者在自己的工作目录复制样板，Key/私钥和用户资料在包外；不把工程内样板改成私人运行目录。",
+      "verification": [
+        "用 node SDK/tools/package.cjs <作者目录> [包外私钥路径] 打包；签名改动对照Core/modules签名测试与完整作者闭环，不重复未受影响验收。"
+      ],
+      "pending": [
+        "正式作者流程33项已验；各样板实际能力仍引用对应模块场景，不以安装代替运行。"
+      ],
+      "requirements": [
+        "R01",
+        "R05",
+        "R06",
+        "R11",
+        "R17",
+        "R28"
+      ],
+      "responsibility": "提供16个真实样板和共同清单/摘要/签名打包器；examples按包类型说明组合依赖，tools维护作者产物和目录Schema同步。"
+    },
+    {
+      "id": "sdk.tools",
+      "path": "SDK/tools",
+      "agreement": "SDK/tools/AGENTS.md",
+      "entries": [
+        "SDK/tools/package.cjs",
+        "SDK/tools/theme-catalog.cjs"
+      ],
+      "documents": [
+        "SDK/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "sdk"
+      ],
+      "status": "active",
+      "data_ownership": "私钥只按包外路径读取，不打印、不复制进包；打包不安装、启用、运行或自动升级版本。",
+      "verification": [
+        "脚本语法走Desktop syntax；签名修改用Core/modules/sdk_signing_test.go的跨语言边界校验及作者闭环，生成后检查Schema与运行时目录一致。"
+      ],
+      "pending": [
+        "正式作者流程33项已验；各样板实际能力仍引用对应模块场景，不以安装代替运行。"
+      ],
+      "requirements": [],
+      "responsibility": "package.cjs生成载荷SHA/size并可选Ed25519签名；theme-catalog从Theme元素目录维护作者Schema/生成资源。"
+    },
+    {
+      "id": "sdk.examples",
+      "path": "SDK/examples",
+      "agreement": "SDK/examples/AGENTS.md",
+      "entries": [
+        "SDK/README.md",
+        "SDK/examples/agent-reviewer/manifest.json",
+        "SDK/examples/workbox-specialist/workflow.json",
+        "SDK/examples/theme-components/README.md"
+      ],
+      "documents": [
+        "SDK/README.md",
+        "docs/项目地图/53-光圈SDK与模块协约.md"
+      ],
+      "depends_on": [
+        "sdk"
+      ],
+      "status": "active",
+      "data_ownership": "本协约覆盖所有样板及其prompts/assets子树；每包为精确载荷集合，不在包内新增AGENTS/临时文件或凭据。作者从包外工作目录复制制作。",
+      "verification": [
+        "修改某样板后按共同打包器更新manifest/版本，检查inspect及实际运行能力；16包作者闭环已过不代表每个运行表面都重复验过。"
+      ],
+      "pending": [
+        "正式作者流程33项已验；各样板实际能力仍引用对应模块场景，不以安装代替运行。"
+      ],
+      "requirements": [],
+      "responsibility": "program-notebook演示沙箱；theme-blank/columns/assets/sounds/components演示布局/离线资产/声音/组件；tool-statistics/toolbox-report演示统计和写报告；workbox-statistics/images/specialist演示组合/审阅/专员；agent-reviewer/workflow-manager演示标准实例；api-local-gateway/context-project/halo-prism演示独立类型。"
+    },
+    {
+      "id": "desktop",
+      "path": "Client/Desktop",
+      "agreement": "Client/Desktop/AGENTS.md",
+      "entries": [
+        "Client/Desktop/package.json",
+        "Client/Desktop/src/main.cjs",
+        "Client/Desktop/host/main.cjs",
+        "Client/Desktop/ui/app.mjs"
+      ],
+      "documents": [
+        "Client/Desktop/README.md",
+        "docs/UI协约.md",
+        "docs/项目地图/45-客户端与共同核心.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "core",
+        "contracts",
+        "theme",
+        "halo",
+        "program",
+        "tool",
+        "agent"
+      ],
+      "status": "active",
+      "data_ownership": "paths与storage绑定资料根，私人配置/提示词/会话不可放入软件资源；node_modules/runtime/update-bootstrap为依赖或交付产物，不手工散改。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 npm start/dev会启动GUI，不能无授权重开用户实例；实际验收由主会话串行调度。"
+      ],
+      "pending": [
+        "触摸/系统IME与macOS实机未验。"
+      ],
+      "requirements": [
+        "R03",
+        "R12",
+        "R24",
+        "R25"
+      ],
+      "responsibility": "src 装配配置/平台能力，host 装配OS/RPC/窗口/模块，ui是实际视图，renderer保留原生表面入口。实际实现已归Client/Desktop；新入口已完成本批实际验收。"
+    },
+    {
+      "id": "desktop.host",
+      "path": "Client/Desktop/host",
+      "agreement": "Client/Desktop/host/AGENTS.md",
+      "entries": [
+        "Client/Desktop/host/main.cjs",
+        "Client/Desktop/host/module-runtime.cjs",
+        "Client/Desktop/host/module-window.cjs",
+        "Client/Desktop/host/surface-lifecycle.cjs"
+      ],
+      "documents": [
+        "Client/Desktop/README.md",
+        "docs/UI协约.md",
+        "docs/项目地图/45-客户端与共同核心.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "desktop"
+      ],
+      "status": "active",
+      "data_ownership": "窗口代次/owner、订阅和截图缓存有独立生命周期；隐藏可暂停，关闭释放，不清私人资料，不重复副作用。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 实际验证独立/内嵌切换、缩放/最小化/恢复几何、迟到回执、关闭订阅及同Core不同窗口。"
+      ],
+      "pending": [
+        "触摸/系统IME与macOS实机未验。"
+      ],
+      "requirements": [],
+      "responsibility": "处理Core连接/RPC、共同模块装配、内嵌/拆出/停靠/关闭、原生表面和模块消息；modules子目录装配独立模块宿主/注册/租约。"
+    },
+    {
+      "id": "desktop.src",
+      "path": "Client/Desktop/src",
+      "agreement": "Client/Desktop/src/AGENTS.md",
+      "entries": [
+        "Client/Desktop/src/main.cjs",
+        "Client/Desktop/src/preload.cjs",
+        "Client/Desktop/src/paths.cjs",
+        "Client/Desktop/src/agent-browser-host.cjs"
+      ],
+      "documents": [
+        "Client/Desktop/README.md",
+        "docs/UI协约.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "desktop"
+      ],
+      "status": "active",
+      "data_ownership": "配置CAS、临时诊断凭据、参数缓存和浏览器profile按资料所有者/适配摘要隔离；日志不暴露Key。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 参数探测/工具缓存诊断要经过共同Go请求，临时子进程有界且关闭输入取消HTTP；真实供应商另验。"
+      ],
+      "pending": [
+        "触摸/系统IME与macOS实机未验。"
+      ],
+      "requirements": [],
+      "responsibility": "装配Electron配置入口、设置RPC/preload、路径与系统能力、Agent浏览器/电脑操作；迁出的浏览器业务在Program，仅保留兼容服务。"
+    },
+    {
+      "id": "desktop.ui",
+      "path": "Client/Desktop/ui",
+      "agreement": "Client/Desktop/ui/AGENTS.md",
+      "entries": [
+        "Client/Desktop/ui/app.mjs",
+        "Client/Desktop/ui/stage.mjs",
+        "Client/Desktop/ui/module-shell.mjs",
+        "Client/Desktop/ui/motion.mjs"
+      ],
+      "documents": [
+        "Client/Desktop/README.md",
+        "docs/UI协约.md",
+        "docs/项目地图/45-客户端与共同核心.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "desktop"
+      ],
+      "status": "active",
+      "data_ownership": "按会话/任务/代次保留草稿、焦点、滚位与节点；切页不重建运行状态，隐藏/关闭释放监听和媒体。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 需要实际键鼠/125%窄窗/双主题/完整重开；静态DOM或大量断言不代替实际观感、动画及辅助输入。",
+        "AIDEBUG titlebar-drag-user：空白与按钮原生命中、切页/悬停/拆放/恢复/125%窄窗/重开。"
+      ],
+      "pending": [
+        "触摸/系统IME与macOS实机未验。"
+      ],
+      "requirements": [],
+      "responsibility": "集中装配主页/设置/资源中心/会话与角色、输入/附件/工具及模块页；desktop子目录含桌面终端投影，实际Program页面迁往Program/official。"
+    },
+    {
+      "id": "desktop.renderer",
+      "path": "Client/Desktop/renderer",
+      "agreement": "Client/Desktop/renderer/AGENTS.md",
+      "entries": [
+        "Client/Desktop/renderer/index.html",
+        "Client/Desktop/renderer/renderer.js",
+        "Client/Desktop/renderer/activity-view.js"
+      ],
+      "documents": [
+        "Client/Desktop/README.md",
+        "docs/UI协约.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "desktop"
+      ],
+      "status": "active",
+      "data_ownership": "窗口收到旧代投影须丢弃，关闭清订阅和资源；原生窗口不重复播放声音或复制执行。",
+      "verification": [
+        "修改后在 Client/Desktop 执行 npm run -s syntax 和 npm run -s selftest；界面变更按 docs/UI协约.md 选择受影响 AIDEBUG 场景，在源码冻结期间实看原生图。 原生窗口热更新、125%缩放、关闭/恢复和真实PrintWindow图需独立核验。"
+      ],
+      "pending": [
+        "触摸/系统IME与macOS实机未验。"
+      ],
+      "requirements": [],
+      "responsibility": "承接原生/独立窗口页面与受控投影，旧browser页面仅转接Program的唯一脚本样式。"
+    },
+    {
+      "id": "desktop.tools",
+      "path": "Client/Desktop/tools",
+      "agreement": "Client/Desktop/tools/AGENTS.md",
+      "entries": [
+        "Client/Desktop/tools/check.cjs",
+        "Client/Desktop/test/ui-identity.cjs"
+      ],
+      "documents": [
+        "Client/Desktop/README.md",
+        "docs/UI协约.md",
+        "docs/项目地图/45-客户端与共同核心.md"
+      ],
+      "depends_on": [
+        "desktop"
+      ],
+      "status": "active",
+      "data_ownership": "只操作本人启动且核验归属的测试窗口，截图/日志/临时资料显式放工程外；不从默认CDP端口猜窗口属于本人，不抢焦点、不改剪贴板或系统显示。",
+      "verification": [
+        "在Client/Desktop执行npm run -s syntax及改动对应自测；更新UI检查还核目录/源码范围，原生适配用本人窗口实际验收。普通文档改动不重新跑完整产品测试。"
+      ],
+      "pending": [
+        "触摸/系统IME与macOS实机未验。"
+      ],
+      "requirements": [],
+      "responsibility": "check.cjs装配syntax/selftest并同步Theme目录；build-icons/ensure-electron等维护受锁依赖和资产；screenshot为手动截图入口，身份校验直接复用Desktop/test/ui-identity.cjs。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Client/Desktop/tools/screenshot.cjs",
+          "Client/Desktop/tools/build-icons.cjs"
+        ],
+        "documents": []
+      }
+    },
+    {
+      "id": "control",
+      "path": "Control",
+      "agreement": "Control/AGENTS.md",
+      "entries": [
+        "Control/app/service/main.py",
+        "Control/app/scripts/control.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "contracts",
+        "theme"
+      ],
+      "status": "active",
+      "data_ownership": "本OS安装的资料经storage解析到独立私人Control根；分发包按README指定外部根，不把身份/凭据/记忆写回源码。",
+      "verification": [
+        "Python用-B；按app/scripts/check-quality.py与对应tests选择受影响检查，桌面/手机/真实外部连接需单独记录。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "活动产品在app，提供本机办公室、Link页面、Agent接入、桌面/手机通道与独立分发；Go Link模块在Link/app/link-core。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Control/app/README.md"
+        ],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app",
+      "path": "Control/app",
+      "agreement": "Control/app/AGENTS.md",
+      "entries": [
+        "Control/app/service/main.py",
+        "Control/app/scripts/agent-station.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control"
+      ],
+      "status": "active",
+      "data_ownership": "沿自己的真实native/actor/profile恢复，保留本机现存办公室；项目五段记忆共享，fresh CAS保全伙伴内容，不直接开真实SQLite或打印凭据。",
+      "verification": [
+        "先看scripts/check-quality.py实际检查项，选择tests/service、unit、desktop-notifications、web对应检查；Python用-B，GUI/构建串行，不强杀用户程序。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "service处理本机API、身份/工位/投递/项目记忆；web提供简洁观察和圆形群聊入口；scripts为正式Agent/发布工具；desktop/mobile/cloud各有独立协约。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Control/app/README.md",
+          "Control/app/docs/AGENT_ADAPTERS.md"
+        ],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app.service",
+      "path": "Control/app/service",
+      "agreement": "Control/app/service/AGENTS.md",
+      "entries": [
+        "Control/app/service/main.py",
+        "Control/app/service/agent_access.py",
+        "Control/app/service/agent_protocol.py",
+        "Control/app/service/office_extensions.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control.app"
+      ],
+      "status": "active",
+      "data_ownership": "所有数据库/私有状态在配置的资料根，不直接读取真实库调试；项目记忆用版本CAS，读消息不隐式ACK。",
+      "verification": [
+        "Python-B运行对应tests/service测试；协议改动同步OpenAPI和agent-client/station，覆盖撤销、租约、native绑定、幂等/未知结果及分页epoch。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "main路由，agent_access/protocol管正式Agent边界，office_extensions管原生接收/回执；coordination_core是有UPSTREAM记录的本地协同内核，product_bridge连接受控产品任务。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app.web",
+      "path": "Control/app/web",
+      "agreement": "Control/app/web/AGENTS.md",
+      "entries": [
+        "Control/app/web/index.html",
+        "Control/app/web/office-home.js",
+        "Control/app/web/station-model.js",
+        "Control/app/web/README.md"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control.app"
+      ],
+      "status": "active",
+      "data_ownership": "显示last-known与实际在线证据差别，浏览/轮询不授予任务权或自动ACK，隐藏/退出释放请求订阅。",
+      "verification": [
+        "对应tests/unit与tests/web场景验证，实际页面按全局UI协约实看；本机合成办公室和真实远端分别记录。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "简洁展示办公室工位、通信/执行事实和圆形群聊/任务入口；无限画布与多余管理导航已取消。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app.desktop",
+      "path": "Control/app/desktop",
+      "agreement": "Control/app/desktop/AGENTS.md",
+      "entries": [
+        "Control/app/desktop/AGENTS.md"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control.app"
+      ],
+      "status": "contract",
+      "data_ownership": "身份与凭据在外部私有根，窗口关闭/进程退出按租约交接；不抢焦点或读取剪贴板完成验收。",
+      "verification": [
+        "对应tests/desktop-notifications与package脚本检查，Windows实际原生消息/重开需串行实测；不要自动重开用户GUI。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "当前工作树仅保留此目录协约，未提供原地图声明的实现入口。原职责记载：提供独立Control壳、登录/通知与OS所有者管道，加载同一web页面，不复制协同业务。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Control/app/desktop/main.cjs",
+          "Control/app/desktop/preload.cjs",
+          "Control/app/desktop/os-owner-pipe.cjs",
+          "Control/app/desktop/README.md"
+        ],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app.scripts",
+      "path": "Control/app/scripts",
+      "agreement": "Control/app/scripts/AGENTS.md",
+      "entries": [
+        "Control/app/scripts/agent-client.py",
+        "Control/app/scripts/agent-station.py",
+        "Control/app/scripts/control.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control.app"
+      ],
+      "status": "active",
+      "data_ownership": "create只在首次用稳定档案，成功后join恢复；未知请求先查原账；finish之前fresh读/保全五段共享记忆再CAS读回。",
+      "verification": [
+        "Python-B；对改动脚本运行tests/service中的client/station/lifecycle对应回归，构建/签名/导出按实际帮助并保留回执。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "提供Agent create/join/work/finish、正式API客户端、Control生命周期与检查/构建/导出工具；工具不替代服务端权限。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Control/app/scripts/check-quality.py"
+        ],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app.mobile",
+      "path": "Control/app/mobile",
+      "agreement": "Control/app/mobile/AGENTS.md",
+      "entries": [
+        "Control/app/mobile/AGENTS.md"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control.app"
+      ],
+      "status": "contract",
+      "data_ownership": "设备身份/密钥留在设备私有存储；历史APK/证据不因整理直接删除，不向第三方Gradle/产物目录散放AGENTS。",
+      "verification": [
+        "mobile/README区分历史alpha命令和现行阻断，tests说明保留真实设备未验项；不为文档整理重新启用构建。未来恢复发行时再串行验Gradle/设备，Android CLI通过不等于手机UI。"
+      ],
+      "pending": [
+        "保留Control Android源码与历史APK；build-android.ps1当前拒绝独立构建，未验真实设备，不代表OS Mobile App。"
+      ],
+      "requirements": [],
+      "responsibility": "当前工作树仅保留此目录协约，未提供原地图声明的实现入口。原职责记载：保留Control Android通道、登录/通知和办公室界面源码及历史debug APK；独立构建入口当前明确拒绝执行，属于兼容资料，不是Client/Mobile中尚未实现的OS手机App。app是源码，gradle是构建工具，artifacts是历史产物。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Control/app/mobile/README.md",
+          "Control/app/mobile/app/build.gradle",
+          "Control/app/mobile/tests/README.md"
+        ],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "control.app.cloud",
+      "path": "Control/app/cloud",
+      "agreement": "Control/app/cloud/AGENTS.md",
+      "entries": [
+        "Control/app/cloud/AGENTS.md"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control.app"
+      ],
+      "status": "contract",
+      "data_ownership": "运行数据库和云凭据在服务器私有根，不进源码、样板或回执；本机与生产云资料不互借。",
+      "verification": [
+        "Python-B用本地合成状态运行对应云测试，实际公网只读与发布另按用户授权；不得因本协约自动SSH、写生产或部署。"
+      ],
+      "pending": [
+        "完整跨设备/云/原生适配投递需分别验收，本机队列接受不代表目标实读。"
+      ],
+      "requirements": [],
+      "responsibility": "当前工作树仅保留此目录协约，未提供原地图声明的实现入口。原职责记载：本目录为云API/站点、反馈和Matrix存储实现；site为随服务页面，不是OS主工程本机Control状态库。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Control/app/cloud/server.py",
+          "Control/app/cloud/matrix_store.py",
+          "Control/app/cloud/feedback_store.py"
+        ],
+        "documents": [
+          "Control/app/README.md"
+        ]
+      }
+    },
+    {
+      "id": "link",
+      "path": "Link",
+      "agreement": "Link/AGENTS.md",
+      "entries": [
+        "Link/app/link-core/go.mod"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control"
+      ],
+      "status": "active",
+      "data_ownership": "私人身份、聊天、项目五段记忆和投递账由外部资料根保存；通信租约、执行状态、原生接收与任务结果是不同事实。",
+      "verification": [
+        "独立Go模块串行test/vet/gofmt；cloud/portable按各自协约执行受影响测试，界面用Control/OS实际场景。生产云默认只读，不自动部署或唤醒旧领导。"
+      ],
+      "pending": [
+        "官方Link Program及共同Core独立包已验；跨设备生产通信和真实远端执行不由本机夹具证明。"
+      ],
+      "requirements": [],
+      "responsibility": "app/link-core是独立Go通道；Control/app提供本机服务与页面；cloud提供远程办公室/会话，portable提供轻量接入包，conformance/docs保留协议与兼容样本。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Link/README.md",
+          "Link/Start-Link.ps1",
+          "Link/docs/INTEGRATION_API.md"
+        ],
+        "documents": [
+          "Link/README.md"
+        ]
+      }
+    },
+    {
+      "id": "link.app.link-core",
+      "path": "Link/app/link-core",
+      "agreement": "Link/app/link-core/AGENTS.md",
+      "entries": [
+        "Link/app/link-core/go.mod",
+        "Link/app/link-core/link/client.go",
+        "Link/app/link-core/link/bridge.go"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "control"
+      ],
+      "status": "active",
+      "data_ownership": "工位身份/请求/租约来自外部资料，源码和发布包不含私人配置或对话；通信在线不等于执行已恢复。",
+      "verification": [
+        "在本独立模块根串行GOMAXPROCS=1 GOFLAGS=-p=1 go test ./...、go vet ./...并检查gofmt；Control契约与独立Link包实际启动另验。"
+      ],
+      "pending": [
+        "官方Link Program及共同Core独立包已验；跨设备生产通信和真实远端执行不由本机夹具证明。"
+      ],
+      "requirements": [],
+      "responsibility": "提供独立Link程序需要的Go桥接、任务/决策/协议及命令装配，link/cmd/internal按实际Go包组织。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [],
+        "documents": [
+          "Link/README.md"
+        ]
+      }
+    },
+    {
+      "id": "link.cloud",
+      "path": "Link/cloud",
+      "agreement": "Link/cloud/AGENTS.md",
+      "entries": [
+        "Link/cloud/protocol.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "link"
+      ],
+      "status": "active",
+      "data_ownership": "云密钥、远端凭据和运行日志在私有根；公开样板不含实际设备或项目正文。",
+      "verification": [
+        "Python-B运行本目录test_cloud/test_remote/test_remote_runtime/test_admin_remote对应检查，client有Node测试；本地夹具、远端连通与真实模型执行分别留证。"
+      ],
+      "pending": [
+        "官方Link Program及共同Core独立包已验；跨设备生产通信和真实远端执行不由本机夹具证明。"
+      ],
+      "requirements": [],
+      "responsibility": "提供远程办公室、设备/会话协议、受控远端runtime与Web终端；client提供正式轻量接入，examples只含脱敏模板。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Link/cloud/server.py",
+          "Link/cloud/remote_runtime.py",
+          "Link/cloud/client/README.zh-CN.md"
+        ],
+        "documents": [
+          "Link/README.md"
+        ]
+      }
+    },
+    {
+      "id": "config",
+      "path": "Config",
+      "agreement": "Config/AGENTS.md",
+      "entries": [
+        "Config/默认设置.json",
+        "Config/运行参数.json",
+        "Config/提示词索引.json"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/阶段性隐藏功能清单.md",
+        "docs/一环运行与投影.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "Key、连接、私人覆盖和备份不纳入公开包；不能扫描或打印私人值生成工程地图。",
+      "verification": [
+        "公共结构改动验证Core/设置服务/索引消费者及public-privacy；私人活动文件不为验收复位，不用历史哈希覆盖用户新修改。"
+      ],
+      "pending": [
+        "保留当前私人配置，不使用旧基线覆盖用户改动；阶段开关只随明确产品决定变化。"
+      ],
+      "requirements": [],
+      "responsibility": "公共默认、release_stage、提示词逻辑索引和模型/终端配色资料在此维护；config.json及个人外观等是私人活动配置，不因文档整理改写。"
+    },
+    {
+      "id": "scripts",
+      "path": "scripts",
+      "agreement": "scripts/AGENTS.md",
+      "entries": [
+        "scripts/build-windows.py",
+        "scripts/check-modules.py",
+        "scripts/public-privacy.py",
+        "scripts/runtime-files.py",
+        "scripts/development-docs.py",
+        "scripts/check-project-map.py",
+        "scripts/code-atlas.py",
+        "scripts/development-session.py"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/开发指南.md",
+        "scripts/PUBLIC-README.md",
+        "docs/AI开发工具.md",
+        "docs/长期协作开发.md",
+        "docs/程序标准链路.md"
+      ],
+      "depends_on": [
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "临时构建/证据在工程外；runtime锁、许可、资源摘要是来源证据，不能当缓存删掉。正式发行由用户决定。",
+      "verification": [
+        "Python-B；改脚本先看--help及对应测试，重构建串行。文档变动用路径/链接/范围和隐私检查，不为不受影响的源码重复全量构建。",
+        "code-atlas/context核库存、规则、消费者、真实行号和上下文失效；development-session核原文/证据保留、head冲突、资源/完成门槛与恢复。对应test_code_atlas.py和test_development_session.py使用工程外合成资料。"
+      ],
+      "pending": [
+        "公开开发导出按精确清单检查；macOS未实机构建，发版须用户决定。"
+      ],
+      "requirements": [
+        "R23",
+        "R26",
+        "R28"
+      ],
+      "responsibility": "维护构建、导出、签名元数据、依赖/隐私/UI检查；code-atlas负责共享代码导航和有界上下文，development-session负责工程外追加任务接续；link/plugins/ui-contract按各自脚本接口工作。"
+    },
+    {
+      "id": "runtime",
+      "path": "runtime",
+      "agreement": "runtime/AGENTS.md",
+      "entries": [
+        "scripts/search-runtime.lock.json",
+        "scripts/provision-search.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "scripts"
+      ],
+      "status": "active",
+      "data_ownership": "软件运行依赖与Data/runtime私人状态无关；不在依赖目录保存用户查询、Key或聊天。",
+      "verification": [
+        "改锁/供应链流程核对来源摘要、许可、离线加载和对应搜索测试；不因文档整理重新下载或清理运行时。"
+      ],
+      "pending": [],
+      "requirements": [],
+      "responsibility": "search是本地搜索桥需要的受锁定Python/DDGS及原生依赖，不是自有业务模块源码。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "runtime/search/LICENSE.txt"
+        ],
+        "documents": []
+      }
+    },
+    {
+      "id": "docs",
+      "path": "docs",
+      "agreement": "docs/AGENTS.md",
+      "entries": [
+        "INDEX.md",
+        "docs/开发指南.md",
+        "docs/工程地图.md",
+        "docs/AI开发工具.md",
+        "docs/长期协作开发.md",
+        "docs/程序标准链路.md"
+      ],
+      "documents": [
+        "docs/工程地图.md",
+        "docs/开发指南.md",
+        "docs/项目地图/README.md"
+      ],
+      "depends_on": [],
+      "status": "active",
+      "data_ownership": "私人逐字原文/凭据/证据正文留Data或工程外，公共文档只引用需求ID、脱敏摘要及证据位置。历史轮次与失败原件保留唯一备份。",
+      "verification": [
+        "修改后检查相对链接/记录路径/模块协约覆盖及公共隐私；历史快照不能重写成当前扫描，文档调整不重复无关全量产品测试。"
+      ],
+      "pending": [
+        "历史实施记录保留当时事实；现行结论由CURRENT与当轮执行文档维护，未验与外部失败不可抹除。"
+      ],
+      "requirements": [],
+      "responsibility": "根AGENTS约束开发，INDEX为短导航，CURRENT记录当前交付事实，当轮文档追踪复查及验收；工程地图给全局职责，项目地图维护专题调用链。",
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "docs/CURRENT.md"
+        ],
+        "documents": []
+      }
+    },
+    {
+      "id": "aidebug",
+      "path": "AIDEBUG",
+      "agreement": "AIDEBUG/AGENTS.md",
+      "entries": [
+        "AIDEBUG/aidebug.cjs",
+        "AIDEBUG/core/live-instance.cjs"
+      ],
+      "documents": [
+        "docs/AIDEBUG.md",
+        "docs/工程地图.md",
+        "docs/UI协约.md"
+      ],
+      "depends_on": [
+        "core",
+        "desktop",
+        "contracts"
+      ],
+      "status": "active",
+      "data_ownership": "从真实日常进程采集，证据存工程外。",
+      "verification": [
+        "从桌面快捷方式连接当前日常程序，核对运行映像、原生控件和实屏。"
+      ],
+      "pending": []
+    },
+    {
+      "id": "link.portable",
+      "path": "Link/portable",
+      "agreement": "Link/portable/AGENTS.md",
+      "entries": [
+        "Link/portable/agent.py",
+        "Link/portable/link.py"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "link"
+      ],
+      "status": "active",
+      "data_ownership": "轻量客户端身份/凭据在包外本人profile；通信租约不启动模型，五段项目记忆按fresh CAS保全。",
+      "verification": [
+        "按Link/portable/README.zh-CN.md与AGENT_START_HERE.md验证首次加入/恢复/finish；本机与真实云另验。"
+      ],
+      "pending": [
+        "官方Link Program及共同Core独立包已验；跨设备生产通信和真实远端执行不由本机夹具证明。"
+      ],
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Link/portable/run.sh"
+        ],
+        "documents": [
+          "Link/README.md"
+        ]
+      }
+    },
+    {
+      "id": "link.cloud.client",
+      "path": "Link/cloud/client",
+      "agreement": "Link/cloud/client/AGENTS.md",
+      "entries": [
+        "Link/cloud/client/remote-link.mjs"
+      ],
+      "documents": [
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "link.cloud"
+      ],
+      "status": "active",
+      "data_ownership": "正式远程客户端凭据在包外独立身份；不把项目/用户正文或设备密钥纳入分发。",
+      "verification": [
+        "node --test Link/cloud/client/test-remote-link.mjs；真实远端连通与模型执行分别验证。"
+      ],
+      "pending": [
+        "官方Link Program及共同Core独立包已验；跨设备生产通信和真实远端执行不由本机夹具证明。"
+      ],
+      "unavailable_original_navigation": {
+        "reason": "原地图中的下列路径当前工作树未提供，不能作为可运行入口或有效文档。",
+        "entries": [
+          "Link/cloud/client/run.ps1"
+        ],
+        "documents": [
+          "Link/README.md"
+        ]
+      }
+    },
+    {
+      "id": "aidebug.core",
+      "path": "AIDEBUG/core",
+      "agreement": "AIDEBUG/core/AGENTS.md",
+      "entries": [
+        "AIDEBUG/core/live-instance.cjs",
+        "AIDEBUG/core/artifacts.cjs"
+      ],
+      "documents": [
+        "docs/AIDEBUG.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "aidebug"
+      ],
+      "status": "active",
+      "data_ownership": "从真实日常进程采集，证据存工程外。",
+      "verification": [
+        "从桌面快捷方式连接当前日常程序，核对运行映像、原生控件和实屏。"
+      ],
+      "pending": [],
+      "requirements": [
+        "T13",
+        "T15",
+        "T17"
+      ]
+    },
+    {
+      "id": "aidebug.fixtures",
+      "path": "AIDEBUG/fixtures",
+      "agreement": "AIDEBUG/fixtures/AGENTS.md",
+      "entries": [
+        "AIDEBUG/fixtures/browser-socks.cjs",
+        "AIDEBUG/fixtures/theme-webp.json"
+      ],
+      "documents": [
+        "docs/AIDEBUG.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "aidebug"
+      ],
+      "status": "active",
+      "data_ownership": "从真实日常进程采集，证据存工程外。",
+      "verification": [
+        "从桌面快捷方式连接当前日常程序，核对运行映像、原生控件和实屏。"
+      ],
+      "pending": [],
+      "requirements": [
+        "T13",
+        "T15",
+        "T17"
+      ]
+    },
+    {
+      "id": "aidebug.tools",
+      "path": "AIDEBUG/tools",
+      "agreement": "AIDEBUG/tools/AGENTS.md",
+      "entries": [
+        "AIDEBUG/tools/desktop-shortcut.cjs",
+        "AIDEBUG/tools/invoke-owned-control.ps1",
+        "AIDEBUG/tools/capture-owned-window.ps1"
+      ],
+      "documents": [
+        "docs/AIDEBUG.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "aidebug"
+      ],
+      "status": "active",
+      "data_ownership": "从真实日常进程采集，证据存工程外。",
+      "verification": [
+        "从桌面快捷方式连接当前日常程序，核对运行映像、原生控件和实屏。"
+      ],
+      "pending": [],
+      "requirements": [
+        "T13",
+        "T15",
+        "T17"
+      ]
+    },
+    {
+      "id": "aidebug.test",
+      "path": "AIDEBUG/test",
+      "agreement": "AIDEBUG/test/AGENTS.md",
+      "entries": [
+        "AIDEBUG/test/live-instance.test.cjs"
+      ],
+      "documents": [
+        "docs/AIDEBUG.md",
+        "docs/工程地图.md"
+      ],
+      "depends_on": [
+        "aidebug"
+      ],
+      "status": "active",
+      "data_ownership": "从真实日常进程采集，证据存工程外。",
+      "verification": [
+        "从桌面快捷方式连接当前日常程序，核对运行映像、原生控件和实屏。"
+      ],
+      "pending": [],
+      "requirements": [
+        "T13",
+        "T15",
+        "T17"
+      ]
+    },
+    {
+      "id": "desktop.compatibility",
+      "path": "Desktop",
+      "agreement": "Desktop/AGENTS.md",
+      "entries": [
+        "Contracts/desktop-compatibility.json"
+      ],
+      "documents": [
+        "Desktop/AGENTS.md"
+      ],
+      "depends_on": [
+        "desktop",
+        "program"
+      ],
+      "status": "compatibility",
+      "data_ownership": "仅21份固定公共资源，不包含私人资料或旧运行依赖。",
+      "verification": [
+        "scripts/check-modules.py逐项核验21资源摘要；新客户端实际Program/原生窗口场景验收。"
+      ],
+      "pending": [],
+      "requirements": [
+        "R24",
+        "R34"
+      ],
+      "responsibility": "固定官方Program的旧资源URL与精确摘要兼容；旧实例正常退出后已移除其余旧实现，不是另一套开发入口。"
+    },
+    {
+      "id": "program.official.workspace",
+      "path": "Program/official/workspace",
+      "agreement": "Program/official/workspace/AGENTS.md",
+      "entries": [
+        "Program/official/workspace/service.cjs",
+        "Program/official/workspace/src/main.tsx",
+        "Program/official/workspace/studio.cjs",
+        "Program/official/workspace/images.cjs"
+      ],
+      "documents": [
+        "Program/README.md",
+        "docs/AIDEBUG.md"
+      ],
+      "depends_on": [
+        "program.official"
+      ],
+      "status": "active",
+      "data_ownership": "画布项目、素材、知识与回执来自宿主注入的当前资料根；旧Workspace安装不参与运行。",
+      "verification": [
+        "桌面语法/自测与program_workspace三轮实际EXE场景；原生图片须实看。"
+      ],
+      "pending": [
+        "真实外部模型、图片供应商和全部Office复杂格式另验。"
+      ],
+      "requirements": [],
+      "responsibility": "保留Workspace原画布与侧栏，适配共同程序Agent、Image Gen、文档工具和保存后关闭。"
+    },
+    {
+      "id": "internal-link",
+      "path": "InternalLink",
+      "agreement": "InternalLink/AGENTS.md",
+      "entries": [
+        "InternalLink/go.mod",
+        "InternalLink/link.go"
+      ],
+      "documents": [
+        "InternalLink/README.md"
+      ],
+      "depends_on": [],
+      "status": "active",
+      "data_ownership": "内部协作协议定义稳定标识、代次和消息约束，Core 持有真实会话和投递事务。",
+      "verification": [
+        "从 OS 的日常进程核对原会话内部派工和回执。"
+      ],
+      "pending": []
+    }
+  ],
+  "unavailable_original_modules": [
+    {
+      "module": {
+        "id": "core.link",
+        "path": "Core/link",
+        "agreement": "Core/link/AGENTS.md",
+        "entries": [
+          "Core/link/bridge.go",
+          "Core/link/client.go",
+          "Core/link/control_transport.go"
+        ],
+        "documents": [
+          "docs/工程地图.md",
+          "docs/项目地图/48-上下文策略与宿主边界.md",
+          "docs/项目地图/49-私人资料路径与清理归属.md"
+        ],
+        "depends_on": [
+          "core"
+        ],
+        "status": "active",
+        "data_ownership": "身份、请求编号、任务状态与通信租约独立；未知投递查原账，不把断线当停工或自动重发。",
+        "verification": [
+          "在 Core 执行 go test ./link、go vet ./link；协议变动再串行验证独立 Link 模块和 Control 对应测试。"
+        ],
+        "pending": [
+          "未搬迁真实用户资料；压力上限与真实自然模型回忆质量不由本地夹具证明。"
+        ],
+        "requirements": [],
+        "responsibility": "保留共同 Core 的 Link 客户端、任务/决策与本机 Control 桥接。此包有活动消费者，不因 Link 外嵌化就删除。"
+      },
+      "reason": "当前迁入工作树未提供此原模块；保留原导航，不声明实现或自动恢复旧来源。"
+    }
+  ],
+  "distribution": {
+    "kind": "public-source",
+    "meaning": "File availability only; implementation and acceptance status are unchanged.",
+    "unavailable": {
+      "core": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.cmd": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.host": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.extensionhost": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.modules": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.platform": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.sessionservice": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.memoryservice": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.userdata": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "core.internal": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.transport": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.request": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.codec": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.parameters": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.catalog": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.adapter": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.images": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.videos": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "api.search": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts.protocol": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts.storage": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts.resources": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts.context": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts.search": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "contracts.privacy": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "agent": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "agent.contract": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "agent.official": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "agent.context": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "agent.presentation": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "client": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "client.cli": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "client.mobile": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "theme": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "theme.contract": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "theme.runtime": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "theme.official": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "theme.showcase": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "halo": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "halo.contract": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "halo.runtime": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "halo.official": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.contract": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.runtime": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.official": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.official.browser": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.official.servers": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.official.link": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.contract": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.runtime": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.presentation": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.base": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.base.official.apply_patch": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.base.official.terminal": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.base.official.update_plan": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.base.official.view_image": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.base.official.web_search": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.toolbox": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.toolbox.official.imagegen": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.toolbox.official.videogen": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "tool.workbox": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "sdk": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "sdk.tools": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "sdk.examples": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop.host": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop.src": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop.ui": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop.renderer": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop.tools": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app.service": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app.web": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app.desktop": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app.scripts": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app.mobile": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "control.app.cloud": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "link": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "link.app.link-core": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "link.cloud": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "config": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "scripts": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "runtime": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "docs": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "aidebug": {
+        "entries": [
+          "AIDEBUG/aidebug.cjs",
+          "AIDEBUG/core/live-instance.cjs"
+        ],
+        "documents": [],
+        "agreement": []
+      },
+      "link.portable": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "link.cloud.client": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "aidebug.core": {
+        "entries": [
+          "AIDEBUG/core/live-instance.cjs",
+          "AIDEBUG/core/artifacts.cjs"
+        ],
+        "documents": [],
+        "agreement": []
+      },
+      "aidebug.fixtures": {
+        "entries": [
+          "AIDEBUG/fixtures/browser-socks.cjs",
+          "AIDEBUG/fixtures/theme-webp.json"
+        ],
+        "documents": [],
+        "agreement": []
+      },
+      "aidebug.tools": {
+        "entries": [
+          "AIDEBUG/tools/desktop-shortcut.cjs",
+          "AIDEBUG/tools/invoke-owned-control.ps1",
+          "AIDEBUG/tools/capture-owned-window.ps1"
+        ],
+        "documents": [],
+        "agreement": []
+      },
+      "aidebug.test": {
+        "entries": [
+          "AIDEBUG/test/live-instance.test.cjs"
+        ],
+        "documents": [],
+        "agreement": []
+      },
+      "desktop.compatibility": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "program.official.workspace": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      },
+      "internal-link": {
+        "entries": [],
+        "documents": [],
+        "agreement": []
+      }
+    }
+  }
+}

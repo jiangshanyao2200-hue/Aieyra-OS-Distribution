@@ -1,0 +1,46 @@
+{
+  "schema": "aieyra.theme/1",
+  "elements": "1.0.0",
+  "assets": {
+    "paper": {
+      "path": "assets/paper.png",
+      "mime": "image/png"
+    },
+    "text": {
+      "path": "assets/inter.woff2",
+      "mime": "font/woff2",
+      "fallback": "sans-serif"
+    }
+  },
+  "styles": [
+    {
+      "element": "body",
+      "properties": {
+        "background-image": "asset(paper)",
+        "background-size": "64px 64px"
+      }
+    },
+    {
+      "element": "body-text",
+      "properties": {
+        "font-family": "asset(text)"
+      }
+    },
+    {
+      "element": "window-title",
+      "properties": {
+        "font-family": "asset(text)",
+        "background-image": "asset(paper)"
+      }
+    },
+    {
+      "element": "message-content",
+      "properties": {
+        "background-image": "asset(paper)",
+        "background-size": "64px 64px",
+        "padding": "12px",
+        "border-radius": "12px"
+      }
+    }
+  ]
+}

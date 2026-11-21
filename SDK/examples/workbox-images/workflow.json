@@ -1,0 +1,113 @@
+{
+  "schema": "aieyra.workbox/1",
+  "name": "images",
+  "description": "生成原图，审阅后引用原图编辑；保留每步图片、用量与恢复回执。",
+  "input": {
+    "type": "object",
+    "properties": {
+      "prompt": {
+        "type": "string"
+      },
+      "edit_prompt": {
+        "type": "string"
+      },
+      "profile_id": {
+        "type": "string"
+      },
+      "size": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt",
+      "edit_prompt",
+      "profile_id",
+      "size"
+    ],
+    "additionalProperties": false
+  },
+  "tools": {
+    "images": {
+      "builtin": "image_gen"
+    }
+  },
+  "steps": [
+    {
+      "id": "generate",
+      "title": "生成原图",
+      "kind": "call",
+      "needs": [],
+      "tool": "images",
+      "arguments": {
+        "prompt": {
+          "$input": "/prompt"
+        },
+        "profile_id": {
+          "$input": "/profile_id"
+        },
+        "size": {
+          "$input": "/size"
+        },
+        "quality": "high",
+        "count": 1
+      },
+      "effect": "external"
+    },
+    {
+      "id": "review",
+      "title": "审阅原图",
+      "kind": "checkpoint",
+      "needs": [
+        "generate"
+      ]
+    },
+    {
+      "id": "edit",
+      "title": "引用原图编辑",
+      "kind": "call",
+      "needs": [
+        "generate",
+        "review"
+      ],
+      "tool": "images",
+      "arguments": {
+        "operation": "edit",
+        "images": [
+          {
+            "$step": "generate",
+            "path": "/paths/0"
+          }
+        ],
+        "prompt": {
+          "$input": "/edit_prompt"
+        },
+        "profile_id": {
+          "$input": "/profile_id"
+        },
+        "size": {
+          "$input": "/size"
+        },
+        "quality": "high",
+        "count": 1
+      },
+      "effect": "external"
+    }
+  ],
+  "outputs": {
+    "original": {
+      "$step": "generate",
+      "path": "/paths"
+    },
+    "edited": {
+      "$step": "edit",
+      "path": "/paths"
+    }
+  },
+  "agentTemplate": {
+    "title": "图片生成与编辑工作流助手",
+    "prompt": "按保存的工作流执行，读取实际步骤回执；检查点等待用户审阅，未知结果先恢复原回执，不重复创建任务。",
+    "max_tokens": 8000,
+    "timeout_seconds": 300,
+    "retention": "task"
+  }
+}

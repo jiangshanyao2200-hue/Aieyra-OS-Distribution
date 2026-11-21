@@ -1,0 +1,61 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body; body .diary-orb; body .diary-ball; body .diary-ball:hover; body .diary-ball:focus-visible; @keyframes diary-glow; body .diary-glyph; body .diary-pill; body .diary-pill small; body .diary-pill span; body .diary-orb[data-pill=hover]:not(:hover):not(:focus-within) .diary-pill; body[data-form=chat] .diary-pill; body[data-form=chat] .diary-orb[data-crowded=true]:not(:hover):not(:focus-within) .diary-pill; body .diary-orb.arrive .diary-ball; @keyframes diary-arrive; body .diary-motes; body .diary-motes i; body .diary-motes i:nth-child(1); body .diary-motes i:nth-child(5); body .diary-orb.dissolve; body .diary-orb.dissolve .diary-pill; body .diary-orb.dissolve .diary-ball; body .diary-orb.dissolve .diary-glyph; body .diary-orb.dissolve .diary-motes i; @keyframes diary-dissolve; @keyframes diary-mote; body #diary-pop; body[data-form=work] #diary-pop; @starting-style; body #diary-pop[hidden]; body .diary-head; body .diary-head small; body .diary-head h2; body #diary-pop-close; body .diary-body; body .diary-body > :first-child; body .diary-body p; body .diary-body :is(ul,ol); body .diary-body :is(h1,h2,h3); @media(prefers-reduced-motion:reduce)
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/subconscious.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* 屏幕上的潜意识（README.md 记忆系统 §5、§7）：日记报告入口，日记在玻璃弹窗里看。
+   Eyra 自己的东西（计划圆、问候、正文）用冷白色；潜意识一律用紫色，一眼能分开。 */
+body { --sub:#b9a2ff; --sub-deep:#7f5cf0; --sub-glow:#a58bff66; --sub-text:#ece8f7; --sub-dim:#b3abc8; }
+
+/* ---- 日记圆：一本小本子在紫光里；出现时从一点光长出来，看完消散成几粒光点 ---- */
+body .diary-orb { position:relative; display:flex; flex-direction:row-reverse; align-items:center; gap:10px; }
+body .diary-ball { position:relative; flex:none; display:grid; place-items:center; width:44px; height:44px; min-height:0; padding:0; border:0; border-radius:50%; cursor:pointer; background:radial-gradient(circle at 36% 30%,#ffe6f63d,#a77cff38 48%,rgba(20,14,32,.76) 78%); backdrop-filter:blur(14px); box-shadow:0 8px 24px #0005,inset 0 0 0 1px #e2c9ff2e; animation:diary-glow 3.6s ease-in-out infinite; transition:transform var(--t1) var(--ease); }
+body .diary-ball:hover { transform:scale(1.06); }
+body .diary-ball:focus-visible { outline:1px solid #e2c9ff88; outline-offset:4px; }
+@keyframes diary-glow { 0%,100% { box-shadow:0 8px 24px #0005,inset 0 0 0 1px #e2c9ff2e,0 0 0 0 #c9a7ff00; } 50% { box-shadow:0 8px 24px #0005,inset 0 0 0 1px #e2c9ff44,0 0 18px 2px #c9a7ff55; } }
+body .diary-glyph { width:20px; height:20px; fill:none; stroke:#f4ecff; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 4px #c9a7ff88); }
+body .diary-pill { display:flex; align-items:baseline; gap:8px; max-width:min(340px,32vw); height:34px; padding:0 16px; border-radius:999px; background:linear-gradient(90deg,rgba(26,18,42,.7),rgba(22,15,36,.46) 72%,rgba(22,15,36,.08)); box-shadow:inset 0 0 0 1px #e2c9ff1c; color:#f1ecfa; font-size:13px; line-height:34px; white-space:nowrap; text-shadow:0 1px 8px rgba(0,0,0,.6); overflow:hidden; transition:opacity 260ms ease,translate 300ms var(--ease),max-width 360ms var(--ease),padding 360ms var(--ease); }
+body .diary-pill small { flex:none; font-size:11px; letter-spacing:.12em; color:#cdb6ff; }
+body .diary-pill span { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+body .diary-orb[data-pill=hover]:not(:hover):not(:focus-within) .diary-pill { max-width:0; padding:0; opacity:0; translate:10px 0; pointer-events:none; }
+body[data-form=chat] .diary-pill { max-width:min(260px,22vw); }
+body[data-form=chat] .diary-orb[data-crowded=true]:not(:hover):not(:focus-within) .diary-pill { max-width:0; padding:0; opacity:0; translate:10px 0; pointer-events:none; }
+body .diary-orb.arrive .diary-ball { animation:diary-arrive 900ms cubic-bezier(.34,1.56,.64,1),diary-glow 3.6s ease-in-out 900ms infinite; }
+@keyframes diary-arrive { 0% { scale:.2; opacity:0; filter:blur(6px); } 55% { opacity:1; filter:blur(0); } 100% { scale:1; } }
+body .diary-motes { position:absolute; inset:0; pointer-events:none; }
+body .diary-motes i { position:absolute; left:calc(50% - 2px); top:calc(50% - 2px); width:4px; height:4px; border-radius:50%; background:#f4ecff; box-shadow:0 0 8px #c9a7ff; opacity:0; }
+body .diary-motes i:nth-child(1) { --a:0deg; } body .diary-motes i:nth-child(2) { --a:45deg; } body .diary-motes i:nth-child(3) { --a:90deg; } body .diary-motes i:nth-child(4) { --a:135deg; }
+body .diary-motes i:nth-child(5) { --a:180deg; } body .diary-motes i:nth-child(6) { --a:225deg; } body .diary-motes i:nth-child(7) { --a:270deg; } body .diary-motes i:nth-child(8) { --a:315deg; }
+/* 消散：圆放大、变虚、淡掉，八粒光点向外飘散。 */
+body .diary-orb.dissolve { pointer-events:none; }
+body .diary-orb.dissolve .diary-pill { opacity:0; translate:-10px 0; }
+body .diary-orb.dissolve .diary-ball { animation:diary-dissolve 900ms ease-out forwards; }
+body .diary-orb.dissolve .diary-glyph { transition:opacity 300ms ease; opacity:0; }
+body .diary-orb.dissolve .diary-motes i { animation:diary-mote 900ms ease-out forwards; }
+@keyframes diary-dissolve { 0% { scale:1; opacity:1; filter:blur(0); } 100% { scale:1.5; opacity:0; filter:blur(8px); } }
+@keyframes diary-mote { 0% { opacity:1; transform:rotate(var(--a)) translateY(-10px) scale(1); } 100% { opacity:0; transform:rotate(var(--a)) translateY(-46px) scale(.2); } }
+
+/* ---- 日记弹窗：右侧的玻璃纸页，衬线正文 ---- */
+body #diary-pop { --diary-top:clamp(calc(var(--titlebar-height,56px) + 12px),28vh,calc(var(--titlebar-height,56px) + 70px)); position:fixed; top:var(--diary-top); right:84px; z-index:96; display:flex; flex-direction:column; width:min(520px,calc(100vw - 108px)); max-height:min(76vh,720px,calc(100vh - var(--diary-top) - 16px)); border-radius:18px; background:linear-gradient(180deg,rgba(28,21,44,.8),rgba(16,13,26,.8)); backdrop-filter:var(--glass-filter); box-shadow:inset 0 0 0 1px #d8c4ff24,0 24px 70px #0008,0 0 60px #8f6bff1a; transition:opacity 220ms ease,translate 280ms var(--ease),display 280ms allow-discrete; }
+body[data-form=work] #diary-pop { --diary-top:clamp(calc(var(--titlebar-height,56px) + 12px),28vh,calc(var(--work-top,64px) + 56px)); }
+@starting-style { body #diary-pop { opacity:0; translate:0 -8px; } }
+body #diary-pop[hidden] { display:none; opacity:0; }
+body .diary-head { position:relative; flex:none; padding:22px 56px 12px 26px; border-bottom:1px solid #d8c4ff14; }
+body .diary-head small { display:block; margin-bottom:6px; font-size:11.5px; letter-spacing:.06em; color:#a99cc8; }
+body .diary-head h2 { margin:0; font-family:"Aieyra Noto Serif SC","Aieyra Noto Sans SC",serif; font-size:19px; font-weight:500; letter-spacing:.04em; color:#f3eefc; }
+body #diary-pop-close { position:absolute; top:16px; right:16px; }
+body .diary-body { flex:1; min-height:0; overflow:auto; scrollbar-width:thin; scrollbar-color:#d8c4ff33 transparent; padding:16px 26px 26px; font-family:"Aieyra Noto Serif SC","Aieyra Noto Sans SC",serif; font-size:15px; line-height:1.95; color:#e6e0f2; user-select:text; }
+body .diary-body > :first-child { margin-top:0; }
+body .diary-body p { margin:0 0 .9em; text-indent:0; }
+body .diary-body :is(ul,ol) { padding-left:1.4em; }
+body .diary-body :is(h1,h2,h3) { font-size:15px; font-weight:600; color:#f3eefc; }
+
+body.reduce-motion :is(#sub-orb,#diary-orb,#diary-pop), body.reduce-motion :is(#sub-orb,#diary-orb,#diary-pop) *, body.reduce-motion :is(#sub-orb,#diary-orb,#diary-pop) *::before, body.reduce-motion :is(#sub-orb,#diary-orb,#diary-pop) *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+@media(prefers-reduced-motion:reduce) {
+ body :is(#sub-orb,#diary-orb,#diary-pop), body :is(#sub-orb,#diary-orb,#diary-pop) *, body :is(#sub-orb,#diary-orb,#diary-pop) *::before, body :is(#sub-orb,#diary-orb,#diary-pop) *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+}

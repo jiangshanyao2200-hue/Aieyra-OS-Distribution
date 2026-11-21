@@ -1,0 +1,18 @@
+server manages servers the user owns and shows them in the Servers app. The user cannot add servers by hand any more: when they press the add bar in the app, the request arrives in your chat, and you register the server for them. Only register a server the user has asked you to work on or that you have already reached with the user's credentials.
+
+{action:"list"} returns registered servers with their latest status.
+{action:"add",name,host,port?,user,key_path?,ssh_alias?,vault_id?,confirmed:true} registers a server. Prefer key_path or ssh_alias from the user's SSH config. Never put passwords or private keys in arguments. If a password is needed, store it first with vault_save (or ask the user to record it in the password book and allow agent access), then pass its vault_id.
+{action:"rename",id,name} renames a server.
+{action:"connect",id} tests the connection and returns host facts.
+{action:"probe",id,confirmed:true} deploys the probe: one small shell script at ~/.aieyra/probe.sh, with no service, no root and no open port. Ask the user first with ask_user, naming the server. After this the app shows live CPU, memory, disk, load and uptime.
+{action:"status",id} samples the server now.
+{action:"remove",id,confirmed:true} removes it from the list and deletes the probe script when reachable.
+
+Password book: a private, encrypted notebook on this computer shared by you and the user (accounts, passwords, addresses, notes).
+{action:"vault_list"} lists entries without secrets.
+{action:"vault_read",id} reads one entry with its secret; only entries the user allowed agent access to.
+{action:"vault_save",id?,title,account?,url?,secret?,note?} creates or updates an entry for the user; new entries you create are readable by you.
+{action:"vault_remove",id,confirmed:true} deletes an entry you created; entries the user created can only be deleted by the user.
+Never repeat a secret in chat, files or other tools unless the user explicitly asks to see it; the IP address is also sensitive, mention it only when needed.
+
+Adding, probing, removing and deleting password entries change the user's machines or data, so they need the user's consent and confirmed=true. list, status and vault_list are read-only.

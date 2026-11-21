@@ -1,0 +1,96 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Tool/presentation/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .tool-work-surface; .tool-work-surface .projection-toolbar; .tool-work-surface :is(.projection-overview,.projection-restore,.projection-control,.projection-decision); .tool-work-surface button:focus-visible; .tool-work-surface button:hover; .tool-work-surface .projection-control; .tool-work-surface .projection-grid; .tool-work-surface .projection-grid[data-count="1"]; .tool-work-surface[data-overview=true] .projection-grid; .tool-work-surface[data-focused=true] .projection-grid; .tool-work-surface .projection-pane; .tool-work-surface .projection-pane:is([data-state=failed],[data-state=timed_out],[data-state=interrupted_unknown]); .tool-work-surface .stage-head; .tool-work-surface .projection-brief; .tool-work-surface .projection-glyph; .tool-work-surface .stage-title; .tool-work-surface .projection-title; .tool-work-surface .stage-state; .tool-work-surface .projection-body; .tool-work-surface[data-overview=true][data-focused=false] .projection-pane :where(*); .tool-work-surface .projection-visual; .tool-work-surface .projection-pane[data-kind=terminal] .projection-visual; .tool-work-surface .projection-receipt; .projection-receipt>summary; .tool-projection; .projection-content; .projection-content:empty; .projection-list; .projection-card; .projection-card>strong; .projection-card>span; .projection-card>p; .projection-note; .projection-error; .projection-question; .projection-decision; .projection-capability; .projection-symbol; .projection-capability[data-action=close] .projection-symbol; .projection-capability>strong; .projection-flow; .projection-flow>li; .projection-flow>li:not(:last-child)::after; .projection-flow-dot; .projection-flow>li:is([data-state=running],[data-state=in_progress],[data-state=in_flight]) .projection-flow-dot; .projection-flow>li[data-state=completed] .projection-flow-dot; .projection-flow strong; .projection-media; .projection-media:has(.projection-image:nth-child(2)); .projection-image; .projection-image .projection-note,.projection-image .projection-error; .projection-media img; .tool-projection progress; .tool-work-surface .desktop-terminal-view; .tool-work-surface .desktop-terminal-view :is(.terminal-view-toolbar,.terminal-view-empty,.run-time); .tool-work-surface .desktop-terminal-view .terminal-view-running; .tool-work-surface :is(.digest-note,.digest-label,.digest-facts dt,.digest-facts dd,.hx-state,.hx-more,.search-meta,.hit-site,.hit-url,.hit-snippet); .tool-work-surface .search-pane; .tool-work-surface .patch-diff; .tool-work-surface .patch-no; .tool-work-surface [hidden]; @media(max-width:620px); @media(prefers-reduced-motion:reduce); .projection-program; .projection-program-content; .projection-browser-bar; .projection-browser-bar>span; .projection-browser-image; .projection-contact; .tool-work-surface .projection-pane; .tool-work-surface .stage-head; .tool-work-surface .projection-glyph; @keyframes brief-signal; .brief-journal; .brief-journal section[data-writing=true] pre::after; @keyframes brief-caret; .brief-journal section; .brief-journal small; .brief-journal pre; .tool-work-surface .projection-visual:empty; body.reduce-motion .tool-work-surface .projection-glyph
+ * Impact: python -B scripts/code-atlas.py show Tool/presentation/projection.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* Shared readonly scenes: no dashboard telemetry or simulated tool output. */
+.tool-work-surface{--projection-ink:var(--ui-text,#e6e9f0);--projection-cyan:var(--ui-accent,#a9c0ec);--projection-edge:var(--glass-line,#ffffff24);--projection-mat:var(--glass-sheen,linear-gradient(145deg,#ffffff09,transparent 55%)),color-mix(in srgb,#17191f 88%,transparent);color:var(--projection-ink);font-family:var(--os-interface-font,inherit);}
+.tool-work-surface .projection-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex:none;min-height:30px;min-width:0;}
+.tool-work-surface :is(.projection-overview,.projection-restore,.projection-control,.projection-decision){flex:none;min-height:28px;white-space:nowrap;color:var(--projection-ink);background:#091c2de8;border:1px solid var(--projection-edge);border-radius:8px;padding:4px 10px;font:12px/1.5 system-ui;cursor:pointer;}
+.tool-work-surface button:focus-visible{outline:2px solid #c3f4ff;outline-offset:2px;}
+.tool-work-surface button:hover{background:#25495c;border-color:#b5f1ff;}
+.tool-work-surface .projection-control{display:grid;place-items:center;width:28px;height:28px;padding:0;background:transparent;font-size:17px;}
+.tool-work-surface .projection-grid{flex:1;min-width:0;min-height:0;display:grid;grid-template-columns:repeat(var(--projection-columns,2),minmax(0,1fr));grid-auto-rows:minmax(180px,1fr);gap:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:1px 2px 4px;align-content:stretch;}
+.tool-work-surface .projection-grid[data-count="1"]{grid-template-columns:minmax(0,1fr);}
+.tool-work-surface[data-overview=true] .projection-grid{grid-auto-rows:minmax(170px,1fr);}
+.tool-work-surface[data-focused=true] .projection-grid{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);grid-auto-rows:minmax(0,1fr);overflow:hidden;}
+.tool-work-surface .projection-pane{--projection-radius:4px;box-sizing:border-box;position:relative;isolation:isolate;min-width:0;min-height:0;display:flex;flex-direction:column;border:1px solid var(--projection-edge);border-radius:var(--projection-radius);background:var(--projection-mat);overflow:hidden;}
+.tool-work-surface .projection-pane:is([data-state=failed],[data-state=timed_out],[data-state=interrupted_unknown]){border-color:#ffc2b778;}
+.tool-work-surface .stage-head{display:flex;align-items:center;flex:none;gap:12px;min-width:0;min-height:40px;box-sizing:border-box;padding:7px 14px;border-bottom:1px solid var(--projection-edge);}
+.tool-work-surface .projection-brief{margin-inline-start:auto;min-width:0;text-align:end;overflow:hidden;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;color:var(--ui-text-2,#d1d6df);font-size:12px;line-height:1.45;}
+.tool-work-surface .projection-glyph{flex:none;font:20px/1 monospace;color:var(--projection-cyan);text-shadow:0 0 16px #8fdcff55;}
+.tool-work-surface .stage-title{flex:1;min-width:24px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:500;color:var(--projection-ink);}
+.tool-work-surface .projection-title{padding:0;border:0;border-radius:3px;background:transparent;font-family:inherit;text-align:left;cursor:pointer;}
+.tool-work-surface .stage-state{flex:none;max-width:34%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:11px/1.6 system-ui;color:#ecf9ff;}
+.tool-work-surface .projection-body{display:flex;flex:1;flex-direction:column;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:0;}
+/* In overview, reaching a receipt's edge continues through the enclosing
+   grid. The grid contains the chain before it can move the chat or page. */
+.tool-work-surface[data-overview=true][data-focused=false] .projection-pane :where(*){overscroll-behavior-y:auto;}
+.tool-work-surface .projection-visual{min-width:0;min-height:0;flex:1 0 auto;}
+.tool-work-surface .projection-pane[data-kind=terminal] .projection-visual{flex:1;min-height:120px;}
+.tool-work-surface .projection-receipt{flex:none;margin:8px 12px 12px;font-size:12px;color:var(--projection-ink);}
+.projection-receipt>summary{cursor:pointer;padding:6px 0;color:#e5f4ff;}
+.tool-projection{min-width:0;color:#f1f9ff;font:12px/1.7 system-ui;}
+.projection-content{padding:14px;min-width:0;}
+.projection-content:empty{display:none;}
+.projection-list{display:grid;gap:8px;min-width:0;}
+.projection-card{position:relative;display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap;min-width:0;padding:8px 0;border-bottom:1px solid var(--projection-edge);}
+.projection-card>strong{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:500;color:#f3fbff;}
+.projection-card>span{font:11px/1.6 "Cascadia Mono",Consolas,monospace;color:#cef0ff;overflow-wrap:anywhere;}
+.projection-card>p{flex-basis:100%;margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;color:#edf7ff;}
+.projection-note{margin:0 0 10px;color:#e8f4ff;overflow-wrap:anywhere;}
+.projection-error{margin:8px 0;color:#ffd4c9;overflow-wrap:anywhere;}
+.projection-question{margin:0 0 12px;font:500 16px/1.6 system-ui;overflow-wrap:anywhere;color:#fff;}
+.projection-decision{margin-top:12px;}
+.projection-capability{display:grid;grid-template-columns:40px minmax(0,1fr);gap:4px 12px;padding:14px 0 20px;align-items:center;color:#f3fbff;}
+.projection-symbol{grid-row:1/3;display:grid;place-items:center;width:38px;height:38px;border:1px solid #a4eafa70;border-radius:10px;color:#d0f6ff;box-shadow:inset 0 0 20px #9de9ff0d,0 0 24px #9de9ff0b;font:26px/1 monospace;}
+.projection-capability[data-action=close] .projection-symbol{border-style:dashed;}
+.projection-capability>strong{font-size:16px;font-weight:500;overflow-wrap:anywhere;}.projection-capability>span:last-child{font-size:12px;}
+.projection-flow{display:grid;gap:0;margin:0;padding:0;list-style:none;}
+.projection-flow>li{position:relative;display:grid;grid-template-columns:12px minmax(0,1fr) auto;align-items:baseline;gap:8px;padding:12px 0 14px;color:#f0f8ff;}
+.projection-flow>li:not(:last-child)::after{content:'';position:absolute;left:4px;top:24px;bottom:-4px;width:1px;background:#a9e1f245;}
+.projection-flow-dot{position:relative;z-index:1;width:7px;height:7px;border:1px solid #d8f4ff;border-radius:50%;background:#101f32;}
+.projection-flow>li:is([data-state=running],[data-state=in_progress],[data-state=in_flight]) .projection-flow-dot{background:#bcf2ff;box-shadow:0 0 12px #b0ebff66;}
+.projection-flow>li[data-state=completed] .projection-flow-dot{background:#d6fff1;border-color:#d6fff1;}
+.projection-flow strong{font-size:12px;font-weight:500;overflow-wrap:anywhere;}.projection-flow li>span{font-size:11px;color:#ddf4ff;}.projection-flow li>p{grid-column:2/-1;color:#ffd4c9;margin:0;}
+.projection-media{display:grid;place-items:center;min-height:140px;max-height:340px;margin:12px;border:1px solid #c0eaff30;border-radius:10px;overflow:hidden;background:repeating-conic-gradient(#162331 0% 25%,#101b27 0% 50%) 50%/16px 16px;}
+.projection-media:has(.projection-image:nth-child(2)){grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;overflow:auto;place-items:stretch;}
+.projection-image{display:grid;place-items:center;min-width:0;min-height:0;}
+.projection-image .projection-note,.projection-image .projection-error{padding:10px;}
+.projection-media img{display:block;max-width:100%;max-height:320px;object-fit:contain;}
+.tool-projection progress{display:block;width:100%;height:4px;accent-color:#c2f5ff;margin:12px 0;}
+.tool-work-surface .desktop-terminal-view{--terminal-text:#d9f5ff;--terminal-glow:0 0 14px #9ce7ff26,0 1px 2px #0008;font-size:12px;background:repeating-linear-gradient(0deg,transparent,transparent 3px,#b6eaff03 4px);}
+.tool-work-surface .desktop-terminal-view :is(.terminal-view-toolbar,.terminal-view-empty,.run-time){color:#e4f6ff;}
+.tool-work-surface .desktop-terminal-view .terminal-view-running{color:#d1f5ff;}.tool-work-surface .run-bar{opacity:.7;}
+.tool-work-surface :is(.digest-note,.digest-label,.digest-facts dt,.digest-facts dd,.hx-state,.hx-more,.search-meta,.hit-site,.hit-url,.hit-snippet){color:#e9f6ff;}
+.tool-work-surface .search-pane{padding:12px;}.tool-work-surface .search-hit{background:#0b2435;border:1px solid #c1eaff30;box-shadow:none;}.tool-work-surface .search-box{background:#0b2235;color:#f2fbff;}
+.tool-work-surface .patch-diff{color:#eef9ff;}.tool-work-surface .patch-line.add{background:#b0ffd515;color:#dcffeb;}.tool-work-surface .patch-line.del{background:#ffc0ad15;color:#ffe0d6;}
+.tool-work-surface .patch-no{color:#dceeff;}.tool-work-surface .patch-file{color:#effaff;}
+.tool-work-surface [hidden]{display:none!important;}
+@media(max-width:620px){.tool-work-surface .projection-grid{gap:10px}.tool-work-surface .stage-head{gap:6px;padding-inline:8px}.projection-content{padding:10px}}
+@media(prefers-reduced-motion:reduce){.tool-work-surface *{animation:none!important;transition:none!important;}}
+
+.projection-program{min-width:0;min-height:0;width:100%;color:var(--ui-text,#fff)}
+.projection-program-content{display:flex;flex-direction:column;gap:10px;min-width:0}
+.projection-browser-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;border:1px solid #a6e8ff30;border-radius:10px;background:linear-gradient(100deg,#13334caa,#0e162c88);color:#fff;white-space:nowrap;font-size:12px}
+.projection-browser-bar>span{overflow:hidden;text-overflow:ellipsis}
+.projection-browser-image{display:block;max-width:100%;width:100%;height:auto;object-fit:contain;border-radius:10px;box-shadow:0 0 0 1px #bbf1ff30;pointer-events:none}
+.projection-contact{border-color:#b8e7ff38;color:#fff}.projection-contact small{color:#eff9ff}
+.tool-work-surface .projection-pane{color:var(--ui-text,#eef0f4);border-color:var(--ui-edge,#ffffff26);border-radius:var(--ui-radius-menu,10px)}
+.tool-work-surface .stage-head{background:transparent;border-color:var(--ui-edge,#ffffff26);padding-inline:16px}
+.tool-work-surface .projection-glyph{color:var(--ui-accent,currentColor);animation:brief-signal 2s ease-in-out infinite}
+@keyframes brief-signal{0%,100%{transform:scaleX(.86)}45%{transform:scaleX(1.18);text-shadow:0 0 7px currentColor}}
+.brief-journal{padding:4px 16px 16px;min-width:0;color:var(--ui-text,#eef0f4)}
+.brief-journal section[data-writing=true] pre::after{content:'';display:inline-block;width:.48em;height:1em;margin-left:2px;background:currentColor;vertical-align:-.12em;animation:brief-caret .8s steps(2,end) infinite}
+@keyframes brief-caret{50%{opacity:.2}}
+.brief-journal section{margin:12px 0 0;padding-inline-start:10px;border-inline-start:1px solid var(--ui-edge,#ffffff30)}
+.brief-journal small{color:var(--ui-text-2,#b9bbc0);font-size:11px}
+.brief-journal pre{margin:3px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.55 var(--os-tools-font,monospace)}
+.tool-work-surface .projection-visual:empty{display:none}
+body.reduce-motion .tool-work-surface .projection-glyph{animation:none}
+

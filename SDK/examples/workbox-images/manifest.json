@@ -1,0 +1,67 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.images-workflow",
+  "kind": "workbox",
+  "name": "图片生成与编辑工作流",
+  "summary": "生成原图，审阅后引用原图编辑；保留每步图片、用量与恢复回执。",
+  "version": "1.0.0",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "workbox": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "workflow": "workflow.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "image_gen",
+      "reason": "执行工作流中声明的步骤"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.workbox",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "bafbc514b53234ebab4635d878861ec054ea836b88a1259732752360101c6f34",
+      "size": 84
+    },
+    "desktop.json": {
+      "sha256": "75086deb28c5a5d4b16344775b31baa51a108415636f4b2a929b5534529b1a91",
+      "size": 109
+    },
+    "manual.md": {
+      "sha256": "579e7fc07b5b5c47b484b2418e327b162d001a135ccc4474ced68d2d3ee9cde7",
+      "size": 886
+    },
+    "workflow.json": {
+      "sha256": "205ec4031b08363069ca61c400f78edabb1b880881e9c828419ed6c3cf685c9a",
+      "size": 2325
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.view_image",
+  "kind": "tool",
+  "name": "查看图片",
+  "summary": "原图与拼图读取、视觉模型转述和本机文字识别",
+  "version": "1.0.1",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/view.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "compose.go": {
+      "sha256": "b892b308d680b73fc006d4b04fca84e83443db591d0567a33023895b07a0fd56",
+      "size": 5666
+    },
+    "contract/types.go": {
+      "sha256": "c33ee0e5266b16e73374b079cfee3d98f539d14ea7ae23a0ba8581503b424f83",
+      "size": 1965
+    },
+    "definition.go": {
+      "sha256": "e0a9e8b47a8545dfc6c8c2f9b512f67fcef99f63d17efc93d28d9fcebdd44127",
+      "size": 667
+    },
+    "manual.txt": {
+      "sha256": "5c16a8c3fe6b8f0c84c03e29774b40d690e04f08f9041057624e6d2690f2c57f",
+      "size": 1530
+    },
+    "native.json": {
+      "sha256": "990106317585a7eb92f279fdedf731eb7848f24614c8b71749a6d220eeec1b07",
+      "size": 100
+    },
+    "ocr.ps1": {
+      "sha256": "6891cc2c224f9cea3ec92a2df2f7f35e2e6489bc70bb66322384c963ed29b8d3",
+      "size": 3127
+    },
+    "ocr_other.go": {
+      "sha256": "9d6f3f3389c88b08892db52f426ab3b5d95c1f83818c5c694e34b18a02a72390",
+      "size": 351
+    },
+    "ocr_windows.go": {
+      "sha256": "90bab919135f35e638cab448e5300e78dd7817dd2d79502ea88dbfaecc75bc53",
+      "size": 2427
+    },
+    "prepare.go": {
+      "sha256": "953c5802f035558cda56090ed4fc0fb37ca6d232016fdcba7f3ee195a29550c9",
+      "size": 5252
+    },
+    "presentation/desktop.css": {
+      "sha256": "c8da804ad98aead0ed595dcec1224d018feea5054b08a191359b41713679e6fb",
+      "size": 3449
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "e58e1e3d8f5dcc37761b8492e0d287ea6741d8b0b5395290c86f1bd755b87ff0",
+      "size": 4540
+    },
+    "presentation/text/view.go": {
+      "sha256": "c8f3b96ba88a2cc67e8e607c5c407bfe84d1dbb2f11d5869262355219a095c52",
+      "size": 1071
+    },
+    "README.md": {
+      "sha256": "a13f5fd822cffbacf62cf77de55ddece548c624a2998b0f81ff5f74ab4f80951",
+      "size": 1066
+    }
+  }
+}

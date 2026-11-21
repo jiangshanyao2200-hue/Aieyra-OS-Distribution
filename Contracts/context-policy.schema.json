@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Aieyra declarative context policy 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "version", "name", "state_schema", "engine", "keep_turns", "summary_guidance"],
+  "properties": {
+    "schema": {"const": "aieyra.context/1"},
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{0,95}$"},
+    "version": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 160},
+    "state_schema": {"const": 1},
+    "engine": {"const": "structured"},
+    "keep_turns": {"type": "integer", "minimum": 1, "maximum": 100},
+    "summary_guidance": {"type": "string", "minLength": 1, "maxLength": 16384}
+  }
+}

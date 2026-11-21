@@ -1,0 +1,102 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.tool.web_search",
+  "kind": "tool",
+  "name": "联网搜索",
+  "summary": "原生搜索及本机后备与来源回执",
+  "version": "1.0.2",
+  "publisher": "aieyra",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "tool": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "tool": "native.json",
+    "manual": "manual/purpose.txt"
+  },
+  "permissions": [],
+  "presentation": {
+    "desktop": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-tool",
+      "entry": "presentation/desktop.mjs"
+    },
+    "cli": {
+      "contract": "1.0.0",
+      "renderer": "aieyra.native-text",
+      "entry": "presentation/text/view.go"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "contract/types.go": {
+      "sha256": "3b06f28cc1582f5389915531b65e5df749ebf5c3c0afbb559214f8c1f71259b0",
+      "size": 248
+    },
+    "ddgs_bridge.py": {
+      "sha256": "9bb9da64f25b8ee6e2f8bc94b1cfc4429101940435075726f6b4b458be57c6be",
+      "size": 1552
+    },
+    "definition.go": {
+      "sha256": "9ba186665eeeddae2020a960d19a4169d7bf4f9c6ce90c29ba4678ab98a5cf2d",
+      "size": 528
+    },
+    "execute.go": {
+      "sha256": "23a88b5319dd6a9d549b55f9bf77faa92d2644450dbf1c6e74ebce32b32f0403",
+      "size": 1730
+    },
+    "local.go": {
+      "sha256": "b60099f41b4fff26485e22e11583307eb8d61265b0cea69928526fa4ca070099",
+      "size": 2841
+    },
+    "manual/method.txt": {
+      "sha256": "775fb1324836dadebb7618a20cae69b65ef8ea31389e44b72b6e78ec477bc4af",
+      "size": 501
+    },
+    "manual/purpose.txt": {
+      "sha256": "d6d61c7fdb2290aa555a24a72f3b534c7f071e374f422587e7bfc4ca54189f2a",
+      "size": 104
+    },
+    "manual/result.txt": {
+      "sha256": "16d98a9e3816c49de0bd3c6e0e393208074b71c7c24969f30d1c98be10dcf08b",
+      "size": 302
+    },
+    "native.json": {
+      "sha256": "dcec77cb24ce63488ab7166955f731311db6845c67faabfafdc0b8ff8d5dc8bf",
+      "size": 100
+    },
+    "presentation/desktop.css": {
+      "sha256": "52a5c365dd4f4174a05317dd9b39dfa915b7d92955ce361e4f687cf45ffef2bb",
+      "size": 5489
+    },
+    "presentation/desktop.mjs": {
+      "sha256": "37691f4cbe75c67e6d9450cca0b7186987d40d82d0846f8a31a90bba6d7ce904",
+      "size": 6663
+    },
+    "presentation/text/view.go": {
+      "sha256": "6b80a7499e5822eddffbe915d258dd008f73391a23b0f96a87b2e8f40cbba060",
+      "size": 736
+    },
+    "prompts/search.txt": {
+      "sha256": "9653378a4e16c965474796d76681995038ce2dff261a8bac7dd90080bc6ee8d5",
+      "size": 523
+    },
+    "README.md": {
+      "sha256": "ba95950cb4b5228ee7667a2bf269649db2942375d8b00bd28c747fd847b3ae07",
+      "size": 1017
+    }
+  }
+}

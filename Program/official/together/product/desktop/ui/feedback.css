@@ -1,0 +1,154 @@
+/* @file-map:start
+文件: link/desktop/ui/feedback.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .titlebar .broadcast-button
+  rule-2 | style | .titlebar .broadcast-button:not([hidden])+#system-settings
+  rule-3 | style | #broadcast-unread:not([hidden])
+  rule-4 | style | .titlebar [data-tab=agents][aria-current=page] .icon
+  rule-5 | style | .titlebar [data-tab=repository][aria-current=page] .icon
+  rule-6 | style | .titlebar [data-tab=office][aria-current=page] .icon
+  rule-7 | style | .titlebar [data-tab=chat][aria-current=page] .icon
+  rule-8 | style | .titlebar [data-tab=management][aria-current=page] .icon
+  rule-9 | style | .broadcast-dialog
+  rule-10 | style | .broadcast-dialog [data-tone=election]
+  rule-11 | style | .broadcast-dialog [data-tone=success]
+  rule-12 | style | .broadcast-dialog [data-tone=release]
+  rule-13 | style | .broadcast-dialog [data-tone=attention]
+  rule-14 | style | .broadcast-dialog ol
+  rule-15 | style | .broadcast-dialog .empty
+  rule-16 | style | body.native-overlay-pending dialog[open],body.native-overlay-pending dialog[open]::backdrop
+  rule-17 | style | .repository-channels
+  rule-18 | style | .repository-channels li
+  rule-19 | style | .repository-channels li[data-channel=development]
+  rule-20 | style | .repository-channels li[data-channel=stable]
+  rule-21 | style | .repository-channels li+li
+  rule-22 | style | .repository-channels li>:is(button,div)
+  rule-23 | style | .repository-channels li>button:hover:not(:disabled)
+  rule-24 | style | .repository-channels .channel-icon
+  rule-25 | style | .repository-channels button .channel-icon
+  rule-26 | style | .repository-channels strong,.repository-channels small
+  rule-27 | style | .repository-channels strong
+  rule-28 | style | .repository-channels small
+  rule-29 | style | .repository-channels .channel-status
+  rule-30 | style | .repository-channels [data-verification-state=passed] .channel-status
+  rule-31 | style | .repository-channels [data-verification-state=failed] .channel-status
+  rule-32 | style | .repository-channels .channel-arrow
+  rule-33 | style | .station-work-marker
+  rule-34 | style | .station-work-marker .icon
+  rule-35 | style | .station-work-marker[data-task-state=blocked]
+  rule-36 | style | .station-work-marker[data-task-state=review]
+  rule-37 | style | .message[data-arrival=true]>div
+  rule-38 | style | @keyframes chat-arrival
+  rule-39 | style | :root:is([data-motion=reduced],[data-hidden=true]) .message[data-arrival=true]>div
+  rule-40 | style | @media(prefers-reduced-motion:reduce)
+  rule-41 | style | .management-section:has([data-review]) h2
+  rule-42 | style | .management-section .admin-list>article:has([data-review])
+  rule-43 | style | .management-section .audit
+  rule-44 | style | @media(max-width:650px)
+  rule-45 | style | #navigation-sweep
+  rule-46 | style | #navigation-sweep
+  rule-47 | style | #tabs
+  rule-48 | style | #navigation-sweep[data-destination=agents]
+  rule-49 | style | #navigation-sweep[data-destination=repository]
+  rule-50 | style | #navigation-sweep[data-destination=chat]
+  rule-51 | style | #navigation-sweep[data-destination=management]
+  rule-52 | style | #workspace>.surface
+  rule-53 | style | body:not(.native-overlay-pending) :is(#dialog,#detail-dialog)[open]
+  rule-54 | style | body.native-overlay-pending dialog[open]
+  rule-55 | style | @keyframes together-dialog-in
+  rule-56 | style | @media(prefers-reduced-motion:reduce)
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ .titlebar .broadcast-button{position:relative;color:#a8dfeb}
+/* @chain-region rule-2 */ .titlebar .broadcast-button:not([hidden])+#system-settings{margin-left:0}
+/* @chain-region rule-3 */ #broadcast-unread:not([hidden]){
+ position:absolute;inset:0 -2px auto auto;display:grid;place-items:center;min-width:16px;height:16px;
+ padding:0 2px;border:1px solid #122029;border-radius:5px;background:#9ce7df;color:#123231;
+ font-size:10px;font-weight:700;font-variant-numeric:tabular-nums;pointer-events:none;
+}
+/* @chain-region rule-4 */ .titlebar [data-tab=agents][aria-current=page] .icon{color:#a0ebc5}
+/* @chain-region rule-5 */ .titlebar [data-tab=repository][aria-current=page] .icon{color:#e1b7f2}
+/* @chain-region rule-6 */ .titlebar [data-tab=office][aria-current=page] .icon{color:#a1d7ee}
+/* @chain-region rule-7 */ .titlebar [data-tab=chat][aria-current=page] .icon{color:#9ce7df}
+/* @chain-region rule-8 */ .titlebar [data-tab=management][aria-current=page] .icon{color:#ffd08a}
+/* @chain-region rule-9 */ .broadcast-dialog{--event-accent:#a1d7ee}
+/* @chain-region rule-10 */ .broadcast-dialog [data-tone=election]{--event-accent:#ffd08a}
+/* @chain-region rule-11 */ .broadcast-dialog [data-tone=success]{--event-accent:#a0ebc5}
+/* @chain-region rule-12 */ .broadcast-dialog [data-tone=release]{--event-accent:#e1b7f2}
+/* @chain-region rule-13 */ .broadcast-dialog [data-tone=attention]{--event-accent:#ffb6a9}
+/* @chain-region rule-14 */ .broadcast-dialog ol{max-height:min(55vh,22rem)}
+/* @chain-region rule-15 */ .broadcast-dialog .empty{margin:0;padding:16px}
+/* @chain-region rule-16 */ body.native-overlay-pending dialog[open],body.native-overlay-pending dialog[open]::backdrop{opacity:0;pointer-events:none}
+/* @chain-region rule-17 */ .repository-channels{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 0 20px;padding:0;list-style:none;
+ border-block:1px solid #b2d5e044;background:#111c24a8;
+}
+/* @chain-region rule-18 */ .repository-channels li{--channel-accent:#a9def1;min-width:0}
+/* @chain-region rule-19 */ .repository-channels li[data-channel=development]{--channel-accent:#a0ebc5}
+/* @chain-region rule-20 */ .repository-channels li[data-channel=stable]{--channel-accent:#e1b7f2}
+/* @chain-region rule-21 */ .repository-channels li+li{border-inline-start:1px solid #b2d5e02a}
+/* @chain-region rule-22 */ .repository-channels li>:is(button,div){
+ display:flex;align-items:center;justify-content:flex-start;gap:9px;width:100%;min-height:72px;
+ padding:9px 11px;border-radius:0;text-align:start;color:var(--ui-text);
+}
+/* @chain-region rule-23 */ .repository-channels li>button:hover:not(:disabled){background:color-mix(in srgb,var(--channel-accent) 12%,transparent)}
+/* @chain-region rule-24 */ .repository-channels .channel-icon{
+ display:grid;place-items:center;flex:none;width:34px;height:34px;border:1px solid #a3b9c746;
+ border-radius:7px;background:#15242b;color:var(--ui-text-2);
+}
+/* @chain-region rule-25 */ .repository-channels button .channel-icon{color:var(--channel-accent);border-color:color-mix(in srgb,var(--channel-accent) 50%,transparent)}
+/* @chain-region rule-26 */ .repository-channels strong,.repository-channels small{display:block;overflow-wrap:anywhere}
+/* @chain-region rule-27 */ .repository-channels strong{font-weight:550}
+/* @chain-region rule-28 */ .repository-channels small{margin-top:3px;font-size:12px}
+/* @chain-region rule-29 */ .repository-channels .channel-status{color:var(--channel-accent)}
+/* @chain-region rule-30 */ .repository-channels [data-verification-state=passed] .channel-status{color:#a0ebc5}
+/* @chain-region rule-31 */ .repository-channels [data-verification-state=failed] .channel-status{color:#ffb6a9}
+/* @chain-region rule-32 */ .repository-channels .channel-arrow{width:16px;height:16px;margin-inline-start:auto;color:var(--channel-accent)}
+/* @chain-region rule-33 */ .station-work-marker{display:inline-flex;align-items:center;gap:5px;color:#a9def1;font-size:13px}
+/* @chain-region rule-34 */ .station-work-marker .icon{width:16px;height:16px}
+/* @chain-region rule-35 */ .station-work-marker[data-task-state=blocked]{color:#ffbaaa}
+/* @chain-region rule-36 */ .station-work-marker[data-task-state=review]{color:#e1b7f2}
+/* @chain-region rule-37 */ .message[data-arrival=true]>div{animation:chat-arrival .85s ease-out}
+/* @chain-region rule-38 */ @keyframes chat-arrival{
+ 0%{translate:0 10px;background:#90dfd843;box-shadow:inset 3px 0 #9ce7df}
+ 36%{translate:0 0;background:#90dfd82a}
+ 100%{background:transparent;box-shadow:inset 0 0 #9ce7df00}
+}
+/* @chain-region rule-39 */ :root:is([data-motion=reduced],[data-hidden=true]) .message[data-arrival=true]>div{animation:none}
+/* @chain-region rule-40 */ @media(prefers-reduced-motion:reduce){.message[data-arrival=true]>div{animation:none}}
+/* @chain-region rule-41 */ .management-section:has([data-review]) h2{color:#ffd08a}
+/* @chain-region rule-42 */ .management-section .admin-list>article:has([data-review]){border-inline-start:2px solid #ffd08a80;padding-inline-start:11px}
+/* @chain-region rule-43 */ .management-section .audit{box-shadow:inset 1px 0 #a0ebc544}
+/* @chain-region rule-44 */ @media(max-width:650px){
+ .repository-channels li>:is(button,div){flex-wrap:wrap;align-content:start;min-height:96px;padding-inline:8px}
+ .repository-channels .channel-arrow{display:none}
+}
+/* @chain-region rule-45 */ #navigation-sweep{
+ position:absolute;pointer-events:none;opacity:0;z-index:1;
+}
+/* @chain-region rule-46 */ #navigation-sweep{
+ bottom:-4px;width:34px;height:3px;border-radius:3px;
+ background:var(--sweep-color,#a1d7ee);
+ box-shadow:0 0 9px var(--sweep-color,#a1d7ee);
+}
+/* @chain-region rule-47 */ #tabs{position:relative}
+/* @chain-region rule-48 */ #navigation-sweep[data-destination=agents]{--sweep-color:#a0ebc5}
+/* @chain-region rule-49 */ #navigation-sweep[data-destination=repository]{--sweep-color:#e1b7f2}
+/* @chain-region rule-50 */ #navigation-sweep[data-destination=chat]{--sweep-color:#9ce7df}
+/* @chain-region rule-51 */ #navigation-sweep[data-destination=management]{--sweep-color:#ffd08a}
+/* @chain-region rule-52 */ #workspace>.surface{animation:none}
+/* @chain-region rule-53 */ body:not(.native-overlay-pending) :is(#dialog,#detail-dialog)[open]{animation:together-dialog-in 245ms cubic-bezier(.2,.75,.25,1)}
+/* @chain-region rule-54 */ body.native-overlay-pending dialog[open]{animation:none}
+/* @chain-region rule-55 */ @keyframes together-dialog-in{
+ from{opacity:.72;translate:0 10px}
+ to{opacity:1;translate:0 0}
+}
+/* @chain-region rule-56 */ @media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

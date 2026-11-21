@@ -1,0 +1,30 @@
+/* @file-map:start
+文件: link/office/web/dialogs.css
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html, link/office/web/index.html
+链路: modal
+验证: AIDEBUG/live-review.cjs, link/desktop/modal-aidebug.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | body dialog
+  rule-2 | style | body dialog[open]
+  rule-3 | style | body dialog:not([open])
+  rule-4 | style | body dialog::backdrop
+  rule-5 | style | @keyframes link-dialog-enter
+  rule-6 | style | @media(prefers-reduced-motion:reduce)
+  rule-7 | style | #native-office-frame
+  rule-8 | style | #native-office-frame[hidden]
+  rule-9 | style | .native-overlay-pending dialog[open]
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* One closing policy for the workspace and the embedded office. Only entry animates. */
+/* @chain-region rule-1 */ body dialog{background:linear-gradient(145deg,#ffffff08,transparent 55%),#141821!important;backdrop-filter:none!important;transition:none!important;transform:none;opacity:1}
+/* @chain-region rule-2 */ body dialog[open]{animation:link-dialog-enter 160ms cubic-bezier(.2,.8,.2,1)}
+/* @chain-region rule-3 */ body dialog:not([open]){display:none!important;visibility:hidden!important;pointer-events:none!important;animation:none!important;transition:none!important;opacity:0}
+/* @chain-region rule-4 */ body dialog::backdrop{background:#05070c9c;backdrop-filter:none!important;animation:none!important;transition:none!important}
+/* @chain-region rule-5 */ @keyframes link-dialog-enter{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
+/* @chain-region rule-6 */ @media(prefers-reduced-motion:reduce){body dialog[open]{animation:none}}
+/* @chain-region rule-7 */ #native-office-frame{position:fixed;inset:56px 0 0;width:100%;height:calc(100% - 56px);object-fit:fill;z-index:2;pointer-events:none}
+/* @chain-region rule-8 */ #native-office-frame[hidden]{display:none}
+/* @chain-region rule-9 */ .native-overlay-pending dialog[open]{visibility:hidden}

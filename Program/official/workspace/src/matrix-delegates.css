@@ -1,0 +1,64 @@
+.matrix-delegates { margin: 20px 0 12px; min-width: 0; }
+.matrix-delegates > header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 12px; }
+.matrix-delegates > header > span { color: var(--muted); margin-left: auto; }
+.matrix-delegate { border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; overflow: hidden; }
+.matrix-delegate > details > summary { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 12px 14px; cursor: pointer; font-size: 12px; }
+.matrix-delegate > details > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+.matrix-delegate-model { color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
+.matrix-delegate-state { margin-left: auto; color: var(--ink-soft); }
+.matrix-delegate-state.is-error,.matrix-delegate-state.is-waiting { font-weight: 600; }
+.matrix-delegate-body { padding: 0 14px 14px; font-size: 12px; line-height: 1.75; overflow-wrap: anywhere; }
+.matrix-delegate-body p { white-space: pre-wrap; }
+.matrix-delegate-tools,.matrix-delegate-usage { color: var(--muted); }
+.matrix-delegate-followup { display: grid; gap: 8px; margin-top: 12px; }
+.matrix-delegate-followup textarea { width: 100%; resize: vertical; min-height: 64px; }
+.matrix-delegate-followup > div { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 560px) { .matrix-delegate-model { flex-basis: 100%; padding-left: 22px; } }
+.matrix-crew-layer { position:relative; grid-column:2; grid-row:1; min-width:0; min-height:0; pointer-events:none; z-index:25; container-type:inline-size; container-name:crew; }
+.ide-shell.unified-workspace:has(.workspace-edge-left.is-revealed:not(.has-open-panel)) .matrix-crew-layer,
+.ide-shell.unified-workspace:has(.workspace-edge-left:not(.has-open-panel) :focus-visible) .matrix-crew-layer { --crew-rail-inset:var(--workspace-rail); }
+.matrix-crew { position:absolute; left:calc(18px + var(--crew-rail-inset,0px)); top:18px; width:min(340px,calc(100% - 36px - var(--crew-rail-inset,0px))); pointer-events:auto; color:var(--ink); font-size:12px; }
+.matrix-crew-orbits { display:flex; flex-direction:column; gap:8px; max-height:min(320px,38vh); overflow:auto; padding:4px; scrollbar-width:thin; }
+.matrix-crew-agent { display:flex; align-items:center; gap:10px; text-align:left; width:100%; padding:2px; border:0; background:transparent; color:inherit; }
+.matrix-crew-orb { display:grid; place-items:center; width:38px; height:38px; flex-shrink:0; border:1px solid var(--line); border-radius:50%; background:var(--surface-solid); box-shadow:var(--small-shadow); }
+.matrix-crew-agent.is-running .matrix-crew-orb,.matrix-crew-agent.is-starting .matrix-crew-orb { border-color:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 12%,transparent); }
+.matrix-crew-agent.is-waiting .matrix-crew-orb,.matrix-crew-agent.is-error .matrix-crew-orb,.matrix-crew-agent.is-interrupted .matrix-crew-orb { border-color:var(--amber); }
+.matrix-crew-bubble { flex:1; min-width:0; display:grid; gap:3px; padding:9px 11px; border:1px solid var(--line); border-radius:12px; background:var(--surface-solid); box-shadow:var(--small-shadow); }
+.matrix-crew-bubble strong { display:flex; min-width:0; justify-content:space-between; gap:8px; font-size:12px; }
+.matrix-crew-bubble strong > span { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.matrix-crew-bubble small { color:var(--muted); font-size:10px; font-weight:400; white-space:nowrap; }
+.matrix-crew-bubble > span { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; overflow-wrap:anywhere; font-size:11px; line-height:1.5; color:var(--ink-soft); }
+.matrix-crew-bar { display:flex; align-items:center; gap:10px; margin-top:8px; padding:7px 10px; width:fit-content; max-width:100%; border:1px solid var(--line); border-radius:18px; background:var(--surface-solid); box-shadow:var(--small-shadow); }
+.matrix-crew-bar button { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:28px; border:0; border-radius:8px; background:none; color:inherit; padding:2px; font-size:11px; white-space:nowrap; }
+.matrix-crew-bar button:hover { background:var(--hover-bg); }
+.matrix-crew-bar button:focus-visible,.matrix-crew-agent:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.matrix-crew-bar > span { color:var(--muted); font-size:10px; white-space:nowrap; }
+.matrix-crew-panel { position:absolute; left:0; top:calc(100% + 10px); width:min(440px,calc(100vw - 44px)); max-width:calc(100vw - 44px); max-height:min(560px,calc(100vh - 180px)); overflow:auto; padding:14px; border:1px solid var(--line); border-radius:16px; background:var(--surface-solid); box-shadow:var(--shadow); scrollbar-width:thin; }
+.matrix-crew:has(.matrix-crew-panel) .matrix-crew-orbits { display:none; }
+.matrix-crew-panel > header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.matrix-crew-panel > header button { background:none; border:0; color:inherit; padding:5px; }
+.matrix-crew-manager { line-height:1.7; overflow-wrap:anywhere; }
+.matrix-crew-manager > p { color:var(--muted); }
+.matrix-crew-seat-list { display:grid; gap:6px; margin-bottom:10px; }
+.matrix-crew-seat-list button { display:grid; text-align:left; gap:3px; border:1px solid var(--line); border-radius:9px; padding:8px 10px; color:inherit; background:transparent; }
+.matrix-crew-seat-list span { color:var(--muted); font-size:11px; overflow-wrap:anywhere; }
+.matrix-crew-config { display:grid; gap:10px; margin-top:12px; }
+.matrix-crew-config label { display:grid; gap:4px; }
+.matrix-crew-config .ui-control { width:100%; min-width:0; max-width:100%; }
+.matrix-crew-config details p { font-size:10px; color:var(--muted); }
+.matrix-crew-actions { display:flex; flex-wrap:wrap; gap:6px; }
+@container crew (max-width:360px) { .matrix-crew-bubble { padding:7px; } .matrix-crew-bar { flex-wrap:wrap; gap:5px; } .matrix-crew-panel { width:min(440px,calc(100vw - 36px - var(--crew-rail-inset,0px))); max-width:calc(100vw - 36px - var(--crew-rail-inset,0px)); } }
+@container crew (max-width:180px) {
+ .matrix-crew { left:10px; width:calc(100% - 20px); }
+ .matrix-crew-orbits { padding:4px 0; overflow:visible; }
+ .matrix-crew-agent { justify-content:center; min-height:44px; padding:2px 0; }
+ .matrix-crew-bubble { display:none; }
+ .matrix-crew-bar { justify-content:center; padding:3px; border-radius:50%; }
+ .matrix-crew-bar button { width:32px; height:32px; border-radius:50%; }
+ .matrix-crew-bar button > span,.matrix-crew-bar > span,.matrix-crew-bar > button:not(:first-child) { display:none; }
+ .ide-shell.unified-workspace:has(.workspace-edge-left.is-revealed:not(.has-open-panel)) .matrix-crew,
+ .ide-shell.unified-workspace:has(.workspace-edge-left:not(.has-open-panel) :focus-visible) .matrix-crew { visibility:hidden; pointer-events:none; }
+}
+@media (max-width: 900px) { .ide-main.workspace-dock-open > .matrix-crew-layer { grid-column:1 / -1; } }
+@media (max-width: 760px) { .matrix-crew { top:12px; } .matrix-crew-orbits { max-height:25vh; } }
+@media (prefers-reduced-motion: reduce) { .matrix-crew * { animation:none!important; transition:none!important; } }

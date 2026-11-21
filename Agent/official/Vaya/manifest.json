@@ -1,0 +1,112 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.vaya",
+  "kind": "agent",
+  "name": "Vaya",
+  "summary": "公开标准执行者定义；显式选择模型并创建独立实例。",
+  "version": "1.1.4",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "agent": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "agent": "definition.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "project",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "terminal",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "exec_command",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "write_stdin",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "read_shell_output",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "apply_patch",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "view_image",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "web_search",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "memory",
+      "reason": "管理本实例的记忆、原文与上下文"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.agent",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "1466674a197c050be1e008bda6f8bfa7e9d76c4d3b525f04043e1c01fd667355",
+      "size": 75
+    },
+    "definition.json": {
+      "sha256": "fbe0ab3918aad68819ccb804c16d3a53fd47d57946eda9d5ad142004bdf959ee",
+      "size": 1176
+    },
+    "desktop.json": {
+      "sha256": "76c9520e19d7c66cf331c45f33a6fca6ff69853e9ed1bcfa547b20f06007bdd2",
+      "size": 75
+    },
+    "manual.md": {
+      "sha256": "49e71328fb4d18ddd1f46396349d24eecbe4ccef0825782a60daa56dd35281a0",
+      "size": 693
+    },
+    "prompts/提示词.txt": {
+      "sha256": "392cf972b5ae9dd53a5fb070c277aadd66297d0c5f79829aea6f98e50af1f043",
+      "size": 3570
+    }
+  }
+}

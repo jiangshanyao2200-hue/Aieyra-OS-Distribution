@@ -1,0 +1,36 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.theme-columns",
+  "kind": "theme",
+  "name": "分栏主题示例",
+  "summary": "主题定义布局与组件组合，保留同一份业务状态。",
+  "version": "1.6.4",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "theme": "^1.3.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "theme": "theme.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "theme.json": {
+      "sha256": "a27831dbdb7d13602c46b8885fc6bff7cb311c8051b95eae82f5d71fc93251d0",
+      "size": 28253
+    }
+  }
+}

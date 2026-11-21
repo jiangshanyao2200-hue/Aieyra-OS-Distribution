@@ -1,0 +1,95 @@
+{
+  "schema": "aieyra.workbox/1",
+  "name": "specialist-statistics",
+  "description": "先统计输入，审阅后生成实际 JSON 报告。",
+  "input": {
+    "type": "object",
+    "properties": {
+      "values": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      },
+      "workdir": {
+        "type": "string"
+      },
+      "file": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "values",
+      "workdir",
+      "file"
+    ],
+    "additionalProperties": false
+  },
+  "tools": {
+    "statistics": {
+      "package": "example.statistics"
+    },
+    "report": {
+      "package": "example.report"
+    }
+  },
+  "steps": [
+    {
+      "id": "calculate",
+      "title": "统计输入",
+      "kind": "call",
+      "needs": [],
+      "tool": "statistics",
+      "arguments": {
+        "values": {
+          "$input": "/values"
+        }
+      },
+      "effect": "read"
+    },
+    {
+      "id": "review",
+      "title": "审阅统计结果",
+      "kind": "checkpoint",
+      "needs": [
+        "calculate"
+      ]
+    },
+    {
+      "id": "export",
+      "title": "写入报告",
+      "kind": "call",
+      "needs": [
+        "calculate",
+        "review"
+      ],
+      "tool": "report",
+      "arguments": {
+        "values": {
+          "$input": "/values"
+        },
+        "workdir": {
+          "$input": "/workdir"
+        },
+        "file": {
+          "$input": "/file"
+        }
+      },
+      "effect": "external"
+    }
+  ],
+  "outputs": {
+    "statistics": {
+      "$step": "calculate",
+      "path": ""
+    },
+    "report": {
+      "$step": "export",
+      "path": ""
+    }
+  },
+  "agentTemplate": {
+    "package": "example.workflow-manager",
+    "retention": "retained"
+  }
+}

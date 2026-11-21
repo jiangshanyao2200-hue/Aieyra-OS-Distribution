@@ -1,0 +1,122 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.cota",
+  "kind": "agent",
+  "name": "Cota",
+  "summary": "公开标准执行者定义；显式选择模型并创建独立实例。",
+  "version": "1.1.6",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "agent": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "agent": "definition.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "project",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "terminal",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "exec_command",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "write_stdin",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "read_shell_output",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "apply_patch",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "view_image",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "web_search",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "update_plan",
+      "reason": "维护专业执行的计划与实际证据；实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "memory",
+      "reason": "管理本实例的记忆、原文与上下文"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "report",
+      "reason": "保存和回读本会话的交付报告；实例可收窄授权"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.agent",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "99b24a999e7c7e2d77bd2f236628e3d648bd46f8d13d8d9a8053c6f6bd77302f",
+      "size": 75
+    },
+    "definition.json": {
+      "sha256": "9e9bac24ddb75773248468c456acb3baa1a85abfce7ad848d071560555f62188",
+      "size": 1261
+    },
+    "desktop.json": {
+      "sha256": "fafa291044a48b13f4a0872565e7b7c8e782152710dc508c6b55162b7e89762d",
+      "size": 75
+    },
+    "manual.md": {
+      "sha256": "961d7f254140ec5438499527c5d705ae74f722bc1bc7bac1696e25c3904e5005",
+      "size": 693
+    },
+    "prompts/提示词.txt": {
+      "sha256": "4e9cbb949af84788dc5bbe7be1c6d3d750359f0cb3e8d8cbb0212dbaff097e89",
+      "size": 4567
+    }
+  }
+}

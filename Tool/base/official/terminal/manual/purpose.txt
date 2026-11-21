@@ -1,0 +1,1 @@
+简短中文用途，例如 搜索配置入口、读取项目约定、运行测试。命令和文件名保持原样。No rationale, exit code, duration or progress counters.

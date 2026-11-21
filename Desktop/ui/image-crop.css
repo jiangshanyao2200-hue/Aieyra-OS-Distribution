@@ -1,0 +1,33 @@
+/* 裁切弹窗（头像、背景、服务器图……）：设置页和程序页面共用同一份。 */
+.image-crop .slider-field { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:10px 12px; font-size:12px; color:var(--text-3); }
+.image-crop .slider-field input[type=range] { grid-column:1 / -1; grid-row:2; }
+.image-crop .slider-field output { grid-column:2; grid-row:1; font-size:12px; font-variant-numeric:tabular-nums; color:var(--text-2); }
+.image-crop input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:18px; margin:0; padding:0; border:0; background:transparent; cursor:pointer; }
+.image-crop input[type=range]::-webkit-slider-runnable-track { height:2px; border-radius:2px; background:linear-gradient(90deg,var(--s-accent,#a9c0ec) 0 var(--fill,0%),#ffffff1f var(--fill,0%) 100%); }
+.image-crop input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; margin-top:-6px; border-radius:50%; background:#eef1f7; box-shadow:0 0 0 4px #a9c0ec22,0 2px 6px #0008; transition:transform var(--t1) var(--ease); }
+.image-crop input[type=range]:hover::-webkit-slider-thumb,.image-crop input[type=range]:focus-visible::-webkit-slider-thumb { transform:scale(1.15); }
+.image-crop input[type=range]:focus { outline:none; }
+.image-crop input[type=range] { min-height:0; }
+dialog.image-crop { width:min(560px,calc(100vw - 48px)); padding:26px 28px 22px; border:1px solid #ffffff14; border-radius:20px; background:rgba(16,18,24,.96); color:var(--text,#e6e9f0); box-shadow:0 30px 80px #000a; }
+dialog.image-crop::backdrop { background:#05060899; backdrop-filter:blur(6px); }
+dialog.image-crop h2 { margin:0; font-size:16px; font-weight:500; }
+dialog.image-crop p { margin:6px 0 18px; font-size:12px; color:var(--text-3,#6b7385); }
+dialog.image-crop .crop-stage { position:relative; width:100%; max-height:52vh; margin:0 auto 18px; border-radius:14px; overflow:hidden; background:#0b0d12; cursor:grab; }
+dialog.image-crop .crop-stage.dragging { cursor:grabbing; }
+dialog.image-crop .crop-stage canvas { display:block; width:100%; height:100%; }
+dialog.image-crop .crop-stage.round { width:min(320px,100%); }
+/* 头像取景：框的内切圆就是最终头像（E2）——圆外压暗，圆周一圈细线。 */
+dialog.image-crop .crop-stage.round::after { content:''; position:absolute; inset:0; border-radius:14px; background:radial-gradient(circle closest-side,transparent calc(100% - 1.5px),#e6e9f066 calc(100% - 1px),#0b0d12c0 100%); box-shadow:inset 0 0 0 1px #ffffff14; pointer-events:none; }
+dialog.image-crop.round { width:min(660px,calc(100vw - 48px)); }
+dialog.image-crop .crop-body { display:flex; align-items:center; gap:28px; }
+dialog.image-crop .crop-body .crop-stage { flex:1 1 auto; margin:0; }
+dialog.image-crop .crop-body .crop-stage.round { flex:none; width:min(380px,50vh,100%); }
+dialog.image-crop .crop-previews { flex:none; display:flex; flex-direction:column; align-items:center; gap:18px; }
+dialog.image-crop .crop-preview { display:grid; justify-items:center; gap:8px; margin:0; }
+dialog.image-crop .crop-preview canvas { border-radius:50%; box-shadow:0 0 0 1px #ffffff24; }
+dialog.image-crop .crop-preview.ring canvas { box-shadow:0 0 0 2px #e6e9f0d9,0 0 18px #b9c8ff38; }
+dialog.image-crop .crop-preview figcaption { font-size:11px; color:var(--text-3,#6b7385); }
+dialog.image-crop .slider-field { margin-top:18px; }
+dialog.image-crop .crop-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+dialog.image-crop button { min-height:34px; padding:0 18px; border:0; border-radius:999px; background:#ffffff0d; color:#c9cfda; font-size:13px; cursor:pointer; }
+dialog.image-crop button:not(.quiet) { background:#eef1f7; color:#0b0d12; font-weight:500; }

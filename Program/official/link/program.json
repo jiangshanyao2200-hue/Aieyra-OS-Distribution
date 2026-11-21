@@ -1,0 +1,107 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "ui/control.mjs",
+    "native": "link",
+    "navigation": {
+      "tab": "dock-link",
+      "host": "process",
+      "order": 4
+    }
+  },
+  "operations": [
+    {
+      "id": "status",
+      "description": "Link办公室：status；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "join",
+      "description": "Link办公室：join；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "inbox",
+      "description": "Link办公室：inbox；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "post",
+      "description": "Link办公室：post；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "deliveries",
+      "description": "Link办公室：deliveries；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "registry",
+      "description": "Link办公室：registry；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "tasks",
+      "description": "Link办公室：tasks；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "task",
+      "description": "Link办公室：task；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "history",
+      "description": "Link办公室：history；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "requirements",
+      "description": "Link办公室：requirements；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "requirement",
+      "description": "Link办公室：requirement；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "memory",
+      "description": "Link办公室：memory；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "notifications",
+      "description": "Link办公室：notifications；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "task_create",
+      "description": "Link办公室：task_create；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "task_claim",
+      "description": "Link办公室：task_claim；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "task_accept",
+      "description": "Link办公室：task_accept；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "task_update",
+      "description": "Link办公室：task_update；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "ack",
+      "description": "Link办公室：ack；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "memory_save",
+      "description": "Link办公室：memory_save；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "notify_leader",
+      "description": "Link办公室：notify_leader；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "notification_ack",
+      "description": "Link办公室：notification_ack；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "receipt",
+      "description": "Link办公室：receipt；保留原权限、身份、游标与请求回执。"
+    },
+    {
+      "id": "remote",
+      "description": "Link办公室：remote；保留原权限、身份、游标与请求回执。"
+    }
+  ]
+}

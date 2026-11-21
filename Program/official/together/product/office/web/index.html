@@ -1,0 +1,46 @@
+<!-- @file-map:start
+文件: link/office/web/index.html
+位置: 一环·共享工位界面 | 工位页面与供shell/原生OS复用的模型、视觉和弹层规则。
+约束: 共享原语优先复用，页面仅组装数据与事件；保持草稿、滚位和焦点，不在布局观察回调中重复同步写布局
+下游: link/office/web/aieyra-theme.css, link/office/web/dialogs.css, link/office/web/link-access-guide.css, link/office/web/link-access-guide.js, link/office/web/link-page.css, link/office/web/office-home.js, link/office/web/styles.css, link/office/web/together-design.css, link/office/web/together-shell.css
+上游: 入口/动态加载；参阅链路与目录地图
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test link/office/tests/unit/*.mjs, AIDEBUG/live-review.cjs
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  script-1 | element
+  app | element
+  announcer | element
+  toast | element
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end -->
+<!doctype html>
+<html lang="zh-CN" class="together-office">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#101319" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Aieyra 众创 Link</title>
+    <link rel="icon" href="./mark.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./aieyra-theme.css" />
+    <link rel="stylesheet" href="./link-page.css" />
+    <link rel="stylesheet" href="./link-access-guide.css" />
+    <link rel="stylesheet" href="./together-shell.css" />
+    <link rel="stylesheet" href="./dialogs.css" />
+    <link rel="stylesheet" href="./together-design.css" />
+    <script type="module" src="./office-home.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳至主要内容</a>
+    <div id="app"
+      ><div class="boot"
+        ><span class="boot-mark" aria-hidden="true">A</span><p>正在连接 Link…</p></div
+      ></div
+    >
+    <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <noscript>请启用 JavaScript 以读取协作状态。Enable JavaScript to connect.</noscript>
+  </body>
+</html>

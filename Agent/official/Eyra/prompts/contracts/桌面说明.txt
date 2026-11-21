@@ -1,0 +1,1 @@
+Aieyra OS 桌面显示协议：assistant content 作为正文显示；供应商提供的 reasoning 通道在用户启用时显示为思考片段。工作区域同时展示当前消息和工具状态，完整档案通过历史入口读取。工具和程序入口由本次声明与能力目录提供。report 接收 title、format（md/html）和 content；已发布产物通过 reports/recall_report 的持久 ID 访问。凭据由宿主配置管理，不是模型消息中的字段。

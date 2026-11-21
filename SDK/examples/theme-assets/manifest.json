@@ -1,0 +1,52 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "example.theme-assets",
+  "kind": "theme",
+  "name": "材质与字体主题示例",
+  "summary": "从当前主题包加载有校验的离线图片与字体。",
+  "version": "1.0.1",
+  "publisher": "example",
+  "license": "MIT",
+  "contracts": {
+    "core": "^1.0.0",
+    "theme": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "theme": "theme.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "assets/inter.woff2": {
+      "sha256": "13b4cddc57045d40b411008e61588c8f81aa0bd72fe884624831a0ff9c4d159a",
+      "size": 350460
+    },
+    "assets/paper.png": {
+      "sha256": "1d7e090fe9c11d1c61f9978969366f6629fd0ba6e38d968170ba36289fd9072c",
+      "size": 237
+    },
+    "FONT-LICENSE.txt": {
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "size": 4377
+    },
+    "README.md": {
+      "sha256": "87ca4a0055d3e531b42a230d0b5c2529be151db38b71d61a557fb13e7fa229e8",
+      "size": 530
+    },
+    "theme.json": {
+      "sha256": "2ea27a39a5f36963b3a84dbc9fa46205b8679335711e86888a2ebb1b39532f6a",
+      "size": 930
+    }
+  }
+}

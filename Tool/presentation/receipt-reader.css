@@ -1,0 +1,24 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Tool/presentation/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body .hx-receipt-body; body .hx-receipt-body small; body .hx-io; body .hx-more; body .hx-pages; body .hx-receipt; body .hx-receipt-body; body .hx-pages; body .hx-receipt-body .hx-state; body .hx-receipt > summary:focus-visible; body :is(.hx,.hx-receipt) :is(.hx-retry,.hx-page); body :is(.hx,.hx-receipt) :is(.hx-retry,.hx-page):hover:not(:disabled); body :is(.hx,.hx-receipt) .hx-page:disabled; body .hx-receipt .hx-page:focus-visible
+ * Impact: python -B scripts/code-atlas.py show Tool/presentation/receipt-reader.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+body .hx-receipt-body { margin:4px 0 10px; padding:12px 14px; border-radius:12px; background:#ffffff06; box-shadow:var(--glass-edge-1); max-height:360px; overflow:auto; scrollbar-width:none; font-size:12.5px; }
+body .hx-receipt-body small { display:block; margin:6px 0 4px; color:var(--text-3); }
+body .hx-io { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; font:12px/1.6 Consolas,"Cascadia Mono",monospace; color:#c4cbd8; }
+body .hx-more { display:inline-block; margin-top:6px; font-size:12px; color:#a9c0ec; cursor:pointer; list-style:none; }
+body .hx-pages { display:flex; gap:8px; margin-top:10px; }
+body .hx-receipt { min-width:0; }
+body .hx-receipt-body { color:var(--ui-text-2,#c4cbd8); }
+body .hx-pages { flex-wrap:wrap; }
+body .hx-receipt-body .hx-state { margin:0 0 8px; color:var(--ui-text-3,#8a92a2); }
+body .hx-receipt > summary:focus-visible { outline:1px solid var(--accent,#a9c0ec); outline-offset:4px; border-radius:6px; }
+body :is(.hx,.hx-receipt) :is(.hx-retry,.hx-page) { min-height:0; padding:4px 12px; border:0; border-radius:999px; background:transparent; box-shadow:inset 0 0 0 1px #ffffff1c; color:var(--ui-text-2,var(--text-2)); font:inherit; font-size:12px; cursor:pointer; }
+body :is(.hx,.hx-receipt) :is(.hx-retry,.hx-page):hover:not(:disabled) { color:var(--ui-text,#eef1f7); box-shadow:inset 0 0 0 1px #ffffff33; }
+body :is(.hx,.hx-receipt) .hx-page:disabled { opacity:.35; cursor:default; }
+body .hx-receipt .hx-page:focus-visible { outline:1px solid var(--accent,#a9c0ec); outline-offset:2px; }

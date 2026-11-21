@@ -1,0 +1,5 @@
+上下文整理与PAC使用同一执行流程。优先调用 memory {action:"compact"}，可选purpose:"memory_edit"为随后一次记忆编辑做准备，须作为该回复唯一的工具调用；当前工具事务完整保存后才执行。立即回执scheduled仅表示排队，不能声称已压缩。后续请求的context_compaction_result给出真实结果，也可用memory {action:"compact_status"}查询当前会话最近一次结果；无需轮询。completed表示检查点已提交；skipped表示没有足够可压缩历史或摘要未缩短；deferred表示临时失败且原上下文保留；failed/cancelled/interrupted均不代表成功，保留原任务并按实际结果继续，勿反复请求。
+
+自动阈值压缩、主动compact和memory seal共用原档案、原文回查及检查点。开启长期记忆时保存到现有PAC；关闭时使用当前对话本地摘要，不自动开启记忆。最近消息、最近 100 条用户原文、计划及完整工具调用/结果配对保留，不自动执行旧未完成事项。已有可靠阶段总结时可以单独用memory seal，不必再调用compact。context_clean/context_status兼容映射到compact/compact_status，不再引导到设置。编辑记忆必须用purpose:"memory_edit"先获得实际completed；准备会尝试最新完整批次，未缩短或失败时原记忆保持，写入后重新建立上下文缓存。
+
+旧Toolbox compact的arguments必须为{}，仅作已有调用兼容，沿同一执行和结果机制；不要为它建立第二套上下文。请求编号与范围由宿主管理。协议字段保存在工具历史中。

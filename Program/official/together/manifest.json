@@ -1,0 +1,1236 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.together",
+  "kind": "program",
+  "name": "Aieyra Together",
+  "summary": "Together 本地办公室与完整云上协作工作台。",
+  "version": "1.2.13",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "program": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "program": "program.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "product/agent/aidebug_launch.py": {
+      "sha256": "4350407f5fa47f0e7596bda9d83fe289944c3cf0b34165f4356bff8c01fda8af",
+      "size": 12485
+    },
+    "product/agent/aidebug_screen.py": {
+      "sha256": "8568042c61447e517b726666a7c24d68dc622cf0e7b862b953f8407daebcc5ab",
+      "size": 7208
+    },
+    "product/agent/aidebug.py": {
+      "sha256": "d745d2799dc8c35d84183a85a4021956770043d32ba193a5a0857f67adc7b0be",
+      "size": 11143
+    },
+    "product/agent/appcontainer-aidebug.cjs": {
+      "sha256": "f0dc62cc2da87f8ae384a10562bfd948cc2e7dc3dc882740c009b951d9722cb0",
+      "size": 8054
+    },
+    "product/agent/appcontainer-fs.cjs": {
+      "sha256": "c78297e370d711c5a4855157a8ea552b2f97f8ce5af33d614c3b664f5cca3328",
+      "size": 5163
+    },
+    "product/agent/appcontainer.py": {
+      "sha256": "7ece9d5b70ab12262484a5839c919adeb2624839ce10a42e8421cf94f1867d81",
+      "size": 17521
+    },
+    "product/agent/artifact.py": {
+      "sha256": "bd2e2f443209c2c7cbb60e2c972d4cbf82de6301e92ac93c7d24c43195eeacb3",
+      "size": 7400
+    },
+    "product/agent/cocreation_source.py": {
+      "sha256": "40c5f9fddb8259edb1b3eb32143fcb97228b97cd013a7d615141e633c8107102",
+      "size": 4481
+    },
+    "product/agent/cocreation.py": {
+      "sha256": "5334b2485e60f8dd98f11754b0617902d4306a79cab0daad2702c44d1eabff23",
+      "size": 27637
+    },
+    "product/agent/collaboration.py": {
+      "sha256": "32ea5d1144d6dcb41f7024c192ad1d04e2e04c49ae1681e76281133bb7ec54de",
+      "size": 9638
+    },
+    "product/agent/live_work.py": {
+      "sha256": "bb4ab04bd3990db2d5ea5cb87d42f7c3cfb2f6a62e25fa9064f8faae6d4fa106",
+      "size": 29964
+    },
+    "product/agent/local_preview.py": {
+      "sha256": "f47f2984b51b6fe01590100fbfb2eb0921005c40cb605d2e9a54641971010a6c",
+      "size": 23592
+    },
+    "product/agent/local_runner.py": {
+      "sha256": "3d202faa5316ad2f53a95f726f9b441589b68d597f069d917f4ca70238eec960",
+      "size": 31664
+    },
+    "product/agent/local_vm.py": {
+      "sha256": "4f5fdf9acf9ef292511c67a431f4163800d011c2f52d2acf814699a0bb94d175",
+      "size": 45048
+    },
+    "product/agent/onboarding.py": {
+      "sha256": "e822cb8a5cd5e4fa4d4e8903fe935d7e3effca462d8f65ddbb807f4ab046ad63",
+      "size": 28520
+    },
+    "product/agent/prepare_vm.py": {
+      "sha256": "f2cea0fb0edced4426b5347d763de9c4e85670b8455ce6da5d31eaa28d1d5d18",
+      "size": 24198
+    },
+    "product/agent/proposal.py": {
+      "sha256": "a313db0bf29e07947740498759dbfc26609e5c605aaa03b3bc52a72eb6958991",
+      "size": 33108
+    },
+    "product/agent/README.md": {
+      "sha256": "c726aaa28e1b99e9aaa7a5396fe9356cb455e093dd0532bb00bbaf61df259275",
+      "size": 28403
+    },
+    "product/agent/source_protocol.py": {
+      "sha256": "bef9d0895e05717f86708d92432b086caaf06b7fa4bacde84d0b3a653542edea",
+      "size": 7813
+    },
+    "product/agent/together_link.py": {
+      "sha256": "7c6d3c32b365f055188cd28d27efcb0d7829b2ed33ee7335722a134b6669b236",
+      "size": 9641
+    },
+    "product/agent/toolchain_extract.py": {
+      "sha256": "44505f3c96f1a8a25159bd0537162cf7610538354a771b6e5d8c5747405a5452",
+      "size": 3193
+    },
+    "product/agent/vm_guest.py": {
+      "sha256": "a3c5d0c30bf7e6bf1ad750432344aa0fb43b81e2070079a69c1130573547f0f1",
+      "size": 10715
+    },
+    "product/agent/windows_debug.py": {
+      "sha256": "5f147bff43a733930b52f33c88b065c10c5f79a5d502dc811f9576c7232adf4a",
+      "size": 3308
+    },
+    "product/agent/windows_devices.py": {
+      "sha256": "b8b03bd9ee6fd423e05c8cd1a53bcc33569f908072216ce617f88184cb89e869",
+      "size": 5855
+    },
+    "product/agent/workspace.py": {
+      "sha256": "4431f2a3bb09acef41f0c514c1835e200ba604e1d3ecae3b9fdb45126f122c3c",
+      "size": 44951
+    },
+    "product/desktop/activity-store.cjs": {
+      "sha256": "fa508296079efa9c0ab7d4f6c2fa843e31c5e111d23f9fdad00cdb74c121b864",
+      "size": 3753
+    },
+    "product/desktop/aidebug-control.cjs": {
+      "sha256": "ef7c6bcdf72cbe3601122469d766c5c66ef8b75034bcb690ba0b398df5d4a0ee",
+      "size": 6681
+    },
+    "product/desktop/aidebug-images.cjs": {
+      "sha256": "be6f42cada05f13aab927c4cdb093b5cb3bc02e999ba6d19a8e69fc63e2023a4",
+      "size": 5346
+    },
+    "product/desktop/aidebug-layout.cjs": {
+      "sha256": "8acc8f9d5ded7a756ba60d8d34d46f5b2014b90d28173e2a08dceca06d21248e",
+      "size": 12446
+    },
+    "product/desktop/aidebug-live.cjs": {
+      "sha256": "c50c11f97f1f5c999067f099fe68068a820aa7282da5ba4dc48e5c8f9c53960e",
+      "size": 40229
+    },
+    "product/desktop/aidebug-native-hit.ps1": {
+      "sha256": "338647f47d7258c3999c9837b0a8be8436e2324ecd53806201aea5ba890d970a",
+      "size": 2960
+    },
+    "product/desktop/aidebug-network.cjs": {
+      "sha256": "cc7561946fc613014f1ba8793453ac1cb22e8c6a1f76ec72f00941ffc73913d8",
+      "size": 5160
+    },
+    "product/desktop/aidebug-observe.cjs": {
+      "sha256": "302ec9b8ec942552c8447471e91a582a010a01b0b05c2aef0ceb720ce556bbcf",
+      "size": 9841
+    },
+    "product/desktop/aidebug-screen.cjs": {
+      "sha256": "a35dce164688b775bc40c77a3cc70958436d04f5b81cbacac207c896a9812733",
+      "size": 3159
+    },
+    "product/desktop/aidebug.cjs": {
+      "sha256": "419ebe8d649d63a5c622f97f75a4f268fecedbb288587ffc8ab79d7fcf54c451",
+      "size": 15939
+    },
+    "product/desktop/bootstrap.cjs": {
+      "sha256": "d47b06a4018a3c666e3f9fd2625554f0006a35fbfc0a087db844126dfa7cec6e",
+      "size": 1979
+    },
+    "product/desktop/cloud-client.cjs": {
+      "sha256": "6b356df71100bf5a04e79f174d9c8c8cc6284e611a587ea3dd1df57db2f5d9f6",
+      "size": 32605
+    },
+    "product/desktop/cocreation.cjs": {
+      "sha256": "26e0ce4f985588b715266b92caa19a6bc564745d9aa97c591f06e82b8d46b8ac",
+      "size": 12117
+    },
+    "product/desktop/desktop-session.cjs": {
+      "sha256": "889a2da0a3fbfa593169cdcc157abafcb94ace3d466a3780a2153982b5f7bdfa",
+      "size": 2471
+    },
+    "product/desktop/development-download.cjs": {
+      "sha256": "777f4cfd25ff1624bda1412cdb3dab9bb357ae9c8428977bf0eb7304b63ca704",
+      "size": 6184
+    },
+    "product/desktop/icon.ico": {
+      "sha256": "25da5e2a8f7835b31a7f67f7ab9109a10bf73bdd24d053473dcf551eac38c68b",
+      "size": 70824
+    },
+    "product/desktop/icon.png": {
+      "sha256": "26900f1a360dd0c6beb2382e327c7def6aaa9bed84bf29b99d540395a4a23c02",
+      "size": 102121
+    },
+    "product/desktop/local-engineering.cjs": {
+      "sha256": "0228ec998ef3d9eb9b511bf636fbae11251782d0c1bfc6ed84034c65994b52ee",
+      "size": 5260
+    },
+    "product/desktop/login-window.cjs": {
+      "sha256": "8259ab44d9fa69d64a38c79bd651cfde9f743a1ba9aa73557f640014e870d9e6",
+      "size": 4070
+    },
+    "product/desktop/main.cjs": {
+      "sha256": "d83847981bc0d0db92b6b1e0ad0091d61c07392c6c9703e50efff7469878acee",
+      "size": 46966
+    },
+    "product/desktop/modal-aidebug.cjs": {
+      "sha256": "7cf41d83cb2abaded1d179dfed6ca9d0ec9c055fe2a0994c46df8518e0b24e0b",
+      "size": 6218
+    },
+    "product/desktop/office-preload.cjs": {
+      "sha256": "70471be5e80bb69e63a377fe733a287e6aaf0fbdfc1b0ed067474b3406534276",
+      "size": 2382
+    },
+    "product/desktop/official-tools.cjs": {
+      "sha256": "9fb95f55990399b5dd5f222d196a2340716d6671190400297b878456a227af62",
+      "size": 5695
+    },
+    "product/desktop/offline.cjs": {
+      "sha256": "82682ac1b6e079daffae49d9d50e09ae425bbf9be42000bd0015df40c1ff8986",
+      "size": 1013
+    },
+    "product/desktop/offline.html": {
+      "sha256": "6c5b2e7c9860b5669b6999c7979610668f99f24f0df0743b5169b132abc088bb",
+      "size": 1916
+    },
+    "product/desktop/onboarding.cjs": {
+      "sha256": "a60d1ed0be11f2c7a35bc3af5d449b4110465060878295ebcc0d71438f74a8c7",
+      "size": 41563
+    },
+    "product/desktop/os-account.cjs": {
+      "sha256": "78c6cce8ff342bf754e000fba2bd351ea89090d3819def1f5ab2ce3bf216a2e2",
+      "size": 3899
+    },
+    "product/desktop/os-aidebug.cjs": {
+      "sha256": "934d466950007f865e3a899ab177d00591b05f2bbe0c318292b85cb21d69280d",
+      "size": 3184
+    },
+    "product/desktop/package.json": {
+      "sha256": "adb7c78e575ff7fcdfd99ad1be69950353b17a2b7378beca709367ded800e737",
+      "size": 539
+    },
+    "product/desktop/personal-station.cjs": {
+      "sha256": "fdac12e658bf6855b3f2dcba639db0ae2a4adde6edad52817d11745108238b08",
+      "size": 3019
+    },
+    "product/desktop/portable.cjs": {
+      "sha256": "2010bbfc76f1dc0d8eacdf0cc47cf8d22732b62982285cab184c62eddf82fbea",
+      "size": 7420
+    },
+    "product/desktop/preload.cjs": {
+      "sha256": "fdb5c962391cb131d9bd1bcebb8e6bd6b5db95911f94f9f3e298da8846209536",
+      "size": 7593
+    },
+    "product/desktop/preview-window.cjs": {
+      "sha256": "ffd4604dd2192b2ff4785d28af4bc5ce110b81ec2d9c0bb645bcf0130a9e5ac2",
+      "size": 3407
+    },
+    "product/desktop/readability-aidebug.cjs": {
+      "sha256": "815b155ee211fd952403d95c68ce21ceba55c0857d2ed88a49c984f5f023fb06",
+      "size": 4387
+    },
+    "product/desktop/request-gate.cjs": {
+      "sha256": "19fc3d41b9bb55777faf645cc1d53d96463f9cc520d38532af28c06328ee1199",
+      "size": 4445
+    },
+    "product/desktop/service-host.cjs": {
+      "sha256": "ffac07ec5c2ed2b46591d7c23e5d8d4e0ed99fb68b2c87725ca1f2a0d631e78f",
+      "size": 11926
+    },
+    "product/desktop/session-aidebug.cjs": {
+      "sha256": "ce5212f6a2ea4e40b1feee2541f44bfc76e44d9a80f0850bd8aa6ad8c197c6a5",
+      "size": 4987
+    },
+    "product/desktop/situation.cjs": {
+      "sha256": "09ad731e8a7abba538392120614af5f004ec0971227a1cfec313d0245a7fc718",
+      "size": 3094
+    },
+    "product/desktop/startup-diagnostics.cjs": {
+      "sha256": "11af9fb7b38c0ae14bbed8ad35c1525ed58e13cb4ae6f299becdaab7f9551204",
+      "size": 8274
+    },
+    "product/desktop/transfer-recovery.cjs": {
+      "sha256": "5b0f00c515389721dfef5936fd25e50f8112c648187e25223ffdf04cdb9759ab",
+      "size": 2367
+    },
+    "product/desktop/UI-PROVENANCE.json": {
+      "sha256": "1961dc9757c17978013a2c418cfc52892a89b8d20780363a12099bcdb88466f7",
+      "size": 1751
+    },
+    "product/desktop/ui/activity-history.mjs": {
+      "sha256": "bd95e57abbfde47df7b5752b00c6974b6fbb1623041a33486137ccd523454a39",
+      "size": 2028
+    },
+    "product/desktop/ui/aidebug.css": {
+      "sha256": "dbc66a3467a3937ae52bc499cf90b0aa26c93a6099d6c6825f95616b3f26fb7b",
+      "size": 4908
+    },
+    "product/desktop/ui/aidebug.mjs": {
+      "sha256": "1c57ce715d43b961955c289a97e75f93a601e5ddeb5d1e14fc183cd2a31ea59e",
+      "size": 6314
+    },
+    "product/desktop/ui/appearance.css": {
+      "sha256": "5e9a115ac89a108b0777255771f0cc81466b0290ce11523e490e0c74831dc6bd",
+      "size": 28256
+    },
+    "product/desktop/ui/appearance.mjs": {
+      "sha256": "d1d743d128a4e60152848686da0d091aac60bcab49b5e3ffba6df79c7e97b805",
+      "size": 14249
+    },
+    "product/desktop/ui/audit.mjs": {
+      "sha256": "bddd26f3070634951c5e0cfe8a5e0195f2abd606d409e92b6ddf3fa88d3a9c18",
+      "size": 5814
+    },
+    "product/desktop/ui/backgrounds/fallback.webp": {
+      "sha256": "023c3436cf0a7718bee4ae2ae8aecbac2582a42e5591d8aa242afc39e673f4f4",
+      "size": 257116
+    },
+    "product/desktop/ui/backgrounds/os-scene-01.webp": {
+      "sha256": "ad5e32b9ab45213820eac1e51c981927bf828516aa596083458f017a31e35770",
+      "size": 9436
+    },
+    "product/desktop/ui/backgrounds/os-scene-02.webp": {
+      "sha256": "03f5c648fdae2003f74e47561be97b75c7731edf286d687ebc219449842cd130",
+      "size": 9362
+    },
+    "product/desktop/ui/backgrounds/os-scene-03.webp": {
+      "sha256": "9d945d7c404f793aef15063192238bb7b07ce97446909a97afb3dd808ffa03cc",
+      "size": 12622
+    },
+    "product/desktop/ui/backgrounds/os-scene-04.webp": {
+      "sha256": "83e0f2a0be3f046ef7baa62eca8373e5759cb301a1db2c948049859ce32fcafe",
+      "size": 6448
+    },
+    "product/desktop/ui/backgrounds/os-scene-05.webp": {
+      "sha256": "e03557b55b5623bb24ecd742bd6de57be573902f6c5421991310229b2410b232",
+      "size": 6374
+    },
+    "product/desktop/ui/backgrounds/os-scene-06.webp": {
+      "sha256": "bcfbc2d8b85db3903ca800a4d38efc83264378f42f8941bb03a63769e6167f2c",
+      "size": 9852
+    },
+    "product/desktop/ui/backgrounds/os-scene-07.webp": {
+      "sha256": "6998ced7897586fdbef83ce31a5b930bad85e9502305d904ea6312943294a6fd",
+      "size": 9826
+    },
+    "product/desktop/ui/backgrounds/os-scene-08.webp": {
+      "sha256": "757689c1e93cef8c51796ccef5fb4c0c57267bc9a32392699ec28bef9b827925",
+      "size": 8148
+    },
+    "product/desktop/ui/backgrounds/os-scene-09.webp": {
+      "sha256": "3bfb0cb4295513f77dfe9edadda05bfb5b5c67e8d4356fea571c44f735b02c9f",
+      "size": 9396
+    },
+    "product/desktop/ui/backgrounds/os-scene-10.webp": {
+      "sha256": "442c1a6290a3138a2a78a40fad40ff947bbc9e21a441aae40155cc2f5f054ea3",
+      "size": 9856
+    },
+    "product/desktop/ui/backgrounds/os-scene-11.webp": {
+      "sha256": "206d4405a9e75163537ba3fe83d488dd7b79c29bfaabd3dd9eb0f5538bcd5bff",
+      "size": 12308
+    },
+    "product/desktop/ui/backgrounds/os-scene-12.webp": {
+      "sha256": "dfb44baa5f019aa5fd7c5b7033d40ca652f90c29e1868351a5efb259a2422c74",
+      "size": 9480
+    },
+    "product/desktop/ui/backgrounds/os-scene-13.webp": {
+      "sha256": "c5de47a34d8941c8b00f702550096b7a1250321048b266fb6e8d40c3b25c7798",
+      "size": 7586
+    },
+    "product/desktop/ui/backgrounds/os-scene-14.webp": {
+      "sha256": "1ac795f8db009af79a88cd105330276dc5f550befec1b156bdc3f3c8fd940e82",
+      "size": 12384
+    },
+    "product/desktop/ui/backgrounds/os-scene-15.webp": {
+      "sha256": "3fedf890535a273cd9a1fc91cfcef0f20a328e615bee7d08634f81d3e5079a64",
+      "size": 7392
+    },
+    "product/desktop/ui/backgrounds/os-scene-16.webp": {
+      "sha256": "76d92c8f7bc5343b2b171436b681952daabca124bbb42ca636a12ce277f3a171",
+      "size": 8982
+    },
+    "product/desktop/ui/backgrounds/os-scene-17.webp": {
+      "sha256": "7b03606e1d9b19729e9122ebc809d9fc896f768c44f2c4a9f4c8b231ece41fe4",
+      "size": 9582
+    },
+    "product/desktop/ui/backgrounds/os-scene-18.webp": {
+      "sha256": "618bd677c6a43e1fac667af7ba42c353951c0b4aecad45e9e86fd06cd685b621",
+      "size": 9588
+    },
+    "product/desktop/ui/backgrounds/os-scene-19.webp": {
+      "sha256": "a24c5e2e0f29e40378047fb5ff19c46babdf23f4d6dea29034ebfdc4956a6486",
+      "size": 7870
+    },
+    "product/desktop/ui/backgrounds/os-scene-20.webp": {
+      "sha256": "cfc13273c0f42892077218eda2b1ab2bff9cf04c4b3be67dab43d903f5aa3679",
+      "size": 10386
+    },
+    "product/desktop/ui/backgrounds/os-scene-21.webp": {
+      "sha256": "fc0f7811cf571298b3a2c2d41ea5890b76a36e6121cde64abf7fbeb908767450",
+      "size": 9044
+    },
+    "product/desktop/ui/carousel.mjs": {
+      "sha256": "277013776bd548d47724da2001d6268514160753328aacd2d6aeac9746658c01",
+      "size": 4635
+    },
+    "product/desktop/ui/collaboration.mjs": {
+      "sha256": "ed486381b9b017a68ad957259a15b4a17cce0db94a5899d84907f2289c7e9c93",
+      "size": 4918
+    },
+    "product/desktop/ui/connection.mjs": {
+      "sha256": "6842ec35e179b5113e6ed5a8ff559c61e8144ca428fb03ee458a23e32975513e",
+      "size": 2111
+    },
+    "product/desktop/ui/controls.mjs": {
+      "sha256": "d51eee24404a17ab3ee2fc71b260aa9381af8b8682c074413b748ba20a341e1a",
+      "size": 2884
+    },
+    "product/desktop/ui/detail-view.mjs": {
+      "sha256": "59a34b32c7d773217a9c3ddda04363f596a98f715ce37b0403fa1666218b83d0",
+      "size": 3327
+    },
+    "product/desktop/ui/development.mjs": {
+      "sha256": "97c940bc9ecb08681c058d63e03753fe0120de74a209402b5eb6adf6b6215201",
+      "size": 7110
+    },
+    "product/desktop/ui/elections.mjs": {
+      "sha256": "cabd74d1ae0af561798a7a1c48ea5702c0bec27b9eb3c67049aafa891ee1bd03",
+      "size": 10207
+    },
+    "product/desktop/ui/engineering.css": {
+      "sha256": "b2fefb932fe017f907d2eed0f4faea6eef66ce53cfba7818caac974b28866965",
+      "size": 16454
+    },
+    "product/desktop/ui/engineering.mjs": {
+      "sha256": "0b4716b296a189034a43879b387b90a39ea5e613a9dde9c043de7af786c4a765",
+      "size": 15522
+    },
+    "product/desktop/ui/feedback.css": {
+      "sha256": "e33eb604447ca1c109256bfcd084ee16fb9011f171377df2907b41322911eb17",
+      "size": 11063
+    },
+    "product/desktop/ui/focus.css": {
+      "sha256": "09368f8e8055f80fc76bb39c903cff25021681791ecde860abfc6b06a50ea42f",
+      "size": 41224
+    },
+    "product/desktop/ui/fonts/inter-OFL.txt": {
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "size": 4377
+    },
+    "product/desktop/ui/fonts/inter-variable.woff2": {
+      "sha256": "13b4cddc57045d40b411008e61588c8f81aa0bd72fe884624831a0ff9c4d159a",
+      "size": 350460
+    },
+    "product/desktop/ui/fonts/notosanssc-OFL.txt": {
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "size": 4388
+    },
+    "product/desktop/ui/fonts/notosanssc-variable.woff2": {
+      "sha256": "aef8c34277afad81ecd0227138a830263c0caea65b7aea66d1195395f097b55a",
+      "size": 7782072
+    },
+    "product/desktop/ui/fonts/sora-OFL.txt": {
+      "sha256": "ba0b9729c9428ba79a0459ab8ec575791b51509dbec213e383d0316d37fec299",
+      "size": 4385
+    },
+    "product/desktop/ui/fonts/sora-variable.woff2": {
+      "sha256": "0e65a6701cc0d013c8fed9904787fdbf64dd9014c4c0736f7c732eb978a528a7",
+      "size": 49240
+    },
+    "product/desktop/ui/halo.svg": {
+      "sha256": "a21ea951f4d9d9245a36926334fbfa67f833924c4bb90149c4bde2bc3662bb34",
+      "size": 579
+    },
+    "product/desktop/ui/icons.mjs": {
+      "sha256": "c9cebc96915aead9eea32e3f5f25c43f8405c924850f32eed0810183b6b311c4",
+      "size": 4697
+    },
+    "product/desktop/ui/index.html": {
+      "sha256": "09a6b9c1a2f55dddc2b6afc039b1473ffa1d8db9e9a210236840efe791a2877c",
+      "size": 8108
+    },
+    "product/desktop/ui/live.mjs": {
+      "sha256": "a268d2418d704f1b8119581065c8b31895d47482628370d39efa2ca55f6ac335",
+      "size": 9950
+    },
+    "product/desktop/ui/login.cjs": {
+      "sha256": "b3579ea90090493c39bec18193afbb881d9a9c0c6137be1fede9567ace41e1d0",
+      "size": 1061
+    },
+    "product/desktop/ui/login.html": {
+      "sha256": "a0774617af493ff2516af4eb84a43ac646e595096f49e886b88e7f985d6bef2c",
+      "size": 1903
+    },
+    "product/desktop/ui/markdown.mjs": {
+      "sha256": "3fba99e5314ecd49e17684eb7fdd86f6a386c64e281a929e7494a86b0ce7dd6d",
+      "size": 2920
+    },
+    "product/desktop/ui/member-menu.mjs": {
+      "sha256": "3413902970e575df566e1e0473e16aadfb10fb3d0e7eeee4a2ec77b089e5bb4b",
+      "size": 3690
+    },
+    "product/desktop/ui/native-overlays.mjs": {
+      "sha256": "664db5ddc646bfa58e66686a03d1668518da7771d52853a547067f488167024f",
+      "size": 3297
+    },
+    "product/desktop/ui/os-foundation.css": {
+      "sha256": "fbd9b658dac510890f3cee604f15a2499124482c1962fbec4cf224a71870374b",
+      "size": 45754
+    },
+    "product/desktop/ui/os-host.css": {
+      "sha256": "8e845985e5dbd9f5263ac35e53c58e1d3e4750a14e770f470895320c8d946da1",
+      "size": 4255
+    },
+    "product/desktop/ui/participation.css": {
+      "sha256": "069431f7a072d74f38fea715603200b241810e544d5e39ad40ba4d179085c289",
+      "size": 26615
+    },
+    "product/desktop/ui/source-browser.mjs": {
+      "sha256": "3d44a132ac2cb6552bc59267240d00dd6d90952e1a214dce9089e5e60dcf4c55",
+      "size": 11177
+    },
+    "product/desktop/ui/station-overview.css": {
+      "sha256": "7bf007c729cbeef2117501e0ee82253b8cfec103277b7a809b7fb2a0f11ccd64",
+      "size": 15365
+    },
+    "product/desktop/ui/surfaces.mjs": {
+      "sha256": "b9534f0b7921c07481183fa6748dd04b54075a1900975f149b31c16a77ceb73f",
+      "size": 5166
+    },
+    "product/desktop/ui/unified.css": {
+      "sha256": "8e6048d08e55f700e6487c8c89b7185985d6d6ae9cd7f29b4002aa5017e6f566",
+      "size": 26373
+    },
+    "product/desktop/ui/unified.mjs": {
+      "sha256": "286e20dce5d6b60f96687bc5fc93cc6cb71c63b4fdfba1e42fe506ca640761c5",
+      "size": 14429
+    },
+    "product/desktop/ui/vendor/program-toolbar.css": {
+      "sha256": "a1225161eb50acc15e418bfea9eeb5d139d43ef3a95c99bf2351dced968249bc",
+      "size": 6223
+    },
+    "product/desktop/ui/vendor/program-toolbar.mjs": {
+      "sha256": "1d95a2cdf78f37a6d8d24758a761a9546a159d53346d43b3e6c230b13c6fa3ba",
+      "size": 1890
+    },
+    "product/desktop/ui/wallpapers.mjs": {
+      "sha256": "ce1d2369d95b45a468330f54ecf20db98a3bce1fea1030dca78929e88fbffc66",
+      "size": 4646
+    },
+    "product/desktop/ui/welcome.mjs": {
+      "sha256": "3b606df89c9e5e82256debf2fe3bcd4c4acdce4a65941b57e578bc8fccf5d780",
+      "size": 5680
+    },
+    "product/desktop/ui/work-status.mjs": {
+      "sha256": "c080f8ee927aeef269d040913d1ef2deb163099e427276f1e75ff6da54459b64",
+      "size": 14293
+    },
+    "product/desktop/ui/workflow.css": {
+      "sha256": "9a968fa608281d8a02d3364cb99d05bb516f6968c96db580f220780dad35fdc7",
+      "size": 5534
+    },
+    "product/desktop/ui/workflow.mjs": {
+      "sha256": "97c0807be6442cc70e7864db5949f00a65f5444ab719bfaecf5a088241a73552",
+      "size": 14686
+    },
+    "product/desktop/ui/workspace.css": {
+      "sha256": "f41ba1ce4c86a5a51f0a2008bf7d825951ac90776d86e33c9ae133fb4c7f6a3c",
+      "size": 59284
+    },
+    "product/desktop/ui/workspace.mjs": {
+      "sha256": "45db2fd8d185cf2d01e470f74e6b3ec51c4098c193dcbbfcd181f03fff8d91ca",
+      "size": 131193
+    },
+    "product/desktop/visible-aidebug.cjs": {
+      "sha256": "0fe040e346c7bc56ef454bbd39007a26271ec38a24f332af192dcd56eb3aeb26",
+      "size": 14090
+    },
+    "product/desktop/wallpapers.cjs": {
+      "sha256": "3e07ce1e906541fc36371ec23e67ffca7b026fd710d6bf330708e1bf96598a02",
+      "size": 8644
+    },
+    "product/desktop/window-layout.cjs": {
+      "sha256": "50dbaf5c1807e5f7fdaeb4869e18666a1600ad78685b21fe11f5b2fa7915821f",
+      "size": 1960
+    },
+    "product/desktop/workspace-aidebug.cjs": {
+      "sha256": "6e5be23d6c91d94a8e77790c53eb2ad7e1eed4f369bd2ea80591d4c093cd655f",
+      "size": 130726
+    },
+    "product/office/config/release-public.pem": {
+      "sha256": "f8f4a7fcdb2c889c45a6c1ce0d8683479c0e615e099883dcbd6099d15d261276",
+      "size": 113
+    },
+    "product/office/features.json": {
+      "sha256": "3ca66f9759a5867d8ea4dbf123a355c21334f7299ae294992745401fd37ef583",
+      "size": 97
+    },
+    "product/office/README.md": {
+      "sha256": "f72333493fd0b18cb6a7f928269508930c7dd4f16f62386de7e5e30dd0604f64",
+      "size": 3037
+    },
+    "product/office/scripts/agent-adapter.py": {
+      "sha256": "605aaecea02428b05c329ca71ef3a99873bec65005a8324926ea9f14d9fc08a3",
+      "size": 13725
+    },
+    "product/office/scripts/agent-client.py": {
+      "sha256": "777544bac62a427fe71580046e1985f6bdd29f7b77a1cdd9d0ccf53bf1572437",
+      "size": 58067
+    },
+    "product/office/scripts/agent-station.py": {
+      "sha256": "23b34b9ff17a6f584a38022661854f5c9dadd035b4e496ea7543ff3c1b8375cb",
+      "size": 84063
+    },
+    "product/office/scripts/claude-station-hook.py": {
+      "sha256": "4c337c85f05286135d7945089322ff77471764599f90f2ac8f0190f49d464bf6",
+      "size": 13892
+    },
+    "product/office/scripts/control.py": {
+      "sha256": "fed73b2cb25229a68a934405aa38d9c90034c03814b58fb36005893d3899973d",
+      "size": 8788
+    },
+    "product/office/scripts/enroll-agent.py": {
+      "sha256": "c3507b7f6858ff1d0036a02cf750170d00ae84de50b55bac3a620e4ed60b67a2",
+      "size": 5498
+    },
+    "product/office/scripts/link_runtime.py": {
+      "sha256": "13830a0029507f46f86d42e6335e8f33c56183a1fbc0798628600b626d088b32",
+      "size": 2358
+    },
+    "product/office/scripts/matrix-proof.cjs": {
+      "sha256": "1e468277af904b6db3691832c950f100777633afdae71fb20c7fa71c124a3628",
+      "size": 2139
+    },
+    "product/office/scripts/project_space.py": {
+      "sha256": "17ff0e0d0c10f3a7807df7800196ca368e6dda21258d6fc253cc34032f704cfa",
+      "size": 7900
+    },
+    "product/office/scripts/station-transfer.py": {
+      "sha256": "540304bcc4e94dcbeddaffff9d2f4bc464099f3ffc1f5a163440327e396d1b2c",
+      "size": 7348
+    },
+    "product/office/scripts/task_delegation.py": {
+      "sha256": "fc190ae33826de7a8115de242faa652a13d147fb4f6b045aae6eff1a5119fcdf",
+      "size": 20191
+    },
+    "product/office/scripts/task_worktree.py": {
+      "sha256": "7312684890c045babd18ed6ca028a2d889ee4b4630c5c8866147f3b5099c937f",
+      "size": 9894
+    },
+    "product/office/scripts/verify-release.cjs": {
+      "sha256": "9860ef0c15a7250e6c8dd39bf8fd0441fcc6b485cd016f2ca14f4368f540488a",
+      "size": 2041
+    },
+    "product/office/service/agent_access.py": {
+      "sha256": "ed459f6d36f65218368eab8c64c9f21dbbaee87bb1a567a013c471541f9adfd1",
+      "size": 81254
+    },
+    "product/office/service/agent_protocol.py": {
+      "sha256": "bd0b79ff0034f491103de5d659ece474f280e2be366be7fef769fe69d8cdb897",
+      "size": 29657
+    },
+    "product/office/service/catalog.py": {
+      "sha256": "7364856df597e84d54c474315e089ba82c84f3a3ceb98e6130d82d9d9bb45c20",
+      "size": 7787
+    },
+    "product/office/service/center_messages.py": {
+      "sha256": "14a4a7de01f5b4ba110af90f09a8ee00a5fe7d3ae293bf75e734d8f193f1482a",
+      "size": 9457
+    },
+    "product/office/service/cloud_link.py": {
+      "sha256": "c28743d96bb55350b957716b86cbb6099888dcf2b2b0cad4e10d7694d5e3783f",
+      "size": 17452
+    },
+    "product/office/service/cloud_session.py": {
+      "sha256": "34a1be6b2672ce92e20f52aee4bc6b6cd126f1516c3736a90df3c2a03027bdb1",
+      "size": 6494
+    },
+    "product/office/service/collaboration.py": {
+      "sha256": "f2d3445ddc69c4f32f4b9d49a0fae2bbcd20ff54e962a3fed7feda872e100434",
+      "size": 25329
+    },
+    "product/office/service/delivery_store.py": {
+      "sha256": "1302abfb225a21b9763f975fb8db0030c54f28caa8841439208c0b1faeb3770a",
+      "size": 16519
+    },
+    "product/office/service/device_link.py": {
+      "sha256": "fe5e5e472a184c076e2eeedc31dd94e21192fa78aade998238ec884c1dace4be",
+      "size": 29157
+    },
+    "product/office/service/discovery.py": {
+      "sha256": "7e0b4e07e82b178fb5ea631a0ad70ddfb298e93bba2bf20515e1ccc545940574",
+      "size": 6495
+    },
+    "product/office/service/evidence.py": {
+      "sha256": "a0c978658f09e754ea744ca5f7a4d667267da5a6de045ea84eb58ea4b3458fcb",
+      "size": 4020
+    },
+    "product/office/service/feature_stage.py": {
+      "sha256": "af71b18aa511430aa7bfb132a32cbe1a5614757a90c527f6c4c13d72665aabb4",
+      "size": 1497
+    },
+    "product/office/service/feedback_contract.py": {
+      "sha256": "b3bc8a377bdb60c2b3f733e66a5a75a8ccf9fb8ef6ab2e2887b7033a9e3fa5a7",
+      "size": 5286
+    },
+    "product/office/service/feedback.py": {
+      "sha256": "bcaec20332e546072583d5b9d08f9c889d5c5b4525113c67b09b3fc8a75d4d4a",
+      "size": 16312
+    },
+    "product/office/service/growth.py": {
+      "sha256": "2c673417f0c3cb0dd087139f426b4522f6c42a29567fea56250e2b8cfca9491f",
+      "size": 19505
+    },
+    "product/office/service/http_drain.py": {
+      "sha256": "bce091c3fac1fe4d9de4865c29e14736e117ad005358efe191a2d43ce6b71fa2",
+      "size": 1747
+    },
+    "product/office/service/hub_client.py": {
+      "sha256": "9f836db2a5ffe3f504fa396267022486b51068b1f666f578b22ab21bbf3d756a",
+      "size": 14061
+    },
+    "product/office/service/human_requests.py": {
+      "sha256": "5fe105e0d531a1d0774facce678175e2fc4156ddf4bd4c6d0ba84165abe6a403",
+      "size": 25380
+    },
+    "product/office/service/link_auto.py": {
+      "sha256": "4d4756c2df2782c8bc3c471c73fa8f46fbcb8a642818fa98764d7fa4456c5856",
+      "size": 8549
+    },
+    "product/office/service/link_lan.py": {
+      "sha256": "4e47e93717a472c43aa9cf80ae1b2769172f88c2e50ec5d6bc82e3d07c9cb171",
+      "size": 15633
+    },
+    "product/office/service/link_owner.py": {
+      "sha256": "9598c6db05f6b05b00fb4200b25aa71df3b125a221b5d7218920be95af16166f",
+      "size": 4842
+    },
+    "product/office/service/link_paths.py": {
+      "sha256": "9c9c25a46bf1afaafe0494dfcd249261ddd4822a1c87ea97bca9ee6f0155eb12",
+      "size": 2429
+    },
+    "product/office/service/link_sessions.py": {
+      "sha256": "f85fc679b770462f9cff6e36c24afe43ac520bcfdc6fd16611977de7cdcf0104",
+      "size": 25106
+    },
+    "product/office/service/local_hub.py": {
+      "sha256": "5096cffc41af47c4eb9da45e91f4379e23adec388ac2b1dcf56cc2ade93a4887",
+      "size": 7385
+    },
+    "product/office/service/main.py": {
+      "sha256": "17511e0a0e6415b5e531384153d53f6ce7419ea197aefbba1a6414b3113f2618",
+      "size": 95189
+    },
+    "product/office/service/matrix_proof.py": {
+      "sha256": "5c9f8ec1db3c2b87c8ba089b8812aa5e20b119f25fc7c3d8f4c9382bed4aa501",
+      "size": 3301
+    },
+    "product/office/service/monitor.py": {
+      "sha256": "a548c78a30de5730c38f6c668db46f4e09741558077bf6df908c702c877ef680",
+      "size": 4977
+    },
+    "product/office/service/native_host.py": {
+      "sha256": "c18539b89ca51ccd948cf0431b6c0e7e8379f344adfacdfaf4622d6c831aa487",
+      "size": 7082
+    },
+    "product/office/service/native_presence.py": {
+      "sha256": "6a3a41b191bf91cbccf00ea5bf9a85e5d516a27bb3741b8930bf56e653a81377",
+      "size": 8393
+    },
+    "product/office/service/native_wakeup.py": {
+      "sha256": "56e8ed9f5a72e75c6175338246f37d6a96b838f9d3a969ed1aaa752398334b4d",
+      "size": 18807
+    },
+    "product/office/service/office_codex.py": {
+      "sha256": "9b4fb0d0de2ab189ddf05e2aebce356c79f707b9cddd9d79a10302400ac3ce6f",
+      "size": 7235
+    },
+    "product/office/service/office_extensions.py": {
+      "sha256": "d2dbddbb11c2a9d32a4ef8c33b7d74ff183e7dea7aa111d2bb2cfa885e200ab9",
+      "size": 43305
+    },
+    "product/office/service/office_runtime.py": {
+      "sha256": "c6f21fda2b26a732a5f240f3bf229f0310f45d187e0e6541db17c62946157f96",
+      "size": 5517
+    },
+    "product/office/service/os_owner.py": {
+      "sha256": "239ae19df8e46e6c9b3ec50f4e0723703fbdd0f5e3674553eb2a64ab29bfb300",
+      "size": 5569
+    },
+    "product/office/service/os_sessions.py": {
+      "sha256": "63d9ded24d463f681a102092545e57c32540ef749b07f4b5d030a10a36a4af1a",
+      "size": 8503
+    },
+    "product/office/service/paths.py": {
+      "sha256": "e1ce0e2cc8889a4504d100b29905914bc5a53040771340c118f5a164847ca83a",
+      "size": 5933
+    },
+    "product/office/service/product_bridge/bridge.py": {
+      "sha256": "9f1b947b61ae979c056257151fa73836e0fa8670b5e8baf03a06bc8f0a09908d",
+      "size": 41921
+    },
+    "product/office/service/product_bridge/commands.py": {
+      "sha256": "c359447ff2e5662a8448c636f3c8a6f3e968f3ce5e2556b5ce01a39ceaaf1f07",
+      "size": 20418
+    },
+    "product/office/service/product_bridge/human_commands.py": {
+      "sha256": "e03ab818290efc657e0f1989cb65056cc5dc5b8557e1894410ad2b452d6d6fd8",
+      "size": 9476
+    },
+    "product/office/service/product_bridge/human_relay.py": {
+      "sha256": "bba5f4ce95a491cdfbe655addbbc34a30a24a08b04123bb8a7355717c93eefff",
+      "size": 19654
+    },
+    "product/office/service/product_bridge/matrix_client.py": {
+      "sha256": "4d6d896b6be0683a978e36411e207e8084b150945d7e02181a94f08aba2f09f5",
+      "size": 13343
+    },
+    "product/office/service/product_bridge/product_job_poll.py": {
+      "sha256": "ef38c7dc9a941a0bf947f526321e5d30796a4694e19fde802cb759ebaf6f75b7",
+      "size": 8156
+    },
+    "product/office/service/product_commands.py": {
+      "sha256": "34cf6e037102cc26fa7d9590b38a29c480e16600ba5926f3eaded542f6f404fc",
+      "size": 6180
+    },
+    "product/office/service/product_jobs.py": {
+      "sha256": "3cd8c73b1d0d54574153b7fe4f4a2f6b48b522c23a6cf9ee5a54d192df9e5b22",
+      "size": 7167
+    },
+    "product/office/service/project_memory.py": {
+      "sha256": "0b62c0cb2c04d36745cc15add6d322250b8948641b884d90680c92b045b9026a",
+      "size": 14258
+    },
+    "product/office/service/release_verify.py": {
+      "sha256": "6f65af2c504d73bf991c9a22609e29fd7435327d9ac6589f323c6351ef4e1d83",
+      "size": 2101
+    },
+    "product/office/service/request_intake.py": {
+      "sha256": "be575b628569eb8569eeb7018bc33b7118451af9c8da5a3c4c83f50c53cf5f2c",
+      "size": 5952
+    },
+    "product/office/service/requirement_delivery.py": {
+      "sha256": "3c463d6cce95a36a4ba50b17aa57960304a8e81fbb239b9dba32dda4ab3e1c1b",
+      "size": 22479
+    },
+    "product/office/service/runtime_observer.py": {
+      "sha256": "f66df303a8768f9b4dad8f21bdd47342d8cb67aa32ca8fc289a8340f71801549",
+      "size": 41455
+    },
+    "product/office/service/self_heal.py": {
+      "sha256": "94724d24cd9de4e0c6a4903111ceacc02ab0132ffa5e882cf8a8933e8d8b4922",
+      "size": 8544
+    },
+    "product/office/service/service_common.py": {
+      "sha256": "8bff6fcd83b4777bf0a90f21c2755f6379a0d6ae874f67e7c7c55ca703f88bc4",
+      "size": 2284
+    },
+    "product/office/service/station_keepalive.py": {
+      "sha256": "88382ade3a7a3aecb3dc0bcebad1e5fe5397916e629942a9f1441319f0615f43",
+      "size": 24628
+    },
+    "product/office/service/station_notifications.py": {
+      "sha256": "f25d1b51659631e85f32324d5d766d6fc56cdf8ab42f80550d48a4eb70cbdc6c",
+      "size": 28245
+    },
+    "product/office/service/watchdog.py": {
+      "sha256": "79154c6ea69e40360e6cc82ee833ce42b6638e0f5a3f93e0561f3bfabf513d4e",
+      "size": 49145
+    },
+    "product/office/web/aieyra-theme.css": {
+      "sha256": "bdda8a4a9d1594143be18b06d2cc072a446b8d9baf2a6229901332683b176e93",
+      "size": 3697
+    },
+    "product/office/web/dialogs.css": {
+      "sha256": "fa12e5e551e4d9ba550d0cbba0dd7d2bc3f80b48a1e137c9a7eae109f45d967a",
+      "size": 2463
+    },
+    "product/office/web/dom.js": {
+      "sha256": "7bda5839ed2071f45fc5eb042b791244a4c03e7463793a1899173eebec0f3c77",
+      "size": 4115
+    },
+    "product/office/web/fonts/inter-OFL.txt": {
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "size": 4377
+    },
+    "product/office/web/fonts/inter-variable.woff2": {
+      "sha256": "13b4cddc57045d40b411008e61588c8f81aa0bd72fe884624831a0ff9c4d159a",
+      "size": 350460
+    },
+    "product/office/web/fonts/notosanssc-OFL.txt": {
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "size": 4388
+    },
+    "product/office/web/fonts/notosanssc-variable.woff2": {
+      "sha256": "aef8c34277afad81ecd0227138a830263c0caea65b7aea66d1195395f097b55a",
+      "size": 7782072
+    },
+    "product/office/web/index.html": {
+      "sha256": "d299b9dd475e2377d9cf343d056be3c3097c62448c517032d42cb8aa03db8547",
+      "size": 2595
+    },
+    "product/office/web/link-access-guide.css": {
+      "sha256": "00fd0dd5c9bd613a71823379f01ffc83b677156366dc4185bb9383b3f54b28d8",
+      "size": 4291
+    },
+    "product/office/web/link-access-guide.js": {
+      "sha256": "f60f5308d5889a68f0ae6b48300c9574324fa48426d83c83698a7643d8158ec9",
+      "size": 13279
+    },
+    "product/office/web/link-page.css": {
+      "sha256": "24de0fc61112dd6738243f2294daa02ec7c2dbe865fe0654714f8dae7377e534",
+      "size": 56928
+    },
+    "product/office/web/mark.svg": {
+      "sha256": "bbee8d6eb45d9f8d4ec15ee611e5fc0308c71159f2af133a9f6771ff586433a4",
+      "size": 300
+    },
+    "product/office/web/model-card.mjs": {
+      "sha256": "7848c25d595c6c2249f8d9ccdfd044db37d2bc2839414eff84ec7c14f3cd19c8",
+      "size": 5300
+    },
+    "product/office/web/model.js": {
+      "sha256": "5156b7c0ec8345627ccbc52193ef8b0660446fabb664d7c3472c701c6f912745",
+      "size": 5919
+    },
+    "product/office/web/motion.mjs": {
+      "sha256": "e00dd7dd9469080f4d5e886b7f2120cb2a612e643b68c84cc40ba895dc21f6b0",
+      "size": 9321
+    },
+    "product/office/web/office-home-model.js": {
+      "sha256": "5a1c7f5035f49b8a18269c01823d0ce24e13631a66c4ecf7984d85e2f47905d1",
+      "size": 6806
+    },
+    "product/office/web/office-home.js": {
+      "sha256": "13dd3c62842d1a03349e9f5390a3126c19fb9e34edb16d07cd563c558ba7a28f",
+      "size": 60447
+    },
+    "product/office/web/pixel-office.js": {
+      "sha256": "5f31877137d2b61a53605beb5419c38623289706dddbe5c7df5c1080b5114662",
+      "size": 3409
+    },
+    "product/office/web/portraits/CREDITS.txt": {
+      "sha256": "cb46b384d61692fc59b1f1076d7dd5f80a550df430638992472c87b3cb521327",
+      "size": 485
+    },
+    "product/office/web/portraits/ember.png": {
+      "sha256": "070bf4ba14c5fdc095e464dfff2f5e32ff74abacdd57d247d28ef5afc0b33e43",
+      "size": 3573
+    },
+    "product/office/web/portraits/iris.png": {
+      "sha256": "82537636d7b34a1fce644cac38f1749d9eecc5ee3bc1038c2c23311e4944965e",
+      "size": 3366
+    },
+    "product/office/web/portraits/jade.png": {
+      "sha256": "7a261db92166408baf451f492e3497357be33b3280670efb6a03a04cc04c7ef0",
+      "size": 3415
+    },
+    "product/office/web/portraits/tide.png": {
+      "sha256": "4adfde051e12c2c2b9ab335e7dc74d1c03f8256778c73ca49473f70281fcd6ad",
+      "size": 3149
+    },
+    "product/office/web/preview-card.mjs": {
+      "sha256": "1289040b6930fc9e89ab19c3853d1a4afeda79b85855938fb9f71c03f4fe25c9",
+      "size": 4583
+    },
+    "product/office/web/situation.js": {
+      "sha256": "e138a505567725af08e6f46eb251ce1eea19f86bf414dbd6ec63e868f25e679e",
+      "size": 12277
+    },
+    "product/office/web/station-model.js": {
+      "sha256": "28fdde67735ff59184e4d916ed0acc2567b3d3a1c273f58a4865981b993eb991",
+      "size": 13941
+    },
+    "product/office/web/station-visual.css": {
+      "sha256": "0dd4b8d8597e5b49ef1df141e37d71c48783e6d40a50efd5898ed7e43e45b8b1",
+      "size": 4208
+    },
+    "product/office/web/station-visual.mjs": {
+      "sha256": "261161acd0ece79aba18f1c2cbea1768c911bf53c5ce99883e403a6f6b0ef111",
+      "size": 4232
+    },
+    "product/office/web/styles.css": {
+      "sha256": "9ac0043d4737a43e019ccdb1d17c2ad16e1a2b37f5b69717c85a9605e7139ca0",
+      "size": 15786
+    },
+    "product/office/web/ticker.js": {
+      "sha256": "14d03c7a464ee9b07f8ee8a8c5fb45a0d431258fd6a6a6f8ddb0c7a499b3703e",
+      "size": 830
+    },
+    "product/office/web/together-design.css": {
+      "sha256": "1cae35a9d8713eb7de8f7d640d01806d15d6cdb41da2368e52ebbe6928acfb3b",
+      "size": 29777
+    },
+    "product/office/web/together-shell.css": {
+      "sha256": "5c53b772354763df4097fa96a1c6f8f9f75ec6c27e346de3ba8f80ae292c8bbf",
+      "size": 11940
+    },
+    "product/office/web/tooltip-content.mjs": {
+      "sha256": "b45f9188592c7749985c98f4fdf42bdfe065280f42421e03e3929824150f0c10",
+      "size": 2159
+    },
+    "product/office/web/tooltip.mjs": {
+      "sha256": "0b497524c3159db64c0169895d37227515009e0b9ae7a82c35cea61106707028",
+      "size": 14969
+    },
+    "product/office/web/ui-foundation.css": {
+      "sha256": "61cac44f9d0aabdd902ed18f54711e0e2f4ab2be1817a35c786411fcd2c212e7",
+      "size": 46079
+    },
+    "product/office/web/ui-ticker.mjs": {
+      "sha256": "47cb05058ba00f4a9bad97e2297fa2c5d5d3164984de288ca1fe5f3c97acd3d6",
+      "size": 8593
+    },
+    "product/runtime/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "product/runtime/coordination_core/__init__.py": {
+      "sha256": "d2990679286f546217737c132dfb2a0b83912db300b21fd9ff130894057d3b52",
+      "size": 80
+    },
+    "product/runtime/coordination_core/collaboration.py": {
+      "sha256": "3e968f9a5396d9a705b02643ee992e6ac2892a84ebdf6c83892853e4b265b30e",
+      "size": 27911
+    },
+    "product/runtime/coordination_core/core.py": {
+      "sha256": "efdd5a572504b62a7852a1bdeb3c0e294c6e87bf4a09df9353408e4e78969e7c",
+      "size": 1129
+    },
+    "product/runtime/coordination_core/hub.py": {
+      "sha256": "fbc0cf1c26b364d23114e34154a5821f141e823d47e95911dc3ffe1fe4784491",
+      "size": 20535
+    },
+    "product/runtime/coordination_core/intake.py": {
+      "sha256": "5ceb50345127b98d4ebd356c37e38e8ee0b1932ba7ca1d56c53d394b64bd816c",
+      "size": 23797
+    },
+    "product/runtime/coordination_core/jobs.py": {
+      "sha256": "c0caaa068433fe8989125df34410db997ed8082aa83a9002f3eac52333b418a2",
+      "size": 24271
+    },
+    "product/runtime/coordination_core/library.py": {
+      "sha256": "4f28b722fe7e8f4328730e2d3ad19fc7a6dcb541493bb446df62c99fa9e44192",
+      "size": 8382
+    },
+    "product/runtime/coordination_core/message_policy.py": {
+      "sha256": "dcf965b84ae938e4f2b595ed1f2c090e5dc673aa002d025073ab8931aa94d994",
+      "size": 1101
+    },
+    "product/runtime/coordination_core/mobile.py": {
+      "sha256": "0be5c4d904b33072d70efe4513ce4f82a7908c779b2b7378820d9ccb1a7c2d3e",
+      "size": 43082
+    },
+    "product/runtime/coordination_core/registry.py": {
+      "sha256": "2edef47967a4aa9abedc6af3725523825c03e35fbb2e93e682ef279312a96b94",
+      "size": 25681
+    },
+    "product/runtime/coordination_core/task_policy.py": {
+      "sha256": "254e3a345d7fa94769a6956c9ada11be8fda821983895614899a0dd6fec6c123",
+      "size": 11804
+    },
+    "product/runtime/coordination_core/UPSTREAM.json": {
+      "sha256": "0a7410dbcb0709589a242ccef8b266c61fd1373b3cddbd90060564f6db6dd8fb",
+      "size": 1884
+    },
+    "product/runtime/coordination_core/workorders.py": {
+      "sha256": "09e789ddff18a5c72ec0b58d9da2489081872cbc887081bde56dca22b494c6cc",
+      "size": 5142
+    },
+    "product/runtime/EXTRACTION.json": {
+      "sha256": "69efc0c617c15d44d32c00c03a61643e0225681560b6e3865336821626405cf4",
+      "size": 1820
+    },
+    "product/runtime/LICENSE-Control.txt": {
+      "sha256": "bc581d4cae61a36f2e954f24bd27522fb0dc38ad498b0a2d8ec69e39d0ec43a8",
+      "size": 258
+    },
+    "product/runtime/native/aieyra-link-lan.exe": {
+      "sha256": "f208a46f1928550af47fc9a7be551743988d2eb079b26c9bcf9de5c2cfea7f1a",
+      "size": 8381952
+    },
+    "product/runtime/native/aieyra-link.exe": {
+      "sha256": "f7a9643ec01acc82f0bdc56a4471b0108323280cf6886fcf85c95226df034921",
+      "size": 12523008
+    },
+    "product/runtime/office.py": {
+      "sha256": "d260372282f0a6c3bc86e01ef7810e90c6bd1fe57bf530c48c403c08464fc49a",
+      "size": 1890
+    },
+    "product/runtime/python/_asyncio.pyd": {
+      "sha256": "a39fd4fb66de434321843b3c7775f22ec3bf75eb56bec8555d2b30e927a21997",
+      "size": 73048
+    },
+    "product/runtime/python/_bz2.pyd": {
+      "sha256": "b4aa26c44a529de7129733a31b73fd74e474b9069edf02d3151d067ac5d52a5c",
+      "size": 86872
+    },
+    "product/runtime/python/_ctypes.pyd": {
+      "sha256": "69ccbfa336004742c18fba4a2d0d24aba5f5e1578983278137788166ea322a22",
+      "size": 134488
+    },
+    "product/runtime/python/_decimal.pyd": {
+      "sha256": "098b917a449a82050820fd4b36b94cff85b243af5d109fdaefc1dff05efccca2",
+      "size": 287064
+    },
+    "product/runtime/python/_elementtree.pyd": {
+      "sha256": "efa8e1818f8c5139bd8f1a8916dead7455af16886e46bfe09cc2d03cdc2854f6",
+      "size": 137048
+    },
+    "product/runtime/python/_hashlib.pyd": {
+      "sha256": "1ca43d7db5e5b3d8066038ff452b09c1dd525022ad5c4447be94345705caadc8",
+      "size": 69464
+    },
+    "product/runtime/python/_lzma.pyd": {
+      "sha256": "71387e8484088f8291664312d985f42454017e1f556bd4107e2d065f19a799ec",
+      "size": 159576
+    },
+    "product/runtime/python/_multiprocessing.pyd": {
+      "sha256": "571784c49fe61b582713274368cab183136374b4fed34a2fbda621755225580b",
+      "size": 38232
+    },
+    "product/runtime/python/_overlapped.pyd": {
+      "sha256": "4df270d8693d16f34188f98b66b02d18a57bcc703339163d3f0570149caadd3f",
+      "size": 57688
+    },
+    "product/runtime/python/_queue.pyd": {
+      "sha256": "f1be4ad7af2810ca957ce1bb6122ac821bb284633bdabc872e12e699f5067269",
+      "size": 35160
+    },
+    "product/runtime/python/_socket.pyd": {
+      "sha256": "6050e57e93872e3cd86daeca9594362ad256a9bbe00e0549fa5988a9b43c90e3",
+      "size": 86360
+    },
+    "product/runtime/python/_sqlite3.pyd": {
+      "sha256": "183d02f0ce2ad03f3f101682313cd3034f6039acd7e7025f618cc27a053ec609",
+      "size": 129880
+    },
+    "product/runtime/python/_ssl.pyd": {
+      "sha256": "5f113a6b4cc933646ef69aa233da278bd311f7f04135a8ea6e1514944af3f851",
+      "size": 182104
+    },
+    "product/runtime/python/_uuid.pyd": {
+      "sha256": "5a69ec3bc4b082b03f84fdad1d9a67d00575c5b23fdd3776607e4653376611cb",
+      "size": 27992
+    },
+    "product/runtime/python/_wmi.pyd": {
+      "sha256": "440ccba82699e5cca4975ad68fa4338d66295dbf9abf391b924ed1d22fe90857",
+      "size": 39768
+    },
+    "product/runtime/python/_zoneinfo.pyd": {
+      "sha256": "645290b5aedb1d4cda16b6b239b3e91e6d77155c2df0da021b9be5588ccc4d64",
+      "size": 50520
+    },
+    "product/runtime/python/libcrypto-3.dll": {
+      "sha256": "e03dd02fdcfb791981c9962827cfcf495f2a47a514c1526efb57f847a9df514a",
+      "size": 5229424
+    },
+    "product/runtime/python/libffi-8.dll": {
+      "sha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a",
+      "size": 39696
+    },
+    "product/runtime/python/libssl-3.dll": {
+      "sha256": "1e4bc0638682bfcbb36f4465d6a2e9944d917a60f05ecc8ddf9e96847e05e13f",
+      "size": 794992
+    },
+    "product/runtime/python/LICENSE.txt": {
+      "sha256": "62bec384df47b0328307db41455ff6ea2559e5546b394ac69148561b21703120",
+      "size": 33861
+    },
+    "product/runtime/python/pyexpat.pyd": {
+      "sha256": "985e29b7adc365f606c594913675288879f3ce2f44d7a7db49595fbc098541df",
+      "size": 218456
+    },
+    "product/runtime/python/python.exe": {
+      "sha256": "29d6486dc5fa86c9d19db9d390fdbb62c4830e2b305761723c0b42e6f3596954",
+      "size": 105816
+    },
+    "product/runtime/python/python3.dll": {
+      "sha256": "f950ce3bf381d5ffae90cf63ec9c9761f1666d9a570e2f203a7f22da6f8e14f3",
+      "size": 72536
+    },
+    "product/runtime/python/python313._pth": {
+      "sha256": "a6196d1e6759494d2cf2e16689f44986b1234a2ff37624b966231da94c706004",
+      "size": 40
+    },
+    "product/runtime/python/python313.dll": {
+      "sha256": "e7119fc5892eab890d44f6df05f44d50cf8c390c35d152e589e0c35781ca8d05",
+      "size": 6113624
+    },
+    "product/runtime/python/python313.zip": {
+      "sha256": "4f5a7f95a8a3ae5a937ee5d9f17c696d2db08c5126d9a8b8f74c2ae86168cf30",
+      "size": 3789709
+    },
+    "product/runtime/python/pythonw.exe": {
+      "sha256": "f74fe1bd59813ad8f8c913b45e7666094cea1e6ae0f3663f6e8ac743fb73e198",
+      "size": 104280
+    },
+    "product/runtime/python/select.pyd": {
+      "sha256": "0dc63cb35f1776d732cb3fbbbdd9e5912b29a98465d3927a8162e8475c0f6809",
+      "size": 33112
+    },
+    "product/runtime/python/sqlite3.dll": {
+      "sha256": "3f0cb5fb18f1c7eb77fb58eb8497fea1b8974f2c824ac1c7377b363fd9be3485",
+      "size": 1584984
+    },
+    "product/runtime/python/unicodedata.pyd": {
+      "sha256": "2b8c8d837e2968751a581e1c6e91447b0db672c2a1496362942df654afddc11d",
+      "size": 712024
+    },
+    "product/runtime/python/vcruntime140_1.dll": {
+      "sha256": "6a99bc0128e0c7d6cbbf615fcc26909565e17d4ca3451b97f8987f9c6acbc6c8",
+      "size": 49776
+    },
+    "product/runtime/python/vcruntime140.dll": {
+      "sha256": "052ad6a20d375957e82aa6a3c441ea548d89be0981516ca7eb306e063d5027f4",
+      "size": 120400
+    },
+    "product/runtime/python/winsound.pyd": {
+      "sha256": "41e099e17de849d82a7871ef6b4738a9eec028d63d2a70d3d18e8a68680f1437",
+      "size": 32088
+    },
+    "program.json": {
+      "sha256": "b80edbd9530e2bb19777be739db269059ab6b11391576cb65dd02a7201a0942d",
+      "size": 547
+    },
+    "service.cjs": {
+      "sha256": "16f9955d8a16d38996f5093d17c4e7ab5c5b7e7f8663529e7a28d78ebd173fbc",
+      "size": 3512
+    }
+  }
+}

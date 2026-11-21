@@ -1,0 +1,102 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Client/Desktop/ui/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: body[data-os-appearance]:is([data-form=chat],[data-form=work]) #screen #voice; body[data-os-appearance][data-form=folded] #screen #voice; body[data-os-appearance] .chat-text; body[data-os-appearance] :is(#message,.gv-composer textarea); body .chat-entry.user .chat-name; body #onboarding .look-preview; body #onboarding .look-preview > summary; body #onboarding .look-stage; @media (max-height:560px); body #onboarding .look-preview; body #onboarding .look-preview > summary; body #onboarding .look-preview > summary::-webkit-details-marker; body #onboarding .look-preview > summary::before; body #onboarding .look-preview[open] > summary::before; body #onboarding .look-preview > summary:is(:hover,:focus-visible); body #onboarding .look-preview[open] .look-stage; body #onboarding .look-screen; body #onboarding .look-screen::before; body #onboarding .look-screen::after; body #onboarding .look-stage:is([data-tab=text],[data-tab=people]) .look-screen; body #onboarding .look-column; body #onboarding .look-window; body #onboarding .look-window-inner; body #onboarding .look-window-column; body #onboarding .look-next; body #onboarding .look-next .chat-avatar; body #onboarding .look-guide; body #onboarding .look-guide.top; body #onboarding .look-guide.left; body #onboarding .look-guide.right; body #onboarding .look-guide.max; body #onboarding .look-group; body #onboarding .look-group-title; body #onboarding .look-grid; body #onboarding .look-grid.look-2; body #onboarding .look-grid.look-effects; body #onboarding .look-grid.look-layout; @media (max-width:740px); body #onboarding .look-window-inner::before; .theme-editor; body #onboarding .look-preview.theme-editing; body #onboarding .look-preview.theme-editing > summary; .theme-editor summary; .theme-editor-version; .theme-token-grid; .theme-token-field; .theme-token-field span; .theme-token-field input; .theme-definition-editor; .theme-definition-editor label; .theme-definition; .theme-editor-actions; .theme-preset-fields; .theme-preset-fields select; .theme-conflict; .theme-conflict h4; .theme-conflict-values; .theme-conflict-values > div; .theme-conflict pre; body #onboarding .look-stage[data-tab=status] .look-state; body #onboarding .look-state::after; body #onboarding .look-state-main; body #onboarding .look-state .presence-identity; body #onboarding .look-state .chat-name; body #onboarding .look-state .presence-work-status; body #onboarding .look-state .thinking-content; body #onboarding .look-state :is(.thinking-content,.look-work-example); body #onboarding .look-state .look-work-example; body #onboarding .look-state .thinking-content .thought-view; body #onboarding .look-grid.look-presentation; body #onboarding .look-stage .chat-name; body #onboarding .look-presentation > label,body #onboarding .look-presentation select
+ * Impact: python -B scripts/code-atlas.py show Client/Desktop/ui/look.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+/* 外观页（docs/UI设计知识库.md 设置 E5/E6）：标签、实景预览、三列参数；以及“正文”参数落到真实界面的规则。
+   这个文件最后加载：预览与真实界面用同一套 .chat-entry / .chat-text 样式，这里只补外壳和变量。 */
+
+/* —— 正文：Eyra 与你的正文同一套字体与排版 ——
+   作用于聊天列、聊天形态托着的回复、历史记录；字号与行距来自 --chat-text / --chat-leading（chatLayout）。
+   工作形态和其他页面的正文条保持固定的最佳值，只跟随字体；输入框也跟随字体。 */
+body[data-os-appearance] .chat-text,
+body[data-os-appearance]:is([data-form=chat],[data-form=work]) #screen #voice { --region-paragraph:var(--os-assistant-paragraph,12px); font-family:var(--os-assistant-font); font-weight:var(--os-assistant-weight); letter-spacing:var(--os-assistant-letter); -webkit-text-stroke:calc(var(--os-assistant-stroke,0px) * 2) var(--os-assistant-strokeColor,transparent); paint-order:stroke fill; text-shadow:var(--os-assistant-shadow,none); }
+body[data-os-appearance][data-form=folded] #screen #voice { font-family:var(--os-assistant-font); }
+body[data-os-appearance] .chat-text { color:var(--os-assistant-color,#e8edf5); }
+body[data-os-appearance] :is(#message,.gv-composer textarea) { --region-font:var(--os-assistant-font); }
+/* 名字字号分成 Eyra 与你两个（E6 Q5）。 */
+body .chat-entry.user .chat-name { font-size:var(--chat-name-user,var(--chat-name,14px)); }
+
+/* —— 外观页外壳 —— */
+
+/* 高窗口固定预览；矮窗口默认收起，展开后和参数一起滚动。 */
+body #onboarding .look-preview { position:sticky; top:0; z-index:3; margin:0 0 20px; }
+body #onboarding .look-preview > summary { display:none; }
+body #onboarding .look-stage { --chat-axis:max(var(--eyra-avatar,80px),var(--user-avatar,44px)); position:relative; margin:0; border-radius:18px; overflow:hidden; background:#0b0d12; box-shadow:0 16px 40px #0006,inset 0 0 0 1px #ffffff12; pointer-events:none; }
+@media (max-height:560px) {
+ body #onboarding .look-preview { position:static; z-index:auto; }
+ body #onboarding .look-preview > summary { display:flex; align-items:center; gap:8px; width:fit-content; padding:5px 0; color:var(--text-3); font-size:13px; cursor:pointer; list-style:none; }
+ body #onboarding .look-preview > summary::-webkit-details-marker { display:none; }
+ body #onboarding .look-preview > summary::before { content:''; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; rotate:-45deg; }
+ body #onboarding .look-preview[open] > summary::before { rotate:45deg; }
+ body #onboarding .look-preview > summary:is(:hover,:focus-visible) { color:var(--text); }
+ body #onboarding .look-preview[open] .look-stage { margin-top:12px; }
+}
+body #onboarding .look-screen { position:relative; isolation:isolate; overflow:hidden; color:var(--text); }
+body #onboarding .look-screen::before { content:''; position:absolute; inset:-40px; z-index:-2; background:var(--look-bg,linear-gradient(160deg,#151a24,#0a0c11)) center/cover no-repeat; filter:blur(var(--look-blur,0px)); }
+body #onboarding .look-screen::after { content:''; position:absolute; inset:0; z-index:-1; background:rgb(5 6 9 / var(--look-veil,0)); }
+
+/* 正文、头像与名字：真实尺寸的一段对话。 */
+body #onboarding .look-stage:is([data-tab=text],[data-tab=people]) .look-screen { max-height:min(400px,50vh); padding:24px 28px 26px; }
+body #onboarding .look-column { display:flex; flex-direction:column; gap:var(--chat-gap,15px); max-width:var(--chat-max,780px); }
+
+/* 版面：和当前窗口等比例的小窗口，按真实像素排好再整体缩小。 */
+body #onboarding .look-window { position:relative; width:100%; max-height:min(440px,54vh); overflow:hidden; }
+body #onboarding .look-window-inner { position:absolute; left:0; top:0; transform-origin:0 0; }
+body #onboarding .look-window-column { position:absolute; inset:0 var(--chat-right) 0 var(--chat-left); max-width:var(--chat-max); padding:var(--chat-top) 0 0; display:flex; flex-direction:column; gap:var(--chat-gap); }
+body #onboarding .look-next { display:grid; grid-template-columns:var(--chat-axis) minmax(0,1fr); column-gap:16px; }
+body #onboarding .look-next .chat-avatar { justify-self:center; }
+body #onboarding .look-guide { position:absolute; border:0 dashed #a9c0ec66; }
+body #onboarding .look-guide.top { left:0; right:0; top:var(--chat-top); border-top-width:2px; }
+body #onboarding .look-guide.left { top:0; bottom:0; left:var(--chat-left); border-left-width:2px; }
+body #onboarding .look-guide.right { top:0; bottom:0; right:var(--chat-right); border-right-width:2px; }
+body #onboarding .look-guide.max { top:0; bottom:0; left:calc(var(--chat-left) + var(--chat-max)); border-left-width:2px; border-color:#ffd17a4d; }
+/* 参数：排版一组两行、每行三个；效果是“数值 + 颜色”两对。 */
+body #onboarding .look-group { margin:0 0 20px; }
+body #onboarding .look-group-title { margin:0 0 12px; font-size:12px; font-weight:500; letter-spacing:.04em; color:var(--text-3); }
+body #onboarding .look-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px 28px; align-items:start; }
+body #onboarding .look-grid.look-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body #onboarding .look-grid.look-effects { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body #onboarding .look-grid.look-layout { grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (max-width:740px) { body #onboarding .look-grid:not(.look-effects) { grid-template-columns:minmax(0,1fr); } }
+body #onboarding .look-window-inner::before { background-image:var(--look-bg,radial-gradient(ellipse at 95% 65%,#43566b 0%,#252c42 35%,#111722 75%)); }
+.theme-editor { margin-block:24px; min-width:0; }
+body #onboarding .look-preview.theme-editing { position:static; }
+body #onboarding .look-preview.theme-editing > summary { display:list-item; color:var(--ui-text-2); cursor:pointer; }
+.theme-editor summary { cursor:pointer; color:var(--ui-text); }
+.theme-editor-version { color:var(--ui-text-2); overflow-wrap:anywhere; }
+.theme-token-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:12px; }
+.theme-token-field { display:flex; flex-direction:column; gap:8px; min-width:0; }
+.theme-token-field span { font-size:12px; overflow-wrap:anywhere; color:var(--ui-text-2); }
+.theme-token-field input { min-width:0; width:100%; }
+.theme-definition-editor { margin-block:16px; }
+.theme-definition-editor label { display:block; margin-block:8px; }
+.theme-definition { width:100%; min-height:160px; resize:vertical; font-family:monospace; }
+.theme-editor-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.theme-preset-fields { display:grid; gap:12px; margin-block:16px; }
+.theme-preset-fields select { width:100%; min-width:0; }
+.theme-conflict { margin-block:16px; padding:16px; border:1px solid var(--ui-edge); border-radius:var(--ui-radius-panel,18px); content-visibility:auto; }
+.theme-conflict h4 { margin:0; overflow-wrap:anywhere; }
+.theme-conflict-values { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr)); gap:12px; }
+.theme-conflict-values > div { min-width:0; }
+.theme-conflict pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:240px; overflow:auto; font-size:12px; }
+
+/* Status preview reuses the actual compact thought renderer. */
+body #onboarding .look-stage[data-tab=status] .look-state { display:grid;grid-template-columns:var(--chat-axis) minmax(0,1fr);align-items:start;column-gap:16px;padding:24px 28px;min-height:calc(var(--eyra-avatar) + 48px);max-height:calc(var(--eyra-avatar) * 2 + 48px); }
+body #onboarding .look-state::after { background:rgb(5 6 9 / max(.66,var(--look-veil,0))); }
+body #onboarding .look-state-main { display:grid;grid-template-rows:auto 72px;min-width:0;padding-top:calc(var(--eyra-avatar) * .2); }
+body #onboarding .look-state .presence-identity { display:flex;align-items:flex-end;gap:12px;min-width:0;margin-bottom:8px; }
+body #onboarding .look-state .chat-name { flex:none;max-inline-size:50%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--chat-name,25px);margin:0; }
+body #onboarding .look-state .presence-work-status { min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--os-status-font);font-size:var(--os-status-size);font-weight:var(--os-status-weight);line-height:1.5;letter-spacing:var(--os-status-letter);color:var(--os-status-color); }
+body #onboarding .look-state .thinking-content { --thought-height:72px; }
+body #onboarding .look-state :is(.thinking-content,.look-work-example) { grid-area:2 / 1;min-width:0; }
+body #onboarding .look-state .look-work-example { align-self:start;color:var(--ui-text-soft);overflow-wrap:anywhere; }
+body #onboarding .look-state .thinking-content .thought-view { min-width:0; }
+body #onboarding .look-grid.look-presentation { grid-template-columns:repeat(3,minmax(0,1fr)); }
+body #onboarding .look-stage .chat-name {color:var(--os-identity-color);}
+body #onboarding .look-presentation > label,body #onboarding .look-presentation select {min-width:0;max-width:100%;}

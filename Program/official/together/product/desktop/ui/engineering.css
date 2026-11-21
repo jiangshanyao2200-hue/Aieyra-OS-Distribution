@@ -1,0 +1,130 @@
+/* @file-map:start
+文件: link/desktop/ui/engineering.css
+位置: 一环·完整界面模块 | 共享界面模块与页面渲染；workspace.mjs负责页面编排与业务事件。
+约束: 优先复用controls、Surfaces、detail-view、native-overlays和既有设计变量；异步更新核对generation/epoch；账号变化释放旧DOM、草稿与定时器
+下游: 无已解析的项目内静态导入
+上游: link/desktop/ui/index.html
+链路: 目录 CODEMAP.md → docs/CODE-MAP.json
+验证: node --test AIDEBUG/controls.test.mjs, AIDEBUG/live-review.cjs, link/DOCS/AIDEBUG-LIVE.md
+目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
+  rule-1 | style | .task-workbench-back
+  rule-2 | style | .task-workbench-list
+  rule-3 | style | button.snapshot-row.task-workbench-row
+  rule-4 | style | .task-workbench-row>span:first-child
+  rule-5 | style | .task-workbench-row strong
+  rule-6 | style | .task-workbench-row>.icon
+  rule-7 | style | .task-workbench-row [data-task-state=blocked]
+  rule-8 | style | .task-workbench-row [data-task-state=review]
+  rule-9 | style | .task-workbench-checkpoint
+  rule-10 | style | .engineering
+  rule-11 | style | .engineering-intro
+  rule-12 | style | .engineering-intro>div:first-child
+  rule-13 | style | .engineering-intro h2
+  rule-14 | style | .engineering-intro p
+  rule-15 | style | .engineering-facts
+  rule-16 | style | .engineering-facts span
+  rule-17 | style | .engineering-facts b
+  rule-18 | style | .blueprint-symbol
+  rule-19 | style | .blueprint-symbol i
+  rule-20 | style | .blueprint-symbol:before
+  rule-21 | style | .blueprint-symbol span
+  rule-22 | style | .blueprint-symbol span:nth-of-type(2)
+  rule-23 | style | .engineering-strip
+  rule-24 | style | .engineering-strip button
+  rule-25 | style | .state-pill
+  rule-26 | style | .state-pill.ready
+  rule-27 | style | .state-pill.waiting
+  rule-28 | style | .engineering-empty
+  rule-29 | style | .engineering-empty h3
+  rule-30 | style | .engineering-empty>p
+  rule-31 | style | .draft-grid
+  rule-32 | style | .draft-grid i
+  rule-33 | style | .draft-grid i:nth-child(2)
+  rule-34 | style | .engineering-steps
+  rule-35 | style | .engineering-steps li
+  rule-36 | style | .engineering-steps b
+  rule-37 | style | .engineering-steps strong
+  rule-38 | style | .engineering-steps span
+  rule-39 | style | .construction-board
+  rule-40 | style | .construction-lane
+  rule-41 | style | .construction-lane>header
+  rule-42 | style | .construction-lane h3
+  rule-43 | style | .construction-lane>header>span
+  rule-44 | style | .task-dot
+  rule-45 | style | .task-dot.working
+  rule-46 | style | .task-dot.blocked
+  rule-47 | style | .task-dot.integrated
+  rule-48 | style | .construction-task
+  rule-49 | style | .construction-task:hover
+  rule-50 | style | .task-domain
+  rule-51 | style | .construction-task strong
+  rule-52 | style | .task-owner
+  rule-53 | style | .lane-empty
+  rule-54 | style | .repository-mark
+  rule-55 | style | .version-track
+  rule-56 | style | .version-track li
+  rule-57 | style | .version-node
+  rule-58 | style | .established .version-node
+  rule-59 | style | .version-track h3
+  rule-60 | style | .version-track p
+  rule-61 | style | .version-track code
+  rule-62 | style | .repository-await
+  rule-63 | style | .repository-await strong
+  rule-64 | style | .repository-await p
+  rule-65 | style | .snapshot-row
+  rule-66 | style | .snapshot-row>div
+  rule-67 | style | .snapshot-row strong
+  rule-68 | style | .snapshot-row small
+  rule-69 | style | .snapshot-line
+  rule-70 | style | .task-detail
+  rule-71 | style | .task-detail dt
+  rule-72 | style | .task-detail dd
+  rule-73 | style | .engineering-guide
+  rule-74 | style | .connection-note
+  rule-75 | style | .snapshot-files
+  rule-76 | style | .snapshot-files button
+  rule-77 | style | .snapshot-source
+  rule-78 | style | .agent-entry .state-pill
+  rule-79 | style | @media(max-width:1000px)
+  rule-80 | style | @media(max-width:720px)
+  rule-81 | style | @media(max-height:760px)
+  rule-82 | style | .engineering-inbox
+  rule-83 | style | .inbox-preview-row
+  rule-84 | style | .inbox-preview-row span,.inbox-preview-row small
+  rule-85 | style | .inbox-preview-row strong
+  rule-86 | style | .inbox-row
+  rule-87 | style | .inbox-title
+  rule-88 | style | .inbox-body,.checkpoint dd
+  rule-89 | style | .checkpoint
+  rule-90 | style | .checkpoint small
+  rule-91 | style | .inbox-detail .secondary
+维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
+@file-map:end */
+/* @chain-region rule-1 */ .task-workbench-back{margin-bottom:12px}
+/* @chain-region rule-2 */ .task-workbench-list{display:grid;gap:8px;margin-top:12px}
+/* @chain-region rule-3 */ button.snapshot-row.task-workbench-row{
+ display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 12px;align-items:center;
+ padding:10px 12px;border-radius:8px;text-align:start;
+}
+/* @chain-region rule-4 */ .task-workbench-row>span:first-child{min-width:0}
+/* @chain-region rule-5 */ .task-workbench-row strong{display:block;overflow-wrap:anywhere}
+/* @chain-region rule-6 */ .task-workbench-row>.icon{width:16px;height:16px}
+/* @chain-region rule-7 */ .task-workbench-row [data-task-state=blocked]{color:var(--together-attention,#ffbaad)}
+/* @chain-region rule-8 */ .task-workbench-row [data-task-state=review]{color:var(--together-accent,#d1ed9b)}
+/* @chain-region rule-9 */ .task-workbench-checkpoint{padding:12px 0;border-top:1px solid var(--line)}
+/* @chain-region rule-10 */ .engineering{max-width:1440px;margin:0 auto;width:100%;padding-bottom:24px}/* @chain-region rule-11 */ .engineering-intro{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:10px 0 28px;border-bottom:1px solid var(--line)}/* @chain-region rule-12 */ .engineering-intro>div:first-child{max-width:680px;min-width:0}/* @chain-region rule-13 */ .engineering-intro h2{font-size:clamp(24px,2.8vw,36px);font-weight:500;letter-spacing:-.04em;line-height:1.4;margin:12px 0}/* @chain-region rule-14 */ .engineering-intro p{color:var(--ui-text-2);font-size:14px;line-height:1.9;max-width:570px}/* @chain-region rule-15 */ .engineering-facts{display:flex;gap:30px;margin-top:24px}/* @chain-region rule-16 */ .engineering-facts span{display:flex;align-items:baseline;gap:8px;font-size:14px;color:var(--ui-text-2)}/* @chain-region rule-17 */ .engineering-facts b{font-size:25px;font-weight:450;color:var(--ui-text);font-variant-numeric:tabular-nums}/* @chain-region rule-18 */ .blueprint-symbol{flex:none;width:180px;height:140px;position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px}/* @chain-region rule-19 */ .blueprint-symbol i{position:absolute;inset:20px 32px;border:1px solid var(--line);transform:rotate(-20deg);border-radius:22px}/* @chain-region rule-20 */ .blueprint-symbol:before{content:'';position:absolute;height:1px;background:var(--ui-accent);opacity:.3;inset-inline:0;top:50%}/* @chain-region rule-21 */ .blueprint-symbol span{z-index:1;display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--line);background:var(--ui-bg,#101217);border-radius:50%;font-size:14px;color:var(--ui-text-2)}/* @chain-region rule-22 */ .blueprint-symbol span:nth-of-type(2){border-color:var(--ui-accent);color:var(--ui-accent);transform:translateY(-30px)}/* @chain-region rule-23 */ .engineering-strip{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;padding:18px 0;color:var(--ui-text-3);font-size:14px}/* @chain-region rule-24 */ .engineering-strip button{margin-left:auto;font-size:14px}/* @chain-region rule-25 */ .state-pill{display:inline-flex;align-items:center;gap:6px;max-width:100%;font-size:14px;color:var(--ui-text-2);padding:5px 9px;border:1px solid var(--line);border-radius:20px;white-space:nowrap}/* @chain-region rule-26 */ .state-pill.ready{color:var(--ui-ok)}/* @chain-region rule-27 */ .state-pill.waiting{color:var(--ui-warn)}/* @chain-region rule-28 */ .engineering-empty{padding:22px 20px;text-align:center}/* @chain-region rule-29 */ .engineering-empty h3{font-size:19px;font-weight:450;margin:20px 0 8px}/* @chain-region rule-30 */ .engineering-empty>p{color:var(--ui-text-2);font-size:14px;line-height:1.9;max-width:490px;margin:auto}/* @chain-region rule-31 */ .draft-grid{display:flex;justify-content:center;gap:10px;padding:10px}/* @chain-region rule-32 */ .draft-grid i{display:block;width:50px;height:42px;border:1px dashed var(--line);border-radius:8px}/* @chain-region rule-33 */ .draft-grid i:nth-child(2){transform:translateY(-7px);border-style:solid;border-color:var(--ui-accent);opacity:.5}/* @chain-region rule-34 */ .engineering-steps{padding:24px 0 0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:680px;margin:16px auto 0;border-top:1px solid var(--line);text-align:left}/* @chain-region rule-35 */ .engineering-steps li{display:grid;grid-template-columns:24px 1fr;gap:4px 10px}/* @chain-region rule-36 */ .engineering-steps b{grid-row:span 2;color:var(--ui-text-3);font-size:14px;font-weight:400}/* @chain-region rule-37 */ .engineering-steps strong{font-size:14px;font-weight:500}/* @chain-region rule-38 */ .engineering-steps span{font-size:14px;color:var(--ui-text-3)}/* @chain-region rule-39 */ .construction-board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;align-items:start}/* @chain-region rule-40 */ .construction-lane{min-width:0}/* @chain-region rule-41 */ .construction-lane>header{display:flex;gap:7px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);margin-bottom:14px}/* @chain-region rule-42 */ .construction-lane h3{font-size:14px;font-weight:500}/* @chain-region rule-43 */ .construction-lane>header>span{margin-left:auto;color:var(--ui-text-3);font-size:14px}/* @chain-region rule-44 */ .task-dot{width:5px;height:5px;border-radius:50%;background:var(--ui-text-3)}/* @chain-region rule-45 */ .task-dot.working{background:var(--ui-accent)}/* @chain-region rule-46 */ .task-dot.blocked{background:var(--ui-warn)}/* @chain-region rule-47 */ .task-dot.integrated{background:var(--ui-ok)}/* @chain-region rule-48 */ .construction-task{width:100%;display:flex;flex-direction:column;align-items:stretch;text-align:left;border:1px solid var(--line);border-radius:12px;padding:15px 12px;margin-bottom:10px;gap:12px;background:#ffffff02;overflow-wrap:anywhere;transition:border-color .2s,transform .2s}/* @chain-region rule-49 */ .construction-task:hover{border-color:var(--ui-accent);transform:translateY(-2px)}/* @chain-region rule-50 */ .task-domain{font-size:14px;color:var(--ui-accent)}/* @chain-region rule-51 */ .construction-task strong{font-size:14px;font-weight:500;line-height:1.7}/* @chain-region rule-52 */ .task-owner{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--ui-text-3)}/* @chain-region rule-53 */ .lane-empty{font-size:14px;color:var(--ui-text-3);padding:20px 4px;text-align:center}/* @chain-region rule-54 */ .repository-mark{font:300 54px/1.4 'Cascadia Code',monospace;letter-spacing:-8px;padding:20px;color:var(--ui-accent);opacity:.5;white-space:nowrap}/* @chain-region rule-55 */ .version-track{list-style:none;padding:32px 0 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}/* @chain-region rule-56 */ .version-track li{position:relative;border-top:1px solid var(--line);padding:20px 20px 0 0;min-width:0}/* @chain-region rule-57 */ .version-node{position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--panel);border:1px solid var(--ui-text-3)}/* @chain-region rule-58 */ .established .version-node{background:var(--ui-accent);border-color:var(--ui-accent);box-shadow:0 0 12px #a9c0ec33}/* @chain-region rule-59 */ .version-track h3{font-size:14px;font-weight:450}/* @chain-region rule-60 */ .version-track p{font-size:14px;color:var(--ui-text-3);margin:8px 0 12px}/* @chain-region rule-61 */ .version-track code{font-size:14px;color:var(--ui-text-2)}/* @chain-region rule-62 */ .repository-await{border-top:1px solid var(--line);padding:36px 0 24px}/* @chain-region rule-63 */ .repository-await strong{font-weight:450;font-size:15px}/* @chain-region rule-64 */ .repository-await p{font-size:14px;color:var(--ui-text-3);margin-top:12px;line-height:1.8}/* @chain-region rule-65 */ .snapshot-row{display:flex;width:100%;align-items:center;text-align:left;gap:16px;border-bottom:1px solid var(--line);padding:18px 8px;border-radius:0}/* @chain-region rule-66 */ .snapshot-row>div{flex:1;min-width:0}/* @chain-region rule-67 */ .snapshot-row strong{display:block;font-size:14px;font-weight:450;overflow-wrap:anywhere}/* @chain-region rule-68 */ .snapshot-row small{display:block;color:var(--ui-text-3);font-size:14px;margin-top:7px}/* @chain-region rule-69 */ .snapshot-line{width:7px;height:7px;border:1px solid var(--ui-accent);border-radius:50%;flex:none}/* @chain-region rule-70 */ .task-detail{display:grid;grid-template-columns:80px 1fr;gap:16px 18px;margin:24px 0;font-size:14px;line-height:1.8}/* @chain-region rule-71 */ .task-detail dt{color:var(--ui-text-3)}/* @chain-region rule-72 */ .task-detail dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}/* @chain-region rule-73 */ .engineering-guide{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.9;color:var(--ui-text-2)}/* @chain-region rule-74 */ .connection-note{font-size:14px;color:var(--ui-text-3);line-height:1.9;margin:14px 0 24px}/* @chain-region rule-75 */ .snapshot-files{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto}/* @chain-region rule-76 */ .snapshot-files button{text-align:left;overflow-wrap:anywhere;font-size:14px;padding:7px 10px}/* @chain-region rule-77 */ .snapshot-source{white-space:pre;overflow:auto;max-height:360px;font:14px/1.8 monospace}/* @chain-region rule-78 */ .agent-entry .state-pill{margin-bottom:8px}
+/* @chain-region rule-79 */ @media(max-width:1000px){.construction-board{grid-template-columns:repeat(3,minmax(0,1fr))}.blueprint-symbol{width:150px}.engineering-intro h2{font-size:26px}}
+/* @chain-region rule-80 */ @media(max-width:720px){.blueprint-symbol,.repository-mark{display:none}.engineering-intro{padding-bottom:20px}.construction-board{grid-template-columns:repeat(2,minmax(0,1fr))}.engineering-facts{gap:18px}.engineering-strip{gap:10px}.engineering-strip button{margin-left:0}.engineering-steps{gap:12px;grid-template-columns:1fr}.version-track p{font-size:14px}.version-track li{padding-right:10px}.version-track code{font-size:14px}.engineering-empty{padding-inline:4px}.engineering-steps li{grid-template-columns:24px 90px 1fr}.engineering-steps b{grid-row:auto}.task-detail{grid-template-columns:65px 1fr;gap:12px}.snapshot-row{gap:10px}}
+
+/* @chain-region rule-81 */ @media(max-height:760px){.engineering-intro{padding:4px 0 14px;gap:16px}.engineering-intro h2{font-size:24px;margin:6px 0}.engineering-intro p{margin:4px 0;line-height:1.65}.engineering-facts{margin-top:12px}.blueprint-symbol{height:90px;width:140px}.engineering-strip{padding:12px 0}.construction-lane>header{padding:10px 0;margin-bottom:10px}}
+
+/* @chain-region rule-82 */ .engineering-inbox{margin:18px 0;padding-top:14px;border-top:1px solid var(--line)}
+/* @chain-region rule-83 */ .inbox-preview-row{display:flex;width:100%;align-items:center;gap:12px;padding:10px 0;text-align:left;background:transparent;border:0}
+/* @chain-region rule-84 */ .inbox-preview-row span,.inbox-preview-row small{flex-shrink:0;opacity:.65;font-size:14px}
+/* @chain-region rule-85 */ .inbox-preview-row strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* @chain-region rule-86 */ .inbox-row{padding:14px 0;border-bottom:1px solid var(--line)}
+/* @chain-region rule-87 */ .inbox-title{display:block;background:transparent;border:0;padding:8px 0;font-size:16px;font-weight:600;text-align:left}
+/* @chain-region rule-88 */ .inbox-body,.checkpoint dd{white-space:pre-wrap;overflow-wrap:anywhere}
+/* @chain-region rule-89 */ .checkpoint{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+/* @chain-region rule-90 */ .checkpoint small{font-size:14px;font-weight:400;opacity:.6}
+/* @chain-region rule-91 */ .inbox-detail .secondary{margin:8px 8px 0 0}

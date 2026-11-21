@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aieyra.invalid/contracts/theme-preset.schema.json",
+  "title": "Aieyra portable theme preset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "name",
+    "theme",
+    "values"
+  ],
+  "properties": {
+    "schema": {
+      "const": "aieyra.theme-preset/1"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "digest",
+        "definition"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,127}$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "version": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+][a-zA-Z0-9.-]+)?$"
+        },
+        "definition": {
+          "$ref": "theme.schema.json"
+        }
+      }
+    },
+    "parent": {
+      "$ref": "#"
+    },
+    "values": {
+      "$ref": "theme.schema.json#/$defs/presetValues"
+    }
+  }
+}

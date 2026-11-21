@@ -1,0 +1,1 @@
+Persistent task state: revision=%d, plan=%s, unresolved interrupted calls=%d. Before final delivery use workspace workflow_status, capture artifact files BEFORE read-only validation, link its exact receipt ref/key with workflow_evidence, then workflow_deliver. Do not replay uncertain side effects. User's current instruction governs continuation, not old summaries.

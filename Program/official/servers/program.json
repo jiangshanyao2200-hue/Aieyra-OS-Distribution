@@ -1,0 +1,60 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {
+    "entry": "ui/app-servers.html",
+    "native": "servers",
+    "navigation": {
+      "tab": "dock-servers",
+      "host": "surface",
+      "background": "sleep",
+      "order": 5
+    }
+  },
+  "operations": [
+    {
+      "id": "list",
+      "description": "服务器：list；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "add",
+      "description": "服务器：add；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "connect",
+      "description": "服务器：connect；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "status",
+      "description": "服务器：status；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "probe",
+      "description": "服务器：probe；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "remove",
+      "description": "服务器：remove；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "rename",
+      "description": "服务器：rename；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "vault_list",
+      "description": "服务器：vault_list；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "vault_read",
+      "description": "服务器：vault_read；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "vault_save",
+      "description": "服务器：vault_save；遵守已有领域权限与参数校验。"
+    },
+    {
+      "id": "vault_remove",
+      "description": "服务器：vault_remove；遵守已有领域权限与参数校验。"
+    }
+  ]
+}

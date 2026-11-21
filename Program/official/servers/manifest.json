@@ -1,0 +1,60 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.servers",
+  "kind": "program",
+  "name": "服务器",
+  "summary": "共用服务器目录和状态，凭据与终端仍按原权限授权。",
+  "version": "1.0.7",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "program": "^1.1.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [],
+  "entrypoints": {
+    "program": "program.json"
+  },
+  "permissions": [],
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "AGENTS.md": {
+      "sha256": "d5b49ad078aa59f597340389e489bd08cbbc3ffafb782ca76cb633c701466066",
+      "size": 1713
+    },
+    "desktop.cjs": {
+      "sha256": "c37ba0febc2b266a46abb3940f2e16951c9f5037e102fba0a663b6bbaa915efd",
+      "size": 2795
+    },
+    "program.json": {
+      "sha256": "289ac8c77f648cde1e914fc37260b5e5d99c00134a0d62132778f518a2d216c8",
+      "size": 1659
+    },
+    "service.cjs": {
+      "sha256": "8acf8c104149a53fbde0a960ad650f42e13c615e2b6aa97cbe5a8380500fcff1",
+      "size": 22929
+    },
+    "ui/app-servers.css": {
+      "sha256": "62ba920d01f12b4c62df358470615028eb318c40d0b0ef54ce26245da93c5fbd",
+      "size": 12288
+    },
+    "ui/app-servers.html": {
+      "sha256": "9e7dc692a181e38b04fe15884c285919b1d7d92258d4aa00982d92ba900ea7d1",
+      "size": 3887
+    },
+    "ui/app-servers.mjs": {
+      "sha256": "44b7a5873c24562bf4f5b422f57676d357322b47c6238d4037abb440d9bd6f7c",
+      "size": 24032
+    }
+  }
+}

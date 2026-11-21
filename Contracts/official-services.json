@@ -1,0 +1,12 @@
+{
+  "schema": "aieyra.official-services/1",
+  "note": "The only place official client endpoints are written. Every host here is public by necessity (clients reach it); protection is CDN/WAF, origin allow-lists and rate limits. Internal relays, panels and origin addresses never appear in source.",
+  "site": "https://aieyra.cn",
+  "account": "https://api.aieyra.cn",
+  "gateway": "https://fast.aieyra.cn/v1",
+  "os": "https://os.aieyra.cn",
+  "download": "https://os.aieyra.cn/os",
+  "link_cloud": "https://os.aieyra.cn/link/cloud",
+  "updates": "https://osupdate.aieyra.cn",
+  "control": "https://ctrlupdate.aieyra.cn"
+}

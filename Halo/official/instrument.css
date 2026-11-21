@@ -1,0 +1,132 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Halo/official/AGENTS.md | ring 3
+ * Chains: module-local; query impact before editing
+ * Regions: .halo; .halo-soft; .halo-edge; body .halo-surface[data-state] .halo; body .halo-surface .halo-edge; .halo-wave, .halo-orbit, .halo-cursor; .halo-code; body .halo-surface[data-state="thinking"] .halo-wave, body .halo-surface[data-state="compacting"] .halo-wave; body .halo-surface[data-state="compacting"] .halo-wave; body .halo-surface[data-state="waiting"] .halo-orbit, body .halo-surface[data-state="connecting"] .halo-orbit, body .halo-surface[data-state="preparing"] .halo-orbit; body .halo-surface[data-long-wait="true"] .halo-orbit; body .halo-surface[data-state="tool"] .halo-orbit; body .halo-surface[data-state="preparing"] .halo-orbit; body .halo-surface[data-state="tool"][data-effect="search"] .halo-orbit; body .halo-surface[data-state="tool"][data-effect="terminal"] .halo-code; body .halo-surface[data-state="tool"][data-effect="terminal"] .halo-orbit; body .halo-surface[data-state="waiting_user"] .halo-wave; body .halo-surface[data-state="error"] .halo-cursor, body .halo-surface[data-state="offline"] .halo-cursor; body .halo-surface[data-state="cancelling"] .halo-orbit; @keyframes eyra-ripple; 0%; 18%; 78%; 100%; @keyframes halo-wait-breathe; 0%, 100%; 50%; @keyframes eyra-code; 0%; 50%; 100%; @keyframes eyra-caret; 50%; body .halo-surface .halo-reader, body .halo-surface .halo-long; body .halo-surface .halo-wait; body .halo-surface[data-state="waiting"] .halo-orbit, body .halo-surface[data-state="connecting"] .halo-orbit; body .halo-surface[data-state="waiting"] .halo-wait, body .halo-surface[data-state="connecting"] .halo-wait; body .halo-surface[data-long-wait="true"] .halo-wait; body .halo-surface[data-long-wait="true"] .halo-long; body .halo-surface[data-state="tool"][data-effect="reader"] .halo-reader, body .halo-surface[data-state="tool"][data-effect="browser"] .halo-reader; body .halo-surface[data-state="tool"][data-effect="reader"] .halo-wave, body .halo-surface[data-state="tool"][data-effect="browser"] .halo-wave; .halo-scan; body .halo-surface[data-state="tool"]:is([data-effect="reader"],[data-effect="browser"]) .halo-scan; .halo-surface; .halo-surface > .halo; .halo-surface .halo :is(circle,path,polygon,polyline); body .halo-surface .halo-edge; .halo-surface::before,.halo-surface::after; .halo-surface::before; .halo-surface::after; .halo-surface:not([data-state=idle]); .halo-surface .halo-flow; .halo-surface[data-state=idle] .halo-flow; .halo-surface[data-state=idle] .halo-edge; .halo-surface[data-state=waiting_user]; .halo-surface:is([data-state=error],[data-state=offline]); .halo-surface:is([data-state=queued],[data-state=confirming],[data-state=boot]) .halo-wait; .halo-surface:is([data-state=error],[data-state=offline])::before; .halo-surface:is([data-state=error],[data-state=offline])::after; [data-inner-animation=pulse]; [data-inner-animation=orbit]; [data-inner-animation=wave]; [data-inner-animation=spark]; [data-inner-animation=vernier]; .halo-surface[data-state=idle] .halo-flow; .halo-surface .halo-edge; .halo-surface::before; .halo-surface[data-state=idle][data-halo-live=false] *, .halo-surface[data-state=idle][data-halo-live=false]::before,.halo-surface[data-state=idle][data-halo-live=false]::after; .halo-surface[data-state=idle][data-halo-live=false] .halo-flow; .halo-surface[data-state=idle][data-halo-live=false]::after; @keyframes halo-flow; @keyframes halo-spin; @keyframes halo-idle; @keyframes pulsar-beat; @keyframes pulsar-wave; body.reduce-motion .halo-surface *,body.reduce-motion .halo-surface::before,body.reduce-motion .halo-surface::after; @media(prefers-reduced-motion:reduce); [data-spread-animation=ripple]; [data-spread-animation=echo]; [data-spread-animation=tide]; [data-spread-animation=step]; [data-spread-animation=ellipse]; @keyframes halo-tide; @keyframes halo-step; @keyframes halo-ellipse; [data-spread-animation=none]; .halo-surface:not([data-halo-custom]):not([data-state=error],[data-state=offline],[data-halo-live=false])::after; @keyframes halo-echo; [data-work-animation=signal]; [data-work-animation=scan]; [data-work-animation=index]; [data-work-animation=pivot]; [data-work-animation=press]; [data-work-animation=still]; body .halo-surface[data-state=tool]:not([data-halo-custom]) :is(.halo-code,.halo-orbit,.halo-cursor,.halo-scan); body .halo-surface[data-state=tool]:not([data-halo-custom])>.halo; @keyframes halo-tool-scan; @keyframes halo-tool-index; @keyframes halo-tool-pivot; @keyframes halo-tool-press; .pulsar-layer; .pulsar-layer .pulsar-dot; .pulsar-layer .pulsar-ring; body.reduce-motion .halo-surface:is([data-state=thinking],[data-state=compacting],[data-state=waiting_user]) .halo-wave; @media(prefers-reduced-motion:reduce); body .received .halo-surface:not([data-halo-custom])::before,body .halo-surface.received:not([data-halo-custom])::before; @keyframes halo-received; body.reduce-motion .received .halo-surface::before; @media(prefers-reduced-motion:reduce)
+ * Impact: python -B scripts/code-atlas.py show Halo/official/instrument.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+.halo { position: absolute; inset: 0px; width: 100%; height: 100%; fill: none; overflow: visible; transform-origin: center center; }
+.halo-soft { stroke: rgb(255, 255, 255); stroke-width: 1.7; opacity: 1; }
+.halo-edge { stroke: var(--eyra-light,currentColor); stroke-width: 2.5; opacity: 0.9; }
+body .halo-surface[data-state] .halo { opacity: 1; transform: none; animation: auto ease 0s 1 normal none running none; filter: none; stroke-dasharray: none; transition: none; }
+body .halo-surface .halo-edge { stroke: var(--eyra-light,currentColor); stroke-width: 1.65; opacity: 1; fill: none; }
+.halo-wave, .halo-orbit, .halo-cursor { stroke: var(--eyra-light,currentColor); stroke-width: 1.35; fill: none; opacity: 0; transform-origin: 20px 20px; }
+.halo-code { stroke: none; fill: var(--eyra-light,currentColor); font: 8px monospace; opacity: 0; }
+body .halo-surface[data-state="thinking"] .halo-wave, body .halo-surface[data-state="compacting"] .halo-wave { animation: 3.4s ease-out 0s infinite normal none running eyra-ripple; }
+body .halo-surface[data-state="compacting"] .halo-wave { animation-duration: 2.8s; }
+body .halo-surface[data-state="waiting"] .halo-orbit, body .halo-surface[data-state="connecting"] .halo-orbit, body .halo-surface[data-state="preparing"] .halo-orbit { opacity: 0.75; stroke-dasharray: 10, 53; animation: 2.4s ease-in-out 0s infinite normal none running halo-wait-breathe; }
+body .halo-surface[data-long-wait="true"] .halo-orbit { stroke-dasharray: 3, 8; animation-duration: 4s; }
+body .halo-surface[data-state="tool"] .halo-orbit { opacity: 0.75; stroke-dasharray: 5, 10; animation: 2.4s ease-in-out 0s infinite normal none running halo-wait-breathe; }
+body .halo-surface[data-state="preparing"] .halo-orbit { stroke-dasharray: 4, 8; }
+body .halo-surface[data-state="tool"][data-effect="search"] .halo-orbit { stroke-dasharray: 2, 5; }
+body .halo-surface[data-state="tool"][data-effect="terminal"] .halo-code { opacity: 1; animation: 2s ease-in-out 0s infinite normal none running eyra-code; }
+body .halo-surface[data-state="tool"][data-effect="terminal"] .halo-orbit { opacity: 0; animation: auto ease 0s 1 normal none running none; }
+body .halo-surface[data-state="tool"][data-effect="typing"] .halo-cursor, body .halo-surface[data-state="tool"][data-effect="editor"] .halo-cursor, body .halo-surface[data-state="body"] .halo-cursor { opacity: 1; animation: 1.8s ease-in-out 0s infinite normal none running eyra-caret; }
+body .halo-surface[data-state="waiting_user"] .halo-wave { animation: 3.2s ease-out 0s infinite normal none running eyra-ripple; }
+body .halo-surface[data-state="error"] .halo-cursor, body .halo-surface[data-state="offline"] .halo-cursor { opacity: 0.7; animation: auto ease 0s 1 normal none running none; }
+body .halo-surface[data-state="cancelling"] .halo-orbit { opacity: 0.8; stroke-dasharray: 3, 6; }
+@keyframes eyra-ripple { 
+  0% { opacity: 0; transform: scale(0.7); }
+  18% { opacity: 0.42; }
+  78% { opacity: 0; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.1); }
+}
+@keyframes halo-wait-breathe { 
+  0%, 100% { opacity: 0.28; transform: scale(0.94); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+@keyframes eyra-code { 
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.65; }
+}
+@keyframes eyra-caret { 
+  50% { opacity: 0.25; }
+}
+body .halo-surface .halo-reader, body .halo-surface .halo-long { fill: none; stroke: var(--eyra-light,currentColor); stroke-width: 0.65; opacity: 0; }
+body .halo-surface .halo-wait { fill: var(--eyra-light,currentColor); opacity: 0; transform-origin: 20px 20px; }
+body .halo-surface[data-state="waiting"] .halo-orbit, body .halo-surface[data-state="connecting"] .halo-orbit { animation: auto ease 0s 1 normal none running none; opacity: 0; }
+body .halo-surface[data-state="waiting"] .halo-wait, body .halo-surface[data-state="connecting"] .halo-wait { opacity: 0.8; animation: 3s ease-in-out 0s infinite normal none running halo-wait-breathe; }
+body .halo-surface[data-long-wait="true"] .halo-wait { opacity: 0; animation: auto ease 0s 1 normal none running none; }
+body .halo-surface[data-long-wait="true"] .halo-long { opacity: 0.45; }
+body .halo-surface[data-state="tool"][data-effect="reader"] .halo-reader, body .halo-surface[data-state="tool"][data-effect="browser"] .halo-reader { opacity: 0.8; }
+body .halo-surface[data-state="tool"][data-effect="reader"] .halo-wave, body .halo-surface[data-state="tool"][data-effect="browser"] .halo-wave { opacity: 0; animation: auto ease 0s 1 normal none running none; }
+.halo-scan { stroke-width: 1; }
+/* The reader group is transparent outside these states; no invisible scan loop. */
+body .halo-surface[data-state="tool"]:is([data-effect="reader"],[data-effect="browser"]) .halo-scan { animation: 1.8s ease-in-out 0s infinite normal none running eyra-caret; }
+
+/* One complete classic theme: geometry, inner signals, outer rhythm and variants. */
+.halo-surface { --eyra-light:var(--ui-text,#e6e9f0); --pulse:2.8s; isolation:isolate; }
+.halo-surface > .halo { z-index:2; pointer-events:none; }
+.halo-surface .halo :is(circle,path,polygon,polyline) { vector-effect:non-scaling-stroke; }
+body .halo-surface .halo-edge { stroke-width:2; }
+.halo-surface::before,.halo-surface::after { content:''; position:absolute; inset:7%; border-radius:50%; pointer-events:none; box-shadow:inset 0 0 0 1px currentColor; color:var(--eyra-light); }
+.halo-surface::before { opacity:.55; animation:pulsar-beat var(--pulse) cubic-bezier(.3,.7,.4,1) infinite; }
+.halo-surface::after { opacity:0; animation:pulsar-wave var(--pulse) cubic-bezier(.2,.6,.3,1) infinite; }
+.halo-surface:not([data-state=idle]) { --pulse:1.25s; }
+.halo-surface .halo-flow { fill:none;stroke:var(--eyra-light);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:6 94;opacity:0; }
+.halo-surface[data-state=idle] .halo-flow { opacity:.8;animation:halo-flow 9s linear infinite; }
+.halo-surface[data-state=idle] .halo-edge { animation:halo-idle 5.2s ease-in-out infinite; }
+.halo-surface[data-state=waiting_user] { --eyra-light:var(--ui-warn,#e0c37f);--pulse:1.8s; }
+.halo-surface:is([data-state=error],[data-state=offline]) { --eyra-light:var(--ui-error,#e6b4ac); }
+.halo-surface:is([data-state=queued],[data-state=confirming],[data-state=boot]) .halo-wait { opacity:.8;animation:halo-wait-breathe 3s ease-in-out infinite; }
+.halo-surface:is([data-state=error],[data-state=offline])::before { animation:none;opacity:.4; }
+.halo-surface:is([data-state=error],[data-state=offline])::after { animation:none;opacity:0; }
+/* A style changes the complete theme's rhythm; it never replaces the inner signals. */
+[data-inner-animation=pulse]{--eyra-flow:6 94;--eyra-period:9s;--eyra-edge:none;--eyra-beat:var(--pulse)}
+[data-inner-animation=orbit]{--eyra-flow:18 82;--eyra-period:2.8s;--eyra-edge:none;--eyra-beat:var(--pulse)}
+[data-inner-animation=wave]{--eyra-flow:6 94;--eyra-period:9s;--eyra-edge:none;--eyra-beat:1.8s}
+[data-inner-animation=spark]{--eyra-flow:6 94;--eyra-period:9s;--eyra-edge:1 3;--eyra-beat:var(--pulse)}
+[data-inner-animation=vernier]{--eyra-flow:1 3 1 3 9 83;--eyra-period:4.2s;--eyra-edge:1 9;--eyra-beat:3.6s}
+.halo-surface[data-state=idle] .halo-flow{stroke-dasharray:var(--eyra-flow,6 94);animation-duration:var(--eyra-period,9s)}
+.halo-surface .halo-edge{stroke-dasharray:var(--eyra-edge,none)}
+.halo-surface::before{animation-duration:var(--eyra-beat,var(--pulse))}
+.halo-surface[data-state=idle][data-halo-live=false] *, .halo-surface[data-state=idle][data-halo-live=false]::before,.halo-surface[data-state=idle][data-halo-live=false]::after { animation:none; }
+.halo-surface[data-state=idle][data-halo-live=false] .halo-flow { opacity:0; }
+.halo-surface[data-state=idle][data-halo-live=false]::after { opacity:0; }
+@keyframes halo-flow { to { stroke-dashoffset:-100; } }
+@keyframes halo-spin { to { transform:rotate(360deg); } }
+@keyframes halo-idle { 0%,100% { stroke-opacity:.72; } 50% { stroke-opacity:1; } }
+@keyframes pulsar-beat { 0% { scale:1;opacity:.55; } 9% { scale:1.035;opacity:1; } 18% { scale:.995;opacity:.7; } 27% { scale:1.02;opacity:.95; } 40%,100% { scale:1;opacity:.55; } }
+@keyframes pulsar-wave { 0%,6% { scale:1;opacity:0; } 9% { scale:1.02;opacity:.75; } 60%,100% { scale:1.32;opacity:0; } }
+body.reduce-motion .halo-surface *,body.reduce-motion .halo-surface::before,body.reduce-motion .halo-surface::after { animation:none!important;transition:none!important; }
+@media(prefers-reduced-motion:reduce) { .halo-surface *,.halo-surface::before,.halo-surface::after { animation:none!important;transition:none!important; } }
+/* Settings and their preview use inherited variables, so the nearest selection wins. */
+[data-spread-animation=ripple]{--halo-spread:pulsar-wave}
+[data-spread-animation=echo]{--halo-spread:halo-echo}
+[data-spread-animation=tide]{--halo-spread:halo-tide}
+[data-spread-animation=step]{--halo-spread:halo-step}
+[data-spread-animation=ellipse]{--halo-spread:halo-ellipse}
+@keyframes halo-tide{0%,100%{scale:.94;opacity:0}35%{opacity:.45}72%{scale:1.24;opacity:.16}}
+@keyframes halo-step{0%,100%{scale:1;opacity:0}18%,32%{scale:1.08;opacity:.5}58%,68%{scale:1.2;opacity:.28}90%{scale:1.3;opacity:0}}
+@keyframes halo-ellipse{0%{scale:.88 .98;opacity:0}24%{opacity:.5}100%{scale:1.32 1.16;opacity:0}}
+[data-spread-animation=none]{--halo-spread:none}
+.halo-surface:not([data-halo-custom]):not([data-state=error],[data-state=offline],[data-halo-live=false])::after{animation-name:var(--halo-spread,pulsar-wave)}
+@keyframes halo-echo{0%,42%{scale:.98;opacity:0}12%,55%{opacity:.6}40%,100%{scale:1.35;opacity:0}}
+[data-work-animation=signal]{--tool-rhythm:running;--tool-filter:none}
+[data-work-animation=scan]{--tool-rhythm:running;--tool-filter:halo-tool-scan 1.6s ease-in-out infinite}
+[data-work-animation=index]{--tool-rhythm:running;--tool-filter:halo-tool-index 1.9s ease-in-out infinite}
+[data-work-animation=pivot]{--tool-rhythm:running;--tool-filter:halo-tool-pivot 2.6s ease-in-out infinite}
+[data-work-animation=press]{--tool-rhythm:running;--tool-filter:halo-tool-press 1.2s ease-in-out infinite}
+[data-work-animation=still]{--tool-rhythm:paused;--tool-filter:none}
+body .halo-surface[data-state=tool]:not([data-halo-custom]) :is(.halo-code,.halo-orbit,.halo-cursor,.halo-scan){animation-play-state:var(--tool-rhythm,running)}
+body .halo-surface[data-state=tool]:not([data-halo-custom])>.halo{animation:var(--tool-filter,none)}
+@keyframes halo-tool-scan{0%,100%{translate:0 0}45%{translate:0 -2%}}
+@keyframes halo-tool-index{0%,100%{rotate:0deg}22%,38%{rotate:3deg}56%,70%{rotate:6deg}}
+@keyframes halo-tool-pivot{0%,100%{rotate:-4deg}50%{rotate:4deg}}
+@keyframes halo-tool-press{0%,40%,100%{scale:1}18%{scale:.95}}
+/* Shape-change particles use the same theme and are released by transition.mjs. */
+.pulsar-layer { position:fixed;inset:0;z-index:2147482000;pointer-events:none;overflow:hidden; }
+.pulsar-layer .pulsar-dot { position:absolute;border-radius:50%;background:var(--ui-text,#eef1f7);will-change:transform,opacity; }
+.pulsar-layer .pulsar-ring { position:absolute;border-radius:50%;box-shadow:inset 0 0 0 1.2px currentColor;color:var(--ui-text,#e6e9f0);will-change:transform,opacity; }
+/* Reduced motion keeps a readable state marker instead of an empty working ring. */
+body.reduce-motion .halo-surface:is([data-state=thinking],[data-state=compacting],[data-state=waiting_user]) .halo-wave { opacity:.42;transform:scale(.9); }
+@media(prefers-reduced-motion:reduce) { .halo-surface:is([data-state=thinking],[data-state=compacting],[data-state=waiting_user]) .halo-wave { opacity:.42;transform:scale(.9); } }
+/* Existing host receipt pulses use this same theme-owned transition. */
+body .received .halo-surface:not([data-halo-custom])::before,body .halo-surface.received:not([data-halo-custom])::before { animation:halo-received 620ms var(--ui-ease,ease); }
+@keyframes halo-received { from { scale:1;opacity:.9; } to { scale:1.1;opacity:0; } }
+body.reduce-motion .received .halo-surface::before { animation:none; }
+@media(prefers-reduced-motion:reduce) { body .received .halo-surface::before { animation:none; } }

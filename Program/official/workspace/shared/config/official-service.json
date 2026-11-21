@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceName": "Aieyra Token",
+  "portalOrigin": "https://api.aieyra.cn",
+  "accountApiOrigin": "https://api.aieyra.cn",
+  "apiOrigin": "https://fast.aieyra.cn",
+  "cookieDomain": "aieyra.cn",
+  "legacyAccountOrigins": [],
+  "legacyOrigins": [
+    "https://aieyra.cn"
+  ],
+  "portalRoutes": {
+    "account": "/dashboard",
+    "login": "/sign-in",
+    "register": "/sign-up",
+    "wallet": "/wallet",
+    "usage": "/usage-logs",
+    "keys": "/keys"
+  }
+}

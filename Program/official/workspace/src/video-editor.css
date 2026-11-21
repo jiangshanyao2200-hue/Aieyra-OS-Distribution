@@ -1,0 +1,13 @@
+.video-editor { --ui-surface-width:920px; }
+.video-editor-body { display:grid; gap:16px; overflow:auto; }
+.video-editor-fields { display:grid; gap:16px; min-width:0; margin:0; padding:0; border:0; }
+.video-preview { display:grid; place-items:center; min-height:160px; }
+.video-preview video { width:100%; max-height:32vh; object-fit:contain; }
+.video-editor-actions,.video-export-options { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+.video-clip-list { display:grid; gap:8px; }
+.video-clip { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:8px; border-radius:var(--ui-radius-control); }
+.video-clip[data-selected="true"] { background:var(--ui-control-hover); }
+.video-clip > button:first-child { flex:1 1 160px; text-align:left; overflow-wrap:anywhere; }
+.video-clip input { width:100px; }
+.flow-node.video video { display:block; width:100%; height:calc(100% - 64px); object-fit:contain; }
+.flow-node.video footer { pointer-events:auto; justify-content:flex-start; }

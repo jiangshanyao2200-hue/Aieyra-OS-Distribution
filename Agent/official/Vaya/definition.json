@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "id": "aieyra.vaya",
+  "version": "1.1.4",
+  "name": "Vaya",
+  "tool_choices": [
+    "project",
+    "terminal",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output",
+    "apply_patch",
+    "view_image",
+    "web_search",
+    "memory"
+  ],
+  "default_tools": [
+    "project",
+    "terminal",
+    "exec_command",
+    "write_stdin",
+    "read_shell_output",
+    "view_image",
+    "web_search",
+    "memory"
+  ],
+  "prompts": {
+    "role": "Vaya/提示词.txt",
+    "contract": "Vaya/提示词.txt#协定"
+  },
+  "context_provider": {
+    "id": "aieyra.context.structured",
+    "version": "1.0.0",
+    "state_schema": 1
+  },
+  "runtime": {
+    "model": {
+      "tool_calls": true,
+      "image_input": false,
+      "min_context_tokens": 0
+    },
+    "budget": {
+      "max_tokens": 1000000,
+      "timeout_seconds": 600
+    },
+    "policy": {
+      "work_mode": "direct-or-delegate",
+      "lifetime": "retained"
+    },
+    "prompt_order": [
+      "role"
+    ],
+    "prompt_files": {
+      "role": "prompts/提示词.txt",
+      "contract": "prompts/提示词.txt#协定"
+    },
+    "tool_packages": [],
+    "programs": [],
+    "data_schema": 1
+  }
+}

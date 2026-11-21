@@ -1,0 +1,7 @@
+{
+  "schema": "aieyra.native-tool/1",
+  "name": "view_image",
+  "aliases": [
+    "view_image"
+  ]
+}

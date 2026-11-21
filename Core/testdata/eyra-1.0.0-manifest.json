@@ -1,0 +1,349 @@
+{
+  "schema": "aieyra.mod/1",
+  "id": "aieyra.eyra",
+  "kind": "agent",
+  "name": "Eyra",
+  "summary": "公开标准执行者定义；显式选择模型并创建独立实例。",
+  "version": "1.0.0",
+  "publisher": "aieyra",
+  "license": "SEE LICENSE IN PRODUCT",
+  "contracts": {
+    "core": "^1.0.0",
+    "agent": "^1.0.0"
+  },
+  "capabilities": [],
+  "clients": [
+    "desktop",
+    "cli"
+  ],
+  "platforms": [
+    "any"
+  ],
+  "dependencies": [
+    {
+      "id": "aieyra.vaya",
+      "version": "^1.0.0"
+    },
+    {
+      "id": "aieyra.cota",
+      "version": "^1.0.0"
+    }
+  ],
+  "entrypoints": {
+    "agent": "definition.json",
+    "manual": "manual.md"
+  },
+  "permissions": [
+    {
+      "capability": "tool.invoke",
+      "scope": "project",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "update_plan",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "memory",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "report",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "terminal",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "exec_command",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "write_stdin",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "read_shell_output",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "apply_patch",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "view_image",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "web_search",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "agents",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    },
+    {
+      "capability": "tool.invoke",
+      "scope": "models",
+      "reason": "使用Agent声明的能力；实际实例可收窄授权"
+    }
+  ],
+  "presentation": {
+    "desktop": {
+      "renderer": "aieyra.agent",
+      "contract": "1.0.0",
+      "entry": "desktop.json"
+    },
+    "cli": {
+      "renderer": "aieyra.text",
+      "contract": "1.0.0",
+      "entry": "cli.json"
+    }
+  },
+  "data": {
+    "schema": 1,
+    "uninstall": "retain"
+  },
+  "files": {
+    "cli.json": {
+      "sha256": "db9dcad4320622c9c414ac79084449e9f5dc7b710a849a3ec87907b68b7df564",
+      "size": 75
+    },
+    "context/compaction.go": {
+      "sha256": "fd3f55be0962444ebaef87583c351e7fc610182f56af1d344461497fa53e9476",
+      "size": 1048
+    },
+    "context/memory.go": {
+      "sha256": "5ddab526b49a80eb9c3a081f71335e1b0db7086c5573ff40e045310d65c8252a",
+      "size": 2893
+    },
+    "context/policy.go": {
+      "sha256": "a61dba94ba64970f75eb04d536e073d8d26c48c0fe1c6be1ea7c3f341c7ec63b",
+      "size": 895
+    },
+    "context/policy_test.go": {
+      "sha256": "51a0eca5ad1cacca9e03ccbaa8f82b17c87469178ca0d0e51d59bae0b3f780c5",
+      "size": 2657
+    },
+    "context/prompts/PAC合并.txt": {
+      "sha256": "6f2ab3cb7a7e92a8097dc2f1b4a323256662b6dc12a2d8b3eab0b532120f0e7f",
+      "size": 754
+    },
+    "context/prompts/PAC检查点.txt": {
+      "sha256": "8e5841f4bc1e693ebd358a12b62dbf96985f4639f6c9464d2bbf175194575243",
+      "size": 294
+    },
+    "context/prompts/PAC目录.txt": {
+      "sha256": "4032883d2a623b6025b7e7a6583022b02092c2b4e3f0ddad2cca370531b1ee37",
+      "size": 398
+    },
+    "context/prompts/上下文清洗.txt": {
+      "sha256": "29f91f9e8228b2e34331fabb2e27ac31032c0e145f330d2a73e994e0d3d06604",
+      "size": 816
+    },
+    "context/prompts/会话尾整理.txt": {
+      "sha256": "661938fc506c8ad1954a1ac236bc680aa63dc4cd92c243a1ad2d819b55d5e54e",
+      "size": 726
+    },
+    "context/prompts/使用约定.txt": {
+      "sha256": "ebe6bbf738954d5a2961ee5e76d9eda864708f19e0f971597732586ded7872fb",
+      "size": 2083
+    },
+    "context/prompts/历史摘要前缀.txt": {
+      "sha256": "ddd21161dd57f2d106d5242e45853950787220e4793ab3cde34c202d3c518e74",
+      "size": 279
+    },
+    "context/prompts/历史来源说明.txt": {
+      "sha256": "4ccd3acb07a893fb164a9abb4cc2d0e08e2d846ad6b1356357145c1fa6cb7fa4",
+      "size": 312
+    },
+    "context/prompts/压缩检查点.txt": {
+      "sha256": "7222b7c914139a21face419dd6b122c6cf026bc1212c5815a44916777b717155",
+      "size": 258
+    },
+    "context/prompts/原文回查说明.txt": {
+      "sha256": "19c4fd81308b188f3933c8735346de57f9bff0cdad13012586b2311c42418e62",
+      "size": 102
+    },
+    "context/prompts/封存结果说明.txt": {
+      "sha256": "2e3568076c2d71fb0e6fc2e762afa4e2b66b1035f1354ba3742fe20458810bc5",
+      "size": 135
+    },
+    "context/prompts/引用前缀.txt": {
+      "sha256": "d624bfea73f0b4f2729b80002069f636181191d228e30332e7d334cfcd739fef",
+      "size": 91
+    },
+    "context/prompts/当前偏好.txt": {
+      "sha256": "d5e09065d388170877131cf5feda5cee05f324b65cc40ce0bb4c08c99fe16cf1",
+      "size": 357
+    },
+    "context/prompts/整理.txt": {
+      "sha256": "07d88f3267bc1bf92bf9d524da4f1b57fb478da318915408bc849eab4928ba2b",
+      "size": 490
+    },
+    "context/prompts/旧记忆前缀.txt": {
+      "sha256": "9294a7573484cdbe672f5326b0a813d82c73b82dfe46f852a7f833c7b489e8f1",
+      "size": 263
+    },
+    "context/prompts/本轮压缩.txt": {
+      "sha256": "c6eecd92451dd0ce86d9c86ffd0c6ebb2de153bcf5d412345309aa2c1cfa1c6d",
+      "size": 521
+    },
+    "context/prompts/检索结果前缀.txt": {
+      "sha256": "0c98dd488e07e35905c236831ac95ec08f960560f1302d0e2e0dc8ebdcbd876a",
+      "size": 47
+    },
+    "context/prompts/检索结果说明.txt": {
+      "sha256": "6463ccfaa6431a9f1cd9a3d4e9bfa01a70e7db72d3cf29a4ddba03fb27d398d5",
+      "size": 630
+    },
+    "context/prompts/配置说明.txt": {
+      "sha256": "c0cf451ea271825e2a2288134d8a37c60036648b5274fbc2a6d9157775d04957",
+      "size": 228
+    },
+    "context/provider.go": {
+      "sha256": "d4bc5396bef53ea3985e8cf090fe107960e3e3b022dcc4780e88a1b20a2eba60",
+      "size": 1080
+    },
+    "definition.json": {
+      "sha256": "4b876e904e138fdab6d6b7631be88c6c2f16b7c56b608ac1ee12d86a49e01b1c",
+      "size": 2518
+    },
+    "desktop.json": {
+      "sha256": "c62a55c0c64b541f09953b73561a059e02b594ce46cf7177222d9afbe84b01d9",
+      "size": 75
+    },
+    "manual.md": {
+      "sha256": "6def7a1993d9dd03db7f23daa3df1cf6dadb8fef3e8ddbe1515402ef392c3b58",
+      "size": 582
+    },
+    "prompts/contracts/主控身份.txt": {
+      "sha256": "fe234c9d459e32b2bfebeae31e0cc7224a887bec2d8a70019a2d17cb4a99e385",
+      "size": 1014
+    },
+    "prompts/contracts/产物验收.txt": {
+      "sha256": "49257ff75643d58f89c3de4fe5821177a0c6e677f4fbd6f236296dfe6fcc6776",
+      "size": 460
+    },
+    "prompts/contracts/任务验收.txt": {
+      "sha256": "a46413ab0a87917fa754bb446b058660f59555f194aed9070f352e6bcda88907",
+      "size": 279
+    },
+    "prompts/contracts/共享身份.txt": {
+      "sha256": "8c9952a83f69e7b696b419032f2e25590a18a13cb39eede00d9453bcbf68b7af",
+      "size": 530
+    },
+    "prompts/contracts/协同派发状态.txt": {
+      "sha256": "cdfa8a4437b7a7976881e910f1454228830c18a9f111b5526325b43bae26dcc2",
+      "size": 31
+    },
+    "prompts/contracts/单人桌面.txt": {
+      "sha256": "9a714ef57dc6e85b40972bb79e8ddf6adf16659e45424f5374872921b9984a35",
+      "size": 2556
+    },
+    "prompts/contracts/单人派发状态.txt": {
+      "sha256": "bce00465c73a9baaa4eaca57c6465d555d8f5bffcfa802c57efca24370c9a5aa",
+      "size": 31
+    },
+    "prompts/contracts/命令行.txt": {
+      "sha256": "7bd6808b8a302d33d672989bf9e21a682fb7493eda063d4357a1d87d0ab6095c",
+      "size": 2625
+    },
+    "prompts/contracts/命令行说明.txt": {
+      "sha256": "9f0462020c842172ed6bf89231f0b31da02e1e4dffa2f676517ae849823157c5",
+      "size": 2448
+    },
+    "prompts/contracts/团队不可用.txt": {
+      "sha256": "a134a7fcadd4b168cace1cfc932b2d3030e5589a7031011c84a1b46287f14317",
+      "size": 233
+    },
+    "prompts/contracts/团队主控.txt": {
+      "sha256": "1ee78129c7836fe8f84416c2596b7af0be9d8f6dd89e0a24a7e9c5c4ac5e36d5",
+      "size": 990
+    },
+    "prompts/contracts/团队沟通.txt": {
+      "sha256": "6d33bb84736fe95fffdf789fafb0df5e8c7cff09777993f89e24fd2ad78aae75",
+      "size": 1942
+    },
+    "prompts/contracts/团队结果交付.txt": {
+      "sha256": "0d7f7c5e2ed7bfd27e2eac082901ad1565f87e85435943ef9196911364442e38",
+      "size": 129
+    },
+    "prompts/contracts/团队角色关闭.txt": {
+      "sha256": "7bb3b82cc4f065edc9e83c898b6448a3e5b06fa5048f99874f949bce3391d8e5",
+      "size": 104
+    },
+    "prompts/contracts/基础工具.txt": {
+      "sha256": "628d2897e633216f53524cbce5a8b2e75eb5e82091d673300d83ea85f7fd7d8f",
+      "size": 1614
+    },
+    "prompts/contracts/基础能力阶段.txt": {
+      "sha256": "1d875c2e36d02672e62a8ea2e60a7e7d81c14a5db7ac98615a8b68aaa21587fa",
+      "size": 1066
+    },
+    "prompts/contracts/工单委派.txt": {
+      "sha256": "cef1d8627a07c9756589c3d6c8b1b4b274f72d60c28091809f2b6f3fff6a0f8c",
+      "size": 1769
+    },
+    "prompts/contracts/执行约定.txt": {
+      "sha256": "8d20e9a68cbb5a1a23f10b77026b6a8e8f1cabb7801c9313f4c046e711abf252",
+      "size": 533
+    },
+    "prompts/contracts/执行角色兼容.txt": {
+      "sha256": "eeaefef0255497c4df61666aa8f105b819b188f7a33ec67814a01184e72225b7",
+      "size": 339
+    },
+    "prompts/contracts/桌面说明.txt": {
+      "sha256": "6936e22b54b0c1dd41cbfda00db737ef6688357512668b4b6ee70a7be164b82f",
+      "size": 5392
+    },
+    "prompts/contracts/终端兼容身份.txt": {
+      "sha256": "86f43b85621b01182317331d7c1beb4db2c75e63132b8864beec1887fbc4a7af",
+      "size": 656
+    },
+    "prompts/contracts/终端回复.txt": {
+      "sha256": "1552d862cadb1605e0fb47de1b389038054d0873c0529c709038f15e60082c14",
+      "size": 215
+    },
+    "prompts/contracts/过程展示.txt": {
+      "sha256": "f3af75636fae99049835022f8a28303fa96ce74c2a6842b3599c33df8b1fcc3f",
+      "size": 317
+    },
+    "prompts/contracts/项目角色兼容.txt": {
+      "sha256": "302be6fcfc4cb663188c3d958f19309182a63de3bbfb253d07b6fac6d2011ed5",
+      "size": 525
+    },
+    "prompts/default/工作.txt": {
+      "sha256": "03fb9faa31fe6bac0906c0e58b3203551ff303c5c2034091a34fbb3c648bd729",
+      "size": 6194
+    },
+    "prompts/default/思考方式.txt": {
+      "sha256": "832ce15a49a772e4fb1874401778c5292f08a79222f356a7e79d81f65054ff3c",
+      "size": 512
+    },
+    "prompts/default/自我.txt": {
+      "sha256": "07c7a82eb9e0778b9d29e0027140df636f7fdebc2670dc3973b88242aba9b23b",
+      "size": 439
+    },
+    "prompts/default/边界.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "team/definition.json": {
+      "sha256": "eff55af95b0b548389d5bc8b9a5ce058ce5d7038ea7a11f76e2fc17c7eec40ef",
+      "size": 468
+    }
+  }
+}

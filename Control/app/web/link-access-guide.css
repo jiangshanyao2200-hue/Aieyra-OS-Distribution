@@ -1,0 +1,31 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Control/app/web/AGENTS.md | ring 2
+ * Chains: module-local; query impact before editing
+ * Regions: .link-help-button; .link-copy-notice; .link-copy-notice[hidden]
+ * Impact: python -B scripts/code-atlas.py show Control/app/web/link-access-guide.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+.link-help-button {
+  -webkit-app-region: no-drag;
+}
+.link-copy-notice {
+  position: fixed;
+  right: 16px;
+  top: 64px;
+  z-index: 30;
+  max-width: calc(100vw - 32px);
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--ui-radius-menu);
+  background: var(--ui-glass);
+  box-shadow: var(--ui-edge), var(--ui-shadow);
+  color: var(--ui-text);
+  font-size: 13px;
+  pointer-events: none;
+}
+.link-copy-notice[hidden] {
+  display: none;
+}

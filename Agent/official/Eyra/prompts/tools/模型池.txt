@@ -1,0 +1,2 @@
+models只读查询已配置的模型池。action=list（可省略），category=all/chat/image/video。返回profile ID、名称、型号、启用状态、类别、地址主机和配置能力，不返回密钥。能力标记来自本机保存的配置，不等于本次实测。enabled仅表示模型自身开关；available表示本机配置就绪，connection_enabled表示连接开关，unavailable_reason说明修复入口。available不保证网络、额度或供应商能力。image_selected=true表示用户选择的唯一默认生图模型；选定即启用，无独立开关。image_gen省略profile_id时使用默认模型，有特殊要求可从category=all返回的完整模型池选择其他available条目。类别是资料提示，不是生图资格白名单；实际供应商不支持时如实报错。没有默认模型时请用户在设置→模型连接中选择一个。不要把文字响应成功当作生图或工具调用成功。
+video类别使用video_gen，并指定profile_id。只有已核实的Muse入口可用；创建、查询和下载相互独立。不要把视频条目当作聊天模型，也不能把生成提示当作实际文件时长或尺寸。

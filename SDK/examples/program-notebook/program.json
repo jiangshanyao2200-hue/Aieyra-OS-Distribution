@@ -1,0 +1,6 @@
+{
+  "schema": "aieyra.program/1",
+  "mode": "collaborative",
+  "desktop": {"entry": "index.html"},
+  "operations": [{"id": "set_text", "description": "Replace the shared note text. The user sees the same text immediately."}]
+}

@@ -1,0 +1,17 @@
+/* <AI-CHAIN v1>
+ * Map: CODEMAP.md
+ * Owner: Agent/presentation/AGENTS.md | ring 1
+ * Chains: module-local; query impact before editing
+ * Regions: .agent-instance; .agent-result; .agent-tools; .agent-tool; .agent-instance summary; .agent-instance details[open] > summary; .agent-instance textarea
+ * Impact: python -B scripts/code-atlas.py show Agent/presentation/desktop.css
+ * Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
+ * </AI-CHAIN>
+ */
+
+.agent-instance { display:grid;gap:16px;min-width:0; }
+.agent-result { max-height:320px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;margin:0; }
+.agent-tools { display:grid;gap:8px;min-width:0;border:0;padding:0; }
+.agent-tool { display:flex;align-items:center;gap:8px;overflow-wrap:anywhere; }
+.agent-instance summary { cursor:pointer; }
+.agent-instance details[open] > summary { margin-bottom:16px; }
+.agent-instance textarea { min-height:96px;resize:vertical; }
