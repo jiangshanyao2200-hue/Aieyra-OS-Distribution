@@ -15,7 +15,7 @@
 
 导入：`Agent/contract/definition.go`, `Agent/contract/delivery.go`, `Agent/contract/instance.go`, `Agent/contract/package.go`, `Agent/contract/task.go`, `Agent/contract/time.go`, `Core/modules/defaults.go`, `Core/modules/files_unix.go`, `Core/modules/files_windows.go`, `Core/modules/host.go`, `Core/modules/lock_unix.go`, `Core/modules/lock_windows.go`, `Core/modules/manager.go`, `Core/modules/manifest.go`, `Core/modules/object.go`, `Core/modules/package.go`, `Core/modules/snapshot.go`, `Core/modules/version.go`。
 
-消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
+消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/host/managed_update.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
 
 ### agent_test.go
 
@@ -35,7 +35,7 @@
 
 导入：`API/adapter/definition.go`, `Agent/context/packaged/provider.go`, `Core/modules/defaults.go`, `Core/modules/files_unix.go`, `Core/modules/files_windows.go`, `Core/modules/host.go`, `Core/modules/lock_unix.go`, `Core/modules/lock_windows.go`, `Core/modules/manager.go`, `Core/modules/manifest.go`, `Core/modules/object.go`, `Core/modules/package.go`, `Core/modules/snapshot.go`, `Core/modules/version.go`, `Halo/contract/definition.go`, `Program/contract/definition.go`, `Program/contract/legacy.go`, `Theme/contract/assets.go`, `Theme/contract/definition.go`, `Theme/contract/presets.go`, `Theme/contract/sounds.go`, `Tool/contract/custom.go`, `Tool/contract/native.go`, `Tool/contract/package.go`, `Tool/contract/presentation.go`, `Tool/contract/schema.go`, `Tool/packages.go`。
 
-消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
+消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/host/managed_update.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
 
 ### desktop_test.go
 
@@ -55,7 +55,7 @@
 
 导入：`Core/modules/defaults.go`, `Core/modules/files_unix.go`, `Core/modules/files_windows.go`, `Core/modules/host.go`, `Core/modules/lock_unix.go`, `Core/modules/lock_windows.go`, `Core/modules/manager.go`, `Core/modules/manifest.go`, `Core/modules/object.go`, `Core/modules/package.go`, `Core/modules/snapshot.go`, `Core/modules/version.go`, `Program/contract/definition.go`, `Program/contract/legacy.go`。
 
-消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
+消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/host/managed_update.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
 
 ### legacy_test.go
 
@@ -75,7 +75,7 @@
 
 导入：`Agent/official/definitions.go`, `Core/modules/defaults.go`, `Core/modules/files_unix.go`, `Core/modules/files_windows.go`, `Core/modules/host.go`, `Core/modules/lock_unix.go`, `Core/modules/lock_windows.go`, `Core/modules/manager.go`, `Core/modules/manifest.go`, `Core/modules/object.go`, `Core/modules/package.go`, `Core/modules/snapshot.go`, `Core/modules/version.go`, `Halo/official/package.go`, `Program/official/packages.go`, `Tool/packages.go`。
 
-消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
+消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/host/managed_update.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
 
 ### official_agents_test.go
 
@@ -185,5 +185,5 @@
 
 导入：`Core/modules/defaults.go`, `Core/modules/files_unix.go`, `Core/modules/files_windows.go`, `Core/modules/host.go`, `Core/modules/lock_unix.go`, `Core/modules/lock_windows.go`, `Core/modules/manager.go`, `Core/modules/manifest.go`, `Core/modules/object.go`, `Core/modules/package.go`, `Core/modules/snapshot.go`, `Core/modules/version.go`, `Tool/workbox/bindings.go`, `Tool/workbox/definition.go`, `Tool/workbox/request.go`, `Tool/workbox/state.go`。
 
-消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
+消费者：`Client/CLI/host/mods.go`, `Core/agent_official_upgrade_test.go`, `Core/agent_package_export.go`, `Core/agent_package_source.go`, `Core/api_adapter.go`, `Core/api_adapter_test.go`, `Core/context_package.go`, `Core/host/managed_update.go`, `Core/program_agents.go`, `Core/tool_official.go`, `Core/tool_packages.go`, `Core/workbox_packages.go`, `Core/workspace_modules.go`。
 

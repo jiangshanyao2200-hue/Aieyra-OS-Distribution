@@ -321,6 +321,9 @@ def build(staging, out, key, notes, program_archives=False, previous_baseline=No
     built = subprocess.run([str(staging / 'Aieyra OS.exe'), '-version'], capture_output=True, text=True, encoding='utf-8', errors='replace')
     if not re.search(r'(?<![\d.])' + re.escape(version) + r'(?![\d.])', built.stdout + built.stderr):
         raise RuntimeError('staging 程序版本与发行元数据不一致')
+    # The staging binary embeds the official packages. The desktop runtime is selected from ROOT.
+    subprocess.run([str(staging / 'Aieyra OS.exe'), '-update-probe', str(ROOT)],
+                   cwd=ROOT, check=True, timeout=60, stdout=subprocess.DEVNULL)
     out.mkdir(parents=True)
     generated = out / '.generated'; generated.mkdir()
     full = os_files(staging, generated)

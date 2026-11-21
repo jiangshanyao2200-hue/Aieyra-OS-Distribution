@@ -92,6 +92,8 @@ var shippedPackages = sync.OnceValues(func() (map[string][]string, error) {
 	for id, versions := range program.CompatibleDigests() {
 		digests[id] = append(digests[id], versions...)
 	}
+	// Signed r33 and r34 shipped Eyra 1.1.13. Keep its installed bindings valid.
+	digests["aieyra.eyra"] = append(digests["aieyra.eyra"], "7b03edad7eb4a74a5b66026afb05ed49ffef0f404ccaebf7ab68cbd4cd8e1771")
 	// Eyra 1.1.11 before distinguishing fault reproduction from repair experience.
 	digests["aieyra.eyra"] = append(digests["aieyra.eyra"],
 		"38ed36eba840a2f8ab320563e85c6b0cc9bf18a229795e1a0ab62372d5fa425e",

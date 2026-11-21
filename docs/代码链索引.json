@@ -81351,6 +81351,7 @@
         "Core/api_adapter.go",
         "Core/api_adapter_test.go",
         "Core/context_package.go",
+        "Core/host/managed_update.go",
         "Core/program_agents.go",
         "Core/tool_official.go",
         "Core/tool_packages.go",
@@ -81478,6 +81479,7 @@
         "Core/api_adapter.go",
         "Core/api_adapter_test.go",
         "Core/context_package.go",
+        "Core/host/managed_update.go",
         "Core/program_agents.go",
         "Core/tool_official.go",
         "Core/tool_packages.go",
@@ -81570,6 +81572,7 @@
         "Core/api_adapter.go",
         "Core/api_adapter_test.go",
         "Core/context_package.go",
+        "Core/host/managed_update.go",
         "Core/program_agents.go",
         "Core/tool_official.go",
         "Core/tool_packages.go",
@@ -81628,7 +81631,7 @@
       "ring": "0",
       "agreement": "Core/extensionhost/AGENTS.md",
       "map": "Core/extensionhost/CODEMAP.md",
-      "bodySHA256": "3aaa9677d50ab2e127198a716844eb8a2e84223ebc61549c7323d09236ab5f65",
+      "bodySHA256": "8dff247e0ebb8c8c1d074e92aca8018266d55118187243ae71b9ffda4b48ee03",
       "regions": [
         {
           "name": "OfficialPackages",
@@ -81643,7 +81646,7 @@
         {
           "name": "officialDigests",
           "kind": "lexical",
-          "bodyLine": 137
+          "bodyLine": 139
         }
       ],
       "imports": [
@@ -81674,6 +81677,7 @@
         "Core/api_adapter.go",
         "Core/api_adapter_test.go",
         "Core/context_package.go",
+        "Core/host/managed_update.go",
         "Core/program_agents.go",
         "Core/tool_official.go",
         "Core/tool_packages.go",
@@ -82168,6 +82172,7 @@
         "Core/api_adapter.go",
         "Core/api_adapter_test.go",
         "Core/context_package.go",
+        "Core/host/managed_update.go",
         "Core/program_agents.go",
         "Core/tool_official.go",
         "Core/tool_packages.go",
@@ -84019,142 +84024,147 @@
       "ring": "0",
       "agreement": "Core/host/AGENTS.md",
       "map": "Core/host/CODEMAP.md",
-      "bodySHA256": "ae9ab3abee4daebd54f497b6400da77bea8f24713116284f7623b7f35165e2ee",
+      "bodySHA256": "483ec92ee9c2e0d01e48fb88b193f42dc093e1d4fc1d9424a2e7d618309fb239",
       "regions": [
         {
           "name": "updateFile",
           "kind": "lexical",
-          "bodyLine": 26
+          "bodyLine": 27
         },
         {
           "name": "updatePlan",
           "kind": "lexical",
-          "bodyLine": 30
+          "bodyLine": 31
         },
         {
           "name": "updateDeviceName",
           "kind": "lexical",
-          "bodyLine": 47
+          "bodyLine": 48
         },
         {
           "name": "updateMediaPath",
           "kind": "lexical",
-          "bodyLine": 48
+          "bodyLine": 49
         },
         {
           "name": "updatePromptSidecar",
           "kind": "lexical",
-          "bodyLine": 49
+          "bodyLine": 50
         },
         {
           "name": "updateDatabaseName",
           "kind": "lexical",
-          "bodyLine": 50
+          "bodyLine": 51
         },
         {
           "name": "spreadsheetThemePath",
           "kind": "lexical",
-          "bodyLine": 52
+          "bodyLine": 53
         },
         {
           "name": "updatePath",
           "kind": "lexical",
-          "bodyLine": 54
+          "bodyLine": 55
         },
         {
           "name": "updateDigest",
           "kind": "lexical",
-          "bodyLine": 111
+          "bodyLine": 112
         },
         {
           "name": "checkUpdateFiles",
           "kind": "lexical",
-          "bodyLine": 125
+          "bodyLine": 126
         },
         {
           "name": "writeUpdateJSON",
           "kind": "lexical",
-          "bodyLine": 138
+          "bodyLine": 139
         },
         {
           "name": "copyUpdateFile",
           "kind": "lexical",
-          "bodyLine": 161
+          "bodyLine": 162
         },
         {
           "name": "loadUpdatePlan",
           "kind": "lexical",
-          "bodyLine": 206
+          "bodyLine": 207
         },
         {
           "name": "updateNames",
           "kind": "lexical",
-          "bodyLine": 242
+          "bodyLine": 243
         },
         {
           "name": "previousChangedFiles",
           "kind": "lexical",
-          "bodyLine": 258
+          "bodyLine": 259
         },
         {
           "name": "prepareUpdateBackup",
           "kind": "lexical",
-          "bodyLine": 268
+          "bodyLine": 269
         },
         {
           "name": "applyUpdateFiles",
           "kind": "lexical",
-          "bodyLine": 307
+          "bodyLine": 308
         },
         {
           "name": "rollbackUpdate",
           "kind": "lexical",
-          "bodyLine": 371
+          "bodyLine": 372
         },
         {
           "name": "updateReceipt",
           "kind": "lexical",
-          "bodyLine": 413
+          "bodyLine": 414
         },
         {
           "name": "cleanUpdateEnv",
           "kind": "lexical",
-          "bodyLine": 416
+          "bodyLine": 417
         },
         {
           "name": "launchUpdated",
           "kind": "lexical",
-          "bodyLine": 426
+          "bodyLine": 427
         },
         {
           "name": "RunManagedUpdate",
           "kind": "lexical",
-          "bodyLine": 437
+          "bodyLine": 438
         },
         {
           "name": "waitUpdatedHealth",
           "kind": "lexical",
-          "bodyLine": 493
+          "bodyLine": 494
         },
         {
           "name": "ProbeManagedUpdate",
           "kind": "lexical",
-          "bodyLine": 546
+          "bodyLine": 547
         },
         {
           "name": "RecoverManagedUpdate",
           "kind": "lexical",
-          "bodyLine": 572
+          "bodyLine": 576
         },
         {
           "name": "RecoverUpdatePlan",
           "kind": "lexical",
-          "bodyLine": 607
+          "bodyLine": 611
         }
       ],
       "imports": [
         "Contracts/layout.go",
-        "Contracts/official_services.go"
+        "Contracts/official_services.go",
+        "Core/extensionhost/agent.go",
+        "Core/extensionhost/desktop.go",
+        "Core/extensionhost/legacy.go",
+        "Core/extensionhost/official.go",
+        "Core/extensionhost/workbox.go"
       ],
       "chains": [],
       "protected": null,
@@ -172703,7 +172713,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "b1dc694d101dcd2084fdd25c145f61f7056c16a81a1b7a09ed4451429dea4bd9",
+      "bodySHA256": "6eeda215c2eb45b44d1485ec548d7fb62323872c35d7b7b674c2b7e1f9b66a3b",
       "regions": [
         {
           "name": "load",

@@ -123,7 +123,7 @@
 
 区域：updateFile; updatePlan; updateDeviceName; updateMediaPath; updatePromptSidecar; updateDatabaseName; spreadsheetThemePath; updatePath; updateDigest; checkUpdateFiles; writeUpdateJSON; copyUpdateFile; loadUpdatePlan; updateNames; previousChangedFiles; prepareUpdateBackup; applyUpdateFiles; rollbackUpdate; updateReceipt; cleanUpdateEnv; launchUpdated; RunManagedUpdate; waitUpdatedHealth; ProbeManagedUpdate; RecoverManagedUpdate; RecoverUpdatePlan。
 
-导入：`Contracts/layout.go`, `Contracts/official_services.go`。
+导入：`Contracts/layout.go`, `Contracts/official_services.go`, `Core/extensionhost/agent.go`, `Core/extensionhost/desktop.go`, `Core/extensionhost/legacy.go`, `Core/extensionhost/official.go`, `Core/extensionhost/workbox.go`。
 
 消费者：`Client/CLI/host/cli.go`, `Core/cmd/aieyra-cli/main.go`, `Core/cmd/aieyra-config/main.go`, `Core/cmd/aieyra-install/main_windows.go`, `Core/cmd/aieyra-module/main.go`, `Core/cmd/aieyra-os/main.go`, `Core/cmd/aieyra-os/tui.go`。
 

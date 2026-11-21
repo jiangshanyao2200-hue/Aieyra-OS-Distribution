@@ -19,6 +19,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/aieyra/aieyra-os/CORE/extensionhost"
 	"github.com/aieyra/aieyra-os/contracts"
 	"io"
 	"net"
@@ -553,6 +554,9 @@ func waitUpdatedHealth(p updatePlan) error {
 // Probe with an isolated profile and no provider calls. Electron itself parses
 // and loads the candidate backend, renderer entrypoints and native runtime.
 func ProbeManagedUpdate(root string) error {
+	if _, err := extensionhost.OfficialPackages(); err != nil {
+		return fmt.Errorf("candidate official packages: %w", err)
+	}
 	root, err := filepath.Abs(root)
 	if err != nil {
 		return err
