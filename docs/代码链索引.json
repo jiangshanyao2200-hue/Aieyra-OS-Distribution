@@ -173590,7 +173590,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "9d5db213bddac46ec8411b8d167cd49a5b3bc8234e88c6f7f2d0c926f1275a17",
+      "bodySHA256": "796237f4e0208b386f9af6ae1b0459333d0ef4ee5577a1cba094a2780f728412",
       "regions": [
         {
           "name": "PrivacyBoundary",

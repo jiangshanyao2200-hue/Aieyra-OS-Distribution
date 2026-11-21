@@ -18,6 +18,13 @@ MAC_SPEC=importlib.util.spec_from_file_location('build_macos',Path(__file__).wit
 mac=importlib.util.module_from_spec(MAC_SPEC);MAC_SPEC.loader.exec_module(mac)
 
 class PrivacyBoundary(unittest.TestCase):
+    def test_public_checkout_contains_reviewed_installer_build_inputs(self):
+        files = dict(p.module_sources(p.ROOT))
+        for name in ('Client/Installer/Installer.xaml', 'Client/Installer/Installer.manifest'):
+            with self.subTest(name=name):
+                self.assertIn(name, files)
+                self.assertEqual(p.validate(name, files[name].read_bytes()), [])
+
     def test_named_source_areas_survive_both_inventories_without_admitting_user_data(self):
         public = ['Tool/runtime/javascript.go', 'Agent/context/history/policy.go']
         private = ['Tool/runtime/history/private.txt', 'Tool/runtime/runtime/private.txt',

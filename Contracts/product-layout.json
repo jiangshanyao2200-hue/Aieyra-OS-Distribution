@@ -49,6 +49,8 @@
     "Agent/program"
   ],
   "source_files": [
+    "Client/Installer/Installer.xaml",
+    "Client/Installer/Installer.manifest",
     "Program/official/together/product/runtime/native/aieyra-link-lan.exe",
     "Program/official/together/product/runtime/native/aieyra-link.exe",
     "Program/official/together/product/runtime/python/_asyncio.pyd",

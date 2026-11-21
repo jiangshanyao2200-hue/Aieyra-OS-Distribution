@@ -2,6 +2,8 @@
   "schema": 1,
   "notes": "Only exact reviewed product artwork and synthetic fixture values are exempt. Hashes do not contain original private values. New files fail closed.",
   "reviewed_text_assets": {
+    "Client/Installer/Installer.xaml": "e41e5669cc1e06b91a9201dbd71d1e46afb0df1b9e85d4db57539e52a22035a1",
+    "Client/Installer/Installer.manifest": "3225b9ec09d46dbde40e4979e690ce8c1b5717c94a386e16cfc65f671e1b7026",
     "Program/official/together/product/runtime/python/python313._pth": "a6196d1e6759494d2cf2e16689f44986b1234a2ff37624b966231da94c706004",
     "Core/model_catalog_models_dev.LICENSE": "dc2dc41c9fea2fd3c41c21c6f484844cab367800b88ff24781f980ad3a9d160a",
     "Client/Desktop/ui/vendor/xterm.LICENSE": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
@@ -288,6 +290,7 @@
   ],
   "service_host_note": "Client-facing hosts only. Internal relays, admin panels and origin names never ship; DDoS defence is CDN/WAF, origin allow-lists and rate limits, not hidden names.",
   "reviewed_ip_literals": {
+    "Client/Installer/Installer.manifest": ["52ab14a48cb941963a498faefd02b1090ebfccfe47f07d5452628d8280b60154"],
     "Program/official/together/product/agent/prepare_vm.py": [
       "f9292b96ff7d66abe0820bbe9bd022cb0abd37bd673d7b462e1bba84245a9f66"
     ],
