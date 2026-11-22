@@ -172788,7 +172788,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "cf723f40f02f85089eceddb93f881b85f7f65d4bf19c0c868122a3c72724bb4d",
+      "bodySHA256": "5668289871a5fa4c609d578a55f8a8186db221c07d0236e51266e46573b88455",
       "regions": [
         {
           "name": "load",
@@ -173819,7 +173819,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "f543f3e33cd977fdd37943daaaca041065989e791b5b4877d3fb8ec258c5ce44",
+      "bodySHA256": "679c0c0b21d067ff2241712b84b1305f377862d2be8acebba79dd6075eab9632",
       "regions": [
         {
           "name": "WindowsPackage",
@@ -173951,32 +173951,37 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "1778e4a7e574a39f04dfb20c2af7693e603a4c5f98d1d4ea433bc9240aff3b69",
+      "bodySHA256": "e8fb6701e20998d10356b0cfa3655134d24f0dde1031fa99914efc0e329d3323",
       "regions": [
+        {
+          "name": "TransportEntry",
+          "kind": "ClassDef",
+          "bodyLine": 19
+        },
         {
           "name": "entry",
           "kind": "FunctionDef",
-          "bodyLine": 19
+          "bodyLine": 26
         },
         {
           "name": "blocks",
           "kind": "FunctionDef",
-          "bodyLine": 27
+          "bodyLine": 34
         },
         {
           "name": "checked",
           "kind": "FunctionDef",
-          "bodyLine": 50
+          "bodyLine": 57
         },
         {
           "name": "patch",
           "kind": "FunctionDef",
-          "bodyLine": 56
+          "bodyLine": 63
         },
         {
           "name": "compact_installer",
           "kind": "FunctionDef",
-          "bodyLine": 70
+          "bodyLine": 77
         }
       ],
       "imports": [],

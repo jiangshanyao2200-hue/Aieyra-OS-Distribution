@@ -8,7 +8,7 @@
 # </AI-CHAIN>
 
 """Standalone delivery regressions; only public package artifacts are copied."""
-import importlib.util, json, os, shutil, subprocess, tempfile, unittest
+import importlib.util, io, json, os, shutil, subprocess, tempfile, unittest, zipfile
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -19,6 +19,17 @@ SPEC.loader.exec_module(package)
 
 
 class WindowsPackage(unittest.TestCase):
+    def test_ascii_alias_to_unicode_source_uses_utf8_zip_flag(self):
+        transport = package.load('test_transport', 'windows-transport.py')
+        stream = io.BytesIO()
+        source = 'Config/OpenCode模型.json'
+        with zipfile.ZipFile(stream, 'w') as archive:
+            archive.writestr(transport.entry('Program/catalog.json', transport.COPY + source.encode()), b'')
+        with zipfile.ZipFile(stream) as archive:
+            entry = archive.infolist()[0]
+            self.assertTrue(entry.flag_bits & 0x800)
+            self.assertEqual(entry.comment.decode(), 'copy-v1:' + source)
+
     @unittest.skipUnless(os.name == 'nt', 'requires actual Windows cmd and Windows PowerShell')
     def test_native_bat_reads_bomless_utf8_config(self):
         # Install.bat launches Windows PowerShell, whose default encoding differs

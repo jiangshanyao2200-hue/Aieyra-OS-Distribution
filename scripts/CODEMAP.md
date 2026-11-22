@@ -415,7 +415,7 @@
 
 [scripts/windows-transport.py](windows-transport.py) · scripts · 环3 · 自有源码，顶部注释链由本工具维护
 
-区域：entry; blocks; checked; patch; compact_installer。
+区域：TransportEntry; entry; blocks; checked; patch; compact_installer。
 
 导入：未解析到本项目静态导入。
 

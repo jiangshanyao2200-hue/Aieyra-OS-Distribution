@@ -310,7 +310,7 @@ def build_installer(target, archive, generated, public_key, version, sequence, t
 
 
 def build(staging, out, key, notes, program_archives=False, previous_baseline=None, source_commit=None,
-          *, installer=True, test_public_key=None, source_revision=None):
+          *, installer=True, test_public_key=None, source_revision=None, patch_baseline=None):
     meta = json.loads((ROOT / 'scripts/release-metadata.json').read_text(encoding='utf-8'))
     version, sequence = meta['version'], meta['sequence']
     if source_commit is not None and not re.fullmatch(r'[a-f0-9]{40}(?:[a-f0-9]{24})?', source_commit):
@@ -349,11 +349,14 @@ def build(staging, out, key, notes, program_archives=False, previous_baseline=No
     artifacts = [
         dict(write_zip(out / f'AieyraOS-{tag}-windows-x64.zip', full, ('Config/official-baseline.json', envelope)), kind='portable', platform='win32', arch='x64', purpose='full', component='os'),
     ]
-    if previous_baseline is not None:
+    def read_base(filename):
         verifier = "const fs=require('node:fs'), f=require(process.argv[1]); console.log(JSON.stringify(f.verifySigned(JSON.parse(fs.readFileSync(process.argv[2],'utf8')),fs.readFileSync(process.argv[3]),'baseline')));"
-        previous = json.loads(subprocess.check_output(['node', '-e', verifier, str(ROOT / 'Client/Desktop/src/managed-update-files.cjs'), str(previous_baseline), str(public_key)], encoding='utf-8'))
+        previous = json.loads(subprocess.check_output(['node', '-e', verifier, str(ROOT / 'Client/Desktop/src/managed-update-files.cjs'), str(filename), str(public_key)], encoding='utf-8'))
         if previous['sequence'] >= sequence:
             raise ValueError('Previous baseline sequence must be lower than the release sequence')
+        return previous
+    if previous_baseline is not None:
+        previous = read_base(previous_baseline)
         changed = {name: file for name, file in full.items() if previous['files'].get(name) != current['files'][name]}
         target = out / f"AieyraOS-{tag}-windows-x64-from-{previous['sequence']}.zip"
         delta = write_zip(target, changed, ('Config/official-baseline.json', envelope), max_bytes=WINDOWS_DELTA_BYTES)
@@ -361,11 +364,17 @@ def build(staging, out, key, notes, program_archives=False, previous_baseline=No
             artifacts.append(dict(delta, kind='delta', platform='win32', arch='x64', component='os', fromSequence=previous['sequence']))
         else:
             target.unlink()
-        old_zip = previous_baseline.with_name(f"AieyraOS-{('local-test-' if test_build else '')}{previous['version']}-r{previous['sequence']}-windows-x64.zip")
+    if patch_baseline is not None or previous_baseline is not None:
+        if patch_baseline is not None:
+            previous = read_base(patch_baseline)
+        source_baseline = patch_baseline or previous_baseline
+        old_zip = source_baseline.with_name(f"AieyraOS-{('local-test-' if test_build else '')}{previous['version']}-r{previous['sequence']}-windows-x64.zip")
+        if patch_baseline and not old_zip.is_file():
+            raise ValueError('Requested binary patch requires the matching portable ZIP')
         if old_zip.is_file():
             transport = load('windows_transport', 'windows-transport.py')
             target = out / f"AieyraOS-{tag}-windows-x64-patch-{previous['sequence']}.zip"
-            transport.patch(target, old_zip, previous_baseline.read_bytes(), previous, envelope, current,
+            transport.patch(target, old_zip, source_baseline.read_bytes(), previous, envelope, current,
                             lambda name: full[name].read_bytes())
             if target.stat().st_size < min(a['size'] for a in artifacts):
                 artifacts.append(dict(name=target.name, size=target.stat().st_size, sha256=digest(target),
@@ -406,6 +415,7 @@ if __name__ == '__main__':
     parser.add_argument('--notes', default='')
     parser.add_argument('--program-archives', action='store_true', help='额外输出独立Link/Browser包；默认只输出内置全部程序的OS ZIP')
     parser.add_argument('--previous-baseline', type=Path, help='Signed Config/official-baseline.json from the preceding Windows release')
+    parser.add_argument('--patch-baseline', type=Path, help='Optional different signed base for clients supporting binary patches')
     parser.add_argument('--source-commit', help='Full Git object ID of the release source')
     parser.add_argument('--source-revision', help='Together source snapshot used for this build')
     parser.add_argument('--skip-installer', action='store_true', help='仅生成 ZIP 制品')
@@ -413,4 +423,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     print(json.dumps(build(args.staging.resolve(), args.out.resolve(), args.key, args.notes, args.program_archives,
                            args.previous_baseline, args.source_commit, installer=not args.skip_installer,
-                           test_public_key=args.test_public_key, source_revision=args.source_revision), ensure_ascii=False))
+                           test_public_key=args.test_public_key, source_revision=args.source_revision, patch_baseline=args.patch_baseline), ensure_ascii=False))

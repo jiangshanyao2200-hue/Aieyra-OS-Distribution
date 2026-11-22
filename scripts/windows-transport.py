@@ -2,7 +2,7 @@
 # Map: CODEMAP.md
 # Owner: scripts/AGENTS.md | ring 3
 # Chains: module-local; query impact before editing
-# Regions: entry; blocks; checked; patch; compact_installer
+# Regions: TransportEntry; entry; blocks; checked; patch; compact_installer
 # Impact: python -B scripts/code-atlas.py show scripts/windows-transport.py
 # Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 # </AI-CHAIN>
@@ -25,8 +25,15 @@ BLOCKS = b'blocks-v1:'
 COPY = b'copy-v1:'
 
 
+class TransportEntry(zipfile.ZipInfo):
+    # zipfile infers bit 11 from the filename alone. It also governs comments,
+    # which can reference a Unicode base even when this filename is ASCII.
+    def _encodeFilenameFlags(self):
+        return self.filename.encode('utf-8'), self.flag_bits | 0x800
+
+
 def entry(name, comment=b'', method=zipfile.ZIP_STORED):
-    info = zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0))
+    info = TransportEntry(name, date_time=(2026, 1, 1, 0, 0, 0))
     info.compress_type = method
     info.external_attr = 0o644 << 16
     info.comment = comment
