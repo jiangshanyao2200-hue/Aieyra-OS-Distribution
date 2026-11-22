@@ -41,7 +41,7 @@
 
 [Core/internal/privatefile/file_windows.go](file_windows.go) · core.internal · 环0 · 自有源码，顶部注释链由本工具维护
 
-区域：createTemp。
+区域：privateDescriptor; createTemp。
 
 导入：未解析到本项目静态导入。
 

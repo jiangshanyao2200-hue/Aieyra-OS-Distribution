@@ -74,8 +74,15 @@ func assertPrivateDACL(t *testing.T, file string) {
 		t.Fatal("unexpected private DACL", actual)
 	}
 	acl, _, err := sd.DACL()
-	if err != nil || acl == nil || acl.AceCount != 2 {
-		t.Fatal("expected only current user and SYSTEM", actual, err)
+	want := uint16(2)
+	if sid := os.Getenv("AIEYRA_TEST_APPCONTAINER_SID"); sid != "" {
+		if !strings.Contains(actual, ";;;"+sid+")") {
+			t.Fatal("private file is unavailable to its creating AppContainer", actual)
+		}
+		want++
+	}
+	if err != nil || acl == nil || acl.AceCount != want {
+		t.Fatal("unexpected private file principals", actual, err)
 	}
 }
 

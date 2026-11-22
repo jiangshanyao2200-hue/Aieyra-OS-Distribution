@@ -2,7 +2,7 @@
 // Map: CODEMAP.md
 // Owner: Core/internal/AGENTS.md | ring 0
 // Chains: module-local; query impact before editing
-// Regions: createTemp
+// Regions: privateDescriptor; createTemp
 // Impact: python -B scripts/code-atlas.py show Core/internal/privatefile/file_windows.go
 // Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 // </AI-CHAIN>
@@ -21,13 +21,36 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-func createTemp(dir string) (*os.File, error) {
-	user, err := windows.GetCurrentProcessToken().GetTokenUser()
+func privateDescriptor() (*windows.SECURITY_DESCRIPTOR, error) {
+	token := windows.GetCurrentProcessToken()
+	user, err := token.GetTokenUser()
 	if err != nil {
 		return nil, err
 	}
-	// Apply the protected DACL at creation, before any other user can open it.
-	sd, err := windows.SecurityDescriptorFromString("D:P(A;;FA;;;SY)(A;;FA;;;" + user.User.Sid.String() + ")")
+	dacl := "D:P(A;;FA;;;SY)(A;;FA;;;" + user.User.Sid.String() + ")"
+	// TOKEN_APPCONTAINER_INFORMATION contains a pointer followed by the SID
+	// in the caller's buffer. Normal desktop tokens return a nil SID.
+	const tokenAppContainerSid = 31
+	var info struct {
+		sid     *windows.SID
+		storage [68]byte // SECURITY_MAX_SID_SIZE
+	}
+	var length uint32
+	err = windows.GetTokenInformation(token, tokenAppContainerSid, (*byte)(unsafe.Pointer(&info)), uint32(unsafe.Sizeof(info)), &length)
+	if err != nil {
+		return nil, err
+	}
+	if info.sid != nil {
+		if !info.sid.IsValid() {
+			return nil, windows.ERROR_INVALID_SID
+		}
+		dacl += "(A;;FA;;;" + info.sid.String() + ")"
+	}
+	return windows.SecurityDescriptorFromString(dacl)
+}
+
+func createTemp(dir string) (*os.File, error) {
+	sd, err := privateDescriptor()
 	if err != nil {
 		return nil, err
 	}

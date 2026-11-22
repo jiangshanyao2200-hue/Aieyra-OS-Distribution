@@ -86921,12 +86921,17 @@
       "ring": "0",
       "agreement": "Core/internal/AGENTS.md",
       "map": "Core/internal/privatefile/CODEMAP.md",
-      "bodySHA256": "c544537a28942c9b236fb8d3ad0b577cbca47fe2b98d81adeaeb584b25f07623",
+      "bodySHA256": "ea99d3dbfaca5a8a9266d53764b7dbc1b1260f682be2e04dc0a8808dbb98a7e8",
       "regions": [
+        {
+          "name": "privateDescriptor",
+          "kind": "lexical",
+          "bodyLine": 15
+        },
         {
           "name": "createTemp",
           "kind": "lexical",
-          "bodyLine": 15
+          "bodyLine": 43
         }
       ],
       "imports": [],
@@ -86954,7 +86959,7 @@
       "ring": "0",
       "agreement": "Core/internal/AGENTS.md",
       "map": "Core/internal/privatefile/CODEMAP.md",
-      "bodySHA256": "c59bda4423c503564ec4048fbb872425a3bd5bff288ff10dd93520b08cb0d1ac",
+      "bodySHA256": "3a9147a03cc7f68a316111f9b028b0c93fce838d48137b7a580e23d6f4a1997a",
       "regions": [
         {
           "name": "TestPrivateDACLReplacesBroadInheritance",
@@ -86969,7 +86974,7 @@
         {
           "name": "TestSnapshotReplacementKeepsPrivateDACL",
           "kind": "lexical",
-          "bodyLine": 73
+          "bodyLine": 80
         }
       ],
       "imports": [],
