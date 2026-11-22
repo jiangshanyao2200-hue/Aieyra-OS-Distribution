@@ -30,9 +30,20 @@ def fetch(build, asset, directory):
         token = json.load(response)['value']
     target = directory / asset['name']
     # The authenticated origin never redirects. curl retries partial origin transfers from the beginning.
-    subprocess.run(['curl','--disable','--fail','--silent','--show-error','--proto','=https','--retry','4',
+    transfer = subprocess.run(['curl','--disable','--fail-with-body','--silent','--show-error','--proto','=https','--retry','4',
                     '--max-time','1500','--output',str(target),'--config','-'],
-                   input=f'header = "Authorization: Bearer {token}"\nurl = "{ORIGIN}/{build}/{asset["name"]}"\n', text=True, check=True)
+                   input=f'header = "Authorization: Bearer {token}"\nurl = "{ORIGIN}/{build}/{asset["name"]}"\n', text=True)
+    if transfer.returncode:
+        claims = json.loads(base64.urlsafe_b64decode(token.split('.')[1]+'==='))
+        print('Publisher identity:', {k:claims.get(k) for k in ('iss','aud','repository_id','repository','ref','workflow_ref','sub')},flush=True)
+        if target.exists() and target.stat().st_size < 8192:
+            try:
+                reason = json.loads(target.read_bytes()).get('error','')
+                if reason in ('Publication credential required','Publication identity rejected','Publication signature rejected','Build selection changed'):
+                    print('Origin:',reason,flush=True)
+            except (UnicodeError,ValueError):
+                print('Origin returned an intermediary response',flush=True)
+        transfer.check_returncode()
     with target.open('rb') as data:
         digest = hashlib.file_digest(data, 'sha256').hexdigest()
     if digest != asset['sha256'] or target.stat().st_size != asset['size']:
