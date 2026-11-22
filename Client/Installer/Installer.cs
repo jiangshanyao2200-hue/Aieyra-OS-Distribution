@@ -119,12 +119,12 @@ internal sealed class Setup
         shortcutDirectory = Choice(options, "--desktop", "");
         Find<Label>("ProgramLabel").Target = program;
         Find<Label>("DataLabel").Target = data;
-        Find<TextBlock>("Edition").Text = version.version + (version.localTest ? " · 本机验收" : "");
+        Find<TextBlock>("Edition").Text = version.version + " r" + version.sequence + (version.localTest ? " · 本机验收" : "");
         Find<Image>("BrandMark").Source = Picture("brand.png");
         window.Icon = Find<Image>("BrandMark").Source;
         window.Width = Math.Min(window.Width, SystemParameters.WorkArea.Width - 24);
         window.Height = Math.Min(window.Height, SystemParameters.WorkArea.Height - 24);
-        window.SizeChanged += delegate { Fit(); };
+        window.SizeChanged += delegate { FitContent(false); };
         window.StateChanged += delegate { halo.ChangeWindowVisibility(window.WindowState != WindowState.Minimized); };
         window.Closing += OnClosing;
         Find<Button>("ChooseProgram").Click += delegate { Browse(program, "选择程序位置"); };
@@ -136,7 +136,7 @@ internal sealed class Setup
             action.Focus();
         };
         action.Click += RunAction;
-        Fit();
+        FitContent(false);
     }
 
     private static string Choice(Dictionary<string, string> options, string key, string fallback)
@@ -174,18 +174,16 @@ internal sealed class Setup
         }
     }
 
-    private void Fit()
-    {
-        double height = window.ActualHeight > 0 ? window.ActualHeight : window.Height;
-        var host = Find<Grid>("HaloHost");
-        host.Width = host.Height = Math.Max(156, Math.Min(244, Math.Floor(height * .38)));
-        FitContent(false);
-    }
-
     private void FitContent(bool animate)
     {
-        double spare = window.ActualHeight - Find<Grid>("HaloHost").Height - (page == "CompletePage" ? 282 : 224);
-        double offset = page == "DestinationPage" || page == "PrivacyPage" ? 0 : Math.Max(0, Math.Floor(spare * .46));
+        bool showNumber = page == "ProgressPage" || page == "CompletePage";
+        var host = Find<Grid>("HaloHost");
+        double height = window.ActualHeight > 0 ? window.ActualHeight : window.Height;
+        host.Width = host.Height = showNumber ? Math.Max(156, Math.Min(244, Math.Floor(height * .38)))
+                                              : Math.Max(80, Math.Min(132, Math.Floor(height * .19)));
+        Find<Grid>("CounterHost").Visibility = showNumber ? Visibility.Visible : Visibility.Collapsed;
+        double spare = height - host.Height - (page == "CompletePage" ? 282 : 224);
+        double offset = showNumber ? Math.Max(0, Math.Floor(spare * .46)) : 0;
         var transform = (TranslateTransform)Find<StackPanel>("InstallerContent").RenderTransform;
         double previous = transform.Y;
         transform.Y = offset;

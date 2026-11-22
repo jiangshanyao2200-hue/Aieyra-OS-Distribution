@@ -2,7 +2,7 @@
   "schema": 1,
   "notes": "Only exact reviewed product artwork and synthetic fixture values are exempt. Hashes do not contain original private values. New files fail closed.",
   "reviewed_text_assets": {
-    "Client/Installer/Installer.xaml": "eb275a931e6622789802974cc9e2405b7615efdd707ef89022ff5a7e05a8760f",
+    "Client/Installer/Installer.xaml": "fb265afabf2c78e11accc03b02627431ea60a48fc242c7b5bdc11e5f3cab99a7",
     "Client/Installer/Installer.manifest": "3225b9ec09d46dbde40e4979e690ce8c1b5717c94a386e16cfc65f671e1b7026",
     "Program/official/together/product/runtime/python/python313._pth": "a6196d1e6759494d2cf2e16689f44986b1234a2ff37624b966231da94c706004",
     "Core/model_catalog_models_dev.LICENSE": "dc2dc41c9fea2fd3c41c21c6f484844cab367800b88ff24781f980ad3a9d160a",

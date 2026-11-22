@@ -166,9 +166,11 @@
           <StackPanel.RenderTransform>
             <TranslateTransform/>
           </StackPanel.RenderTransform>
-          <Grid x:Name="HaloHost" Width="232" Height="232" HorizontalAlignment="Center">
-            <TextBlock x:Name="ProgressValue" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       FontSize="53" Text="0%" FontWeight="Medium" TextAlignment="Center"/>
+          <Grid x:Name="HaloHost" Width="112" Height="112" HorizontalAlignment="Center">
+            <Grid x:Name="CounterHost" Visibility="Collapsed">
+              <TextBlock x:Name="ProgressValue" HorizontalAlignment="Center" VerticalAlignment="Center"
+                         FontSize="53" Text="0%" FontWeight="Medium" TextAlignment="Center"/>
+            </Grid>
           </Grid>
           <Grid Margin="15,6,15,0">
             <StackPanel x:Name="DestinationPage">

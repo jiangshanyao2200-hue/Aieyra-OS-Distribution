@@ -64205,7 +64205,7 @@
       "ring": "2",
       "agreement": "Client/AGENTS.md",
       "map": "Client/Installer/CODEMAP.md",
-      "bodySHA256": "732c33d31ec8ba56b85cdbce88ed7cecf9860c61cab2305d5e5db0312b58e61d",
+      "bodySHA256": "644bcecf35a55434f511d7526e7886a338f05628c94152512a315f99015b50a8",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -64217,7 +64217,7 @@
       "ring": "2",
       "agreement": "Client/AGENTS.md",
       "map": "Client/Installer/CODEMAP.md",
-      "bodySHA256": "1ed0d7c11ad7ea442dd0d1b30bbb1c12d02924f4bac39ad8c6c3c6554cece322",
+      "bodySHA256": "f922d8c9aa1dc85d4b9c90b3c07e9ef8ca5625c8b9ab155d57ed4289f2d9a3ca",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -172731,7 +172731,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "3a9ba4def1c05a67c13a61cb63d55c16ddc536b90837aa167d7a567360072a5b",
+      "bodySHA256": "9667d471ab0b4d2e3215d97eefa2f9a1b3456dfa5cd5c3ed6db916d21638c395",
       "regions": [
         {
           "name": "desktop_compatibility",
@@ -172751,17 +172751,17 @@
         {
           "name": "packages",
           "kind": "FunctionDef",
-          "bodyLine": 105
+          "bodyLine": 109
         },
         {
           "name": "renderer_delivery",
           "kind": "FunctionDef",
-          "bodyLine": 123
+          "bodyLine": 127
         },
         {
           "name": "check",
           "kind": "FunctionDef",
-          "bodyLine": 154
+          "bodyLine": 158
         }
       ],
       "imports": [],

@@ -26,11 +26,12 @@ internal sealed class HaloProgress : FrameworkElement
         "Orbit", typeof(double), typeof(HaloProgress),
         new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
 
-    private static readonly Pen Track = Light(160, 57, 67, 71, 2.3);
-    private static readonly Pen IdleTrack = Light(220, 153, 170, 173, 2.4);
-    private static readonly Pen BloomFar = Light(10, 168, 225, 226, 18);
-    private static readonly Pen BloomNear = Light(38, 169, 225, 226, 8);
-    private static readonly Pen Edge = Light(255, 227, 251, 250, 3.4);
+    private static readonly Pen Track = Light(255, 54, 66, 70, 1.8);
+    private static readonly Pen IdleTrack = Light(255, 196, 219, 219, 2.7);
+    private static readonly Pen BloomFar = Light(8, 169, 225, 226, 10);
+    private static readonly Pen BloomNear = Light(36, 169, 225, 226, 5);
+    private static readonly Pen Edge = Light(255, 227, 251, 250, 2.7);
+    private static readonly RadialGradientBrush TipGlow = CreateTipGlow();
     private readonly TextBlock counter;
     private bool working, pending, spinning;
     private int displayed = -1;
@@ -52,6 +53,16 @@ internal sealed class HaloProgress : FrameworkElement
         };
         pen.Freeze();
         return pen;
+    }
+
+    private static RadialGradientBrush CreateTipGlow()
+    {
+        var glow = new RadialGradientBrush();
+        glow.GradientStops.Add(new GradientStop(Color.FromArgb(156, 211, 250, 247), 0));
+        glow.GradientStops.Add(new GradientStop(Color.FromArgb(40, 163, 231, 226), .35));
+        glow.GradientStops.Add(new GradientStop(Color.FromArgb(0, 163, 231, 226), 1));
+        glow.Freeze();
+        return glow;
     }
 
     internal void Reset()
@@ -123,6 +134,7 @@ internal sealed class HaloProgress : FrameworkElement
         var center = new Point(RenderSize.Width / 2, RenderSize.Height / 2);
         var radius = Math.Min(center.X, center.Y) - 21;
         if (radius <= 0) return;
+        if (!working) drawing.DrawEllipse(null, BloomNear, center, radius, radius);
         drawing.DrawEllipse(null, working ? Track : IdleTrack, center, radius, radius);
         if (!working) return;
 
@@ -142,16 +154,18 @@ internal sealed class HaloProgress : FrameworkElement
         }
         if (sweep <= .05) return;
 
+        var tip = PointAt(center, radius, start + sweep);
         var arc = new StreamGeometry();
         using (var geometry = arc.Open())
         {
             geometry.BeginFigure(PointAt(center, radius, start), false, false);
-            geometry.ArcTo(PointAt(center, radius, start + sweep), new Size(radius, radius),
+            geometry.ArcTo(tip, new Size(radius, radius),
                            0, sweep > 180, SweepDirection.Clockwise, true, false);
         }
         drawing.DrawGeometry(null, BloomFar, arc);
         drawing.DrawGeometry(null, BloomNear, arc);
         drawing.DrawGeometry(null, Edge, arc);
+        drawing.DrawEllipse(TipGlow, null, tip, 7, 7);
     }
 
     private static Point PointAt(Point center, double radius, double degrees)

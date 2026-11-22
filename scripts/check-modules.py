@@ -72,7 +72,8 @@ const shared=new Set(['Contracts/official-services.mjs','Program/official/link/u
 // imports host capabilities. Keep them in the same recursive parser review.
 shared.add('Tool/presentation/projection.mjs');
 shared.add('Tool/base/official/terminal/presentation/readonly.mjs');
-const dataAssets=new Set();
+shared.add('Theme/runtime/program-toolbar.mjs');
+const dataAssets=new Set(['Theme/runtime/program-toolbar.css']);
 const legacyManifest=path.join(root,'Contracts/desktop-compatibility.json');
 if(fs.existsSync(legacyManifest))for(const name of Object.keys(JSON.parse(fs.readFileSync(legacyManifest,'utf8')).files))if(/\.[cm]?js$/.test(name))shared.add(name);
 for(const name of shared)if(fs.existsSync(path.join(root,name)))files.push(path.join(root,name));
@@ -91,6 +92,9 @@ for(const file of files){const from=relative(file),source=fs.readFileSync(file,'
  try{
   const module=new vm.SourceTextModule(source,{identifier:file});
   for(const spec of module.dependencySpecifiers)edge(file,spec,'static');
+  if(from==='Theme/runtime/program-toolbar.mjs'){
+   for(const m of clean.matchAll(/new URL\('([^']+)',\s*import\.meta\.url\)/g))edge(file,m[1],'asset');
+  }
   for(const m of clean.matchAll(/\bimport\s*\(\s*([^)]*)\)/g)){
    const literal=m[1].trim();
    if(!/^(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')$/.test(literal)){errors.push({from,error:'Unreviewed dynamic import expression'});continue;}
