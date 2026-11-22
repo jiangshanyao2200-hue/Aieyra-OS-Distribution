@@ -315,6 +315,12 @@ document.addEventListener('click',event=>{
   if(signature!==headerSignature){headerSignature=signature;$('account').innerHTML=state.signedIn?`${avatar(state.user)}<span>${e(state.user?.name)}</span>`:'登录';}
   $('account').ariaLabel=state.signedIn?'账号信息':'登录';
   if(hostOS){
+    const homeTab=mainTabs.find(button=>button.dataset.tab==='home');
+    const accountState=navigator.onLine===false?'offline':state.hostAuth;
+    const accountLabel={ready:'官方众创已连接','signed-out':'尚未登录官方众创',unavailable:'官方众创暂不可达',offline:'网络已断开'}[accountState]||'正在连接官方众创';
+    homeTab.dataset.connection=accountState||'waiting';
+    homeTab.title=accountLabel;
+    homeTab.setAttribute('aria-description',accountLabel);
     const tools=$('local-office-tools');
     $('tabs').hidden=false;
     tools.hidden=state.mode!=='local';
@@ -324,9 +330,9 @@ document.addEventListener('click',event=>{
     const connection=tools.querySelector('[data-office-action="connections"]');
     connection.dataset.cloud=state.localCloud||'unknown';
     connection.title={
-      online:'云服务在线',
-      offline:'云服务未连接',
-      unavailable:'连接状态暂不可用',
+      online:'工位云服务器在线',
+      offline:'工位云服务器未连接',
+      unavailable:'工位云服务器状态暂不可用',
     }[state.localCloud]||'正在读取连接';
     connection.setAttribute('aria-description',connection.title);
   }
@@ -1381,8 +1387,12 @@ document.addEventListener('visibilitychange',()=>{
   scheduleBroadcast();
   syncVisibleWorkspace();
 });
-window.addEventListener('online',syncVisibleWorkspace);
+window.addEventListener('online',()=>{
+  if(hostOS){header();void refresh();}
+  syncVisibleWorkspace();
+});
 window.addEventListener('offline',()=>{
+  if(hostOS)header();
   if(tab==='home')surfaceStatus(Error('网络已断开'));
 });
 document.addEventListener('keydown',event=>{if(tab==='repository'&&repo==='code'&&$('file-find')&&!document.querySelector('dialog[open]')&&(event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='f'){event.preventDefault();workspace.querySelector('.source-find').hidden=false;$('file-find').focus();}});

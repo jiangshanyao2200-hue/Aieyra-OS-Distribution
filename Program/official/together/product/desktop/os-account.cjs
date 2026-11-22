@@ -3,14 +3,15 @@
 位置: 二环·桌面能力 | Electron生命周期、权限边界、本机服务、云账号与可诊断桌面模块。
 约束: renderer通过preload白名单进入主进程，禁止开放任意IPC；启动失败先持久取证；关闭须收束服务租约和诊断
 下游: 无已解析的项目内静态导入
-上游: link/desktop/main.cjs
+上游: AIDEBUG/os-account-connection.test.cjs, link/desktop/main.cjs
 链路: 目录 CODEMAP.md → docs/CODE-MAP.json
-验证: npm --prefix link/desktop run check, AIDEBUG/startup-review.py
+验证: AIDEBUG/os-account-connection.test.cjs
 目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
   bindOSAccount | function
   bindOSAccount.report | function
   bindOSAccount.invalidate | function
   bindOSAccount.sync | function
+  bindOSAccount.connection | method
   bindOSAccount.status | method
   bindOSAccount.close | method
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
@@ -42,7 +43,7 @@
     if (closed) return Promise.resolve();
     invalidate();
     if (request) return request.promise;
-    if (cloud.state().signedIn) return Promise.resolve(cloud.state());
+    if (cloud.state().signedIn && !refresh && status === 'ready') return Promise.resolve(cloud.state());
     if (!binding && !refresh) {
       report('signed-out');
       return Promise.resolve();
@@ -50,7 +51,7 @@
     const entry = { binding, controller: new AbortController(), promise: null };
     const signal = entry.controller.signal;
     request = entry;
-    report('connecting');
+    if (status !== 'ready') report('connecting');
     entry.promise = (async () => {
       try {
         if (!binding) await account.refresh();
@@ -61,15 +62,21 @@
           report('signed-out');
           return;
         }
-        const url = await cloud.beginLogin({ signal });
-        const callback = await account.authorize(binding, url, signal);
-        const result = await cloud.completeLogin(callback, { expectedUser: binding.userID, signal });
+        let result;
+        if (cloud.state().signedIn) {
+          result = await cloud.refresh(signal);
+        } else {
+          const url = await cloud.beginLogin({ signal });
+          const callback = await account.authorize(binding, url, signal);
+          result = await cloud.completeLogin(callback, { expectedUser: binding.userID, signal });
+        }
+        signal.throwIfAborted();
         report('ready');
         return result;
       } catch (error) {
         if (signal.aborted) return;
         cloud.cancelLogin();
-        report(cloud.state().signedIn ? 'ready' : 'unavailable');
+        report('unavailable');
         throw error;
       } finally {
         if (request === entry) request = null;
@@ -81,6 +88,11 @@
   return {
     sync,
     invalidate,
+    /* @chain-region bindOSAccount.connection | calls: cloud.state */ connection() {
+      const authenticated = cloud.state().signedIn;
+      const state = status === 'ready' ? (authenticated ? 'online' : 'unavailable') : status;
+      return {state, authenticated, online: state === 'online'};
+    },
     /* @chain-region bindOSAccount.status */ status: () => status,
     /* @chain-region bindOSAccount.close | calls: request.controller.abort, cloud.close, catch, cloud.logout */ close() {
       closed = true;

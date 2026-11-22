@@ -17,13 +17,15 @@
   rule-8 | style | [data-os-host] #local-office-tools [data-cloud]
   rule-9 | style | [data-os-host] #local-office-tools [data-cloud]::after
   rule-10 | style | [data-os-host] #local-office-tools [data-cloud=online]::after
-  rule-11 | style | [data-os-host] .os-cloud-status
-  rule-12 | style | @media(max-width:700px)
-  rule-13 | style | @media(max-width:460px)
-  rule-14 | style | .update-streams
-  rule-15 | style | .update-streams > div
-  rule-16 | style | .update-streams h3
-  rule-17 | style | .update-streams code
+  rule-11 | style | [data-os-host] [data-tab="home"][data-connection="ready"] i
+  rule-12 | style | [data-os-host] [data-tab="home"]:is([data-connection="offline"],[data-connection="unavailable"]) i
+  rule-13 | style | [data-os-host] .os-cloud-status
+  rule-14 | style | @media(max-width:700px)
+  rule-15 | style | @media(max-width:460px)
+  rule-16 | style | .update-streams
+  rule-17 | style | .update-streams > div
+  rule-18 | style | .update-streams h3
+  rule-19 | style | .update-streams code
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
 @file-map:end */
 /* @chain-region rule-1 */ .together-desktop[data-os-host],
@@ -56,17 +58,19 @@
   border-radius:50%; background:var(--ui-text-2); content:"";
 }
 /* @chain-region rule-10 */ [data-os-host] #local-office-tools [data-cloud=online]::after { background:var(--ui-accent); }
-/* @chain-region rule-11 */ [data-os-host] .os-cloud-status {
+/* @chain-region rule-11 */ [data-os-host] [data-tab="home"][data-connection="ready"] i { color:var(--ui-accent); }
+/* @chain-region rule-12 */ [data-os-host] [data-tab="home"]:is([data-connection="offline"],[data-connection="unavailable"]) i { color:#e3b275; }
+/* @chain-region rule-13 */ [data-os-host] .os-cloud-status {
   display:grid; place-content:center; justify-items:center; gap:12px; width:100%; color:var(--ui-text-2);
 }
-/* @chain-region rule-12 */ @media(max-width:700px) {
+/* @chain-region rule-14 */ @media(max-width:700px) {
   [data-os-host] #local-office-tools button span, [data-os-host] #broadcast-preview { display:none; }
 }
-/* @chain-region rule-13 */ @media(max-width:460px) {
+/* @chain-region rule-15 */ @media(max-width:460px) {
   [data-os-host] .titlebar { overflow:auto hidden; scrollbar-width:none; }
   [data-os-host] .titlebar-space { display:none; }
 }
-/* @chain-region rule-14 */ .update-streams { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:16px; margin-block:12px; }
-/* @chain-region rule-15 */ .update-streams > div { display:grid; align-content:start; justify-items:start; gap:6px; border-top:1px solid var(--ui-border); padding-block:10px; }
-/* @chain-region rule-16 */ .update-streams h3 { margin:0; font-size:14px; }
-/* @chain-region rule-17 */ .update-streams code { overflow-wrap:anywhere; font-size:12px; }
+/* @chain-region rule-16 */ .update-streams { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:16px; margin-block:12px; }
+/* @chain-region rule-17 */ .update-streams > div { display:grid; align-content:start; justify-items:start; gap:6px; border-top:1px solid var(--ui-border); padding-block:10px; }
+/* @chain-region rule-18 */ .update-streams h3 { margin:0; font-size:14px; }
+/* @chain-region rule-19 */ .update-streams code { overflow-wrap:anywhere; font-size:12px; }

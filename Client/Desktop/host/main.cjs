@@ -519,7 +519,8 @@ app
         if(module==='together'&&operation==='status'){
           const result=await nativePrograms.run('together',()=>together.status());
           if(result?.protocol!=='aieyra-office/1'||!Number.isSafeInteger(result.stations))throw Error('Together 办公室回执无效');
-          return {ok:true,protocol:result.protocol,stations:result.stations,cloudOnline:result.cloud?.online===true};
+          return {ok:true,protocol:result.protocol,stations:result.stations,cloudOnline:result.cloud?.online===true,
+            cloudState:result.cloud?.state,serverState:result.server?.state};
         }
         if(module==='together'&&operation==='aidebug'){
           return nativePrograms.run('together',()=>together.inspect());

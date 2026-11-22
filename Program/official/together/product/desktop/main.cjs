@@ -39,6 +39,7 @@
   startDesktop.startup | method
   startDesktop.inspectOS | method
   startDesktop.origin | method
+  startDesktop.cloudStatus | method
   startDesktop.accountChanged | method
   startDesktop.close | method
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
@@ -102,7 +103,7 @@ const errorURL = pathToFileURL(path.join(__dirname, 'offline.html')).href;
 let tabEpoch = 0, onboarding, visibleControl, diagnostics;
 let window, officeView, loginWindow, cloud, development, tab = embedded ? 'office' : 'home', host, starting = false, quitting = false, stopped = false, exitCode = 0;
 let mode = embedded ? 'local' : 'cloud', closing, startFlight, handlersReady = false, localReady=false, localError=false;
-let localCloud='unknown',setOfficeInset;
+let localCloud='unknown',setOfficeInset,accountTimer;
 let cloudPosition={tab:'home',generation:null};
 let osAccount;
 const /* @chain-region startDesktop.ownerWindow */ ownerWindow = () => embedded ? (window.host || window.owner) : window;
@@ -393,7 +394,7 @@ if (!embedded && !app.requestSingleInstanceLock({ product: 'Aieyra Together Link
           const allowed=saved.tab==='agents'||(access?.member&&(saved.tab!=='management'||access.admin));
           setTab(mode==='local'?'office':(sameAccount&&allowed?saved.tab:'home'));
           data={mode,tab,hostAuth:osAccount.status()};
-          if(mode==='cloud')void osAccount.sync({refresh:true}).catch(()=>{});
+          if(mode==='cloud')void osAccount.sync({refresh:!cloud.cachedAccess()}).catch(()=>{});
         }
         else if (value.method === 'backgrounds') data=await wallpapers.catalog();
         else if (value.method === 'background-state') data=await wallpapers.state(first||{});
@@ -408,8 +409,8 @@ if (!embedded && !app.requestSingleInstanceLock({ product: 'Aieyra Together Link
           data=await cloud.logout();setTab('home');
         }
         else if (value.method === 'refresh') {
-          if(osAccount)await osAccount.sync({refresh:true});
-          data={...await cloud.refresh(tab==='home'?homeReads.signal:undefined),hostAuth:osAccount?.status()};
+          const refreshed=osAccount?await osAccount.sync({refresh:true}):await cloud.refresh(tab==='home'?homeReads.signal:undefined);
+          data={...cloud.state(),...refreshed,hostAuth:osAccount?.status()};
         }
         else if (value.method === 'work-status') data=await (await officeReady.promise).workStatus(first===true);
         else if (value.method === 'personal-station') data=await (await officeReady.promise).personalStation();
@@ -606,6 +607,10 @@ if (!embedded && !app.requestSingleInstanceLock({ product: 'Aieyra Together Link
     });
     handlersReady=true;
     if(embedded) {
+      void osAccount.sync({refresh:true}).catch(()=>{});
+      accountTimer=setInterval(()=>{
+        if(embedded.account.read() || osAccount.status()==='unavailable')void osAccount.sync({refresh:true}).catch(()=>{});
+      },60000);
       await startOffice();
       return;
     }
@@ -658,13 +663,15 @@ return {
     });
   },
   /* @chain-region startDesktop.origin */ get origin(){return host?.origin||'';},
+  /* @chain-region startDesktop.cloudStatus | calls: osAccount.connection */ cloudStatus(){return osAccount?.connection();},
   /* @chain-region startDesktop.accountChanged | calls: osAccount.invalidate, catch, osAccount.sync */ accountChanged(){
     osAccount?.invalidate();
     void osAccount?.sync().catch(()=>{});
   },
-  /* @chain-region startDesktop.close | calls: ipcMain.removeHandler, homeReads.abort, releaseDownload.abort, closePreviews, development.close, osAccount.close, cloud.close, loginWindow.host.isDestroyed … */ close() {
+  /* @chain-region startDesktop.close | calls: clearInterval, ipcMain.removeHandler, homeReads.abort, releaseDownload.abort, closePreviews, development.close, osAccount.close, cloud.close … */ close() {
     if(closing)return closing;
     quitting=true;
+    clearInterval(accountTimer);
     closing=(async()=>{
       if(handlersReady){ipcMain.removeHandler('link:workspace');ipcMain.removeHandler('link:retry');}
       homeReads.abort();

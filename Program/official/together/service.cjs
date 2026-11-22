@@ -23,7 +23,12 @@ function createTogetherProgram({ privateBase, account, theme, legacyOffice, fetc
     return response.json();
   }
 
-  const status = () => read('/api/office');
+  async function status() {
+    const current = desktop;
+    const office = await read('/api/office');
+    if (!current || desktop !== current) throw Error('Together 工作区已切换。');
+    return { ...office, server: office.cloud, cloud: current.cloudStatus() };
+  }
   return {
     surface: {
       webPreferences: {

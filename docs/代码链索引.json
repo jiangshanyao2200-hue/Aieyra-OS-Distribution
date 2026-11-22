@@ -2,7 +2,7 @@
   "schema": "aieyra.code-atlas/1",
   "proof": "Python top-level AST; other declarations and literal imports are lexical candidates. Dynamic calls, IPC, CSS consumers and runtime ownership require the curated chains and actual investigation.",
   "contractSHA256": "e60382eff88f5c9e1dd13f2166656a244a16afdbfbd7a2a4182a3c63190a0130",
-  "projectMapSHA256": "2644538f80868f796c1fbf6f877c084dad9023183dfbf4db573454b602913963",
+  "projectMapSHA256": "4d99014b5f03ccd173e5929b6eb728f12ffba0cc833dd94934638d3992ddc55f",
   "files": {
     "AIDEBUG/aidebug.cjs": {
       "module": "aidebug",
@@ -421,7 +421,7 @@
       "ring": "3",
       "agreement": "AIDEBUG/AGENTS.md",
       "map": "AIDEBUG/together/CODEMAP.md",
-      "bodySHA256": "42e904119f8040b3ddaadbf6b519ebe11daa41e25658afc9abdadc093b2802d0",
+      "bodySHA256": "a5a1d0b2fa5d22dd9d576f73bbbc53a56c8ae56fd1a104377319251ca4203b0a",
       "regions": [
         {
           "name": "assert",
@@ -474,7 +474,7 @@
       "ring": "3",
       "agreement": "AIDEBUG/AGENTS.md",
       "map": "AIDEBUG/together/CODEMAP.md",
-      "bodySHA256": "5e9e7698e2773ded93200f917fb5dfbc373bbea557adfac1367cefdf520e9fbe",
+      "bodySHA256": "03362869677a95411aac8558aa5a1f4902c1066312084539e25c1a0d7bcb34ca",
       "regions": [
         {
           "name": "fs",
@@ -16143,7 +16143,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "7c2d6c8bac04f99437ca3f38b54313f7fd239693102efce05b7bbc0fbc0a0ed7",
+      "bodySHA256": "c069d52f50581c4b21b6caefbefe3c976560565320a4004127d94b945fd124ae",
       "regions": [
         {
           "name": "path",
@@ -115664,30 +115664,6 @@
         "Core/workspace_core_link.go"
       ]
     },
-    "Link/AIDEBUG.ps1": {
-      "module": "link",
-      "ring": "2",
-      "agreement": "Link/AGENTS.md",
-      "map": "Link/CODEMAP.md",
-      "bodySHA256": "4ac60381ff763e0d8919516b9104ea831597c58b2e5a7b3f4eec4f5022da9f42",
-      "regions": [],
-      "imports": [],
-      "chains": [],
-      "protected": null,
-      "consumers": []
-    },
-    "Link/Start-Link.ps1": {
-      "module": "link",
-      "ring": "2",
-      "agreement": "Link/AGENTS.md",
-      "map": "Link/CODEMAP.md",
-      "bodySHA256": "6f5e4f5fc552c319aae9fac361d4bbe07179223b89f5a380ece90e273490ee9e",
-      "regions": [],
-      "imports": [],
-      "chains": [],
-      "protected": null,
-      "consumers": []
-    },
     "Link/app/link-core/cmd/aieyra-link-lan/main.go": {
       "module": "link.app.link-core",
       "ring": "2",
@@ -117456,59 +117432,6 @@
           "name": "CloudHTTP",
           "kind": "ClassDef",
           "bodyLine": 100
-        }
-      ],
-      "imports": [],
-      "chains": [],
-      "protected": null,
-      "consumers": []
-    },
-    "Link/desktop/main.cjs": {
-      "module": "link",
-      "ring": "2",
-      "agreement": "Link/AGENTS.md",
-      "map": "Link/desktop/CODEMAP.md",
-      "bodySHA256": "787bff192bcdb5430baabfa03c6ee89fb9352cb61a9b49469b3387ded8c8bf9f",
-      "regions": [
-        {
-          "name": "path",
-          "kind": "lexical",
-          "bodyLine": 3
-        },
-        {
-          "name": "officeData",
-          "kind": "lexical",
-          "bodyLine": 9
-        },
-        {
-          "name": "scope",
-          "kind": "lexical",
-          "bodyLine": 10
-        },
-        {
-          "name": "port",
-          "kind": "lexical",
-          "bodyLine": 11
-        },
-        {
-          "name": "origin",
-          "kind": "lexical",
-          "bodyLine": 12
-        },
-        {
-          "name": "window",
-          "kind": "lexical",
-          "bodyLine": 13
-        },
-        {
-          "name": "officeReady",
-          "kind": "lexical",
-          "bodyLine": 15
-        },
-        {
-          "name": "openOffice",
-          "kind": "lexical",
-          "bodyLine": 29
         }
       ],
       "imports": [],
@@ -125072,162 +124995,162 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "cb98cad0e5d0985ff210a07c7f1fb65b31c33ce6cfc55ea85e32053075ac4d38",
+      "bodySHA256": "2596a612896dcd37dab6e39fdc8a28a729bc975fd2d45503dec3fc8343684b39",
       "regions": [
         {
           "name": "electron",
           "kind": "lexical",
-          "bodyLine": 47
+          "bodyLine": 48
         },
         {
           "name": "fs",
           "kind": "lexical",
-          "bodyLine": 52
+          "bodyLine": 53
         },
         {
           "name": "path",
           "kind": "lexical",
-          "bodyLine": 53
+          "bodyLine": 54
         },
         {
           "name": "startup",
           "kind": "lexical",
-          "bodyLine": 59
+          "bodyLine": 60
         },
         {
           "name": "args",
           "kind": "lexical",
-          "bodyLine": 66
+          "bodyLine": 67
         },
         {
           "name": "testOutput",
           "kind": "lexical",
-          "bodyLine": 73
+          "bodyLine": 74
         },
         {
           "name": "testProfile",
           "kind": "lexical",
-          "bodyLine": 74
+          "bodyLine": 75
         },
         {
           "name": "visibleTest",
           "kind": "lexical",
-          "bodyLine": 75
+          "bodyLine": 76
         },
         {
           "name": "liveTest",
           "kind": "lexical",
-          "bodyLine": 76
+          "bodyLine": 77
         },
         {
           "name": "noActivate",
           "kind": "lexical",
-          "bodyLine": 77
+          "bodyLine": 78
         },
         {
           "name": "legacyProfile",
           "kind": "lexical",
-          "bodyLine": 90
+          "bodyLine": 91
         },
         {
           "name": "legacyBase",
           "kind": "lexical",
-          "bodyLine": 91
+          "bodyLine": 92
         },
         {
           "name": "privateBase",
           "kind": "lexical",
-          "bodyLine": 92
+          "bodyLine": 93
         },
         {
           "name": "profile",
           "kind": "lexical",
-          "bodyLine": 93
+          "bodyLine": 94
         },
         {
           "name": "wallpapers",
           "kind": "lexical",
-          "bodyLine": 97
+          "bodyLine": 98
         },
         {
           "name": "linkRoot",
           "kind": "lexical",
-          "bodyLine": 98
+          "bodyLine": 99
         },
         {
           "name": "proposalCLI",
           "kind": "lexical",
-          "bodyLine": 99
+          "bodyLine": 100
         },
         {
           "name": "shellURL",
           "kind": "lexical",
-          "bodyLine": 100
+          "bodyLine": 101
         },
         {
           "name": "errorURL",
           "kind": "lexical",
-          "bodyLine": 101
+          "bodyLine": 102
         },
         {
           "name": "tabEpoch",
           "kind": "lexical",
-          "bodyLine": 102
+          "bodyLine": 103
         },
         {
           "name": "window",
           "kind": "lexical",
-          "bodyLine": 103
+          "bodyLine": 104
         },
         {
           "name": "mode",
           "kind": "lexical",
-          "bodyLine": 104
+          "bodyLine": 105
         },
         {
           "name": "localCloud",
           "kind": "lexical",
-          "bodyLine": 105
+          "bodyLine": 106
         },
         {
           "name": "cloudPosition",
           "kind": "lexical",
-          "bodyLine": 106
+          "bodyLine": 107
         },
         {
           "name": "osAccount",
           "kind": "lexical",
-          "bodyLine": 107
+          "bodyLine": 108
         },
         {
           "name": "homeReads",
           "kind": "lexical",
-          "bodyLine": 109
+          "bodyLine": 110
         },
         {
           "name": "releaseDownload",
           "kind": "lexical",
-          "bodyLine": 110
+          "bodyLine": 111
         },
         {
           "name": "officeMotion",
           "kind": "lexical",
-          "bodyLine": 111
+          "bodyLine": 112
         },
         {
           "name": "nativeOverlay",
           "kind": "lexical",
-          "bodyLine": 112
+          "bodyLine": 113
         },
         {
           "name": "officeReady",
           "kind": "lexical",
-          "bodyLine": 120
+          "bodyLine": 121
         },
         {
           "name": "previewWindows",
           "kind": "lexical",
-          "bodyLine": 121
+          "bodyLine": 122
         }
       ],
       "imports": [
@@ -125403,7 +125326,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "78c6cce8ff342bf754e000fba2bd351ea89090d3819def1f5ab2ce3bf216a2e2",
+      "bodySHA256": "495cea8f8bc13c017026ad7e0d4a8833849075e9e826496d1314d5ef03be8c7b",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -126523,32 +126446,32 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "ffc2d49188bcf12bca68d8a02333925eaa776fdaad4f155732600df9df4d6178",
+      "bodySHA256": "bd6d0f268ffd7af1155e694efafee5730aba7e1bf2bea1d6db59faec5fb1087d",
       "regions": [
         {
           "name": ".together-desktop[data-os-host] #workspace",
           "kind": "lexical",
-          "bodyLine": 31
+          "bodyLine": 33
         },
         {
           "name": "[data-os-host][data-mode=local] :is(#release-transfer,#broadcast-button,#broadcast-preview)",
           "kind": "lexical",
-          "bodyLine": 34
+          "bodyLine": 36
         },
         {
           "name": "[data-os-host] #local-office-tools button span, [data-os-host] #broadcast-preview",
           "kind": "lexical",
-          "bodyLine": 63
+          "bodyLine": 67
         },
         {
           "name": "[data-os-host] .titlebar",
           "kind": "lexical",
-          "bodyLine": 66
+          "bodyLine": 70
         },
         {
           "name": "[data-os-host] .titlebar-space",
           "kind": "lexical",
-          "bodyLine": 67
+          "bodyLine": 71
         }
       ],
       "imports": [],
@@ -127077,7 +127000,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "d04b78a1d657ed342ee71f9d0ea8369c48c57b967ddd38ef30da8274eec92dd7",
+      "bodySHA256": "2bd72cd2eefe151b17dd6679cb7da375bd27e6928f7d5b7e373a2c6435b1c7b7",
       "regions": [
         {
           "name": "api",
@@ -132167,7 +132090,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together.md",
-      "bodySHA256": "fd98d3a1060c7800d54bc7fe83314391f862f7bcd65cb15aad978260943e5b86",
+      "bodySHA256": "3480f4a076fd50e68a19f48ab022928da0763834ccc8f6b852e383ae72f620cb",
       "regions": [
         {
           "name": "path",
@@ -175897,10 +175820,6 @@
     "InternalLink/CODEMAP.md": [
       "InternalLink/link.go"
     ],
-    "Link/CODEMAP.md": [
-      "Link/AIDEBUG.ps1",
-      "Link/Start-Link.ps1"
-    ],
     "Link/app/link-core/cmd/aieyra-link-lan/CODEMAP.md": [
       "Link/app/link-core/cmd/aieyra-link-lan/main.go"
     ],
@@ -175950,9 +175869,6 @@
     ],
     "Link/cloud/client/CODEMAP.md": [
       "Link/cloud/client/remote-link.mjs"
-    ],
-    "Link/desktop/CODEMAP.md": [
-      "Link/desktop/main.cjs"
     ],
     "Link/portable/CODEMAP.md": [
       "Link/portable/agent.py",
