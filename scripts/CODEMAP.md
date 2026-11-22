@@ -411,6 +411,16 @@
 
 消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
 
+### windows-transport.py
+
+[scripts/windows-transport.py](windows-transport.py) · scripts · 环3 · 自有源码，顶部注释链由本工具维护
+
+区域：entry; blocks; checked; patch; compact_installer。
+
+导入：未解析到本项目静态导入。
+
+消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
+
 ### winres.py
 
 [scripts/winres.py](winres.py) · scripts · 环3 · 自有源码，顶部注释链由本工具维护

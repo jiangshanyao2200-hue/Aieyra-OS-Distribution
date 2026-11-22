@@ -1157,6 +1157,16 @@
 
 消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
 
+### managed-update-download.test.cjs
+
+[Client/Desktop/test/managed-update-download.test.cjs](managed-update-download.test.cjs) · desktop · 环2 · 自有源码，顶部注释链由本工具维护
+
+区域：assert; path; os; fs。
+
+导入：`Client/Desktop/src/managed-update-download.cjs`, `Client/Desktop/src/managed-update-files.cjs`。
+
+消费者：静态导入未解析到；仍须查注册/IPC/模板/运行时消费者。
+
 ### managed-updates.test.cjs
 
 [Client/Desktop/test/managed-updates.test.cjs](managed-updates.test.cjs) · desktop · 环2 · 自有源码，顶部注释链由本工具维护

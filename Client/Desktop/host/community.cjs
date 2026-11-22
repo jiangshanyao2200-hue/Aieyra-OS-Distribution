@@ -118,7 +118,12 @@ function createCommunityClient({fetchImpl=fetch,origin=CLOUD,now=Date.now}={}){
   const url=new URL(input),current=credential;
   if(url.origin!==origin||!(/^\/api\/v1\/releases\/(stable|events)$/.test(url.pathname)||/^\/downloads\/[a-zA-Z0-9._-]+$/.test(url.pathname))||url.search||url.hash)throw Error('更新地址无效');
   if(!current||current.expiresAt<=now())throw Error('请先登录 Aieyra 后接收更新');
-  const response=await fetchImpl(url.href,{...options,method:'GET',redirect:'error',credentials:'omit',headers:{accept:'application/json',authorization:'Bearer '+current.accessToken,'x-aieyra-os-client':'1'},signal:options.signal?AbortSignal.any([options.signal,authController.signal]):authController.signal});
+  const headers={accept:'application/json',authorization:'Bearer '+current.accessToken,'x-aieyra-os-client':'1'};
+  if(url.pathname.startsWith('/downloads/')){
+   const supplied=new Headers(options.headers);
+   for(const name of ['range','if-range'])if(supplied.has(name))headers[name]=supplied.get(name);
+  }
+  const response=await fetchImpl(url.href,{...options,method:'GET',redirect:'error',credentials:'omit',headers,signal:options.signal?AbortSignal.any([options.signal,authController.signal]):authController.signal});
   if(credential!==current) {await response.body?.cancel();throw Error('账号已退出');}
   if(response.status===401){credential=null;changed();}
   return response;

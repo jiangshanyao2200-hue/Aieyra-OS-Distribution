@@ -21,7 +21,7 @@ Private data never enters: sources come from the reviewed public inventory, and 
 private Config/API/Prompt/Data files are outside it. The signing key is only referenced.
 The native installer build uses fonttools with Brotli to prepare its desktop fonts.
 """
-import argparse, base64, hashlib, importlib.util, json, os, re, subprocess, zipfile
+import argparse, base64, gzip, hashlib, importlib.util, json, os, re, shutil, subprocess, zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -281,13 +281,17 @@ def build_installer(target, archive, generated, public_key, version, sequence, t
     env = {**os.environ, 'GOOS': 'windows', 'GOARCH': 'amd64', 'GOMAXPROCS': '1', 'GOFLAGS': '-p=1'}
     subprocess.run(['go', 'build', '-trimpath', '-ldflags', f'-s -w -H=windowsgui -X main.trustedKey={key}',
                     '-o', str(engine), './cmd/aieyra-install'], cwd=ROOT / 'Core', env=env, check=True)
+    compressed_engine = generated / 'install-engine.exe.gz'
+    with engine.open('rb') as reader, compressed_engine.open('wb') as dest:
+        with gzip.GzipFile(fileobj=dest, mode='wb', compresslevel=6, mtime=0) as compressed:
+            shutil.copyfileobj(reader, compressed, length=1 << 20)
     release = generated / 'installer-release.json'
     release.write_text(json.dumps({'version': version, 'sequence': sequence, 'localTest': test_build}), encoding='utf-8')
     references = [framework / f for f in ('System.Web.Extensions.dll', 'System.Windows.Forms.dll', 'System.Xaml.dll')]
     references += [framework / 'WPF' / f for f in ('WindowsBase.dll', 'PresentationCore.dll', 'PresentationFramework.dll')]
     resources = {
         'Installer.xaml': source / 'Installer.xaml',
-        'install.exe': engine,
+        'install.exe.gz': compressed_engine,
         'release.json': release,
         'payload.zip': archive,
         'brand.png': ROOT / 'Client/Desktop/assets/os.png',
@@ -357,13 +361,27 @@ def build(staging, out, key, notes, program_archives=False, previous_baseline=No
             artifacts.append(dict(delta, kind='delta', platform='win32', arch='x64', component='os', fromSequence=previous['sequence']))
         else:
             target.unlink()
+        old_zip = previous_baseline.with_name(f"AieyraOS-{('local-test-' if test_build else '')}{previous['version']}-r{previous['sequence']}-windows-x64.zip")
+        if old_zip.is_file():
+            transport = load('windows_transport', 'windows-transport.py')
+            target = out / f"AieyraOS-{tag}-windows-x64-patch-{previous['sequence']}.zip"
+            transport.patch(target, old_zip, previous_baseline.read_bytes(), previous, envelope, current,
+                            lambda name: full[name].read_bytes())
+            if target.stat().st_size < min(a['size'] for a in artifacts):
+                artifacts.append(dict(name=target.name, size=target.stat().st_size, sha256=digest(target),
+                                      kind='patch', platform='win32', arch='x64', component='os', fromSequence=previous['sequence']))
+            else:
+                target.unlink()
     if program_archives:
         artifacts.extend([
             dict(write_zip(out / f'AieyraLink-{tag}-windows-x64.zip', load('link_development_docs', 'development-docs.py').prepare_paths(link_files(staging, full), generated / 'link-documents')), kind='program', platform='win32', arch='x64', component='link'),
             dict(write_zip(out / f'AieyraBrowser-{tag}-windows-x64.zip', browser_files(full)), kind='program', platform='win32', arch='x64', component='browser'),
         ])
     if installer:
-        artifacts.append(build_installer(out / f'AieyraOS-{tag}-windows-x64-Setup.exe', out / artifacts[0]['name'],
+        compact = generated / 'install-payload.zip'
+        load('windows_transport', 'windows-transport.py').compact_installer(
+            compact, full, current, envelope, [name + '.exe' for name in MODULE_LAUNCHERS.values()])
+        artifacts.append(build_installer(out / f'AieyraOS-{tag}-windows-x64-Setup.exe', compact,
                                           generated, public_key, version, sequence, test_build))
     release_input = {'product': 'aieyra-os', 'channel': 'stable', 'id': f'os-{tag}', 'version': version, 'sequence': sequence,
                      'publishedAt': '', 'notes': notes,

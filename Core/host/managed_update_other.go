@@ -2,7 +2,7 @@
 // Map: CODEMAP.md
 // Owner: Core/host/AGENTS.md | ring 0
 // Chains: module-local; query impact before editing
-// Regions: hideUpdateProcess; rejectUpdateHardlink; waitUpdateParent
+// Regions: hideUpdateProcess; runReleasePatch; rejectUpdateHardlink; waitUpdateParent
 // Impact: python -B scripts/code-atlas.py show Core/host/managed_update_other.go
 // Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 // </AI-CHAIN>
@@ -20,6 +20,7 @@ import (
 )
 
 func hideUpdateProcess(command *exec.Cmd) {}
+func runReleasePatch([]string) error      { return fmt.Errorf("official binary patches require Windows") }
 func rejectUpdateHardlink(file string) error {
 	info, err := os.Stat(file)
 	if err != nil {

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -355,7 +356,7 @@ internal sealed class Setup
         try
         {
             CopyResource("payload.zip", archive, token);
-            CopyResource("install.exe", engine, token);
+            CopyResource("install.exe.gz", engine, token);
             token.ThrowIfCancellationRequested();
             var settings = new ProcessStartInfo(engine)
             {
@@ -426,7 +427,9 @@ internal sealed class Setup
 
     private static void CopyResource(string name, string target, CancellationToken token)
     {
-        using (var input = Resource(name))
+        using (var resource = Resource(name))
+        using (var input = name.EndsWith(".gz", StringComparison.Ordinal)
+            ? (Stream)new GZipStream(resource, CompressionMode.Decompress) : resource)
         using (var output = File.Open(target, FileMode.CreateNew, FileAccess.Write, FileShare.None))
         {
             var buffer = new byte[1024 * 1024];

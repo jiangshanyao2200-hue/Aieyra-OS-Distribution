@@ -25,6 +25,9 @@ func RunDesktopMaintenance(args []string) (bool, error) {
 		return false, nil
 	}
 	name := strings.TrimLeft(strings.SplitN(args[0], "=", 2)[0], "-")
+	if name == "extract-release-patch" {
+		return true, runReleasePatch(args[1:])
+	}
 	if name != "apply-update" && name != "recover-update" && name != "update-probe" {
 		return false, nil
 	}

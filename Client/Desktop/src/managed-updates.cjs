@@ -8,7 +8,8 @@
 // </AI-CHAIN>
 
 'use strict';
-const path=require('node:path'),crypto=require('node:crypto'),{spawn}=require('node:child_process');
+const path=require('node:path'),{spawn}=require('node:child_process');
+const {downloadArtifact}=require('./managed-update-download.cjs');
 const f=require('./managed-update-files.cjs');
 const fs=f.diskFS;
 const OFFICIAL=require('../../../Contracts/official-services.json'),ORIGIN=OFFICIAL.updates;
@@ -60,16 +61,12 @@ function createManagedUpdates({root,fetchImpl=fetch,origin=ORIGIN,publicKey,noti
   state.checkedAt=new Date(now()).toISOString();persist();await notifyPending();requireLogin();return status();
  }
  async function download(artifact,dest){
-  if(!artifact||!/^[a-zA-Z0-9._-]{1,180}$/.test(artifact.name)||!/^[a-f0-9]{64}$/.test(artifact.sha256)||!Number.isSafeInteger(artifact.size)||artifact.size<1||artifact.size>2**31)throw Error('下载清单无效');
-  if(fs.existsSync(dest)&&fs.statSync(dest).size===artifact.size&&f.fileHash(dest)===artifact.sha256)return;
-  f.requireSpace(path.dirname(dest),artifact.size);
-  const response=await fetchImpl(origin+'/downloads/'+artifact.name,{redirect:'error',credentials:'omit',signal:requestSignal(20*60*1000)});requireLogin();if(!response.ok)throw Error('下载未成功');
-  if(operation)Object.assign(operation,{received:0,total:artifact.size});
-  const temp=dest+'.part',fd=fs.openSync(temp,'w');let size=0;const digest=crypto.createHash('sha256');
-  try{for await(const chunk of response.body){size+=chunk.length;if(operation)operation.received=size;if(size>artifact.size)throw Error('下载超过签名大小');digest.update(chunk);fs.writeSync(fd,chunk);}fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
-  requireLogin();if(size!==artifact.size||digest.digest('hex')!==artifact.sha256)throw Error('下载摘要不一致');fs.renameSync(temp,dest);
+  return downloadArtifact(artifact,dest,headers=>fetchImpl(origin+'/downloads/'+artifact.name,{
+   headers,redirect:'error',credentials:'omit',signal:requestSignal(20*60*1000)
+  }),requireLogin,(received,total)=>{if(operation)Object.assign(operation,{received,total});});
  }
- function paths(){if(!state.release)throw Error('尚无待核对版本');const dir=path.join(store,state.release.id);return {dir,incoming:path.join(dir,state.transfer?.kind==='delta'?'incoming-delta':'incoming'),candidate:path.join(dir,'candidate')};}
+ function incomingDir(kind){return kind==='patch'?'incoming-patch':kind==='delta'?'incoming-delta':'incoming';}
+ function paths(){if(!state.release)throw Error('尚无待核对版本');const dir=path.join(store,state.release.id);return {dir,incoming:path.join(dir,incomingDir(state.transfer?.kind)),candidate:path.join(dir,'candidate')};}
  async function inventory(dir,names,{fresh=false}={}){
   if(inventoryCache.size>20000)inventoryCache.clear();
   const files=await f.inventoryAsync(dir,names,{cache:inventoryCache,fresh,signal:operationController?.signal});
@@ -80,12 +77,22 @@ function createManagedUpdates({root,fetchImpl=fetch,origin=ORIGIN,publicKey,noti
  async function verifyLocal(){requireReview();const {incoming}=paths(),base=baseline(),next=f.verifySigned(JSON.parse(f.read(path.join(incoming,'Config/official-baseline.json')).toString()),key,'baseline');const current=await localInventory(base,next);if(f.hash(JSON.stringify(current))!==state.localDigest){state.phase='available';state.reviewDigest='';state.candidateDigest='';persist();throw Error('本地内容已变化，需要重新核对');}return {base,next,current};}
  const reviewStatus=()=>({...status(),transfer:state.transfer||null,files:(state.rows||[]).map(r=>({path:r.name,choice:r.choice,localChanged:!f.same(r.base,r.local),incomingChanged:!f.same(r.base,r.incoming)}))});
  async function receive(artifact,base,dir,kind){
-  const delta=kind==='delta',incoming=path.join(dir,delta?'incoming-delta':'incoming');
-  const archive=path.join(dir,delta?'delta.zip':'download.zip'),marker=path.join(dir,delta?'extracted-delta.json':'extracted.json');
+  const delta=kind!=='full',incoming=path.join(dir,incomingDir(kind));
+  const archive=path.join(dir,delta?kind+'.zip':'download.zip'),marker=path.join(dir,delta?'extracted-'+kind+'.json':'extracted.json');
   await download(artifact,archive);
   if(!fs.existsSync(marker)){
    if(fs.existsSync(incoming)){if(fs.lstatSync(incoming).isSymbolicLink())throw Error('候选目录不能是链接');fs.rmSync(incoming,{recursive:true});}
-   const names=await require('./managed-update-archive.cjs').extractArchive(archive,incoming);requireLogin();f.atomicJSON(marker,{names,sha256:artifact.sha256});
+   let names;
+   if(kind==='patch'){
+    const decoder='Aieyra OS.exe',installed=await inventory(root,[decoder],{fresh:true});
+    if(!base.files[decoder]||!f.same(base.files[decoder],installed[decoder]))return null;
+    const result=await run(path.join(root,'Aieyra OS.exe'),['-extract-release-patch','-archive',archive,'-base',root,
+     '-output',incoming,'-version',state.release.version,'-from',String(base.sequence),'-to',String(state.release.sequence)],{},operationController.signal,10*60*1000);
+    requireLogin();
+    if(result.code!==0)return null;
+    names=fs.readdirSync(incoming,{recursive:true,withFileTypes:true}).filter(e=>e.isFile()).map(e=>path.relative(incoming,path.join(e.parentPath,e.name)).split(path.sep).join('/'));
+   }else names=await require('./managed-update-archive.cjs').extractArchive(archive,incoming);
+   requireLogin();f.atomicJSON(marker,{names,sha256:artifact.sha256});
   }
   const extracted=JSON.parse(f.read(marker));if(extracted.sha256!==artifact.sha256)throw Error('解压记录不匹配');
   const envelope=JSON.parse(f.read(path.join(incoming,'Config/official-baseline.json')).toString()),next=f.verifySigned(envelope,key,'baseline');
@@ -107,7 +114,14 @@ function createManagedUpdates({root,fetchImpl=fetch,origin=ORIGIN,publicKey,noti
   const matches=artifacts.filter(a=>a.kind==='portable');
   const full=matches.find(a=>a.purpose==='full')||matches.find(a=>a.name===`AieyraOS-${state.release.version}-windows-x64.zip`)||matches[0];
   const delta=artifacts.filter(a=>a.kind==='delta'&&a.fromSequence===base.sequence&&(!full||a.size<full.size)).sort((a,b)=>a.size-b.size)[0];
-  const received=(delta?await receive(delta,base,dir,'delta'):null)||await receive(full,base,dir,'full');
+  const patch=artifacts.filter(a=>a.kind==='patch'&&a.fromSequence===base.sequence&&a.size<(delta||full)?.size).sort((a,b)=>a.size-b.size)[0];
+  let received;
+  if(patch){
+   try{received=await receive(patch,base,dir,'patch');}
+   catch(error){requireLogin();if(error.code!=='artifact_digest')throw error;}
+  }
+  if(!received&&delta)received=await receive(delta,base,dir,'delta');
+  if(!received)received=await receive(full,base,dir,'full');
   const {next,local}=received;state.rows=f.compare(base.files,local,next.files);state.localDigest=f.hash(JSON.stringify(local));state.reviewDigest=f.hash(JSON.stringify({base:base.sequence,next:next.sequence,local:state.localDigest,rows:state.rows}));state.resolutions={};state.phase='reviewed';state.reason='三方变化已核对';state.candidateDigest='';state.evidence=null;persist();return reviewStatus();
  }
  const incomingRoot=row=>state.transfer?.sparse&&f.same(row.base,row.incoming)?root:paths().incoming;
@@ -203,5 +217,5 @@ function createManagedUpdates({root,fetchImpl=fetch,origin=ORIGIN,publicKey,noti
  return {call,status,start,notifyPending,withManualChecks,close(){if(closed)return;closed=true;unsubscribe();pause();}};
 }
 async function bounded(response,limit){let bytes=0;const chunks=[];for await(const chunk of response.body){bytes+=chunk.length;if(bytes>limit)throw Error('响应过大');chunks.push(chunk);}return Buffer.concat(chunks).toString('utf8');}
-async function run(executable,args,env,signal){return new Promise((resolve,reject)=>{let output='',failure;const child=spawn(executable,args,{signal,windowsHide:true,env:Object.fromEntries(Object.entries({...process.env,...env}).filter(([k])=>!k.startsWith('NODE_TEST_')&&k!=='NODE_OPTIONS')),stdio:['ignore','pipe','pipe']});const timer=setTimeout(()=>{failure=Error('验证超时');child.kill();},60000);for(const stream of [child.stdout,child.stderr])stream.on('data',b=>{if(output.length<32000)output+=b.toString();});child.once('error',e=>{clearTimeout(timer);failure=e;});child.once('close',code=>{clearTimeout(timer);if(failure)reject(failure);else resolve({code,output});});});}
+async function run(executable,args,env,signal,timeout=60000){return new Promise((resolve,reject)=>{let output='',failure;const child=spawn(executable,args,{signal,windowsHide:true,env:Object.fromEntries(Object.entries({...process.env,...env}).filter(([k])=>!k.startsWith('NODE_TEST_')&&k!=='NODE_OPTIONS')),stdio:['ignore','pipe','pipe']});const timer=setTimeout(()=>{failure=Error('验证超时');child.kill();},timeout);for(const stream of [child.stdout,child.stderr])stream.on('data',b=>{if(output.length<32000)output+=b.toString();});child.once('error',e=>{clearTimeout(timer);failure=e;});child.once('close',code=>{clearTimeout(timer);if(failure)reject(failure);else resolve({code,output});});});}
 module.exports={createManagedUpdates};

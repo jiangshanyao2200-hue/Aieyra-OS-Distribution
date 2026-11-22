@@ -307,6 +307,16 @@
 
 消费者：`Client/Desktop/host/cloud-updates.cjs`, `Client/Desktop/test/managed-update-bootstrap.test.cjs`。
 
+### managed-update-download.cjs
+
+[Client/Desktop/src/managed-update-download.cjs](managed-update-download.cjs) · desktop.src · 环2 · 自有源码，顶部注释链由本工具维护
+
+区域：path; regularSize; downloadArtifact。
+
+导入：`Client/Desktop/src/managed-update-files.cjs`。
+
+消费者：`Client/Desktop/src/managed-updates.cjs`, `Client/Desktop/test/managed-update-download.test.cjs`。
+
 ### managed-update-files.cjs
 
 [Client/Desktop/src/managed-update-files.cjs](managed-update-files.cjs) · desktop.src · 环2 · 自有源码，顶部注释链由本工具维护
@@ -315,7 +325,7 @@
 
 导入：`Contracts/resources/prompts.cjs`。
 
-消费者：`Client/Desktop/src/managed-update-archive.cjs`, `Client/Desktop/src/managed-update-bootstrap.cjs`, `Client/Desktop/src/managed-updates.cjs`, `Client/Desktop/src/update-integrity.cjs`, `Client/Desktop/test/managed-update-bootstrap.test.cjs`, `Client/Desktop/test/managed-updates.test.cjs`, `Client/Desktop/test/runtime-prompts.test.cjs`。
+消费者：`Client/Desktop/src/managed-update-archive.cjs`, `Client/Desktop/src/managed-update-bootstrap.cjs`, `Client/Desktop/src/managed-update-download.cjs`, `Client/Desktop/src/managed-updates.cjs`, `Client/Desktop/src/update-integrity.cjs`, `Client/Desktop/test/managed-update-bootstrap.test.cjs`, `Client/Desktop/test/managed-update-download.test.cjs`, `Client/Desktop/test/managed-updates.test.cjs`, `Client/Desktop/test/runtime-prompts.test.cjs`。
 
 ### managed-updates.cjs
 
@@ -323,7 +333,7 @@
 
 区域：path; f; fs; OFFICIAL; createManagedUpdates; bounded; run。
 
-导入：`Client/Desktop/src/managed-update-archive.cjs`, `Client/Desktop/src/managed-update-files.cjs`。
+导入：`Client/Desktop/src/managed-update-archive.cjs`, `Client/Desktop/src/managed-update-download.cjs`, `Client/Desktop/src/managed-update-files.cjs`。
 
 消费者：`Client/Desktop/host/main.cjs`, `Client/Desktop/src/service.cjs`, `Client/Desktop/src/update-probe.cjs`, `Client/Desktop/test/authenticated-updates.test.cjs`, `Client/Desktop/test/managed-updates.test.cjs`。
 

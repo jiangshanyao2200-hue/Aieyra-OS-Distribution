@@ -5542,6 +5542,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -14926,7 +14927,7 @@
       "ring": "1",
       "agreement": "Client/Desktop/host/AGENTS.md",
       "map": "Client/Desktop/host/CODEMAP.md",
-      "bodySHA256": "be27f03bd8adb30ade6718759c149fc3b6eb3916e81ef4d3b117df069c670f87",
+      "bodySHA256": "f2bb3472593ec28be6fa506c37868a46cd0106ebb7ddcf06c242edfc7495b74e",
       "regions": [
         {
           "name": "crypto",
@@ -14966,7 +14967,7 @@
         {
           "name": "startCommunityBridge",
           "kind": "lexical",
-          "bodyLine": 231
+          "bodyLine": 236
         }
       ],
       "imports": [
@@ -20430,6 +20431,39 @@
         "Client/Desktop/test/managed-update-bootstrap.test.cjs"
       ]
     },
+    "Client/Desktop/src/managed-update-download.cjs": {
+      "module": "desktop.src",
+      "ring": "2",
+      "agreement": "Client/Desktop/src/AGENTS.md",
+      "map": "Client/Desktop/src/CODEMAP.md",
+      "bodySHA256": "e43524b3ee991e19d72593947148508243525d7704dc4922e07aff5ec24882f0",
+      "regions": [
+        {
+          "name": "path",
+          "kind": "lexical",
+          "bodyLine": 3
+        },
+        {
+          "name": "regularSize",
+          "kind": "lexical",
+          "bodyLine": 6
+        },
+        {
+          "name": "downloadArtifact",
+          "kind": "lexical",
+          "bodyLine": 13
+        }
+      ],
+      "imports": [
+        "Client/Desktop/src/managed-update-files.cjs"
+      ],
+      "chains": [],
+      "protected": null,
+      "consumers": [
+        "Client/Desktop/src/managed-updates.cjs",
+        "Client/Desktop/test/managed-update-download.test.cjs"
+      ]
+    },
     "Client/Desktop/src/managed-update-files.cjs": {
       "module": "desktop.src",
       "ring": "2",
@@ -20606,9 +20640,11 @@
       "consumers": [
         "Client/Desktop/src/managed-update-archive.cjs",
         "Client/Desktop/src/managed-update-bootstrap.cjs",
+        "Client/Desktop/src/managed-update-download.cjs",
         "Client/Desktop/src/managed-updates.cjs",
         "Client/Desktop/src/update-integrity.cjs",
         "Client/Desktop/test/managed-update-bootstrap.test.cjs",
+        "Client/Desktop/test/managed-update-download.test.cjs",
         "Client/Desktop/test/managed-updates.test.cjs",
         "Client/Desktop/test/runtime-prompts.test.cjs"
       ]
@@ -20618,7 +20654,7 @@
       "ring": "2",
       "agreement": "Client/Desktop/src/AGENTS.md",
       "map": "Client/Desktop/src/CODEMAP.md",
-      "bodySHA256": "1db23703c8b4cfe628a69d1acf1bf128b077e3f61dd563e6bb5ee1ba2fe9fe3c",
+      "bodySHA256": "e997d28a5c4a63cb0325a12e9cfdcf88fa9e35f8ac764c1566d07b5bb8ba1fcf",
       "regions": [
         {
           "name": "path",
@@ -20628,36 +20664,37 @@
         {
           "name": "f",
           "kind": "lexical",
-          "bodyLine": 3
+          "bodyLine": 4
         },
         {
           "name": "fs",
           "kind": "lexical",
-          "bodyLine": 4
+          "bodyLine": 5
         },
         {
           "name": "OFFICIAL",
           "kind": "lexical",
-          "bodyLine": 5
+          "bodyLine": 6
         },
         {
           "name": "createManagedUpdates",
           "kind": "lexical",
-          "bodyLine": 6
+          "bodyLine": 7
         },
         {
           "name": "bounded",
           "kind": "lexical",
-          "bodyLine": 196
+          "bodyLine": 210
         },
         {
           "name": "run",
           "kind": "lexical",
-          "bodyLine": 197
+          "bodyLine": 211
         }
       ],
       "imports": [
         "Client/Desktop/src/managed-update-archive.cjs",
+        "Client/Desktop/src/managed-update-download.cjs",
         "Client/Desktop/src/managed-update-files.cjs"
       ],
       "chains": [],
@@ -26877,6 +26914,42 @@
       ],
       "imports": [
         "Client/Desktop/src/managed-update-bootstrap.cjs",
+        "Client/Desktop/src/managed-update-files.cjs"
+      ],
+      "chains": [],
+      "protected": null,
+      "consumers": []
+    },
+    "Client/Desktop/test/managed-update-download.test.cjs": {
+      "module": "desktop",
+      "ring": "2",
+      "agreement": "Client/Desktop/AGENTS.md",
+      "map": "Client/Desktop/test/CODEMAP.md",
+      "bodySHA256": "35ae371b58e84efbe6e58c427b5448322adb7919fdc543044bfb2d56bec7f916",
+      "regions": [
+        {
+          "name": "assert",
+          "kind": "lexical",
+          "bodyLine": 3
+        },
+        {
+          "name": "path",
+          "kind": "lexical",
+          "bodyLine": 4
+        },
+        {
+          "name": "os",
+          "kind": "lexical",
+          "bodyLine": 5
+        },
+        {
+          "name": "fs",
+          "kind": "lexical",
+          "bodyLine": 6
+        }
+      ],
+      "imports": [
+        "Client/Desktop/src/managed-update-download.cjs",
         "Client/Desktop/src/managed-update-files.cjs"
       ],
       "chains": [],
@@ -64217,7 +64290,7 @@
       "ring": "2",
       "agreement": "Client/AGENTS.md",
       "map": "Client/Installer/CODEMAP.md",
-      "bodySHA256": "f922d8c9aa1dc85d4b9c90b3c07e9ef8ca5625c8b9ab155d57ed4289f2d9a3ca",
+      "bodySHA256": "ee93f775049d66cb34e1ae65782e9191d80330f43240d4c5682dcf77aaab4743",
       "regions": [],
       "imports": [],
       "chains": [],
@@ -76482,6 +76555,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -76804,6 +76878,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -77040,6 +77115,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -77138,6 +77214,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -77311,6 +77388,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -77458,6 +77536,7 @@
         "Core/host/module_runtime.go",
         "Core/host/module_runtime_other.go",
         "Core/host/module_runtime_windows.go",
+        "Core/host/release_transport_windows.go",
         "Core/host/win.go",
         "Core/host/win_other.go",
         "Core/host/workspace.go",
@@ -83262,7 +83341,7 @@
       "ring": "0",
       "agreement": "Core/host/AGENTS.md",
       "map": "Core/host/CODEMAP.md",
-      "bodySHA256": "85505ac79a5275df6f87ec19b5aff9d77e8ed6d5daa85cf9e70690b16c344495",
+      "bodySHA256": "577d22d71480f3e8a02b180cf6aa5723c933fa2a7de99dffd9078141a2a98e1b",
       "regions": [
         {
           "name": "RunDesktopMaintenance",
@@ -83272,12 +83351,12 @@
         {
           "name": "RunDesktopWorker",
           "kind": "lexical",
-          "bodyLine": 51
+          "bodyLine": 54
         },
         {
           "name": "OpenDesktopSettings",
           "kind": "lexical",
-          "bodyLine": 71
+          "bodyLine": 74
         }
       ],
       "imports": [
@@ -83783,7 +83862,7 @@
       "ring": "0",
       "agreement": "Core/host/AGENTS.md",
       "map": "Core/host/CODEMAP.md",
-      "bodySHA256": "ed7a7dfa4eaebd56d106ec758ce692401e2705e3e54e83a54612a1fe125b2928",
+      "bodySHA256": "426afaefb7d2eac3b92b0dc53acd6a64a93d51c33425c25466785b0ff184488b",
       "regions": [
         {
           "name": "installerBaseline",
@@ -83816,44 +83895,49 @@
           "bodyLine": 49
         },
         {
+          "name": "verifyInstallManifest",
+          "kind": "lexical",
+          "bodyLine": 66
+        },
+        {
           "name": "installDirectory",
           "kind": "lexical",
-          "bodyLine": 89
+          "bodyLine": 96
         },
         {
           "name": "emptyInstallRoot",
           "kind": "lexical",
-          "bodyLine": 110
+          "bodyLine": 117
         },
         {
           "name": "containsInstallPath",
           "kind": "lexical",
-          "bodyLine": 124
+          "bodyLine": 131
         },
         {
           "name": "installStageParent",
           "kind": "lexical",
-          "bodyLine": 130
+          "bodyLine": 137
         },
         {
           "name": "installerEntries",
           "kind": "lexical",
-          "bodyLine": 142
+          "bodyLine": 149
         },
         {
           "name": "extractInstallFile",
           "kind": "lexical",
-          "bodyLine": 170
+          "bodyLine": 184
         },
         {
           "name": "InstallWindows",
           "kind": "lexical",
-          "bodyLine": 216
+          "bodyLine": 206
         },
         {
           "name": "installShortcuts",
           "kind": "lexical",
-          "bodyLine": 347
+          "bodyLine": 341
         }
       ],
       "imports": [
@@ -84203,7 +84287,7 @@
       "ring": "0",
       "agreement": "Core/host/AGENTS.md",
       "map": "Core/host/CODEMAP.md",
-      "bodySHA256": "314820611344441a53960177a5a280cbf048885d404536005e79bf8e3f9382dc",
+      "bodySHA256": "44833d4439e59bb67c21aa2e19d19c5493a2fbfba6f3f4d2e3ba821901eb95c7",
       "regions": [
         {
           "name": "hideUpdateProcess",
@@ -84211,14 +84295,19 @@
           "bodyLine": 13
         },
         {
-          "name": "rejectUpdateHardlink",
+          "name": "runReleasePatch",
           "kind": "lexical",
           "bodyLine": 14
         },
         {
+          "name": "rejectUpdateHardlink",
+          "kind": "lexical",
+          "bodyLine": 15
+        },
+        {
           "name": "waitUpdateParent",
           "kind": "lexical",
-          "bodyLine": 28
+          "bodyLine": 29
         }
       ],
       "imports": [],
@@ -84967,6 +85056,62 @@
       "chains": [],
       "protected": null,
       "consumers": []
+    },
+    "Core/host/release_transport_windows.go": {
+      "module": "core.host",
+      "ring": "0",
+      "agreement": "Core/host/AGENTS.md",
+      "map": "Core/host/CODEMAP.md",
+      "bodySHA256": "7aca8f628ddbcce569449f21422382b5d92129bca42e8651eb2cfaebcae3e986",
+      "regions": [
+        {
+          "name": "transportBlock",
+          "kind": "lexical",
+          "bodyLine": 18
+        },
+        {
+          "name": "runReleasePatch",
+          "kind": "lexical",
+          "bodyLine": 21
+        },
+        {
+          "name": "transportOutput",
+          "kind": "lexical",
+          "bodyLine": 39
+        },
+        {
+          "name": "Write",
+          "kind": "lexical",
+          "bodyLine": 45
+        },
+        {
+          "name": "checkTransportEntry",
+          "kind": "lexical",
+          "bodyLine": 57
+        },
+        {
+          "name": "decodeTransport",
+          "kind": "lexical",
+          "bodyLine": 87
+        },
+        {
+          "name": "extractReleasePatch",
+          "kind": "lexical",
+          "bodyLine": 181
+        }
+      ],
+      "imports": [],
+      "chains": [],
+      "protected": null,
+      "consumers": [
+        "Client/CLI/host/cli.go",
+        "Core/cmd/aieyra-cli/main.go",
+        "Core/cmd/aieyra-config/main.go",
+        "Core/cmd/aieyra-install/main_windows.go",
+        "Core/cmd/aieyra-module/main.go",
+        "Core/cmd/aieyra-os/main.go",
+        "Core/cmd/aieyra-os/tui.go"
+      ]
     },
     "Core/host/terminal_windows_test.go": {
       "module": "core.host",
@@ -172643,7 +172788,7 @@
       "ring": "3",
       "agreement": "scripts/AGENTS.md",
       "map": "scripts/CODEMAP.md",
-      "bodySHA256": "6eeda215c2eb45b44d1485ec548d7fb62323872c35d7b7b674c2b7e1f9b66a3b",
+      "bodySHA256": "cf723f40f02f85089eceddb93f881b85f7f65d4bf19c0c868122a3c72724bb4d",
       "regions": [
         {
           "name": "load",
@@ -172718,7 +172863,7 @@
         {
           "name": "build",
           "kind": "FunctionDef",
-          "bodyLine": 299
+          "bodyLine": 303
         }
       ],
       "imports": [],
@@ -173801,6 +173946,44 @@
       "protected": null,
       "consumers": []
     },
+    "scripts/windows-transport.py": {
+      "module": "scripts",
+      "ring": "3",
+      "agreement": "scripts/AGENTS.md",
+      "map": "scripts/CODEMAP.md",
+      "bodySHA256": "1778e4a7e574a39f04dfb20c2af7693e603a4c5f98d1d4ea433bc9240aff3b69",
+      "regions": [
+        {
+          "name": "entry",
+          "kind": "FunctionDef",
+          "bodyLine": 19
+        },
+        {
+          "name": "blocks",
+          "kind": "FunctionDef",
+          "bodyLine": 27
+        },
+        {
+          "name": "checked",
+          "kind": "FunctionDef",
+          "bodyLine": 50
+        },
+        {
+          "name": "patch",
+          "kind": "FunctionDef",
+          "bodyLine": 56
+        },
+        {
+          "name": "compact_installer",
+          "kind": "FunctionDef",
+          "bodyLine": 70
+        }
+      ],
+      "imports": [],
+      "chains": [],
+      "protected": null,
+      "consumers": []
+    },
     "scripts/winres.py": {
       "module": "scripts",
       "ring": "3",
@@ -174362,6 +174545,7 @@
       "Client/Desktop/src/main.cjs",
       "Client/Desktop/src/managed-update-archive.cjs",
       "Client/Desktop/src/managed-update-bootstrap.cjs",
+      "Client/Desktop/src/managed-update-download.cjs",
       "Client/Desktop/src/managed-update-files.cjs",
       "Client/Desktop/src/managed-updates.cjs",
       "Client/Desktop/src/matrix-window-preload.cjs",
@@ -174519,6 +174703,7 @@
       "Client/Desktop/test/look-save104.test.cjs",
       "Client/Desktop/test/main-shutdown.test.cjs",
       "Client/Desktop/test/managed-update-bootstrap.test.cjs",
+      "Client/Desktop/test/managed-update-download.test.cjs",
       "Client/Desktop/test/managed-updates.test.cjs",
       "Client/Desktop/test/mapped-defaults.test.cjs",
       "Client/Desktop/test/markdown.test.cjs",
@@ -175680,6 +175865,7 @@
       "Core/host/module_runtime_test.go",
       "Core/host/module_runtime_windows.go",
       "Core/host/regress_test.go",
+      "Core/host/release_transport_windows.go",
       "Core/host/terminal_windows_test.go",
       "Core/host/win.go",
       "Core/host/win_other.go",
@@ -176742,6 +176928,7 @@
       "scripts/test_public_privacy.py",
       "scripts/test_windows_package.py",
       "scripts/update-model-reference.py",
+      "scripts/windows-transport.py",
       "scripts/winres.py"
     ],
     "scripts/plugins/CODEMAP.md": [

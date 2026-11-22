@@ -2,7 +2,7 @@
 // Map: CODEMAP.md
 // Owner: Core/host/AGENTS.md | ring 0
 // Chains: module-local; query impact before editing
-// Regions: installerBaseline; installerArchiveLimit; installerManifest; InstallProgress; installVersion; installerManifestFrom; installDirectory; emptyInstallRoot; containsInstallPath; installStageParent; installerEntries; extractInstallFile; InstallWindows; installShortcuts
+// Regions: installerBaseline; installerArchiveLimit; installerManifest; InstallProgress; installVersion; installerManifestFrom; verifyInstallManifest; installDirectory; emptyInstallRoot; containsInstallPath; installStageParent; installerEntries; extractInstallFile; InstallWindows; installShortcuts
 // Impact: python -B scripts/code-atlas.py show Core/host/install_windows.go
 // Rules: follow the linked map and nearest AGENTS; retain semantic/why comments.
 // </AI-CHAIN>
@@ -57,10 +57,8 @@ var installVersion = regexp.MustCompile("^[0-9]+\\.[0-9]+\\.[0-9]+$")
 
 func installerManifestFrom(archive *zip.ReadCloser, public []byte, version string, sequence int) (installerManifest, []byte, error) {
 	var manifest installerManifest
-	var signed struct {
-		Algorithm string
-		Payload   string
-		Signature string
+	if !installVersion.MatchString(version) {
+		return manifest, nil, fmt.Errorf("安装器版本无效")
 	}
 	entry, err := archive.Open(installerBaseline)
 	if err != nil {
@@ -68,7 +66,16 @@ func installerManifestFrom(archive *zip.ReadCloser, public []byte, version strin
 	}
 	defer entry.Close()
 	raw, err := io.ReadAll(io.LimitReader(entry, (24<<20)+1))
-	if err != nil || len(raw) > 24<<20 || json.Unmarshal(raw, &signed) != nil || signed.Algorithm != "Ed25519" {
+	if err != nil {
+		return manifest, nil, err
+	}
+	return verifyInstallManifest(raw, public, version, sequence)
+}
+
+func verifyInstallManifest(raw, public []byte, version string, sequence int) (installerManifest, []byte, error) {
+	var manifest installerManifest
+	var signed struct{ Algorithm, Payload, Signature string }
+	if len(raw) > 24<<20 || json.Unmarshal(raw, &signed) != nil || signed.Algorithm != "Ed25519" {
 		return manifest, nil, fmt.Errorf("安装文件签名清单无法读取")
 	}
 	keyBlock, rest := pem.Decode(public)
@@ -83,7 +90,7 @@ func installerManifestFrom(archive *zip.ReadCloser, public []byte, version strin
 		return manifest, nil, fmt.Errorf("安装文件未通过发行签名校验")
 	}
 	if json.Unmarshal(message, &manifest) != nil || manifest.Schema != "aieyra-os-baseline-v1" ||
-		manifest.Product != "aieyra-os" || !installVersion.MatchString(version) || manifest.Version != version ||
+		manifest.Product != "aieyra-os" || !installVersion.MatchString(manifest.Version) || (version != "" && manifest.Version != version) ||
 		sequence < 1 || manifest.Sequence != sequence || len(manifest.Files) == 0 || len(manifest.Files) >= 10000 {
 		return manifest, nil, fmt.Errorf("安装文件与当前安装器版本不匹配")
 	}
@@ -149,6 +156,7 @@ func installStageParent(parent string) (string, error) {
 }
 
 func installerEntries(archive *zip.ReadCloser, manifest installerManifest) (int64, error) {
+	compact := archive.Comment == "aieyra-install-v1"
 	seen := make(map[string]bool)
 	var total int64
 	for _, entry := range archive.File {
@@ -158,12 +166,18 @@ func installerEntries(archive *zip.ReadCloser, manifest installerManifest) (int6
 		}
 		seen[lower] = true
 		if entry.Name == installerBaseline {
+			if entry.Comment != "" {
+				return 0, fmt.Errorf("invalid installation baseline entry")
+			}
 			continue
 		}
 		want, ok := manifest.Files[entry.Name]
 		digest, err := hex.DecodeString(want.SHA256)
-		if !ok || err != nil || len(digest) != sha256.Size || want.Size < 0 || want.Size > 1<<30 || uint64(want.Size) != entry.UncompressedSize64 {
+		if !ok || err != nil || len(digest) != sha256.Size || want.Size < 0 || want.Size > 1<<30 {
 			return 0, fmt.Errorf("安装文件与签名清单不一致：%s", entry.Name)
+		}
+		if err := checkTransportEntry(entry, manifest.Files, seen, compact); err != nil {
+			return 0, err
 		}
 		total += want.Size
 		if total > installerArchiveLimit {
@@ -176,45 +190,21 @@ func installerEntries(archive *zip.ReadCloser, manifest installerManifest) (int6
 	return total, nil
 }
 
-func extractInstallFile(entry *zip.File, target string, want updateFile, buffer []byte, account func(int) error) error {
+func extractInstallFile(entry *zip.File, target, source string, want updateFile, buffer []byte, account func(int) error) error {
 	if err := os.MkdirAll(filepath.Dir(target), 0755); err != nil {
 		return err
 	}
-	source, err := entry.Open()
-	if err != nil {
-		return err
-	}
-	defer source.Close()
 	output, err := os.OpenFile(target, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
 	if err != nil {
 		return err
 	}
 	defer output.Close()
 	digest := sha256.New()
-	writer := io.MultiWriter(output, digest)
-	var written int64
-	for {
-		n, err := source.Read(buffer)
-		if n > 0 {
-			written += int64(n)
-			if written > want.Size {
-				return fmt.Errorf("安装文件大小不一致：%s", entry.Name)
-			}
-			if _, e := writer.Write(buffer[:n]); e != nil {
-				return e
-			}
-			if e := account(n); e != nil {
-				return e
-			}
-		}
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return err
-		}
+	writer := &transportOutput{writer: io.MultiWriter(output, digest), remaining: want.Size, account: account}
+	if err := decodeTransport(entry, source, writer, want.Size, buffer); err != nil {
+		return err
 	}
-	if written != want.Size || hex.EncodeToString(digest.Sum(nil)) != want.SHA256 {
+	if writer.remaining != 0 || hex.EncodeToString(digest.Sum(nil)) != want.SHA256 {
 		return fmt.Errorf("安装文件摘要校验失败：%s", entry.Name)
 	}
 	return output.Close()
@@ -293,7 +283,11 @@ func InstallWindows(ctx context.Context, archivePath string, public []byte, vers
 			continue
 		}
 		file := filepath.Join(stage, filepath.FromSlash(entry.Name))
-		err := extractInstallFile(entry, file, manifest.Files[entry.Name], buffer, func(n int) error {
+		source := ""
+		if _, name, _ := strings.Cut(entry.Comment, ":"); name != "" {
+			source = filepath.Join(stage, filepath.FromSlash(name))
+		}
+		err := extractInstallFile(entry, file, source, manifest.Files[entry.Name], buffer, func(n int) error {
 			done += int64(n)
 			if done-reported >= 4<<20 {
 				reportExtract()
