@@ -179,9 +179,13 @@ run 只返回排队回执，不代表通过。读 status 到终态，分页读�
 
 人类界面授权 engineering.integrate，载荷精确绑定 revision、repository_version、reason。Agent 读 `election --resource authorization --id AUTHORIZATION`，核对后用 `election --action execute --body-file 执行.json`；含稳定 request_id、authorization_id。授权十分钟有效。主线 CAS 变化则重读、重审，不能绕过。
 
-## 阶段与开发／稳定产物
+## Aieyra OS 正式更新
 
-`engineering --resource workflow` 返回当前阶段、阻塞、采纳目标、负责人权限及最新开发版。人类概览突出事实与关键动作，完整依据按需展开。下列阶段动作由负责人精确授权，再由 Agent 执行；稳定发布另走全员投票：
+普通开发者从任务工作树执行 `work commit`。作者和另一位工程师分别检出候选，运行同一检查并上交报告。负责人审阅精确修订并合入云代码。在 Together 云仓库查看「待提交源码」，确认 Git 提交后使用「提交开发版」。已获准工程师可在已登录的 OS Link 中获取该开发源码并隔离启动。签名构建就绪后，超管选中同一提交的构建并点「同步至稳定版」。官网安装器和日常 OS 更新器使用这个稳定选择。[官方众创云仓库](https://os.aieyra.cn/os/together?view=repository)
+
+## 阶段产物与实验投票
+
+`engineering --resource workflow` 返回阶段项目的阻塞、采纳目标、负责人权限和阶段版本。下列动作由负责人按修订授权，再由 Agent 执行。
 
 | 动作 | 精确载荷 |
 | --- | --- |
@@ -204,7 +208,7 @@ proposal.py --key-file KEY artifact download --release-id RELEASE --sha256 SHA25
 
 分块上传下载均核对摘要、游标和请求编号；断点可恢复，不覆盖不同内容的已有文件，不自动执行或安装。损坏 partial 隔离保留，再次尝试可恢复。下载仅限已授权版本清单列出的产物。
 
-发布载荷指定构建工程师、当前通过报告及其记录的路径／字节数／SHA256；云端只核对已上传内容。稳定版沿用已试用开发版的同一源码和产物，由当前当选负责人在人类仓库页面提交。`GET /engineering/releases/proposals`读取投票；`POST /engineering/releases/propose`提交 revision/name/notes/request_id，`POST /engineering/releases/vote`提交 id/choice/request_id。提交时固定全体有资格成员，支持票严格大于70%才发布（10人7票不发、8票发布）；源码、负责人或阶段版本变化使旧投票失效。Agent不能代投，超管及旧稳定发布授权不能绕过。实验包明确标实验，摘要不等于代码签名。原 OS／Link 安装包继续暂停，众创 OS 获权下载已开放。
+阶段产物记录构建工程师、通过报告、文件路径、字节数和 SHA-256。历史实验投票可从 `GET /engineering/releases/proposals` 查询。正式 OS 安装器和桌面差分由上节的 Together 更新通道提供。
 
 ## 收件、接续与自愿交接
 
@@ -238,3 +242,12 @@ receive 每页最多 20 条，先验证摘要并保存本人缓存，再输出�
 memory 是带时间的离线缓存，不证明当前权限。report 支持 running / idle / paused / waiting_user / unknown，标题最多 120 字、摘要最多 600 字；结束写真实结果，等待写实际原因。接入、收件、工作声明、实际执行与完成交付分别记实。
 
 旧 activate、guide、report-local 和办公室通信 together_link.py 保留兼容。办公室 Key 与提案 Agent 凭据分开；不自动迁移聊天、不远程执行 shell，不自动调用模型。许可见项目 LICENSE，本包不含成员凭据和私人办公室资料。
+## 目标和议程的代码影响评估
+
+每次提出目标、创建议程或提交参选方案，在对应目标和议程各自的 JSON 中附上 `impact`。先检查当前开发版源码、调用方和共同契约。写明受影响区域和原因，按代码影响评为 A（系统底层）、B（跨模块或破坏性契约）、C（单模块）或 D（局部）。审议卡显示等级、预计文件数和删除、重构等操作的数量，展开后可核对原因和涉及的代码。
+
+```json
+{"level":"B","scope":"cross_module","areas":["安装器","更新服务"],"reason":"修改安装布局契约，需要同时验证安装器和更新器的读取行为。","changes":[{"path":"Contracts/product-layout.json","action":"edit"},{"path":"Client/Installer/","action":"affected"}]}
+```
+
+把上面对象作为 `impact` 字段。scope 可取 `system`、`cross_module`、`module`、`local`。action 可取 `add`、`edit`、`delete`、`refactor`、`affected`。目录以斜杠结尾，服务端按所选源码修订展开、去重；新增文件使用具体路径。纯讨论等零代码事项使用 `no_code: true` 和空 `changes`。旧草稿可用 `publish --impact-file 评估.json` 补报。同一操作重试沿用原 request_id。

@@ -366,6 +366,7 @@ def main(argv=None):
     publish = commands.add_parser("publish")
     publish.add_argument("--id", required=True)
     publish.add_argument("--request-id", required=True)
+    publish.add_argument("--impact-file", type=Path, help="Supply the impact report for an older draft")
     complete = commands.add_parser("agenda-complete")
     complete.add_argument("--id", required=True)
     complete.add_argument("--request-id", required=True)
@@ -522,6 +523,8 @@ def main(argv=None):
                     raise ValueError("invalid_agenda_id")
                 body = {"request_id": args.request_id}
                 action = "publish"
+                if command == "publish" and args.impact_file:
+                    body["impact"] = read_json(args.impact_file)
                 if command == "agenda-complete":
                     action = "complete"
                     body["note"] = args.note

@@ -124151,7 +124151,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--agent.md",
-      "bodySHA256": "a313db0bf29e07947740498759dbfc26609e5c605aaa03b3bc52a72eb6958991",
+      "bodySHA256": "ce7e4846ad2715d8c248a5fc393b57ce7b9c30f61e3e1f42fd3b0f41f328f3de",
       "regions": [
         {
           "name": "ApiError",
@@ -124254,7 +124254,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--agent.md",
-      "bodySHA256": "a7cef9a89ac2e0d4f59dbde9f980210e02f18a1c4a08d2bbc1d9b2dfb2fdd161",
+      "bodySHA256": "b7b6a0a2491a46935b91d4ec6fbf86c6194062c90545cf00efe116e6c012b662",
       "regions": [
         {
           "name": "canonical",
@@ -126796,52 +126796,52 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "8e6048d08e55f700e6487c8c89b7185985d6d6ae9cd7f29b4002aa5017e6f566",
+      "bodySHA256": "7f8953021ea8bf7afb1014b688c792a19ff5b10040f41569e320d9aa36388541",
       "regions": [
         {
           "name": "from",
           "kind": "lexical",
-          "bodyLine": 230
+          "bodyLine": 238
         },
         {
           "name": "to",
           "kind": "lexical",
-          "bodyLine": 231
+          "bodyLine": 239
         },
         {
           "name": ".home-milestones [data-arrival=true]",
           "kind": "lexical",
-          "bodyLine": 235
+          "bodyLine": 243
         },
         {
           "name": ".home-situation",
           "kind": "lexical",
-          "bodyLine": 238
+          "bodyLine": 246
         },
         {
           "name": ".home-stage-heading",
           "kind": "lexical",
-          "bodyLine": 239
+          "bodyLine": 247
         },
         {
           "name": ".home-stage-steps",
           "kind": "lexical",
-          "bodyLine": 240
+          "bodyLine": 248
         },
         {
           "name": ".home-stage-steps li:nth-child(2)::before",
           "kind": "lexical",
-          "bodyLine": 241
+          "bodyLine": 249
         },
         {
           "name": ".home-milestones li",
           "kind": "lexical",
-          "bodyLine": 242
+          "bodyLine": 250
         },
         {
           "name": ".home-milestones time",
           "kind": "lexical",
-          "bodyLine": 243
+          "bodyLine": 251
         }
       ],
       "imports": [],
@@ -127005,152 +127005,152 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop--ui.md",
-      "bodySHA256": "2bd72cd2eefe151b17dd6679cb7da375bd27e6928f7d5b7e373a2c6435b1c7b7",
+      "bodySHA256": "d0ccfddb9c03be6e79ca55da23d1d4e14525cf8d95e71f4714ffc5e605bfd572",
       "regions": [
         {
           "name": "api",
           "kind": "lexical",
-          "bodyLine": 138
+          "bodyLine": 139
         },
         {
           "name": "hostOS",
           "kind": "lexical",
-          "bodyLine": 139
+          "bodyLine": 140
         },
         {
           "name": "detailView",
           "kind": "lexical",
-          "bodyLine": 157
+          "bodyLine": 158
         },
         {
           "name": "appearance",
           "kind": "lexical",
-          "bodyLine": 158
+          "bodyLine": 159
         },
         {
           "name": "motionPreference",
           "kind": "lexical",
-          "bodyLine": 159
+          "bodyLine": 160
         },
         {
           "name": "mainTabs",
           "kind": "lexical",
-          "bodyLine": 165
+          "bodyLine": 166
         },
         {
           "name": "state",
           "kind": "lexical",
-          "bodyLine": 166
+          "bodyLine": 167
         },
         {
           "name": "board",
           "kind": "lexical",
-          "bodyLine": 167
+          "bodyLine": 168
         },
         {
           "name": "timer",
           "kind": "lexical",
-          "bodyLine": 168
+          "bodyLine": 169
         },
         {
           "name": "direction",
           "kind": "lexical",
-          "bodyLine": 169
+          "bodyLine": 170
         },
         {
           "name": "surfaces",
           "kind": "lexical",
-          "bodyLine": 170
+          "bodyLine": 171
         },
         {
           "name": "repositoryStatus",
           "kind": "lexical",
-          "bodyLine": 171
+          "bodyLine": 172
         },
         {
           "name": "updateChannels",
           "kind": "lexical",
-          "bodyLine": 172
+          "bodyLine": 173
         },
         {
           "name": "governancePage",
           "kind": "lexical",
-          "bodyLine": 173
+          "bodyLine": 174
         },
         {
           "name": "homeData",
           "kind": "lexical",
-          "bodyLine": 174
+          "bodyLine": 175
         },
         {
           "name": "homeRevision",
           "kind": "lexical",
-          "bodyLine": 175
+          "bodyLine": 176
         },
         {
           "name": "pulseFlight",
           "kind": "lexical",
-          "bodyLine": 176
+          "bodyLine": 177
         },
         {
           "name": "broadcastRevision",
           "kind": "lexical",
-          "bodyLine": 177
+          "bodyLine": 178
         },
         {
           "name": "memberMenu",
           "kind": "lexical",
-          "bodyLine": 178
+          "bodyLine": 179
         },
         {
           "name": "accessSignature",
           "kind": "lexical",
-          "bodyLine": 179
+          "bodyLine": 180
         },
         {
           "name": "agentCopyBusy",
           "kind": "lexical",
-          "bodyLine": 180
+          "bodyLine": 181
         },
         {
           "name": "admittedAgent",
           "kind": "lexical",
-          "bodyLine": 181
+          "bodyLine": 182
         },
         {
           "name": "developmentCloudRevision",
           "kind": "lexical",
-          "bodyLine": 182
+          "bodyLine": 183
         },
         {
           "name": "releaseTransfer",
           "kind": "lexical",
-          "bodyLine": 190
+          "bodyLine": 191
         },
         {
           "name": "activitySource",
           "kind": "lexical",
-          "bodyLine": 241
+          "bodyLine": 242
         },
         {
           "name": "activityPages",
           "kind": "lexical",
-          "bodyLine": 242
+          "bodyLine": 243
         },
         {
           "name": "situationCarousel",
           "kind": "lexical",
-          "bodyLine": 243
+          "bodyLine": 244
         },
         {
           "name": "pairing",
           "kind": "lexical",
-          "bodyLine": 244
+          "bodyLine": 245
         },
         {
           "name": "names",
           "kind": "lexical",
-          "bodyLine": 246
+          "bodyLine": 247
         }
       ],
       "imports": [

@@ -4,7 +4,7 @@
   "kind": "program",
   "name": "Aieyra Together",
   "summary": "Together 协作工位、云代码与开发更新。",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "publisher": "aieyra",
   "license": "SEE LICENSE IN PRODUCT",
   "contracts": {
@@ -93,16 +93,16 @@
       "size": 24198
     },
     "product/agent/proposal.py": {
-      "sha256": "a313db0bf29e07947740498759dbfc26609e5c605aaa03b3bc52a72eb6958991",
-      "size": 33108
+      "sha256": "ce7e4846ad2715d8c248a5fc393b57ce7b9c30f61e3e1f42fd3b0f41f328f3de",
+      "size": 33343
     },
     "product/agent/README.md": {
-      "sha256": "c726aaa28e1b99e9aaa7a5396fe9356cb455e093dd0532bb00bbaf61df259275",
-      "size": 28403
+      "sha256": "36acc03c936d56ce83c426173954155268186220d233257c4ad2733051d7ccec",
+      "size": 29617
     },
     "product/agent/source_protocol.py": {
-      "sha256": "a7cef9a89ac2e0d4f59dbde9f980210e02f18a1c4a08d2bbc1d9b2dfb2fdd161",
-      "size": 9680
+      "sha256": "b7b6a0a2491a46935b91d4ec6fbf86c6194062c90545cf00efe116e6c012b662",
+      "size": 9707
     },
     "product/agent/together_link.py": {
       "sha256": "7c6d3c32b365f055188cd28d27efcb0d7829b2ed33ee7335722a134b6669b236",
@@ -537,8 +537,8 @@
       "size": 5166
     },
     "product/desktop/ui/unified.css": {
-      "sha256": "8e6048d08e55f700e6487c8c89b7185985d6d6ae9cd7f29b4002aa5017e6f566",
-      "size": 26373
+      "sha256": "7f8953021ea8bf7afb1014b688c792a19ff5b10040f41569e320d9aa36388541",
+      "size": 27685
     },
     "product/desktop/ui/unified.mjs": {
       "sha256": "286e20dce5d6b60f96687bc5fc93cc6cb71c63b4fdfba1e42fe506ca640761c5",
@@ -577,8 +577,8 @@
       "size": 60130
     },
     "product/desktop/ui/workspace.mjs": {
-      "sha256": "2bd72cd2eefe151b17dd6679cb7da375bd27e6928f7d5b7e373a2c6435b1c7b7",
-      "size": 133096
+      "sha256": "d0ccfddb9c03be6e79ca55da23d1d4e14525cf8d95e71f4714ffc5e605bfd572",
+      "size": 134433
     },
     "product/desktop/visible-aidebug.cjs": {
       "sha256": "0fe040e346c7bc56ef454bbd39007a26271ec38a24f332af192dcd56eb3aeb26",

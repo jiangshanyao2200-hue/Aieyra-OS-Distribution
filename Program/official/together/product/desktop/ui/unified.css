@@ -138,7 +138,15 @@
   rule-129 | style | @media(max-width:900px)
   rule-130 | style | @media(max-width:620px)
   rule-131 | style | @media(prefers-reduced-motion:reduce)
-  rule-132 | style | @media(max-height:360px)
+  rule-132 | style | .proposal-impact
+  rule-133 | style | .proposal-impact summary
+  rule-134 | style | .proposal-impact summary:focus-visible
+  rule-135 | style | .proposal-impact summary strong
+  rule-136 | style | .proposal-impact[data-level="A"] summary strong,.proposal-impact[data-level="B"] summary strong
+  rule-137 | style | .proposal-impact ul
+  rule-138 | style | .proposal-impact p
+  rule-139 | style | .proposal-impact-missing
+  rule-140 | style | @media(max-height:360px)
 维护: 修改接口/入口/约束后运行 scripts/code_map.py --write；具体经验写入本目录 CODEMAP.md 的经验区。
 @file-map:end */
 /* @chain-region rule-1 */ .surface>header.surface-toolbar{display:none;min-height:0;margin:0;padding:0;border:0}
@@ -289,4 +297,12 @@
 /* @chain-region rule-129 */ @media(max-width:900px){.management-grid{grid-template-columns:1fr}.source-repository{grid-template-columns:minmax(160px,32%) minmax(0,1fr)}.home-situation{min-height:170px;padding-inline:24px}.chat-surface .message{max-width:92%}}
 /* @chain-region rule-130 */ @media(max-width:620px){.unified-home{gap:18px}.home-goal{padding:20px}.source-repository{grid-template-columns:140px minmax(0,1fr)}.source-directory{padding:8px 4px}.source-directory .tree-search{gap:0}.source-directory .tree-search button{padding:5px}.source-repository .source>header{padding:12px}.source-repository [data-source-size]{display:none}.source-repository pre{padding:12px}.management-section{padding:16px}}
 /* @chain-region rule-131 */ @media(prefers-reduced-motion:reduce){.release-vote-meter i{transition:none}}
-/* @chain-region rule-132 */ @media(max-height:360px){.home-members .members{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}.home-members .member{width:100%;justify-content:flex-start}}
+/* @chain-region rule-132 */ .proposal-impact{margin:8px 0;font-size:13px;line-height:1.55;overflow-wrap:anywhere}
+/* @chain-region rule-133 */ .proposal-impact summary{cursor:pointer;padding:5px 0}
+/* @chain-region rule-134 */ .proposal-impact summary:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+/* @chain-region rule-135 */ .proposal-impact summary strong{color:var(--ink,currentColor)}
+/* @chain-region rule-136 */ .proposal-impact[data-level="A"] summary strong,.proposal-impact[data-level="B"] summary strong{text-decoration:underline;text-underline-offset:3px}
+/* @chain-region rule-137 */ .proposal-impact ul{margin:5px 0;padding-inline-start:18px;max-height:12em;overflow:auto}
+/* @chain-region rule-138 */ .proposal-impact p{margin:4px 0}
+/* @chain-region rule-139 */ .proposal-impact-missing{display:block;margin-block:5px}
+/* @chain-region rule-140 */ @media(max-height:360px){.home-members .members{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}.home-members .member{width:100%;justify-content:flex-start}}
