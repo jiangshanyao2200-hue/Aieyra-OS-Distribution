@@ -12,14 +12,27 @@
 package host
 
 import (
-	"golang.org/x/sys/windows"
+	"os"
 	"os/exec"
 	"unsafe"
+
+	"golang.org/x/sys/windows"
 )
 
 func hideWorkspaceProcess(command *exec.Cmd) {
-	// Electron 是 GUI 子系统程序；SW_HIDE 会让首次窗口显示失效。
-	// 仅无窗口测试使用 Electron 自身的 offscreen 开关。
+	// Chromium cannot create a nested Windows lowbox. Only the OS-confirmed
+	// AppContainer uses the existing kernel sandbox for the whole process tree.
+	const tokenIsAppContainer = 29
+	var container, returned uint32
+	err := windows.GetTokenInformation(windows.GetCurrentProcessToken(), tokenIsAppContainer,
+		(*byte)(unsafe.Pointer(&container)), 4, &returned)
+	if err == nil && container != 0 {
+		command.Args = append([]string{command.Args[0], "--no-sandbox"}, command.Args[1:]...)
+		command.Stdin, command.Stdout = os.Stdin, os.Stdout
+		if os.Getenv("AIEYRA_WORKSPACE_OFFSCREEN") == "1" {
+			command.Env = append(command.Env, "AIEYRA_WORKSPACE_OFFSCREEN=1")
+		}
+	}
 }
 
 // Assign the Core itself before it can spawn Electron, so there is no window

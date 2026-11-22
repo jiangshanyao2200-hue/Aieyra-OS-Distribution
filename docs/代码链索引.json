@@ -85527,17 +85527,17 @@
       "ring": "0",
       "agreement": "Core/host/AGENTS.md",
       "map": "Core/host/CODEMAP.md",
-      "bodySHA256": "f49a007feeb9d5abe53c1205cf8615ab1cd3e7be08450e94b5fd91b02b48f037",
+      "bodySHA256": "00fef38aa7685346aecd36d5cbea2bce4add7a775b4c1d49c84752e0de651425",
       "regions": [
         {
           "name": "hideWorkspaceProcess",
           "kind": "lexical",
-          "bodyLine": 11
+          "bodyLine": 13
         },
         {
           "name": "ownWorkspaceLifetime",
           "kind": "lexical",
-          "bodyLine": 20
+          "bodyLine": 33
         }
       ],
       "imports": [],
