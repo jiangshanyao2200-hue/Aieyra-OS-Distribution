@@ -4,7 +4,7 @@
   "kind": "program",
   "name": "Aieyra Together",
   "summary": "Together 协作工位、云代码与开发更新。",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "publisher": "aieyra",
   "license": "SEE LICENSE IN PRODUCT",
   "contracts": {
@@ -177,8 +177,8 @@
       "size": 32577
     },
     "product/desktop/cocreation.cjs": {
-      "sha256": "26e0ce4f985588b715266b92caa19a6bc564745d9aa97c591f06e82b8d46b8ac",
-      "size": 12117
+      "sha256": "429b7f1985d3112ae03732bc721cd41ef56d53914598093abab156b1233cf3f1",
+      "size": 13227
     },
     "product/desktop/desktop-session.cjs": {
       "sha256": "889a2da0a3fbfa593169cdcc157abafcb94ace3d466a3780a2153982b5f7bdfa",

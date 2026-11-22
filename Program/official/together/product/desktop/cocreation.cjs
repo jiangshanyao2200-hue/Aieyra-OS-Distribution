@@ -8,6 +8,7 @@
 验证: AIDEBUG/transfer-recovery.test.cjs
 目录: <module> 为导入、状态与入口接线；以下为稳定区域锚点，调用名是静态线索。
   digest | function
+  isSourceRead | function
   Development | class
   Development.constructor | method
   Development.send | method
@@ -33,6 +34,27 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 const readline=require('node:readline');
 const /* @chain-region digest | calls: crypto.createHash, fs.createReadStream, h.update, h.digest */ digest=async file=>{const h=crypto.createHash('sha256');for await(const chunk of fs.createReadStream(file))h.update(chunk);return h.digest('hex');};
+
+/* @chain-region isSourceRead | calls: route.includes, route.indexOf, route.slice, URLSearchParams, revision.test, query.get, offset.test, Set … */ function isSourceRead(route) {
+ if (typeof route !== 'string' || route.length > 4096 || route.includes('#')) return false;
+ if (route === '/engineering/overview' || route === '/engineering/development') return true;
+ const separator = route.indexOf('?');
+ if (separator < 0) return false;
+ const endpoint = route.slice(0, separator);
+ const query = new URLSearchParams(route.slice(separator + 1));
+ const revision = /^[a-f0-9]{64}$/;
+ const offset = /^\d+$/;
+ if (!revision.test(query.get('revision') || '') || !offset.test(query.get('offset') || '')) return false;
+ if (new Set(query.keys()).size !== query.size) return false;
+ if (endpoint === '/engineering/archive') {
+  if (query.has('segments') && query.get('segments') !== '1') return false;
+  if (query.has('reuse') && (!query.has('segments') || !revision.test(query.get('reuse')))) return false;
+  return [...query.keys()].every(key => ['revision', 'offset', 'segments', 'reuse'].includes(key));
+ }
+ return endpoint === '/engineering/file' && query.size === 5 && !!query.get('path') &&
+  offset.test(query.get('limit') || '') && query.get('transfer') === '1';
+}
+
 /* @chain-region Development */ class Development {
  /* @chain-region Development.constructor | calls: Object.assign, Map, AbortController, spawn, path.join, path.dirname, child.stdin.on, child.stderr.on … */ constructor({python,cli,cloud,account,directory,server,offscreen=false,changed=()=>{}}){
   Object.assign(this,{python,cli,cloud,account,directory,changed});this.generation=cloud.generation;this.pending=new Map();this.serial=0;
@@ -58,7 +80,7 @@ const /* @chain-region digest | calls: crypto.createHash, fs.createReadStream, h
    active();let result;
    if(value.kind==='cloud'){
     const route=value.payload?.route;
-    if(typeof route!=='string'||route.length>4096||!/^\/engineering\/(?:overview|development|archive\?revision=[a-f0-9]{64}&offset=\d+(?:&segments=1)?|file\?revision=[a-f0-9]{64}&path=[^&#]+&offset=\d+&limit=\d+&transfer=1)$/.test(route))throw Error('源码读取入口无效。');
+    if(!isSourceRead(route))throw Error('源码读取入口无效。');
     let progressAt=0;
     result=await this.transferRead(route,{signal,/* @chain-region Development.message.progress | calls: Date.now, changed */ progress:(received,total)=>{this.value={...this.value,page_received:received,page_total:total};if(Date.now()-progressAt>250){progressAt=Date.now();this.changed(this.value);}}});
    }else if(value.kind==='artifact'){

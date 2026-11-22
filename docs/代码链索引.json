@@ -124856,27 +124856,27 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "26e0ce4f985588b715266b92caa19a6bc564745d9aa97c591f06e82b8d46b8ac",
+      "bodySHA256": "429b7f1985d3112ae03732bc721cd41ef56d53914598093abab156b1233cf3f1",
       "regions": [
         {
           "name": "fs",
           "kind": "lexical",
-          "bodyLine": 31
+          "bodyLine": 32
         },
         {
           "name": "path",
           "kind": "lexical",
-          "bodyLine": 32
+          "bodyLine": 33
         },
         {
           "name": "crypto",
           "kind": "lexical",
-          "bodyLine": 33
+          "bodyLine": 34
         },
         {
           "name": "readline",
           "kind": "lexical",
-          "bodyLine": 34
+          "bodyLine": 35
         }
       ],
       "imports": [
