@@ -4,7 +4,7 @@
   "kind": "program",
   "name": "Aieyra Together",
   "summary": "Together 协作工位、云代码与开发更新。",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "publisher": "aieyra",
   "license": "SEE LICENSE IN PRODUCT",
   "contracts": {
@@ -85,16 +85,16 @@
       "size": 45048
     },
     "product/agent/onboarding.py": {
-      "sha256": "e822cb8a5cd5e4fa4d4e8903fe935d7e3effca462d8f65ddbb807f4ab046ad63",
-      "size": 28520
+      "sha256": "017e8d25c5f6543314251ebd05fd8ef37d5ad5224e2e3ae8793c6c00c71ec21e",
+      "size": 28936
     },
     "product/agent/prepare_vm.py": {
       "sha256": "f2cea0fb0edced4426b5347d763de9c4e85670b8455ce6da5d31eaa28d1d5d18",
       "size": 24198
     },
     "product/agent/proposal.py": {
-      "sha256": "ce7e4846ad2715d8c248a5fc393b57ce7b9c30f61e3e1f42fd3b0f41f328f3de",
-      "size": 33343
+      "sha256": "b12172d17e20cc680eaae3eb90da404426334d88a0da68e6c7cbfd60d5a679e8",
+      "size": 33393
     },
     "product/agent/README.md": {
       "sha256": "36acc03c936d56ce83c426173954155268186220d233257c4ad2733051d7ccec",
@@ -173,8 +173,8 @@
       "size": 1979
     },
     "product/desktop/cloud-client.cjs": {
-      "sha256": "a9aa8c50fa771d48ed28cd2862708645d85d116594ae146f609a9c8f0133c7ff",
-      "size": 32577
+      "sha256": "0d0cbcbab9b2531176b2bfe1e0eb05bb32dcb60c2d9f9878f19057a45862bb2a",
+      "size": 32669
     },
     "product/desktop/cocreation.cjs": {
       "sha256": "429b7f1985d3112ae03732bc721cd41ef56d53914598093abab156b1233cf3f1",
@@ -229,8 +229,8 @@
       "size": 1916
     },
     "product/desktop/onboarding.cjs": {
-      "sha256": "a0de5c4f49ea08b77c5c119a5a1296b7cc2159c680ace8da356fa5d6981f4352",
-      "size": 41762
+      "sha256": "238efda3eed34d791bee24b44b479f63aa368b9ad83e3e0f5e1ea8d3ef2795e0",
+      "size": 43452
     },
     "product/desktop/os-account.cjs": {
       "sha256": "495cea8f8bc13c017026ad7e0d4a8833849075e9e826496d1314d5ef03be8c7b",

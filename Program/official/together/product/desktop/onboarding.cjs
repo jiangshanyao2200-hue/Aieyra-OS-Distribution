@@ -256,14 +256,15 @@ const /* @chain-region fields | calls: Array.isArray, some, Object.keys, allowed
   }
   /* @chain-region Onboarding.handle | calls: URL, fail, includes, test, Number, chunks.push, toString, Buffer.concat … */ async handle(req, res) {
     let admitted = false, authorizedBinding=null, authorizedRecord=null;
-    const /* @chain-region Onboarding.handle.send | calls: binding, Error, admission, res.writeHead, res.end, JSON.stringify */ send = (status, value) => { if(status===200&&authorizedBinding){try{if(authorizedBinding!==this.binding())throw Error();}catch{status=401;value={error:'account_changed'};}if(status===200&&authorizedRecord&&this.admission(authorizedRecord).state==='expired'){status=410;value={error:'onboarding_expired_reconnect'};}} if (!res.destroyed) { res.writeHead(status, {'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','connection':'close'}); res.end(JSON.stringify(value)); } };
+    const /* @chain-region Onboarding.handle.send | calls: binding, Error, admission, res.writeHead, res.end, JSON.stringify */ send = (status, value) => { if(status===200&&authorizedBinding){try{if(authorizedBinding!==this.binding())throw Error();}catch{status=401;value={error:'account_changed'};}if(status===200&&authorizedRecord&&req.url!=='/site-content'&&this.admission(authorizedRecord).state==='expired'){status=410;value={error:'onboarding_expired_reconnect'};}} if (!res.destroyed) { res.writeHead(status, {'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','connection':'close'}); res.end(JSON.stringify(value)); } };
     try {
       if (this.closed || req.headers.host !== new URL(this.origin).host || req.headers.origin || req.headers['sec-fetch-site'] || req.method !== 'POST') throw fail('local_request_denied', 403);
-      if (!['/prepare','/local','/confirm','/context','/apply'].includes(req.url)) throw fail('route_denied',404);
+      if (!['/prepare','/local','/confirm','/context','/apply','/site-content'].includes(req.url)) throw fail('route_denied',404);
       if (this.busy||this.issuing) throw fail('onboarding_busy_retry',429);
-      if (!/^application\/json(?:;|$)/i.test(req.headers['content-type'] || '') || Number(req.headers['content-length'] || 0) > 16384) throw fail('invalid_request_size',413);
+      const limit = req.url === '/site-content' ? 100000 : 16384;
+      if (!/^application\/json(?:;|$)/i.test(req.headers['content-type'] || '') || Number(req.headers['content-length'] || 0) > limit) throw fail('invalid_request_size',413);
       this.busy = true; admitted = true;
-      const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>16384)throw fail('request_too_large',413);chunks.push(chunk);}const raw=Buffer.concat(chunks).toString('utf8');
+      const chunks=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>limit)throw fail('request_too_large',413);chunks.push(chunk);}const raw=Buffer.concat(chunks).toString('utf8');
       let body; try { body=JSON.parse(raw); } catch { throw fail('invalid_json'); }
       const token=(req.headers.authorization || '').replace(/^Bearer /,'');
       if (!secret(token)) throw fail('invalid_ticket',401);
@@ -274,7 +275,7 @@ const /* @chain-region fields | calls: Array.isArray, some, Object.keys, allowed
       const agents=access.member?(await this.cloud.call('/agents')).agents||[]:[];
       if(binding!==this.binding())throw fail('account_changed',401);
       authorizedRecord=record;
-      if(this.admission(record,agents).state==='expired')throw fail('onboarding_expired_reconnect',410);
+      if(this.admission(record,agents).state==='expired' && (access.member || req.url !== '/site-content'))throw fail('onboarding_expired_reconnect',410);
       if (req.url === '/prepare') {
         fields(body,['request_id','resume','token','name']);
         if (!ident(body.request_id) || !secret(body.resume) || !secret(body.token) || typeof body.name!=='string' || !body.name.trim() || body.name.length>80) throw fail('invalid_enrollment');
@@ -330,6 +331,18 @@ const /* @chain-region fields | calls: Array.isArray, some, Object.keys, allowed
           record.runtime_id=this.desktopSession?.id;record.reconnected_at=Date.now();this.save(record);this.runtimeAccepted.set(this.binding()+':'+body.id,true);
           this.note(record,'本机连接验证已通过');this.workSnapshot=null;
           this.last={account:record.account,name:record.name,state:'connected',at:Date.now()};send(200,result);
+        } else if (req.url === '/site-content') {
+          fields(body, ['session_id', 'article']);
+          const office = await this.local('/api/agent-access');
+          const credential = office.credentials?.some(c => c.id === record.request_id && c.actor_id === record.actor && !c.revoked);
+          const connected = office.sessions?.some(s => s.actor_id === record.actor && s.id === body.session_id &&
+            s.state === 'connected' && s.lease_until > Date.now() / 1000);
+          if (!credential || !connected || !body.article || typeof body.article !== 'object' || Array.isArray(body.article))
+            throw fail('connected_agent_required', 403);
+          if (record.agent_id && !agents.some(a => a.id === record.agent_id && !a.revoked && a.expires > Date.now() / 1000))
+            throw fail('agent_revoked_or_expired_copy_new_instructions', 403);
+          if (binding !== this.binding()) throw fail('account_changed', 401);
+          send(200, await this.cloud.request('/api/v1/together/agent/site-content', body.article));
         } else if (req.url==='/apply') {
           fields(body,['about','participation','engineer_intent']);
           if (body.engineer_intent!==true || typeof body.about!=='string' || typeof body.participation!=='string' || [body.about,body.participation].some(v=>v.trim().length<20||v.length>4000)) throw fail('engineer_intent_and_application_required');
@@ -455,6 +468,10 @@ const /* @chain-region fields | calls: Array.isArray, some, Object.keys, allowed
       ...(agendas.agendas.some(a=>a.status==='voting'&&a.eligible)?['由工程师在议程页参与相应投票']:[])
     ] : [access.application?.status==='pending'?'等待工程师资格审核并查看工程概况':access.application?.status==='rejected'?'说明拒绝原因，经工程师同意完善申请后重新提交':'经工程师同意填写介绍和参与方向，申请成为众创工程师'];
     const result={observed_at:new Date().toISOString(),access,phase:cycle?.status||'awaiting_goal',cycle,
+      site_content:{command:'site-content --connection <connection_file> --body-file <article.json>',
+        sections:['product','research','future'],actions:['save','publish','unpublish'],
+        fields:{id:'稿件 UUID v4',requestId:'本次操作的 UUID v4，重试沿用',revision:'新文章填 0，编辑用上次回执中的版本',
+          section:'所属栏目',action:'本次操作',title:'标题',summary:'可选摘要',content:'Markdown 正文'}},
       participants:{total:members.total,items:(members.members||[]).map(m=>({id:m.id,name:m.name,bio:m.bio})),has_more:members.has_more},
       goals:visibleGoals.map(c=>({id:c.id,title:c.title,adopted_rank:c.adopted_rank,own:c.author===access.user.id,votes:c.votes})),
       goals_total:access.member?candidates.length:null,goals_has_more:access.member?candidates.length>20:null,

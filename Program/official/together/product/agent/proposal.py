@@ -377,10 +377,10 @@ def main(argv=None):
     join.add_argument('--discovery', type=Path, required=True)
     join.add_argument('--ticket', required=True)
     join.add_argument('--name', required=True)
-    for name in ('finish', 'context', 'apply', 'report'):
+    for name in ('finish', 'context', 'apply', 'report', 'site-content'):
         command = commands.add_parser(name)
         command.add_argument('--connection', type=Path, required=True)
-        if name == 'report': command.add_argument('--body-file', type=Path, required=True)
+        if name in ('report', 'site-content'): command.add_argument('--body-file', type=Path, required=True)
         if name == 'finish': command.add_argument('--accept-guide', required=True)
         if name == 'apply':
             command.add_argument('--body-file', type=Path, required=True)
@@ -394,7 +394,7 @@ def main(argv=None):
             break
     args = parser.parse_args(argv)
     try:
-        if args.command in ('join', 'finish', 'context', 'apply', 'report'):
+        if args.command in ('join', 'finish', 'context', 'apply', 'report', 'site-content'):
             from onboarding import run
             output = run(args)
         elif args.command == "activate":

@@ -84,7 +84,7 @@ def request_once(origin, route, token, body=None):
     if parsed.scheme != 'http' or parsed.hostname != '127.0.0.1' or parsed.username or parsed.password or parsed.path or parsed.query or parsed.fragment:
         raise ValueError('invalid_link_endpoint')
     raw = None if body is None else json.dumps(body, ensure_ascii=False).encode()
-    if raw and len(raw) > 16384:
+    if raw and len(raw) > (100000 if route == '/site-content' else 16384):
         raise ValueError('request_too_large')
     try:
         with api.opener.open(Request(origin + route, data=raw, headers={'Authorization':'Bearer ' + token, 'Content-Type':'application/json'}), timeout=35) as response:
@@ -406,6 +406,11 @@ def report_work(args):
 
 # @chain-region run | calls: ValueError, api.call, api.read_json, bool, broker, collaboration_handoff, command, config.get …
 def run(args):
+    if args.command == 'site-content':
+        config = api.read_json(args.connection)
+        # Renew only the caller's local office lease. Publication is also available before engineering admission.
+        connect(args.connection, config)
+        return broker(config, '/site-content', {'session_id': config['session_id'], 'article': api.read_json(args.body_file)})
     if args.command=='report':return report_work(args)
     if args.command=='join':return join(args)
     if args.command=='finish':return finish(args)

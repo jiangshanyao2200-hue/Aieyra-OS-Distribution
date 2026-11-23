@@ -124148,7 +124148,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--agent.md",
-      "bodySHA256": "e822cb8a5cd5e4fa4d4e8903fe935d7e3effca462d8f65ddbb807f4ab046ad63",
+      "bodySHA256": "017e8d25c5f6543314251ebd05fd8ef37d5ad5224e2e3ae8793c6c00c71ec21e",
       "regions": [
         {
           "name": "request",
@@ -124296,7 +124296,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--agent.md",
-      "bodySHA256": "ce7e4846ad2715d8c248a5fc393b57ce7b9c30f61e3e1f42fd3b0f41f328f3de",
+      "bodySHA256": "b12172d17e20cc680eaae3eb90da404426334d88a0da68e6c7cbfd60d5a679e8",
       "regions": [
         {
           "name": "ApiError",
@@ -124953,7 +124953,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "a9aa8c50fa771d48ed28cd2862708645d85d116594ae146f609a9c8f0133c7ff",
+      "bodySHA256": "0d0cbcbab9b2531176b2bfe1e0eb05bb32dcb60c2d9f9878f19057a45862bb2a",
       "regions": [
         {
           "name": "crypto",
@@ -125430,7 +125430,7 @@
       "ring": "3",
       "agreement": "Program/official/AGENTS.md",
       "map": "docs/代码链目录/Program--official--together--product--desktop.md",
-      "bodySHA256": "a0de5c4f49ea08b77c5c119a5a1296b7cc2159c680ace8da356fa5d6981f4352",
+      "bodySHA256": "238efda3eed34d791bee24b44b479f63aa368b9ad83e3e0f5e1ea8d3ef2795e0",
       "regions": [
         {
           "name": "http",
